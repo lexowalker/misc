@@ -104,8 +104,53 @@ const R = (() => {
         g.shadowBlur = 0;
       });
     }
+    for (const ly of lyricLines(t)) {
+      any = true;
+      const top = LYR_TOP.some(([a, b]) => ly.s0 >= a - .5 && ly.s0 < b);
+      let size = 46, font = 'italic 400', track = .5, y = top ? H * .115 : H * .885;
+      if (ly.style === 'caps') { size = 40; font = '500'; track = 5; }
+      if (ly.style === 'held') { size = 42; font = '500'; track = 5 + 11 * K.smooth((t - ly.s0) / 10); }
+      if (ly.style === 'still') { size = 96; font = '600'; track = 22; y = H * .8; }
+      y += ly.row * size * 1.3 + (1 - ly.a) * 5;
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.font = `${font} ${size}px 'Cormorant Garamond'`;
+      g.letterSpacing = track + 'px';
+      const w = g.measureText(ly.text).width;
+      const loud = ly.style === 'still' || ly.style === 'held';
+      scrim(g, W / 2, y, w * (loud ? 1.5 : 1), size * (loud ? 1.6 : 1), (ly.style === 'still' ? .32 : ly.style === 'held' ? .36 : .26) * ly.a);
+      g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = size * .45;
+      g.fillStyle = `rgba(250,240,222,${ly.a})`;
+      g.fillText(ly.text, W / 2, y);
+      g.shadowBlur = 0;
+    }
     if (any) E.upload(L);
     return any;
+  }
+  // ---------------- the song's words ----------------
+  const LYR_TOP = [[16.5, 25.9], [168.6, 175.4], [417.4, 426.2]];   // shots whose lower frame holds a figure or bright water
+  function scrim(g, x, y, w, size, a) {
+    if (a <= 0) return;
+    const r = size * 1.6;
+    g.save();
+    g.translate(x, y); g.scale(Math.max(1, (w / 2 + r) / r), 1);
+    const grd = g.createRadialGradient(0, 0, 0, 0, 0, r);
+    grd.addColorStop(0, `rgba(0,0,0,${a})`); grd.addColorStop(.55, `rgba(0,0,0,${a * .55})`); grd.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = grd; g.fillRect(-r, -r, 2 * r, 2 * r);
+    g.restore();
+  }
+  function lyricLines(t) {
+    const out = [], n = LYRICS.length;
+    LYRICS.forEach(([s0, s1, text, style], i) => {
+      let e = s1, fout = .35, row = 0;
+      if (i === n - 2) { e = 437.6; fout = 1.6; row = -1; }       // the closing couplet stays together
+      if (i === n - 1) { e = 437.6; fout = 1.6; }
+      if (style === 'still') fout = .9;
+      if (t < s0 - .01 || t > e + .01) return;
+      const fin = style === 'still' ? .06 : .3;
+      out.push({ text, style, s0, row, a: Math.min(K.smooth((t - s0) / fin), K.smooth((e - t) / fout)) });
+    });
+    return out;
   }
 
   let ready = false;

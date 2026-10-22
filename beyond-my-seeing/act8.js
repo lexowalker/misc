@@ -107,4 +107,3 @@ shot(426.6, 438.37, c => {
   c.post.bloom = .85; c.post.vig = .6 + dark * .3;
   c.post.exp = lerp(1, .2, dark);
 }, { fade: 1.2 });
-words(426.9, 436.8, ['And perhaps the One I’m seeking', 'has been searching, too, for me.'], { y: SH * .78, size: 48, stagger: 3.6, fin: 1.6, fout: 2.2 });

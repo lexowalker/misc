@@ -8,7 +8,7 @@ When the sun is low over the sea, its reflection makes a road of gold across the
 
 The film opens on a single point of light in the dark. It turns out to be the morning star over the sea, and then the sunrise draws its path of gold to a child on a rock. A small light kindles in his chest, which is his question, and he carries it through his whole life. At the end he is an old man sitting on the same rock, in the same path of gold. Others stand along the shore, and each of them has a path of their own: the sea shader computes the glitter for several viewpoints at once. Then the camera turns around to the sun's side and pulls away until only the light in his chest remains. It is the same point of light the film began with, now seen from the other side.
 
-Four lines of the song appear on screen: the title, the first "Where are You, beyond my seeing?", "I will seek You still.", and the final couplet. Everything else is left to the images.
+The song's words run through the whole film as captions (`lyrics.js`) so viewers can follow them. Each line fades in just before it is sung and holds until the next. They are set in Cormorant Garamond italic; the final chorus switches to tracked capitals as the lyric sheet writes it, and "STILL!" lands large on the orchestral blast after the silence. Where the bottom of the frame holds a figure or bright water, the lines move to the top, and a soft scrim keeps them legible over bright light.
 
 ## Shots, synced to the vocal
 
@@ -47,6 +47,7 @@ Section starts come from word-level timings (faster-whisper over the track) and 
 | `main.js` | The timeline: which shot or shots are live at time `t`, crossfades, fades to black on silences, and timed words. |
 | `render.mjs` | Playwright with SwiftShader. Captures frames, stills and contact sheets. |
 | `tools/analyze.py`, `audio-env.js` | Per-frame loudness envelopes of the song (subtle audio reactivity: the chest light, glows). |
+| `tools/align.py`, `lyrics.js` | The lyric sheet aligned to faster-whisper word timestamps; each line's display window. The held "I WILL SEEK YOU—" and "STILL!" are placed by the music (the held note, the silence at 6:33.7, the blast). |
 | `fonts/` | Cormorant Garamond (SIL OFL). |
 
 ## Rebuild

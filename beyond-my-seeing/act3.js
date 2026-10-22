@@ -22,7 +22,6 @@ shot(111.3, 119.4, c => {
   }));
   c.post.bloom = .8; c.post.vig = .6; c.post.exp = 1.05;
 }, { fade: .5 });
-words(111.4, 118.6, ['Where are You, beyond my seeing?'], { y: SH * .86, size: 50, fin: 1.6, fout: 1.8 });
 
 // ---------- C2a: within the silence (a face against the stars) ----------
 shot(119.4, 122.6, c => {
@@ -110,4 +109,3 @@ shot(139.3, 148.2, c => {
   c.glow(a.chest[0], a.chest[1], 9 + k * 5, C.ember, (1.2 + k * 2.2) * pulse, 2.4);
   c.post.bloom = .8; c.post.vig = .75;
 }, { fade: .25 });
-words(139.5, 145.6, ['I will seek You still.'], { y: SH * .84, size: 50, fin: 1.4, fout: 1.6 });
