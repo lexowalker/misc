@@ -118,8 +118,9 @@ const R = (() => {
       g.letterSpacing = track + 'px';
       const w = g.measureText(ly.text).width;
       const loud = ly.style === 'still' || ly.style === 'held';
-      scrim(g, W / 2, y, w * (loud ? 1.5 : 1), size * (loud ? 1.6 : 1), (ly.style === 'still' ? .32 : ly.style === 'held' ? .36 : .26) * ly.a);
-      g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = size * .45;
+      const bright = LYR_BRIGHT.some(([a, b]) => t >= a && t < b);
+      scrim(g, W / 2, y, w * (loud ? 1.5 : 1), size * (loud ? 1.6 : 1), (ly.style === 'still' ? .32 : ly.style === 'held' ? .36 : bright ? .5 : .26) * ly.a);
+      g.shadowColor = `rgba(0,0,0,${bright ? .85 : .6})`; g.shadowBlur = size * .45;
       g.fillStyle = `rgba(250,240,222,${ly.a})`;
       g.fillText(ly.text, W / 2, y);
       g.shadowBlur = 0;
@@ -129,6 +130,7 @@ const R = (() => {
   }
   // ---------------- the song's words ----------------
   const LYR_TOP = [[16.5, 25.9], [168.6, 175.4], [417.4, 426.2]];   // shots whose lower frame holds a figure or bright water
+  const LYR_BRIGHT = [[317.5, 321.8], [331.0, 342.0], [347.8, 361.2], [394.4, 402.5]];  // whiteouts, glare and bright cloud: a deeper scrim
   function scrim(g, x, y, w, size, a) {
     if (a <= 0) return;
     const r = size * 1.6;
