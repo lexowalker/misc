@@ -1,0 +1,54 @@
+[
+ {
+  "id": "s01_open",
+  "text": "[softly] It is the middle of the night. The wood is dark… and almost everything in it is silent. [pause] Almost."
+ },
+ {
+  "id": "s02_bird",
+  "text": "Somewhere in a thicket, a small brown bird is singing as though its life depended on it. In a sense… it does."
+ },
+ {
+  "id": "s03_basics",
+  "text": "This is the common nightingale. Plain brown, a little larger than a robin. Each spring, the males fly north from tropical Africa to the thickets of Europe — and the unpaired ones do something most songbirds don't. They sing all night. That night song seems to be aimed at females, passing overhead on their own migration. Once a male has found a mate, his night singing largely stops. By day he sings on… but that song is for his rivals."
+ },
+ {
+  "id": "s04_count",
+  "text": "And what a song it is. Slow it down, and it breaks apart. The smallest piece is a single note — an element. A whistle. A click. A buzz. One male may use several hundred kinds, and counts across the species run past a thousand. Elements are strung into songs about three seconds long. And a single male knows around two hundred different songs. Some, more than two hundred and fifty."
+ },
+ {
+  "id": "s05_vary",
+  "text": "What does he vary? Pitch — from about one to eight kilohertz. Its shape: rising, falling, swooping. Length — some notes last a few hundredths of a second. Loudness. Speed, in trills that accelerate like a drumroll. And texture, from a pure, flute-like whistle to a harsh rattle. [pause] And one more trick. A bird's voice box has two sides, each controlled separately. So a nightingale can sing two notes at once. A duet… with itself."
+ },
+ {
+  "id": "s06_hier",
+  "text": "Even the order matters. Young birds learn songs in small packages of three or five, and tend to keep them together for life. Note, song, package, sequence. It is a hierarchy."
+ },
+ {
+  "id": "s07_humans",
+  "text": "How does that compare with us? Human languages are built from phonemes — the sounds that turn one word into another. English has about forty-four. Across the world, from around eleven to more than a hundred. So in raw building blocks, the nightingale is well ahead. But our trick lies elsewhere. Forty-odd sounds become thousands of syllables, tens of thousands of words… and an unlimited number of sentences. The nightingale has a large alphabet. We have a small one — and grammar."
+ },
+ {
+  "id": "s08_meaning",
+  "text": "So what is a nightingale actually saying? Here we must be careful. As far as we know, a song doesn't mean something the way a word does. There is no song for fox, or rain. The message is the singer. I am here. I am male. I am healthy, and experienced. Older males tend to have larger repertoires, so variety itself may be the message. And how he uses his songs says more. Answer a rival with the very same song, and you are matching him — a challenge. Start singing before he has finished, and you are overlapping him. That seems to be heard as an escalation."
+ },
+ {
+  "id": "s09_bits",
+  "text": "Now, some rough arithmetic — and from here on, treat this as speculation. If a male chose freely among two hundred songs, each choice would carry under eight bits of information. At one song every six or seven seconds, that is roughly one bit per second. Human speech, measured across seventeen languages, carries about thirty-nine bits per second. On those terms, we say in one second what a nightingale says in half a minute."
+ },
+ {
+  "id": "s10_computer",
+  "text": "But imagine a computer that could talk only in nightingale. Not with the bird's meanings — just with its voice. Now the picture flips. Treat each of a thousand notes as a symbol, sung ten to a second, and the raw channel may approach a hundred bits per second. More than our speech. [pause] So the bottleneck isn't the voice. It's the rules. A nightingale's song, as far as we can tell, is a chain: each song leads to the next, like beads on a string. Human language nests — phrases inside phrases, ideas inside ideas, with no fixed limit. Ten songs in a row can be arranged in about ten to the power of twenty-three ways. Vast. But each is still just a string of beads. Grammar lets the parts carry meaning, and combine into meanings no one has heard before. That may be the real gulf. Not how many signals you can make… but how many thoughts they can hold. Given a grammar, a nightingale's voice might out-talk our own. Without one, it is a song with a single subject: the singer."
+ },
+ {
+  "id": "s11_distance",
+  "text": "How far does it carry? A nightingale can sing at around ninety decibels a metre away — as loud as a lawnmower — from a body of twenty grams. At night the air is still and the wood falls quiet, so sound travels further and cleaner. On a calm night, the song may reach a kilometre or more. And in Berlin, nightingales were found to sing louder where the traffic was louder… just as we raise our voices in a crowded room."
+ },
+ {
+  "id": "s12_parallel",
+  "text": "And when every male in the wood sings at once? They don't — quite. Neighbours often take turns, slotting songs into each other's pauses. Other species shift to other hours, or other pitches. Listeners seem able to pull one voice from the chorus, as you follow one conversation at a party. And there are eavesdroppers: birds listening in on contests they are not part of… perhaps keeping score. A wood at night is not a crowd talking over itself. It is closer to a network, taking turns."
+ },
+ {
+  "id": "s13_close",
+  "text": "In Japan, the word nightingale belongs to a different bird: the uguisu. Its name was given to castle floors said to chirp beneath an intruder's feet. Nightingale floors. A message, written in sound. [pause] Perhaps that is the best way to hear our nightingale, too. Not as a speaker of words… but as one voice, saying one thing, a thousand different ways, all night long. [softly] I am here."
+ }
+]
