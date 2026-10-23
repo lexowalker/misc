@@ -88,26 +88,27 @@ beds *= (1 - 0.82 * duck)[:, None]
 # city noise for the Berlin traffic moment
 t0c, t1c = seg['s11']['t0'] + 21, c[6][0] + 0.5
 n = int((t1c - t0c) * SR)
-rumble = lowpass(rng.standard_normal(n), 220) * 2.5 + bandpass(rng.standard_normal(n), 300, 1500) * 0.3
+rumble = highpass(lowpass(rng.standard_normal(n), 400), 90) * 1.5 + bandpass(rng.standard_normal(n), 300, 1500) * 0.4
 rumble *= 0.6 + 0.4 * np.sin(np.arange(n) / SR * 0.7)
-place(beds, fade(pan(rumble, 0) * db(-22), 1.5, 2.0), t0c)
+place(beds, fade(pan(rumble, 0) * db(-30), 1.5, 2.0), t0c)
+
+# a faint forest bed under the whole film: leaves stirring in slow gusts
+def rustle():
+    out = np.zeros((N, 2), np.float32)
+    gust = signal.sosfiltfilt(signal.butter(2, 0.25, fs=200, output='sos'), rng.standard_normal(N // 240 + 2))
+    gust = np.interp(np.arange(N) / 240, np.arange(len(gust)), (gust - gust.min()) / (np.ptp(gust) + 1e-9))
+    for ch in range(2):
+        leaves = bandpass(rng.standard_normal(N).astype(np.float32), 500, 3200, 2)
+        crackle = bandpass(rng.standard_normal(N).astype(np.float32) * (rng.random(N) > 0.9993), 1500, 5000, 2) * 6
+        out[:, ch] = (leaves * (0.15 + 0.85 * gust ** 1.5) + crackle * gust)
+    return lowpass(out, 4500)
+forest = fade(rustle(), 4, 6) * db(-44)
+beds += forest * (1 - 0.3 * duck)[:, None]
 
 # ---------- score ----------
 music = np.zeros((N, 2), np.float32)
 IN = [62, 63, 67, 69, 70, 74, 75, 79, 81, 82]           # D in-scale (miyako-bushi), MIDI
 hz = lambda m: 440 * 2 ** ((m - 69) / 12)
-def pad_tone(freqs, dur):
-    t = np.arange(int(dur * SR)) / SR; y = np.zeros(len(t))
-    for f in freqs:
-        for d in (-0.15, 0.15):
-            y += np.sin(2 * np.pi * (f + d) * t + rng.random() * 6) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.07 * t + rng.random() * 6))
-    return lowpass(y, 1400) / len(freqs)
-CHORDS = [[38, 50, 57], [39, 51, 58], [43, 50, 55], [38, 45, 50], [34, 46, 53], [38, 50, 57], [43, 51, 55], [38, 50, 57]]
-bounds = [0] + [cc['t0'] for cc in cards] + [DUR]
-for i in range(len(bounds) - 1):
-    a, b = bounds[i], bounds[i + 1] + 2
-    x = pad_tone([hz(m) for m in CHORDS[i % len(CHORDS)]], b - a)
-    place(music, fade(pan(x, 0), 2.5, 2.5), a, db(-31))
 def koto(f, dur=2.4):                                     # Karplus-Strong pluck
     n, p = int(dur * SR), int(SR / f)
     buf = rng.uniform(-1, 1, p); y = np.zeros(n)
@@ -128,47 +129,47 @@ def clack(t, g=-14):
 
 # ---------- picture-cued sounds ----------
 fx = np.zeros((N, 2), np.float32)
-def tone(f, dur, fm=0.0, fmr=30, a=0.01, d=None, harm=0.15):
+def tone(f, dur, fm=0.0, fmr=30, a=0.025, d=None, rel=0.05):
+    """A soft, pure tone: no harmonics, gentle attack and release, rolled-off top."""
     t = np.arange(int(dur * SR)) / SR
     ff = (f(t) if callable(f) else np.full_like(t, f)) * (1 + fm * np.sin(2 * np.pi * fmr * t))
-    ph = 2 * np.pi * np.cumsum(ff) / SR
-    y = np.sin(ph) + harm * np.sin(2 * ph)
-    e = np.minimum(1, t / a) * np.minimum(1, (dur - t) / 0.02).clip(0)
-    return y * e * (np.exp(-t / d) if d else 1)
-def click():
-    n = int(0.008 * SR); return bandpass(rng.standard_normal(n), 2000, 9000, 2) * env_ad(n, 0.0003, 0.002) * 3
-def buzz(dur=0.3):
+    y = np.sin(2 * np.pi * np.cumsum(ff) / SR)
+    e = np.minimum(1, t / a) * np.clip((dur - t) / rel, 0, 1) ** 2
+    return lowpass(y * e * (np.exp(-t / d) if d else 1), 3000, 2)
+def click():                                      # a soft wooden tock
+    n = int(0.06 * SR); return bandpass(rng.standard_normal(n), 500, 1600, 2) * env_ad(n, 0.001, 0.012) * 2
+def buzz(dur=0.35):                               # a gentle purr rather than a rasp
     t = np.arange(int(dur * SR)) / SR
-    y = signal.sawtooth(2 * np.pi * 3200 * t) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 45 * t)))
-    return bandpass(y, 2000, 7000, 2) * np.minimum(1, (dur - t) / 0.03) * 0.6
-def trill(times, f=3000):
-    out = np.zeros(int((times[-1] + 0.1) * SR))
+    y = np.sin(2 * np.pi * 900 * t) * (0.55 + 0.45 * np.sin(2 * np.pi * 32 * t))
+    return lowpass(y, 1800, 2) * np.minimum(1, t / 0.03) * np.clip((dur - t) / 0.06, 0, 1) * 0.8
+def trill(times, f=1400):
+    out = np.zeros(int((times[-1] + 0.2) * SR))
     for tt in times:
-        s = tone(lambda u: f * (1.3 - 3 * u), 0.03, a=0.002); i = int(tt * SR); out[i:i + len(s)] += s
+        s = tone(lambda u: f * (1.1 - 2 * u), 0.06, a=0.008, rel=0.04); i = int(tt * SR); out[i:i + len(s)] += s
     return out
 SONG = load('build/rec/berlin.mp3', 199.4, 3.3)
 def demo(kind):
-    if kind == 'whistle': return tone(3400, 0.35, fm=0.004, fmr=7)
+    if kind == 'whistle': return tone(1700, 0.45, fm=0.004, fmr=6)
     if kind == 'click': return click()
     if kind == 'buzz': return buzz()
-    if kind == 'pitch':
-        return tone(lambda t: 1000 + 7000 * (0.5 - 0.5 * np.cos(np.clip(t / 2.6, 0, 1) * np.pi * 1.5)), 2.6, a=0.05) * 0.6
-    if kind == 'up': return tone(lambda t: 2000 + 3000 * (t / 0.35) ** 2, 0.35)
-    if kind == 'down': return tone(lambda t: 6000 - 3500 * np.sqrt(t / 0.35), 0.35)
-    if kind == 'swoop': return tone(lambda t: 3500 + 1500 * np.sin(t / 0.5 * np.pi * 1.5), 0.5)
+    if kind == 'pitch':                           # follows the on-screen note, an octave and more lower
+        return tone(lambda t: 600 + 1800 * (0.5 - 0.5 * np.cos(np.clip(t / 2.6, 0, 1) * np.pi * 1.5)), 2.6, a=0.15, rel=0.3) * 0.7
+    if kind == 'up': return tone(lambda t: 1000 + 1200 * (t / 0.4) ** 2, 0.4)
+    if kind == 'down': return tone(lambda t: 2300 - 1200 * np.sqrt(t / 0.4), 0.4)
+    if kind == 'swoop': return tone(lambda t: 1500 + 500 * np.sin(t / 0.55 * np.pi * 1.5), 0.55)
     if kind == 'length':
-        out = np.zeros(int(1.2 * SR))
-        for j, d in enumerate((0.02, 0.06, 0.18)): s = tone(3000, d, a=0.003); i = int(j * 0.35 * SR); out[i:i + len(s)] += s
+        out = np.zeros(int(1.3 * SR))
+        for j, d in enumerate((0.04, 0.09, 0.22)): s = tone(1500, d, a=0.01, rel=0.02); i = int(j * 0.35 * SR); out[i:i + len(s)] += s
         return out
     if kind == 'loudness':
         t = np.arange(int(2.2 * SR)) / SR
-        return tone(3000, 2.2, fm=0.004, fmr=6) * (0.15 + 0.85 * (0.5 + 0.5 * np.sin(t * 5)))
+        return tone(1500, 2.2, fm=0.003, fmr=5, rel=0.3) * (0.15 + 0.85 * (0.5 + 0.5 * np.sin(t * 5)))
     if kind == 'speed':
-        ts, dt, t = [], 0.16, 0.0
-        while t < 3.6: ts.append(t); t += dt; dt = max(0.028, dt * 0.88)
+        ts, dt, t = [], 0.18, 0.0
+        while t < 3.6: ts.append(t); t += dt; dt = max(0.05, dt * 0.9)
         return trill(ts)
-    if kind == 'rattle': return buzz(0.6) * 1.2
-    if kind == 'twovoice': return tone(2800, 1.2, fm=0.01, fmr=5) * 0.7 + tone(lambda t: 4200 - 600 * t, 1.2, fm=0.006, fmr=9) * 0.6
+    if kind == 'rattle': return buzz(0.6)
+    if kind == 'twovoice': return tone(1300, 1.2, fm=0.008, fmr=5, rel=0.3) * 0.6 + tone(lambda t: 1950 - 250 * t, 1.2, fm=0.005, fmr=7, rel=0.3) * 0.5
     if kind == 'swap': return KOTO[74] * 0.8
     return np.zeros(10)
 for cu in CUES:
@@ -177,7 +178,7 @@ for cu in CUES:
         x = SONG if cu['rate'] == 1 else signal.resample(SONG, int(len(SONG) / cu['rate']), axis=0)
         if cu['rate'] != 1: x = reverb(x, 0.35)
         place(fx, fade(x, 0.02, 0.3), t, cu['gain'])
-    elif k == 'demo': place(fx, pan(demo(cu['sound']), 0.1), t, db(-17))
+    elif k == 'demo': place(fx, pan(demo(cu['sound']), 0.1), t, db(-22))
     elif k == 'taiko': taiko(t); arpeggio(t + 0.6, [62, 67, 70, 74, 79], 0.22, -16)
     elif k == 'clack': clack(t); arpeggio(t + 0.35, [74, 70, 67], 0.2, -22)
     elif k == 'stamp':
@@ -188,9 +189,8 @@ for cu in CUES:
             n = int(0.02 * SR); y = bandpass(rng.standard_normal(n), 2500, 6000, 2) * env_ad(n, 0.0003, 0.004) * 2
             place(fx, pan(y, rng.uniform(-0.5, 0.5)), t + j * cu['dur'] / cu['n'] + rng.uniform(0, 0.01), db(-20))
     elif k == 'chirp':
-        y = tone(lambda u: 4200 - 9000 * u, 0.09, a=0.003) * 0.8
-        y[:int(0.07 * SR)] += tone(lambda u: 3800 - 6000 * u, 0.07, a=0.003) * 0.3
-        place(fx, pan(y, cu.get('pan', 0)), t, db(-16))
+        y = tone(lambda u: 2600 - 5000 * u, 0.1, a=0.006, rel=0.04)
+        place(fx, pan(y, cu.get('pan', 0)), t, db(-19))
 fx = fx * (1 - 0.35 * duck)[:, None]
 
 # ---------- mix ----------
