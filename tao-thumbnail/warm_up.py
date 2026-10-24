@@ -44,17 +44,18 @@ def saturate(rgb, k):
 
 def grade_figure(rgb):
     lum = (rgb @ LUMA)[..., None]
-    # skin/hair midtones (not the near-white shirt) get a golden tan
+    # warm only where there's already skin colour (r > b), so silver hair and
+    # beard stay neutral; lean rosy (red) rather than yellow (low blue)
+    skin = np.clip((rgb[..., :1] - rgb[..., 2:]) / 0.12, 0, 1)
     mid = np.clip(1 - np.abs(lum - 0.5) / 0.4, 0, 1)
-    rgb = rgb + mid * np.array([0.055, 0.02, -0.04])
-    rgb = saturate(rgb, 1.25)
-    # bring the white shirt down to a warm cream so it isn't blown out
+    rgb = rgb + skin * mid * np.array([0.055, 0.018, -0.008])
+    rgb = saturate(rgb, 1.16)
+    # bring the white shirt down to a soft off-white so it isn't blown out
     hi = np.clip((lum - 0.75) / 0.25, 0, 1)
-    rgb = rgb * (1 - hi * 0.08) + hi * 0.08 * np.array([0.96, 0.88, 0.74])
+    rgb = rgb * (1 - hi * 0.06) + hi * 0.06 * np.array([0.95, 0.92, 0.87])
     # richer shadows: deeper eyes, hair and beard texture
     rgb = s_curve(rgb, 0.22)
-    rgb = rgb * np.array([1.03, 1.0, 0.94])
-    return rgb
+    return rgb * np.array([1.015, 1.0, 0.985])
 
 
 def radial(h, w, cx, cy, r):
@@ -77,14 +78,14 @@ def main(src, dst):
     lum = (fig @ LUMA)[..., None]
     fig = fig * (1 - form[..., None] * np.clip((lum - 0.6) / 0.3, 0, 1))
 
-    # golden key light from upper right, falling across the face
+    # soft warm key light from upper right, falling across the face
     key = radial(h, w, w * 0.78, h * 0.48, w * 0.95) ** 2
-    fig = fig + key * np.array([0.09, 0.05, 0.0])
+    fig = fig + key * np.array([0.05, 0.035, 0.02])
 
     # warm rim just inside the figure's edge
     inner = to_arr(to_img(a[..., 0], "L").filter(ImageFilter.MinFilter(9)))[..., None]
     edge = to_img(np.clip(a - inner, 0, 1)[..., 0], "L").filter(ImageFilter.GaussianBlur(4))
-    fig = fig + to_arr(edge)[..., None] * np.array([0.06, 0.04, 0.01])
+    fig = fig + to_arr(edge)[..., None] * np.array([0.04, 0.03, 0.02])
 
     # only the figure changes; the background is the input, untouched
     out = rgb * (1 - a) + np.clip(fig, 0, 1) * a
