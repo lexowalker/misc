@@ -1,8 +1,9 @@
-"""Warm up the lighting and make the figure pop in a finished thumbnail.
+"""Warm up the figure in a finished thumbnail, leaving the cover untouched.
 
 Usage: python3 warm_up.py IN.jpg OUT.jpg
-Cuts the figure out of IN, grades figure and background separately, and
-recombines them with a warm key light, rim light and vignette.
+Cuts the figure out of IN, grades only the figure (warm skin, contrast, a
+golden key light and a shaded shirt) and puts it back over IN's own
+background pixels, which are left exactly as they were.
 """
 import os
 import sys
@@ -56,12 +57,6 @@ def grade_figure(rgb):
     return rgb
 
 
-def grade_background(rgb):
-    rgb = rgb * np.array([1.06, 1.0, 0.86]) + np.array([0.015, 0.005, 0.0])
-    rgb = saturate(rgb, 1.08)
-    return s_curve(rgb, 0.08)
-
-
 def radial(h, w, cx, cy, r):
     yy, xx = np.mgrid[0:h, 0:w]
     d = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2) / r
@@ -75,12 +70,6 @@ def main(src, dst):
     a = figure_alpha(im, os.path.join("build", "cut-" + os.path.basename(src) + ".png"))
 
     fig = grade_figure(rgb)
-    bg = grade_background(rgb)
-
-    # warm halo behind the figure so it separates from the card/painting
-    soft = np.asarray(to_img(a[..., 0], "L").filter(ImageFilter.GaussianBlur(45)))
-    halo = (soft.astype(np.float32) / 255.0)[..., None] * 0.18
-    bg = bg * (1 - halo) + np.array([1.0, 0.86, 0.62]) * halo
 
     # shape the shirt: falloff toward the bottom and the left (away from the key)
     yy, xx = np.mgrid[0:h, 0:w]
@@ -88,21 +77,17 @@ def main(src, dst):
     lum = (fig @ LUMA)[..., None]
     fig = fig * (1 - form[..., None] * np.clip((lum - 0.6) / 0.3, 0, 1))
 
-    out = bg * (1 - a) + fig * a
-
     # golden key light from upper right, falling across the face
     key = radial(h, w, w * 0.78, h * 0.48, w * 0.95) ** 2
-    out = out + key * np.array([0.09, 0.05, 0.0]) * (0.12 + 0.88 * a)
+    fig = fig + key * np.array([0.09, 0.05, 0.0])
 
-    # warm rim on the figure's edge
-    edge = a - (to_arr(to_img(a[..., 0], "L").filter(ImageFilter.MinFilter(9))))[..., None]
-    edge = np.asarray(to_img(np.clip(edge, 0, 1)[..., 0], "L").filter(ImageFilter.GaussianBlur(4)))
-    edge = (edge.astype(np.float32) / 255.0)[..., None]
-    out = out + edge * np.array([0.06, 0.04, 0.01])
+    # warm rim just inside the figure's edge
+    inner = to_arr(to_img(a[..., 0], "L").filter(ImageFilter.MinFilter(9)))[..., None]
+    edge = to_img(np.clip(a - inner, 0, 1)[..., 0], "L").filter(ImageFilter.GaussianBlur(4))
+    fig = fig + to_arr(edge)[..., None] * np.array([0.06, 0.04, 0.01])
 
-    # soft warm-brown vignette to focus the frame
-    vig = 1 - radial(h, w, w * 0.55, h * 0.5, max(w, h) * 0.75) ** 0.6
-    out = out * (1 - vig * 0.35) + vig * 0.35 * np.array([0.22, 0.15, 0.07]) * out * 2
+    # only the figure changes; the background is the input, untouched
+    out = rgb * (1 - a) + np.clip(fig, 0, 1) * a
 
     to_img(out).save(dst, quality=95)
 

@@ -10,7 +10,7 @@ Cleary) as the background, with a portrait composited in the foreground.
 - `out/thumbnail-indoor.jpg` — big, golden candlelit grade, over the lower card
 - `out/thumbnail-outdoor.jpg` — close-up bleeding off the right, olive split tone, backlit hair
 - `src/user-edit.jpg` — hand-edited layout (B&W portrait colorized, over the card)
-- `out/thumbnail-warm.jpg` — `user-edit.jpg` with warm key light, richer skin tones and a shaded shirt
+- `out/thumbnail-warm.jpg` — `user-edit.jpg` with only the figure regraded (warm skin, golden key light, shaded shirt); cover untouched
 - `out/thumbnail-ink.jpg` — B&W portrait multiplied into the painting like brush ink, on a cream mist
 
 ## Build
