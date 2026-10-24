@@ -5,13 +5,18 @@ Cleary) as the background, with a portrait composited in the foreground.
 
 - `src/cover.jpg` — book cover (background)
 - `src/portrait.jpg` — source portrait
-- `out/thumbnail.jpg` — rendered result
+- `src/portrait-indoor.jpg`, `src/portrait-outdoor.jpg`, `src/portrait-bw.jpg` — portraits for the variants
+- `out/thumbnail.jpg` — rendered result (blue shirt, under the card)
+- `out/thumbnail-indoor.jpg` — big, golden candlelit grade, over the lower card
+- `out/thumbnail-outdoor.jpg` — close-up bleeding off the right, olive split tone, backlit hair
+- `out/thumbnail-ink.jpg` — B&W portrait multiplied into the painting like brush ink, on a cream mist
 
 ## Build
 
 ```sh
 pip install rembg pillow numpy onnxruntime
 python3 make_thumbnail.py src/cover.jpg src/portrait.jpg out/thumbnail.jpg
+python3 variants.py   # the three variants; caches cutouts in build/
 ```
 
 The script moves the cover's title card up to leave room for the subject.
