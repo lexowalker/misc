@@ -1,0 +1,255 @@
+<meta name="dash-one-writer">
+<style>
+  .cle { max-width: 60rem; margin-inline: auto; display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
+  .cle-head { display: grid; gap: var(--cds-gap-sm); }
+  .cle-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .cle-head p { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 65ch; }
+  .cle .cle-big { font-family: var(--font-anthropic-serif); font-weight: 400; color: var(--color-fg); font-size: 1.25em; }
+  .cle-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-md); min-width: 0; }
+  .cle-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .cle-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); max-width: 70ch; }
+  .cle-rows { display: grid; gap: var(--cds-gap-lg); }
+  .cle-row { display: grid; gap: var(--cds-gap-xs); }
+  .cle-row-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--cds-gap-sm); align-items: baseline; }
+  .cle-label { font-size: var(--cds-font-size-body); }
+  .cle-label small { display: block; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .cle-fig { font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); white-space: nowrap; }
+  .cle-fig .cle-of { color: var(--color-fg-muted); }
+  .cle-need { font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cle .cle-need b { color: var(--color-warn); font-weight: 600; }
+  .cle-bar { height: 0.5rem; border-radius: 999px; background: var(--cds-chart-grid); overflow: hidden; }
+  .cle-bar span { display: block; height: 100%; border-radius: 999px; }
+  .cle-total { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
+  .cle-total .cle-label { font-weight: var(--cds-font-weight-medium); }
+  .cle-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+  .cle-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-body); }
+  .cle-field input { font: inherit; padding: var(--cds-pad-xs) var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); }
+  .cle-scroll { overflow-x: auto; }
+  .cle table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .cle th, .cle td { text-align: left; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .cle th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .cle td.n, .cle th.n { text-align: right; white-space: nowrap; }
+  .cle td.ok { color: var(--color-ok); }
+  .cle td.short { color: var(--color-warn); }
+  .cle ul { margin: 0; padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-body); max-width: 70ch; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  [data-dash-source-state=empty] { color: transparent; }
+</style>
+
+<div class="cle">
+  <header class="cle-head" id="summary">
+    <h1>CLE Reregistration Tracker</h1>
+    <p>Newly admitted cycle, New York. You still need <b class="cle-big" data-draw="num" data-source="progress" data-field="remaining" data-where="key=total">—</b> of 32 credits. Your 10 Desmarais certificates add up to <b data-draw="num" data-source="progress" data-field="earned" data-where="key=total">—</b> credits.</p>
+  </header>
+
+  <section class="cle-card" id="cycle">
+    <h2>What's left for the two-year cycle</h2>
+    <p class="cle-note">Earned against the 32-credit cycle total. Each year also needs its own 16 credits; see the Year 1 / Year 2 split below.</p>
+    <div class="cle-rows">
+      <div class="cle-row">
+        <div class="cle-row-top">
+          <span class="cle-label">Ethics &amp; Professionalism<small>3 per year. Up to 3 Cybersecurity-Ethics credits count here.</small></span>
+          <span class="cle-fig"><b data-draw="num" data-source="progress" data-field="earned" data-where="key=ethics">—</b> <span class="cle-of">of</span> <span data-draw="num" data-source="progress" data-field="required" data-where="key=ethics">—</span></span>
+        </div>
+        <div class="cle-bar" data-draw="bar" data-key="ethics" data-source="progress"></div>
+        <span class="cle-need">Still need <b data-draw="num" data-source="progress" data-field="remaining" data-where="key=ethics">—</b></span>
+      </div>
+      <div class="cle-row">
+        <div class="cle-row-top">
+          <span class="cle-label">Skills<small>6 per year.</small></span>
+          <span class="cle-fig"><b data-draw="num" data-source="progress" data-field="earned" data-where="key=skills">—</b> <span class="cle-of">of</span> <span data-draw="num" data-source="progress" data-field="required" data-where="key=skills">—</span></span>
+        </div>
+        <div class="cle-bar" data-draw="bar" data-key="skills" data-source="progress"></div>
+        <span class="cle-need">Still need <b data-draw="num" data-source="progress" data-field="remaining" data-where="key=skills">—</b></span>
+      </div>
+      <div class="cle-row">
+        <div class="cle-row-top">
+          <span class="cle-label">Law Practice Management, Areas of Professional Practice or Cybersecurity-General<small>7 per year, in any mix of these.</small></span>
+          <span class="cle-fig"><b data-draw="num" data-source="progress" data-field="earned" data-where="key=practice">—</b> <span class="cle-of">of</span> <span data-draw="num" data-source="progress" data-field="required" data-where="key=practice">—</span></span>
+        </div>
+        <div class="cle-bar" data-draw="bar" data-key="practice" data-source="progress"></div>
+        <span class="cle-need">Still need <b data-draw="num" data-source="progress" data-field="remaining" data-where="key=practice">—</b></span>
+      </div>
+      <div class="cle-row">
+        <div class="cle-row-top">
+          <span class="cle-label">Cybersecurity, Privacy &amp; Data Protection<small>At least 1 in the cycle, Ethics or General. It also counts toward the category above it falls in.</small></span>
+          <span class="cle-fig"><b data-draw="num" data-source="progress" data-field="earned" data-where="key=cyber">—</b> <span class="cle-of">of</span> <span data-draw="num" data-source="progress" data-field="required" data-where="key=cyber">—</span></span>
+        </div>
+        <div class="cle-bar" data-draw="bar" data-key="cyber" data-source="progress"></div>
+        <span class="cle-need">Still need <b data-draw="num" data-source="progress" data-field="remaining" data-where="key=cyber">—</b></span>
+      </div>
+      <div class="cle-row cle-total">
+        <div class="cle-row-top">
+          <span class="cle-label">Total credits</span>
+          <span class="cle-fig"><b data-draw="num" data-source="progress" data-field="earned" data-where="key=total">—</b> <span class="cle-of">of</span> <span data-draw="num" data-source="progress" data-field="required" data-where="key=total">—</span></span>
+        </div>
+        <div class="cle-bar" data-draw="bar" data-key="total" data-source="progress"></div>
+        <span class="cle-need">Still need <b data-draw="num" data-source="progress" data-field="remaining" data-where="key=total">—</b></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="cle-grid">
+    <section class="cle-card" id="years">
+      <h2>Year 1 and Year 2</h2>
+      <p class="cle-note">Year 1 runs from your admission date to its first anniversary, Year 2 to the second. Enter your admission date to sort each certificate into its year.</p>
+      <label class="cle-field" for="cle-admitted">Admitted to the NY bar on
+        <input id="cle-admitted" class="cle-admitted" type="date" min="2015-01-01" max="2030-12-31">
+      </label>
+      <div class="cle-scroll" data-draw="years" data-source="certificates requirements">—</div>
+    </section>
+
+    <section class="cle-card" id="plan">
+      <h2>Fastest way to finish</h2>
+      <ul>
+        <li>Take a <b>Cybersecurity-Ethics</b> course. One credit clears the Cybersecurity requirement and counts toward Ethics.</li>
+        <li>Then pick up the rest of Ethics, Skills and Practice credits shown above.</li>
+        <li>Trial-skills programs like the Desmarais series split credit between Skills and Areas of Professional Practice, so they move two bars at once.</li>
+        <li>Keep each certificate for at least four years.</li>
+      </ul>
+      <p class="cle-note">Rules from the NY newly admitted attorney FAQ you shared. Check year boundaries and carry-over with the NYS CLE Board before you file.</p>
+    </section>
+  </div>
+
+  <section class="cle-card" id="certificates">
+    <h2>Certificates on file</h2>
+    <p class="cle-note">Desmarais LLP internal programs, May to July 2025. Credits by category as printed on each certificate.</p>
+    <div class="cle-scroll">
+      <table data-source="certificates" data-row-key="program">
+        <thead><tr>
+          <th data-field="date">Date</th>
+          <th data-field="program">Program</th>
+          <th class="n" data-field="ethics">Ethics</th>
+          <th class="n" data-field="skills">Skills</th>
+          <th class="n" data-field="app">Areas of practice</th>
+          <th class="n" data-field="total">Total</th>
+        </tr></thead>
+        <tbody data-draw="certs"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+  dash.calc('progress', {
+    title: 'Credits earned vs. cycle requirement',
+    description: 'Sums each certificate category and compares it with the 32-credit newly admitted cycle; up to 3 Cybersecurity-Ethics credits count toward Ethics.',
+    inputs: ['certificates', 'requirements'],
+    fn: (certificates, requirements) => {
+      const sum = (k) => certificates.reduce((a, r) => a + Number(r[k] || 0), 0);
+      const ce = sum('cyber_ethics'), cg = sum('cyber_general');
+      const earned = {
+        ethics: sum('ethics') + Math.min(ce, 3),
+        skills: sum('skills'),
+        practice: sum('lpm') + sum('app') + cg,
+        cyber: ce + cg,
+        total: sum('total'),
+      };
+      return requirements.map((q) => {
+        const required = Number(q.cycle);
+        const e = earned[q.key] ?? 0;
+        return { key: q.key, category: q.category, required, earned: e, remaining: Math.max(0, required - e) };
+      });
+    },
+  });
+
+  window.cleFmt = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? String(Math.round(n * 100) / 100) : '—';
+  };
+
+  dash.draw('num', (el) => {
+    const d = dash.data(el.dataset.source);
+    if (d.status !== 'ok') { el.textContent = '—'; return; }
+    const [k, v] = (el.dataset.where || '').split('=');
+    const row = d.data.find((r) => String(r[k]) === v);
+    el.textContent = row ? window.cleFmt(row[el.dataset.field]) : '—';
+  });
+
+  dash.draw('bar', (el) => {
+    const d = dash.data('progress');
+    el.replaceChildren();
+    if (d.status !== 'ok') return;
+    const row = d.data.find((r) => r.key === el.dataset.key);
+    if (!row) return;
+    const pct = row.required ? Math.min(1, row.earned / row.required) : 0;
+    const fill = document.createElement('span');
+    fill.style.width = (pct * 100).toFixed(1) + '%';
+    fill.style.background = pct >= 1 ? 'var(--color-ok)' : dash.colors[0];
+    el.append(fill);
+  });
+
+  dash.draw('certs', (tbody) => {
+    const d = dash.data('certificates');
+    tbody.replaceChildren();
+    if (d.status !== 'ok') return;
+    const fmtDate = d3.utcFormat('%b %-d, %Y');
+    [...d.data].sort((a, b) => String(a.date).localeCompare(String(b.date))).forEach((r) => {
+      const tr = document.createElement('tr');
+      const cells = [
+        [fmtDate(new Date(r.date)), ''],
+        [r.program, ''],
+        [window.cleFmt(r.ethics), 'n'],
+        [window.cleFmt(r.skills), 'n'],
+        [window.cleFmt(r.app), 'n'],
+        [window.cleFmt(r.total), 'n'],
+      ];
+      cells.forEach(([t, c]) => { const td = document.createElement('td'); td.textContent = t; if (c) td.className = c; tr.append(td); });
+      tbody.append(tr);
+    });
+  });
+
+  dash.draw('years', (el) => {
+    const certs = dash.data('certificates');
+    const reqs = dash.data('requirements');
+    el.replaceChildren();
+    const admitted = dash.params().admitted;
+    if (certs.status !== 'ok' || reqs.status !== 'ok' || !admitted) { el.textContent = '—'; return; }
+    const start = new Date(admitted + 'T00:00:00Z');
+    if (isNaN(start)) { el.textContent = '—'; return; }
+    const y1 = d3.utcYear.offset(start, 1), y2 = d3.utcYear.offset(start, 2);
+    const inYear = (r, a, b) => { const t = new Date(r.date + 'T00:00:00Z'); return t >= a && t < b; };
+    const sum = (rows, keys) => rows.reduce((acc, r) => acc + keys.reduce((s, k) => s + Number(r[k] || 0), 0), 0);
+    const rowsY1 = certs.data.filter((r) => inYear(r, start, y1));
+    const rowsY2 = certs.data.filter((r) => inYear(r, y1, y2));
+    const outside = certs.data.length - rowsY1.length - rowsY2.length;
+    const keys = { ethics: ['ethics', 'cyber_ethics'], skills: ['skills'], practice: ['lpm', 'app', 'cyber_general'], total: ['total'] };
+    const fmtDate = d3.utcFormat('%b %-d, %Y');
+    const table = document.createElement('table');
+    const head = document.createElement('tr');
+    ['Category', 'Year 1', 'Year 2'].forEach((t, i) => { const th = document.createElement('th'); th.textContent = t; if (i) th.className = 'n'; head.append(th); });
+    const thead = document.createElement('thead'); thead.append(head); table.append(thead);
+    const tb = document.createElement('tbody');
+    reqs.data.filter((q) => keys[q.key]).forEach((q) => {
+      const tr = document.createElement('tr');
+      const name = document.createElement('td'); name.textContent = q.key === 'practice' ? 'Practice / LPM / Cyber-Gen.' : q.category; tr.append(name);
+      [rowsY1, rowsY2].forEach((rows) => {
+        const e = sum(rows, keys[q.key]), need = Number(q.per_year);
+        const td = document.createElement('td');
+        td.className = 'n ' + (e >= need ? 'ok' : 'short');
+        td.textContent = window.cleFmt(e) + ' / ' + need;
+        tr.append(td);
+      });
+      tb.append(tr);
+    });
+    table.append(tb);
+    const note = document.createElement('p');
+    note.className = 'cle-note';
+    note.textContent = 'Year 1: ' + fmtDate(start) + ' – ' + fmtDate(d3.utcDay.offset(y1, -1)) +
+      '. Year 2: ' + fmtDate(y1) + ' – ' + fmtDate(d3.utcDay.offset(y2, -1)) + '.' +
+      (outside ? ' ' + outside + ' certificate(s) fall outside both years.' : '');
+    el.append(table, note);
+  });
+
+  document.querySelectorAll('.cle-admitted').forEach((input) => {
+    input.addEventListener('change', () => {
+      if (input.value && input.validity.valid) dash.setParams({ admitted: input.value });
+    });
+    input.addEventListener('blur', () => { input.value = dash.params().admitted ?? ''; });
+  });
+  dash.onData(() => {
+    document.querySelectorAll('.cle-admitted').forEach((input) => {
+      if (input !== document.activeElement) input.value = dash.params().admitted ?? '';
+    });
+  });
+</script>

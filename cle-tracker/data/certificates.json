@@ -1,0 +1,12 @@
+[
+ {"date":"2025-05-08","program":"Conflicts Training Part I","ethics":1,"skills":0,"lpm":0,"app":0,"cyber_ethics":0,"cyber_general":0,"total":1},
+ {"date":"2025-05-15","program":"Impactful Cases, Federal Circuit Q2 2025","ethics":0,"skills":0,"lpm":0,"app":1,"cyber_ethics":0,"cyber_general":0,"total":1},
+ {"date":"2025-06-04","program":"Trial Training 2025 - Theme Building","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-06-05","program":"Trial Training 2025 - A Practical Guide to the Rules of Evidence","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-06-17","program":"Trial Training 2025 - Direct Examinations, Part II","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-06-18","program":"Trial Training 2025 - Exhibits & Demonstratives","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-07-02","program":"Trial Training 2025 - Cross Examinations, Part I","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-07-08","program":"Trial Training 2025 - Cross Examinations, Part II","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-07-09","program":"Trial Training 2025 - Cross Examinations, Part III","ethics":0,"skills":0.75,"lpm":0,"app":0.75,"cyber_ethics":0,"cyber_general":0,"total":1.5},
+ {"date":"2025-07-10","program":"Trial Training 2025 - Witness Preparation","ethics":1.5,"skills":0,"lpm":0,"app":0,"cyber_ethics":0,"cyber_general":0,"total":1.5}
+]

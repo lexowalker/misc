@@ -1,0 +1,7 @@
+[
+ {"key":"ethics","category":"Ethics & Professionalism","per_year":3,"cycle":6},
+ {"key":"skills","category":"Skills","per_year":6,"cycle":12},
+ {"key":"practice","category":"Law Practice Mgmt / Areas of Practice / Cyber-General","per_year":7,"cycle":14},
+ {"key":"cyber","category":"Cybersecurity, Privacy & Data Protection (Ethics or General)","per_year":0,"cycle":1},
+ {"key":"total","category":"Total","per_year":16,"cycle":32}
+]
