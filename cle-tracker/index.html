@@ -39,7 +39,7 @@
 <div class="cle">
   <header class="cle-head" id="summary">
     <h1>CLE Reregistration Tracker</h1>
-    <p>Newly admitted cycle, New York. You still need <b class="cle-big" data-draw="num" data-source="progress" data-field="remaining" data-where="key=total">—</b> of 32 credits. Your 43 Desmarais certificates add up to <b data-draw="num" data-source="progress" data-field="earned" data-where="key=total">—</b> credits.</p>
+    <p>Newly admitted cycle, New York. You still need <b class="cle-big" data-draw="num" data-source="progress" data-field="remaining" data-where="key=total">—</b> of 32 credits. The 36 Desmarais certificates that count for newly admitted credit add up to <b data-draw="num" data-source="progress" data-field="earned" data-where="key=total">—</b> credits. Seven marked for experienced attorneys only are left out.</p>
   </header>
 
   <section class="cle-card" id="cycle">
@@ -103,7 +103,7 @@
       <h2>Fastest way to finish</h2>
       <ul>
         <li>Take <b>1 Cybersecurity credit</b>. That is the only gap left. Cybersecurity-General can be on-demand; Cybersecurity-Ethics must be live with questions allowed.</li>
-        <li>Year 2 is 0.75 Skills and 0.75 Practice short on its own. Up to 8 extra Year 1 credits can carry over to Year 2 (not Ethics), which covers it.</li>
+        <li>Year 2 is 1.5 Skills and 2.5 Practice short on its own. Up to 8 extra Year 1 credits can carry over to Year 2 (not Ethics), which covers it. Confirm with the CLE Board.</li>
         <li>Finish within your 90-day extension and keep each certificate for at least four years.</li>
       </ul>
       <p class="cle-note">Rules from the NY newly admitted attorney FAQ you shared. Check year boundaries and carry-over with the NYS CLE Board before you file.</p>
@@ -112,7 +112,7 @@
 
   <section class="cle-card" id="certificates">
     <h2>Certificates on file</h2>
-    <p class="cle-note">Desmarais LLP programs, April 2024 to July 2025. Credits by category as printed on each certificate.</p>
+    <p class="cle-note">Desmarais LLP programs, April 2024 to July 2025. Credits by category as printed on each certificate. Courses for experienced attorneys only don't count toward the newly admitted requirement.</p>
     <div class="cle-scroll">
       <table data-source="certificates" data-row-key="program">
         <thead><tr>
@@ -122,6 +122,7 @@
           <th class="n" data-field="skills">Skills</th>
           <th class="n" data-field="app">Areas of practice</th>
           <th class="n" data-field="total">Total</th>
+          <th data-field="audience">Course is for</th>
         </tr></thead>
         <tbody data-draw="certs"></tbody>
       </table>
@@ -132,10 +133,11 @@
 <script>
   dash.calc('progress', {
     title: 'Credits earned vs. cycle requirement',
-    description: 'Sums each certificate category and compares it with the 32-credit newly admitted cycle; up to 3 Cybersecurity-Ethics credits count toward Ethics.',
+    description: 'Leaves out experienced-only courses, sums each certificate category and compares it with the 32-credit newly admitted cycle; up to 3 Cybersecurity-Ethics credits count toward Ethics.',
     inputs: ['certificates', 'requirements'],
     fn: (certificates, requirements) => {
-      const sum = (k) => certificates.reduce((a, r) => a + Number(r[k] || 0), 0);
+      const counted = certificates.filter((r) => r.audience !== 'experienced only');
+      const sum = (k) => counted.reduce((a, r) => a + Number(r[k] || 0), 0);
       const ce = sum('cyber_ethics'), cg = sum('cyber_general');
       const earned = {
         ethics: sum('ethics') + Math.min(ce, 3),
@@ -192,6 +194,7 @@
         [window.cleFmt(r.skills), 'n'],
         [window.cleFmt(r.app), 'n'],
         [window.cleFmt(r.total), 'n'],
+        [r.audience, r.audience === 'experienced only' ? 'short' : ''],
       ];
       cells.forEach(([t, c]) => { const td = document.createElement('td'); td.textContent = t; if (c) td.className = c; tr.append(td); });
       tbody.append(tr);
@@ -209,9 +212,10 @@
     const y1 = d3.utcYear.offset(start, 1), y2 = d3.utcYear.offset(start, 2);
     const inYear = (r, a, b) => { const t = new Date(r.date + 'T00:00:00Z'); return t >= a && t < b; };
     const sum = (rows, keys) => rows.reduce((acc, r) => acc + keys.reduce((s, k) => s + Number(r[k] || 0), 0), 0);
-    const rowsY1 = certs.data.filter((r) => inYear(r, start, y1));
-    const rowsY2 = certs.data.filter((r) => inYear(r, y1, y2));
-    const outside = certs.data.length - rowsY1.length - rowsY2.length;
+    const usable = certs.data.filter((r) => r.audience !== 'experienced only');
+    const rowsY1 = usable.filter((r) => inYear(r, start, y1));
+    const rowsY2 = usable.filter((r) => inYear(r, y1, y2));
+    const outside = usable.length - rowsY1.length - rowsY2.length;
     const keys = { ethics: ['ethics', 'cyber_ethics'], skills: ['skills'], practice: ['lpm', 'app', 'cyber_general'], total: ['total'] };
     const fmtDate = d3.utcFormat('%b %-d, %Y');
     const table = document.createElement('table');

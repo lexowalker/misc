@@ -8,7 +8,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-05-16",
@@ -19,7 +20,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-06-04",
@@ -30,7 +32,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-11",
@@ -41,7 +44,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-14",
@@ -52,7 +56,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-18",
@@ -63,7 +68,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-20",
@@ -74,7 +80,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-25",
@@ -85,7 +92,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-06-27",
@@ -96,7 +104,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-07-09",
@@ -107,7 +116,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-07-11",
@@ -118,7 +128,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2024-07-23",
@@ -129,7 +140,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 19.5
+  "total": 19.5,
+  "audience": "both"
  },
  {
   "date": "2024-10-15",
@@ -140,7 +152,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-10-29",
@@ -151,7 +164,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-11-05",
@@ -162,7 +176,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-11-12",
@@ -173,7 +188,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-11-14",
@@ -184,7 +200,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-11-19",
@@ -195,7 +212,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2024-11-21",
@@ -206,7 +224,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-12-03",
@@ -217,7 +236,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2024-12-10",
@@ -228,7 +248,8 @@
   "app": 0.5,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2024-12-17",
@@ -239,7 +260,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2025-01-08",
@@ -250,7 +272,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 3.5
+  "total": 3.5,
+  "audience": "both"
  },
  {
   "date": "2025-01-09",
@@ -261,7 +284,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 3.5
+  "total": 3.5,
+  "audience": "both"
  },
  {
   "date": "2025-01-28",
@@ -272,7 +296,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2025-02-06",
@@ -283,7 +308,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-02-20",
@@ -294,7 +320,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-03-06",
@@ -305,7 +332,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2025-03-27",
@@ -316,7 +344,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-04-03",
@@ -327,7 +356,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-04-09",
@@ -338,7 +368,8 @@
   "app": 1.5,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 3.0
+  "total": 3.0,
+  "audience": "both"
  },
  {
   "date": "2025-04-10",
@@ -349,7 +380,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-04-15",
@@ -360,7 +392,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-05-08",
@@ -371,7 +404,8 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "both"
  },
  {
   "date": "2025-05-15",
@@ -382,7 +416,8 @@
   "app": 1.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.0
+  "total": 1.0,
+  "audience": "experienced only"
  },
  {
   "date": "2025-06-04",
@@ -393,7 +428,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-06-05",
@@ -404,7 +440,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-06-17",
@@ -415,7 +452,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-06-18",
@@ -426,7 +464,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-07-02",
@@ -437,7 +476,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-07-08",
@@ -448,7 +488,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "experienced only"
  },
  {
   "date": "2025-07-09",
@@ -459,7 +500,8 @@
   "app": 0.75,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  },
  {
   "date": "2025-07-10",
@@ -470,6 +512,7 @@
   "app": 0.0,
   "cyber_ethics": 0.0,
   "cyber_general": 0.0,
-  "total": 1.5
+  "total": 1.5,
+  "audience": "both"
  }
 ]
