@@ -129,7 +129,7 @@ const app = {
     const p = this.project;
     $("projName").value = p.name;
     $("bpm").value = (+p.bpm).toFixed(1);
-    $("btnSteady").hidden = !p.tempoMap;
+    if ($("btnSteady")) $("btnSteady").hidden = !p.tempoMap;
     $("keyTonic").value = p.key.tonic; $("keyMode").value = p.key.mode;
     $("curLen").textContent = fmtTime(this.tempo().sec(endBeat(p)));
     if (document.activeElement !== $("target")) $("target").value = p.targetSeconds ? fmtTime(p.targetSeconds) : "";
@@ -658,7 +658,7 @@ function wire() {
     ["Project JSON", () => download(new Blob([JSON.stringify(app.project, null, 1)], { type: "application/json" }), app.project.name + ".refdaw.json")],
   ]);
   $("projName").onchange = (e) => { app.commit(); app.project.name = e.target.value || "Untitled"; app.changed({ analyze: false }); };
-  $("btnSteady").onclick = () => app.op("steady_tempo", {});
+  if ($("btnSteady")) $("btnSteady").onclick = () => app.op("steady_tempo", {});
   $("bpm").onchange = (e) => { const v = parseFloat(e.target.value); if (v > 10) app.op("set_tempo", { bpm: v }); };
   for (const n of NOTE_NAMES) $("keyTonic").append(el("option", { value: n }, n));
   for (const m of Object.keys(MODES)) $("keyMode").append(el("option", { value: m }, m));
