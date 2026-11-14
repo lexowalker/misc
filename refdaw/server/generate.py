@@ -74,34 +74,66 @@ def elevenlabs(project: dict, out_dir: pathlib.Path, style: str, instruments: st
     return out
 
 
-def fal_ace(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path, style: str, instruments: str,
-            seconds: float, endpoint: str | None = None, extra: dict | None = None,
-            progress=lambda m, f: None) -> pathlib.Path:
-    key = os.environ.get("FAL_KEY")
-    if not key:
-        raise RuntimeError("FAL_KEY is not set (add it to refdaw/.env)")
+ACOUSTIC = "Acoustic instruments only: no drums, no percussion, no synthesizers, no electronic sounds, no vocals."
+
+
+def _fal_run(endpoint: str, args: dict, out_dir: pathlib.Path, tag: str, progress) -> pathlib.Path:
     import fal_client
 
-    endpoint = endpoint or os.environ.get("REFDAW_FAL_ENDPOINT", "fal-ai/ace-step/audio-to-audio")
-    progress("Uploading reference to fal", 0.1)
-    url = fal_client.upload_file(str(ref_wav))
-    tags = style_prompt(project, style, instruments)
-    args = {"audio_url": url, "tags": tags, "original_tags": tags, "duration": float(seconds),
-            "edit_mode": "remix", "lyrics": "[inst]", "original_lyrics": "[inst]"}
-    args.update(extra or {})
-    progress(f"Generating with {endpoint}", 0.3)
+    progress(f"Generating with {endpoint} (usually 30 s – 3 min)", 0.3)
     result = fal_client.subscribe(endpoint, arguments=args, with_logs=False)
     audio = result.get("audio") or (result.get("audios") or [None])[0] or result.get("audio_file")
     audio_url = audio["url"] if isinstance(audio, dict) else audio
     if not audio_url:
         raise RuntimeError(f"Unexpected fal response: {json.dumps(result)[:800]}")
     progress("Downloading result", 0.9)
-    data = httpx.get(audio_url, timeout=300).content
+    data = httpx.get(audio_url, timeout=300, follow_redirects=True).content
     ext = pathlib.Path(audio_url.split("?")[0]).suffix or ".wav"
-    out = out_dir / f"gen_ace_{int(time.time())}{ext}"
+    out = out_dir / f"gen_{tag}_{int(time.time())}{ext}"
     out.write_bytes(data)
-    (out.with_suffix(".json")).write_text(json.dumps({"endpoint": endpoint, "args": {**args, "audio_url": "<upload>"}}, indent=2))
+    (out.with_suffix(".json")).write_text(json.dumps({"endpoint": endpoint, "seed": result.get("seed"),
+                                                      "args": {**args, "audio_url": "<your rendered mix>"}}, indent=2))
     return out
+
+
+def _fal_upload(ref_wav: pathlib.Path, progress) -> str:
+    if not os.environ.get("FAL_KEY"):
+        raise RuntimeError("FAL_KEY is not set (add it to refdaw/.env and restart)")
+    import fal_client
+
+    progress("Uploading your mix to fal", 0.1)
+    return fal_client.upload_file(str(ref_wav))
+
+
+def fal_stable_audio(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path, style: str, instruments: str,
+                     seconds: float, strength: float = 0.45, acoustic: bool = True, extra: dict | None = None,
+                     progress=lambda m, f: None) -> pathlib.Path:
+    """Stable Audio 2.5 audio-to-audio: re-renders the reference with real-sounding instruments.
+
+    `strength` is how far it may move from the reference: ~0.3 keeps notes and timing very close,
+    ~0.6 lets it reinterpret more freely.
+    """
+    url = _fal_upload(ref_wav, progress)
+    prompt = style_prompt(project, style, instruments) + (" " + ACOUSTIC if acoustic else "")
+    args = {"prompt": prompt, "audio_url": url, "strength": float(max(0.05, min(1.0, strength))),
+            "total_seconds": int(max(1, min(190, round(seconds))))}
+    args.update(extra or {})
+    return _fal_run("fal-ai/stable-audio-25/audio-to-audio", args, out_dir, f"stable{int(args['strength'] * 100)}", progress)
+
+
+def fal_ace(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path, style: str, instruments: str,
+            seconds: float, endpoint: str | None = None, extra: dict | None = None, acoustic: bool = True,
+            progress=lambda m, f: None) -> pathlib.Path:
+    """ACE-Step audio-to-audio remix. Keeps the reference's length; restyles it with tags."""
+    url = _fal_upload(ref_wav, progress)
+    endpoint = endpoint or os.environ.get("REFDAW_FAL_ENDPOINT", "fal-ai/ace-step/audio-to-audio")
+    tags = style_prompt(project, style, instruments) + (" " + ACOUSTIC if acoustic else "")
+    inst = instruments or ", ".join(sorted({core.GM[t["program"]] for t in project["tracks"] if not t.get("mute")}))
+    args = {"audio_url": url, "edit_mode": "remix", "tags": tags,
+            "original_tags": f"{inst}, MIDI rendering, synthetic, instrumental",
+            "lyrics": "[inst]", "original_lyrics": "[inst]"}
+    args.update(extra or {})
+    return _fal_run(endpoint, args, out_dir, "ace", progress)
 
 
 def suno_brief(project: dict, style: str, instruments: str, seconds: float) -> str:

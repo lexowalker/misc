@@ -443,6 +443,15 @@ async def generate(pid: str, req: Request):
         if provider == "elevenlabs":
             out = gen.elevenlabs(project, d, style, inst, seconds, bool(body.get("useSections", True)),
                                  body.get("model") or None, progress=progress)
+        elif provider == "fal_stable":
+            ref = d / "mix.wav"
+            if not ref.exists():
+                raise RuntimeError("Render the mix first (Export → Render mix.wav)")
+            extra = body.get("extra") or {}
+            if isinstance(extra, str):
+                extra = json.loads(extra) if extra.strip() else {}
+            out = gen.fal_stable_audio(project, d, ref, style, inst, seconds, float(body.get("strength") or 0.45),
+                                       bool(body.get("acoustic", True)), extra, progress=progress)
         elif provider == "fal_ace":
             ref = d / "mix.wav"
             if not ref.exists():
@@ -451,7 +460,7 @@ async def generate(pid: str, req: Request):
             if isinstance(extra, str):
                 extra = json.loads(extra) if extra.strip() else {}
             out = gen.fal_ace(project, d, ref, style, inst, seconds, body.get("endpoint") or None, extra,
-                              progress=progress)
+                              bool(body.get("acoustic", True)), progress=progress)
         else:
             raise RuntimeError(f"Unknown provider {provider}")
         return {"file": out.name}

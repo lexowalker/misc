@@ -386,14 +386,19 @@ async function generateDialog() {
   const dur = p.targetSeconds || app.tempo().sec(endBeat(p));
   const insts = [...new Set(p.tracks.filter((t) => !t.mute).map((t) => app.config.gm[t.program]))].join(", ");
   const prov = el("select", {},
-    el("option", { value: "elevenlabs" }, "ElevenLabs Music (style + sections + exact length)" + (app.config.elevenlabs ? "" : " — key missing")),
-    el("option", { value: "fal_ace" }, "ACE-Step via fal.ai (uses your mix as reference audio)" + (app.config.fal ? "" : " — key missing")),
+    el("option", { value: "fal_stable" }, "Stable Audio 2.5 via fal.ai (re-performs your mix; keeps your notes closest)" + (app.config.fal ? "" : " — key missing")),
+    el("option", { value: "fal_ace" }, "ACE-Step via fal.ai (restyles your mix more freely)" + (app.config.fal ? "" : " — key missing")),
+    el("option", { value: "elevenlabs" }, "ElevenLabs Music (new music from style + sections + exact length)" + (app.config.elevenlabs ? "" : " — key missing")),
     el("option", { value: "suno" }, "Suno (manual upload; no public API)"));
   const style = el("textarea", { rows: 3, placeholder: "e.g. minimalist cinematic, pulsing arpeggios, warm string orchestra and saxophones, building intensity, melancholic and hopeful" });
   style.value = localStorage.getItem("refdaw.style") || "";
   const inst = el("input", { type: "text", value: insts });
   const secs = el("input", { type: "text", value: fmtTime(dur), size: 6 });
   const useSect = el("input", { type: "checkbox", checked: true });
+  const strength = el("input", { type: "range", min: 0.15, max: 0.85, step: 0.05, value: 0.45, id: "genStrength" });
+  const strengthOut = el("span", { class: "dim small" }, " 0.45");
+  strength.oninput = () => (strengthOut.textContent = " " + (+strength.value).toFixed(2) + (strength.value < 0.35 ? " (very close to your notes)" : strength.value > 0.6 ? " (freer reinterpretation)" : ""));
+  const acoustic = el("input", { type: "checkbox", checked: true, id: "genAcoustic" });
   const model = el("input", { type: "text", placeholder: "default (music_v1)" });
   const endpoint = el("input", { type: "text", placeholder: "fal-ai/ace-step/audio-to-audio" });
   const extra = el("textarea", { rows: 2, placeholder: '{"edit_mode": "remix"}' });
@@ -413,13 +418,13 @@ async function generateDialog() {
     const seconds = parseTime(secs.value) || dur;
     out.innerHTML = "";
     try {
-      if (prov.value === "fal_ace") {
+      if (prov.value === "fal_ace" || prov.value === "fal_stable") {
         go.disabled = true;
         out.append(el("p", { class: "note" }, "Rendering the mix to use as reference…"));
         await renderMix(false);
       }
       const body = { project: app.project, provider: prov.value, style: style.value, instruments: inst.value, seconds,
-        useSections: useSect.checked, model: model.value, endpoint: endpoint.value, extra: extra.value };
+        useSections: useSect.checked, strength: +strength.value, acoustic: acoustic.checked, model: model.value, endpoint: endpoint.value, extra: extra.value };
       const r = await api(`/api/projects/${p.id}/generate`, { json: body });
       if (r.brief) { out.append(el("pre", {}, r.brief), el("button", { onclick: () => renderMix(false) }, "Render mix.wav for Suno")); return; }
       out.append(el("p", { class: "note" }, "Prompt: " + r.prompt));
@@ -437,6 +442,8 @@ async function generateDialog() {
       el("label", {}, "Style"), style,
       el("label", {}, "Instruments"), inst,
       el("label", {}, "Length"), el("span", {}, secs, el("span", { class: "dim small" }, "  m:ss — your target is " + (p.targetSeconds ? fmtTime(p.targetSeconds) : "not set"))),
+      el("label", {}, "How much to change"), el("span", {}, strength, strengthOut, el("div", { class: "dim small" }, "Stable Audio only. Lower keeps your notes and timing; higher sounds more natural but drifts.")),
+      el("label", {}, "Acoustic only"), el("span", {}, acoustic, el("span", { class: "dim small" }, " tell the model: no drums, synths or vocals")),
       el("label", {}, "Follow my sections"), el("span", {}, useSect, el("span", { class: "dim small" }, " section lengths match the arrangement (ElevenLabs)"))),
     el("details", {}, el("summary", { class: "dim" }, "Advanced"),
       el("div", { class: "grid", style: "margin-top:8px" },
