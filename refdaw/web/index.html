@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RefDAW</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="top">
+  <div class="brand">
+    <button id="projBtn" class="ghost" title="Projects">▾</button>
+    <input id="projName" class="name" spellcheck="false" title="Project name">
+  </div>
+  <div class="transport">
+    <button id="btnHome" title="To start (Home)">⏮</button>
+    <button id="btnPlay" class="play" title="Play / pause (Space)">▶</button>
+    <button id="btnStop" title="Stop (Enter)">■</button>
+    <button id="btnLoop" class="toggle" title="Loop the selected range (L)">⟲</button>
+    <button id="btnMetro" class="toggle" title="Metronome (K)">♩</button>
+    <div class="lcd"><span id="posBar">1.1</span><span id="posTime">0:00</span></div>
+  </div>
+  <div class="fields">
+    <label>BPM <input id="bpm" type="number" step="0.1" min="20" max="300"></label>
+    <label>Key
+      <select id="keyTonic"></select><select id="keyMode"></select>
+    </label>
+    <label title="Current length → target length">Length <span id="curLen">0:00</span> →
+      <input id="target" placeholder="2:47" size="5"></label>
+    <button id="btnFit" title="Change tempo so the piece ends exactly at the target length">Fit</button>
+  </div>
+  <div class="actions">
+    <button id="btnUndo" title="Undo (⌘Z)">↶</button>
+    <button id="btnRedo" title="Redo (⇧⌘Z)">↷</button>
+    <button id="btnImport">Import</button>
+    <button id="btnExport">Export</button>
+    <button id="btnGenerate" class="primary">Generate</button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="arrange">
+    <div id="trackHeads">
+      <div class="headspace"><button id="btnAddTrack" class="ghost small" title="Add track">+ Track</button></div>
+      <div id="heads"></div>
+    </div>
+    <canvas id="arrCanvas"></canvas>
+  </section>
+  <div id="splitter" title="Drag to resize"></div>
+  <section id="editor">
+    <div class="toolbar">
+      <span id="rollTitle" class="title">—</span>
+      <div class="seg" id="toolSeg">
+        <button data-tool="select" class="on" title="Select / move (V). Double-click adds or deletes a note.">Select</button>
+        <button data-tool="draw" title="Draw notes (D)">Draw</button>
+      </div>
+      <label>Snap <select id="snap">
+        <option value="1">1/4</option><option value="0.5">1/8</option><option value="0.25" selected>1/16</option>
+        <option value="0.333333">1/8T</option><option value="0.125">1/32</option><option value="0">off</option>
+      </select></label>
+      <label title="Velocity of the selected notes">Vel <input id="vel" type="range" min="1" max="127" value="90"></label>
+      <button id="btnQuant" title="Quantize the selection (or the track) to the snap grid (Q)">Quantize</button>
+      <button id="btnRange" title="Limit the melodic range of the track (or selection)">Range…</button>
+      <button id="btnVary" title="Subtle variations on the selection or range">Vary</button>
+      <label class="chk"><input id="ghosts" type="checkbox" checked> other tracks</label>
+      <span class="spacer"></span>
+      <span id="selInfo" class="dim"></span>
+    </div>
+    <div class="roll">
+      <canvas id="keys"></canvas>
+      <canvas id="rollCanvas"></canvas>
+    </div>
+  </section>
+</main>
+
+<aside id="side">
+  <div class="panel-head">Assistant <span id="agentState" class="dim"></span></div>
+  <div id="chat"></div>
+  <div id="ctxLine" class="dim small"></div>
+  <form id="askForm">
+    <textarea id="ask" rows="2" placeholder="e.g. “move everything to E minor”, “keep the soprano within one octave”, “subtle variations on part B”"></textarea>
+    <div class="row">
+      <button type="button" id="btnMic" title="Speak a command">🎙 Speak</button>
+      <span class="spacer"></span>
+      <button type="submit" class="primary">Send</button>
+    </div>
+  </form>
+  <div class="panel-head">Hum a melody</div>
+  <div class="hum">
+    <div class="row">
+      <label>Into <select id="humTarget"></select></label>
+      <label>Mode <select id="humMode"><option value="replace">replace</option><option value="layer">layer</option></select></label>
+    </div>
+    <div class="row">
+      <label class="chk"><input id="humPlayback" type="checkbox" checked> play along</label>
+      <label class="chk"><input id="humSnap" type="checkbox" checked> snap to key</label>
+      <label>Oct <select id="humOct"><option value="-1">−1</option><option value="0" selected>0</option><option value="1">+1</option></select></label>
+    </div>
+    <div class="row">
+      <button id="btnHum" class="rec">● Record hum</button>
+      <div class="meter"><div id="meterBar"></div></div>
+    </div>
+    <div class="dim small">Starts at the playhead after a one-bar count-in. Press again to stop.</div>
+  </div>
+</aside>
+
+<div id="status"></div>
+<div id="modal" class="hidden"><div class="box" id="modalBox"></div></div>
+<div id="dropHint" class="hidden">Drop audio (mp3, wav, m4a…) or a score (MusicXML, MXL, MIDI)</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
