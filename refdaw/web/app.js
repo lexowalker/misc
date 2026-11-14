@@ -704,12 +704,19 @@ function wire() {
   });
   window.addEventListener("resize", () => app.redraw());
   // drag & drop anywhere
-  let dragDepth = 0;
-  window.addEventListener("dragenter", (e) => { if (e.dataTransfer?.types?.includes("Files")) { dragDepth++; $("dropHint").classList.remove("hidden"); } });
-  window.addEventListener("dragleave", () => { if (--dragDepth <= 0) { dragDepth = 0; $("dropHint").classList.add("hidden"); } });
+  // Drop overlay. Hidden on any drop (capture phase, so drops on inner drop zones count too),
+  // when the drag leaves the window, and on any mouse movement without a drag in progress.
+  let hintTimer = null;
+  const hideHint = () => { clearTimeout(hintTimer); $("dropHint").classList.add("hidden"); };
+  window.addEventListener("dragenter", (e) => { if (e.dataTransfer?.types?.includes("Files") && $("modal").classList.contains("hidden")) $("dropHint").classList.remove("hidden"); });
+  window.addEventListener("dragover", () => { clearTimeout(hintTimer); hintTimer = setTimeout(hideHint, 400); });
+  window.addEventListener("dragleave", (e) => { if (!e.relatedTarget || e.clientX <= 0 || e.clientY <= 0 || e.clientX >= innerWidth || e.clientY >= innerHeight) hideHint(); });
+  window.addEventListener("drop", hideHint, true);
+  window.addEventListener("dragend", hideHint, true);
+  window.addEventListener("mousemove", hideHint);
   window.addEventListener("dragover", (e) => e.preventDefault());
   window.addEventListener("drop", (e) => {
-    e.preventDefault(); dragDepth = 0; $("dropHint").classList.add("hidden");
+    e.preventDefault(); hideHint();
     if (!$("modal").classList.contains("hidden")) return;
     const preset = {};
     for (const f of e.dataTransfer.files) {
