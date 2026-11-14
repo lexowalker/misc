@@ -386,6 +386,7 @@ async function generateDialog() {
   const dur = p.targetSeconds || app.tempo().sec(endBeat(p));
   const insts = [...new Set(p.tracks.filter((t) => !t.mute).map((t) => app.config.gm[t.program]))].join(", ");
   const prov = el("select", {},
+    el("option", { value: "fal_ace15" }, "ACE-Step 1.5 Cover via fal.ai (newest; re-performs keeping melody & chords)" + (app.config.fal ? "" : " — key missing")),
     el("option", { value: "fal_stable" }, "Stable Audio 2.5 via fal.ai (re-performs your mix; keeps your notes closest)" + (app.config.fal ? "" : " — key missing")),
     el("option", { value: "fal_ace" }, "ACE-Step via fal.ai (restyles your mix more freely)" + (app.config.fal ? "" : " — key missing")),
     el("option", { value: "elevenlabs" }, "ElevenLabs Music (new music from style + sections + exact length)" + (app.config.elevenlabs ? "" : " — key missing")),
@@ -418,7 +419,7 @@ async function generateDialog() {
     const seconds = parseTime(secs.value) || dur;
     out.innerHTML = "";
     try {
-      if (prov.value === "fal_ace" || prov.value === "fal_stable") {
+      if (["fal_ace", "fal_stable", "fal_ace15"].includes(prov.value)) {
         go.disabled = true;
         out.append(el("p", { class: "note" }, "Rendering the mix to use as reference…"));
         await renderMix(false);
@@ -442,7 +443,7 @@ async function generateDialog() {
       el("label", {}, "Style"), style,
       el("label", {}, "Instruments"), inst,
       el("label", {}, "Length"), el("span", {}, secs, el("span", { class: "dim small" }, "  m:ss — your target is " + (p.targetSeconds ? fmtTime(p.targetSeconds) : "not set"))),
-      el("label", {}, "How much to change"), el("span", {}, strength, strengthOut, el("div", { class: "dim small" }, "Stable Audio only. Lower keeps your notes and timing; higher sounds more natural but drifts.")),
+      el("label", {}, "How much to change"), el("span", {}, strength, strengthOut, el("div", { class: "dim small" }, "Stable Audio and ACE-Step 1.5 Cover. Lower keeps your notes and timing; higher sounds more natural but drifts.")),
       el("label", {}, "Acoustic only"), el("span", {}, acoustic, el("span", { class: "dim small" }, " tell the model: no drums, synths or vocals")),
       el("label", {}, "Follow my sections"), el("span", {}, useSect, el("span", { class: "dim small" }, " section lengths match the arrangement (ElevenLabs)"))),
     el("details", {}, el("summary", { class: "dim" }, "Advanced"),

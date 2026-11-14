@@ -121,6 +121,26 @@ def fal_stable_audio(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path
     return _fal_run("fal-ai/stable-audio-25/audio-to-audio", args, out_dir, f"stable{int(args['strength'] * 100)}", progress)
 
 
+def fal_ace15_cover(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path, style: str, instruments: str,
+                    seconds: float, change: float = 0.45, acoustic: bool = True, extra: dict | None = None,
+                    progress=lambda m, f: None) -> pathlib.Path:
+    """ACE-Step 1.5 Cover: re-performs the source keeping structure, chords and melody.
+
+    cover_strength 1.0 follows the source most closely, ~0.2 is a loose style transfer. The UI's
+    "how much to change" slider maps onto it inversely.
+    """
+    url = _fal_upload(ref_wav, progress)
+    prompt = style_prompt(project, style, instruments) + (" " + ACOUSTIC if acoustic else "")
+    cover = round(max(0.2, min(1.0, 1.25 - float(change))), 2)
+    ts = str(project["timeSig"][0]) if str(project["timeSig"][0]) in ("2", "3", "4", "6") else ""
+    key = project.get("key") or {}
+    args = {"source_audio_url": url, "prompt": prompt, "cover_strength": cover, "lyrics": "[instrumental]",
+            "bpm": int(max(30, min(300, round(project.get("bpm") or 120)))), "time_signature": ts,
+            "key_scale": f"{key.get('tonic', '')} {str(key.get('mode', '')).capitalize()}".strip()}
+    args.update(extra or {})
+    return _fal_run("fal-ai/ace-step-1.5/cover", args, out_dir, f"ace15cover{int(cover * 100)}", progress)
+
+
 def fal_ace(project: dict, out_dir: pathlib.Path, ref_wav: pathlib.Path, style: str, instruments: str,
             seconds: float, endpoint: str | None = None, extra: dict | None = None, acoustic: bool = True,
             progress=lambda m, f: None) -> pathlib.Path:
