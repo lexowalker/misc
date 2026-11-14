@@ -14,6 +14,12 @@ def score_to_project(path: str, project: dict) -> dict:
     import music21 as m21
 
     s = m21.converter.parse(path)
+    # Scores for transposing instruments (saxes, clarinets, horns...) are usually written at
+    # written pitch; the DAW needs sounding pitch.
+    try:
+        s = s.toSoundingPitch()
+    except Exception as e:
+        log.info("toSoundingPitch failed (%s); using pitches as written", e)
     try:
         s = s.expandRepeats()
     except Exception as e:  # malformed repeat marks are common in community scores
@@ -73,9 +79,13 @@ def _rehearsal_sections(s, project) -> list:
     if marks[0][0] > 0:
         marks.insert(0, (0.0, "Intro"))
     out = []
+    seen: dict[str, int] = {}
     for i, (st, nm) in enumerate(marks):
         en = marks[i + 1][0] if i + 1 < len(marks) else end
-        out.append({"name": str(nm), "start": st, "end": float(en)})
+        nm = str(nm)
+        seen[nm] = seen.get(nm, 0) + 1
+        label = nm if seen[nm] == 1 else f"{nm} (repeat {seen[nm] - 1})" if seen[nm] > 2 else f"{nm} (repeat)"
+        out.append({"name": label, "start": st, "end": float(en)})
     return out
 
 
