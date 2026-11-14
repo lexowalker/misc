@@ -90,7 +90,8 @@ const app = {
   // ------------------------------------------------ selection / transport
   selectTrack(id) {
     if (this.selectedTrack !== id) { this.selectedTrack = id; this.roll.sel.clear(); this.roll.centerOn(this.roll.track()); }
-    this.renderHeads(); this.renderRollBar(); this.updateCtx(); this.redraw();
+    document.querySelectorAll("#heads .head[data-id]").forEach((h) => h.classList.toggle("sel", h.dataset.id === id));
+    this.renderRollBar(); this.updateCtx(); this.redraw();
   },
   setRange(a, b) {
     this.range = a == null ? null : { start: a, end: b };
@@ -151,8 +152,8 @@ const app = {
       const vol = el("input", { type: "range", min: 0, max: 1, step: 0.01, value: t.volume ?? 0.8, title: "Volume",
         oninput: (e) => { t.volume = +e.target.value; this.engine.updateMix(this.project); this.save(); } });
       vol.addEventListener("mousedown", (e) => e.stopPropagation());
-      const btn = (label, cls, on, fn, title) => el("button", { class: cls + (on ? " on" : ""), title, onclick: (e) => { e.stopPropagation(); fn(); } }, label);
-      const head = el("div", { class: "head" + (t.id === this.selectedTrack ? " sel" : ""), onmousedown: () => this.selectTrack(t.id) },
+      const btn = (label, cls, on, fn, title) => el("button", { class: cls + (on ? " on" : ""), title, onmousedown: (e) => e.stopPropagation(), onclick: (e) => { e.stopPropagation(); fn(); } }, label);
+      const head = el("div", { class: "head" + (t.id === this.selectedTrack ? " sel" : ""), "data-id": t.id, onmousedown: () => this.selectTrack(t.id) },
         el("div", { class: "sw", style: `background:${t.color}` }),
         el("div", { class: "mid" }, name, sel),
         el("div", { class: "btns" },
