@@ -1,0 +1,1111 @@
+<title>The Long Winter Trail</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=VT323&display=swap">
+<style>
+/* Layout: a single winding trail down a snowy night forest. Camps sit along it; each opens a drawer by the fire. Deliberately single-theme (night). */
+:root {
+  --night: #0a1120;
+  --night-2: #101a2e;
+  --pine: #0f1d1c;
+  --snow: #e6edf5;
+  --frost: #9db0c6;
+  --mist: #5d7088;
+  --ember: #eaa25e;
+  --ember-dim: #eaa25e26;
+  --aurora: #73d1b5;
+  --aurora-dim: #73d1b51f;
+  --line: #ffffff14;
+  --panel: #0d1627ee;
+  --font-display: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  --font-story: "IM Fell English", Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-ledger: "VT323", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--night); }
+body {
+  background: var(--night);
+  color: var(--snow);
+  font: 17px/1.6 var(--font-body);
+  min-height: 100%;
+  overflow-x: hidden;
+}
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 1040px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--ember); text-underline-offset: 3px; }
+a:hover { color: var(--snow); }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; border-radius: 4px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+/* Hero */
+header.hero { position: relative; z-index: 1; padding-block: 56px 0; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+.eyebrow { font: 20px/1 var(--font-ledger); letter-spacing: .12em; color: var(--frost); text-transform: uppercase; }
+h1 {
+  font: 400 clamp(44px, 7vw, 82px)/0.95 var(--font-display);
+  margin: 12px 0 18px; letter-spacing: .01em; text-wrap: balance;
+  text-shadow: 0 0 40px #9ec6ff22;
+}
+.hero p.lede { font: italic 21px/1.5 var(--font-story); color: var(--frost); max-width: 34em; margin: 0; }
+.ledger {
+  font-family: var(--font-ledger); font-size: 22px; line-height: 1.25;
+  background: #050a14cc; border: 1px solid var(--line); border-radius: 6px;
+  padding: 16px 18px; color: var(--snow);
+  box-shadow: inset 0 0 0 4px #050a14, inset 0 0 0 5px #ffffff0d;
+}
+.ledger .row { display: flex; justify-content: space-between; gap: 12px; }
+.ledger .row span:first-child { color: var(--mist); }
+.ledger .bar { height: 10px; margin: 10px 0 8px; background: #ffffff10; border-radius: 2px; overflow: hidden; }
+.ledger .bar i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(90deg, var(--ember) 0 8px, transparent 8px 10px); transition: width .8s ease; }
+.ledger .status { color: var(--aurora); }
+#pines { display: block; width: 100%; height: 170px; margin-top: 28px; }
+
+/* Tabs */
+nav.tabs {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: linear-gradient(#0a1120f2, #0a1120d9); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+nav.tabs .wrap { display: flex; gap: 4px; align-items: center; padding-block: 8px; overflow-x: auto; }
+.tab {
+  background: none; border: 0; padding: 8px 14px; border-radius: 4px;
+  font: 22px/1 var(--font-ledger); letter-spacing: .06em; color: var(--frost); white-space: nowrap;
+}
+.tab[aria-selected="true"] { color: var(--night); background: var(--ember); }
+.tab:not([aria-selected="true"]):hover { color: var(--snow); background: #ffffff0d; }
+.sync { margin-left: auto; font: 18px/1 var(--font-ledger); color: var(--mist); white-space: nowrap; padding-left: 12px; }
+
+main { position: relative; z-index: 1; padding-block: 36px 96px; }
+section.view[hidden] { display: none; }
+
+/* Trail */
+.region { position: relative; margin-bottom: 40px; }
+.region-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: end; padding: 24px 0 18px; border-bottom: 1px dashed #ffffff1f; margin-bottom: 8px; }
+.region-head h2 { font: 400 clamp(30px, 4.4vw, 44px)/1 var(--font-display); margin: 4px 0 0; text-wrap: balance; }
+.region-head p { grid-column: 1 / -1; margin: 6px 0 0; color: var(--frost); max-width: 62ch; font: italic 19px/1.5 var(--font-story); }
+.region-head .miles { font: 22px/1 var(--font-ledger); color: var(--ember); white-space: nowrap; }
+.camps { position: relative; padding-block: 12px; }
+.trail-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.camp {
+  position: relative; display: flex; align-items: center; gap: 16px;
+  width: min(520px, 100%); margin: 26px 0; text-align: left;
+  background: none; border: 0; padding: 0;
+}
+.camp.right { margin-left: auto; flex-direction: row-reverse; text-align: right; }
+.lantern {
+  flex: none; width: 54px; height: 54px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--night-2); border: 2px solid #ffffff2a;
+  font: 24px/1 var(--font-ledger); color: var(--frost);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.camp.here .lantern { border-color: var(--ember); color: var(--ember); box-shadow: 0 0 0 6px var(--ember-dim), 0 0 32px #eaa25e66; animation: flicker 3.2s ease-in-out infinite; }
+.camp.done .lantern { border-color: var(--aurora); color: var(--night); background: var(--aurora); box-shadow: 0 0 22px #73d1b544; }
+.camp:hover .lantern { transform: scale(1.06); }
+@keyframes flicker { 0%,100% { box-shadow: 0 0 0 6px var(--ember-dim), 0 0 28px #eaa25e55; } 50% { box-shadow: 0 0 0 7px #eaa25e33, 0 0 40px #eaa25e88; } }
+.card {
+  min-width: 0; flex: 1;
+  background: #0d1729d9; border: 1px solid var(--line); border-radius: 10px;
+  padding: 14px 18px; transition: border-color .2s, background .2s;
+}
+.camp:hover .card { border-color: #ffffff30; background: #111d33e6; }
+.camp.here .card { border-color: #eaa25e66; }
+.card .k { font: 18px/1 var(--font-ledger); letter-spacing: .08em; color: var(--mist); text-transform: uppercase; }
+.camp.here .card .k { color: var(--ember); }
+.camp.done .card .k { color: var(--aurora); }
+.card h3 { font: 400 25px/1.15 var(--font-display); margin: 6px 0 4px; text-wrap: balance; }
+.card .t { color: var(--frost); font-size: 16px; }
+.mini { height: 4px; border-radius: 2px; background: #ffffff12; margin-top: 10px; overflow: hidden; }
+.mini i { display: block; height: 100%; background: var(--aurora); width: 0; transition: width .6s ease; }
+.camp.right .mini i { margin-left: auto; }
+.finale { text-align: center; padding: 40px 0 0; color: var(--frost); font: italic 20px/1.6 var(--font-story); }
+.finale strong { display: block; font: 400 34px/1.1 var(--font-display); color: var(--snow); font-style: normal; margin-bottom: 6px; }
+
+/* Drawer */
+.scrim { position: fixed; inset: 0; z-index: 20; background: #02060dcc; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+aside.drawer {
+  position: fixed; z-index: 21; top: 0; right: 0; bottom: 0;
+  width: min(640px, 100%); background: var(--panel); border-left: 1px solid var(--line);
+  transform: translateX(102%); transition: transform .38s cubic-bezier(.2,.8,.2,1);
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(env(safe-area-inset-top, 0px) + 22px) max(22px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 40px) 26px;
+  backdrop-filter: blur(10px);
+}
+aside.drawer.open { transform: none; }
+.drawer-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.close { background: none; border: 1px solid var(--line); border-radius: 4px; padding: 4px 12px; font: 20px/1 var(--font-ledger); color: var(--frost); }
+.close:hover { color: var(--snow); border-color: #ffffff40; }
+.drawer h2 { font: 400 38px/1.05 var(--font-display); margin: 14px 0 6px; text-wrap: balance; }
+.drawer .sub { color: var(--frost); margin: 0 0 18px; }
+.story { font: italic 19px/1.6 var(--font-story); color: #c9d6e4; border-left: 2px solid var(--ember); padding: 2px 0 2px 16px; margin: 0 0 24px; }
+.drawer h4 { font: 20px/1 var(--font-ledger); letter-spacing: .1em; text-transform: uppercase; color: var(--ember); margin: 28px 0 10px; display: flex; justify-content: space-between; gap: 8px; }
+.drawer h4 span { color: var(--mist); }
+ul.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.check { display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 10px; align-items: start; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.check:hover { background: #ffffff08; }
+.check input { appearance: none; width: 20px; height: 20px; margin: 3px 0 0; border: 1.5px solid #ffffff4d; border-radius: 4px; display: grid; place-items: center; cursor: pointer; background: transparent; }
+.check input::after { content: ""; width: 10px; height: 6px; border: 2px solid var(--night); border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px,-1px); opacity: 0; }
+.check input:checked { background: var(--aurora); border-color: var(--aurora); }
+.check input:checked::after { opacity: 1; }
+.check .body { min-width: 0; }
+.check b { font-weight: 700; }
+.check .note { display: block; color: var(--frost); font-size: 15.5px; margin-top: 2px; }
+.check input:checked + .body > .main { color: var(--frost); }
+.lab { margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 2px 14px; background: #ffffff05; }
+.lab summary { cursor: pointer; padding: 8px 0; font: 19px/1.3 var(--font-ledger); letter-spacing: .04em; color: var(--snow); }
+.lab ol, .lab ul { margin: 0 0 12px; padding-left: 20px; color: #cfd9e5; font-size: 16px; }
+.lab p { margin: 0 0 10px; color: #cfd9e5; font-size: 16px; }
+.done-when { background: var(--aurora-dim); border: 1px solid #73d1b540; border-radius: 10px; }
+
+/* Fireside guide */
+.fire { margin-top: 34px; border: 1px solid #eaa25e40; border-radius: 12px; background: linear-gradient(180deg, #2a1a0c55, #0d162700); padding: 16px 16px 14px; }
+.fire-head { display: flex; align-items: center; gap: 12px; }
+.fire-head canvas { flex: none; width: 44px; height: 44px; }
+.fire-head h5 { margin: 0; font: 400 24px/1 var(--font-display); }
+.fire-head p { margin: 2px 0 0; color: var(--frost); font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.chip { background: #ffffff0a; border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 15px; color: var(--snow); }
+.chip:hover { border-color: var(--ember); color: var(--ember); }
+.msgs { display: grid; gap: 10px; max-height: 420px; overflow-y: auto; }
+.msg { padding: 10px 14px; border-radius: 10px; font-size: 16px; min-width: 0; overflow-wrap: anywhere; }
+.msg p { margin: 0 0 8px; } .msg p:last-child { margin: 0; }
+.msg ul { margin: 0 0 8px; padding-left: 20px; }
+.msg.you { background: #ffffff0d; justify-self: end; max-width: 88%; }
+.msg.guide { background: #eaa25e12; border: 1px solid #eaa25e2a; }
+.msg.guide.thinking { color: var(--frost); font-style: italic; }
+.ask { display: flex; gap: 8px; margin-top: 10px; }
+.ask textarea { flex: 1; min-width: 0; resize: vertical; min-height: 44px; max-height: 200px; background: #050a14; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--snow); font: 16px/1.4 var(--font-body); }
+.btn { background: var(--ember); color: var(--night); border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 700; }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: none; color: var(--frost); border: 1px solid var(--line); font-weight: 500; }
+.btn[disabled] { opacity: .5; cursor: default; }
+.fire .off { color: var(--frost); font-size: 15px; margin: 8px 0 0; }
+
+/* Field guide & journal */
+.prose { max-width: 760px; }
+.prose h2 { font: 400 clamp(32px, 4.4vw, 44px)/1.05 var(--font-display); margin: 0 0 8px; }
+.prose > p.lead { font: italic 19px/1.55 var(--font-story); color: var(--frost); margin: 0 0 28px; }
+.fg-sec { margin: 0 0 36px; }
+.fg-sec h3 { font: 22px/1 var(--font-ledger); letter-spacing: .1em; text-transform: uppercase; color: var(--ember); margin: 0 0 12px; }
+.fg-sec p, .fg-sec li { color: #d3dce8; }
+.fg-sec ol, .fg-sec ul:not(.checks) { padding-left: 22px; margin: 0; display: grid; gap: 6px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 16px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 18px/1 var(--font-ledger); letter-spacing: .08em; text-transform: uppercase; color: var(--mist); font-weight: 400; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ember); }
+.qgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.qgrid > div { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #0d1729b3; min-width: 0; }
+.qgrid h4 { margin: 0 0 8px; font: 400 22px/1.1 var(--font-display); }
+.qgrid ul { padding-left: 18px; margin: 0; font-size: 15.5px; display: grid; gap: 4px; color: #d3dce8; }
+
+.jform { display: grid; gap: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: #0d1729cc; margin-bottom: 28px; }
+.jform label { display: grid; gap: 4px; font: 18px/1 var(--font-ledger); letter-spacing: .06em; color: var(--frost); text-transform: uppercase; }
+.jform input, .jform textarea { background: #050a14; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; color: var(--snow); font: 16px/1.45 var(--font-body); text-transform: none; letter-spacing: 0; }
+.jform textarea { min-height: 64px; resize: vertical; }
+.jform .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.jform .actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.jform .hint { color: var(--mist); font-size: 15px; }
+.entries { display: grid; gap: 16px; }
+.entry { border-left: 2px solid var(--ember); padding: 4px 0 4px 18px; }
+.entry .d { font: 19px/1 var(--font-ledger); color: var(--mist); letter-spacing: .06em; }
+.entry h4 { margin: 4px 0 6px; font: 400 26px/1.15 var(--font-display); }
+.entry dl { margin: 0; display: grid; gap: 4px; }
+.entry dt { font: 16px/1 var(--font-ledger); color: var(--ember); letter-spacing: .08em; text-transform: uppercase; margin-top: 8px; }
+.entry dd { margin: 0; color: #d3dce8; white-space: pre-wrap; }
+.entry .del { margin-top: 8px; background: none; border: 0; color: var(--mist); font-size: 14px; padding: 0; text-decoration: underline; }
+.entry .del.confirm { color: #f08a7a; }
+.empty { color: var(--frost); font: italic 19px/1.6 var(--font-story); }
+
+/* Toast */
+.toast {
+  position: fixed; z-index: 30; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+  transform: translate(-50%, 20px); opacity: 0; transition: all .4s ease;
+  width: min(560px, calc(100% - 32px));
+  background: #050a14f2; border: 1px solid var(--ember); border-radius: 6px;
+  padding: 14px 18px; font: 22px/1.3 var(--font-ledger); color: var(--snow);
+  box-shadow: inset 0 0 0 4px #050a14, inset 0 0 0 5px #eaa25e33, 0 10px 40px #000a;
+  pointer-events: none;
+}
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+.toast b { color: var(--ember); font-weight: 400; }
+
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  header.hero { padding-block: 36px 0; }
+  .camp, .camp.right { width: 100%; margin-left: 0; flex-direction: row; text-align: left; }
+  .camp.right .mini i { margin-left: 0; }
+  .jform .two { grid-template-columns: minmax(0, 1fr); }
+  #pines { height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">An expedition in twelve camps</div>
+        <h1>The Long Winter Trail</h1>
+        <p class="lede">From the first flake of a neuron to a working practice of your own. One camp a week, by lantern light, through the forest of how these machines think.</p>
+      </div>
+      <div class="ledger" aria-live="polite">
+        <div class="row"><span>DATE</span><span id="lg-date">—</span></div>
+        <div class="row"><span>CAMP</span><span id="lg-camp">Week 1 of 12</span></div>
+        <div class="row"><span>MILES</span><span id="lg-miles">0 of 1,200</span></div>
+        <div class="bar"><i id="lg-bar"></i></div>
+        <div class="row"><span>SUPPLIES</span><span id="lg-labs">0 of 9 labs</span></div>
+        <div class="row"><span>WEATHER</span><span id="lg-weather">Light snow</span></div>
+        <div class="row"><span>PARTY</span><span class="status" id="lg-health">Good health</span></div>
+      </div>
+    </div>
+  </div>
+  <canvas id="pines" aria-hidden="true"></canvas>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" id="tab-trail" aria-selected="true" data-view="trail">The Trail</button>
+    <button class="tab" role="tab" id="tab-guide" aria-selected="false" data-view="field">Field Guide</button>
+    <button class="tab" role="tab" id="tab-journal" aria-selected="false" data-view="journal">Trail Journal</button>
+    <span class="sync" id="sync">Saved in this browser</span>
+  </div>
+</nav>
+
+<main>
+  <section class="view" id="view-trail"><div class="wrap" id="trail"></div></section>
+  <section class="view" id="view-field" hidden><div class="wrap prose" id="field"></div></section>
+  <section class="view" id="view-journal" hidden><div class="wrap prose" id="journal"></div></section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="dr-title" role="dialog"></aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------------- Course data ---------------- */
+const L = {
+  la: ["3Blue1Brown: Essence of Linear Algebra", "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab"],
+  nn: ["3Blue1Brown: Neural Networks", "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi"],
+  intro: ["Karpathy: Intro to Large Language Models", "https://www.youtube.com/watch?v=zjkBMFhNj_g"],
+  deep: ["Karpathy: Deep Dive into LLMs like ChatGPT", "https://www.youtube.com/watch?v=7xTGNNLPyMI"],
+  gpt: ["Karpathy: Let's build GPT from scratch", "https://www.youtube.com/watch?v=kCc8FmEb1nY"],
+  alammar: ["Jay Alammar: The Illustrated Transformer", "https://jalammar.github.io/illustrated-transformer/"],
+  bea: ["Anthropic: Building Effective Agents", "https://www.anthropic.com/engineering/building-effective-agents"],
+  ctx: ["Anthropic: Effective context engineering for AI agents", "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"],
+  tools: ["Anthropic: Writing effective tools for agents", "https://www.anthropic.com/engineering/writing-tools-for-agents"],
+  pe: ["Anthropic prompt engineering docs", "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview"],
+  mcp: ["Model Context Protocol", "https://modelcontextprotocol.io"],
+  hamel: ["Hamel Husain: Your AI product needs evals", "https://hamel.dev/blog/posts/evals/"],
+  yan: ["Eugene Yan's writing", "https://eugeneyan.com"],
+  trifecta: ["Simon Willison: The lethal trifecta", "https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/"],
+  simon: ["Simon Willison's blog", "https://simonwillison.net"],
+  arena: ["LMArena", "https://lmarena.ai"],
+  aa: ["Artificial Analysis", "https://artificialanalysis.ai"],
+  epoch: ["Epoch AI", "https://epoch.ai"],
+  metr: ["METR", "https://metr.org"],
+};
+
+const REGIONS = [
+  { id: "creek", name: "The Frozen Creek", phase: "Phase I · How it works", weeks: [1,2,3],
+    blurb: "Ice over moving water. Underneath, the machinery is simpler than it looks: vectors, matrices, and a very large game of autocomplete." },
+  { id: "ridge", name: "Lookout Ridge", phase: "Phase II · The ecosystem", weeks: [4],
+    blurb: "A clearing above the treeline. From here you can see every lab, vendor, and model across the valley, and which paths lead where." },
+  { id: "pines", name: "The Deep Pines", phase: "Phase III · Harness engineering", weeks: [5,6,7,8,9],
+    blurb: "The longest stretch and the heart of the journey. The model is the engine. The harness is the wagon, the map, and the rules of the road." },
+  { id: "lodge", name: "Timberline Lodge", phase: "Phase IV · Advisory craft", weeks: [10,11,12],
+    blurb: "Warm windows at the edge of the forest. Where what you learned becomes something a client will pay for." },
+];
+
+const WEEKS = {
+  1: { camp: "Gradient Hollow", title: "Neural nets and training",
+    story: "The trail begins in a hollow where the snow lies in drifts. A model, the old guide says, is just a great function with a billion knobs. Training is walking downhill in the dark, one careful step at a time.",
+    inputs: [
+      [L.nn, "Chapters 1–4. You are already partway through."],
+      [L.la, "Chapters 1–4 and 9 (dot products) at 1.5×. Optionally 7 and 14. Skip a full linear algebra course."],
+    ],
+    ideas: [
+      ["A vector is a list of numbers, a point in space.", "Words become vectors (embeddings). Similar meaning means nearby."],
+      ["A matrix is a function that transforms vectors.", "A neural network layer is roughly: multiply by a matrix, then apply a squiggle."],
+      ["A dot product measures how aligned two vectors are.", "Attention, later, is dot products deciding what to pay attention to."],
+      ["Training is optimization.", "A loss function scores mistakes; gradient descent walks downhill. You have seen this in ChemE."],
+      ["Overfitting versus generalization.", "Memorizing the answer key is not the same as learning the subject."],
+    ],
+    tasks: [
+      ["Write a one-page \"explain it to a portfolio manager\" note in your journal."],
+      ["Lab 0: Set up camp", "lab0"],
+    ],
+    done: "You can explain gradient descent with a non-math analogy in under 60 seconds." },
+  2: { camp: "Tokenizer Crossing", title: "Transformers and LLMs",
+    story: "The creek narrows to a crossing of flat stones. Each stone is a token. The model never sees the whole river, only stone after stone, guessing where the next one lies.",
+    inputs: [
+      [L.nn, "Chapters 5–7: GPT, attention, and how facts are stored."],
+      [L.intro, "One hour. The best single overview."],
+      [L.alammar, "Skim as a visual reference."],
+    ],
+    ideas: [
+      ["Tokens.", "Models see chunks, not letters or words. It's why counting letters is hard and why pricing is per token."],
+      ["Next-token prediction.", "Everything is autocomplete, sampled one token at a time."],
+      ["The context window is the model's entire working memory.", "It remembers nothing between calls unless you put it back. The most important fact for harness design."],
+      ["Temperature and sampling.", "Why the same prompt gives different answers."],
+      ["Attention.", "Each token looks at all prior tokens, which is why long contexts are expensive."],
+    ],
+    tasks: [["Lab 1: Feel the model", "lab1"]],
+    done: "You can explain why a model hallucinates a case citation in terms of next-token prediction, and why retrieval reduces it but doesn't eliminate it." },
+  3: { camp: "The Agent Loop", title: "From base model to assistant to agent",
+    story: "Where the creek bends back on itself, a mill wheel turns. Model, tool, result, model again. Round and round. That is all an agent is, and that is why it is powerful and why it fails.",
+    inputs: [
+      [L.deep, "3.5 hours. Watch post-training and \"LLM psychology\" closely; skim the rest."],
+      [L.bea, "Required. You will read it again at Camp 5."],
+      [L.gpt, "Optional. Watch, don't code along. A GPT in about 200 lines."],
+    ],
+    ideas: [
+      ["Pre-training, then post-training, then reasoning.", "Read the internet; learn to be helpful through fine-tuning and feedback; learn to think through RL on verifiable tasks."],
+      ["The model never does anything itself.", "It outputs a structured request. Your code runs it and puts the result back in context."],
+      ["An agent is tool use in a loop.", "Most of the engineering is in the loop, not the model."],
+      ["Fine-tuning is rarely the answer for your clients.", "Expensive, brittle, overtaken by the next frontier model. Most problems are context, data access, or workflow."],
+    ],
+    tasks: [
+      ["Lab 2: Build an agent loop by hand", "lab2"],
+      ["Journal: \"Five things executives misunderstand about LLMs.\"", null, "Your first outreach post."],
+    ],
+    done: "You can draw the agent loop on a napkin and point to where it goes wrong." },
+  4: { camp: "The Overlook", title: "Models, vendors, and how to choose",
+    story: "Above the trees, the whole valley opens. Smoke rises from many camps: the frontier labs, the open-weight settlers, the outfitters selling wagons. The view changes every month, so you learn to read the land, not memorize it.",
+    inputs: [
+      [L.arena, "Crowd rankings."],
+      [L.aa, "Price, speed, and benchmark comparisons."],
+      [L.epoch, "Trend data for \"where is this going\" conversations."],
+      [L.metr, "How long a task agents can finish on their own."],
+      [L.simon, "The single best practitioner feed."],
+    ],
+    ideas: [
+      ["The frontier labs and their families.", "Anthropic, OpenAI, Google, xAI, plus open-weight models: Llama, Mistral, DeepSeek, Qwen."],
+      ["The axes clients care about.", "Capability on their task, speed, cost per million tokens, context length, PDFs and images, agentic reliability, data retention, contract terms."],
+      ["Where does it run?", "Vendor API with zero retention, inside the client's own cloud (Bedrock, Azure, Vertex), or on-prem open weights. Know the trade-offs cold."],
+      ["The application layer.", "Enterprise chat, Copilot, legal tools like Harvey and Legora, coding agents."],
+      ["The plumbing.", "iManage, NetDocuments, SharePoint, vector databases, MCP servers, observability and eval tools."],
+      ["Information diet.", "Two or three feeds, capped at two hours a week."],
+    ],
+    tasks: [
+      ["Lab 3: Model bake-off", "lab3"],
+      ["Write your opinionated one-page model landscape. Update it monthly.", null, "It becomes a client deliverable."],
+    ],
+    done: "Given \"a fund wants AI over research notes, and no data leaves Azure,\" you can name two or three viable stacks and their trade-offs in five minutes." },
+  5: { camp: "Context Clearing", title: "Prompting and context engineering",
+    story: "Into the pines. The guide sets down a pack and asks: what does the traveler need to carry, in what order, at what moment? Too little and they starve. Too much and they can't walk.",
+    inputs: [
+      [L.pe, "Plus the OpenAI prompting guide."],
+      [L.bea, "Second reading. It reads differently now."],
+      [L.ctx, ""],
+      [L.tools, ""],
+    ],
+    ideas: [
+      ["Context engineering beats prompt engineering.", "What does the model need in its window, in what form, at what moment?"],
+      ["The basic tools.", "System prompts, few-shot examples, structured outputs with JSON schemas, reasoning before answering."],
+      ["Brief it like a smart new associate with no context.", "Your legal drafting skills transfer directly."],
+    ],
+    tasks: [["Lab 4: Structured extraction", "lab4"]],
+    done: "You can take a weak prompt, diagnose what context is missing, and fix it." },
+  6: { camp: "The Archive Cabin", title: "Retrieval and client data",
+    story: "A cabin full of ledgers, half of them locked. Finding the right page is the work. Making sure nobody reads a ledger they shouldn't is the real work.",
+    inputs: [
+      [L.simon, "Search his tags for RAG and embeddings."],
+    ],
+    ideas: [
+      ["Embeddings and semantic search.", "The vector intuition from Camp 1 pays off here."],
+      ["Chunking, hybrid search, re-ranking, metadata filters.", "Matter, date, client, and permissions."],
+      ["Agentic search versus classic RAG.", "Agents that grep, list, and open files often beat a pre-built index. Know when each fits."],
+      ["Permissions are the hard part in the enterprise.", "If the analyst can't see it in SharePoint, the AI must not either. Ethical walls and MNPI barriers matter."],
+    ],
+    tasks: [["Lab 5: Document Q&A, two ways", "lab5"]],
+    done: "You can give a grounded opinion on \"buy a RAG vendor or build an agent,\" backed by your own evidence." },
+  7: { camp: "Toolmaker's Ford", title: "Tools, MCP, and agents",
+    story: "At the ford, a toolmaker fits every wagon with the same standard hitch. Any tool, any wagon. The travelers call it MCP and are glad of it.",
+    inputs: [
+      [L.mcp, "Read the introduction and browse the server list."],
+      [L.tools, "Reread with MCP in mind."],
+    ],
+    ideas: [
+      ["MCP is the USB-C of AI.", "An open standard for plugging tools and data into AI apps. Vendors increasingly ship MCP servers."],
+      ["Workflow versus agent.", "Fixed steps are predictable and auditable; model-directed loops are flexible. For regulated clients, start with workflows."],
+      ["Agent SDKs and coding agents are general harnesses.", "Claude Agent SDK, OpenAI Agents SDK, and tools like Claude Code do far more than write code."],
+      ["Patterns for long tasks.", "Subagents, skills, and memory files."],
+    ],
+    tasks: [["Lab 6: Agent with MCP", "lab6"]],
+    done: "You can walk an IT team through how an AI tool would connect to iManage or SharePoint, and what to lock down." },
+  8: { camp: "Surveyor's Station", title: "Evals, your secret weapon",
+    story: "A small station with instruments in the window. The surveyor doesn't trust a bridge because it looked fine. He loads it, measures, writes it down, and loads it again next spring.",
+    inputs: [
+      [L.hamel, "And the rest of his writing on evals."],
+      [L.yan, "Especially on LLM evaluators."],
+    ],
+    ideas: [
+      ["\"It looked good in the demo\" is how AI projects die.", "Evals are tests: real inputs with known-good answers or rubrics, run on every change."],
+      ["Error analysis first.", "Read 50 to 100 real outputs, sort the failures, then write evals."],
+      ["Three kinds of grader.", "Code checks, LLM-as-judge validated against human labels, and human review queues."],
+      ["This is where lawyer-mindedness shines.", "You already define \"correct,\" spot edge cases, and audit work product."],
+    ],
+    tasks: [["Lab 7: Evals", "lab7"]],
+    done: "You can pick between two models for a client task using a scorecard, not a vibe." },
+  9: { camp: "The Watchtower", title: "Security, cost, and governance",
+    story: "From the tower you can see the dangers: a stranger's letter with instructions hidden inside, a supply bill that doubles overnight, a ledger with no record of who wrote in it. You learn to guard all three.",
+    inputs: [
+      [L.trifecta, "Private data, untrusted content, and a way to send data out."],
+    ],
+    ideas: [
+      ["Prompt injection.", "Documents, emails, and pages can carry instructions. No single agent should hold all three legs of the lethal trifecta."],
+      ["Data governance.", "Retention, zero-retention terms, training opt-outs, privilege, SEC and FINRA recordkeeping, audit logs."],
+      ["Cost modeling.", "Tokens × price × volume, prompt caching, routing easy steps to cheap models."],
+      ["Observability.", "Log every model call and tool call, so failures can be investigated."],
+      ["Human in the loop.", "Who approves what, and when."],
+    ],
+    tasks: [
+      ["Personalize the risk checklist in the Field Guide."],
+      ["Build a reusable cost-model spreadsheet."],
+    ],
+    done: "You can hand a GC a one-page risk memo for any AI workflow you propose." },
+  10: { camp: "The Lodge Hearth", title: "Discovery and solution design",
+    story: "Warm light and a long table. A stranger sits down and describes their business. Your job is to ask the right questions until the shape of the problem shows itself.",
+    inputs: [],
+    ideas: [
+      ["Discovery is diagnosis.", "Business, workflow, environment, and people. See the Field Guide."],
+      ["Value × feasibility × risk.", "Start high value, high feasibility, moderate risk, with a human reviewer."],
+      ["Recommend the simplest architecture that works.", "Enterprise chat with good habits often delivers most of the value."],
+    ],
+    tasks: [
+      ["Work through the Field Guide end to end."],
+      ["Run a mock discovery with the fireside guide as a skeptical COO of a $2B fund."],
+      ["Run another as a family-office principal."],
+      ["Draft your AI Opportunity Assessment template (10–15 pages)."],
+    ],
+    done: "You have a fixed-fee entry offer you could send tomorrow." },
+  11: { camp: "The Workshop", title: "Capstone, part one",
+    story: "Behind the lodge, a workshop with good light. You build one thing properly, the way you would for a client: spec, build, measure, and guard.",
+    inputs: [],
+    ideas: [
+      ["Pick a scenario that matches your target clients.", "Side-letter tracker, memo first-drafter, or a private document vault."],
+    ],
+    tasks: [
+      ["Lab 8: Capstone demo harness", "lab8"],
+      ["One-page spec and architecture diagram."],
+      ["Working build."],
+    ],
+    done: "The build runs end to end on realistic, fake documents." },
+  12: { camp: "Timberline", title: "Capstone, part two",
+    story: "The trees thin. Below, the lights of the town. You arrive with something to show: a working tool, the numbers that prove it, and a clear account of its risks.",
+    inputs: [],
+    ideas: [
+      ["The portfolio piece is the outreach.", "A demo video and case study do more than a pitch deck."],
+    ],
+    tasks: [
+      ["Eval scorecard."],
+      ["Risk and governance memo."],
+      ["Five-minute demo video."],
+      ["Case-study write-up for your website."],
+    ],
+    done: "You could show this to a prospective client tonight." },
+};
+
+const LABS = {
+  lab0: { name: "Lab 0 · Set up camp", time: "2 hours", steps: [
+    "Install Python 3.11+, VS Code, git, and an AI coding agent (Claude Code, Cursor, or similar).",
+    "Get API keys from Anthropic and OpenAI. Set a $50 monthly spend limit on each; the whole course should stay under ~$150.",
+    "Learn just enough terminal: cd, ls, running a script, setting an environment variable. Have your coding agent teach you.",
+    "Create a private GitHub repo for lab work."],
+    done: "A hello-world script calls a model and prints the reply." },
+  lab1: { name: "Lab 1 · Feel the model", time: "2–3 hours", steps: [
+    "Call the API directly from a script, not a chat window.",
+    "Send the same prompt five times at temperature 0, then at 1. Compare.",
+    "Count tokens in a 20-page contract. Price out 10,000 of them.",
+    "Paste something larger than the context window. See what happens.",
+    "Hold a three-turn conversation and notice that you resend the whole history each time. The API is stateless."],
+    done: "You understand cost, memory, and non-determinism from the inside." },
+  lab2: { name: "Lab 2 · An agent loop by hand", time: "3–4 hours", steps: [
+    "No framework. Give the model two tools: read_file(path) and list_files(folder), over ten text documents.",
+    "Ask: \"Which of these agreements has a non-compete longer than 12 months?\"",
+    "Print every step: what it asked for, what your code returned.",
+    "Watch it take wrong turns. Add a max-steps limit."],
+    done: "You know what \"agent\" really means, and vendor hand-waving stops impressing you." },
+  lab3: { name: "Lab 3 · Model bake-off", time: "3 hours", steps: [
+    "Pick a real type of task from your legal work, with synthetic or public documents.",
+    "Run it across four to six models: frontier, cheap and fast, and one open-weight.",
+    "Score blind on a simple rubric. Record cost and latency."],
+    done: "A first version of a sellable deliverable: which model for which task, with evidence." },
+  lab4: { name: "Lab 4 · Structured extraction", time: "4 hours", steps: [
+    "Contract in, JSON out: governing law, term, termination, assignment, MFN, each with a supporting quote and page.",
+    "Iterate the system prompt. Add two examples. Require quotes.",
+    "Add a \"not found\" option and watch hallucination drop."],
+    done: "You see that most enterprise value is boring, reliable extraction." },
+  lab5: { name: "Lab 5 · Document Q&A, two ways", time: "6–8 hours", steps: [
+    "Gather about 50 public documents (EDGAR 10-Ks or credit agreements).",
+    "Version A: chunk, embed, store in a local vector DB, retrieve, answer with citations.",
+    "Version B: give the model search, list, and read tools and let it navigate.",
+    "Compare on 20 questions you write, including multi-document ones.",
+    "Add a permission filter: user X sees only Fund A documents."],
+    done: "You have your own evidence for build-versus-buy conversations." },
+  lab6: { name: "Lab 6 · Agent with MCP", time: "6–8 hours", steps: [
+    "Install two or three existing MCP servers (filesystem, database, web fetch) and watch how tools appear.",
+    "Build a tiny MCP server wrapping a mock document system: search matters, fetch document, list versions.",
+    "Have the agent draft a memo using only that system, with citations.",
+    "Plant a prompt injection in one document. See what happens, then design mitigations."],
+    done: "You can explain to IT exactly how an AI tool connects to their DMS and what to lock down." },
+  lab7: { name: "Lab 7 · Evals", time: "6 hours", steps: [
+    "Turn your Lab 4 and 5 questions into 30–50 eval cases.",
+    "Write a script that runs them all and prints a scorecard.",
+    "Add an LLM-as-judge and check its agreement with your own grades on 20 cases.",
+    "Compare three models × two prompts. Decide from the data."],
+    done: "You have the method behind a retainer: monthly re-tests against new models." },
+  lab8: { name: "Lab 8 · Capstone demo harness", time: "2 weekends", steps: [
+    "Fund: a side-letter and LPA obligations tracker. Extract MFN, reporting, key-person, and excuse rights into a register with cited Q&A.",
+    "Fund ops: an investment-memo first-drafter from a mock research folder, in the house template, with human review.",
+    "Family office: a private document vault for trusts, insurance, and property, with renewal deadlines and strict privacy.",
+    "Deliver it like an engagement: spec, build, scorecard, risk memo, demo, case study."],
+    done: "A portfolio piece and an outreach asset." },
+};
+
+const FIELD = {
+  offers: [
+    ["AI Opportunity Assessment", "3–4 weeks, fixed fee", "$10k–$25k", "Low-risk entry. Interviews, workflow map, roadmap, vendor shortlist, risk memo."],
+    ["Implementation retainer", "Monthly", "$5k–$15k/mo", "Architecture decisions, vendor selection, work with IT, pilots, evals, training, governance."],
+    ["Pilot build", "6–10 weeks", "Scoped", "You and their IT or vendor stand up one workflow with evals and success metrics."],
+    ["HNWI / family office", "Monthly", "$5k–$10k/mo", "Privacy-first personal AI, staff enablement, document vault, research assistant."],
+  ],
+  discovery: [
+    ["Business", ["Where do your highest-paid people spend time on low-judgment work?", "Which decisions are slow because information is hard to assemble?", "What would you do with ten more analysts?", "What has already been tried with AI, and what happened?"]],
+    ["Each workflow", ["Volume per week, time per instance, who does it, what it costs", "Where the inputs live", "What \"done\" looks like, and who checks it", "Cost of an error, and how errors are caught today"]],
+    ["Environment", ["Azure, AWS, or Google? M365 tenant? Existing licenses?", "Document systems, their APIs and permission models", "IT team size and appetite; who owns AI decisions", "SEC/FINRA, GDPR, privilege, MNPI walls"]],
+    ["People", ["Who are the champions, and who are the skeptics?", "What training exists?", "What is the policy on personal ChatGPT use? Shadow AI is already happening."]],
+  ],
+  patterns: [
+    ["Enterprise chat with good habits", "Licenses, prompt libraries, training, a usage policy. Often 60% of the value for 10% of the effort."],
+    ["Projects and knowledge bases", "Curated document sets attached to the chat tool for a team."],
+    ["Fixed workflow", "Extract, check, draft, human review. Auditable; the default for regulated work."],
+    ["Retrieval over firm knowledge", "RAG or agentic search over the DMS, with permissions respected."],
+    ["Agent with tools over MCP", "Scoped permissions and human approval for actions."],
+    ["General agent harness for power users", "Coding agents for technical staff and quants, with guardrails."],
+  ],
+  risks: [
+    ["Data flow map", "Where data goes, which vendors see it, in which region."],
+    ["Vendor terms", "No training on client data, retention period, sub-processors, SOC 2, breach notice."],
+    ["Access control", "AI respects existing permissions; ethical walls and MNPI barriers enforced."],
+    ["Prompt injection", "No agent combines private data, untrusted input, and outbound send without human approval."],
+    ["Human review", "Defined for every output that leaves the building or drives a decision."],
+    ["Evals", "Baseline measured before launch; re-run on every model or prompt change."],
+    ["Logging and recordkeeping", "Retention per regulatory requirements; an audit trail."],
+    ["Privilege and confidentiality", "Legal review of AI's effect on privilege; disclosure where needed."],
+    ["Acceptable-use policy and training", ""],
+    ["Incident plan", "What happens when it gets something wrong."],
+    ["Cost controls", "Budgets, alerts, model routing."],
+    ["Exit plan", "Switch models or vendors without rebuilding."],
+  ],
+};
+
+/* ---------------- State ---------------- */
+const LS_KEY = "winter-trail-v1";
+let state = { checks: {}, journal: [] };
+let db = null, uid = null, userDocRef = null;
+try { const s = JSON.parse(localStorage.getItem(LS_KEY) || "null"); if (s) state = { checks: s.checks || {}, journal: s.journal || [] }; } catch (e) {}
+
+function weekItems(n) {
+  const w = WEEKS[n], ids = [];
+  w.inputs.forEach((_, i) => ids.push(`w${n}.in${i}`));
+  w.ideas.forEach((_, i) => ids.push(`w${n}.id${i}`));
+  w.tasks.forEach((_, i) => ids.push(`w${n}.t${i}`));
+  ids.push(`w${n}.done`);
+  return ids;
+}
+const ALL_IDS = Object.keys(WEEKS).flatMap(n => weekItems(+n));
+const isOn = id => !!state.checks[id];
+const weekPct = n => { const ids = weekItems(n); return ids.filter(isOn).length / ids.length; };
+const weekDone = n => weekPct(n) === 1;
+function currentWeek() { for (let n = 1; n <= 12; n++) if (!weekDone(n)) return n; return 13; }
+function labsDone() {
+  let c = 0;
+  for (const n in WEEKS) WEEKS[n].tasks.forEach((t, i) => { if (t[1] && isOn(`w${n}.t${i}`)) c++; });
+  return c;
+}
+
+/* ---------------- Persistence ---------------- */
+let saveTimer = null, saving = false, pendingSave = false;
+function persist() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+  if (!userDocRef) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flush, 700);
+}
+async function flush() {
+  saveTimer = null;
+  if (saving) { pendingSave = true; return; }
+  saving = true; setSync("Saving…");
+  try { await userDocRef.doc("progress").set({ checks: { ...state.checks }, updatedAt: Date.now() }); setSync("Saved to your account"); }
+  catch (e) { setSync("Couldn't save to your account; kept in this browser"); }
+  saving = false;
+  if (pendingSave) { pendingSave = false; flush(); }
+}
+function setSync(t) { document.getElementById("sync").textContent = t; }
+
+async function connect() {
+  if (!window.claude || !window.claude.use) return;
+  const [dbNs, userNs] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+  if (!dbNs || !userNs) return;
+  const id = await userNs.id();
+  if (!id) return;
+  db = dbNs; uid = id;
+  userDocRef = db.collection("data/users/" + uid);
+  setSync("Connecting…");
+  const timer = setTimeout(() => setSync("Account storage not reachable yet; saving here"), 10000);
+  let first = true;
+  userDocRef.onSnapshot(snap => {
+    if (!snap.metadata || !snap.metadata.fromCache) clearTimeout(timer);
+    const prog = snap.docs.find(d => d.id === "progress");
+    const entries = snap.docs.filter(d => d.id.startsWith("j_")).map(d => ({ id: d.id, ...d.data() }));
+    if (first) {
+      first = false;
+      // Merge any local-only progress up to the account once.
+      const remote = prog && prog.exists ? (prog.data().checks || {}) : {};
+      const merged = { ...remote };
+      let changed = false;
+      for (const k in state.checks) if (state.checks[k] && !merged[k]) { merged[k] = true; changed = true; }
+      state.checks = merged;
+      const localOnly = state.journal.filter(j => !String(j.id).startsWith("j_") || !entries.some(e => e.id === j.id));
+      state.journal = entries;
+      if (changed) persist();
+      localOnly.forEach(j => saveEntry({ ...j, id: undefined }));
+    } else {
+      if (prog && prog.exists && !saving && !saveTimer) state.checks = { ...(prog.data().checks || {}) };
+      state.journal = entries;
+    }
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    setSync("Saved to your account");
+    renderAll();
+  }, () => { clearTimeout(timer); setSync("Account storage unavailable; saving in this browser"); });
+}
+
+/* ---------------- Rendering helpers ---------------- */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = s => document.querySelector(s);
+
+function updateLedger() {
+  const total = ALL_IDS.length, on = ALL_IDS.filter(isOn).length;
+  const miles = Math.round(1200 * on / total);
+  const cw = currentWeek();
+  $("#lg-date").textContent = new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
+  $("#lg-camp").textContent = cw > 12 ? "Arrived at Timberline" : `Week ${cw} of 12 · ${WEEKS[cw].camp}`;
+  $("#lg-miles").textContent = `${miles.toLocaleString()} of 1,200`;
+  $("#lg-bar").style.width = (100 * on / total) + "%";
+  $("#lg-labs").textContent = `${labsDone()} of 9 labs`;
+  const m = new Date().getMonth();
+  const weathers = m === 10 ? ["Light snow", "First frost", "Clear and cold"] : m === 11 || m === 0 ? ["Heavy snow", "Still and bitter", "Snow on the pines"] : ["Cold wind", "Thaw in the air", "Clear night"];
+  $("#lg-weather").textContent = weathers[new Date().getDate() % weathers.length];
+  const h = new Date().getHours();
+  $("#lg-health").textContent = h >= 0 && h < 5 ? "Tired. Rest soon." : "Good health";
+}
+
+function renderTrail() {
+  const cw = currentWeek();
+  let html = "", milesSoFar = 0;
+  const perWeek = 100;
+  REGIONS.forEach(r => {
+    const start = milesSoFar, end = milesSoFar + r.weeks.length * perWeek; milesSoFar = end;
+    html += `<div class="region" id="region-${r.id}">
+      <div class="region-head"><div><div class="eyebrow">${esc(r.phase)}</div><h2>${esc(r.name)}</h2></div>
+      <div class="miles">Mile ${start}–${end}</div><p>${esc(r.blurb)}</p></div><div class="camps">
+      <svg class="trail-svg" aria-hidden="true"></svg>`;
+    r.weeks.forEach(n => {
+      const w = WEEKS[n], pct = weekPct(n);
+      const st = weekDone(n) ? "done" : n === cw ? "here" : "";
+      const side = n % 2 === 0 ? "right" : "";
+      const label = st === "done" ? `Week ${n} · Camp made` : st === "here" ? `Week ${n} · You are here` : `Week ${n}`;
+      html += `<button class="camp ${side} ${st}" data-week="${n}" aria-label="Open week ${n}: ${esc(w.title)}">
+        <span class="lantern">${st === "done" ? "✓" : n}</span>
+        <span class="card"><span class="k">${label}</span><h3>${esc(w.camp)}</h3><span class="t">${esc(w.title)}</span>
+        <span class="mini"><i style="width:${Math.round(pct * 100)}%"></i></span></span></button>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `<div class="finale"><strong>${cw > 12 ? "You made it." : "Beyond the trees"}</strong>${cw > 12 ? "Twelve camps behind you. Keep a small fire going: one experiment and one journal entry a week, and re-run your evals when new models arrive." : "After Timberline the trail keeps going. Monthly: update your landscape and re-run your evals. Weekly: one build, one journal entry, one post."}</div>`;
+  $("#trail").innerHTML = html;
+  document.querySelectorAll(".camp").forEach(b => b.addEventListener("click", () => openWeek(+b.dataset.week)));
+  requestAnimationFrame(drawTrails);
+}
+
+function drawTrails() {
+  document.querySelectorAll(".camps").forEach(box => {
+    const svg = box.querySelector("svg"); const r0 = box.getBoundingClientRect();
+    const pts = [...box.querySelectorAll(".lantern")].map(l => { const r = l.getBoundingClientRect(); return [r.left - r0.left + r.width / 2, r.top - r0.top + r.height / 2]; });
+    if (!pts.length) return;
+    let d = `M ${pts[0][0]} 0 L ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 1; i < pts.length; i++) {
+      const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], my = (y0 + y1) / 2;
+      d += ` C ${x0} ${my}, ${x1} ${my}, ${x1} ${y1}`;
+    }
+    const last = pts[pts.length - 1];
+    d += ` L ${last[0]} ${box.clientHeight}`;
+    svg.setAttribute("viewBox", `0 0 ${box.clientWidth} ${box.clientHeight}`);
+    svg.innerHTML = `<path d="${d}" fill="none" stroke="#e6edf5" stroke-opacity=".18" stroke-width="6" stroke-linecap="round"/>
+      <path d="${d}" fill="none" stroke="#e6edf5" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="2 9" stroke-linecap="round"/>`;
+  });
+}
+
+function checkRow(id, main, note, extra = "") {
+  return `<li><label class="check"><input type="checkbox" id="${id}" data-id="${id}" ${isOn(id) ? "checked" : ""}>
+    <span class="body"><span class="main">${main}</span>${note ? `<span class="note">${note}</span>` : ""}${extra}</span></label></li>`;
+}
+
+let openWk = null;
+function countOf(n, pre, len) { let c = 0; for (let i = 0; i < len; i++) if (isOn(`w${n}.${pre}${i}`)) c++; return `${c}/${len}`; }
+function syncDrawer() {
+  if (!openWk) return;
+  const n = openWk, w = WEEKS[n];
+  const lens = { in: w.inputs.length, id: w.ideas.length, t: w.tasks.length };
+  document.querySelectorAll("#drawer [data-cnt]").forEach(s => s.textContent = countOf(n, s.dataset.cnt, lens[s.dataset.cnt]));
+  document.querySelectorAll("#drawer input[data-id]").forEach(cb => cb.checked = isOn(cb.dataset.id));
+}
+function openWeek(n) {
+  openWk = n;
+  const w = WEEKS[n];
+  const cnt = (pre, len) => `<span data-cnt="${pre}">${countOf(n, pre, len)}</span>`;
+  let h = `<div class="drawer-top"><span class="eyebrow">Week ${n} · ${esc(REGIONS.find(r => r.weeks.includes(n)).name)}</span><button class="close" id="dr-close">Close ✕</button></div>
+    <h2 id="dr-title">${esc(w.camp)}</h2><p class="sub">${esc(w.title)}</p><p class="story">${esc(w.story)}</p>`;
+  if (w.inputs.length) {
+    h += `<h4>Provisions ${cnt("in", w.inputs.length)}</h4><ul class="checks">`;
+    w.inputs.forEach(([l, note], i) => h += checkRow(`w${n}.in${i}`, `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`, esc(note)));
+    h += `</ul>`;
+  }
+  h += `<h4>What to understand ${cnt("id", w.ideas.length)}</h4><ul class="checks">`;
+  w.ideas.forEach(([a, b], i) => h += checkRow(`w${n}.id${i}`, `<b>${esc(a)}</b>`, esc(b)));
+  h += `</ul><h4>The work ${cnt("t", w.tasks.length)}</h4><ul class="checks">`;
+  w.tasks.forEach(([text, lab, note], i) => {
+    let extra = "";
+    if (lab) {
+      const L2 = LABS[lab];
+      extra = `<details class="lab"><summary>Field notes · ${esc(L2.time)}</summary><ol>${L2.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol><p><b>Done when:</b> ${esc(L2.done)}</p></details>`;
+    }
+    h += checkRow(`w${n}.t${i}`, lab ? `<b>${esc(LABS[lab].name)}</b>` : esc(text), note ? esc(note) : "", extra);
+  });
+  h += `</ul><h4>Make camp when</h4><ul class="checks done-when">${checkRow(`w${n}.done`, esc(w.done))}</ul>`;
+  h += `<div class="fire" id="fire">
+    <div class="fire-head"><canvas id="fire-cv" width="88" height="88" aria-hidden="true"></canvas><div><h5>The fireside guide</h5><p>Ask anything about this camp. The guide knows what you're studying here.</p></div></div>
+    <div class="chips">
+      <button class="chip" data-q="Quiz me on this camp. Ask me one question at a time and wait for my answer.">Quiz me</button>
+      <button class="chip" data-q="Explain the hardest idea at this camp using a chemical engineering analogy.">Explain like a ChemE</button>
+      <button class="chip" data-q="How would I explain this camp's ideas to a hedge fund COO in two minutes, and what would they push back on?">Say it to a client</button>
+      ${n === 10 ? `<button class="chip" data-q="Role-play a skeptical COO of a $2B hedge fund in a first discovery meeting with me. Stay in character. Start by greeting me and stating your skepticism.">Mock discovery</button>` : ""}
+    </div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <form class="ask" id="ask"><textarea id="ask-in" rows="1" placeholder="Ask the guide…" aria-label="Ask the guide"></textarea><button class="btn" id="ask-btn" type="submit">Ask</button></form>
+    <p class="off" id="fire-off" hidden></p>
+  </div>`;
+  const dr = $("#drawer");
+  dr.innerHTML = h; dr.scrollTop = 0;
+  dr.classList.add("open"); dr.setAttribute("aria-hidden", "false"); $("#scrim").classList.add("open");
+  $("#dr-close").addEventListener("click", closeWeek);
+  dr.querySelectorAll("input[data-id]").forEach(cb => cb.addEventListener("change", onCheck));
+  setupGuide(n);
+  setTimeout(() => $("#dr-close").focus(), 50);
+}
+function closeWeek() {
+  const dr = $("#drawer"); dr.classList.remove("open"); dr.setAttribute("aria-hidden", "true"); $("#scrim").classList.remove("open");
+  if (guideAbort) guideAbort.abort();
+  const b = document.querySelector(`.camp[data-week="${openWk}"]`); openWk = null; if (b) b.focus();
+}
+$("#scrim").addEventListener("click", closeWeek);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && openWk) closeWeek(); });
+
+const CAMP_LINES = [
+  "The party rests by the fire.", "The snow is falling softly. All are well.", "You find good water and dry wood.",
+  "An owl calls from the pines.", "The stars are out over the ridge.", "You mend the wagon and sleep well.",
+];
+const TICK_LINES = ["", "", "", "Steady progress.", "The trail is clear ahead.", "Your lantern burns bright."];
+function onCheck(e) {
+  const id = e.target.dataset.id, n = +id.slice(1).split(".")[0];
+  const wasDone = weekDone(n);
+  if (e.target.checked) state.checks[id] = true; else delete state.checks[id];
+  persist();
+  syncDrawer();
+  renderTrail(); updateLedger();
+  if (!wasDone && weekDone(n)) {
+    const miles = Math.round(1200 * ALL_IDS.filter(isOn).length / ALL_IDS.length);
+    toast(`You made camp at <b>${esc(WEEKS[n].camp)}</b>. ${CAMP_LINES[n % CAMP_LINES.length]}<br>${miles} miles traveled.`);
+  } else if (e.target.checked && Math.random() < .5) {
+    const t = TICK_LINES[Math.floor(Math.random() * TICK_LINES.length)]; if (t) toast(t, 1800);
+  }
+}
+let toastT;
+function toast(html, ms = 3800) { const t = $("#toast"); t.innerHTML = html; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), ms); }
+
+/* ---------------- Fireside guide (sample) ---------------- */
+let guideHistory = [], guideAbort = null, sampleFn = undefined;
+function weekContext(n) {
+  const w = WEEKS[n];
+  return `Week ${n}, "${w.camp}": ${w.title}.
+Key ideas: ${w.ideas.map(i => i[0] + " " + i[1]).join(" | ")}
+Work: ${w.tasks.map(t => t[1] ? LABS[t[1]].name + " (" + LABS[t[1]].steps.join(" ") + ")" : t[0]).join(" | ")}
+Done when: ${w.done}`;
+}
+const GUIDE_FRAME = n => `You are the fireside guide in "The Long Winter Trail", a 12-week course for a forward-deployed legal engineer at a large hedge fund who is building an AI-implementation advisory practice ($5k–$15k/month retainers for funds, firms, and high-net-worth individuals). They have a chemical engineering background, are not a software engineer, learn fast, and study at night. Teach for deep understanding without needless detail. Be warm, concise, and concrete. Use plain prose and short paragraphs; bullets only when they help. Keep answers under about 250 words unless asked for more. If you're unsure about a fast-changing fact (current model rankings, prices), say so and point to a live source.
+
+The current camp:
+${weekContext(n)}
+
+Conversation so far follows.`;
+
+function mdLite(s) {
+  const lines = esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>").split(/\n/);
+  let out = "", inList = false, para = [];
+  const flushP = () => { if (para.length) { out += `<p>${para.join("<br>")}</p>`; para = []; } };
+  for (const ln of lines) {
+    const m = ln.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)/);
+    if (m) { flushP(); if (!inList) { out += "<ul>"; inList = true; } out += `<li>${m[1]}</li>`; }
+    else { if (inList) { out += "</ul>"; inList = false; } if (!ln.trim()) flushP(); else para.push(ln); }
+  }
+  flushP(); if (inList) out += "</ul>";
+  return out;
+}
+
+async function setupGuide(n) {
+  guideHistory = [];
+  const off = $("#fire-off");
+  const disable = msg => { off.hidden = false; off.textContent = msg; $("#ask").hidden = true; document.querySelectorAll(".chip").forEach(c => c.hidden = true); };
+  $("#ask").addEventListener("submit", e => { e.preventDefault(); const v = $("#ask-in").value.trim(); if (v) { $("#ask-in").value = ""; askGuide(n, v); } });
+  $("#ask-in").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#ask").requestSubmit(); } });
+  document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", () => askGuide(n, c.dataset.q)));
+  drawFire();
+  if (sampleFn === undefined) sampleFn = window.claude && window.claude.use ? await window.claude.use("sample") : null;
+  if (!sampleFn) disable("The guide is resting here. Open this page on claude.ai to talk with the guide. Your own model chat works too: paste in this camp's ideas and ask it to quiz you.");
+}
+
+async function askGuide(n, q) {
+  if (!sampleFn) return;
+  const msgs = $("#msgs");
+  guideHistory.push({ role: "user", content: q });
+  msgs.insertAdjacentHTML("beforeend", `<div class="msg you">${esc(q)}</div>`);
+  const out = document.createElement("div"); out.className = "msg guide thinking"; out.textContent = "The guide stirs the fire and thinks…";
+  msgs.appendChild(out); msgs.scrollTop = msgs.scrollHeight;
+  $("#ask-btn").disabled = true;
+  guideAbort = new AbortController();
+  const turns = guideHistory.map((m, i) => i === 0 ? { role: "user", content: GUIDE_FRAME(n) + "\n\nTraveler: " + m.content } : m);
+  try {
+    const res = await sampleFn(turns, { cache: false, signal: guideAbort.signal, onText: ({ text }) => { out.classList.remove("thinking"); out.innerHTML = mdLite(text); msgs.scrollTop = msgs.scrollHeight; } });
+    out.classList.remove("thinking"); out.innerHTML = mdLite(res.text);
+    guideHistory.push({ role: "assistant", content: res.text });
+  } catch (e) {
+    guideHistory.pop();
+    out.classList.remove("thinking");
+    if (e && e.code === "not_granted") { out.textContent = "The guide needs your permission to speak. Allow Claude for this page from the Permissions menu to talk with the guide."; }
+    else if (e && e.code === "rate_limited") out.textContent = "The guide needs a moment. Try again shortly.";
+    else if (e && (e.name === "AbortError" || e.code === "aborted")) out.remove();
+    else out.textContent = (e && e.text) ? e.text : "The wind took the guide's words. Try asking again.";
+  }
+  if ($("#ask-btn")) $("#ask-btn").disabled = false;
+}
+
+let fireRAF;
+function drawFire() {
+  const cv = $("#fire-cv"); if (!cv) return; const c = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  cancelAnimationFrame(fireRAF);
+  const parts = [];
+  const step = () => {
+    if (!document.body.contains(cv)) return;
+    c.clearRect(0, 0, 88, 88);
+    c.fillStyle = "#3a2a1c"; c.fillRect(22, 70, 44, 6); c.save(); c.translate(44, 73); c.rotate(.35); c.fillRect(-24, -3, 48, 6); c.restore();
+    for (let i = 0; i < 3; i++) parts.push({ x: 44 + (Math.random() - .5) * 18, y: 68, vy: -.6 - Math.random() * .9, life: 1, r: 6 + Math.random() * 6 });
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i]; p.y += p.vy; p.x += (Math.random() - .5) * .6; p.life -= .028; p.r *= .975;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      const g = c.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      g.addColorStop(0, `rgba(255,${190 + 50 * p.life | 0},120,${.9 * p.life})`); g.addColorStop(1, "rgba(234,120,40,0)");
+      c.fillStyle = g; c.beginPath(); c.arc(p.x, p.y, p.r, 0, 7); c.fill();
+    }
+    if (!reduce) fireRAF = requestAnimationFrame(step);
+  };
+  if (reduce) { for (let k = 0; k < 40; k++) step(); } else step();
+}
+
+/* ---------------- Field guide ---------------- */
+function renderField() {
+  let h = `<h2>Field Guide</h2><p class="lead">What you carry into a client's office. Refine it after every real engagement.</p>`;
+  h += `<div class="fg-sec"><h3>What you sell</h3><div class="tbl"><table><thead><tr><th>Offer</th><th>Shape</th><th>Price</th><th>Purpose</th></tr></thead><tbody>`;
+  FIELD.offers.forEach(o => h += `<tr><td><b>${esc(o[0])}</b></td><td>${esc(o[1])}</td><td class="n">${esc(o[2])}</td><td>${esc(o[3])}</td></tr>`);
+  h += `</tbody></table></div><p>The assessment is the front door: its roadmap becomes the retainer's work plan.</p></div>`;
+  h += `<div class="fg-sec"><h3>Discovery questions</h3><div class="qgrid">`;
+  FIELD.discovery.forEach(([t, qs]) => h += `<div><h4>${esc(t)}</h4><ul>${qs.map(q => `<li>${esc(q)}</li>`).join("")}</ul></div>`);
+  h += `</div></div>`;
+  h += `<div class="fg-sec"><h3>Choosing where to start</h3><p>Score each workflow 1–5 on <b>value</b> (hours saved × cost of those hours), <b>feasibility</b> (is the data reachable, is "correct" definable, can it be evaluated) and <b>risk</b> (cost of an error, confidentiality, regulation). Start where value and feasibility are high, risk is moderate, and a human reviews the output. Quick wins buy trust for harder projects.</p></div>`;
+  h += `<div class="fg-sec"><h3>Architecture patterns, simplest first</h3><ol>`;
+  FIELD.patterns.forEach(p => h += `<li><b>${esc(p[0])}.</b> ${esc(p[1])}</li>`);
+  h += `</ol><p>Buy for commodity needs. Build or configure where the firm's workflow, data, or judgment is the edge. Prefer vendors that support several models and MCP, and that let you export your data.</p></div>`;
+  h += `<div class="fg-sec"><h3>Risk and governance checklist</h3><p>Tick these off as you make each one your own.</p><ul class="checks">`;
+  FIELD.risks.forEach((r, i) => h += checkRow(`risk${i}`, `<b>${esc(r[0])}</b>`, esc(r[1])));
+  h += `</ul></div>`;
+  h += `<div class="fg-sec"><h3>Success metrics, agreed up front</h3><ul><li>Time per task, measured before and after</li><li>Accuracy on the eval set; error rate in production review</li><li>Adoption: weekly active users, tasks run</li><li>What people can now do that they couldn't before</li></ul></div>`;
+  h += `<div class="fg-sec"><h3>Your position</h3><p>Lawyer-grade rigor, hands-on harness knowledge, and time inside a sophisticated hedge fund. Most AI consultants have one of the three. With strong engineering teams, be the systems architect and the owner of evals and risk. With teams that don't have one, be the translator and integrator: spec it, pick vendors, work with IT, prototype, and bring in contractors for heavy builds.</p><p>Before outreach, check your current engagement for non-solicit, non-compete, and confidentiality terms, and never reuse your current client's materials.</p></div>`;
+  h += `<div class="fg-sec"><h3>Live sources</h3><ul>${[L.arena, L.aa, L.epoch, L.metr, L.simon].map(l => `<li><a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a></li>`).join("")}</ul></div>`;
+  $("#field").innerHTML = h;
+  $("#field").querySelectorAll("input[data-id]").forEach(cb => cb.addEventListener("change", e => { if (e.target.checked) state.checks[e.target.dataset.id] = true; else delete state.checks[e.target.dataset.id]; persist(); }));
+}
+
+/* ---------------- Journal ---------------- */
+const JF = [["did", "What I did"], ["key", "The key idea, in one sentence a CFO would understand"], ["surprise", "What surprised me"], ["client", "What I'd tell a client"], ["open", "Open question"]];
+let draft = {};
+try { draft = JSON.parse(localStorage.getItem(LS_KEY + "-draft") || "{}"); } catch (e) {}
+function renderJournal() {
+  const cw = Math.min(currentWeek(), 12);
+  let h = `<h2>Trail Journal</h2><p class="lead">A few lines each night. Good entries become posts, and posts become clients.</p>
+    <form class="jform" id="jform"><div class="two"><label for="j-topic">Topic<input id="j-topic" required placeholder="e.g. Why the API forgets" value="${esc(draft.topic || "")}"></label>
+    <label for="j-week">Camp<input id="j-week" value="${esc(draft.week || ("Week " + cw + " · " + WEEKS[cw].camp))}"></label></div>`;
+  JF.forEach(([k, l]) => h += `<label for="j-${k}">${esc(l)}<textarea id="j-${k}">${esc(draft[k] || "")}</textarea></label>`);
+  h += `<div class="actions"><button class="btn" type="submit">Write it in the journal</button><span class="hint" id="j-hint">${userDocRef ? "Private to you, saved to your account." : "Saved in this browser."}</span></div></form><div class="entries">`;
+  const list = state.journal.slice().sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  if (!list.length) h += `<p class="empty">The journal is empty, and the night is long. Your first entry might be the one-page note from Camp 1: gradient descent, explained to a portfolio manager.</p>`;
+  list.forEach(e => {
+    h += `<article class="entry"><div class="d">${esc(new Date(e.createdAt || Date.now()).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }))} · ${esc(e.week || "")}</div><h4>${esc(e.topic)}</h4><dl>`;
+    JF.forEach(([k, l]) => { if (e[k]) h += `<dt>${esc(l)}</dt><dd>${esc(e[k])}</dd>`; });
+    h += `</dl><button class="del" data-del="${esc(e.id)}">Remove entry</button></article>`;
+  });
+  h += `</div>`;
+  $("#journal").innerHTML = h;
+  const form = $("#jform");
+  form.addEventListener("input", () => { draft = { topic: $("#j-topic").value, week: $("#j-week").value }; JF.forEach(([k]) => draft[k] = $("#j-" + k).value); try { localStorage.setItem(LS_KEY + "-draft", JSON.stringify(draft)); } catch (e) {} });
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const entry = { topic: $("#j-topic").value.trim(), week: $("#j-week").value.trim(), createdAt: Date.now() };
+    JF.forEach(([k]) => entry[k] = $("#j-" + k).value.trim());
+    if (!entry.topic) return;
+    draft = {}; try { localStorage.removeItem(LS_KEY + "-draft"); } catch (e) {}
+    await saveEntry(entry);
+    toast("Entry written by lantern light.", 2200);
+  });
+  $("#journal").querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", async () => {
+    if (!b.classList.contains("confirm")) { b.classList.add("confirm"); b.textContent = "Click again to remove for good"; setTimeout(() => { if (b.isConnected) { b.classList.remove("confirm"); b.textContent = "Remove entry"; } }, 4000); return; }
+    const id = b.dataset.del;
+    state.journal = state.journal.filter(j => j.id !== id);
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+    if (userDocRef && id.startsWith("j_")) { try { await userDocRef.doc(id).delete(); } catch (e) {} }
+    renderJournal();
+  }));
+}
+async function saveEntry(entry) {
+  const id = "j_" + (entry.createdAt || Date.now()) + "_" + Math.random().toString(36).slice(2, 6);
+  const rec = { ...entry, id };
+  state.journal = state.journal.concat(rec);
+  try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+  renderJournal();
+  if (userDocRef) { const { id: _, ...body } = rec; try { await userDocRef.doc(id).set(body); } catch (e) { setSync("Couldn't save entry to your account; kept in this browser"); } }
+}
+
+/* ---------------- Tabs ---------------- */
+function showView(v) {
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.view === v)));
+  ["trail", "field", "journal"].forEach(k => $("#view-" + k).hidden = k !== v);
+  try { localStorage.setItem(LS_KEY + "-view", v); } catch (e) {}
+  if (v === "trail") requestAnimationFrame(drawTrails);
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => showView(t.dataset.view)));
+
+function renderAll() {
+  updateLedger(); renderTrail(); renderField();
+  if (!document.activeElement || !document.activeElement.closest("#jform")) renderJournal();
+  syncDrawer();
+  document.querySelectorAll("#field input[data-id]").forEach(cb => cb.checked = isOn(cb.dataset.id));
+}
+
+/* ---------------- Night sky ---------------- */
+(function sky() {
+  const cv = $("#sky"), c = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, dpr, stars = [], flakes = [];
+  function size() {
+    dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    stars = Array.from({ length: Math.round(W * H / 5200) }, () => ({ x: Math.random() * W, y: Math.random() * H * .75, r: Math.random() * 1.2 + .2, p: Math.random() * 6.28, s: .4 + Math.random() * 1.4 }));
+    flakes = Array.from({ length: Math.round(W / 9) }, () => mk(true));
+  }
+  function mk(any) { const z = Math.random(); return { x: Math.random() * W, y: any ? Math.random() * H : -10, z, r: .6 + z * 2.2, vy: .25 + z * .9, ph: Math.random() * 6.28 }; }
+  let t = 0;
+  function frame() {
+    t += 1 / 60;
+    const g = c.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#050914"); g.addColorStop(.55, "#0a1120"); g.addColorStop(1, "#0f1a2c");
+    c.fillStyle = g; c.fillRect(0, 0, W, H);
+    // aurora
+    c.save(); c.globalCompositeOperation = "lighter";
+    for (let k = 0; k < 3; k++) {
+      c.beginPath();
+      for (let x = 0; x <= W; x += 16) {
+        const y = H * (.16 + k * .05) + Math.sin(x * .004 + t * .15 + k) * 30 + Math.sin(x * .011 - t * .1) * 12;
+        x === 0 ? c.moveTo(x, y) : c.lineTo(x, y);
+      }
+      c.lineTo(W, 0); c.lineTo(0, 0); c.closePath();
+      const ag = c.createLinearGradient(0, 0, 0, H * .35);
+      ag.addColorStop(0, "rgba(115,209,181,0)"); ag.addColorStop(.8, `rgba(115,209,181,${.035 - k * .008})`); ag.addColorStop(1, "rgba(115,209,181,0)");
+      c.fillStyle = ag; c.fill();
+    }
+    c.restore();
+    // moon
+    const mx = W - Math.max(56, W * .05), my = 64;
+    const mg = c.createRadialGradient(mx, my, 0, mx, my, 120); mg.addColorStop(0, "rgba(230,237,245,.18)"); mg.addColorStop(1, "rgba(230,237,245,0)");
+    c.fillStyle = mg; c.beginPath(); c.arc(mx, my, 120, 0, 7); c.fill();
+    c.fillStyle = "#eef3f8"; c.beginPath(); c.arc(mx, my, 22, 0, 7); c.fill();
+    c.fillStyle = "rgba(10,17,32,.9)"; c.beginPath(); c.arc(mx + 9, my - 5, 20, 0, 7); c.fill();
+    // stars
+    for (const s of stars) { const a = .35 + .45 * Math.sin(s.p + t * s.s); c.fillStyle = `rgba(230,237,245,${a})`; c.fillRect(s.x, s.y, s.r, s.r); }
+    // snow
+    for (const f of flakes) {
+      f.y += f.vy; f.x += Math.sin(t * .8 + f.ph) * .3 * (f.z + .3);
+      if (f.y > H + 5) Object.assign(f, mk(false));
+      c.fillStyle = `rgba(240,246,252,${.25 + f.z * .55})`; c.beginPath(); c.arc(f.x, f.y, f.r, 0, 7); c.fill();
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  addEventListener("resize", () => { size(); if (reduce) frame(); });
+  size(); frame();
+})();
+
+/* ---------------- Hero pines ---------------- */
+function drawPines() {
+  const cv = $("#pines"), c = cv.getContext("2d");
+  const dpr = Math.min(devicePixelRatio || 1, 2), W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr; c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const layers = [["#13213a", .55, 26], ["#0f1b2f", .75, 34], ["#0b1424", 1, 44]];
+  layers.forEach(([col, hf, step]) => {
+    for (let x = -20; x < W + 20; x += step * (.6 + rnd() * .7)) {
+      const h = H * hf * (.5 + rnd() * .5), w = h * .32, base = H;
+      c.fillStyle = col; c.beginPath();
+      const tiers = 5;
+      for (let i = 0; i < tiers; i++) {
+        const ty = base - h + (h * i / tiers), tw = w * (.35 + .65 * (i + 1) / tiers);
+        c.moveTo(x, ty); c.lineTo(x - tw / 2, ty + h / tiers * 1.5); c.lineTo(x + tw / 2, ty + h / tiers * 1.5); c.closePath();
+      }
+      c.fill();
+      c.fillStyle = "rgba(230,237,245,.10)"; c.beginPath(); c.moveTo(x, base - h); c.lineTo(x - w * .12, base - h + h * .12); c.lineTo(x + w * .1, base - h + h * .1); c.fill();
+    }
+  });
+  const sg = c.createLinearGradient(0, H - 18, 0, H); sg.addColorStop(0, "rgba(10,17,32,0)"); sg.addColorStop(1, "#0a1120");
+  c.fillStyle = sg; c.fillRect(0, H - 18, W, 18);
+}
+
+/* ---------------- Boot ---------------- */
+addEventListener("resize", () => { drawPines(); drawTrails(); });
+renderAll(); drawPines();
+try { const v = localStorage.getItem(LS_KEY + "-view"); if (v && v !== "trail") showView(v); } catch (e) {}
+connect();
+</script>
