@@ -140,6 +140,18 @@ def align_to_audio(project: dict, audio_path: str) -> dict:
 
     ibi = np.maximum(median_filter(ibi, size=5, mode="nearest"), 0.05)
     secs = np.concatenate([[secs[0]], secs[0] + np.cumsum(ibi)])
+    # Sanity check: if the implied tempo swings wildly (typical when the performance repeats sections
+    # a different number of times than the score), the alignment is not trustworthy. Keep the score's
+    # steady tempo instead of a warped one.
+    win = 8
+    local = [win * 60.0 / (secs[i + win] - secs[i]) for i in range(0, len(secs) - win, win)]
+    if local and max(local) / max(1e-6, min(local)) > 1.4:
+        project["tempoMap"] = None
+        if project.get("reference") is not None:
+            project["reference"]["synced"] = False
+            project["reference"]["alignNote"] = ("The score's structure doesn't match the recording (likely different "
+                                                 "repeats), so a steady tempo is used instead of the recording's timing.")
+        return project
     project["tempoMap"] = [[a[0], round(float(s), 4)] for a, s in zip(anchors, secs)]
     span = secs[-1] - secs[0]
     if span > 0:

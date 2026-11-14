@@ -136,3 +136,4 @@ body { display: grid; grid-template-columns: 1fr 320px; grid-template-rows: 48px
 .menu button:hover { background: var(--bg-4); }
 .menu hr { border: 0; border-top: 1px solid var(--border); margin: 4px 0; }
 #modal select { max-width: 100%; }
+[hidden] { display: none !important; }

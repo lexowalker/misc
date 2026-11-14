@@ -223,6 +223,17 @@ def set_tempo(project, bpm):
     return f"Tempo {old:g} → {float(bpm):g} BPM"
 
 
+@op("steady_tempo", "Drop the reference recording's tempo map and play at one steady tempo (default: the current "
+    "average BPM).", {"bpm": {"type": "number"}})
+def steady_tempo(project, bpm=None):
+    bpm = float(bpm or project["bpm"])
+    project["tempoMap"] = None
+    project["bpm"] = round(bpm, 3)
+    if project.get("reference"):
+        project["reference"]["synced"] = False
+    return f"Steady tempo at {bpm:g} BPM"
+
+
 @op("fit_duration", "Change the tempo so the piece lasts exactly `seconds` (e.g. 167 for 2:47).",
     {"seconds": {"type": "number"}}, ["seconds"])
 def fit_duration(project, seconds):
