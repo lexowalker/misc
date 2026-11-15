@@ -59,12 +59,21 @@ The figures were checked by screenshot review and `test/check.cjs`. They have no
 
 The manufacturer pages for Milwaukee and Bosch could not be loaded during research. Their specs come from retailer listings.
 
-## Explainer video
+## Explainer videos
 
-`video/home-lift-mover-explainer.mp4` is a 3-minute narrated explainer for the mover. The voiceover (`video/voiceover.mp3`) was generated with ElevenLabs (voice: Ryan, American documentary narrator). `video/voiceover-words.json` is its word-timestamp transcript, which sets each scene's length, the cue points that pin animations to the words, and the subtitles. Delete those two files to get the silent, captioned cut. To rebuild:
+Two narrated explainers, voiced with ElevenLabs (voice: Ryan, American documentary narrator):
+
+| Video | Narration | Word timestamps | Scenes |
+|---|---|---|---|
+| `video/home-lift-mover-explainer.mp4` (3:10) | `video/voiceover.mp3` | `video/voiceover-words.json` | `video/mover-scenes.js` |
+| `video/toolkit-explainer.mp4` (3:48) | `video/toolkit-voiceover.mp3` | `video/toolkit-voiceover-words.json` | `video/toolkit-scenes.js` |
+
+Both share `video/lib-head.js` (drawing helpers) and `video/lib-tail.js` (renderer). The word timestamps set each scene's length, the cue points that pin animations to spoken words, and the subtitles. Without them a video falls back to a silent, captioned cut. To rebuild:
 
 ```sh
-node build.mjs && node video/build-video.mjs && NODE_PATH=$(npm root -g) node video/render.cjs
+node build.mjs
+node video/build-video.mjs mover   && NODE_PATH=$(npm root -g) node video/render.cjs video/home-lift-mover-explainer.mp4 30
+node video/build-video.mjs toolkit && NODE_PATH=$(npm root -g) node video/render.cjs video/toolkit-explainer.mp4 30 toolkit-explainer.html toolkit-voiceover.mp3
 ```
 
-The scenes are in `video/scenes.js`. `video/explainer.html` plays the animation live in a browser.
+The generated `video/*explainer.html` pages also play live in a browser.
