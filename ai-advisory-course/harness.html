@@ -1,0 +1,814 @@
+<title>Harness Field Manual</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=VT323&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field manual from the Long Winter Trail. One reading column, with wide plates (diagrams) that break out of it. Deliberately single-theme (night). */
+:root {
+  --night: #0a1120;
+  --night-2: #111b2f;
+  --night-3: #16223a;
+  --snow: #e6edf5;
+  --frost: #9db0c6;
+  --mist: #5d7088;
+  --ember: #eaa25e;
+  --aurora: #73d1b5;
+  --danger: #f08a7a;
+  --line: #ffffff17;
+  --font-display: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  --font-story: "IM Fell English", Georgia, serif;
+  --font-body: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+  --font-ledger: "VT323", ui-monospace, Menlo, monospace;
+  --font-code: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--night); scroll-behavior: smooth; }
+body {
+  background:
+    radial-gradient(1px 1px at 12% 8%, #ffffff55 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 4%, #ffffff44 50%, transparent 51%),
+    radial-gradient(1px 1px at 45% 14%, #ffffff33 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 90% 18%, #ffffff44 50%, transparent 51%),
+    radial-gradient(1px 1px at 30% 2%, #ffffff44 50%, transparent 51%),
+    linear-gradient(#060b16, var(--night) 600px);
+  background-repeat: no-repeat;
+  background-color: var(--night);
+  color: var(--snow);
+  font: 18px/1.62 var(--font-body);
+  overflow-x: hidden;
+}
+.wrap { max-width: 1060px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 700px; }
+a { color: var(--ember); text-underline-offset: 3px; }
+a:hover { color: var(--snow); }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; border-radius: 4px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+p { margin: 0 0 14px; }
+b, strong { font-weight: 700; color: #f3f7fb; }
+code { font: 0.86em var(--font-code); background: #ffffff0f; padding: 1px 5px; border-radius: 4px; }
+
+header { padding-block: 56px 28px; }
+.eyebrow { font: 20px/1 var(--font-ledger); letter-spacing: .12em; color: var(--frost); text-transform: uppercase; }
+h1 { font: 400 clamp(42px, 7vw, 76px)/0.98 var(--font-display); margin: 12px 0 16px; text-wrap: balance; }
+.lede { font: italic 21px/1.5 var(--font-story); color: var(--frost); max-width: 36em; margin: 0; }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 26px; padding-top: 18px; border-top: 1px dashed #ffffff22; font: 19px/1.3 var(--font-ledger); letter-spacing: .04em; }
+.toc a { color: var(--frost); text-decoration: none; }
+.toc a:hover { color: var(--ember); }
+.toc a span { color: var(--mist); margin-right: 6px; }
+
+section { padding-block: 44px 20px; border-top: 1px solid var(--line); }
+section h2 { font: 400 clamp(32px, 4.6vw, 46px)/1.04 var(--font-display); margin: 6px 0 14px; text-wrap: balance; }
+section h3 { font: 21px/1 var(--font-ledger); letter-spacing: .1em; text-transform: uppercase; color: var(--ember); margin: 28px 0 10px; }
+.num { font: 20px/1 var(--font-ledger); color: var(--ember); letter-spacing: .1em; }
+
+/* Plates (diagrams) */
+figure.plate { margin: 22px 0 26px; }
+.plate-frame { background: #0c1527; border: 1px solid var(--line); border-radius: 12px; padding: 18px; overflow-x: auto; }
+figure.plate svg { display: block; width: 100%; height: auto; max-width: 100%; color: var(--snow); }
+figure.plate svg.wide { min-width: 640px; }
+figcaption { color: var(--frost); font: italic 17px/1.5 var(--font-story); margin-top: 10px; max-width: 70ch; }
+figcaption b { font-style: normal; }
+
+/* SVG vocabulary */
+.d text { fill: currentColor; font: 13px var(--font-body); }
+.d text.lbl { font: 12px var(--font-body); fill: var(--frost); paint-order: stroke; stroke: #0c1527; stroke-width: 5px; stroke-linejoin: round; }
+.d text.cap { font: 15px var(--font-ledger); letter-spacing: .1em; fill: var(--mist); }
+.d text.big { font: 20px var(--font-display); }
+.d text.sub { font: 11.5px var(--font-body); fill: var(--frost); }
+.d .box { fill: var(--night-2); stroke: currentColor; stroke-opacity: .35; stroke-width: 1.2; }
+.d .box.model { fill: #2a1e12; stroke: var(--ember); stroke-opacity: 1; }
+.d .box.ok { stroke: var(--aurora); stroke-opacity: .9; }
+.d .box.hl { stroke: var(--ember); stroke-opacity: 1; stroke-width: 2; }
+.d .box.ghost { fill: none; stroke-dasharray: 4 4; }
+.d .edge { fill: none; stroke: currentColor; stroke-opacity: .55; stroke-width: 1.4; marker-end: url(#ah); }
+.d .edge.hl { stroke: var(--ember); stroke-opacity: 1; stroke-width: 2.2; marker-end: url(#ah-hl); }
+.d .edge.ok { stroke: var(--aurora); stroke-opacity: .9; marker-end: url(#ah-ok); }
+.d .edge.dash { stroke-dasharray: 5 5; }
+.d .edge.plain { marker-end: none; }
+.d .ring { fill: none; stroke: var(--ember); stroke-opacity: .35; stroke-dasharray: 6 6; stroke-width: 1.4; }
+.d .zone { fill: #ffffff05; stroke: currentColor; stroke-opacity: .18; stroke-dasharray: 5 5; }
+.d .zone.ok { fill: #73d1b50a; stroke: var(--aurora); stroke-opacity: .5; }
+.d .spoke { stroke: currentColor; stroke-opacity: .14; }
+.d .node { cursor: pointer; }
+.d .node:hover .box { stroke-opacity: .9; }
+.d .node.on .box { stroke: var(--ember); stroke-opacity: 1; stroke-width: 2; fill: #241a10; }
+.d .node:focus { outline: none; }
+.d .node:focus-visible .box { stroke: var(--ember); stroke-width: 2.5; }
+.d .badge { fill: var(--ember); }
+.d .badge-t { fill: var(--night); font: 600 12px var(--font-body); }
+#ah path { fill: var(--snow); fill-opacity: .7; }
+#ah-hl path { fill: var(--ember); }
+#ah-ok path { fill: var(--aurora); }
+
+/* Anatomy detail */
+.detail { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; margin-top: 14px; padding: 14px 16px; border: 1px solid #eaa25e44; border-radius: 10px; background: #eaa25e0a; }
+.detail .k { font: 20px/1.2 var(--font-ledger); color: var(--ember); letter-spacing: .06em; text-transform: uppercase; }
+.detail h4 { margin: 0; font: 400 24px/1.15 var(--font-display); }
+.detail p { grid-column: 1 / -1; margin: 6px 0 0; color: #d4dde8; }
+.detail .eg { grid-column: 1 / -1; color: var(--frost); font-size: 16px; margin-top: 4px; }
+
+/* Two columns of plates */
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.pair .plate-frame h4 { margin: 0 0 8px; font: 400 22px/1.1 var(--font-display); }
+.pair .plate-frame p { font-size: 16px; color: var(--frost); margin: 8px 0 0; }
+
+/* Loop stepper */
+.stepper { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.step-text { min-height: 120px; }
+.step-text .k { font: 19px/1 var(--font-ledger); color: var(--ember); letter-spacing: .08em; }
+.step-text h4 { margin: 6px 0 6px; font: 400 25px/1.15 var(--font-display); }
+.step-text p { color: #d4dde8; font-size: 16.5px; }
+.controls { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+.btn { background: var(--ember); color: var(--night); border: 0; border-radius: 8px; padding: 8px 16px; font-weight: 700; }
+.btn.ghost { background: none; color: var(--snow); border: 1px solid var(--line); font-weight: 500; }
+.btn[disabled] { opacity: .4; cursor: default; }
+.dots { display: flex; gap: 6px; margin-left: auto; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: #ffffff22; }
+.dots i.on { background: var(--ember); }
+.ctx { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #070d19; }
+.ctx-head { display: flex; justify-content: space-between; gap: 10px; font: 18px/1.1 var(--font-ledger); color: var(--frost); letter-spacing: .04em; }
+.ctx-head b { color: var(--snow); font-weight: 400; font-variant-numeric: tabular-nums; }
+.meter { height: 8px; background: #ffffff10; border-radius: 4px; overflow: hidden; margin: 8px 0 10px; }
+.meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--aurora), var(--ember)); transition: width .5s ease; }
+.blocks { display: flex; flex-direction: column; gap: 4px; max-height: 300px; overflow-y: auto; }
+.blk { display: flex; justify-content: space-between; gap: 10px; padding: 5px 9px; border-radius: 5px; font: 13px/1.35 var(--font-code); border-left: 3px solid; background: #ffffff07; animation: drop .35s ease; min-width: 0; }
+.blk span:first-child { overflow-wrap: anywhere; min-width: 0; }
+.blk span:last-child { color: var(--frost); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.blk.sys { border-color: var(--frost); }
+.blk.task { border-color: var(--snow); }
+.blk.model { border-color: var(--ember); }
+.blk.tool { border-color: var(--aurora); }
+@keyframes drop { from { opacity: 0; transform: translateY(-6px); } }
+.billed { margin-top: 10px; font: 18px/1.2 var(--font-ledger); color: var(--frost); display: flex; justify-content: space-between; gap: 10px; }
+.billed b { color: var(--ember); font-weight: 400; font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; color: var(--frost); margin-top: 10px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+
+/* Bars */
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: minmax(150px, 230px) minmax(0, 1fr); gap: 14px; align-items: center; }
+.bar-row .name { font-weight: 700; line-height: 1.25; }
+.bar-row .name small { display: block; font-weight: 400; color: var(--frost); font-size: 14.5px; }
+.track { position: relative; height: 30px; background: #ffffff08; border-radius: 4px; display: flex; overflow: hidden; }
+.track i { display: block; height: 100%; }
+.track .v { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font: 17px var(--font-ledger); color: var(--snow); font-variant-numeric: tabular-nums; }
+
+/* Pattern grid */
+.spectrum { display: flex; justify-content: space-between; gap: 12px; font: 18px/1.2 var(--font-ledger); color: var(--frost); letter-spacing: .04em; margin: 10px 0 6px; }
+.spectrum-bar { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--aurora), var(--ember)); margin-bottom: 16px; }
+.patterns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pat { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px 14px; background: #0c1527; min-width: 0; }
+.pat h4 { margin: 0; font: 400 22px/1.1 var(--font-display); }
+.pat .when { font-size: 15.5px; color: var(--frost); margin: 6px 0 0; }
+.pat .eg { font-size: 15.5px; color: #d4dde8; margin: 6px 0 0; }
+.pat svg { margin: 8px 0 4px; }
+
+/* Code */
+.code-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+pre { margin: 0; background: #060b16; border: 1px solid var(--line); border-radius: 10px; padding: 14px; overflow-x: auto; font: 13px/1.55 var(--font-code); color: #cfdae6; }
+pre .c { color: var(--mist); } pre .s { color: var(--aurora); } pre .k { color: var(--ember); }
+.code-label { font: 18px/1 var(--font-ledger); color: var(--frost); letter-spacing: .06em; margin-bottom: 6px; text-transform: uppercase; }
+
+/* Trifecta */
+.tri { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: center; }
+.toggles { display: grid; gap: 8px; }
+.tog { display: flex; align-items: center; gap: 12px; text-align: left; background: #0c1527; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.tog .sw { flex: none; width: 36px; height: 20px; border-radius: 10px; background: #ffffff1a; position: relative; transition: background .2s; }
+.tog .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--snow); transition: transform .2s; }
+.tog[aria-pressed="true"] { border-color: #eaa25e66; }
+.tog[aria-pressed="true"] .sw { background: var(--ember); }
+.tog[aria-pressed="true"] .sw::after { transform: translateX(16px); }
+.tog b { display: block; }
+.tog small { color: var(--frost); font-size: 14.5px; }
+.verdict { margin-top: 10px; padding: 12px 14px; border-radius: 10px; font-size: 16.5px; border: 1px solid; }
+.verdict.safe { border-color: #73d1b555; background: #73d1b510; }
+.verdict.risk { border-color: #f08a7a77; background: #f08a7a14; }
+.d circle.v { fill-opacity: .08; stroke-width: 1.5; transition: fill-opacity .3s; }
+.d circle.v.on { fill-opacity: .28; }
+.d .core { fill: var(--danger); opacity: 0; transition: opacity .3s; }
+.d .core.on { opacity: .9; }
+
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 12px 0; }
+.tbl table { min-width: 560px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 17px/1 var(--font-ledger); letter-spacing: .08em; text-transform: uppercase; color: var(--mist); font-weight: 400; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-variant-numeric: tabular-nums; text-align: right; }
+td.good { color: var(--aurora); } td.bad { color: var(--danger); }
+.pill { display: inline-block; font: 15px/1 var(--font-ledger); letter-spacing: .06em; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+.pill.auto { background: #73d1b522; color: var(--aurora); }
+.pill.ask { background: #eaa25e22; color: var(--ember); }
+.pill.never { background: #f08a7a22; color: var(--danger); }
+
+dl.gloss { display: grid; grid-template-columns: minmax(130px, 200px) minmax(0, 1fr); gap: 0; margin: 0; border-top: 1px solid var(--line); }
+dl.gloss dt, dl.gloss dd { padding: 12px 0; border-bottom: 1px solid var(--line); margin: 0; }
+dl.gloss dt { font: 400 22px/1.2 var(--font-display); padding-right: 16px; }
+dl.gloss dd { color: #d4dde8; }
+
+.callout { border-left: 2px solid var(--ember); padding: 4px 0 4px 18px; margin: 18px 0; font: italic 19px/1.55 var(--font-story); color: #cfdbe7; }
+.notes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+.notes li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+.notes li span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ember); color: var(--night); font: 700 13px var(--font-body); margin-top: 2px; }
+footer { padding-block: 40px 80px; border-top: 1px solid var(--line); color: var(--frost); font: italic 18px/1.6 var(--font-story); }
+
+@media (max-width: 820px) {
+  .pair, .stepper, .code-pair, .tri { grid-template-columns: minmax(0, 1fr); }
+  .patterns { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .bar-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  dl.gloss { grid-template-columns: minmax(0, 1fr); }
+  dl.gloss dt { border-bottom: 0; padding-bottom: 0; }
+}
+@media (max-width: 520px) { .patterns { grid-template-columns: minmax(0, 1fr); } .plate-frame { padding: 12px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="ah-hl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="ah-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Long Winter Trail · Companion volume</div>
+    <h1>Harness Field Manual</h1>
+    <p class="lede">The model is the horse. Everything that turns its strength into useful work, the reins, the wagon, the map, and the rules of the road, is the harness. This is a guide to that second part, the one you will actually design for clients.</p>
+    <nav class="toc" aria-label="Contents">
+      <a href="#anatomy"><span>I</span>Anatomy</a>
+      <a href="#same-model"><span>II</span>Same horse, two wagons</a>
+      <a href="#loop"><span>III</span>The loop</a>
+      <a href="#context"><span>IV</span>Context budget</a>
+      <a href="#patterns"><span>V</span>Patterns</a>
+      <a href="#stack"><span>VI</span>Where LangChain fits</a>
+      <a href="#tools"><span>VII</span>Tools and MCP</a>
+      <a href="#safety"><span>VIII</span>Guarding the camp</a>
+      <a href="#evals"><span>IX</span>Evals</a>
+      <a href="#fund"><span>X</span>A fund, drawn</a>
+      <a href="#words"><span>XI</span>Words</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- I. Anatomy -->
+<section id="anatomy"><div class="wrap">
+  <div class="col">
+    <div class="num">I</div>
+    <h2>Anatomy of a harness</h2>
+    <p>A language model does exactly one thing. It takes text in and writes text out. It can't open a file, search a database, or remember yesterday. It can only <em>write</em>.</p>
+    <p>A <b>harness</b> is all the software around the model that turns that one ability into work. Every AI product you have used, from ChatGPT to Harvey to Claude Code, is a model plus a harness. When two products use the same model and one is far better, the harness is the difference.</p>
+  </div>
+  <figure class="plate">
+    <div class="plate-frame"><svg class="d wide" id="anat" viewBox="0 0 760 470" role="img" aria-label="A model at the center, surrounded by eight harness components: instructions, context assembly, tools, the loop, memory, permissions, guardrails, and logging and evals."></svg></div>
+    <div class="detail" id="anat-detail" aria-live="polite"></div>
+    <figcaption>Tap any part. The orange center is the only piece the AI lab sells you. <b>Everything on the dashed ring is design work</b>, and most of it is where client projects succeed or fail.</figcaption>
+  </figure>
+</div></section>
+
+<!-- II. Same model -->
+<section id="same-model"><div class="wrap">
+  <div class="col">
+    <div class="num">II</div>
+    <h2>Same horse, two wagons</h2>
+    <p>Here is the same model inside two different harnesses. On the left, a chat window. On the right, an agent harness like Claude Code. The model hasn't changed. What changed is what the harness lets it reach and how many times it gets to try.</p>
+  </div>
+  <div class="pair">
+    <figure class="plate" style="margin:0"><div class="plate-frame"><h4>A chat window</h4><svg class="d" id="chat" viewBox="0 0 360 250" role="img" aria-label="Chat harness: the person sends a message, the harness adds history and a system prompt, the model replies once."></svg><p>One call per message. The model only sees what you paste in. If it needs a document, you go and get it.</p></div></figure>
+    <figure class="plate" style="margin:0"><div class="plate-frame"><h4>An agent harness</h4><svg class="d" id="agent" viewBox="0 0 360 250" role="img" aria-label="Agent harness: the harness loops between the model and tools for files, search and commands, with a permission gate, until the task is done."></svg><p>Many calls per task. The model asks for files, searches and commands. The harness runs them, checks permission, and loops until the work is done.</p></div></figure>
+  </div>
+  <p class="callout col">For a client, the question is rarely "which model?" It's "how much of the right wagon do we build, and what are we willing to let it reach?"</p>
+</div></section>
+
+<!-- III. Loop -->
+<section id="loop"><div class="wrap">
+  <div class="col">
+    <div class="num">III</div>
+    <h2>The loop, one step at a time</h2>
+    <p>This is the mechanism under every agent. Step through a real-shaped task: <i>"Which of these ten agreements has a non-compete longer than 12 months?"</i> Watch the context window on the right. It's the model's entire working memory, and the harness rebuilds it on every call.</p>
+  </div>
+  <div class="stepper">
+    <div>
+      <figure class="plate" style="margin:0 0 12px"><div class="plate-frame"><svg class="d" id="loopsvg" viewBox="0 0 540 300" role="img" aria-label="The agent loop: the person gives a task to the harness, the harness sends the full context to the model, the model returns a tool request or an answer, the harness runs tools against documents and appends results."></svg></div></figure>
+      <div class="step-text" id="step-text" aria-live="polite"></div>
+      <div class="controls">
+        <button class="btn ghost" id="prev">Back</button>
+        <button class="btn" id="next">Next step</button>
+        <button class="btn ghost" id="reset">Start over</button>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="ctx">
+      <div class="ctx-head"><span>CONTEXT WINDOW</span><b id="ctx-n">0 tokens</b></div>
+      <div class="meter"><i id="ctx-m"></i></div>
+      <div class="blocks" id="blocks"></div>
+      <div class="billed"><span>Model calls: <b id="calls">0</b></span><span>Input tokens billed: <b id="billed">0</b></span></div>
+      <div class="legend"><span><i style="background:var(--frost)"></i>Harness setup</span><span><i style="background:var(--snow)"></i>Task</span><span><i style="background:var(--ember)"></i>Model writes</span><span><i style="background:var(--aurora)"></i>Tool results</span></div>
+    </div>
+  </div>
+  <p class="col" style="margin-top:18px">Notice the last number. The API is stateless, so <b>every call resends the whole window</b>. Twelve calls over a growing window billed about 359,000 input tokens, nearly six times the 63,000 the window ends at. Long contexts also dilute attention: the model gets worse at finding the one clause that matters. Both are harness problems, and the next section is about solving them.</p>
+</div></section>
+
+<!-- IV. Context -->
+<section id="context"><div class="wrap">
+  <div class="col">
+    <div class="num">IV</div>
+    <h2>The context budget</h2>
+    <p><b>Context engineering</b> is deciding what goes in the window, in what form, at what moment. Same task, same model, three harness designs:</p>
+  </div>
+  <figure class="plate"><div class="plate-frame">
+    <div class="bars" id="bars"></div>
+    <div class="legend" style="margin-top:14px"><span><i style="background:var(--frost)"></i>Setup and task</span><span><i style="background:var(--ember)"></i>Model writes</span><span><i style="background:var(--aurora)"></i>Document text</span><span><i style="background:#73d1b555"></i>Summaries from helpers</span></div>
+  </div><figcaption>Final size of the main context window, in tokens. Illustrative numbers for the ten-agreement task. Smaller isn't automatically better: search can miss a clause phrased oddly, and summaries can drop the detail you needed. <b>Your evals tell you which trade-off is acceptable.</b></figcaption></figure>
+  <div class="col">
+    <h3>The main techniques</h3>
+    <p><b>Retrieval.</b> Fetch only the relevant passages, by keyword search, semantic search, or both. <b>Agentic search.</b> Let the model grep and open files itself, the way a lawyer skims an index. <b>Compaction.</b> Summarize older turns when the window gets full. <b>Subagents.</b> Send a helper with its own fresh window to read a long document and report back a short answer. <b>Memory files.</b> Write durable notes to a file the harness loads next session, since the model itself forgets everything.</p>
+  </div>
+</div></section>
+
+<!-- V. Patterns -->
+<section id="patterns"><div class="wrap">
+  <div class="col">
+    <div class="num">V</div>
+    <h2>Workflows and agents</h2>
+    <p>Anthropic's <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">Building Effective Agents</a> sorts harness designs into a handful of patterns. In a <b>workflow</b>, your code decides the steps. In an <b>agent</b>, the model decides. For regulated clients, start on the left and move right only when the task demands it.</p>
+  </div>
+  <div class="spectrum"><span>Predictable · auditable · cheap</span><span>Flexible · autonomous · harder to test</span></div>
+  <div class="spectrum-bar"></div>
+  <div class="patterns" id="pats"></div>
+</div></section>
+
+<!-- VI. Stack -->
+<section id="stack"><div class="wrap">
+  <div class="col">
+    <div class="num">VI</div>
+    <h2>Where LangChain fits</h2>
+    <p>Harness, orchestration, framework: these words overlap because they describe the same pile at different heights. The <b>harness</b> is the whole working system. A <b>framework</b> like LangChain is a box of prebuilt parts you can build a harness from. <b>Orchestration</b> is the part of the harness that runs the steps and the loop. LangGraph is LangChain's orchestration layer.</p>
+  </div>
+  <figure class="plate"><div class="plate-frame"><svg class="d wide" id="stacksvg" viewBox="0 0 860 430" role="img" aria-label="Four layers: model APIs at the bottom, frameworks such as LangChain above them, agent SDKs and orchestration such as LangGraph above that, and finished harnesses such as Claude Code at the top. MCP runs alongside all layers to connect tools; observability and eval tools run alongside on the other side. A direct path shows you can also write your own harness straight on the model API."></svg></div>
+  <figcaption>You can enter at any height. A client buying Claude for Enterprise starts at the top and configures. A client with engineers might use an agent SDK. You can also skip the middle and write a small loop straight on the API, which is what Lab 2 has you do.</figcaption></figure>
+  <div class="col">
+    <h3>What to tell a client about frameworks</h3>
+    <p>Frameworks speed up the first prototype and give you many connectors. They also add layers of abstraction that can make it harder to see exactly what the model was sent, which is the first thing you need when debugging. Many experienced teams use the plain model API or a lab's agent SDK for that reason. Neither choice is wrong. What matters is that someone on the team can always answer: <i>what exactly went into the context window, and why?</i></p>
+  </div>
+</div></section>
+
+<!-- VII. Tools & MCP -->
+<section id="tools"><div class="wrap">
+  <div class="col">
+    <div class="num">VII</div>
+    <h2>Tools and MCP</h2>
+    <p>The model never touches a system. It writes a request in a fixed format, and the harness decides whether to run it. A tool is just three things the model can read: a <b>name</b>, a <b>description</b> of when to use it, and an <b>input schema</b>.</p>
+  </div>
+  <div class="code-pair">
+    <div><div class="code-label">What the harness tells the model</div><pre><span class="c">// a tool definition</span>
+{
+  <span class="k">"name"</span>: <span class="s">"search_matters"</span>,
+  <span class="k">"description"</span>: <span class="s">"Search the document system
+    for agreements by counterparty,
+    type or date. Returns titles and
+    IDs, not full text."</span>,
+  <span class="k">"input_schema"</span>: {
+    <span class="k">"counterparty"</span>: <span class="s">"string"</span>,
+    <span class="k">"doc_type"</span>: <span class="s">"NDA | LPA | side letter"</span>,
+    <span class="k">"after"</span>: <span class="s">"date"</span>
+  }
+}</pre></div>
+    <div><div class="code-label">What the model writes back</div><pre><span class="c">// a tool call: just text, until
+// the harness chooses to run it</span>
+{
+  <span class="k">"type"</span>: <span class="s">"tool_use"</span>,
+  <span class="k">"name"</span>: <span class="s">"search_matters"</span>,
+  <span class="k">"input"</span>: {
+    <span class="k">"counterparty"</span>: <span class="s">"Acme Capital"</span>,
+    <span class="k">"doc_type"</span>: <span class="s">"side letter"</span>
+  }
+}
+
+<span class="c">// harness runs it, appends the
+// result, and calls the model again</span></pre></div>
+  </div>
+  <div class="col" style="margin-top:22px">
+    <p><b>MCP</b>, the <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a>, standardizes this plug. A vendor writes one MCP server for their system, and any MCP-capable harness can use it. Think of it as a standard hitch: any wagon, any tool.</p>
+  </div>
+  <figure class="plate"><div class="plate-frame"><svg class="d wide" id="mcpsvg" viewBox="0 0 860 300" role="img" aria-label="The model talks only to the harness. The harness contains an MCP client which connects to three MCP servers, for the document system, SharePoint and a database, each of which talks to the real system. A permission check sits between the model's requests and the MCP client."></svg></div>
+  <figcaption>The dashed line is the trust boundary. Everything to its right is the client's real data. <b>The permission gate and the server's own access rules</b> are where you decide what an AI is allowed to reach on whose behalf.</figcaption></figure>
+</div></section>
+
+<!-- VIII. Safety -->
+<section id="safety"><div class="wrap">
+  <div class="col">
+    <div class="num">VIII</div>
+    <h2>Guarding the camp</h2>
+    <p>Models follow instructions, and they can't reliably tell your instructions from instructions hidden inside a document, email, or web page. That's <b>prompt injection</b>. Simon Willison's <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/" target="_blank" rel="noopener">lethal trifecta</a> is the simplest way to reason about it. Turn on the capabilities and watch the middle.</p>
+  </div>
+  <div class="tri">
+    <figure class="plate" style="margin:0"><div class="plate-frame"><svg class="d" id="venn" viewBox="0 0 360 300" role="img" aria-label="Three overlapping circles: private data, untrusted content, and the ability to send data out. The center, where all three overlap, is the danger zone."></svg></div></figure>
+    <div>
+      <div class="toggles" id="toggles"></div>
+      <div class="verdict" id="verdict" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="col">
+    <h3>Permission tiers</h3>
+    <p>The harness decides what runs on its own and what waits for a person. A sensible default for a fund:</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Action</th><th>Example</th><th>Default</th></tr></thead>
+    <tbody>
+      <tr><td>Read within the user's own access</td><td>Search side letters, open an LPA</td><td><span class="pill auto">Automatic</span></td></tr>
+      <tr><td>Write to a draft area</td><td>Save a memo draft, fill a tracker</td><td><span class="pill auto">Automatic</span></td></tr>
+      <tr><td>Change a system of record</td><td>Update the obligations register, file a document</td><td><span class="pill ask">Person approves</span></td></tr>
+      <tr><td>Send outside the firm</td><td>Email a counterparty, post to a portal</td><td><span class="pill ask">Person approves</span></td></tr>
+      <tr><td>Cross an information barrier</td><td>Read deal-team files from the public side</td><td><span class="pill never">Never</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- IX. Evals -->
+<section id="evals"><div class="wrap">
+  <div class="col">
+    <div class="num">IX</div>
+    <h2>Evals: the surveyor's instruments</h2>
+    <p>Every harness change, whether a new prompt, a new model or a new tool, can fix one thing and quietly break another. An eval set is a fixed list of real tasks with known-good answers, run after every change. It's the only way to know.</p>
+  </div>
+  <figure class="plate"><div class="plate-frame"><svg class="d wide" id="evalsvg" viewBox="0 0 860 200" role="img" aria-label="The eval loop: change the harness, run the eval set, read the scorecard, compare with the baseline, then either ship or go back to fix."></svg></div>
+  <figcaption>This loop is also a retainer. <b>"Each month we test your workflows against the newest models and catch regressions"</b> is a concrete, recurring service.</figcaption></figure>
+  <div class="tbl"><table>
+    <thead><tr><th>Side-letter extraction · 50 cases</th><th>Correct</th><th>Cited correctly</th><th>Invented a clause</th><th>Cost per doc</th></tr></thead>
+    <tbody>
+      <tr><td>Baseline prompt · Model A</td><td class="n">78%</td><td class="n">71%</td><td class="n bad">6</td><td class="n">$0.09</td></tr>
+      <tr><td>Required quotes + "not found" option · Model A</td><td class="n good">90%</td><td class="n good">92%</td><td class="n good">1</td><td class="n">$0.10</td></tr>
+      <tr><td>Same prompt · cheaper Model B</td><td class="n">84%</td><td class="n">85%</td><td class="n">3</td><td class="n good">$0.02</td></tr>
+    </tbody>
+  </table></div>
+  <p class="col" style="color:var(--frost);font-size:16px">An example scorecard with made-up numbers, to show the shape. You'll build a real one in Lab 7.</p>
+</div></section>
+
+<!-- X. Fund -->
+<section id="fund"><div class="wrap">
+  <div class="col">
+    <div class="num">X</div>
+    <h2>A fund, drawn</h2>
+    <p>Here is everything above assembled into one realistic design: a research and documents assistant for a hedge fund that keeps data inside its own cloud. The numbered marks are the decisions you, as the advisor, own.</p>
+  </div>
+  <figure class="plate"><div class="plate-frame"><svg class="d wide" id="fundsvg" viewBox="0 0 900 470" role="img" aria-label="Reference architecture: analysts sign in to an assistant running in the fund's cloud. The harness sends context to a model through the cloud provider with zero data retention, retrieves from a search index synced from SharePoint and iManage with permissions, writes every call to an audit log, and is tested nightly by an eval suite."></svg></div></figure>
+  <ol class="notes col">
+    <li><span>1</span><div><b>Where the model runs.</b> Through the fund's own Azure, AWS or Google account under zero-retention terms, or a vendor's enterprise API. This decision drives what compliance will sign.</div></li>
+    <li><span>2</span><div><b>Permissions travel with the data.</b> The index stores each document's access list from SharePoint or iManage, and the harness filters by the signed-in analyst on every search. Information barriers are enforced here, not in the prompt.</div></li>
+    <li><span>3</span><div><b>What gets logged, and for how long.</b> Prompts, retrieved documents, tool calls and answers, retained to match recordkeeping rules.</div></li>
+    <li><span>4</span><div><b>Who owns the eval set.</b> The fund's own experts should write the cases. You design the method and run it.</div></li>
+    <li><span>5</span><div><b>What needs a person.</b> Anything that leaves the building or changes a system of record goes through approval.</div></li>
+  </ol>
+</div></section>
+
+<!-- XI. Words -->
+<section id="words"><div class="wrap"><div class="col">
+  <div class="num">XI</div>
+  <h2>Words you'll hear</h2>
+  <dl class="gloss">
+    <dt>Harness</dt><dd>Everything around the model that makes it useful: instructions, context assembly, tools, the loop, memory, permissions, guardrails, logging. Also called scaffolding.</dd>
+    <dt>Orchestration</dt><dd>The part of a harness that sequences steps: which call happens next, in what order, with what branching or retries.</dd>
+    <dt>Framework</dt><dd>A library of prebuilt harness parts, such as LangChain or LlamaIndex. Optional.</dd>
+    <dt>Agent SDK</dt><dd>A lab's toolkit for building agent harnesses, such as the Claude Agent SDK or OpenAI Agents SDK. It ships the loop, tool handling and context management ready-made.</dd>
+    <dt>Workflow</dt><dd>A harness where your code fixes the steps. The model fills in each step.</dd>
+    <dt>Agent</dt><dd>A harness where the model chooses the next step, using tools in a loop until it decides the task is done.</dd>
+    <dt>Tool / function calling</dt><dd>The model writes a structured request; the harness runs it and returns the result.</dd>
+    <dt>MCP</dt><dd>An open standard for connecting tools and data sources to any compatible harness.</dd>
+    <dt>RAG</dt><dd>Retrieval-augmented generation. Search for relevant text first, then put it in the context so the model answers from it.</dd>
+    <dt>Context engineering</dt><dd>Designing what the model sees on each call. The core craft of harness work.</dd>
+    <dt>Fine-tuning</dt><dd>Changing the model's weights with extra training. A different, rarer tool. Most client problems are harness problems.</dd>
+    <dt>Evals</dt><dd>Fixed test sets that score a harness, run after every change.</dd>
+  </dl>
+</div></div></section>
+</main>
+
+<footer><div class="wrap"><div class="col">
+  These pages pair with Camps 5 through 9 on <a href="https://claude.ai/artifact/AUMR7ddRyLVwnUynqtArfC" target="_blank" rel="noopener">The Long Winter Trail</a>. The fastest way to make all of this real is Lab 2: build the loop from Section III yourself, in about sixty lines, and watch every step print.
+</div></div></footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* SVG helpers */
+function box(cx, cy, w, h, label, cls = "", sub = "") {
+  const ty = sub ? cy - 4 : cy + 4.5;
+  return `<rect class="box ${cls}" x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h}" rx="8"/>
+    <text x="${cx}" y="${ty}" text-anchor="middle">${esc(label)}</text>${sub ? `<text class="sub" x="${cx}" y="${cy + 12}" text-anchor="middle">${esc(sub)}</text>` : ""}`;
+}
+function arrow(x1, y1, x2, y2, label = "", cls = "", dx = 0, dy = -7, id = "") {
+  const mx = (x1 + x2) / 2 + dx, my = (y1 + y2) / 2 + dy;
+  return `<line ${id ? `id="${id}"` : ""} class="edge ${cls}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>${label ? `<text class="lbl" ${id ? `id="${id}-t"` : ""} x="${mx}" y="${my}" text-anchor="middle">${esc(label)}</text>` : ""}`;
+}
+function path(d, label = "", cls = "", lx = 0, ly = 0, id = "") {
+  return `<path ${id ? `id="${id}"` : ""} class="edge ${cls}" d="${d}"/>${label ? `<text class="lbl" x="${lx}" y="${ly}" text-anchor="middle">${esc(label)}</text>` : ""}`;
+}
+
+/* I. Anatomy */
+const PARTS = [
+  { k: "instructions", name: "Instructions", sub: "system prompt", text: "The standing brief: who the model is working for, the rules, the house style, the output format. Written like a memo to a sharp new associate who knows nothing about the firm.", eg: "\"You review side letters for the fund's legal team. Quote the clause for every finding. If a term isn't present, say 'not found'.\"" },
+  { k: "context", name: "Context assembly", sub: "what goes in the window", text: "Decides what the model sees on each call: retrieved passages, prior turns, summaries, tool results. The model knows only what is in its window, so this is the most important job a harness has.", eg: "For a question about Acme's MFN rights, include Acme's side letter and the LPA's MFN section, not all 400 fund documents." },
+  { k: "tools", name: "Tools", sub: "things it may request", text: "Functions the model can ask the harness to run: search, read a file, query a database, draft an email. Each has a name, a description, and an input schema. The model only requests; your code executes.", eg: "search_matters, read_document, list_versions, create_draft" },
+  { k: "loop", name: "The loop", sub: "orchestration", text: "Calls the model, runs any tool it requested, appends the result, and calls it again until the model says it's done or a limit is hit. A workflow fixes the steps in code; an agent lets the model choose them.", eg: "Stop after 25 steps or $2 of usage, whichever comes first." },
+  { k: "memory", name: "Memory", sub: "what persists", text: "The model forgets everything between calls. Anything that should persist, such as user preferences, matter notes, or what was learned last session, lives in files or databases the harness reads back in.", eg: "A matter-notes file the assistant updates and reloads each time someone opens the matter." },
+  { k: "permissions", name: "Permissions", sub: "who may reach what", text: "Which tools run automatically, which wait for a person, and which data each user may touch. Should mirror the access rules the firm already has, including information barriers.", eg: "Reading is automatic; sending an email or editing the obligations register needs approval." },
+  { k: "guardrails", name: "Guardrails", sub: "checks in and out", text: "Checks before and after the model: validate the output's format, verify that quoted clauses actually appear in the source, redact personal data, and resist injected instructions.", eg: "Reject any answer whose quotations can't be found word-for-word in the cited document." },
+  { k: "obs", name: "Logging & evals", sub: "seeing and measuring", text: "Record every call, tool use and answer so failures can be investigated and regulators satisfied. Run a fixed test set on every change so improvements are measured, not guessed.", eg: "A nightly run of 50 graded side-letter questions, with a scorecard emailed to the legal ops lead." },
+];
+const MODEL = { name: "The model", sub: "text in, text out", text: "A very large function that predicts the next token. It is stateless: it remembers nothing between calls and can't act on the world. Everything it does beyond writing text, the harness makes possible.", eg: "Claude, GPT, Gemini, Llama. Swappable, if the harness is built well." };
+function renderAnatomy() {
+  const cx = 380, cy = 235, rx = 270, ry = 172;
+  let s = `<ellipse class="ring" cx="${cx}" cy="${cy}" rx="${rx + 82}" ry="${ry + 52}"/>
+    <text class="cap" x="${cx}" y="22" text-anchor="middle">THE HARNESS</text>`;
+  const pos = PARTS.map((_, i) => { const a = (-90 + i * 45) * Math.PI / 180; return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)]; });
+  pos.forEach(([x, y]) => s += `<line class="spoke" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`);
+  s += `<g class="node" data-i="-1" tabindex="0" role="button" aria-label="The model">
+    <circle cx="${cx}" cy="${cy}" r="64" class="box model"/>
+    <text class="big" x="${cx}" y="${cy - 2}" text-anchor="middle">The model</text>
+    <text class="sub" x="${cx}" y="${cy + 18}" text-anchor="middle">text in, text out</text></g>`;
+  PARTS.forEach((p, i) => {
+    const [x, y] = pos[i];
+    s += `<g class="node" data-i="${i}" tabindex="0" role="button" aria-label="${esc(p.name)}">${box(x, y, 156, 48, p.name, "", p.sub)}</g>`;
+  });
+  $("#anat").innerHTML = s;
+  const pick = i => {
+    document.querySelectorAll("#anat .node").forEach(n => n.classList.toggle("on", +n.dataset.i === i));
+    const p = i < 0 ? MODEL : PARTS[i];
+    $("#anat-detail").innerHTML = `<span class="k">${i < 0 ? "Engine" : "Harness"}</span><h4>${esc(p.name)}</h4><p>${esc(p.text)}</p><span class="eg"><b>Example:</b> ${esc(p.eg)}</span>`;
+  };
+  document.querySelectorAll("#anat .node").forEach(n => {
+    n.addEventListener("click", () => pick(+n.dataset.i));
+    n.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(+n.dataset.i); } });
+  });
+  pick(1);
+}
+
+/* II. Chat vs agent */
+function renderPair() {
+  $("#chat").innerHTML = `
+    <rect class="zone" x="110" y="30" width="140" height="190" rx="10"/><text class="cap" x="180" y="22" text-anchor="middle">HARNESS</text>
+    ${box(50, 125, 76, 40, "You")}
+    ${box(180, 90, 116, 40, "System prompt")}
+    ${box(180, 160, 116, 40, "Chat history")}
+    ${box(305, 125, 80, 50, "Model", "model")}
+    ${arrow(88, 118, 120, 100, "message", "", -12, -6)}
+    ${arrow(240, 112, 263, 118)}
+    ${arrow(240, 152, 263, 136)}
+    ${path("M305,152 C305,215 60,215 50,147", "one reply", "", 180, 236)}`;
+  $("#agent").innerHTML = `
+    <rect class="zone" x="96" y="30" width="150" height="200" rx="10"/><text class="cap" x="171" y="22" text-anchor="middle">HARNESS</text>
+    ${box(46, 60, 70, 36, "You")}
+    ${box(171, 62, 124, 34, "Prompt + memory")}
+    ${box(171, 130, 124, 38, "Loop", "hl")}
+    ${box(171, 198, 124, 34, "Permission gate", "ok")}
+    ${box(305, 62, 80, 46, "Model", "model")}
+    ${box(305, 154, 80, 30, "Files")}
+    ${box(305, 192, 80, 30, "Search")}
+    ${box(305, 230, 80, 30, "Commands")}
+    ${arrow(82, 62, 107, 62, "task", "", 0, -8)}
+    ${path("M233,122 C265,118 268,96 280,86", "context", "hl", 246, 102)}
+    ${path("M290,86 C278,108 262,134 235,138", "tool call", "", 302, 130)}
+    ${arrow(171, 149, 171, 179)}
+    ${arrow(233, 198, 263, 158)}
+    ${arrow(233, 200, 263, 194)}
+    ${arrow(233, 204, 263, 228)}
+    ${path("M109,128 C70,128 46,110 46,80", "answer", "", 62, 124)}`;
+}
+
+/* III. Loop stepper */
+const STEPS = [
+  { title: "The harness assembles the first call", text: "Before the model sees anything, the harness builds its window: the standing instructions, descriptions of the two tools it may use, and the analyst's question. Then it calls the model.", edges: ["e-task", "e-ctx"], add: [["System prompt", 1200, "sys"], ["Tool definitions: list_files, read_file", 800, "sys"], ["Task: which agreements have non-competes > 12 months?", 60, "task"]], callAfter: true },
+  { title: "The model asks for a tool", text: "The model can't look at the folder. So it writes a request: list_files(\"/agreements\"). That's just text. Nothing has happened yet.", edges: ["e-req"], add: [["→ list_files(\"/agreements\")", 40, "model"]] },
+  { title: "The harness checks permission and runs it", text: "The harness sees a read-only request inside the analyst's access, so it runs it automatically. It gets back ten filenames and appends them to the window.", edges: ["e-run", "e-res"], add: [["← 10 filenames", 150, "tool"]] },
+  { title: "Round two: the whole window goes back", text: "The harness calls the model again, resending everything so far. The model now asks to read the first agreement.", edges: ["e-ctx", "e-req"], add: [["→ read_file(\"acme_nda.txt\")", 40, "model"]], calls: 1 },
+  { title: "A whole contract lands in the window", text: "The harness runs the read and appends the full text: about 6,000 tokens. The window has tripled.", edges: ["e-run", "e-res"], add: [["← acme_nda.txt, full text", 6000, "tool"]] },
+  { title: "Nine more times around the loop", text: "Read, append, call again. Each call resends the growing window, so the cost of each round rises as the work goes on.", edges: ["e-ctx", "e-req", "e-run", "e-res"], repeat: 9 },
+  { title: "The model answers and the loop ends", text: "With all ten read, the model writes an answer instead of a tool call. That's the signal to stop. The harness checks the format, logs everything, and shows the analyst.", edges: ["e-ctx", "e-ans", "e-out"], add: [["→ Answer: 3 agreements, with quoted clauses", 400, "model"]], calls: 1 },
+];
+let step = -1;
+function renderLoopSvg() {
+  $("#loopsvg").innerHTML = `
+    ${box(56, 150, 84, 44, "Analyst")}
+    ${box(230, 150, 130, 64, "Harness", "", "your code")}
+    ${box(450, 56, 120, 52, "Model", "model")}
+    ${box(450, 248, 120, 52, "Tools", "", "list_files, read_file")}
+    ${arrow(98, 140, 163, 140, "task", "", 0, -8, "e-task")}
+    ${path("M260,118 C290,70 340,56 388,56", "full context", "", 300, 64, "e-ctx")}
+    ${path("M450,82 C430,140 340,150 297,150", "tool call", "", 378, 132, "e-req")}
+    ${path("M270,182 C300,240 340,248 388,248", "runs it", "", 306, 238, "e-run")}
+    ${path("M440,222 C420,190 330,178 296,170", "result", "", 400, 196, "e-res")}
+    ${path("M420,82 C380,110 330,128 297,136", "", "dash", 0, 0, "e-ans")}
+    ${arrow(163, 162, 98, 162, "answer", "", 0, 20, "e-out")}`;
+}
+function simulate(upto) {
+  const blocks = []; let calls = 0, billed = 0;
+  const ctx = () => blocks.reduce((a, b) => a + b[1], 0);
+  for (let i = 0; i <= upto; i++) {
+    const s = STEPS[i];
+    if (s.repeat) {
+      const names = ["beta_nda", "cobalt_lpa", "delta_sideletter", "elm_services", "fir_employment", "grove_nda", "hollow_consult", "ivy_jv", "juniper_nda"];
+      for (let r = 0; r < s.repeat; r++) {
+        calls++; billed += ctx();
+        blocks.push([`→ read_file("${names[r]}.txt")`, 40, "model"]);
+        blocks.push([`← ${names[r]}.txt, full text`, 6000, "tool"]);
+      }
+      continue;
+    }
+    if (s.callAfter) { (s.add || []).forEach(x => blocks.push(x)); calls++; billed += ctx(); }
+    else if (s.calls) { calls++; billed += ctx(); (s.add || []).forEach(x => blocks.push(x)); }
+    else (s.add || []).forEach(x => blocks.push(x));
+  }
+  return { blocks, calls, billed, ctx: ctx() };
+}
+function showStep(i) {
+  step = Math.max(-1, Math.min(STEPS.length - 1, i));
+  document.querySelectorAll("#loopsvg .edge").forEach(e => e.classList.remove("hl"));
+  const st = $("#step-text");
+  if (step < 0) {
+    st.innerHTML = `<div class="k">READY</div><h4>A task arrives</h4><p>An analyst asks the assistant about ten agreements in a folder. Press <b>Next step</b> to follow what the harness does.</p>`;
+    $("#blocks").innerHTML = ""; $("#ctx-n").textContent = "0 tokens"; $("#ctx-m").style.width = "0"; $("#calls").textContent = "0"; $("#billed").textContent = "0";
+  } else {
+    const s = STEPS[step];
+    s.edges.forEach(id => { const e = document.getElementById(id); if (e) e.classList.add("hl"); });
+    st.innerHTML = `<div class="k">STEP ${step + 1} OF ${STEPS.length}</div><h4>${esc(s.title)}</h4><p>${esc(s.text)}</p>`;
+    const r = simulate(step);
+    $("#blocks").innerHTML = r.blocks.map(b => `<div class="blk ${b[2]}"><span>${esc(b[0])}</span><span>${b[1].toLocaleString()}</span></div>`).join("");
+    $("#blocks").scrollTop = $("#blocks").scrollHeight;
+    $("#ctx-n").textContent = `${r.ctx.toLocaleString()} / 200,000 tokens`;
+    $("#ctx-m").style.width = (100 * r.ctx / 200000) + "%";
+    $("#calls").textContent = r.calls; $("#billed").textContent = r.billed.toLocaleString();
+  }
+  $("#prev").disabled = step < 0; $("#next").disabled = step >= STEPS.length - 1;
+  $("#dots").innerHTML = STEPS.map((_, k) => `<i class="${k <= step ? "on" : ""}"></i>`).join("");
+}
+$("#next").addEventListener("click", () => showStep(step + 1));
+$("#prev").addEventListener("click", () => showStep(step - 1));
+$("#reset").addEventListener("click", () => showStep(-1));
+
+/* IV. Bars */
+const BARS = [
+  { name: "Read everything", note: "every file, in full", parts: [[2060, "var(--frost)"], [800, "var(--ember)"], [60150, "var(--aurora)"]] },
+  { name: "Search, then read", note: "grep for \"non-compete\", open matching sections", parts: [[2060, "var(--frost)"], [900, "var(--ember)"], [15200, "var(--aurora)"]] },
+  { name: "A helper per document", note: "each helper reads one file in its own window", parts: [[2060, "var(--frost)"], [1000, "var(--ember)"], [1500, "#73d1b555"]] },
+];
+function renderBars() {
+  const max = 63010;
+  $("#bars").innerHTML = BARS.map(b => {
+    const tot = b.parts.reduce((a, p) => a + p[0], 0);
+    return `<div class="bar-row"><div class="name">${esc(b.name)}<small>${esc(b.note)}</small></div>
+      <div class="track" role="img" aria-label="${esc(b.name)}: about ${tot.toLocaleString()} tokens">${b.parts.map(p => `<i style="width:${100 * p[0] / max}%;background:${p[1]}"></i>`).join("")}<span class="v">${Math.round(tot / 100) / 10}k</span></div></div>`;
+  }).join("");
+}
+
+/* V. Patterns */
+const PATS = [
+  { name: "Prompt chain", when: "Fixed steps, each checkable.", eg: "Extract terms, check them against the policy, then draft the summary.",
+    svg: () => `${box(30, 50, 44, 28, "In")}${box(100, 50, 60, 30, "LLM", "model")}<polygon points="160,38 174,50 160,62 146,50" class="box ok"/>${box(222, 50, 60, 30, "LLM", "model")}${box(286, 50, 44, 28, "Out")}${arrow(52, 50, 68, 50)}${arrow(130, 50, 145, 50)}${arrow(175, 50, 190, 50)}${arrow(252, 50, 262, 50)}<text class="lbl" x="160" y="84" text-anchor="middle">check</text>` },
+  { name: "Routing", when: "Different inputs need different handling.", eg: "Send NDAs, credit agreements and side letters to specialized prompts.",
+    svg: () => `${box(30, 50, 44, 28, "In")}${box(110, 50, 70, 30, "Router", "model")}${box(240, 16, 84, 24, "NDA")}${box(240, 50, 84, 24, "Credit")}${box(240, 84, 84, 24, "Side letter")}${arrow(52, 50, 74, 50)}${arrow(145, 44, 197, 18)}${arrow(145, 50, 197, 50)}${arrow(145, 56, 197, 82)}` },
+  { name: "Parallel", when: "Independent pieces, or several opinions.", eg: "Review one agreement for tax, regulatory and commercial issues at once.",
+    svg: () => `${box(30, 50, 44, 28, "In")}${box(150, 16, 60, 24, "LLM", "model")}${box(150, 50, 60, 24, "LLM", "model")}${box(150, 84, 60, 24, "LLM", "model")}${box(270, 50, 64, 30, "Merge")}${arrow(52, 46, 119, 18)}${arrow(52, 50, 119, 50)}${arrow(52, 54, 119, 82)}${arrow(181, 18, 237, 44)}${arrow(181, 50, 237, 50)}${arrow(181, 82, 237, 56)}` },
+  { name: "Orchestrator–workers", when: "You can't know the subtasks in advance.", eg: "Plan a diligence review, then assign one worker per document found.",
+    svg: () => `${box(70, 50, 96, 32, "Orchestrator", "model")}${box(230, 16, 70, 24, "worker", "ghost")}${box(230, 50, 70, 24, "worker", "ghost")}${box(230, 84, 70, 24, "worker", "ghost")}${arrow(119, 42, 194, 18, "", "dash")}${arrow(119, 50, 194, 50, "", "dash")}${arrow(119, 58, 194, 82, "", "dash")}<text class="lbl" x="160" y="104" text-anchor="middle">workers created as needed</text>` },
+  { name: "Evaluator–optimizer", when: "Clear criteria and real gains from revision.", eg: "Draft a client memo; a second pass grades it against a checklist; revise.",
+    svg: () => `${box(80, 50, 90, 32, "Generator", "model")}${box(240, 50, 90, 32, "Evaluator", "model")}${path("M126,40 C160,18 190,18 194,40", "draft", "", 160, 18)}${path("M194,60 C170,84 150,84 126,60", "feedback", "", 160, 96)}` },
+  { name: "Autonomous agent", when: "Open-ended tasks with good tools and guardrails.", eg: "\"Find every side letter granting MFN rights and build the register.\"",
+    svg: () => `${box(80, 50, 70, 32, "LLM", "model")}${box(240, 50, 100, 32, "Tools · world")}${path("M116,40 C150,16 180,16 189,40", "action", "", 152, 16)}${path("M189,60 C170,84 140,84 116,60", "result", "", 152, 96)}${arrow(80, 67, 80, 98, "", "ok")}<text class="lbl" x="44" y="100" text-anchor="middle">done</text>` },
+];
+function renderPatterns() {
+  $("#pats").innerHTML = PATS.map(p => `<div class="pat"><h4>${esc(p.name)}</h4><svg class="d" viewBox="0 0 320 110" role="img" aria-label="${esc(p.name)} diagram">${p.svg()}</svg><p class="when">${esc(p.when)}</p><p class="eg"><b>Example:</b> ${esc(p.eg)}</p></div>`).join("");
+}
+
+/* VI. Stack */
+function renderStack() {
+  const L = [
+    { y: 46, name: "Finished harnesses", how: "you configure", items: "Claude Code · ChatGPT & Claude apps · Microsoft Copilot · Harvey · Cursor" },
+    { y: 136, name: "Agent SDKs & orchestration", how: "you assemble loops", items: "Claude Agent SDK · OpenAI Agents SDK · LangGraph · CrewAI" },
+    { y: 226, name: "Frameworks & libraries", how: "building blocks", items: "LangChain · LlamaIndex · Vercel AI SDK", hl: true },
+    { y: 316, name: "Model APIs", how: "the engine", items: "Anthropic · OpenAI · Google · via Bedrock / Azure / Vertex · open weights" },
+  ];
+  let s = `<rect class="zone" x="70" y="14" width="588" height="358" rx="12"/>`;
+  L.forEach(l => {
+    s += `<rect class="box ${l.hl ? "hl" : l.y === 316 ? "model" : ""}" x="90" y="${l.y}" width="520" height="70" rx="8"/>
+      <text class="big" x="110" y="${l.y + 28}">${esc(l.name)}</text>
+      <text class="sub" x="592" y="${l.y + 27}" text-anchor="end">${esc(l.how)}</text>
+      <text x="110" y="${l.y + 53}">${esc(l.items)}</text>`;
+  });
+  s += `<text class="lbl" x="350" y="${226 + 85}" text-anchor="middle" style="fill:var(--ember)">LangChain is a parts box; LangGraph sits one layer up</text>`;
+  // side rails
+  s += `<rect class="box ok" x="16" y="46" width="40" height="340" rx="8"/><text class="cap" transform="translate(41 216) rotate(-90)" text-anchor="middle" style="fill:var(--aurora)">MCP · CONNECTS TOOLS AT ANY LAYER</text>`;
+  s += `<rect class="box" x="672" y="46" width="172" height="340" rx="8"/>
+    <text class="cap" x="758" y="74" text-anchor="middle">SEE &amp; MEASURE</text>
+    <text x="758" y="104" text-anchor="middle">LangSmith</text><text x="758" y="126" text-anchor="middle">Langfuse</text><text x="758" y="148" text-anchor="middle">Braintrust</text>
+    <text class="sub" x="758" y="184" text-anchor="middle">tracing, logs and</text><text class="sub" x="758" y="200" text-anchor="middle">eval runs, whatever</text><text class="sub" x="758" y="216" text-anchor="middle">you built on</text>`;
+  s += `<text class="cap" x="364" y="404" text-anchor="middle">THE HARNESS = WHATEVER YOU STACK HERE + YOUR PROMPTS, TOOLS, DATA AND RULES</text>`;
+  // direct path
+  s += `${path("M612,84 C648,160 648,280 614,346", "", "hl dash", 0, 0)}<text class="lbl" transform="translate(652 216) rotate(-90)" text-anchor="middle" style="fill:var(--ember)">or write your own</text>`;
+  $("#stacksvg").setAttribute("viewBox", "0 0 860 420");
+  $("#stacksvg").innerHTML = s;
+}
+
+/* VII. MCP */
+function renderMcp() {
+  $("#mcpsvg").innerHTML = `
+    <rect class="zone" x="150" y="20" width="330" height="260" rx="12"/><text class="cap" x="315" y="40" text-anchor="middle">HARNESS</text>
+    <line x1="560" y1="10" x2="560" y2="290" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="6 6"/>
+    <text class="cap" x="568" y="22">FIRM SYSTEMS</text>
+    ${box(66, 150, 100, 56, "Model", "model", "writes requests")}
+    ${box(250, 150, 120, 48, "Permission gate", "ok", "allow · ask · deny")}
+    ${box(410, 150, 110, 48, "MCP client")}
+    ${box(640, 70, 120, 44, "DMS server", "", "MCP")}
+    ${box(640, 150, 120, 44, "SharePoint server", "", "MCP")}
+    ${box(640, 230, 120, 44, "Database server", "", "MCP")}
+    ${box(800, 70, 90, 40, "iManage")}
+    ${box(800, 150, 90, 40, "SharePoint")}
+    ${box(800, 230, 90, 40, "SQL")}
+    ${arrow(116, 140, 188, 140, "tool call", "", 0, -10)}
+    ${arrow(188, 162, 116, 162, "result", "", 0, 22)}
+    ${arrow(310, 150, 353, 150, "if allowed", "ok", 0, -10)}
+    ${arrow(465, 140, 578, 74)}
+    ${arrow(465, 150, 578, 150)}
+    ${arrow(465, 160, 578, 226)}
+    ${arrow(700, 70, 753, 70)}
+    ${arrow(700, 150, 753, 150)}
+    ${arrow(700, 230, 753, 230)}
+    <text class="lbl" x="520" y="104" text-anchor="middle">standard protocol</text>`;
+}
+
+/* VIII. Trifecta */
+const TRI = [
+  { k: "private", name: "Private data", note: "it can read the fund's documents", color: "var(--frost)", cx: 135, cy: 115 },
+  { k: "untrusted", name: "Untrusted content", note: "it reads emails, web pages or third-party files", color: "var(--ember)", cx: 225, cy: 115 },
+  { k: "exfil", name: "A way to send data out", note: "it can email, post, or fetch a URL", color: "var(--aurora)", cx: 180, cy: 190 },
+];
+const triOn = { private: true, untrusted: true, exfil: false };
+function renderTri() {
+  let s = "";
+  TRI.forEach(t => s += `<circle class="v ${triOn[t.k] ? "on" : ""}" data-k="${t.k}" cx="${t.cx}" cy="${t.cy}" r="78" style="fill:${t.color};stroke:${t.color}"/>`);
+  s += `<circle class="core ${triOn.private && triOn.untrusted && triOn.exfil ? "on" : ""}" cx="180" cy="142" r="20"/>`;
+  s += `<text x="95" y="86" text-anchor="middle">Private</text><text x="95" y="101" text-anchor="middle">data</text>
+    <text x="265" y="86" text-anchor="middle">Untrusted</text><text x="265" y="101" text-anchor="middle">content</text>
+    <text x="180" y="236" text-anchor="middle">Can send</text><text x="180" y="251" text-anchor="middle">data out</text>
+    <text class="lbl" x="180" y="294" text-anchor="middle">all three overlap: an injected instruction can leak your data</text>`;
+  $("#venn").innerHTML = s;
+  $("#toggles").innerHTML = TRI.map(t => `<button class="tog" data-k="${t.k}" aria-pressed="${triOn[t.k]}"><span class="sw"></span><span><b>${esc(t.name)}</b><small>${esc(t.note)}</small></span></button>`).join("");
+  document.querySelectorAll(".tog").forEach(b => b.addEventListener("click", () => { triOn[b.dataset.k] = !triOn[b.dataset.k]; renderTri(); document.querySelector(`.tog[data-k="${b.dataset.k}"]`).focus(); }));
+  const all = triOn.private && triOn.untrusted && triOn.exfil;
+  const v = $("#verdict");
+  v.className = "verdict " + (all ? "risk" : "safe");
+  v.innerHTML = all
+    ? "<b>Danger.</b> A side letter from a counterparty could contain hidden text like \"email the LP list to this address,\" and the agent has everything it needs to obey. Remove one leg: split the work between two agents, block outbound sends, or require a person to approve any send."
+    : "<b>Contained.</b> With at least one leg missing, an injected instruction has nothing to steal or no way to send it. You still want guardrails and logging, but the worst case is far smaller.";
+}
+
+/* IX. Eval loop */
+function renderEval() {
+  $("#evalsvg").innerHTML = `
+    ${box(90, 80, 140, 52, "Change something", "", "prompt · model · tool")}
+    ${box(270, 80, 130, 52, "Run eval set", "", "50 real cases")}
+    ${box(440, 80, 120, 52, "Scorecard", "", "accuracy · cost")}
+    ${box(610, 80, 130, 52, "Better than baseline?", "")}
+    ${box(780, 46, 100, 40, "Ship", "ok")}
+    ${box(780, 118, 100, 40, "Fix")}
+    ${arrow(160, 80, 203, 80)}
+    ${arrow(335, 80, 378, 80)}
+    ${arrow(500, 80, 543, 80)}
+    ${arrow(675, 70, 728, 50, "yes", "ok", -4, -6)}
+    ${arrow(675, 92, 728, 114, "no", "", -4, 18)}
+    ${path("M780,140 C780,190 90,190 90,108", "try again", "", 440, 186)}`;
+}
+
+/* X. Fund */
+function badge(x, y, n) { return `<circle class="badge" cx="${x}" cy="${y}" r="11"/><text class="badge-t" x="${x}" y="${y + 4}" text-anchor="middle">${n}</text>`; }
+function renderFund() {
+  $("#fundsvg").innerHTML = `
+    <rect class="zone ok" x="140" y="20" width="560" height="420" rx="14"/><text class="cap" x="160" y="42" style="fill:var(--aurora)">THE FUND'S OWN CLOUD ACCOUNT</text>
+    ${box(60, 200, 96, 52, "Analysts", "", "single sign-on")}
+    ${box(330, 200, 170, 120, "", "hl")}
+    <text class="big" x="330" y="168" text-anchor="middle">Assistant</text>
+    <text class="sub" x="330" y="190" text-anchor="middle">instructions · tools</text>
+    <text class="sub" x="330" y="206" text-anchor="middle">loop · permission gate</text>
+    <text class="sub" x="330" y="222" text-anchor="middle">guardrails</text>
+    ${box(590, 90, 160, 56, "Model endpoint", "model", "zero data retention")}
+    ${box(590, 220, 160, 56, "Search index", "", "text + access lists")}
+    ${box(330, 380, 170, 48, "Audit log", "", "every call and answer")}
+    ${box(590, 380, 160, 48, "Eval suite", "", "runs nightly")}
+    ${box(820, 220, 120, 70, "", "")}
+    <text x="820" y="212" text-anchor="middle">SharePoint</text><text x="820" y="232" text-anchor="middle">iManage</text>
+    ${arrow(108, 200, 243, 200, "asks, as themselves", "", 0, -10)}
+    ${path("M415,170 C460,130 470,96 508,92", "context", "", 450, 118)}
+    ${path("M510,108 C480,140 450,170 417,184", "", "dash")}
+    ${arrow(415, 220, 508, 220, "as this analyst", "", 0, -10)}
+    ${arrow(758, 220, 672, 220, "syncs", "", 0, 22)}
+    ${arrow(330, 262, 330, 354, "writes", "", 26, 0)}
+    ${path("M590,356 C590,320 450,300 417,262", "tests", "", 528, 316)}
+    ${badge(590, 54, 1)}${badge(760, 186, 2)}${badge(420, 380, 3)}${badge(680, 380, 4)}${badge(252, 146, 5)}`;
+}
+
+renderAnatomy(); renderPair(); renderLoopSvg(); showStep(-1); renderBars(); renderPatterns(); renderStack(); renderMcp(); renderTri(); renderEval(); renderFund();
+</script>

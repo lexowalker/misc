@@ -30,6 +30,7 @@ So the time split is deliberate:
 ## Files
 
 - [`trail.html`](trail.html): **The Long Winter Trail**, the course as an interactive night-forest web page (published as a claude.ai artifact). Tracks progress through 12 camps, keeps a private journal, and has a fireside guide that quizzes you.
+- [`harness.html`](harness.html): **Harness Field Manual**, a visual, interactive guide to harness engineering (anatomy, the agent loop, context budgets, patterns, where LangChain fits, MCP, safety, evals, a reference design for a fund).
 - [`CURRICULUM.md`](CURRICULUM.md): the 12-week plan, week by week, with resources and "done when" checks
 - [`LABS.md`](LABS.md): hands-on builds, from your first API call to a client-grade demo harness
 - [`ADVISORY-PLAYBOOK.md`](ADVISORY-PLAYBOOK.md): frameworks you'll actually use with clients (discovery, architecture patterns, risk checklist, engagement shapes)
