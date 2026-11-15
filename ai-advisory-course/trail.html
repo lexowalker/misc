@@ -82,6 +82,11 @@ nav.tabs .wrap { display: flex; gap: 4px; align-items: center; padding-block: 8p
 }
 .tab[aria-selected="true"] { color: var(--night); background: var(--ember); }
 .tab:not([aria-selected="true"]):hover { color: var(--snow); background: #ffffff0d; }
+.tab.sound { margin-left: 8px; border: 1px solid var(--line); font-size: 20px; }
+.tab.sound[aria-pressed="true"] { color: var(--ember); border-color: #eaa25e66; }
+.tab.sound::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--mist); margin-right: 8px; vertical-align: 2px; }
+.tab.sound[aria-pressed="true"]::before { background: var(--ember); box-shadow: 0 0 8px var(--ember); animation: flickdot 2.4s ease-in-out infinite; }
+@keyframes flickdot { 50% { opacity: .55; } }
 .sync { margin-left: auto; font: 18px/1 var(--font-ledger); color: var(--mist); white-space: nowrap; padding-left: 12px; }
 
 main { position: relative; z-index: 1; padding-block: 36px 96px; }
@@ -283,6 +288,7 @@ td.n { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--emb
     <button class="tab" role="tab" id="tab-trail" aria-selected="true" data-view="trail">The Trail</button>
     <button class="tab" role="tab" id="tab-guide" aria-selected="false" data-view="field">Field Guide</button>
     <button class="tab" role="tab" id="tab-journal" aria-selected="false" data-view="journal">Trail Journal</button>
+    <button class="tab sound" id="sound" aria-pressed="false" title="Wind and campfire sounds">Sound off</button>
     <span class="sync" id="sync">Saved in this browser</span>
   </div>
 </nav>
@@ -818,12 +824,14 @@ function openWeek(n) {
   $("#dr-close").addEventListener("click", closeWeek);
   dr.querySelectorAll("input[data-id]").forEach(cb => cb.addEventListener("change", onCheck));
   setupGuide(n);
+  setFireNear(true);
   setTimeout(() => $("#dr-close").focus(), 50);
 }
 function closeWeek() {
   const dr = $("#drawer"); dr.classList.remove("open"); dr.setAttribute("aria-hidden", "true"); $("#scrim").classList.remove("open");
   if (guideAbort) guideAbort.abort();
-  const b = document.querySelector(`.camp[data-week="${openWk}"]`); openWk = null; if (b) b.focus();
+  setFireNear(false);
+  const b =document.querySelector(`.camp[data-week="${openWk}"]`); openWk = null; if (b) b.focus();
 }
 $("#scrim").addEventListener("click", closeWeek);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && openWk) closeWeek(); });
@@ -1102,6 +1110,109 @@ function drawPines() {
   const sg = c.createLinearGradient(0, H - 18, 0, H); sg.addColorStop(0, "rgba(10,17,32,0)"); sg.addColorStop(1, "#0a1120");
   c.fillStyle = sg; c.fillRect(0, H - 18, W, 18);
 }
+
+/* ---------------- Ambience: wind and campfire (Web Audio, generated live) ---------------- */
+const amb = { ctx: null, master: null, fire: null, on: false, crackleTimer: null, near: false };
+function noiseBuffer(ctx, secs, brown) {
+  const sr = ctx.sampleRate, buf = ctx.createBuffer(1, sr * secs, sr), d = buf.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < d.length; i++) {
+    const w = Math.random() * 2 - 1;
+    if (brown) { last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w;
+  }
+  return buf;
+}
+function loopSrc(ctx, buf) { const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true; s.start(ctx.currentTime + Math.random()); return s; }
+function lfo(ctx, freq, depth, target) { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = freq; g.gain.value = depth; o.connect(g).connect(target); o.start(); return o; }
+function buildAmbience() {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+  const brown = noiseBuffer(ctx, 6, true), white = noiseBuffer(ctx, 2, false);
+
+  // Wind: deep body through a slowly wandering band-pass, with gusts.
+  const windBody = ctx.createBiquadFilter(); windBody.type = "bandpass"; windBody.frequency.value = 380; windBody.Q.value = 0.7;
+  const windGain = ctx.createGain(); windGain.gain.value = 0.55;
+  loopSrc(ctx, brown).connect(windBody).connect(windGain).connect(master);
+  lfo(ctx, 0.05, 220, windBody.frequency);
+  lfo(ctx, 0.11, 0.28, windGain.gain);
+  lfo(ctx, 0.031, 0.18, windGain.gain);
+  // Wind through the pines: a faint high whistle.
+  const whistle = ctx.createBiquadFilter(); whistle.type = "bandpass"; whistle.frequency.value = 1100; whistle.Q.value = 5;
+  const whistleGain = ctx.createGain(); whistleGain.gain.value = 0.035;
+  loopSrc(ctx, white).connect(whistle).connect(whistleGain).connect(master);
+  lfo(ctx, 0.07, 380, whistle.frequency);
+  lfo(ctx, 0.09, 0.03, whistleGain.gain);
+
+  // Fire: a low rumble plus scheduled crackles and pops.
+  const fire = ctx.createGain(); fire.gain.value = 0.35; fire.connect(master);
+  const rumbleLP = ctx.createBiquadFilter(); rumbleLP.type = "lowpass"; rumbleLP.frequency.value = 220;
+  const rumbleGain = ctx.createGain(); rumbleGain.gain.value = 0.5;
+  loopSrc(ctx, brown).connect(rumbleLP).connect(rumbleGain).connect(fire);
+  lfo(ctx, 0.6, 0.12, rumbleGain.gain);
+  const crackHP = ctx.createBiquadFilter(); crackHP.type = "highpass"; crackHP.frequency.value = 1400;
+  const crackBus = ctx.createGain(); crackBus.gain.value = 0.9;
+  crackHP.connect(crackBus).connect(fire);
+  const popLP = ctx.createBiquadFilter(); popLP.type = "bandpass"; popLP.frequency.value = 600; popLP.Q.value = 1.5;
+  popLP.connect(fire);
+  function burst(t, dur, gain, dest) {
+    const s = ctx.createBufferSource(), g = ctx.createGain();
+    s.buffer = white; s.playbackRate.value = 0.6 + Math.random() * 1.2;
+    g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(g).connect(dest); s.start(t, Math.random() * 1.5, dur + 0.02);
+  }
+  amb.crackleTimer = setInterval(() => {
+    if (ctx.state !== "running") return;
+    const now = ctx.currentTime;
+    for (let i = 0; i < 4; i++) {
+      if (Math.random() < 0.32) {
+        const t = now + Math.random() * 0.1;
+        burst(t, 0.004 + Math.random() * 0.02, 0.15 + Math.random() * 0.5, crackHP);
+        if (Math.random() < 0.3) burst(t + 0.01 + Math.random() * 0.03, 0.004 + Math.random() * 0.01, 0.2 * Math.random(), crackHP);
+      }
+    }
+    if (Math.random() < 0.04) burst(now + Math.random() * 0.1, 0.05 + Math.random() * 0.07, 0.5 + Math.random() * 0.4, popLP);
+  }, 100);
+  Object.assign(amb, { ctx, master, fire });
+}
+function setFireNear(near) {
+  amb.near = near;
+  if (!amb.ctx) return;
+  const t = amb.ctx.currentTime;
+  amb.fire.gain.cancelScheduledValues(t);
+  amb.fire.gain.setTargetAtTime(near ? 1.15 : 0.35, t, 0.8);
+}
+async function setSound(on) {
+  amb.on = on;
+  const b = $("#sound");
+  b.setAttribute("aria-pressed", String(on)); b.textContent = on ? "Sound on" : "Sound off";
+  try { localStorage.setItem(LS_KEY + "-sound", on ? "1" : "0"); } catch (e) {}
+  if (on) {
+    if (!amb.ctx) buildAmbience();
+    try { await amb.ctx.resume(); } catch (e) {}
+    setFireNear(amb.near);
+    const t = amb.ctx.currentTime;
+    amb.master.gain.cancelScheduledValues(t); amb.master.gain.setValueAtTime(amb.master.gain.value, t);
+    amb.master.gain.linearRampToValueAtTime(0.5, t + 2.5);
+  } else if (amb.ctx) {
+    const t = amb.ctx.currentTime;
+    amb.master.gain.cancelScheduledValues(t); amb.master.gain.setValueAtTime(amb.master.gain.value, t);
+    amb.master.gain.linearRampToValueAtTime(0, t + 0.8);
+    setTimeout(() => { if (!amb.on && amb.ctx) amb.ctx.suspend(); }, 900);
+  }
+}
+$("#sound").addEventListener("click", () => setSound(!amb.on));
+document.addEventListener("visibilitychange", () => {
+  if (!amb.ctx) return;
+  if (document.hidden) amb.ctx.suspend(); else if (amb.on) amb.ctx.resume();
+});
+// If sound was on last visit, start it on the first tap (browsers require a gesture).
+try {
+  if (localStorage.getItem(LS_KEY + "-sound") === "1") {
+    $("#sound").textContent = "Tap for sound";
+    const resumeOnce = e => { if (e.target.closest && e.target.closest("#sound")) return; setSound(true); };
+    document.addEventListener("pointerdown", resumeOnce, { once: true });
+  }
+} catch (e) {}
 
 /* ---------------- Boot ---------------- */
 addEventListener("resize", () => { drawPines(); drawTrails(); });
