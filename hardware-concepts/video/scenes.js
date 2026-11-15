@@ -1,0 +1,318 @@
+// Explainer video scenes for the Home Lift & Mover. renderAt(t) draws the frame at t seconds into #v (1280×720 SVG).
+// Numbers come from content/model.mjs and the build's cost tables (injected as window.V by build-video.mjs).
+(() => {
+  const W = 1280, H = 720;
+  const C = { page: "#F2F4F8", paper: "#FFFFFF", ink: "#161616", ink2: "#525252", ink3: "#8D8D8D", rule: "#C6C6C6", teal: "#005D5D", tealT: "#D9FBFB", blue: "#002D9C", blueT: "#EDF5FF", violet: "#6929C4", violetT: "#F6F2FF", rust: "#8A3800", rustT: "#FFF2E8", wood: "#F4F1EC", woodD: "#E7E1D8", good: "#0E6027" };
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const seg = (t, a, b) => clamp((t - a) / (b - a));
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const es = (t, a, b) => ease(seg(t, a, b));
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const r1 = (v) => Math.round(v * 10) / 10;
+  const fmt = (v) => Math.round(v).toLocaleString("en-US");
+  const T = (x, y, s, o = {}) => `<text x="${r1(x)}" y="${r1(y)}" font-size="${o.size || 22}" font-weight="${o.w || 400}" fill="${o.fill || C.ink}" text-anchor="${o.a || "start"}" font-family="${o.mono ? "IBM Plex Mono" : "IBM Plex Sans"}, sans-serif"${o.op !== undefined ? ` opacity="${r1(o.op * 100) / 100}"` : ""}>${s}</text>`;
+  const R = (x, y, w, h, o = {}) => `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(Math.max(0, w))}" height="${r1(Math.max(0, h))}" rx="${o.rx || 0}" fill="${o.fill || "none"}" stroke="${o.stroke || "none"}" stroke-width="${o.sw || 1.5}"${o.dash ? ` stroke-dasharray="${o.dash}"` : ""}${o.op !== undefined ? ` opacity="${o.op}"` : ""}/>`;
+  const L = (x1, y1, x2, y2, o = {}) => `<path d="M${r1(x1)} ${r1(y1)}L${r1(x2)} ${r1(y2)}" stroke="${o.stroke || C.ink}" stroke-width="${o.sw || 1.5}" fill="none"${o.dash ? ` stroke-dasharray="${o.dash}"` : ""}${o.arrow ? ` marker-end="url(#${o.arrow})"` : ""}${o.op !== undefined ? ` opacity="${o.op}"` : ""} stroke-linecap="round"/>`;
+  const Ci = (x, y, r, o = {}) => `<circle cx="${r1(x)}" cy="${r1(y)}" r="${r1(r)}" fill="${o.fill || "none"}" stroke="${o.stroke || "none"}" stroke-width="${o.sw || 1.5}"${o.op !== undefined ? ` opacity="${o.op}"` : ""}/>`;
+  const P = (d, o = {}) => `<path d="${d}" fill="${o.fill || "none"}" stroke="${o.stroke || "none"}" stroke-width="${o.sw || 1.5}"${o.dash ? ` stroke-dasharray="${o.dash}"` : ""}${o.op !== undefined ? ` opacity="${o.op}"` : ""} stroke-linejoin="round" stroke-linecap="round"/>`;
+  const G = (s, o = {}) => `<g${o.tr ? ` transform="${o.tr}"` : ""}${o.op !== undefined ? ` opacity="${r1(clamp(o.op) * 100) / 100}"` : ""}>${s}</g>`;
+  const DEFS = `<defs>
+    <marker id="aT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C.teal}"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C.rust}"/></marker>
+    <marker id="aK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C.ink}"/></marker>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V8" stroke="#A8A8A8" stroke-width="1.2"/></pattern>
+    <pattern id="hz" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><path d="M0 0V7" stroke="${C.rust}" stroke-width="1.6"/></pattern>
+    <pattern id="sw" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V9" stroke="${C.teal}" stroke-width="1.2"/></pattern>
+  </defs>`;
+
+  // ---------- reusable drawings ----------
+  // side view of the platform: x = left edge, floor y, scale s (px/mm), lift mm, wheel angle
+  function platform(x, fy, s, lift = 0, spin = 0, w = 360) {
+    const W2 = w * s;
+    let o = "";
+    // pinch zone / skirt (between tray top 22 and deck bottom 39+lift)
+    o += R(x + 6 * s, fy - (39 + lift) * s, W2 - 12 * s, (17 + lift) * s, { fill: "url(#hz)", stroke: C.rust, sw: 1, op: lift > 0.5 ? 0.85 : 0.35 });
+    // links (two toggles drawn as X-ish struts)
+    const zt = 35 + lift, zb = 24.5;
+    for (const [px, dir] of [[50, 1], [w - 50, -1]]) {
+      const len = 120, dy = zt - zb, dx = Math.sqrt(Math.max(0, len * len - dy * dy));
+      o += L(x + px * s, fy - zt * s, x + (px + dir * dx) * s, fy - zb * s, { stroke: C.teal, sw: 4 });
+      o += Ci(x + px * s, fy - zt * s, 3.5, { fill: "#fff", stroke: C.teal, sw: 2 });
+      o += Ci(x + (px + dir * dx) * s, fy - zb * s, 3.5, { fill: "#fff", stroke: C.teal, sw: 2 });
+    }
+    o += R(x, fy - 22 * s, W2, 19 * s, { fill: "#E4E6E9", stroke: C.ink, rx: 3 });
+    o += R(x + 5 * s, fy - (47 + lift) * s, W2 - 10 * s, 8 * s, { fill: "#F7F8F9", stroke: C.ink, rx: 2 });
+    for (const cx of [30, w - 30]) {
+      const cxp = x + cx * s, cy = fy - 9 * s;
+      o += Ci(cxp, cy, 9 * s, { fill: C.tealT, stroke: C.teal, sw: 2 });
+      o += L(cxp, cy, cxp + Math.cos(spin) * 8 * s, cy + Math.sin(spin) * 8 * s, { stroke: C.teal, sw: 2 });
+    }
+    return o;
+  }
+  // chest section: x left, floor y, s, raise mm, cut height mm
+  function chest(x, fy, s, raise = 0, cut = 600, D = 480) {
+    const y0 = fy - raise * s;
+    let o = "";
+    const top = y0 - cut * s;
+    let zig = `M${x} ${y0 - 76 * s}V${top}`;
+    for (let i = 1; i <= 10; i++) zig += `L${r1(x + (D * s * i) / 10)} ${r1(top + (i % 2 ? -10 : 10))}`;
+    zig += `V${y0 - 76 * s}Z`;
+    o += P(zig, { fill: C.wood, stroke: C.ink, sw: 2 });
+    o += L(x, y0 - 94 * s, x + D * s, y0 - 94 * s, { stroke: "#C9C1B5", sw: 1.5 });
+    o += L(x, y0 - 320 * s, x + D * s, y0 - 320 * s, { stroke: "#C9C1B5", sw: 1.5 });
+    o += R(x, y0 - 76 * s, 50 * s, 76 * s, { fill: C.woodD, stroke: C.ink, sw: 2 });
+    o += R(x + (D - 50) * s, y0 - 76 * s, 50 * s, 76 * s, { fill: C.woodD, stroke: C.ink, sw: 2 });
+    return o;
+  }
+  const floor = (y, x0 = 40, x1 = W - 40, off = 0) => {
+    let o = L(x0, y, x1, y, { sw: 2 });
+    for (let x = x0 + ((off % 24) + 24) % 24; x < x1; x += 24) o += L(x, y + 2, x - 10, y + 12, { stroke: "#B0B0B0", sw: 1.2 });
+    return o;
+  };
+  function person(x, fy, k = 1, lean = 0, o2 = {}) {
+    const hx = x + lean * 40 * k, hy = fy - 300 * k;
+    let o = Ci(hx, hy, 26 * k, { fill: "#F5E9DF", stroke: "#6F6F6F", sw: 3 });
+    const sh = [hx - lean * 8 * k, hy + 34 * k], hip = [x, fy - 150 * k];
+    o += P(`M${sh[0]} ${sh[1]}L${hip[0]} ${hip[1]}`, { stroke: "#6F6F6F", sw: 10 * k });
+    o += P(`M${hip[0]} ${hip[1]}L${x - 30 * k} ${fy}M${hip[0]} ${hip[1]}L${x + 26 * k} ${fy}`, { stroke: "#6F6F6F", sw: 9 * k });
+    const hand = o2.hand || [sh[0] - 90 * k, sh[1] + 40 * k];
+    o += P(`M${sh[0]} ${sh[1] + 8 * k}L${hand[0]} ${hand[1]}`, { stroke: "#6F6F6F", sw: 8 * k });
+    return o;
+  }
+  const chip = (x, y, text, col = C.teal, bg = C.tealT, op = 1) => {
+    const w = text.length * 10.4 + 26;
+    return G(R(x, y - 24, w, 34, { fill: bg, stroke: col, rx: 17, sw: 2 }) + T(x + w / 2, y - 1, text, { a: "middle", size: 18, w: 600, fill: col, mono: true }), { op });
+  };
+  const bigNum = (x, y, n, label, col, op) => G(T(x, y, n, { size: 54, w: 600, fill: col, mono: true }) + T(x, y + 34, label, { size: 20, fill: C.ink2 }), { op });
+
+  // ---------- scenes ----------
+  const V = window.V;
+  const S = [];
+  const scene = (dur, label, draw, caps) => S.push({ dur, label, draw, caps });
+
+  // 1 · title
+  scene(6, "", (t) => {
+    const u = es(t, 0, 1.2);
+    let o = T(110, 250, "Home Lift &amp; Mover", { size: 76, w: 600, op: u });
+    o += T(112, 304, "A thin powered platform that slides under furniture,", { size: 28, fill: C.ink2, op: es(t, 0.5, 1.6) });
+    o += T(112, 342, "lifts it, and steers it through your home.", { size: 28, fill: C.ink2, op: es(t, 0.5, 1.6) });
+    o += T(112, 420, "Should you prototype it?", { size: 34, w: 600, fill: C.teal, op: es(t, 1.6, 2.6) });
+    o += G(floor(590, 700, 1220) + platform(lerp(1300, 760, es(t, 0.8, 3.2)), 590, 1.2, 40 * es(t, 3.4, 4.6)), {});
+    o += T(112, 480, "Explainer · decision file 2026-11-15 · US launch · USD", { size: 18, fill: C.ink3, mono: true, op: u });
+    return o;
+  }, [[0.3, 6, "An animated walk-through of the engineering, the market and the decision."]]);
+
+  // 2 · problem
+  scene(9, "The problem", (t) => {
+    const s = 0.5, fy = 600, cx = 740;
+    let o = floor(fy);
+    o += G(chest(cx, fy, s, 0, 1000, 480 * 1.0), {});
+    const strain = Math.sin(t * 9) * 3 * es(t, 2, 3);
+    o += person(cx + 480 * s + 120, fy, 1, -0.4 + strain * 0.02, { hand: [cx + 480 * s + 6, fy - 230] });
+    for (let i = 0; i < 3; i++) o += G(L(cx + 480 * s + 190, fy - 330 - i * 16, cx + 480 * s + 214, fy - 340 - i * 16, { stroke: C.rust, sw: 3 }), { op: es(t, 2, 2.6) * (0.5 + 0.5 * Math.sin(t * 6 + i)) });
+    const items = ["60 kg emptied 4-drawer chest", "Living alone, or limited strength", "Today: tip it, wedge sliders under, shove", "Thresholds, carpet and a tight hall turn"];
+    items.forEach((s2, i) => { o += G(Ci(70, 196 + i * 64, 6, { fill: C.teal }) + T(90, 204 + i * 64, s2, { size: 24 }), { op: es(t, 0.6 + i * 1.2, 1.3 + i * 1.2) }); });
+    o += T(70, 130, "Moving one heavy piece, alone", { size: 40, w: 600 });
+    return o;
+  }, [[0, 4.5, "Picture someone living alone who needs to move a 60 kg chest of drawers."], [4.5, 9, "Today that means tipping it, wedging sliders under the feet, and shoving."]]);
+
+  // 3 · how it works (side section)
+  scene(19, "How it works", (t) => {
+    const s = 1.0, fy = 610, cx0 = 430;
+    const steps = [["Insert", 0, 3.5], ["Engage + lift", 3.5, 7.5], ["Drive", 7.5, 12], ["Lower", 12, 14.5], ["Retrieve", 14.5, 18.5]];
+    let o = "";
+    steps.forEach(([n, a, b], i) => {
+      const on = t >= a && t < b, done = t >= b;
+      o += R(60 + i * 232, 70, 216, 46, { fill: on ? C.ink : done ? "#E8E8E8" : C.paper, stroke: C.ink, rx: 0 });
+      o += T(60 + i * 232 + 108, 100, `${i + 1} · ${n}`, { a: "middle", size: 20, w: 600, fill: on ? "#fff" : C.ink });
+    });
+    const ins = es(t, 0.3, 3.2), lift = 31 * es(t, 3.8, 5.6) + 10 * es(t, 5.9, 7.2) - 41 * es(t, 12.2, 14.2);
+    const drive = -300 * es(t, 7.8, 11.8);
+    const out = es(t, 14.7, 17.5);
+    const raise = Math.max(0, lift - 31);
+    const off = drive;
+    o += floor(fy, 40, W - 40, off);
+    const cx = cx0 + off;
+    const px = cx + 60 * s + lerp(560, 0, ins) + lerp(0, 560, out);
+    o += chest(cx, fy, s, raise, 470);
+    o += platform(px, fy, s, lift, (-drive / 9) % (2 * Math.PI));
+    // handle + hand during insert / retrieve
+    const hOp = Math.max(1 - es(t, 3.2, 3.8), es(t, 14.5, 15));
+    o += G(R(px + 360 * s, fy - 16 * s, 230 * s, 8 * s, { fill: "#C9CCD1", stroke: C.ink, rx: 3 }) + P(`M${px + 580 * s} ${fy - 18 * s}c-10 -34 20 -50 44 -38c20 9 18 34 2 40z`, { fill: "#F5E9DF", stroke: "#6F6F6F" }), { op: hOp });
+    // annotations
+    if (t < 3.6) { o += G(L(cx - 30, fy, cx - 30, fy - 76 * s, { stroke: C.rust, dash: "6 4", arrow: "aR" }) + T(cx - 40, fy - 60, "76 mm under the chest (assumed)", { size: 19, fill: C.rust, a: "end" }) + T(cx - 40, fy - 32, "platform is 45 mm tall", { size: 19, fill: C.teal, a: "end" }), { op: es(t, 1.6, 2.4) * (1 - es(t, 3.2, 3.6)) }); }
+    if (t > 3.6 && t < 7.6) o += G(T(cx + 530 * s, fy - 150, `deck rises ${Math.round(lift)} mm`, { size: 26, w: 600, fill: C.teal, mono: true }) + T(cx + 530 * s, fy - 116, lift > 31 ? `feet ${Math.round(raise)} mm off the floor` : "touching the underside at 31 mm", { size: 20, fill: C.ink2 }), { op: es(t, 3.7, 4) });
+    if (t > 7.6 && t < 12) o += G(L(cx + 240, 300, cx + 120, 300, { stroke: C.teal, sw: 4, arrow: "aT" }) + T(cx + 250, 307, "0.3 m/s, hold-to-run pendant", { size: 22, fill: C.teal, w: 600 }), { op: es(t, 7.7, 8.1) });
+    if (t > 12 && t < 14.6) o += G(T(cx + 530 * s, fy - 150, "lowers until the feet carry it", { size: 22, fill: C.ink2 }), { op: es(t, 12.1, 12.4) });
+    return o;
+  }, [[0, 3.6, "Step 1: push the 45 mm platform under the chest with a handle. No kneeling."], [3.6, 7.6, "Step 2: the deck rises to touch, then lifts the feet about 10 mm."], [7.6, 12, "Step 3: drive it with a hold-to-run pendant. Let go and everything stops."], [12, 19, "Step 4: lower it until the feet carry the weight, then pull the platform back out."]]);
+
+  // 4 · lift mechanism
+  scene(12, "The lift", (t) => {
+    const ox = 250, fy = 520, s = 2.6;
+    const th = lerp(5, 30, es(t, 1, 5) - es(t, 9.5, 11.5) * 0);
+    const rad = (th * Math.PI) / 180;
+    const dz = 120 * Math.sin(rad), dx = 120 * Math.cos(rad);
+    const lift = (120 * Math.sin(rad) - 120 * Math.sin((5 * Math.PI) / 180));
+    let o = "";
+    o += R(ox - 20, fy - 6, 200 * s + 40, 12, { fill: "url(#hatch)", stroke: C.ink });
+    // screw
+    o += R(ox, fy - 20, 200 * s, 10, { fill: C.tealT, stroke: C.teal });
+    for (let x = 0; x < 200 * s; x += 9) o += L(ox + x, fy - 20, ox + x + 5, fy - 10, { stroke: C.teal, sw: 1 });
+    const nx = ox + (40 + dx) * s, topx = ox + 40 * s;
+    o += R(nx - 16, fy - 34, 32, 38, { fill: "#E4E6E9", stroke: C.ink, rx: 4 });
+    const zb = fy - 24, zt = fy - 24 - dz * s - 12;
+    o += L(nx, zb, topx, zt, { stroke: C.teal, sw: 9 });
+    o += Ci(nx, zb, 7, { fill: "#fff", stroke: C.teal, sw: 3 }) + Ci(topx, zt, 7, { fill: "#fff", stroke: C.teal, sw: 3 });
+    o += R(ox - 10, zt - 30, 200 * s + 20, 24, { fill: "#F7F8F9", stroke: C.ink, rx: 4 });
+    o += T(ox + 100 * s, zt - 40, "deck", { a: "middle", size: 20, fill: C.ink2 });
+    o += T(ox + 210 * s, fy - 4, "lead screw", { size: 20, fill: C.teal });
+    // dims
+    o += L(nx, fy + 40, ox + (40 + 119.5) * s, fy + 40, { stroke: C.teal, sw: 3, arrow: "aT" });
+    o += T(nx, fy + 74, `nut travels ${(119.5 - dx).toFixed(1)} mm`, { size: 22, mono: true, fill: C.teal });
+    o += L(ox - 50, fy - 24 - 10.5 * s - 12, ox - 50, zt, { stroke: C.teal, sw: 3, arrow: "aT" });
+    o += T(ox - 60, (zt + fy - 60) / 2, `+${lift.toFixed(1)} mm`, { size: 26, w: 600, mono: true, fill: C.teal, a: "end" });
+    o += T(820, 200, "Toggle links", { size: 34, w: 600 });
+    const lines = ["Small nut movement, big lift:", "15.6 mm of travel → 49.5 mm of rise.", "Weakest near flat, before it carries load.", "Self-locking screw: if power dies,", "the load stays up. A hand crank lowers it."];
+    lines.forEach((l, i) => (o += T(820, 250 + i * 40, l, { size: 23, fill: i === 3 || i === 4 ? C.ink : C.ink2, op: es(t, 1 + i * 1.3, 1.8 + i * 1.3) })));
+    o += G(chip(820, 500, "motor sets the limit: 61 mm clearance min.", C.rust, C.rustT), { op: es(t, 8.5, 9.3) });
+    return o;
+  }, [[0, 5, "Inside, one motor turns a screw that pulls two toggle links upright."], [5, 12, "The screw self-locks, so a power cut never drops the load."]]);
+
+  // 5 · limits
+  scene(17, "The limits", (t) => {
+    let o = T(70, 120, "Where it stops working", { size: 40, w: 600 });
+    const panel = (i, title, a) => G(R(60 + i * 395, 160, 375, 400, { fill: C.paper, stroke: C.rule }) + T(80 + i * 395, 200, title, { size: 22, w: 600 }), { op: es(t, a, a + 0.6) });
+    // a) clearance
+    o += panel(0, "1 · Needs legs: ≥ 61 mm under", 0.2);
+    {
+      const fy = 470;
+      o += G(L(80, fy, 420, fy, { sw: 2 }) + R(95, fy - 210, 140, 180, { fill: C.wood, stroke: C.ink, sw: 2 }) + R(95, fy - 30, 18, 30, { fill: C.woodD, stroke: C.ink }) + R(217, fy - 30, 18, 30, { fill: C.woodD, stroke: C.ink }) + R(118, fy - 20, 94, 16, { fill: "#E4E6E9", stroke: C.ink }) + T(165, fy + 36, "legged ✓", { a: "middle", size: 20, fill: C.good, w: 600 }), { op: es(t, 0.6, 1.2) });
+      o += G(R(270, fy - 210, 140, 210, { fill: C.wood, stroke: C.ink, sw: 2 }) + R(290, fy - 4, 100, 4, { fill: C.rust }) + T(340, fy + 36, "flush base ✗", { a: "middle", size: 20, fill: C.rust, w: 600 }), { op: es(t, 1.4, 2) });
+      o += G(T(80, 545, "Flush bases need a lever or a helper.", { size: 18, fill: C.ink2 }), { op: es(t, 2.2, 2.8) });
+    }
+    // b) sills
+    o += panel(1, "2 · Sills over ~2 mm need a ramp", 3.2);
+    {
+      const bx = 475, fy = 440, r = 19 * 1.9, h = 6 * 1.9, sx = 680;
+      const ramp = t > 9;
+      const push = es(t, 4, 6.5);
+      let wx = lerp(bx + 40, sx - Math.sqrt(r * r - (r - h) * (r - h)), push);
+      let wy = fy - r;
+      const stall = !ramp && push >= 1;
+      if (ramp) { const u = es(t, 9.4, 12); wx = lerp(sx - 60, sx + 90, u); const lift2 = clamp((wx - (sx - 50)) / 50) * h; wy = fy - r - lift2; }
+      o += G(L(470, fy, sx, fy, { sw: 2 }) + R(sx, fy - h, 140, h, { fill: "#C9CCD1", stroke: C.ink }) + L(sx + 140, fy, 835, fy, { sw: 2 }) + (ramp ? P(`M${sx - 50} ${fy}L${sx} ${fy - h}L${sx} ${fy}Z`, { fill: C.tealT, stroke: C.teal }) : "") + Ci(wx, wy, r, { fill: C.tealT, stroke: C.teal, sw: 3 }) + Ci(wx, wy, 4, { fill: C.ink }) + L(wx - r - 70, wy, wx - r - 8, wy, { stroke: stall ? C.rust : C.teal, sw: 4, arrow: stall ? "aR" : "aT" }), { op: es(t, 3.6, 4.2) });
+      o += G(T(475, 500, "38 mm wheel, 6 mm sill:", { size: 19, fill: C.ink2 }) + T(475, 528, "needs 1.07× its load to climb → stalls", { size: 19, fill: C.rust, w: 600 }), { op: es(t, 6.5, 7.2) * (1 - es(t, 9, 9.3)) });
+      o += G(T(475, 515, "With the 13 mm ramp: rolls over", { size: 19, fill: C.good, w: 600 }), { op: es(t, 9.4, 9.8) });
+    }
+    // c) carpet + tipping
+    o += panel(2, "3 · Hard floors, gentle stops", 12.2);
+    {
+      const x = 870;
+      o += G(T(x, 250, "Carpet ✗", { size: 26, w: 600, fill: C.rust }) + T(x, 282, "rolling force 21 N → 63 N,", { size: 19, fill: C.ink2 }) + T(x, 308, "ball transfers sink in", { size: 19, fill: C.ink2 }), { op: es(t, 12.8, 13.4) });
+      const bw = 300;
+      o += G(T(x, 350, "Tip-over vs braking", { size: 22, w: 600 }) + R(x, 390, bw, 26, { fill: "#EEE", stroke: C.rule }) + R(x, 390, bw * (0.1 / 0.5), 26, { fill: C.teal }) + L(x + bw * 0.8, 382, x + bw * 0.8, 424, { stroke: C.rust, sw: 3 }) + T(x, 448, "brakes at 0.10 g", { size: 18, fill: C.teal, mono: true }) + T(x + bw * 0.8, 376, "tips at 0.40 g", { size: 18, fill: C.rust, mono: true, a: "middle" }) + T(x, 500, "4× margin on stops; a hard jolt", { size: 18, fill: C.ink2 }) + T(x, 524, "at a sill eats most of it.", { size: 18, fill: C.ink2 }), { op: es(t, 14, 14.6) });
+    }
+    return o;
+  }, [[0, 3.2, "First limit: it only fits under items with legs, at least 61 mm of clearance."], [3.2, 9.2, "Second: wheels small enough to slide under can’t climb a 6 mm sill."], [9.2, 12.2, "So a little ramp goes at every sill. That’s a bend-down task for the user."], [12.2, 17, "Third: hard floors only, and stops are kept gentle so the chest can’t tip."]]);
+
+  // 6 · tightest turn (plan view)
+  scene(10, "The tightest turn", (t) => {
+    const s = 0.2, ox = 560, oy = 600;
+    const X = (x) => ox + x * s, Y = (y) => oy - y * s;
+    const hall = 914, door = 737, wall = 140;
+    let o = "";
+    o += R(X(-1700), Y(0), 3500 * s, wall * s, { fill: "url(#hatch)", stroke: C.ink });
+    o += R(X(-1700), Y(hall + wall), 1700 * s, wall * s, { fill: "url(#hatch)", stroke: C.ink });
+    o += R(X(door), Y(hall + wall), (1800 - door) * s, wall * s, { fill: "url(#hatch)", stroke: C.ink });
+    o += T(X(-1650), Y(hall / 2) + 8, "36 in hallway", { size: 20, fill: C.ink2 });
+    o += T(X(-1650), Y(hall + wall + 120), "Bedroom", { size: 20, fill: C.ink2 });
+    o += T(X(-40), Y(hall + wall + 70), "32 in door", { size: 18, fill: C.ink2, a: "end" });
+    const pts = V.turn;
+    const all = [[pts[0][0] - 700, pts[0][1], 0], ...pts, [pts[pts.length - 1][0], pts[pts.length - 1][1] + 500, 90]];
+    const u = es(t, 0.6, 7.5);
+    const f = u * (all.length - 1), i = Math.min(all.length - 2, Math.floor(f)), w = f - i;
+    const cur = [0, 1, 2].map((k) => lerp(all[i][k], all[i + 1][k], w));
+    const rect = (cx, cy, Lx, Dy, ph) => { const c = Math.cos(ph * Math.PI / 180), sn = Math.sin(ph * Math.PI / 180); return "M" + [[-Lx / 2, -Dy / 2], [Lx / 2, -Dy / 2], [Lx / 2, Dy / 2], [-Lx / 2, Dy / 2]].map(([a, b]) => `${r1(X(cx + a * c - b * sn))} ${r1(Y(cy + a * sn + b * c))}`).join("L") + "Z"; };
+    let swept = "";
+    for (let k = 0; k <= i; k += 2) swept += rect(all[k][0], all[k][1], 1100, 480, all[k][2]);
+    o += `<path d="${swept}" fill="url(#sw)" opacity="0.9"/>`;
+    o += P(rect(cur[0], cur[1], 1100, 480, cur[2]), { fill: "rgba(244,241,236,0.95)", stroke: C.ink, sw: 2 });
+    o += P(rect(cur[0], cur[1], 700, 360, cur[2]), { stroke: C.teal, sw: 2, dash: "8 4" });
+    o += T(60, 110, "Will it make the turn?", { size: 34, w: 600 });
+    o += G(T(60, 152, "Hatched = everything the chest sweeps.", { size: 21, fill: C.ink2 }) + T(60, 182, "The platform (dashed) sits inside it.", { size: 21, fill: C.ink2 }), { op: es(t, 1, 1.6) });
+    o += G(chip(940, 150, `fits, ${V.minClear} mm to spare`, C.good, "#DEFBE6") + T(940, 196, `Longest that turns: ≈ ${(V.longest / 1000).toFixed(2)} m`, { size: 18 }), { op: es(t, 7.6, 8.2) });
+    return o;
+  }, [[0, 6, "The tightest turn: a 36-inch hall into a 32-inch bedroom door."], [6, 10, `The 1.1 m chest makes it with about ${V.minClear} mm to spare.`]]);
+
+  // 7 · market
+  scene(14, "The market", (t) => {
+    let o = T(70, 110, "What people can buy today (US, listings 2026-11-15)", { size: 32, w: 600 });
+    const rows = [["Super Sliders, 4-pack", 14, 14], ["Lever + 4 sliders kit", 29, 29], ["Harper appliance hand truck", 146, 146], ["Dayton desk mover (manual lift-and-roll)", 492, 492], ["Airsled air-bearing mover (pro)", 530, 842], ["Mirfee powered stair dolly", 903, 903], ["P-1 platform, estimated retail", 650, 900]];
+    const x0 = 520, sc = 0.66;
+    rows.forEach(([n, lo, hi], i) => {
+      const y = 170 + i * 58, us = i === rows.length - 1;
+      const g = es(t, 0.5 + i * 0.9, 1.4 + i * 0.9);
+      o += G(T(x0 - 20, y + 24, n, { a: "end", size: 21, w: us ? 600 : 400, fill: us ? C.teal : C.ink }), { op: g });
+      if (lo === hi) o += R(x0, y + 4, lo * sc * g, 30, { fill: us ? C.teal : "#A8B0BA" });
+      else { o += R(x0, y + 4, lo * sc * g, 30, { fill: us ? C.tealT : "#A8B0BA", stroke: us ? C.teal : "none", dash: us ? "6 4" : "" }); o += R(x0 + lo * sc, y + 4, (hi - lo) * sc * g, 30, { fill: us ? "url(#sw)" : "#D0D5DB", stroke: us ? C.teal : "none" }); }
+      o += G(T(x0 + hi * sc * g + 12, y + 26, lo === hi ? `$${lo}` : `$${lo}–${hi}`, { size: 20, mono: true, w: 600, fill: us ? C.teal : C.ink }), { op: g });
+    });
+    o += G(chip(70, 600, "No consumer powered under-furniture mover found", C.violet, C.violetT), { op: es(t, 8, 8.6) });
+    o += G(chip(720, 600, "Strongest rival: the $29 lever kit", C.rust, C.rustT), { op: es(t, 10, 10.6) });
+    return o;
+  }, [[0, 6.5, "Prices run from $14 sliders and a $29 lever kit to pro movers at $500–900."], [6.5, 10, "No consumer powered mover like this turned up: an open niche, or thin demand."], [10, 14, "The real competitor is the $29 lever kit. It works on carpet and needs no charging."]]);
+
+  // 8 · costs
+  scene(12, "What it costs", (t) => {
+    let o = T(70, 120, "What it would cost you", { size: 40, w: 600 });
+    const card = (i, a, title, n, l1, l2, col) => G(R(70 + i * 385, 170, 360, 380, { fill: C.paper, stroke: C.rule }) + T(94 + i * 385, 214, title, { size: 21, w: 600, fill: C.ink2 }) + T(94 + i * 385, 296, n, { size: 33, w: 600, mono: true, fill: col }) + T(94 + i * 385, 350, l1, { size: 20, fill: C.ink2 }) + T(94 + i * 385, 380, l2, { size: 20, fill: C.ink2 }), { op: es(t, a, a + 0.7) });
+    o += card(0, 0.4, "Tested prototype", V.proto, `$${fmt(V.protoCash)} parts (you buy)`, `+ ${V.protoLab} paid engineers`, C.teal);
+    o += card(1, 2.6, "Pilot · 100 units", V.p100, `landed ${V.l100} per unit`, "incl. certification", C.blue);
+    o += card(2, 4.8, "First run · 1,000 units", V.p1000, `landed ${V.l1000} per unit`, "→ retail ≈ $650–900", C.violet);
+    o += G(T(70, 595, "The biggest swing: whether a test lab treats it as a “robot” (UL 3300) or just an appliance.", { size: 21, fill: C.rust }), { op: es(t, 7.5, 8.2) });
+    return o;
+  }, [[0, 2.6, `A tested prototype: about ${V.proto}, mostly paid engineering help.`], [2.6, 7.5, `At 1,000 units each costs ${V.l1000} landed, so it must retail near $650–900.`], [7.5, 12, "Certification is the wild card: robot or appliance changes the bill a lot."]]);
+
+  // 9 · verdict
+  scene(14, "The verdict", (t) => {
+    let o = T(70, 120, "Verdict:", { size: 40, w: 600 }) + T(250, 120, "narrow, then decide", { size: 40, w: 600, fill: C.mid || "#8E6A00" });
+    o += G(R(70, 160, 1140, 92, { fill: C.paper, stroke: C.ink, sw: 2 }) + T(94, 198, "Next experiment · about $82 + a therapist’s time · 3 weeks", { size: 22, w: 600 }) + T(94, 232, "3 people who live alone try the $29 lever-and-slider kit on a real chest. Measure where they get stuck.", { size: 20, fill: C.ink2 }), { op: es(t, 0.6, 1.3) });
+    const bx = 120, by = 300;
+    const box = (x, y, w, h, title, sub, col, bg, a) => G(R(x, y, w, h, { fill: bg, stroke: col, sw: 2 }) + T(x + 18, y + 36, title, { size: 22, w: 600, fill: col }) + T(x + 18, y + 68, sub, { size: 19, fill: C.ink2 }), { op: es(t, a, a + 0.6) });
+    o += box(470, 290, 340, 84, "Where do they get stuck?", "watch, measure force and time", C.ink, C.paper, 2);
+    const branch = (x, label, title, sub, col, bg, a) => G(L(640, 374, x + 170, 418, { stroke: col, sw: 2.5, arrow: col === C.rust ? "aR" : col === C.teal ? "aT" : "aK" }) + T(x + 170, 444, label, { size: 18, fill: col, a: "middle", w: 600 }), { op: es(t, a, a + 0.5) }) + box(x, 458, 340, 110, title, sub, col, bg, a + 0.3);
+    o += branch(60, "only tipping it", "Build a lift-only wedge", "no drive: far cheaper", C.teal, C.tealT, 4);
+    o += branch(470, "pushing or sills", "Prototype P-1", "the full powered platform", C.blue, C.blueT, 6);
+    o += branch(880, "they finish easily", "Pause", "the $29 kit already works", C.rust, C.rustT, 8);
+    return o;
+  }, [[0, 4, "My verdict: narrow it, then decide. First run a cheap test with three real users."], [4, 8, "If they only struggle to tip the chest, build a simple lift-only wedge instead."], [8, 14, "If they fail at pushing or sills, prototype it. If the $29 kit works, pause."]]);
+
+  // 10 · end
+  scene(5, "", (t) => {
+    let o = T(640, 300, "Home Lift &amp; Mover", { size: 54, w: 600, a: "middle", op: es(t, 0, 0.8) });
+    o += T(640, 356, "Narrow, then decide. Next step: a $82 user test.", { size: 28, a: "middle", fill: C.teal, op: es(t, 0.5, 1.2) });
+    o += T(640, 420, "Full drawings, sources and calculations are in the decision file.", { size: 22, a: "middle", fill: C.ink2, op: es(t, 1, 1.6) });
+    return o;
+  }, []);
+
+  const total = S.reduce((s, x) => s + x.dur, 0);
+  window.TOTAL = total;
+  window.renderAt = (tg) => {
+    let acc = 0, idx = 0;
+    while (idx < S.length - 1 && tg >= acc + S[idx].dur) { acc += S[idx].dur; idx++; }
+    const sc = S[idx], t = tg - acc;
+    const fade = Math.min(es(t, 0, 0.45), 1 - es(t, sc.dur - 0.4, sc.dur));
+    let o = `${DEFS}<rect width="${W}" height="${H}" fill="${C.page}"/><rect x="24" y="24" width="${W - 48}" height="${H - 48}" fill="${C.paper}" stroke="${C.rule}"/>`;
+    o += `<g opacity="${r1(fade * 100) / 100}">${sc.draw(t)}</g>`;
+    if (sc.label) o += T(W - 50, 58, `${String(idx).padStart(2, "0")} · ${sc.label.toUpperCase()}`, { size: 15, a: "end", fill: C.ink3, mono: true });
+    const cap = sc.caps.find(([a, b]) => t >= a && t < b);
+    if (cap) {
+      const op = Math.min(es(t, cap[0], cap[0] + 0.3), 1 - es(t, cap[1] - 0.25, cap[1]));
+      o += G(`<rect x="24" y="${H - 96}" width="${W - 48}" height="72" fill="${C.ink}"/>` + T(W / 2, H - 50, cap[2], { size: 24, a: "middle", fill: "#fff", w: 500 }), { op });
+    }
+    // progress bar
+    o += `<rect x="24" y="${H - 27}" width="${r1((W - 48) * (tg / total))}" height="3" fill="${C.teal}"/>`;
+    document.getElementById("v").innerHTML = o;
+  };
+})();

@@ -58,3 +58,13 @@ The figures were checked by screenshot review and `test/check.cjs`. They have no
 - **estimate**: an estimate.
 
 The manufacturer pages for Milwaukee and Bosch could not be loaded during research. Their specs come from retailer listings.
+
+## Explainer video
+
+`video/home-lift-mover-explainer.mp4` is a 2-minute captioned explainer for the mover. To rebuild it:
+
+```sh
+node build.mjs && node video/build-video.mjs && NODE_PATH=$(npm root -g) node video/render.cjs
+```
+
+The scenes are in `video/scenes.js`. `video/explainer.html` plays the animation live in a browser.
