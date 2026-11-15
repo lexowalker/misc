@@ -17,7 +17,15 @@ const path = require("path");
   } else {
     const out = process.argv[2] || path.join(__dirname, "home-lift-mover-explainer.mp4");
     const fps = +(process.argv[3] || 30);
-    const ff = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(fps), "-i", "-", "-c:v", "libx264", "-preset", "slow", "-crf", "22", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
+    // voiceover.mp3 next to this script is muxed in when present
+    const audio = path.join(__dirname, "voiceover.mp3");
+    const withAudio = require("fs").existsSync(audio) && !process.env.NO_AUDIO;
+    const args = ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(fps), "-i", "-"];
+    if (withAudio) args.push("-i", audio);
+    args.push("-c:v", "libx264", "-preset", "slow", "-crf", "22", "-pix_fmt", "yuv420p");
+    if (withAudio) args.push("-c:a", "aac", "-b:a", "160k", "-af", "apad");
+    args.push("-t", String(total), "-movflags", "+faststart", out);
+    const ff = spawn("ffmpeg", args, { stdio: ["pipe", "inherit", "inherit"] });
     const n = Math.round(total * fps);
     for (let i = 0; i < n; i++) {
       await p.evaluate((t) => renderAt(t), i / fps);

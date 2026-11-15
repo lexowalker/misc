@@ -61,7 +61,7 @@ The manufacturer pages for Milwaukee and Bosch could not be loaded during resear
 
 ## Explainer video
 
-`video/home-lift-mover-explainer.mp4` is a 2-minute captioned explainer for the mover. To rebuild it:
+`video/home-lift-mover-explainer.mp4` is a 3-minute narrated explainer for the mover. The voiceover (`video/voiceover.mp3`) was generated with ElevenLabs (voice: Ryan, American documentary narrator). `video/voiceover-words.json` is its word-timestamp transcript, which sets each scene's length, the cue points that pin animations to the words, and the subtitles. Delete those two files to get the silent, captioned cut. To rebuild:
 
 ```sh
 node build.mjs && node video/build-video.mjs && NODE_PATH=$(npm root -g) node video/render.cjs
