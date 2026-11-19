@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tractatus Expedition</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A guided expedition through Wittgenstein's Tractatus Logico-Philosophicus: the full 1922 text, plain explanations, and interactive instruments.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,400&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="cosmos" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<div id="labels" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="brand" href="#s0">Tractatus <span>Logico-Philosophicus</span></a>
+  <nav class="rail" id="rail" aria-label="Stations"></nav>
+  <div class="tools">
+    <button type="button" id="btn-de" aria-pressed="false" title="Show the German original under each quotation">Deutsch</button>
+    <button type="button" id="btn-atlas" aria-pressed="false" title="Open the map of all 526 remarks">Atlas</button>
+  </div>
+</header>
+
+<main id="journey">
+
+<!-- ═══════════════════════════ DEPARTURE ═══════════════════════════ -->
+<section class="stage" id="s0" data-stage="0" data-name="Departure">
+  <header class="arrival opening">
+    <p class="coord">Ludwig Wittgenstein · 1921 · 526 numbered remarks</p>
+    <h1><span>Tractatus</span> <span>Logico-</span><span>Philosophicus</span></h1>
+    <p class="lede">A guided expedition to the limit of what can be said.</p>
+    <blockquote class="epigraph">
+      <p>What can be said at all can be said clearly; and whereof one cannot speak thereof one must be silent.</p>
+      <footer>Wittgenstein, from the preface</footer>
+    </blockquote>
+    <p class="hint">Scroll to begin <span aria-hidden="true">↓</span></p>
+  </header>
+
+  <div class="body">
+    <h3>The book</h3>
+    <p>Ludwig Wittgenstein wrote this book while he was a soldier in the First World War. He completed it in 1918. It appeared in German in 1921 and in English in 1922. It has about 75 pages.</p>
+    <p>The book has one aim. It tries to find the limit of what language can say. Wittgenstein states the aim in his preface:</p>
+    <blockquote class="w plainquote">
+      <div class="wt"><p>The book will, therefore, draw a limit to thinking, or rather—not to thinking, but to the expression of thoughts; for, in order to draw a limit to thinking we should have to be able to think both sides of this limit (we should therefore have to be able to think what cannot be thought).</p>
+      <p>The limit can, therefore, only be drawn in language and what lies on the other side of the limit will be simply nonsense.</p></div>
+    </blockquote>
+    <p>The method is unusual. The book does not argue in chapters. It gives 526 short remarks. Some are one line long. Each remark has a number, and the number gives its place in a strict order.</p>
+
+    <h3>How the numbers work</h3>
+    <p>Seven remarks have whole numbers, 1 to 7. They are the main propositions. Remark 2.1 is a comment on remark 2. Remark 2.11 is a comment on 2.1. Each added digit goes one level deeper. Wittgenstein explains this in his only footnote to the main text:</p>
+    <blockquote class="w plainquote"><div class="wt" id="footnote-1"></div></blockquote>
+    <p>Select a number. You see the chain of remarks that it hangs on.</p>
+    <div class="lab" data-lab="numbers"></div>
+    <aside class="r"><p>Wittgenstein does not explain the zeros in numbers such as 2.01. Most readers take 2.01 to be a comment on 2 that has less weight than 2.1, or that prepares it.</p></aside>
+
+    <h3>The map</h3>
+    <p>In this guide the book is also a place. Each remark is one star. Each star is attached to the remark that it comments on. At this moment you see a cloud of points without clear order. As you read, the connections appear, one station after another.</p>
+    <p>The <button type="button" class="linklike" data-open-atlas>Atlas</button> shows the full map at any time. There you can read all 526 remarks, in English and in German.</p>
+
+    <h3>Three voices</h3>
+    <p>The guide uses three voices. Each has its own typeface, so that you always know who speaks.</p>
+    <blockquote class="w" data-n="1.2"></blockquote>
+    <p><strong>This is Wittgenstein.</strong> His text is set like the one above, with his number in the margin. Select a number to see the remark in its place in the book.</p>
+    <p><strong>This is the guide.</strong> It explains the text in plain words. It uses short sentences on purpose. A dotted line marks a <span class="t" data-t="proposition">technical term</span>. Select the term to see its definition.</p>
+    <aside class="r"><p><strong>This marks an interpretation.</strong> Scholars disagree about much of this book. Where the guide goes beyond what the text says, it tells you.</p></aside>
+    <aside class="tn"><p><strong>This marks a note on translation.</strong> The English text is the first translation, from 1922. It carries the name of C.&nbsp;K.&nbsp;Ogden. Frank Ramsey, then a student, did most of the work, and Wittgenstein corrected it. A later translation (Pears and McGuinness, 1961) uses different English words for some key terms. The guide tells you where this matters.</p></aside>
+
+    <h3>The route</h3>
+    <ol class="route">
+      <li><a href="#s1"><b>1</b><span>The world</span><i>What there is: facts.</i></a></li>
+      <li><a href="#s2"><b>2</b><span>Facts and pictures</span><i>What facts are made of. How one fact can show another.</i></a></li>
+      <li><a href="#s3"><b>3</b><span>Thought</span><i>A thought is a logical picture. How it appears in signs.</i></a></li>
+      <li><a href="#s4"><b>4</b><span>Language</span><i>What a proposition can say, and what it can only show.</i></a></li>
+      <li><a href="#s5"><b>5</b><span>Logic</span><i>How all propositions are built from the simplest ones.</i></a></li>
+      <li><a href="#s6"><b>6</b><span>The limit</span><i>The one form of all propositions, and what falls outside it.</i></a></li>
+      <li><a href="#s7"><b>7</b><span>Silence</span><i></i></a></li>
+    </ol>
+    <p>One warning before departure. Near the end, the book says that its own sentences are nonsense (<a class="ref" data-n="6.54">6.54</a>). This is not a slip. Keep it in mind during the whole journey. We return to it at the end.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 1 ═══════════════════════════ -->
+<section class="stage" id="s1" data-stage="1" data-name="The world">
+  <header class="arrival">
+    <p class="coord">Station 1 · Remarks 1 – 1.21</p>
+    <div class="numeral" aria-hidden="true">1</div>
+    <h2 class="main" data-main="1"></h2>
+    <p class="lede">The book starts with the largest subject there is: everything. Its first step is to say what kind of “everything” the world is.</p>
+  </header>
+  <div class="body">
+    <p>“What is the case” means: what is so. It rains. The lamp is on the table. Each of these is a <span class="t" data-t="fact">fact</span>.</p>
+    <blockquote class="w" data-n="1.1"></blockquote>
+    <p>This is the first surprise. We usually think that the world is a very large collection of things: stars, tables, people. Wittgenstein says that this is wrong. A list of things does not give you a world.</p>
+    <p>Here is an example. A room contains a table, a lamp, and a book. Make a list: table, lamp, book. The list does not tell you if the book is on the table or under it. It does not tell you if the lamp is on. Two different rooms can have the same list. The rooms differ in how the things stand to one another. Those are facts.</p>
+    <blockquote class="w" data-n="1.11"></blockquote>
+    <blockquote class="w" data-n="1.12"></blockquote>
+    <p>A full description of the world has two parts. The first part is all the facts. The second part is the information that these are all. With both parts you also know everything that is <em>not</em> the case. If the list is complete and “the lamp is on” is not in it, then the lamp is off.</p>
+    <blockquote class="w" data-n="1.13"></blockquote>
+    <p>Think of every way that things could be. Wittgenstein calls this field of possibilities <span class="t" data-t="logical-space">logical space</span>. The actual world is one selection from it: the possibilities that are real.</p>
+    <p>This is the central image of the guide. The dark field around you stands for logical space. A lit point stands for a fact.</p>
+    <blockquote class="w" data-n="1.2"></blockquote>
+    <blockquote class="w" data-n="1.21"></blockquote>
+    <p>Facts come apart cleanly. You can change one and leave all the others as they are. At the next station Wittgenstein limits this claim to the simplest facts (<a class="ref" data-n="2.061">2.061</a>). Try it with three of them.</p>
+
+    <div class="lab" data-lab="space"></div>
+
+    <aside class="r"><p>Why does the book begin with the world, and not with language? Many readers think that the order of discovery was the opposite. Wittgenstein first asked how a sentence can say something. Then he asked what the world must be like so that sentences are possible. On this reading, the first pages are a result and not a foundation. The text does not tell you which way to read it.</p></aside>
+
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>The world is what is the case.</li>
+        <li>It consists of facts, not of things.</li>
+        <li>Facts have a place in a space of possibilities.</li>
+        <li>A complete list of facts also fixes what is not the case.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 2 ═══════════════════════════ -->
+<section class="stage" id="s2" data-stage="2" data-name="Facts and pictures">
+  <header class="arrival">
+    <p class="coord">Station 2 · Remarks 2 – 2.225</p>
+    <div class="numeral" aria-hidden="true">2</div>
+    <h2 class="main" data-main="2"></h2>
+    <p class="lede">Proposition 2 goes down to the smallest parts of the world. Then it makes the step on which the whole book depends. It says what a picture is.</p>
+  </header>
+  <div class="body">
+    <h3>Atomic facts and objects</h3>
+    <aside class="tn"><p><em>Atomic fact</em> is Ogden's word for the German <em lang="de">Sachverhalt</em>. The later translation says <em>state of affairs</em>. It means the simplest possible fact: a fact that has no smaller facts as parts. Be careful. Ogden uses “state of affairs” for a different German word, <em lang="de">Sachlage</em>, which means any possible situation, simple or complex.</p></aside>
+    <blockquote class="w" data-n="2.01"></blockquote>
+    <p>An <span class="t" data-t="atomic-fact">atomic fact</span> is a number of objects that are joined together. “<span class="t" data-t="object">Object</span>” is also a technical term. It does not mean a table or a star.</p>
+    <blockquote class="w" data-n="2.02"></blockquote>
+    <blockquote class="w" data-n="2.0271"></blockquote>
+    <p>An object is simple. It has no parts. A table has parts, so a table is not an object in this sense. Objects are the points where analysis stops. They are the same in every possible world. Only their arrangement changes. Wittgenstein calls the totality of objects the <span class="t" data-t="substance">substance</span> of the world.</p>
+    <blockquote class="w" data-n="2.03"></blockquote>
+    <p>Nothing additional holds the objects together. There is no glue between two links of a chain. The links hold one another.</p>
+    <blockquote class="w" data-n="2.0123" data-p="1"></blockquote>
+    <blockquote class="w" data-n="2.0141"></blockquote>
+    <p>Each object brings its possibilities with it. To know an object is to know all the atomic facts in which it could occur. This range of possibilities is the <span class="t" data-t="form">form</span> of the object.</p>
+    <p>A comparison (it is not Wittgenstein's): you know what a bishop in chess is when you know all the moves that it can make. You do not need to know where it is on the board now.</p>
+    <p>Wittgenstein gives no example of an object and no example of an atomic fact. This is deliberate. He does not claim that he has found them. He claims that logic requires them.</p>
+
+    <details class="deeper">
+      <summary>Why must there be simple objects?</summary>
+      <blockquote class="w" data-n="2.0211"></blockquote>
+      <blockquote class="w" data-n="2.0212"></blockquote>
+      <p>This is one of the hardest steps in the book. The text gives the argument in two lines.</p>
+      <aside class="r">
+        <p>Here is a common way to rebuild it. Take a sentence about a complex thing: “The broom is in the corner.” A broom is a stick that is attached to a brush. If the stick and the brush come apart, there is no broom, and the sentence is about nothing. So the sentence has sense only if another sentence is true: “The stick is attached to the brush.”</p>
+        <p>Now suppose that everything is complex in this way, without end. Then each sentence has sense only if a second sentence is true, and the second only if a third is true. We could never know that a sentence has sense before we know facts about the world.</p>
+        <p>But we do understand a sentence before we know if it is true. So the chain must stop. It stops at names for simple objects. A simple object has no parts that can come apart.</p>
+        <p>The broom is Wittgenstein's own example, from his later book <cite>Philosophical Investigations</cite>. There he uses it to criticize this argument.</p>
+      </aside>
+    </details>
+
+    <blockquote class="w" data-n="2.04"></blockquote>
+    <blockquote class="w" data-n="2.05"></blockquote>
+    <blockquote class="w" data-n="2.061"></blockquote>
+    <blockquote class="w" data-n="2.062"></blockquote>
+    <p>Now the image from Station 1 is exact. The world is all the atomic facts that exist. The list is complete, so it also fixes which atomic facts do not exist. Atomic facts are independent of one another. If you know one, you can conclude nothing about a second.</p>
+    <p>This is why three atomic facts give eight possible worlds, and why <i class="v">n</i> atomic facts give 2<sup><i class="v">n</i></sup>.</p>
+
+    <h3>Pictures</h3>
+    <blockquote class="w" data-n="2.1"></blockquote>
+    <blockquote class="w" data-n="2.12"></blockquote>
+    <p>Here the book turns from the world to the way we represent it. The German word <em lang="de">Bild</em> means <span class="t" data-t="picture">picture</span>, and it also means model. In a notebook from 1914 Wittgenstein mentions a court in Paris. There a road accident was shown to the judges with toy cars and dolls.</p>
+    <p>A model can show an accident because of three things.</p>
+    <blockquote class="w" data-n="2.131"></blockquote>
+    <p><strong>One.</strong> Each part of the model stands for one thing. This toy stands for that car.</p>
+    <blockquote class="w" data-n="2.15" data-p="1"></blockquote>
+    <p><strong>Two.</strong> The parts of the model have a definite arrangement. The arrangement says that the things have the same arrangement.</p>
+    <blockquote class="w" data-n="2.17"></blockquote>
+    <p><strong>Three.</strong> The model and reality have a form in common. Toys can be arranged in space in all the ways in which cars can be arranged in space. This common range of possible arrangements is the <span class="t" data-t="form-of-representation">form of representation</span>.</p>
+    <blockquote class="w" data-n="2.141"></blockquote>
+    <p>A picture is itself a fact: the fact that its parts are arranged in this way. Only a fact can show a fact. A heap of toys in a bag shows nothing.</p>
+
+    <div class="lab" data-lab="picture"></div>
+
+    <blockquote class="w" data-n="2.221"></blockquote>
+    <blockquote class="w" data-n="2.222"></blockquote>
+    <blockquote class="w" data-n="2.224"></blockquote>
+    <blockquote class="w" data-n="2.225"></blockquote>
+    <p><span class="t" data-t="sense">Sense</span> and truth are two different things. The sense of a picture is the situation that it shows. You find the sense when you look at the picture alone. To know if the picture is true, you must look at the world. No picture is its own proof.</p>
+    <p>This is the first sign of where the limit will be. Every picture that has sense can be true and can be false. Something that cannot be false is not a picture of the world.</p>
+    <blockquote class="w" data-n="2.172"></blockquote>
+    <p>This is the second sign. A picture shows a situation because it has a form in common with the situation. But a picture cannot go outside its own form and make a picture of that form. A map shows the land by spatial relations. The map cannot also show what a spatial relation is. It can only use spatial relations.</p>
+    <p>The difference between <span class="t" data-t="say-show">saying and showing</span> starts here. It becomes the main idea of the book.</p>
+    <blockquote class="w" data-n="2.18"></blockquote>
+    <blockquote class="w" data-n="2.182"></blockquote>
+    <p>Not every picture is spatial. A musical score is a picture of sounds, and a score makes no sound. But every picture has a minimum in common with what it shows: <span class="t" data-t="logical-form">logical form</span>. This is the bare possibility of structure. A picture that needs only this minimum is a logical picture.</p>
+
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>The simplest facts are atomic facts. They are combinations of simple objects.</li>
+        <li>Atomic facts are independent of one another.</li>
+        <li>A picture is a fact that is used as a model of another fact.</li>
+        <li>Its sense is what it shows. Its truth depends on the world.</li>
+        <li>A picture cannot represent its own form. It shows it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 3 ═══════════════════════════ -->
+<section class="stage" id="s3" data-stage="3" data-name="Thought">
+  <header class="arrival">
+    <p class="coord">Station 3 · Remarks 3 – 3.5</p>
+    <div class="numeral" aria-hidden="true">3</div>
+    <h2 class="main" data-main="3"></h2>
+    <p class="lede">A thought is a picture that needs nothing but logical form. This station shows how a thought becomes visible in signs, and how signs can mislead us.</p>
+  </header>
+  <div class="body">
+    <p>To think is to make logical pictures. This is a claim about structure. It is not a claim about psychology. Wittgenstein does not ask what happens in a mind. He asks what a <span class="t" data-t="thought">thought</span> must be so that it can be true or false.</p>
+    <blockquote class="w" data-n="3.02"></blockquote>
+    <blockquote class="w" data-n="3.03"></blockquote>
+    <p>A thought is a picture, and a picture shows a possible situation. So everything that can be thought is possible. There is no “illogical thought”. An illogical picture would be a picture without form, and that is not a picture.</p>
+    <blockquote class="w" data-n="3.032"></blockquote>
+    <p>You cannot give the coordinates of a point that does not exist. In the same way, language cannot describe something that “contradicts logic”. Logic is not a fence around thought with forbidden ground behind it. There is no ground behind it.</p>
+
+    <h3>The sentence as a fact</h3>
+    <blockquote class="w" data-n="3.1"></blockquote>
+    <blockquote class="w" data-n="3.12"></blockquote>
+    <p>Two terms. The <span class="t" data-t="propositional-sign">propositional sign</span> is the sentence that you can see or hear: ink, sound. The <span class="t" data-t="proposition">proposition</span> is this sign in use, projected onto the world.</p>
+    <aside class="tn"><p>The German word is <em lang="de">Satz</em>. It is the usual word for “sentence”. In this book it means a sentence that is used to say that something is the case.</p></aside>
+    <blockquote class="w" data-n="3.1431"></blockquote>
+    <blockquote class="w" data-n="3.1432"></blockquote>
+    <p>A sentence looks like a list of words. It is not a list. In “the book is on the table” it is important which word is in which position. Wittgenstein makes this clear with an experiment in thought: build the sentence from furniture. Then you see that the arrangement does the work.</p>
+    <p>Remark 3.1432 says the same in symbols. “<i class="v">aRb</i>” can be a sentence for “<i class="v">a</i> has the relation <i class="v">R</i> to <i class="v">b</i>”. The letter <i class="v">R</i> is not a third name between two names. What says that <i class="v">a</i> is related to <i class="v">b</i> is a fact about the signs: “<i class="v">a</i>” is on the left of “<i class="v">R</i>”, and “<i class="v">b</i>” is on the right. A fact is expressed by a fact.</p>
+
+    <h3>Names</h3>
+    <blockquote class="w" data-n="3.202"></blockquote>
+    <blockquote class="w" data-n="3.203"></blockquote>
+    <blockquote class="w" data-n="3.3"></blockquote>
+    <p>When analysis is complete, a proposition consists of <span class="t" data-t="name">names</span>. A name stands for one simple object. It does not describe the object. It only stands for it.</p>
+    <p>Keep two words apart. <span class="t" data-t="sense">Sense</span> belongs to propositions: it is the situation that the proposition shows. <span class="t" data-t="meaning">Meaning</span> belongs to names: it is the object that the name stands for. A name alone says nothing. It does its work only in a proposition.</p>
+    <blockquote class="w" data-n="3.144" data-p="2"></blockquote>
+    <aside class="tn"><p>The German <em lang="de">Sinn</em> means “sense”, and it can also mean “direction”. An arrow has a direction. A proposition points at a situation, and it can point correctly or incorrectly. A name, like a point, cannot be wrong.</p></aside>
+    <blockquote class="w" data-n="3.25"></blockquote>
+    <p>Wittgenstein believes that each proposition has exactly one complete analysis into names. He does not give a complete analysis of any proposition. Later he decided that this demand was a mistake.</p>
+
+    <h3>Sign and symbol</h3>
+    <blockquote class="w" data-n="3.32"></blockquote>
+    <blockquote class="w" data-n="3.321"></blockquote>
+    <p>A sign is what you see or hear. A <span class="t" data-t="symbol">symbol</span> is a sign together with its logical use. One sign can belong to different symbols. Everyday language does this all the time, and it hides the difference.</p>
+    <blockquote class="w" data-n="3.323" data-p="2,3"></blockquote>
+
+    <div class="lab" data-lab="signs"></div>
+
+    <blockquote class="w" data-n="3.324"></blockquote>
+    <blockquote class="w" data-n="3.325" data-p="1"></blockquote>
+    <p>This is Wittgenstein's diagnosis. We see one word, and we think that there is one kind of thing. Many problems of philosophy start in this way. The remedy is a notation in which each sign has one kind of use. Frege and Russell started to build such notations. The rest of the book uses one.</p>
+
+    <h3>The whole space at once</h3>
+    <blockquote class="w" data-n="3.4"></blockquote>
+    <blockquote class="w" data-n="3.42" data-p="1,3"></blockquote>
+    <p>A proposition marks one place in logical space. But the whole space must be there before you can mark a place. If you understand “it rains”, you also understand “it does not rain” and “it rains or it snows”. You do not learn these one after the other. They come with the first, as the whole grid of coordinates comes with one point.</p>
+
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>A thought is a logical picture of a possible situation.</li>
+        <li>A proposition is a thought that is expressed in signs.</li>
+        <li>The propositional sign is a fact. The arrangement of its parts does the work.</li>
+        <li>Names have meaning. Only propositions have sense.</li>
+        <li>The same sign can hide different symbols. A clear notation shows the difference.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 4 ═══════════════════════════ -->
+<section class="stage" id="s4" data-stage="4" data-name="Language">
+  <header class="arrival">
+    <p class="coord">Station 4 · Remarks 4 – 4.53</p>
+    <div class="numeral" aria-hidden="true">4</div>
+    <h2 class="main" data-main="4"></h2>
+    <p class="lede">A proposition is a picture that is made of words. From this follows what language can do, what philosophy is, and the difference between saying and showing.</p>
+  </header>
+  <div class="body">
+    <aside class="tn"><p>Ogden's “significant proposition” is the German <em lang="de">sinnvoller Satz</em>: a proposition that has sense.</p></aside>
+    <blockquote class="w" data-n="4.001"></blockquote>
+    <blockquote class="w" data-n="4.002" data-p="3,4"></blockquote>
+    <p>We speak without knowing how language works, as we walk without knowing which muscles we use. The grammar on the surface of a sentence is like clothing. It is made for everyday purposes. It does not show the form of the thought below it.</p>
+    <blockquote class="w" data-n="4.003" data-p="1"></blockquote>
+    <aside class="tn"><p>Here Ogden writes “senseless” for the German <em lang="de">unsinnig</em>. Later translators write <em>nonsensical</em>. This matters, because Wittgenstein has two different words: <em lang="de">sinnlos</em> (without sense) and <em lang="de">unsinnig</em> (nonsensical). You will see the difference later at this station. In Ogden's English the two are not always distinct. The guide marks each case.</p></aside>
+    <p>Look at what the claim is. Wittgenstein does not say that the statements of philosophers are false. He says that most of them do not say anything. The words are there, but no picture is made.</p>
+    <blockquote class="w" data-n="4.0031"></blockquote>
+    <p>Russell had shown that the grammatical form of a sentence can be different from its logical form. His example: “The present King of France is bald.” It looks like a statement about one person. Russell analysed it as three statements together. There is a King of France. There is not more than one. He is bald.</p>
+
+    <h3>A picture in words</h3>
+    <blockquote class="w" data-n="4.01"></blockquote>
+    <blockquote class="w" data-n="4.014" data-p="1"></blockquote>
+    <p>At first this seems wrong. A sentence does not look like the thing that it describes. Wittgenstein's answer: a score does not look like music, and the groove of a record does not look like a score. But a rule takes you from each of them to the others. They have a structure in common. In the same way, a sentence has logical structure in common with the situation that it describes.</p>
+    <blockquote class="w" data-n="4.021"></blockquote>
+    <blockquote class="w" data-n="4.024" data-p="1,2"></blockquote>
+    <p>Here is the best evidence that sentences are pictures. You understand sentences that you have never heard before. “A green elephant is asleep on the roof of the opera.” Nobody explained this sentence to you. You know the words, and you see how they are arranged. Thus you know what is the case if the sentence is true. To understand a sentence is exactly this.</p>
+    <blockquote class="w" data-n="4.022"></blockquote>
+    <p>The two key verbs appear together here. A proposition <em>shows</em> its sense: you can read from it which situation it pictures. And it <em>says</em> that this situation is real. Showing is what the picture does by its structure. Saying is the claim that the world agrees.</p>
+    <blockquote class="w" data-n="4.0312"></blockquote>
+    <p>Wittgenstein calls this his fundamental thought. Names stand for objects. But words such as “not”, “and”, “or”, “if” do not stand for anything. There is no object “not” in the world. These words have a different function: they operate on complete pictures.</p>
+    <blockquote class="w" data-n="4.0621" data-p="3"></blockquote>
+    <p>“It does not rain” pictures the same situation as “it rains”. It only reverses the claim. If this is correct, logic is not a science of special logical objects. This thought drives everything at Stations 5 and 6.</p>
+
+    <h3>What philosophy is</h3>
+    <blockquote class="w" data-n="4.11"></blockquote>
+    <blockquote class="w" data-n="4.112"></blockquote>
+    <p>All true propositions together are natural science. So there is no room for a separate set of philosophical truths. Philosophy cannot be a doctrine. It is an activity: to make clear what we say. “Elucidations” are remarks that help someone to see clearly. They are tools. They are not results.</p>
+    <blockquote class="w" data-n="4.114"></blockquote>
+    <blockquote class="w" data-n="4.115"></blockquote>
+    <p>This is the plan of the book in one line. You cannot mark the limit of language by a description of what is on the other side. To describe it, you would have to say it. You mark the limit from the inside: you make fully clear what can be said. The limit shows where the clear region ends.</p>
+
+    <h3>Saying and showing</h3>
+    <blockquote class="w" data-n="4.12"></blockquote>
+    <blockquote class="w" data-n="4.121" data-p="2,3,4"></blockquote>
+    <blockquote class="w" data-n="4.1212"></blockquote>
+    <p>This idea started at <a class="ref" data-n="2.172">2.172</a>. Now it applies to all of language. A proposition can describe any situation. It cannot describe the logical form that it has in common with the situation. For that, it would have to stand outside logical form, and no proposition can do that.</p>
+    <p>But logical form is not hidden. It is visible in each proposition, in the way the proposition is built. It is <span class="t" data-t="say-show">shown</span>.</p>
+    <p>The book gives examples of things that are shown and not said: that “<i class="v">a</i>” is the name of an object; that one proposition follows from another; that there are objects.</p>
+
+    <details class="deeper">
+      <summary>Formal concepts: why “There are objects” says nothing</summary>
+      <blockquote class="w" data-n="4.1272" data-p="1,4,5"></blockquote>
+      <p>“Book” is a proper concept. Some things are books, and other things are not. So “there are books” says something, and it could be false.</p>
+      <p>“Object” is different. It is a <span class="t" data-t="formal-concept">formal concept</span>. It does not divide things into two groups. In a logical notation, the variable <i class="v">x</i> itself expresses it. That something is an object is shown by the kind of sign that we use for it.</p>
+      <p>So “there are objects” tries to say what can only be shown. Wittgenstein calls such a sentence a pseudo-proposition. (Ogden's “senseless” here is again <em lang="de">unsinnig</em>, nonsensical.)</p>
+      <p>Now look at the Tractatus itself. “Objects are simple.” “The world is the totality of facts.” These sentences use formal concepts in exactly the way that 4.1272 excludes. Remark <a class="ref" data-n="6.54">6.54</a> answers this problem.</p>
+    </details>
+
+    <aside class="r"><p>How strong is the difference between saying and showing? Readers disagree. For some, what is shown is a kind of truth that we understand but cannot state. For others, “what is shown” is not a hidden content. It is only our practical ability to use signs correctly. The guide leaves this open until the end.</p></aside>
+
+    <h3>Elementary propositions and their possibilities</h3>
+    <blockquote class="w" data-n="4.21"></blockquote>
+    <blockquote class="w" data-n="4.22"></blockquote>
+    <p>The <span class="t" data-t="elementary-proposition">elementary proposition</span> is the counterpart in language of the atomic fact. It is a direct combination of names. It says that one atomic fact exists. Elementary propositions are independent, as atomic facts are: no elementary proposition can contradict another (<a class="ref" data-n="4.211">4.211</a>). Again the book gives no example.</p>
+    <blockquote class="w" data-n="4.26"></blockquote>
+    <blockquote class="w" data-n="4.3"></blockquote>
+    <p>Take two elementary propositions, <i class="v">p</i> and <i class="v">q</i>. Each can be true or false. So there are four combinations. Wittgenstein calls them <span class="t" data-t="truth-possibilities">truth-possibilities</span>. He writes them as the rows of a table (<a class="ref" data-n="4.31">4.31</a>). Each row is one way the world can be. This is logical space again, now written as a table. Such “truth-tables” are in every logic textbook today. Wittgenstein was one of the first to publish them.</p>
+    <blockquote class="w" data-n="4.4"></blockquote>
+    <p>This is the decisive definition. Any proposition, simple or complex, is a selection among the rows. It says “yes” to some truth-possibilities and “no” to the others. To understand the proposition is to know which rows it agrees with. Make some.</p>
+
+    <div class="lab" data-lab="table"></div>
+
+    <blockquote class="w" data-n="4.46"></blockquote>
+    <blockquote class="w" data-n="4.461" data-p="1,2,3,5"></blockquote>
+    <blockquote class="w" data-n="4.4611"></blockquote>
+    <p>Two selections are special. A <span class="t" data-t="tautology">tautology</span> says “yes” to all rows. A <span class="t" data-t="contradiction">contradiction</span> says “no” to all rows. “It rains or it does not rain” is true in all weather. For that reason it tells you nothing about the weather.</p>
+    <aside class="tn">
+      <p>Two different words. In 4.461 “without sense” is <em lang="de">sinnlos</em>. In 4.4611 “not senseless” is <em lang="de">nicht unsinnig</em>: not nonsensical. So the book has three classes of sentence.</p>
+      <div class="tablewrap"><table class="kinds">
+        <tr><th>With sense <span lang="de">sinnvoll</span></th><td>Pictures a possible situation. Can be true, can be false.</td><td>“It rains.”</td></tr>
+        <tr><th>Without sense <span lang="de">sinnlos</span></th><td>Built correctly, but pictures nothing, because it is true (or false) in all cases. A limiting case of language, as 0 is of arithmetic.</td><td>“It rains or it does not rain.”</td></tr>
+        <tr><th>Nonsensical <span lang="de">unsinnig</span></th><td>Not a proposition. A sign in it has no meaning in this use.</td><td>“Socrates is identical.” (<a class="ref" data-n="5.473">5.473</a>)</td></tr>
+      </table></div>
+    </aside>
+    <blockquote class="w" data-n="4.463" data-p="3"></blockquote>
+    <blockquote class="w" data-n="4.5" data-p="3"></blockquote>
+    <p>At the end of proposition 4, Wittgenstein announces that all propositions have one form in common. In words: “Such and such is the case.” Station 6 gives the exact formula. First we need the machine that builds propositions.</p>
+
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>A proposition is a picture. You understand it when you know what is the case if it is true.</li>
+        <li>Logical words do not stand for objects.</li>
+        <li>Philosophy is an activity of clarification, not a set of truths.</li>
+        <li>What can be shown cannot be said.</li>
+        <li>A proposition selects among truth-possibilities. Tautology and contradiction are the two limits.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 5 ═══════════════════════════ -->
+<section class="stage" id="s5" data-stage="5" data-name="Logic">
+  <header class="arrival">
+    <p class="coord">Station 5 · Remarks 5 – 5.641</p>
+    <div class="numeral" aria-hidden="true">5</div>
+    <h2 class="main" data-main="5"></h2>
+    <p class="lede">The technical centre of the book. One operation builds all propositions from elementary ones. Then, without warning, the path arrives at the limit of the world and at the self.</p>
+  </header>
+  <div class="body">
+    <p>A function gives one output for each input. A <span class="t" data-t="truth-function">truth-function</span> takes truth-values as input and gives a truth-value as output. “<i class="v">p</i> and <i class="v">q</i>” is a truth-function of <i class="v">p</i> and <i class="v">q</i>. If you know whether <i class="v">p</i> is true and whether <i class="v">q</i> is true, you know whether “<i class="v">p</i> and <i class="v">q</i>” is true. Nothing else is relevant.</p>
+    <p>Proposition 5 is a very strong claim. It says that <em>every</em> proposition is of this kind. The truth of each proposition depends only on which elementary propositions are true. So if you had all elementary propositions, and knew which are true, you would know everything that can be said (<a class="ref" data-n="4.26">4.26</a>).</p>
+    <aside class="r"><p>Is this credible? “All men are mortal” and “Anna believes that it rains” do not look like truth-functions. Wittgenstein treats both cases at this station (<a class="ref" data-n="5.52">5.52</a>, <a class="ref" data-n="5.542">5.542</a>). Critics have doubted both treatments from the start.</p></aside>
+
+    <h3>What follows from what</h3>
+    <blockquote class="w" data-n="5.12"></blockquote>
+    <blockquote class="w" data-n="5.14"></blockquote>
+    <p>The <span class="t" data-t="truth-grounds">truth-grounds</span> of a proposition are the rows in which it is true. With this, logical inference becomes simple. <i class="v">p</i> follows from <i class="v">q</i> when every row that makes <i class="v">q</i> true also makes <i class="v">p</i> true. Then <i class="v">p</i> says nothing that <i class="v">q</i> did not say already.</p>
+
+    <div class="lab" data-lab="follows"></div>
+
+    <blockquote class="w" data-n="5.13"></blockquote>
+    <p>Inference adds no information. No “laws of inference” are necessary to justify it. If the notation is clear, you see the relation in the two propositions themselves. This is one more case of showing.</p>
+    <blockquote class="w" data-n="5.134"></blockquote>
+    <blockquote class="w" data-n="5.1361"></blockquote>
+    <p>Elementary propositions are independent. So no elementary proposition follows from another. Wittgenstein draws a hard conclusion from this. There is no logical connection between one event and a different event. What happens tomorrow does not follow from what happens today.</p>
+    <p>“Causal nexus” here means a necessary bond between events. Wittgenstein does not deny that science finds regular patterns. He denies that the patterns make events necessary. Station 6 says more about this.</p>
+
+    <details class="deeper">
+      <summary>Probability</summary>
+      <blockquote class="w" data-n="5.15"></blockquote>
+      <blockquote class="w" data-n="5.152" data-p="2,3"></blockquote>
+      <p>The same table gives a measure of probability. Count the rows in which <i class="v">r</i> is true. Then count in how many of these rows <i class="v">s</i> is also true. The ratio is the probability that <i class="v">r</i> gives to <i class="v">s</i>. If <i class="v">s</i> is true in all of them, the ratio is 1: <i class="v">s</i> follows from <i class="v">r</i>. Logical certainty is the limiting case of probability. The instrument above shows this ratio.</p>
+    </details>
+
+    <h3>No logical objects</h3>
+    <blockquote class="w" data-n="5.4"></blockquote>
+    <blockquote class="w" data-n="5.44" data-p="5"></blockquote>
+    <p>At <a class="ref" data-n="4.0312">4.0312</a> you saw the fundamental thought: logical words do not stand for things. Here is an argument for it. Suppose that “∼” (not) is the name of an object. Then “∼∼<i class="v">p</i>” speaks about that object two times, and “<i class="v">p</i>” does not speak about it. They would say different things. But they say the same thing: they select the same rows. So “∼” is not a name.</p>
+    <p>There is a second argument (<a class="ref" data-n="5.42">5.42</a>). The logical signs can be defined by one another in many ways. You can define “if” from “not” and “or”. You can also define “or” from “not” and “if”. True building blocks could not be exchanged in this way.</p>
+    <blockquote class="w" data-n="5.43" data-p="2"></blockquote>
+
+    <h3>One operation</h3>
+    <blockquote class="w" data-n="5.5"></blockquote>
+    <blockquote class="w" data-n="5.51"></blockquote>
+    <p>Wittgenstein now reduces all logical words to one <span class="t" data-t="operation">operation</span>. Its name is <span class="t" data-t="n-operator">N</span>. Give N any number of propositions. The result is true only if all of them are false. With one proposition, N(<i class="v">p</i>) is “not <i class="v">p</i>”. With two, N(<i class="v">p</i>, <i class="v">q</i>) is “neither <i class="v">p</i> nor <i class="v">q</i>”.</p>
+    <p>In 1913 Henry Sheffer had shown that “neither … nor” is sufficient to define all the other connectives. Wittgenstein's N extends this to any number of propositions at one time. Try to build the sixteen truth-functions of <i class="v">p</i> and <i class="v">q</i> with N alone.</p>
+
+    <div class="lab" data-lab="nop"></div>
+
+    <details class="deeper">
+      <summary>“All” and “some”</summary>
+      <blockquote class="w" data-n="5.52"></blockquote>
+      <p>For Wittgenstein, “everything is <i class="v">f</i>” is not a new kind of proposition. Let <i class="v">fa</i>, <i class="v">fb</i>, <i class="v">fc</i> … be all propositions of the form <i class="v">fx</i>. Apply N to all of them together. The result says that none of them is true: “nothing is <i class="v">f</i>”. Apply N to this result: “something is <i class="v">f</i>”.</p>
+      <aside class="r"><p>With a finite list this is clear. If there are infinitely many objects, N must take infinitely many propositions at one time. Since the 1970s there has also been a debate on whether N can express sentences that mix “all” and “some”, such as “everyone loves someone” (Fogelin said no; Geach and Soames replied). And in 1936 Church and Turing proved that there is no general mechanical test for logical truth when “all” and “some” are included. Wittgenstein's remark that there are no surprises in logic (<a class="ref" data-n="6.1251">6.1251</a>) fits truth-tables better than it fits the whole of logic.</p></aside>
+    </details>
+
+    <details class="deeper">
+      <summary>Identity</summary>
+      <blockquote class="w" data-n="5.53"></blockquote>
+      <blockquote class="w" data-n="5.5303"></blockquote>
+      <p>In Wittgenstein's notation, each object has one name, and different names stand for different objects. Then the sign “=” is not necessary. Identity is not a relation that some objects have and others do not have. It is shown by the use of the same sign.</p>
+    </details>
+
+    <details class="deeper">
+      <summary>“Anna believes that it rains”</summary>
+      <blockquote class="w" data-n="5.542"></blockquote>
+      <p>This is a problem case. In “Anna believes that it rains”, the proposition “it rains” occurs in a larger proposition. But the truth of the whole does not depend on the truth of the part: Anna can believe something false. This seems to contradict proposition 5.</p>
+      <aside class="r"><p>Wittgenstein's answer is short and obscure. A common explanation: Anna's belief is itself a fact, an arrangement of elements in her mind, and this fact pictures the situation. So the sentence correlates one fact with another fact, element by element. No simple “subject” has a relation to a proposition. Remark <a class="ref" data-n="5.5421">5.5421</a> draws the conclusion that there is no unified soul of the kind that psychology then assumed.</p></aside>
+    </details>
+
+    <h3>The limit and the self</h3>
+    <blockquote class="w" data-n="5.6"></blockquote>
+    <p>This is one of the best-known sentences of the book. It is often misread. It does not mean that a person with more words has a larger world. “Language” here means all propositions that can be formed. “My world” means everything that I could say is the case or is not the case. The two have the same limit, because logic bounds both.</p>
+    <blockquote class="w" data-n="5.61" data-p="1,4"></blockquote>
+    <p>We cannot draw the limit from the outside. We cannot say: “The world contains this, but not that”, where “that” is something that logic excludes. To exclude it we would have to describe it. Then it would be thinkable.</p>
+    <blockquote class="w" data-n="5.62" data-p="2,3"></blockquote>
+    <p><span class="t" data-t="solipsism">Solipsism</span> is the view that only I and my experience exist. Wittgenstein says something subtle about it. The solipsist tries to say: “The world is my world.” As a statement this fails. It has no opposite that we can picture: I cannot picture a world that is not seen from where I am. But the attempt points at something that shows itself. Every description of the world is given in the language that I understand.</p>
+    <blockquote class="w" data-n="5.632"></blockquote>
+    <blockquote class="w" data-n="5.633" data-p="2,3"></blockquote>
+    <p>Where is this “I”? It is not in the world. Make a list of all the facts. Include all the facts about your body and your psychology. The subject that sees the world is not an item on the list.</p>
+    <p>Wittgenstein compares this with the eye and the field of sight. You do not see your eye in the field. And nothing in the field tells you that an eye sees it. His drawing shows what the field of sight is <em>not</em> like:</p>
+    <blockquote class="w" data-n="5.6331"></blockquote>
+    <blockquote class="w" data-n="5.64"></blockquote>
+    <p>So the self decreases to a point without size. It is a limit, not a part. And then solipsism and realism are the same. If the “I” is not a thing in the world, then nothing remains of “only my world exists” except this: the world exists.</p>
+
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>Every proposition is a truth-function of elementary propositions.</li>
+        <li>Inference is containment of truth-grounds. It adds nothing.</li>
+        <li>There are no logical objects. One operation, N, builds all propositions.</li>
+        <li>The limits of language are the limits of the world.</li>
+        <li>The subject is not a part of the world. It is its limit.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 6 ═══════════════════════════ -->
+<section class="stage" id="s6" data-stage="6" data-name="The limit">
+  <header class="arrival">
+    <p class="coord">Station 6 · Remarks 6 – 6.54</p>
+    <div class="numeral" aria-hidden="true">6</div>
+    <h2 class="main" data-main="6"></h2>
+    <p class="lede">One formula gives the form of everything that can be said. The remainder of the book examines what the formula excludes: logic, mathematics, the laws of nature, value, and the book itself.</p>
+  </header>
+  <div class="body">
+    <p>The formula looks difficult. It has three parts, and you know all of them already. Select each part.</p>
+    <div class="lab" data-lab="form"></div>
+    <blockquote class="w" data-n="6.001"></blockquote>
+    <p>This is the limit, drawn from the inside, as <a class="ref" data-n="4.114">4.114</a> required. Everything that the procedure can reach is a proposition. Nothing else is.</p>
+    <p>Proposition 6 now examines the kinds of sentence that do not fit this form. Each kind gets a different verdict.</p>
+
+    <h3>Logic</h3>
+    <blockquote class="w" data-n="6.1"></blockquote>
+    <blockquote class="w" data-n="6.11"></blockquote>
+    <blockquote class="w" data-n="6.113"></blockquote>
+    <p>People had thought that logic is the most general science: a set of deep truths about everything. Wittgenstein's answer is sobering. The truths of logic are tautologies. They are true in all cases because they say nothing. You do not look at the world to check them. You see it in the sign, for example in a truth-table.</p>
+    <blockquote class="w" data-n="6.124" data-until="And this is their connexion with the world."></blockquote>
+    <blockquote class="w" data-n="6.13"></blockquote>
+    <p>But tautologies are not without use. That certain propositions together give a tautology shows how those propositions are related. Logic shows the “scaffolding” of the world.</p>
+    <p>“<span class="t" data-t="transcendental">Transcendental</span>” means here: logic is not one of the facts in the world. It is a condition for facts and pictures.</p>
+
+    <h3>Mathematics</h3>
+    <blockquote class="w" data-n="6.2"></blockquote>
+    <blockquote class="w" data-n="6.211" data-p="1"></blockquote>
+    <p>An equation such as 2 × 2 = 4 does not describe a fact. It says that one expression can replace another. In this book a number counts how many times an operation is applied (<a class="ref" data-n="6.021">6.021</a>). So mathematics, like logic, says nothing about the world. We use it to go from one proposition about the world to another.</p>
+
+    <h3>Science and the net</h3>
+    <blockquote class="w" data-n="6.341" data-from="Let us imagine a white surface" data-until="hexagonal mesh."></blockquote>
+
+    <div class="lab" data-lab="mesh"></div>
+
+    <blockquote class="w" data-n="6.342" data-from="That a picture like that" data-until="definite net of definite fineness."></blockquote>
+    <p>Newtonian mechanics is like a net with one shape of mesh. That the world can be described with this net tells us nothing about the world. Any world can be described with it, if the mesh is sufficiently fine. What tells us something is how simple the description becomes with this net, compared with a different one.</p>
+    <blockquote class="w" data-n="6.371"></blockquote>
+    <blockquote class="w" data-n="6.372"></blockquote>
+    <p>The laws of nature describe regular patterns. They do not make things happen. They do not explain why there are patterns. Wittgenstein thinks that the modern world treats “law of nature” as a final answer, as earlier ages treated God or Fate. The ancients, he says, at least knew that they had come to a stop.</p>
+    <blockquote class="w" data-n="6.36311"></blockquote>
+    <blockquote class="w" data-n="6.37"></blockquote>
+    <p>To expect that the future is like the past is not a logical inference. It is a habit. It is a reasonable habit, but nothing guarantees it.</p>
+
+    <details class="deeper">
+      <summary>The first crack: colours</summary>
+      <blockquote class="w" data-n="6.3751" data-p="1,3"></blockquote>
+      <p>“This point is red” and “this point is blue” cannot both be true. Wittgenstein says that the impossibility must be logical, because there is no other kind. But then the two sentences contradict each other. And elementary propositions cannot contradict each other (<a class="ref" data-n="4.211">4.211</a>).</p>
+      <p>So he concludes that statements about colour are not elementary. A further analysis must make the hidden contradiction visible. He did not give this analysis.</p>
+      <aside class="r"><p>History: in 1929 he tried to give it, in the paper “Some Remarks on Logical Form”. He failed. Then he gave up the independence of elementary propositions. Many see this as the first crack. Through it the whole system later broke.</p></aside>
+    </details>
+
+    <h3>Value</h3>
+    <blockquote class="w" data-n="6.41"></blockquote>
+    <p>The book now turns, in a few pages, to the subject that Wittgenstein thought most important. The argument is short. Every proposition describes a possible fact. Every fact is accidental: it could be different. But if something has value in itself, this cannot be an accident. So value is not a fact, and no proposition states it.</p>
+    <p>Imagine a book that contains the complete description of the world. It would not contain one judgement that something is good or bad.</p>
+    <blockquote class="w" data-n="6.42"></blockquote>
+    <blockquote class="w" data-n="6.421"></blockquote>
+    <p>Do not read this as contempt for ethics. It is the opposite. Wittgenstein takes ethics out of the area of facts, theories and proofs because he thinks that it is higher than they are. “Transcendental” is the word that he used for logic at <a class="ref" data-n="6.13">6.13</a>. Like logic, ethics is not in the world. It is a condition of the world as a whole.</p>
+    <blockquote class="w" data-n="6.43" data-p="1,3"></blockquote>
+    <p>A good will or a bad will does not change any fact. It changes the world as a whole: the same facts, seen differently. The limits move. The content does not.</p>
+    <blockquote class="w" data-n="6.4311"></blockquote>
+    <blockquote class="w" data-n="6.44"></blockquote>
+    <blockquote class="w" data-n="6.45"></blockquote>
+    <p>“<span class="t" data-t="mystical">The mystical</span>” here does not mean visions or secret knowledge. Science can answer <em>how</em> the world is: which facts hold. <em>That</em> there is a world is not one more fact. No proposition says it, because a proposition says how things are, and it assumes that there is something.</p>
+    <p>To see the world <em lang="la">sub specie aeterni</em> (“under the aspect of eternity”, a phrase from Spinoza) is to see it from no place in it: as one bounded whole.</p>
+    <blockquote class="w" data-n="6.52"></blockquote>
+    <blockquote class="w" data-n="6.521" data-p="1"></blockquote>
+    <blockquote class="w" data-n="6.522"></blockquote>
+    <p>The questions of life do not get an answer. They disappear as questions, because a question exists only where an answer can be said (<a class="ref" data-n="6.5">6.5</a>). “Shows itself” is the same verb as in <a class="ref" data-n="4.1212">4.1212</a>.</p>
+
+    <h3>The verdicts</h3>
+    <div class="tablewrap"><table class="verdicts">
+      <thead><tr><th>Kind of sentence</th><th>Example</th><th>Status in the Tractatus</th></tr></thead>
+      <tbody>
+        <tr><td>Natural science, everyday statements</td><td>“It rains.”</td><td>With sense. It says something. It can be true or false.</td></tr>
+        <tr><td>Logic</td><td>“<i class="v">p</i> or not <i class="v">p</i>”</td><td>Without sense. A tautology. It says nothing and shows the form of language and world.</td></tr>
+        <tr><td>Mathematics</td><td>2 × 2 = 4</td><td>An equation, a “pseudo-proposition”. It shows that two expressions can replace each other.</td></tr>
+        <tr><td>Principles of science</td><td>“Every event has a cause.”</td><td>Not a law, but the form of a law. It belongs to the net, not to the surface.</td></tr>
+        <tr><td>Ethics, aesthetics, the meaning of life</td><td>“This is good.”</td><td>Cannot be expressed. Transcendental. It shows itself.</td></tr>
+        <tr><td>Philosophy, including this book</td><td>“The world is everything that is the case.”</td><td>Nonsensical. An elucidation: a step on a ladder.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>The ladder</h3>
+    <blockquote class="w" data-n="6.53"></blockquote>
+    <blockquote class="w" data-n="6.54"></blockquote>
+    <aside class="tn"><p>Ogden's “senseless” is again <em lang="de">unsinnig</em>: nonsensical. It is not the mild “without sense” of tautologies. Wittgenstein says that his own propositions are nonsense.</p></aside>
+    <p>This is the most surprising sentence in the book. Look back. “The world is the totality of facts.” “Objects are simple.” “A proposition is a picture.” Not one of these is a picture of a possible fact that could also be false. Not one is built from elementary propositions with N. By the measure of the book itself, they say nothing.</p>
+    <p>The book is not a description of the limit. It is a ladder to a place from which you see the limit. Then the ladder must go.</p>
+    <p>How can nonsense help someone to see? That question divides readers of the Tractatus to this day. After the last station you find their answers. First, take the last step.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 7 ═══════════════════════════ -->
+<section class="stage silence" id="s7" data-stage="7" data-name="Silence">
+  <div class="seven">
+    <div class="num7">7</div>
+    <p class="en" data-main-en="7"></p>
+    <p class="de" lang="de" data-main-de="7"></p>
+  </div>
+  <div class="void" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════ AFTER ═══════════════════════════ -->
+<section class="stage" id="s8" data-stage="8" data-name="Looking back">
+  <header class="arrival after">
+    <p class="coord">After the last remark · Not part of the book</p>
+    <h2 class="main plain">Looking back</h2>
+    <p class="lede">From here you see the whole structure. The text below is history and interpretation. None of it is Wittgenstein's text.</p>
+  </header>
+  <div class="body">
+    <h3>Three ways to read the ladder</h3>
+    <p>The book calls its own sentences nonsense. Readers have understood this in three main ways.</p>
+
+    <div class="readings">
+      <article>
+        <h4>There are truths that cannot be said</h4>
+        <p class="who">The older reading. For example Elizabeth Anscombe, Peter Hacker.</p>
+        <p>The sentences of the book are nonsense by its own strict measure. But they are helpful nonsense. They direct us to things that are real and can only be shown: logical form, the existence of objects, value. When the ladder is gone, we keep the insight. We stop the attempt to state it.</p>
+        <p class="but"><b>The difficulty.</b> “A truth that cannot be said” sounds like the thing that the book excludes. Frank Ramsey put it this way: what we can't say we can't say, and we can't whistle it either.</p>
+      </article>
+      <article>
+        <h4>Nonsense is only nonsense</h4>
+        <p class="who">The “resolute” reading. For example Cora Diamond, James Conant.</p>
+        <p>There are no truths that cannot be said. The sentences of the book only appear to have sense. The reader first feels that they have sense, and then sees that this feeling was an illusion. The book is a treatment for the desire to do metaphysics. No doctrine remains at the end. Only clarity remains.</p>
+        <p class="but"><b>The difficulty.</b> The logical results of the book, such as truth-tables and the account of tautology, look like real results. Wittgenstein continued to defend some of them. And it is hard to explain how plain nonsense can have such a careful structure.</p>
+      </article>
+      <article>
+        <h4>A weapon against metaphysics</h4>
+        <p class="who">The Vienna Circle in the 1920s. For example Moritz Schlick, Rudolf Carnap.</p>
+        <p>Only science says something. Metaphysics is without meaning. The last pages on ethics and the mystical are a personal addition, and you can ignore them.</p>
+        <p class="but"><b>The difficulty.</b> Wittgenstein rejected this. In 1919 he wrote to the publisher Ludwig von Ficker that the point of the book is an ethical one. He said that the work has two parts: the part that he wrote, and everything that he did not write. The second part, he said, is the important one.</p>
+      </article>
+    </div>
+    <p>The guide does not choose. You have read the text. The decision is yours.</p>
+
+    <h3>What Wittgenstein did next</h3>
+    <p>He thought that the problems were solved. He gave away the fortune that he had inherited. He worked as a teacher in village schools, as a gardener in a monastery, and as an architect. In 1929 he returned to Cambridge and to philosophy.</p>
+    <p>In the years after that he took the Tractatus apart. In the preface to his second book, <cite>Philosophical Investigations</cite> (1953), he speaks of “grave mistakes” in the first. He gave up these ideas:</p>
+    <ul class="plainlist">
+      <li><b>Independent elementary propositions.</b> The problem of colours showed that they do not work (<a class="ref" data-n="6.3751">6.3751</a>).</li>
+      <li><b>One form for all language.</b> Later he described many different “language-games”: to give orders, to tell a story, to pray, to make a joke. They have no single essence.</li>
+      <li><b>Meaning as an object.</b> Later he said: in most cases, the meaning of a word is its use in the language.</li>
+      <li><b>Final analysis.</b> Later he saw no reason to believe that sentences have one hidden, complete analysis into simple parts.</li>
+    </ul>
+    <p>He kept these: philosophy is an activity and not a theory. Its problems come from a wrong view of how our language works. Its aim is clarity.</p>
+
+    <h3>What stayed in use</h3>
+    <ul class="plainlist">
+      <li><b>Truth-tables.</b> Every logic textbook has them. The design of digital circuits uses them.</li>
+      <li><b>Logical truth as tautology.</b> For the logic of “and”, “or”, “not”, this account is standard.</li>
+      <li><b>Logical space.</b> The idea of a space of possible worlds became a basic tool of later logic and of the theory of meaning.</li>
+      <li><b>Saying and showing.</b> The difference is still discussed, in philosophy and outside it.</li>
+    </ul>
+
+    <h3>Where to go from here</h3>
+    <p>Open the <button type="button" class="linklike" data-open-atlas>Atlas</button> and read the book from 1 to 7. It takes one evening. You now know the map.</p>
+    <p>Then compare translations. Pears and McGuinness (1961) is the usual second choice. There are three recent ones: Michael Beaney (2023), Alexander Booth (2023) and Damion Searls (2024).</p>
+    <p>Good companions: G.&nbsp;E.&nbsp;M. Anscombe, <cite>An Introduction to Wittgenstein's Tractatus</cite> (1959). Roger White, <cite>Wittgenstein's Tractatus Logico-Philosophicus: A Reader's Guide</cite> (2006). Michael Morris, <cite>Wittgenstein and the Tractatus Logico-Philosophicus</cite> (2008). For his life: Ray Monk, <cite>Ludwig Wittgenstein: The Duty of Genius</cite> (1990).</p>
+
+    <h3>Terms</h3>
+    <dl class="glossary" id="glossary"></dl>
+
+    <footer class="colophon">
+      <p>Text: <cite lang="la">Tractatus Logico-Philosophicus</cite>, London 1922. English by C.&nbsp;K.&nbsp;Ogden with F.&nbsp;P.&nbsp;Ramsey; German original of 1921. Both are in the public domain. Source: Project Gutenberg eBook 5740. Eight small diagrams of the original are redrawn or described.</p>
+      <p>The explanations are a guide, not an authority. Where they simplify, the text decides.</p>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<aside id="atlas" aria-label="Atlas of all remarks" hidden>
+  <div class="atlas-head">
+    <label for="atlas-q">Go to remark</label>
+    <input id="atlas-q" type="text" inputmode="decimal" autocomplete="off" placeholder="4.0312" spellcheck="false">
+  </div>
+  <div id="atlas-body"></div>
+  <p class="atlas-help">Drag to turn. Scroll or pinch to move closer. Select a star to read it.</p>
+</aside>
+
+<div id="pop" role="dialog" aria-label="Definition" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="data/tlp.js"></script>
+<script src="js/cosmos.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
