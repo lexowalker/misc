@@ -88,7 +88,8 @@ python3 tools/build_text.py
 - Text: *Tractatus Logico-Philosophicus*, Kegan Paul, London 1922. English translation
   credited to C. K. Ogden (largely by F. P. Ramsey); German text of 1921. Public domain.
   Transcription: Project Gutenberg eBook #5740.
-- The three small diagrams of 5.5423, 5.6331 and 6.36111 are redrawn. The five bracket
-  diagrams of 6.1203 are not reproduced; a note marks their place.
+- All eight diagrams of the original are redrawn as SVG: 5.5423, 5.6331, 6.36111 and
+  the five bracket diagrams of 6.1203. The last of those is a tidied version of a
+  hand-drawn figure; it keeps every connection but not the exact shapes.
 - The explanations are one careful reading, not an authority. Where they simplify, the
   text decides.

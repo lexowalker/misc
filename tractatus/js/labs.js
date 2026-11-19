@@ -402,6 +402,61 @@
       '<circle cx="60" cy="22" r="4"/><path d="M135 17 145 27M145 17 135 27M175 17 185 27M185 17 175 27"/><circle cx="260" cy="22" r="4"/>' +
       '<g fill="currentColor" stroke="none" font-family="STIX Two Text, serif" font-style="italic" font-size="15"><text x="96" y="44">a</text><text x="216" y="44">b</text></g></svg>'
   };
+  /* The bracket notation of 6.1203, redrawn. A brace joins one truth-value of each
+     argument; a thin line carries that combination to the T or F of the whole. */
+  (function () {
+    function mk(w, h, label, body) {
+      return '<svg viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" role="img" aria-label="' + label + '">' + body + '</svg>';
+    }
+    function tx(x, y, t, size) {
+      return '<text x="' + x + '" y="' + y + '" text-anchor="middle" fill="currentColor" stroke="none" font-family="STIX Two Text, Times New Roman, serif" font-style="italic" font-size="' + (size || 17) + '">' + t + '</text>';
+    }
+    function ln(a, b) { return '<path stroke-width=".8" d="M' + a[0] + ' ' + a[1] + 'L' + b[0] + ' ' + b[1] + '"/>'; }
+    // a curly brace from a to b; h > 0 bulges to the left of the direction a→b (up, for left-to-right)
+    function brace(a, b, h, c) {
+      var dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = uy, ny = -ux;
+      var q = Math.min(13, L * 0.12), m = L * (c || 0.5);
+      function P(t, v) { return (a[0] + ux * t + nx * v).toFixed(1) + ' ' + (a[1] + uy * t + ny * v).toFixed(1); }
+      var d = 'M' + P(0, 0) + 'Q' + P(0, h / 2) + ' ' + P(q, h / 2) + 'L' + P(m - q, h / 2) + 'Q' + P(m, h / 2) + ' ' + P(m, h) +
+        'Q' + P(m, h / 2) + ' ' + P(m + q, h / 2) + 'L' + P(L - q, h / 2) + 'Q' + P(L, h / 2) + ' ' + P(L, 0);
+      return { d: '<path d="' + d + '"/>', cusp: [a[0] + ux * m + nx * h, a[1] + uy * m + ny * h] };
+    }
+    function pair(l, r, y) {
+      return tx(20, y, 'T') + tx(43, y, l) + tx(66, y, 'F') + tx(246, y, 'T') + tx(271, y, r) + tx(296, y, 'F');
+    }
+    // 01, 02: the four truth-combinations of p and q; then p ⊃ q
+    var y = 96;
+    var tt = brace([20, y - 18], [246, y - 18], 14), tf = brace([13, y - 20], [303, y - 20], 36, 0.56);
+    var ft = brace([66, y + 8], [246, y + 8], -14), ff = brace([73, y + 10], [303, y + 10], -36, 0.56);
+    var four = tt.d + tf.d + ft.d + ff.d + pair('p', 'q', y);
+    FIGS.brackets01 = mk(320, 160, 'T p F and T q F. Four braces join T with T, T with F, F with T, and F with F.', four);
+    FIGS.brackets02 = mk(320, 190, 'The same braces. The combination p true, q false is joined to F. The other three are joined to T.',
+      four + tx(tf.cusp[0] + 9, tf.cusp[1] - 4, 'F', 15) + tx(168, 184, 'T', 15) +
+      ln(tt.cusp, [164, 170]) + ln(ft.cusp, [166, 170]) + ln(ff.cusp, [172, 172]));
+    // 03: negation exchanges T and F
+    FIGS.brackets03 = mk(130, 150, 'T above is joined to the F of T xi F. The T of T xi F is joined to F below.',
+      tx(34, 24, 'T', 19) + tx(22, 82, '“', 19) + tx(44, 82, 'T', 19) + tx(64, 82, 'ξ', 19) + tx(84, 82, 'F', 19) + tx(104, 82, '”', 19) +
+      tx(92, 140, 'F', 19) + ln([42, 30], [80, 64]) + ln([48, 90], [86, 124]));
+    // 04: ξ . η is true for one combination only
+    y = 100;
+    var a = brace([66, y - 18], [303, y - 20], 36, 0.5), b = brace([73, y - 16], [246, y - 16], 14, 0.5);
+    var c = brace([20, y + 8], [246, y + 8], -14, 0.42), e = brace([13, y + 10], [296, y + 12], -36, 0.5);
+    FIGS.brackets04 = mk(320, 200, 'T xi F and T eta F. The combination T with T is joined to T. The other three combinations are joined to F.',
+      a.d + b.d + c.d + e.d + pair('ξ', 'η', y) + tx(c.cusp[0], 16, 'T', 15) + tx(182, 194, 'F', 15) +
+      ln(c.cusp, [c.cusp[0], 22]) + ln(a.cusp, [181, 180]) + ln(b.cusp, [178, 180]) + ln(e.cusp, [176, 181]));
+    // 05: ∼(p . ∼q)
+    var g = brace([70, 118], [300, 178], 15, 0.45), h = brace([60, 116], [352, 178], 42, 0.5);
+    var i = brace([92, 262], [300, 204], -15, 0.5), j = brace([84, 268], [352, 206], -42, 0.55);
+    FIGS.brackets05 = mk(400, 350, 'The sign for not (p and not q), built from the three signs above: T q F with its values exchanged, braces to T p F, and the result exchanged once more.',
+      g.d + h.d + i.d + j.d +
+      tx(40, 198, 'T') + tx(62, 198, 'q') + tx(86, 198, 'F') + tx(60, 134, 'T') + tx(78, 264, 'F') +
+      ln([66, 140], [84, 182]) + ln([44, 205], [70, 248]) +
+      tx(300, 198, 'T') + tx(324, 198, 'p') + tx(350, 198, 'F') +
+      tx(150, 62, 'T') + ln(g.cusp, [156, 68]) + ln([160, 52], [184, 34]) + tx(192, 32, 'F') +
+      tx(262, 318, 'F') + ln(h.cusp, [258, 302]) + ln(i.cusp, [254, 304]) + ln(j.cusp, [256, 303]) +
+      ln([272, 320], [296, 334]) + tx(306, 342, 'T'));
+  })();
+
   window.Labs = {
     mount: function () {
       document.querySelectorAll('.lab[data-lab]').forEach(function (el) {
@@ -413,7 +468,7 @@
       root.querySelectorAll('figure.fig[data-fig]').forEach(function (f) {
         if (f.firstChild) return;
         var k = f.dataset.fig;
-        f.innerHTML = FIGS[k] || '<figcaption>[A diagram is at this place in the original: brackets that connect the letters T and F of the single propositions. It is not reproduced here.]</figcaption>';
+        f.innerHTML = FIGS[k] || '';
       });
     }
   };
