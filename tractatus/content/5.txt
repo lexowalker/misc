@@ -1,0 +1,303 @@
+@ 5
+A function gives one output for each input. A [[truth-function|truth-function]] takes truth-values as input and gives a truth-value as output. “$p$ and $q$” is a truth-function of $p$ and $q$. If you know whether $p$ is true and whether $q$ is true, you know whether “$p$ and $q$” is true. Nothing else is relevant.
+
+Proposition 5 is a very strong claim. It says that *every* proposition is of this kind. The truth of each proposition depends only on which elementary propositions are true.
+
+@r 5
+Is this credible? “All men are mortal” and “Anna believes that it rains” do not look like truth-functions. Wittgenstein treats both cases at this station ({5.52}, {5.542}). Critics have doubted both treatments from the start.
+
+@ 5.02
+In “∼$p$” the letter $p$ is an argument: you must understand $p$ before you can understand “∼$p$”. This is different from an index. An index is only a part of a label, like “Julius” in “Julius Caesar”. Wittgenstein thinks that Frege confused the two. For Frege a sentence was a name of a truth-value, and its parts were like indices of that name.
+
+@h 5.1 What follows from what
+
+@ 5.101
+The table lists all 16 truth-functions of two propositions. The four letters in brackets are the last column of the truth-table, written as a line. The [[truth-grounds|truth-grounds]] of a proposition are the rows in which it is true.
+
+@ 5.12
+With this, logical inference becomes simple. $p$ follows from $q$ when every row that makes $q$ true also makes $p$ true.
+
+@ 5.122
+Then $p$ says nothing that $q$ did not say already. Its sense is a part of the sense of $q$.
+
+@lab 5.122 follows
+
+@ 5.123
+Nothing more must be done to make the consequences of a truth true. Not even a god could make “$p$ and $q$” true and leave $p$ false.
+
+@ 5.1241
+A proposition asserts everything that follows from it. “$p$ and $q$” asserts $p$, and it asserts $q$. Two propositions are opposed when no proposition with sense can assert both.
+
+@ 5.131
+Inference adds no information. If the notation is clear, you see the relation in the two propositions themselves. The relation is internal ({4.123}): it is there as soon as the propositions are there. This is one more case of showing.
+
+@ 5.1311
+An example of a notation that shows more. The stroke “$p$ | $q$” means “neither $p$ nor $q$”. If you write “or” and “not” with the stroke only, you can see directly how the propositions are related.
+
+@ 5.132
+So no “laws of inference” are necessary to justify an inference. Frege and Russell had stated such laws. For Wittgenstein they do no work. The two propositions alone justify the step.
+
+@ 5.134
+Elementary propositions are independent. So no elementary proposition follows from another.
+
+@ 5.1361
+Wittgenstein draws a hard conclusion from this. There is no logical connexion between one event and a different event. What happens tomorrow does not follow from what happens today.
+
+“Causal nexus” here means a necessary bond between events. Wittgenstein does not deny that science finds regular patterns. He denies that the patterns make events necessary. Station 6 says more about this.
+
+@ 5.1362
+If causes made their effects necessary, as premises make a conclusion necessary, we could calculate our future actions now. We cannot. For Wittgenstein the freedom of the will is this fact.
+
+The sentence in brackets: you cannot “know” a tautology, because a tautology gives nothing to know. “Senseless” here has the mild meaning: without sense.
+
+@ 5.1363
+Russell had said that the basic laws of logic are self-evident. Wittgenstein answers: that something seems obvious does not prove it.
+
+@ 5.141
+The more a proposition says, the more follows from it. If each of two propositions follows from the other, they say the same. Then they are one proposition, written in two ways.
+
+@ 5.143
+A tautology follows from every proposition, because it says nothing. It is the empty centre that all propositions have in common. A contradiction is the outer limit: no two propositions that say something have it in common.
+
+@h 5.15 Probability
+
+@ 5.151
+The same table gives a measure of probability. Count the rows in which $r$ is true. Then count in how many of these rows $s$ is also true. The ratio is the probability that $r$ gives to $s$. The instrument above shows this ratio.
+
+@ 5.1511
+So probability is not about a special kind of object or fact. It is a relation between propositions.
+
+@ 5.152
+Two elementary propositions give each other the probability ½. If $s$ follows from $r$, the ratio is 1. Logical certainty is the limiting case of probability.
+
+@ 5.153
+One proposition alone has no probability. An event occurs or it does not occur. Probability exists only relative to what we know.
+
+@ 5.155
+The example of the urn. “White and black are equally probable” does not describe the balls. It says: what I know gives no more support to one result than to the other. An experiment can confirm only that the results do not depend on the conditions that I do not know.
+
+@ 5.156
+We use probability when we do not know a fact completely, but know something about its form. A statement of probability is a summary of other propositions.
+
+@h 5.2 Operations
+
+@ 5.22
+The structures of propositions have internal relations to one another. For example, “not $p$” is related to “$p$” in a fixed way. An [[operation|operation]] makes such a relation visible: it shows one proposition as made from others.
+
+@ 5.233
+An operation is the step from one proposition to another. Which steps are possible depends on the forms of the propositions. The step from each member of a series to the next is an operation.
+
+@ 5.2341
+Denial, “and”, “or” are operations. They take propositions and give a proposition. Denial reverses the sense of a proposition.
+
+@ 5.242
+An operation is not a form. It marks the difference between two forms. The same operation can lead from $p$ to $q$ and then from $q$ to $r$.
+
+@ 5.251
+An operation says nothing. Only its result says something. And an operation is not a function. A function cannot take itself as its input ({3.333}). But an operation can be applied to its own result: you can deny a denial.
+
+@ 5.2523
+When you apply an operation to its own result again and again, you get a series. Wittgenstein writes a series as a bracket with three parts: the first member, any member, and the member that follows it. This is the exact meaning of “and so on”. The general form of proposition at Station 6 has this shape.
+
+@ 5.254
+Operations can cancel each other. Two denials give the first proposition again: “∼∼$p$” says the same as “$p$”.
+
+@ 5.3
+Now the claim of proposition 5 has a second form. Every proposition is the result of truth-operations on elementary propositions. A truth-operation on truth-functions gives a truth-function again. So you never leave the system.
+
+@ 5.32
+The tables of {4.31} can also be used when $p$ and $q$ are complex. And each truth-function is reached in a finite number of steps.
+
+@h 5.4 No logical objects
+
+@ 5.4
+At {4.0312} you saw the fundamental thought: logical words do not stand for things. Here are the arguments.
+
+@ 5.41
+First: different combinations of operations can give the same truth-function. Then they are the same proposition. If the logical signs were names of things, the combinations would be about different things.
+
+@ 5.42
+Second: the logical signs can be defined by one another in many ways. You can define “if” from “not” and “or”. You can also define “or” from “not” and “if”. True building blocks could not be exchanged in this way.
+
+@ 5.43
+Third: from one proposition $p$ there would follow infinitely many others: “∼∼$p$”, “∼∼∼∼$p$”, and so on. This is hard to believe if each says something new. But they all say the same as $p$. And the propositions of logic all say the same: nothing.
+
+@ 5.44
+Suppose that “∼” is the name of an object. Then “∼∼$p$” speaks about that object two times, and “$p$” does not speak about it. They would say different things. But they say the same thing: they select the same rows. So “∼” is not a name.
+
+@ 5.442
+The same disappearance occurs with the signs for “all”, “some” and “=”. And with one proposition, all results of operations on it are given at the same time.
+
+@ 5.452
+If logic had basic signs, each would have to be introduced once, for all its uses, and its place would have to be justified. Wittgenstein criticizes Russell and Whitehead's <cite>Principia Mathematica</cite>: there new signs and rules appear in the margin, in words, without justification.
+
+@ 5.454
+In logic nothing is beside something else, and nothing is more general than something else. So logic has no special numbers and no classes of things.
+
+@ 5.4541
+The Latin phrase means: simplicity is the mark of truth. Wittgenstein expects that the solutions in logic are simple and form one closed, regular structure.
+
+@h 5.46 One logical constant
+
+@ 5.4611
+The signs “∨” and “⊃” need brackets. Signs for real relations, such as “is to the left of”, do not. Nobody thinks that a bracket stands for a thing. So these signs are not signs for relations. They are like punctuation.
+
+@ 5.472
+When the logical signs are correctly introduced, all their combinations come with them. So the true basic sign of logic is not “or” or “some”. It is the general form of their combination. That is the general form of proposition: the one thing that all propositions have in common. Station 6 states it.
+
+@ 5.473
+Logic needs no help from outside. No rules are necessary to forbid wrong combinations of signs. Every combination that is possible is permitted.
+
+@ 5.4733
+If a sentence says nothing, the reason is always the same: we gave no meaning to one of its signs in this use. In “Socrates is identical”, the word “identical” has no meaning as an adjective. The sign is the same as in “$a$ is identical with $b$”, but the symbol is different ({3.323}). “Senseless” in 5.473 has the strong meaning: nonsensical.
+
+@ 5.476
+How many basic operations a logic needs depends on the notation. What is important is not a number of basic ideas. It is one rule.
+
+@h 5.5 The operation N
+
+@ 5.5
+Wittgenstein now reduces all logical words to one operation. Its name is [[n-operator|N]].
+
+@ 5.502
+The sign with the line above it stands for a selection of propositions: all the values of the variable ξ. The selection can be given in three ways. You can list the propositions. You can give a pattern that they all fit. Or you can give a rule that makes them one after the other.
+
+@ 5.51
+Give N any number of propositions. The result is true only if all of them are false. With one proposition, N($p$) is “not $p$”. With two, N($p$, $q$) is “neither $p$ nor $q$”.
+
+In 1913 Henry Sheffer had shown that “neither … nor” is sufficient to define all the other connectives. Wittgenstein's N extends this to any number of propositions at one time. Try to build the sixteen truth-functions of $p$ and $q$ with N alone.
+
+@lab 5.51 nop
+
+@ 5.511
+Logic mirrors the world. How can it use such technical devices? Wittgenstein answers with an image: the devices are all connected in one very fine net, and the net is the mirror.
+
+@ 5.512
+What denies in “∼$p$” is not the mark “∼”. It is what all the ways to write the denial of $p$ have in common: “∼$p$”, “∼∼∼$p$”, “∼$p$ . ∼$p$” and the rest. The common rule is the symbol.
+
+@ 5.514
+The same holds for “and” and “or”. And each proposition has exactly one negative: the one proposition that is completely outside it in logical space.
+
+@ 5.5151
+A proposition and the logical operations come together. “$p$” already assumes “or” and “not”, because “$p$ or $p$” says the same as “$p$”. And a negative proposition is always made with a positive one. Each assumes the other.
+
+@h 5.52 “All” and “some”
+
+@ 5.52
+For Wittgenstein, “everything is $f$” is not a new kind of proposition. Let $fa$, $fb$, $fc$ … be all propositions of the form $fx$. Apply N to all of them together. The result says that none of them is true: “nothing is $f$”. Apply N to this result: “something is $f$”.
+
+@r 5.52
+With a finite list this is clear. If there are infinitely many objects, N must take infinitely many propositions at one time. Since the 1970s there has also been a debate on whether N can express sentences that mix “all” and “some”, such as “everyone loves someone” (Fogelin said no; Geach and Soames replied). And in 1936 Church and Turing proved that there is no general mechanical test for logical truth when “all” and “some” are included. Wittgenstein's remark that there are no surprises in logic ({6.1251}) fits truth-tables better than it fits the whole of logic.
+
+@ 5.521
+Frege and Russell had explained “all” as a long “and”, and “some” as a long “or”. Wittgenstein separates two things: the selection of all propositions of a form, and the truth-operation that is applied to the selection.
+
+@ 5.523
+A sign of generality points to a pattern, and it makes visible what stays constant in the pattern.
+
+@ 5.524
+When the objects are given, “all objects” is given with them. No additional fact says that these are all.
+
+@ 5.525
+“Something is $f$” does not mean “$f$ is possible”. Possible, certain and impossible are not said by propositions. They are shown: a proposition with sense is possible, a tautology is certain, a contradiction is impossible.
+
+@ 5.5262
+You could describe the whole world with general propositions only, without one name: “there is a thing that …”. To get the usual form, you add: “and this thing is $a$”. A general proposition is composite like every other, and its truth or falsity also changes how the world can be.
+
+@h 5.53 Identity
+
+@ 5.5303
+In Wittgenstein's notation, each object has one name, and different names stand for different objects. Identity is not a relation that some objects have and others do not have. To say of two things that they are identical is nonsense. To say it of one thing says nothing.
+
+@ 5.5321
+These remarks show how to write formulas without the sign “=”. The same letter is used for the same thing, and different letters for different things.
+
+@ 5.534
+So the sign “=” is not a necessary part of a logical notation. Sentences such as “$a$ = $a$” or “everything is identical with itself” cannot be written in a correct notation at all.
+
+@ 5.535
+With them some problems disappear. Russell needed an axiom that says there are infinitely many things. For Wittgenstein that is not something a proposition can say. It would show itself in language: in the number of names with different meanings.
+
+@ 5.5352
+Two more attempts to use such signs to speak about formal concepts. Russell wrote “$p$ ⊃ $p$” to say that $p$ is a proposition. Others wrote “nothing is identical with itself” to say that there are no things. Both fail. Here “nonsense” and “senseless” have the strong meaning.
+
+@h 5.54 A sentence in a sentence
+
+@ 5.54
+In the general form, a proposition occurs in another proposition in one way only: as the basis of a truth-operation.
+
+@ 5.541
+This is a problem case. In “Anna believes that it rains”, the proposition “it rains” occurs in a larger proposition. But the truth of the whole does not depend on the truth of the part: Anna can believe something false. This seems to contradict proposition 5.
+
+@ 5.542
+Wittgenstein's answer is short and obscure.
+
+@r 5.542
+A common explanation: Anna's belief is itself a fact, an arrangement of elements in her mind, and this fact pictures the situation. So the sentence connects one fact with another fact, element by element. No simple “subject” has a relation to a proposition.
+
+@ 5.5421
+Wittgenstein draws a conclusion for psychology. There is no simple soul or subject of the kind that was then assumed. That which thinks and believes is composite.
+
+@ 5.5422
+Russell had a theory in which a person who judges stands in a relation to several separate things. Wittgenstein's objection: on that theory a person could judge nonsense, for example that “the table penholders the book”. A correct account must exclude this.
+
+@ 5.5423
+To see a complex thing is to see that its parts are combined in one definite way. The drawing of the cube can be seen in two ways. You do not see one thing with two interpretations. You see two different facts.
+
+@h 5.55 What logic cannot say in advance
+
+@ 5.55
+What forms do elementary propositions have? How many names does one contain? Logic cannot answer this in advance.
+
+@ 5.551
+If a question can be decided by logic, it can be decided without a look at the world. If we must look at the world to answer it, it was not a question of logic.
+
+@ 5.5521
+Logic does not depend on *how* the world is. It does assume *that* there is something. But this is not an experience, because every experience is that something is so and not otherwise.
+
+@ 5.5542
+Russell had said that there are relations with two terms, with three terms, and so on. Wittgenstein asks: how many? No number is special. To give a list of the forms would be arbitrary. We cannot even ask in advance whether we will need a sign for a relation with 27 terms.
+
+@ 5.556
+In logic we deal only with that which makes all forms possible, not with specific forms. Only that which we construct ourselves can we foresee.
+
+@ 5.5561
+The world of experience has its limit in the totality of objects. The same limit appears in language as the totality of elementary propositions.
+
+@ 5.5563
+This remark is important and is often forgotten. Wittgenstein does not want to replace everyday language by an ideal language. Our everyday sentences are in perfect logical order as they are. The analysis only makes that order visible.
+
+@ 5.5571
+Logic tells us that there must be elementary propositions. Which ones there are is decided by the application of logic: by the analysis of actual language. Logic and its application touch, but they do not overlap.
+
+@h 5.6 The limit and the self
+
+@ 5.6
+This is one of the best-known sentences of the book. It is often misread. It does not mean that a person with more words has a larger world. “Language” here means all propositions that can be formed. “My world” means everything that I could say is the case or is not the case. The two have the same limit, because logic bounds both.
+
+@ 5.61
+We cannot draw the limit from the outside. We cannot say: “The world contains this, but not that”, where “that” is something that logic excludes. To exclude it we would have to describe it. Then it would be thinkable.
+
+@ 5.62
+[[solipsism|Solipsism]] is the view that only I and my experience exist. Wittgenstein says something subtle about it. The solipsist tries to say: “The world is my world.” As a statement this fails. It has no opposite that we can picture: I cannot picture a world that is not seen from where I am. But the attempt points at something that shows itself. Every description of the world is given in the language that I understand.
+
+@ 5.63
+The world is not one thing and my life a second thing in it. My world is all that I can meet.
+
+@ 5.631
+Where is this “I”? It is not in the world. Imagine a book with the title “The world as I found it”. It reports everything: all the facts, including the facts about my body and my psychology. The subject that finds the world is not an item in the book.
+
+@ 5.633
+Wittgenstein compares this with the eye and the field of sight. You do not see your eye in the field. And nothing in the field tells you that an eye sees it.
+
+@ 5.6331
+The drawing shows what the field of sight is *not* like. The eye is not a part of what is seen.
+
+@ 5.634
+Nothing in experience must be as it is. Everything that we can see or describe could be different. So no part of experience is fixed in advance, and no part of it is the “I”.
+
+@ 5.64
+So the self decreases to a point without size. It is a limit, not a part. And then solipsism and realism are the same. If the “I” is not a thing in the world, then nothing remains of “only my world exists” except this: the world exists.
+
+@ 5.641
+The “I” of philosophy is not the human being, not the body, and not the mind that psychology studies. It is the limit of the world.

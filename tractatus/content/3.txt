@@ -1,0 +1,166 @@
+@ 3
+To think is to make logical pictures. This is a claim about structure. It is not a claim about psychology. Wittgenstein does not ask what happens in a mind. He asks what a [[thought|thought]] must be so that it can be true or false.
+
+@ 3.01
+If you had all true thoughts together, you would have a complete picture of the world.
+
+@ 3.02
+A thought is a picture, and a picture shows a possible situation. So everything that can be thought is possible.
+
+@ 3.03
+There is no “illogical thought”. An illogical picture would be a picture without form, and that is not a picture.
+
+@ 3.0321
+You cannot give the coordinates of a point that does not exist. In the same way, language cannot describe something that “contradicts logic”. A drawing can show a ball that falls upwards, against physics. No drawing can show a figure that breaks the rules of space.
+
+Logic is not a fence around thought with forbidden ground behind it. There is no ground behind it.
+
+@ 3.05
+A thought that is true *a priori* would be true before any comparison with the world. You would see its truth in the thought alone. Remark {2.225} has excluded this already for pictures. No thought with sense is of this kind.
+
+@tn 3.05
+The sentence is not complete in this edition. It continues the thought of 3.04: only in that case could we know *a priori* that a thought is true.
+
+@h 3.1 The sentence as a fact
+
+@ 3.12
+Two terms. The [[propositional-sign|propositional sign]] is the sentence that you can see or hear: ink, sound. The [[proposition|proposition]] is this sign in use, projected onto the world. “Projection” is a term from geometry: you draw lines from a figure to a surface and get an image of the figure. Here it means the rule that connects the signs with a possible situation.
+
+@tn 3.12
+In the original the word for “proposition” is also the usual word for “sentence”. In this book it means a sentence that is used to say that something is the case.
+
+@ 3.13
+A sentence does not contain the situation that it describes. It contains only the means to show it. A plan of a house is not a house. But the plan has the form of the house in it.
+
+@ 3.142
+A sentence looks like a list of words. It is not a list. In “the book is on the table” it is important which word is in which position. A set of names in no order says nothing. Only an arrangement, which is a fact, can say something.
+
+@ 3.143
+In writing, a sentence and a word look similar: both are rows of letters. This hides the difference. Frege treated sentences as complex names. Wittgenstein thinks that this is a basic mistake.
+
+@ 3.1432
+Wittgenstein makes the point with an experiment in thought: build the sentence from furniture. Then you see that the arrangement does the work.
+
+Remark 3.1432 says the same in symbols. “$aRb$” can be a sentence for “$a$ has the relation $R$ to $b$”. The letter $R$ is not a third name between two names. What says that $a$ is related to $b$ is a fact about the signs: “$a$” is on the left of “$R$”, and “$b$” is on the right. A fact is expressed by a fact.
+
+@ 3.144
+You can give a name to a thing. You cannot give a name to a situation. You can only describe it, with a sentence. A sentence can be right or wrong, and a name cannot.
+
+@tn 3.144
+The word for “sense” in the original can also mean “direction”. An arrow has a direction. A proposition points at a situation, and it can point correctly or incorrectly. A name, like a point, cannot be wrong.
+
+@h 3.2 Names
+
+@ 3.203
+When analysis is complete, a proposition consists of [[name|names]]. A name stands for one simple object. That object is its [[meaning|meaning]].
+
+@ 3.21
+The arrangement of the names in the sentence corresponds to the arrangement of the objects in the situation. This is the picture idea of {2.15}, now for sentences.
+
+@ 3.221
+A name does not describe its object. It only stands for it. So you cannot use a sentence to say what an object is. You can only say how it is: what it is combined with.
+
+@ 3.23
+Why must there be simple signs? Because the sense of a sentence must be definite. If analysis had no end, it would never be fixed what exactly a sentence says. This is the argument of {2.0211} from the side of language.
+
+@ 3.24
+A sentence about a complex thing depends on sentences about the parts of the thing. If the complex does not exist, the sentence is false. It is not nonsense. And a sign for a complex can be replaced by a definition that gives its parts.
+
+@ 3.251
+Wittgenstein believes that each proposition has exactly one complete analysis into names. He does not give a complete analysis of any proposition. Later he decided that this demand was a mistake.
+
+@ 3.261
+A sign that has a definition gets its meaning through the signs in the definition. A name has no definition. It reaches its object directly.
+
+@ 3.263
+How can you learn what a name means, if it has no definition? Only from sentences in which it is used. But you understand those sentences only if you know the name already. Wittgenstein states this circle and does not remove it. You do not get the meaning of a name from an explanation. You see it in the use ({3.262}).
+
+@ 3.3
+Keep two words apart. [[sense|Sense]] belongs to propositions: it is the situation that the proposition shows. [[meaning|Meaning]] belongs to names: it is the object that the name stands for. A name alone says nothing. It does its work only in a proposition.
+
+@h 3.31 Expressions and variables
+
+@ 3.311
+An [[expression|expression]] is any part of a sentence that is important for its sense. The same expression can occur in many sentences. It is what those sentences have in common.
+
+@ 3.313
+So you can show an expression by a pattern with gaps. Take “… is red”. The gap can be filled in many ways, and each way gives a sentence. Such a pattern is a [[variable|variable]]. Its values are all the sentences that contain the expression.
+
+@ 3.315
+If you replace every sign that has a meaning by a gap, a pure pattern remains. This pattern does not depend on any agreement about words. It is a logical form.
+
+@ 3.317
+To fix a variable is to say which sentences are its values. For this you describe signs. You say nothing about the world.
+
+@ 3.318
+A function gives a result for each thing that you put in. A sentence depends in this way on the expressions in it. Wittgenstein takes this view from Frege and Russell.
+
+@h 3.32 Sign and symbol
+
+@ 3.321
+A sign is what you see or hear. A [[symbol|symbol]] is a sign together with its logical use. One sign can belong to different symbols.
+
+@ 3.322
+That two things have the same sign tells you nothing about the things. Signs are chosen freely.
+
+@ 3.323
+Everyday language uses one sign for different symbols all the time, and it hides the difference.
+
+@lab 3.323 signs
+
+@ 3.325
+This is Wittgenstein's diagnosis. We see one word, and we think that there is one kind of thing. Many problems of philosophy start in this way. The remedy is a notation in which each sign has one kind of use. Frege and Russell started to build such notations. The rest of the book uses one.
+
+@ 3.327
+You find the symbol when you look at how the sign is used with sense. The sign alone does not show it.
+
+@ 3.328
+Occam's razor is the old rule that you must not assume more things than are necessary. Wittgenstein gives it a logical turn. A sign that does no work in the notation has no meaning. A sign that does work has meaning.
+
+@h 3.33 Logical syntax
+
+@ 3.33
+The rules for the use of signs must be stated for the signs alone. They must not mention the things that the signs stand for.
+
+@ 3.331
+Russell made rules that divide things into types, to prevent contradictions. To state the rules, he had to speak about what his signs stand for. For Wittgenstein this shows that the rules are wrong in kind. A correct notation needs no such rules. In it the forbidden combinations cannot be written.
+
+@ 3.332
+A sentence cannot be about itself, because a sign cannot be a part of itself.
+
+@ 3.333
+This is Wittgenstein's answer to Russell's paradox. The paradox arises when a function is applied to itself. Wittgenstein says that this is not possible. A sign for a function already fixes what kind of sign can fill its gap, and it is not of that kind. If you write “$F(F(fx))$”, the two letters $F$ look the same, but they are different symbols.
+
+@ 3.334
+If you know how each sign signifies, the rules for combining signs follow. They do not need to be added.
+
+@h 3.34 What is essential in a notation
+
+@ 3.341
+Each notation has accidental features, for example the shapes of its letters. The essential features are those that all notations with the same sense have in common.
+
+@ 3.3411
+So the “real name” of an object is not one specific mark. It is what all marks for that object have in common.
+
+@ 3.3421
+Much in a notation is by agreement. But when one thing is agreed, other things follow. And that a certain notation is possible at all shows something about the world.
+
+@ 3.343
+A definition is a rule to translate from one notation into another. All correct notations can be translated into one another.
+
+@ 3.3441
+An example. There are many notations for “not”, “and”, “or”. All of them can be replaced by a notation that has only “not” and “or”. That this is possible tells us something general about all of them.
+
+@ 3.3442
+Analysis is not arbitrary. The same complex sign is analysed in the same way in every sentence.
+
+@h 3.4 The whole space at once
+
+@ 3.411
+A proposition marks one place in logical space. A place in geometry is a possibility: something can be there. A logical place is also a possibility: a situation can exist.
+
+@ 3.42
+But the whole space must be there before you can mark a place. If you understand “it rains”, you also understand “it does not rain” and “it rains or it snows”. You do not learn these one after the other. They come with the first, as the whole grid of coordinates comes with one point.
+
+@ 3.5
+This connects the station with the next one. A thought is not something behind the sentence. It is the sentence in use.

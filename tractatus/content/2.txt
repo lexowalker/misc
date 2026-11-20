@@ -1,0 +1,167 @@
+@h 2.01 Atomic facts and objects
+
+@tn< 2.01
+*Atomic fact* is this translation's term for the simplest possible fact: a fact that has no smaller facts as parts. Later translations say *state of affairs*. Be careful. This translation also uses “state of affairs”, but for something different: any possible situation, simple or complex.
+
+@ 2.01
+An [[atomic-fact|atomic fact]] is a number of objects that are joined together. “[[object|Object]]” is also a technical term. It does not mean a table or a star. The next remarks say what it means.
+
+@ 2.012
+An object is not first there alone, and then put into facts. To be a possible part of atomic facts belongs to what an object is. Which atomic facts it can be part of is fixed from the start.
+
+@ 2.0121
+The comparison in the fourth paragraph helps. You cannot think of a body without space around it. In the same way you cannot think of an object without its possible connexions to other objects. The object and its possibilities come together.
+
+@ 2.0122
+An object is independent in one way: it is not bound to one situation. It can occur in many. But it must occur in some situation. That is its dependence. The sentence in brackets says the same about words: a word does not have one life alone and a second life in sentences.
+
+@tn 2.0122
+Here “state of affairs” and “circumstances” mean possible situations in general, not atomic facts.
+
+@ 2.01231
+To know an object is to know what it *can* combine with. These are its internal qualities. They cannot change. Its external qualities are the facts in which it is in fact a part. They can change, and you do not need them to know the object.
+
+@ 2.0124
+The objects carry all possibilities in them. So when you have all objects, you have the whole of logical space. No possibility is added later.
+
+@ 2.0131
+Each object has a “space” of possibilities around it. Wittgenstein gives familiar examples. A speck in the field of sight can have any colour, but it cannot have no colour. A tone can have any pitch, but it must have some pitch.
+
+@r 2.0131
+These examples are comparisons. The text does not say that specks or tones are objects in the strict sense of this book.
+
+@ 2.0141
+This range of possibilities is the [[form|form]] of the object.
+
+A comparison (it is not Wittgenstein's): you know what a bishop in chess is when you know all the moves that it can make. You do not need to know where it is on the board now.
+
+@h 2.02 Substance
+
+@ 2.02
+An object is simple. It has no parts. A table has parts, so a table is not an object in this sense. Objects are the points where analysis stops.
+
+Wittgenstein gives no example of an object and no example of an atomic fact. This is deliberate. He does not claim that he has found them. He claims that logic requires them.
+
+@ 2.0201
+This is the idea of analysis. A statement about a complex thing can be replaced by statements about its parts, together with statements that say how the parts are joined.
+
+@ 2.021
+The totality of objects is the [[substance|substance]] of the world: that which is there whatever the facts are. A compound thing can come apart, so it cannot be part of the substance.
+
+@deep 2.0212 Why must there be simple objects?
+Remarks 2.0211 and 2.0212 give the argument in two lines. It is one of the hardest steps in the book.
+
+r: Here is a common way to rebuild it. Take a sentence about a complex thing: “The broom is in the corner.” A broom is a stick that is attached to a brush. If the stick and the brush come apart, there is no broom, and the sentence is about nothing. So the sentence has sense only if another sentence is true: “The stick is attached to the brush.”
+
+r: Now suppose that everything is complex in this way, without end. Then each sentence has sense only if a second sentence is true, and the second only if a third is true. We could never know that a sentence has sense before we know facts about the world.
+
+r: But we do understand a sentence before we know if it is true. So the chain must stop. It stops at names for simple objects. A simple object has no parts that can come apart.
+
+r: The broom is Wittgenstein's own example, from his later book <cite>Philosophical Investigations</cite>. There he uses it to criticize this argument.
+
+@ 2.023
+You can imagine a world that is very different from the real one. But you imagine it with the same building blocks in a different arrangement. So every imagined world has something in common with the real world: the objects, and with them the range of possible arrangements.
+
+@ 2.0232
+The objects alone give only possibilities. A material property, for example that something is red, is a matter of how objects are arranged. So an object does not itself have a colour. Colour appears only when objects are combined.
+
+@ 2.02331
+Suppose that two objects have the same form: the same possibilities. Then nothing internal distinguishes them. They are simply two. If they also had all external properties in common, no description could select one of them.
+
+@ 2.025
+Substance does not depend on the facts. It is “form and content”.
+
+@r 2.025
+The text does not explain “content” here. A common reading: the form is the possibilities of combination, and the content is the objects themselves, which names stand for.
+
+@ 2.0251
+Space, time and colour are “forms of objects”: they are kinds of possibility. To be spatial is to be able to have a place. This is not the same as to have a specific place.
+
+@ 2.0272
+These four remarks give the result. The objects are fixed. The same objects are there in every possible world. What changes is their arrangement, and an arrangement of objects is an atomic fact.
+
+@h 2.03 How objects make facts
+
+@ 2.03
+Nothing additional holds the objects together. There is no glue between two links of a chain. The links hold one another.
+
+@ 2.033
+Two terms that return in the whole book. The [[structure|structure]] of a fact is the definite way in which its parts are in fact combined. The form is the possibility of that structure. Structure is actual. Form is possible.
+
+@ 2.034
+A complex fact has no structure of its own beyond the structures of the atomic facts in it.
+
+@ 2.05
+Now the image from Station 1 is exact. The world is all the atomic facts that exist. The list is complete, so it also fixes which atomic facts do not exist.
+
+@ 2.06
+That an atomic fact does not exist is also something about reality. Wittgenstein calls it a negative fact.
+
+@ 2.062
+Atomic facts are independent of one another. If you know one, you can conclude nothing about a second. This is why three atomic facts give eight possible worlds, and why $n$ atomic facts give 2<sup>$n$</sup>.
+
+@r 2.063
+There is a small puzzle. Remark 2.04 says that the world is the existent atomic facts. Remark 2.06 says that reality also includes the non-existence of atomic facts. Now 2.063 says that the total reality is the world. Remark 2.05 connects them: the complete list of what exists already fixes what does not exist.
+
+@h 2.1 Pictures
+
+@ 2.1
+Here the book turns from the world to the way we represent it.
+
+@ 2.12
+The word for “[[picture|picture]]” in the original also means model. In a notebook from 1914 Wittgenstein mentions a court in Paris. There a road accident was shown to the judges with toy cars and dolls. A model can show an accident because of three things. The next remarks give them one by one.
+
+@ 2.131
+*One.* Each part of the model stands for one thing. This toy stands for that car.
+
+@ 2.141
+*Two.* The parts of the model have a definite arrangement. So a picture is itself a fact: the fact that its parts are arranged in this way. Only a fact can show a fact. A heap of toys in a bag shows nothing.
+
+@ 2.151
+*Three.* The model and reality have a form in common. That the toys stand in this arrangement says that the cars stand in the same arrangement. This works because toys can be arranged in space in all the ways in which cars can be arranged in space. This common range of possible arrangements is the [[form-of-representation|form of representation]].
+
+@lab 2.151 picture
+
+@ 2.15121
+A ruler touches the thing that you measure only with its marks. In the same way a picture touches reality only at definite points: at its elements, each of which stands for one thing. Everything between the points is done by the arrangement.
+
+@ 2.1515
+The connexions between the elements of the picture and the things are part of the picture. Without them it is only a pattern. Wittgenstein calls them feelers: with them the picture reaches reality.
+
+@ 2.161
+A picture and the thing that it shows cannot be completely different. Something must be the same in both.
+
+@ 2.171
+That common element is the form of representation. A spatial picture can show spatial things. A coloured picture can show the colours of things.
+
+@ 2.172
+This remark is the first sign of the main idea of the book. A picture shows a situation because it has a form in common with the situation. But a picture cannot make a picture of that form. A map shows the land by spatial relations. The map cannot also show what a spatial relation is. It can only use spatial relations.
+
+The difference between [[say-show|saying and showing]] starts here.
+
+@ 2.174
+A picture looks at its object from a position outside the object. So it can be right, and it can be wrong. But it cannot take a position outside its own form. So it cannot be right or wrong about that form.
+
+@h 2.18 Logical form
+
+@ 2.182
+Not every picture is spatial. A musical score is a picture of sounds, and a score makes no sound. But every picture has a minimum in common with what it shows: [[logical-form|logical form]]. This is the bare possibility of structure. A picture that needs only this minimum is a logical picture. So every picture is also a logical picture.
+
+@ 2.19
+Because logical form is the form of reality itself, a logical picture can show anything that can be the case.
+
+@h 2.2 Sense and truth
+
+@ 2.203
+A picture shows a possible situation. The possibility is in the picture itself: its elements *can* be arranged in this way, so the things can be arranged in this way.
+
+@ 2.21
+Because the picture shows a possible situation from outside, it can agree with reality, and it can fail to agree.
+
+@ 2.222
+[[sense|Sense]] and truth are two different things. The sense of a picture is the situation that it shows. You find the sense when you look at the picture alone. Truth is the agreement of that sense with reality.
+
+@ 2.225
+To know if the picture is true, you must look at the world. No picture is its own proof.
+
+This is the second sign of where the limit will be. Every picture that has sense can be true and can be false. Something that cannot be false is not a picture of the world.

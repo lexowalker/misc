@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tractatus Expedition</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A guided expedition through Wittgenstein's Tractatus Logico-Philosophicus: all 526 remarks in order, plain explanations, and interactive instruments.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,400&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="cosmos" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<div id="labels" aria-hidden="true"></div>
+
+<header class="hud">
+  <a class="brand" href="#s0">Tractatus <span>Logico-Philosophicus</span></a>
+  <nav class="rail" id="rail" aria-label="Stations"></nav>
+  <div class="tools">
+    <div class="depth" role="group" aria-label="Reading depth">
+      <span>Depth</span>
+      <button type="button" data-depth="1" aria-pressed="false" title="Show only the direct comments on each main proposition">1</button>
+      <button type="button" data-depth="2" aria-pressed="false" title="Show two levels of comments">2</button>
+      <button type="button" data-depth="3" aria-pressed="false" title="Show three levels of comments">3</button>
+      <button type="button" data-depth="all" aria-pressed="true" title="Show every remark">All</button>
+    </div>
+    <button type="button" id="btn-atlas" aria-pressed="false" title="Open the map of all 526 remarks">Atlas</button>
+  </div>
+</header>
+
+<main id="journey">
+
+<!-- ═══════════════════════════ DEPARTURE ═══════════════════════════ -->
+<section class="stage" id="s0" data-stage="0" data-name="Departure">
+  <header class="arrival opening">
+    <p class="coord">Ludwig Wittgenstein · 1921 · 526 numbered remarks</p>
+    <h1><span>Tractatus</span> <span>Logico-</span><span>Philosophicus</span></h1>
+    <p class="lede">A guided expedition to the limit of what can be said.</p>
+    <blockquote class="epigraph">
+      <p>What can be said at all can be said clearly; and whereof one cannot speak thereof one must be silent.</p>
+      <footer>Wittgenstein, from the preface</footer>
+    </blockquote>
+    <p class="hint">Scroll to begin <span aria-hidden="true">↓</span></p>
+  </header>
+
+  <div class="body">
+    <h3>The book</h3>
+    <p>Ludwig Wittgenstein wrote this book while he was a soldier in the First World War. He completed it in 1918. It appeared in German in 1921 and in English in 1922. It has about 75 pages.</p>
+    <p>The book has one aim. It tries to find the limit of what language can say. Wittgenstein states the aim in his preface:</p>
+    <blockquote class="w plainquote">
+      <div class="wt"><p>The book will, therefore, draw a limit to thinking, or rather—not to thinking, but to the expression of thoughts; for, in order to draw a limit to thinking we should have to be able to think both sides of this limit (we should therefore have to be able to think what cannot be thought).</p>
+      <p>The limit can, therefore, only be drawn in language and what lies on the other side of the limit will be simply nonsense.</p></div>
+    </blockquote>
+    <p>The method is unusual. The book does not argue in chapters. It gives 526 short remarks. Some are one line long. Each remark has a number, and the number gives its place in a strict order.</p>
+    <p>This guide contains the complete text. All 526 remarks are here, in the order of the book. No remark is shortened.</p>
+
+    <h3>How the numbers work</h3>
+    <p>Seven remarks have whole numbers, 1 to 7. They are the main propositions. Remark 2.1 is a comment on remark 2. Remark 2.11 is a comment on 2.1. Each added digit goes one level deeper. Wittgenstein explains this in his only footnote to the main text:</p>
+    <blockquote class="w plainquote"><div class="wt" id="footnote-1"></div></blockquote>
+    <p>Select a number. You see the chain of remarks that it hangs on.</p>
+    <div class="lab" data-lab="numbers"></div>
+    <aside class="r"><p>Wittgenstein does not explain the zeros in numbers such as 2.01. Most readers take 2.01 to be a comment on 2 that has less weight than 2.1, or that prepares it.</p></aside>
+
+    <h3>The map</h3>
+    <p>In this guide the book is also a place. Each remark is one star. Each star is attached to the remark that it comments on. At this moment you see a cloud of points without clear order. As you read, the connections appear, one station after another.</p>
+    <p>The <button type="button" class="linklike" data-open-atlas>Atlas</button> shows the full map at any time. There you can go to any remark by its number, and see what it comments on and what comments on it.</p>
+
+    <h3>How deep to read</h3>
+    <p>On the route, a remark is set further to the right when it is deeper in the order. You can also read the book in layers. The control <b>Depth</b> at the top selects how many levels you see.</p>
+    <p class="depthdemo"><button type="button" data-depth="1">Depth 1</button> shows only the direct comments on each main proposition. <button type="button" data-depth="2">Depth 2</button> and <button type="button" data-depth="3">Depth 3</button> add one level each. <button type="button" data-depth="all">All</button> shows every remark. The guide starts with all of them.</p>
+    <p>Many readers think that this is how Wittgenstein wanted the book to be read: first the main line, then the comments on it, then the comments on the comments.</p>
+
+    <h3>Three voices</h3>
+    <p>The guide uses three voices. Each has its own typeface, so that you always know who speaks.</p>
+    <blockquote class="w sample" data-n="1.2"></blockquote>
+    <p><strong>This is Wittgenstein.</strong> His text is set like the one above, with his number in the margin. It is always complete, and the guide never changes it. Select a number to see the remark on the map.</p>
+    <p><strong>This is the guide.</strong> It stands between the remarks and explains them in plain words. A note explains the remark above it, and often the few remarks before that one. It uses short sentences on purpose. A dotted line marks a <span class="t" data-t="proposition">technical term</span>. Select the term to see its definition.</p>
+    <aside class="r"><p><strong>This marks an interpretation.</strong> Scholars disagree about much of this book. Where the guide goes beyond what the text says, it tells you.</p></aside>
+    <aside class="tn"><p><strong>This marks a note on translation.</strong> The English text is the first translation, from 1922. Frank Ramsey, then a student, did most of the work. C.&nbsp;K.&nbsp;Ogden edited it, and Wittgenstein corrected it. The guide follows the edition of the Ludwig Wittgenstein Project, which includes the corrections of later printings. A later translation (Pears and McGuinness, 1961) uses different English words for some key terms. The guide tells you where this matters.</p></aside>
+
+    <h3>The route</h3>
+    <ol class="route">
+      <li><a href="#s1"><b>1</b><span>The world</span><i>What there is: facts.</i></a></li>
+      <li><a href="#s2"><b>2</b><span>Facts and pictures</span><i>What facts are made of. How one fact can show another.</i></a></li>
+      <li><a href="#s3"><b>3</b><span>Thought</span><i>A thought is a logical picture. How it appears in signs.</i></a></li>
+      <li><a href="#s4"><b>4</b><span>Language</span><i>What a proposition can say, and what it can only show.</i></a></li>
+      <li><a href="#s5"><b>5</b><span>Logic</span><i>How all propositions are built from the simplest ones.</i></a></li>
+      <li><a href="#s6"><b>6</b><span>The limit</span><i>The one form of all propositions, and what falls outside it.</i></a></li>
+      <li><a href="#s7"><b>7</b><span>Silence</span><i></i></a></li>
+    </ol>
+    <p>One warning before departure. Near the end, the book says that its own sentences are nonsense (<a class="ref" data-n="6.54">6.54</a>). This is not a slip. Keep it in mind during the whole journey. We return to it at the end.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 1 ═══════════════════════════ -->
+<section class="stage" id="s1" data-stage="1" data-name="The world">
+  <header class="arrival">
+    <p class="coord">Station 1 · Remarks 1 – 1.21 · 7 remarks</p>
+    <div class="numeral" aria-hidden="true">1</div>
+    <h2 class="main" data-main="1"></h2>
+    <p class="lede">The book starts with the largest subject there is: everything. Its first step is to say what kind of “everything” the world is.</p>
+    <nav class="branches" data-branches="1" aria-label="The direct comments on proposition 1"></nav>
+  </header>
+  <div class="body book" data-book="1">
+    <!--BOOK:1-->
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>The world is what is the case.</li>
+        <li>It consists of facts, not of things.</li>
+        <li>Facts have a place in a space of possibilities.</li>
+        <li>A complete list of facts also fixes what is not the case.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 2 ═══════════════════════════ -->
+<section class="stage" id="s2" data-stage="2" data-name="Facts and pictures">
+  <header class="arrival">
+    <p class="coord">Station 2 · Remarks 2 – 2.225 · 79 remarks</p>
+    <div class="numeral" aria-hidden="true">2</div>
+    <h2 class="main" data-main="2"></h2>
+    <p class="lede">Proposition 2 goes down to the smallest parts of the world. Then it makes the step on which the whole book depends. It says what a picture is.</p>
+    <nav class="branches" data-branches="2" aria-label="The direct comments on proposition 2"></nav>
+  </header>
+  <div class="body book" data-book="2">
+    <!--BOOK:2-->
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>The simplest facts are atomic facts. They are combinations of simple objects.</li>
+        <li>Atomic facts are independent of one another.</li>
+        <li>A picture is a fact that is used as a model of another fact.</li>
+        <li>Its sense is what it shows. Its truth depends on the world.</li>
+        <li>A picture cannot represent its own form. It shows it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 3 ═══════════════════════════ -->
+<section class="stage" id="s3" data-stage="3" data-name="Thought">
+  <header class="arrival">
+    <p class="coord">Station 3 · Remarks 3 – 3.5 · 74 remarks</p>
+    <div class="numeral" aria-hidden="true">3</div>
+    <h2 class="main" data-main="3"></h2>
+    <p class="lede">A thought is a picture that needs nothing but logical form. This station shows how a thought becomes visible in signs, and how signs can mislead us.</p>
+    <nav class="branches" data-branches="3" aria-label="The direct comments on proposition 3"></nav>
+  </header>
+  <div class="body book" data-book="3">
+    <!--BOOK:3-->
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>A thought is a logical picture of a possible situation.</li>
+        <li>A proposition is a thought that is expressed in signs.</li>
+        <li>The propositional sign is a fact. The arrangement of its parts does the work.</li>
+        <li>Names have meaning. Only propositions have sense.</li>
+        <li>The same sign can hide different symbols. A clear notation shows the difference.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 4 ═══════════════════════════ -->
+<section class="stage" id="s4" data-stage="4" data-name="Language">
+  <header class="arrival">
+    <p class="coord">Station 4 · Remarks 4 – 4.53 · 109 remarks</p>
+    <div class="numeral" aria-hidden="true">4</div>
+    <h2 class="main" data-main="4"></h2>
+    <p class="lede">A proposition is a picture that is made of words. From this follows what language can do, what philosophy is, and the difference between saying and showing.</p>
+    <nav class="branches" data-branches="4" aria-label="The direct comments on proposition 4"></nav>
+  </header>
+  <div class="body book" data-book="4">
+    <!--BOOK:4-->
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>A proposition is a picture. You understand it when you know what is the case if it is true.</li>
+        <li>Logical words do not stand for objects.</li>
+        <li>Philosophy is an activity of clarification, not a set of truths.</li>
+        <li>What can be shown cannot be said.</li>
+        <li>A proposition selects among truth-possibilities. Tautology and contradiction are the two limits.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 5 ═══════════════════════════ -->
+<section class="stage" id="s5" data-stage="5" data-name="Logic">
+  <header class="arrival">
+    <p class="coord">Station 5 · Remarks 5 – 5.641 · 151 remarks</p>
+    <div class="numeral" aria-hidden="true">5</div>
+    <h2 class="main" data-main="5"></h2>
+    <p class="lede">The technical centre of the book. One operation builds all propositions from elementary ones. Then, without warning, the path arrives at the limit of the world and at the self.</p>
+    <nav class="branches" data-branches="5" aria-label="The direct comments on proposition 5"></nav>
+  </header>
+  <div class="body book" data-book="5">
+    <!--BOOK:5-->
+    <div class="sum">
+      <h4>What you have now</h4>
+      <ul>
+        <li>Every proposition is a truth-function of elementary propositions.</li>
+        <li>Inference is containment of truth-grounds. It adds nothing.</li>
+        <li>There are no logical objects. One operation, N, builds all propositions.</li>
+        <li>The limits of language are the limits of the world.</li>
+        <li>The subject is not a part of the world. It is its limit.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 6 ═══════════════════════════ -->
+<section class="stage" id="s6" data-stage="6" data-name="The limit">
+  <header class="arrival">
+    <p class="coord">Station 6 · Remarks 6 – 6.54 · 105 remarks</p>
+    <div class="numeral" aria-hidden="true">6</div>
+    <h2 class="main" data-main="6"></h2>
+    <p class="lede">One formula gives the form of everything that can be said. The remainder of the book examines what the formula excludes: logic, mathematics, the laws of nature, value, and the book itself.</p>
+    <nav class="branches" data-branches="6" aria-label="The direct comments on proposition 6"></nav>
+  </header>
+  <div class="body book" data-book="6">
+    <!--BOOK:6-->
+      </div>
+</section>
+
+<!-- ═══════════════════════════ 7 ═══════════════════════════ -->
+<section class="stage silence" id="s7" data-stage="7" data-name="Silence">
+  <div class="seven">
+    <div class="num7">7</div>
+    <p class="en" data-main-en="7"></p>
+  </div>
+  <div class="void" aria-hidden="true"></div>
+</section>
+
+<!-- ═══════════════════════════ AFTER ═══════════════════════════ -->
+<section class="stage" id="s8" data-stage="8" data-name="Looking back">
+  <header class="arrival after">
+    <p class="coord">After the last remark · Not part of the book</p>
+    <h2 class="main plain">Looking back</h2>
+    <p class="lede">From here you see the whole structure. The text below is history and interpretation. None of it is Wittgenstein's text.</p>
+  </header>
+  <div class="body">
+    <h3>Three ways to read the ladder</h3>
+    <p>The book calls its own sentences nonsense. Readers have understood this in three main ways.</p>
+
+    <div class="readings">
+      <article>
+        <h4>There are truths that cannot be said</h4>
+        <p class="who">The older reading. For example Elizabeth Anscombe, Peter Hacker.</p>
+        <p>The sentences of the book are nonsense by its own strict measure. But they are helpful nonsense. They direct us to things that are real and can only be shown: logical form, the existence of objects, value. When the ladder is gone, we keep the insight. We stop the attempt to state it.</p>
+        <p class="but"><b>The difficulty.</b> “A truth that cannot be said” sounds like the thing that the book excludes. Frank Ramsey put it this way: what we can't say we can't say, and we can't whistle it either.</p>
+      </article>
+      <article>
+        <h4>Nonsense is only nonsense</h4>
+        <p class="who">The “resolute” reading. For example Cora Diamond, James Conant.</p>
+        <p>There are no truths that cannot be said. The sentences of the book only appear to have sense. The reader first feels that they have sense, and then sees that this feeling was an illusion. The book is a treatment for the desire to do metaphysics. No doctrine remains at the end. Only clarity remains.</p>
+        <p class="but"><b>The difficulty.</b> The logical results of the book, such as truth-tables and the account of tautology, look like real results. Wittgenstein continued to defend some of them. And it is hard to explain how plain nonsense can have such a careful structure.</p>
+      </article>
+      <article>
+        <h4>A weapon against metaphysics</h4>
+        <p class="who">The Vienna Circle in the 1920s. For example Moritz Schlick, Rudolf Carnap.</p>
+        <p>Only science says something. Metaphysics is without meaning. The last pages on ethics and the mystical are a personal addition, and you can ignore them.</p>
+        <p class="but"><b>The difficulty.</b> Wittgenstein rejected this. In 1919 he wrote to the publisher Ludwig von Ficker that the point of the book is an ethical one. He said that the work has two parts: the part that he wrote, and everything that he did not write. The second part, he said, is the important one.</p>
+      </article>
+    </div>
+    <p>The guide does not choose. You have read the text. The decision is yours.</p>
+
+    <h3>What Wittgenstein did next</h3>
+    <p>He thought that the problems were solved. He gave away the fortune that he had inherited. He worked as a teacher in village schools, as a gardener in a monastery, and as an architect. In 1929 he returned to Cambridge and to philosophy.</p>
+    <p>In the years after that he took the Tractatus apart. In the preface to his second book, <cite>Philosophical Investigations</cite> (1953), he speaks of “grave mistakes” in the first. He gave up these ideas:</p>
+    <ul class="plainlist">
+      <li><b>Independent elementary propositions.</b> The problem of colours showed that they do not work (<a class="ref" data-n="6.3751">6.3751</a>).</li>
+      <li><b>One form for all language.</b> Later he described many different “language-games”: to give orders, to tell a story, to pray, to make a joke. They have no single essence.</li>
+      <li><b>Meaning as an object.</b> Later he said: in most cases, the meaning of a word is its use in the language.</li>
+      <li><b>Final analysis.</b> Later he saw no reason to believe that sentences have one hidden, complete analysis into simple parts.</li>
+    </ul>
+    <p>He kept these: philosophy is an activity and not a theory. Its problems come from a wrong view of how our language works. Its aim is clarity.</p>
+
+    <h3>What stayed in use</h3>
+    <ul class="plainlist">
+      <li><b>Truth-tables.</b> Every logic textbook has them. The design of digital circuits uses them.</li>
+      <li><b>Logical truth as tautology.</b> For the logic of “and”, “or”, “not”, this account is standard.</li>
+      <li><b>Logical space.</b> The idea of a space of possible worlds became a basic tool of later logic and of the theory of meaning.</li>
+      <li><b>Saying and showing.</b> The difference is still discussed, in philosophy and outside it.</li>
+    </ul>
+
+    <h3>Where to go from here</h3>
+    <p>Read the book again without stops at the notes. Set <b>Depth</b> to 1 and read only the main line. Then go to 2, then 3. It takes one evening. You now know the map.</p>
+    <p>Then compare translations. Pears and McGuinness (1961) is the usual second choice. There are three recent ones: Michael Beaney (2023), Alexander Booth (2023) and Damion Searls (2024).</p>
+    <p>Good companions: G.&nbsp;E.&nbsp;M. Anscombe, <cite>An Introduction to Wittgenstein's Tractatus</cite> (1959). Roger White, <cite>Wittgenstein's Tractatus Logico-Philosophicus: A Reader's Guide</cite> (2006). Michael Morris, <cite>Wittgenstein and the Tractatus Logico-Philosophicus</cite> (2008). For his life: Ray Monk, <cite>Ludwig Wittgenstein: The Duty of Genius</cite> (1990).</p>
+
+    <h3>Terms</h3>
+    <dl class="glossary" id="glossary"></dl>
+
+    <footer class="colophon">
+      <p>Text: <cite>Tractatus Logico-Philosophicus</cite>, London 1922, translated by F.&nbsp;P.&nbsp;Ramsey and edited by C.&nbsp;K.&nbsp;Ogden. It is in the public domain. All 526 remarks are reproduced in full and in order. The wording was checked, remark by remark, against the edition of the Ludwig Wittgenstein Project. The eight diagrams of the original are redrawn.</p>
+      <p>The explanations are a guide, not an authority. Where they simplify, the text decides.</p>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<aside id="atlas" aria-label="Atlas of all remarks" hidden>
+  <div class="atlas-head">
+    <label for="atlas-q">Go to remark</label>
+    <input id="atlas-q" type="text" inputmode="decimal" autocomplete="off" placeholder="4.0312" spellcheck="false">
+  </div>
+  <div id="atlas-body"></div>
+  <p class="atlas-help">Drag to turn. Scroll or pinch to move closer. Select a star to read it.</p>
+</aside>
+
+<div id="pop" role="dialog" aria-label="Definition" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="data/tlp.js"></script>
+<script src="js/cosmos.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

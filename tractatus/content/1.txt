@@ -1,0 +1,25 @@
+@ 1
+“What is the case” means: what is so. It rains. The lamp is on the table. Each of these is a [[fact|fact]].
+
+The star at the first sentence marks Wittgenstein's only footnote to the main text. It explains the numbers. You find it above.
+
+@ 1.1
+This is the first surprise. We usually think that the world is a very large collection of things: stars, tables, people. Wittgenstein says that this is wrong. A list of things does not give you a world.
+
+Here is an example. A room contains a table, a lamp, and a book. Make a list: table, lamp, book. The list does not tell you if the book is on the table or under it. It does not tell you if the lamp is on. Two different rooms can have the same list. The rooms differ in how the things stand to one another. Those are facts.
+
+@ 1.12
+A full description of the world has two parts. The first part is all the facts. The second part is the information that these are all. With both parts you also know everything that is *not* the case. If the list is complete and “the lamp is on” is not in it, then the lamp is off.
+
+@ 1.13
+Think of every way that things could be. Wittgenstein calls this field of possibilities [[logical-space|logical space]]. The actual world is one selection from it: the possibilities that are real.
+
+This is the central image of the guide. The dark field around you stands for logical space. A lit point stands for a fact.
+
+@ 1.21
+Facts come apart cleanly. You can change one and leave all the others as they are. At the next station Wittgenstein limits this claim to the simplest facts ({2.061}). Try it with three of them.
+
+@lab 1.21 space
+
+@r 1.21
+Why does the book begin with the world, and not with language? Many readers think that the order of discovery was the opposite. Wittgenstein first asked how a sentence can say something. Then he asked what the world must be like so that sentences are possible. On this reading, the first pages are a result and not a foundation. The text does not tell you which way to read it.

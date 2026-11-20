@@ -1,0 +1,273 @@
+@tn 4
+“Significant proposition” means a proposition that has sense.
+
+@ 4.001
+Language is all propositions together. It is not a list of words.
+
+@ 4.002
+We speak without knowing how language works, as we walk without knowing which muscles we use. The grammar on the surface of a sentence is like clothing. It is made for everyday purposes. It does not show the form of the thought below it.
+
+@ 4.003
+Look at what the claim is. Wittgenstein does not say that the statements of philosophers are false. He says that most of them do not say anything. The words are there, but no picture is made.
+
+@tn 4.003
+In this translation “senseless” usually means what later translations call *nonsensical*: not a proposition at all. This matters, because the original has two different words. One is strong: nonsensical. One is mild: without sense. You will see the difference later at this station ({4.461}, {4.4611}). The translation does not always keep the two apart. The guide marks each important case.
+
+@ 4.0031
+Russell had shown that the grammatical form of a sentence can be different from its logical form. His example: “The present King of France is bald.” It looks like a statement about one person. Russell analysed it as three statements together. There is a King of France. There is not more than one. He is bald.
+
+Fritz Mauthner was a writer of the time who also criticized language, but with a sceptical aim. Wittgenstein separates himself from him.
+
+@h 4.01 A picture in words
+
+@ 4.011
+At first this seems wrong. A sentence does not look like the thing that it describes. Wittgenstein's answer: written notes do not look like music, and letters do not look like speech. They are pictures all the same.
+
+@ 4.013
+In a sentence of the form “$aRb$” you can see the picture directly: two names, one on each side of a relation sign. And a notation can have irregular parts, like the signs ♯ and ♭ in a score. These also show what they must show, in a different way.
+
+@ 4.0141
+The groove of a record does not look like a score, and a score does not look like sound. But a rule takes you from each of them to the others. That such a rule exists is their similarity. They have a structure in common. In the same way, a sentence has logical structure in common with the situation that it describes.
+
+@ 4.016
+Every comparison and every image in language is possible only because language pictures. Picture-writing shows this openly. The alphabet developed from it, and the essential thing was not lost.
+
+@h 4.02 To understand a sentence
+
+@ 4.021
+Here is the best evidence that sentences are pictures. You understand sentences that you have never heard before. “A green elephant is asleep on the roof of the opera.” Nobody explained this sentence to you. You know the words, and you see how they are arranged.
+
+@ 4.022
+The two key verbs appear together here. A proposition *shows* its sense: you can read from it which situation it pictures. And it *says* that this situation is real. Showing is what the picture does by its structure. Saying is the claim that the world agrees.
+
+@ 4.023
+A proposition leaves only one thing open: yes or no. All the rest is fixed by the proposition. So you can see in it all the logical features that reality has if the proposition is true. For the same reason you can draw conclusions from a false proposition: its structure is all there.
+
+@ 4.024
+To understand a sentence is to know what is the case if it is true. You do not need to know whether it is true.
+
+@ 4.026
+A translator does not need a list of all sentences. A dictionary of words is sufficient. Words must be explained to us. Sentences are different: with words that we know, a sentence explains itself.
+
+@ 4.03
+This is the central property of language. With a limited stock of old words we can say new things. This is possible only if the sentence is a picture: it puts known elements into a new arrangement.
+
+@ 4.0311
+In a sentence a situation is put together as a test, like a model. Each name stands for one thing, and the names are connected. The whole is like a scene that actors present on a stage.
+
+@ 4.0312
+Wittgenstein calls this his fundamental thought. Names stand for objects. But words such as “not”, “and”, “or”, “if” do not stand for anything. There is no object “not” in the world. These words have a different function: they operate on complete pictures. If this is correct, logic is not a science of special logical objects. This thought drives everything at Stations 5 and 6.
+
+@ 4.032
+A sentence pictures only because it has parts in an arrangement. This is true also for a sentence of one word. The Latin “ambulo” means “I walk”. It has two parts: the stem gives the action, and the ending gives the person.
+
+@ 4.04
+A sentence must have as many parts that can be distinguished as the situation has. Wittgenstein calls this the same multiplicity. The reference is to the physicist Heinrich Hertz. Hertz said that a model must have the same number of independent parts as the system that it models.
+
+@ 4.041
+This multiplicity is one more thing that cannot be pictured. Each picture of it would need the same multiplicity again.
+
+@ 4.0411
+An example from logic. The notation “($x$) . $fx$” means “everything is $f$”. A simpler notation fails, because it has too few parts. The notation must show three things: that there is generality, how far it extends in the formula, and which gaps belong together.
+
+@ 4.0412
+The same argument is used against a theory of perception. Some philosophers said that we see things in space because the mind adds space, as coloured glasses add a colour. But glasses add one thing to everything. They cannot give the many different relations of space.
+
+@h 4.05 True and false
+
+@ 4.06
+A sentence can be true or false only because it is a picture. You hold it against reality and compare.
+
+@ 4.061
+A sentence has its sense before the facts decide. If you forget this, you can think that “true” and “false” are two relations of the same rank between signs and things. Then “$p$” would signify truly what “∼$p$” signifies falsely.
+
+@ 4.062
+Could we agree to speak only in false sentences? No. If all understand “$p$” to mean not-$p$, then “$p$” now says that not-$p$, and it is true when not-$p$ is the case. We have changed the meaning of the sign. We have not made the false do the work of the true.
+
+@ 4.0621
+“It does not rain” pictures the same situation as “it rains”. It only reverses the claim. So the sign for “not” corresponds to nothing in reality. This is the fundamental thought of {4.0312} in one case.
+
+@ 4.063
+A comparison, and its limit. Take a black spot on white paper. For each point you can say “black” or “white”. In the same way, for each proposition you can say “true” or “false”. But there is a difference. You can point at a place on the paper before you know what black and white are. You cannot point at a proposition before it has a sense. Without sense there is nothing that could be true or false. For Frege, “is true” was like a verb that is added to the thought. Wittgenstein answers: that which is true must contain the verb already. It must be a complete proposition.
+
+@ 4.064
+To assert a sentence does not give it sense. It must have sense first. The assertion says that this sense agrees with the facts.
+
+@ 4.0641
+The same is true for denial. The denied sentence must already mark a place in logical space. The denial uses that place: it says that reality is outside it.
+
+@h 4.1 What philosophy is
+
+@ 4.11
+All true propositions together are natural science. So there is no room for a separate set of philosophical truths.
+
+@ 4.112
+Philosophy cannot be a doctrine. It is an activity: to make clear what we say. “Elucidations” are remarks that help someone to see clearly. They are tools. They are not results.
+
+@ 4.1122
+Philosophy is also not a part of psychology or of biology. The theory of knowledge had tried to examine the processes of thought. Wittgenstein examines the signs. He sees the risk that his own method becomes psychology in the same way.
+
+@ 4.116
+This is the plan of the book in a few lines. You cannot mark the limit of language by a description of what is on the other side. To describe it, you would have to say it. You mark the limit from the inside: you make fully clear what can be said. The limit shows where the clear region ends.
+
+@h 4.12 Saying and showing
+
+@ 4.12
+This idea started at {2.172}. Now it applies to all of language. A proposition can describe any situation. It cannot describe the logical form that it has in common with the situation. For that, it would have to stand outside logical form, and no proposition can do that.
+
+@ 4.121
+But logical form is not hidden. It is visible in each proposition, in the way the proposition is built. It is [[say-show|shown]].
+
+@ 4.1211
+Examples of what is shown and not said. The sentence “$fa$” shows that it is about the object $a$. Two sentences show by their structure that one contradicts the other, or that one follows from the other.
+
+@ 4.1212
+This is the shortest statement of the main idea of the book.
+
+@ 4.1213
+So when the notation is correct, the logical view is correct. Nothing more is to be done.
+
+@r 4.1213
+How strong is the difference between saying and showing? Readers disagree. For some, what is shown is a kind of truth that we understand but cannot state. For others, “what is shown” is not a hidden content. It is only our practical ability to use signs correctly. The guide leaves this open until the end.
+
+@h 4.122 Internal properties
+
+@ 4.1221
+An [[internal|internal property]] is a property of form or structure. Wittgenstein compares it with a feature of a face. It is not an additional fact about the thing. It belongs to what the thing is.
+
+@ 4.123
+The test: can you think the thing without the property? If you cannot, the property is internal. One shade of blue is lighter than another shade. This could not be different. If it were different, they would be other shades.
+
+@ 4.1241
+For this reason an internal property cannot be stated in a sentence. A sentence with sense could also be false. But here the opposite cannot be thought. The property shows itself in the sentences that describe the thing.
+
+@tn 4.124
+“Senseless” here has the strong meaning: nonsensical.
+
+@ 4.1251
+Philosophers of the time disputed whether all relations are internal or external. Wittgenstein's answer: the two kinds are different in logic. One kind can be stated. The other kind only shows itself. The dispute came from a confusion of the two.
+
+@ 4.1252
+A [[formal-series|formal series]] is a series in which each member comes from the one before by the same step. The numbers are the best-known example. The example in the text is: $b$ follows directly after $a$; there is one thing between them; there are two things between them; and so on.
+
+@h 4.126 Formal concepts
+
+@ 4.126
+“Book” is a proper concept. Some things are books, and other things are not. So “there are books” says something, and it could be false.
+
+“Object” is different. It is a [[formal-concept|formal concept]]. It does not divide things into two groups. That something is an object is shown by the kind of sign that we use for it.
+
+@ 4.1271
+In a logical notation, a formal concept is not expressed by a word. It is expressed by a kind of variable. The variable $x$ itself expresses the concept “object”.
+
+@ 4.1272
+So “there are objects” tries to say what can only be shown. Wittgenstein calls such a sentence a pseudo-proposition. “Senseless” here has the strong meaning: nonsensical.
+
+Now look at the Tractatus itself. “Objects are simple.” “The world is the totality of facts.” These sentences use formal concepts in exactly the way that this remark excludes. Remark {6.54} answers this problem.
+
+@ 4.12721
+A formal concept is given together with any one thing that falls under it. So it cannot be introduced a second time, as a basic idea beside those things. This is directed against Russell, who took both “function” and specific functions as basic ideas.
+
+@ 4.1273
+The general member of a formal series can be given only by a variable: you give the first member and the step that makes the next member. Frege and Russell had defined “follows somewhere after” in a different way. Wittgenstein thinks that their definition is circular. His own notation for series returns at {5.2522} and {6}.
+
+@ 4.1274
+Thus you cannot ask if a formal concept “exists”. No proposition could answer the question.
+
+@ 4.128
+Logical forms cannot be counted. So no number has a special place in logic. This removes old philosophical positions such as “all is one” or “there are two basic kinds of thing”.
+
+@h 4.2 Elementary propositions
+
+@ 4.2
+This definition repeats {2.222} for sentences. The sense of a proposition is given by the possibilities with which it agrees and the possibilities with which it does not agree.
+
+@ 4.211
+The [[elementary-proposition|elementary proposition]] is the counterpart in language of the atomic fact. It says that one atomic fact exists. Elementary propositions are independent, as atomic facts are. Again the book gives no example.
+
+@ 4.2211
+An elementary proposition is a direct combination of names. Analysis must arrive there. And it must arrive there even if the world has no limit of complexity.
+
+@ 4.24
+The notation for the rest of the book. Single letters $x$, $y$, $z$ are names. “$fx$” and “φ($x$, $y$)” are elementary propositions written with their names. The letters $p$, $q$, $r$ are elementary propositions written as wholes.
+
+@ 4.243
+The sign “=” between two names says only that one sign can replace the other. It is a rule for signs. It says nothing about the objects. So “$a$ = $a$” is not a proposition. Station 5 returns to this ({5.53}).
+
+@ 4.26
+If you had all elementary propositions and knew which are true, you would have a complete description of the world.
+
+@ 4.28
+The formula counts the possibilities. With $n$ atomic facts, each of which exists or does not exist, there are 2<sup>$n$</sup> combinations. The instrument at Station 1 shows the case $n$ = 3, with 8 worlds.
+
+@h 4.3 Truth-possibilities
+
+@ 4.31
+Take two elementary propositions, $p$ and $q$. Each can be true or false. So there are four combinations. Wittgenstein calls them [[truth-possibilities|truth-possibilities]]. He writes them as the rows of a table. Each row is one way the world can be. This is logical space again, now written as a table. Such “truth-tables” are in every logic textbook today. Wittgenstein was one of the first to publish them.
+
+@ 4.4
+This is the decisive definition. Any proposition, simple or complex, is a selection among the rows. It says “yes” to some truth-possibilities and “no” to the others.
+
+@ 4.411
+So the elementary propositions are the basis for the understanding of all other propositions.
+
+@ 4.42
+A second count. For each row, a proposition says “yes” or “no”. With 2<sup>$n$</sup> rows there are 2 to the power 2<sup>$n$</sup> different selections. For two elementary propositions that is 16.
+
+@ 4.431
+The rows that a proposition marks with “T” are its [[truth-conditions|truth-conditions]]. To give them is to give the proposition. Frege started his logic in a similar way. But Frege took “the true” and “the false” to be objects. Wittgenstein rejects this.
+
+@ 4.441
+A table with its “T” marks is itself a way to write a proposition. Nothing in the world corresponds to the marks “T” and “F”, or to the lines of the table. This is one more form of the fundamental thought.
+
+@ 4.442
+Frege and Russell put the sign “⊢” before a sentence to mark that it is asserted. Wittgenstein says that this sign is not a part of logic. It only reports that the author thinks the sentence is true.
+
+When the order of the rows is fixed, the last column alone gives the proposition. Wittgenstein writes it as one line: (TTFT)($p$, $q$). Make some.
+
+@lab 4.442 table
+
+@ 4.45
+The 16 selections can be put in an order. Remark {5.101} gives the full list.
+
+@h 4.46 Tautology and contradiction
+
+@ 4.46
+Two selections are special. A [[tautology|tautology]] says “yes” to all rows. A [[contradiction|contradiction]] says “no” to all rows.
+
+@ 4.461
+“It rains or it does not rain” is true in all weather. For that reason it tells you nothing about the weather.
+
+@html 4.4611
+<aside class="tn"><p>Two different words. Tautology and contradiction are “without sense” (4.461). But they are “not nonsensical” (4.4611). So the book has three classes of sentence.</p>
+<div class="tablewrap"><table class="kinds">
+<tr><th>With sense</th><td>Pictures a possible situation. Can be true, can be false.</td><td>“It rains.”</td></tr>
+<tr><th>Without sense</th><td>Built correctly, but pictures nothing, because it is true (or false) in all cases. A limiting case of language, as 0 is of arithmetic.</td><td>“It rains or it does not rain.”</td></tr>
+<tr><th>Nonsensical</th><td>Not a proposition. A sign in it has no meaning in this use.</td><td>“Socrates is identical.” ({5.473})</td></tr>
+</table></div></aside>
+
+@ 4.462
+A tautology pictures nothing, because it allows every situation. A contradiction pictures nothing, because it allows no situation.
+
+@ 4.463
+A proposition with sense divides logical space into two parts and says that reality is in one of them. A tautology leaves all of the space open. A contradiction closes all of it. Neither tells reality where to be.
+
+@ 4.464
+The three grades of certain, possible and impossible come from this. They return in the account of probability ({5.15}).
+
+@ 4.465
+If you add a tautology to a proposition with “and”, nothing changes. The result says exactly what the proposition said.
+
+@ 4.4661
+In a proposition with sense, the arrangement of the signs corresponds to an arrangement of things. In a tautology and in a contradiction the signs are also arranged, but the arrangement cancels itself. Nothing is pictured. They are the points where the combination of signs dissolves.
+
+@h 4.5 The general form is announced
+
+@ 4.5
+Wittgenstein now announces that all propositions have one form in common. In words: “Such and such is the case.” Station 6 gives the exact formula.
+
+@ 4.52
+If all elementary propositions are given, all propositions are given with them: everything that can be built from the elementary ones. Nothing can be added from another source. So language has a limit.
+
+@ 4.53
+The general form is not one specific sentence. It is a variable: a pattern of which each proposition is a value. First we need the machine that builds propositions.

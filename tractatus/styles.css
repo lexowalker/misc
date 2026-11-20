@@ -17,6 +17,7 @@
   --math: "STIX Two Text", "Cambria Math", "Times New Roman", serif;
   --hang: 4.75rem;      /* margin in which remark numbers hang */
   --col: 35rem;         /* reading measure */
+  --step: 1.35rem;      /* indent for one level of the numbering */
   --left: clamp(5.5rem, 9vw, 10rem);
 }
 
@@ -95,6 +96,13 @@ body[data-stage="7"]:not(.atlas) .hud > * { pointer-events: none; }
 }
 .tools button:hover, .lab button:hover, .atlas-head button:hover { border-color: var(--ion); }
 .tools button[aria-pressed="true"] { color: var(--void); background: var(--ion); border-color: var(--ion); }
+.depth { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 2px; background: rgba(11,16,27,.72); }
+.depth span { font: 400 .66rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--dim); padding: 0 .55rem 0 .75rem; }
+.depth button { border: 0; border-left: 1px solid var(--line); border-radius: 0; background: none; padding: .62rem .62rem; min-width: 2.1rem; }
+.depth button[aria-pressed="true"] { color: var(--void); background: var(--sodium); }
+body.atlas .depth, body[data-stage="0"] .hud .depth { display: none; }
+.depthdemo button { font: 400 .72rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; background: rgba(11,16,27,.72); color: var(--ion); border: 1px solid var(--line); border-radius: 2px; padding: .4rem .55rem; cursor: pointer; }
+.depthdemo button[aria-pressed="true"] { color: var(--void); background: var(--sodium); border-color: var(--sodium); }
 
 .rail {
   position: absolute; left: max(1.25rem, env(safe-area-inset-left, 0px)); top: 50%; transform: translateY(-50%);
@@ -107,6 +115,7 @@ body[data-stage="7"]:not(.atlas) .hud > * { pointer-events: none; }
 .rail a b { font-weight: 400; width: 1.1rem; text-align: center; transition: color .4s; }
 .rail a span { opacity: 0; transform: translateX(-4px); transition: opacity .4s, transform .4s; white-space: nowrap; text-transform: uppercase; font-size: .64rem; letter-spacing: .14em; }
 .rail a:hover span, .rail.announce a.on span { opacity: 1; transform: none; }
+.rail a span { background: rgba(4,6,11,.94); padding: .45rem .6rem .45rem 0; }
 .rail a.on b { color: var(--sodium); }
 .rail a.done b { color: var(--guide); }
 .rail a::before { content: ""; width: 1px; height: 100%; background: var(--line); margin-right: -.2rem; }
@@ -139,8 +148,6 @@ body.atlas { overflow: hidden; }
 }
 .main p { margin: 0 0 .35em; }
 .main p + p { font-size: .62em; line-height: 1.3; color: var(--guide); }
-.main .de { display: block; margin-top: 1.1rem; font: italic 400 clamp(1.05rem, 1.7vw, 1.3rem)/1.35 var(--serif); color: var(--dim); }
-.main .de p { margin: 0; font-size: 1em; color: inherit; }
 .main.plain { font-style: italic; }
 .lede { max-width: 33rem; margin: 2rem 0 0; font-size: 1.1rem; line-height: 1.62; color: var(--guide); }
 
@@ -174,24 +181,58 @@ i.v { font-family: var(--math); font-style: italic; }
 a.ref { font-family: var(--mono); font-size: .86em; color: var(--sodium); text-decoration: none; cursor: pointer; border-bottom: 1px solid rgba(230,182,114,.35); }
 a.ref:hover { border-bottom-color: var(--sodium); }
 
-/* Wittgenstein's voice */
-.w { position: relative; margin: 1.9rem 0 1.5rem; padding: 0; }
-.w + .w { margin-top: -.35rem; }
+/* Wittgenstein's voice. The number hangs in the margin; the text moves one step to the
+   right for each level of the numbering, so the order of the book is visible. */
+.w { position: relative; margin: 1.7rem 0 1.3rem; padding: 0 0 0 calc((var(--lv, 1) - 1) * var(--step)); scroll-margin-top: 30vh; }
+.w + .w { margin-top: -.2rem; }
 .w .wn {
-  position: absolute; left: calc(-1 * var(--hang)); top: .5rem; width: calc(var(--hang) - 1rem);
-  font: 400 .78rem/1.3 var(--mono); color: var(--sodium); letter-spacing: .02em; text-decoration: none; cursor: pointer;
+  position: absolute; left: calc(-1 * var(--hang)); top: .48rem; width: calc(var(--hang) - .8rem);
+  font: 400 .78rem/1.3 var(--mono); color: var(--sodium); letter-spacing: .01em; text-decoration: none; cursor: pointer;
   font-variant-numeric: tabular-nums;
 }
-.w .wn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.w a.wn:hover { text-decoration: underline; text-underline-offset: 3px; }
 .wt { font: 400 1.42rem/1.4 var(--serif); color: var(--star); }
 .wt p { margin: 0 0 .5em; max-width: 34rem; }
 .wt p:last-child { margin-bottom: 0; }
 .wt em { font-style: italic; }
-.w .cut { font-family: var(--mono); font-size: .7em; color: var(--dim); margin-left: .35em; }
-.wd { display: none; margin-top: .55rem; font: italic 400 1.08rem/1.42 var(--serif); color: var(--dim); max-width: 34rem; }
-.wd p { margin: 0 0 .4em; }
-.wd em, [lang="de"] .wt em { font-style: normal; letter-spacing: .14em; }
-body.de .wd { display: block; }
+.w[data-lv="1"] .wt { font-size: 1.56rem; line-height: 1.34; }
+.w[data-lv="1"] { margin-top: 2.6rem; }
+.w[data-lv="1"] .wn { top: .62rem; color: #f2c98e; }
+.w[data-lv="3"] .wt { font-size: 1.32rem; }
+.w[data-lv="4"] .wt, .w[data-lv="5"] .wt, .w[data-lv="6"] .wt { font-size: 1.24rem; color: #e3ddd0; }
+.w.footnote { margin-top: 0; }
+.w.footnote .wt { font-size: 1.06rem; line-height: 1.45; color: #cfc9bc; }
+.w.footnote .wn { cursor: default; }
+.w .more {
+  display: none; margin-top: .55rem; background: none; border: 1px solid var(--line); border-radius: 2px; padding: .32rem .55rem;
+  font: 400 .66rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ion); cursor: pointer;
+}
+.w .more:hover { border-color: var(--ion); }
+
+/* the guide's voice, placed under the remark that it explains */
+.note, .book > .r, .book > .tn, .book > .deeper { padding-left: calc((var(--lv, 1) - 1) * var(--step)); }
+.note { margin: 0 0 1.5rem; max-width: calc(var(--col) + 4 * var(--step)); }
+.note p { max-width: var(--col); }
+.note p:last-child { margin-bottom: 0; }
+.book > .lab { margin-top: 2.2rem; }
+
+/* reading depth: hide the levels below the chosen one */
+body[data-depth="1"] .book [data-lv]:not([data-lv="0"]):not([data-lv="1"]),
+body[data-depth="2"] .book [data-lv]:not([data-lv="0"]):not([data-lv="1"]):not([data-lv="2"]),
+body[data-depth="3"] .book [data-lv]:not([data-lv="0"]):not([data-lv="1"]):not([data-lv="2"]):not([data-lv="3"]) { display: none; }
+body[data-depth="1"] .w[data-lv="1"] .more,
+body[data-depth="2"] .w[data-lv="2"] .more,
+body[data-depth="3"] .w[data-lv="3"] .more { display: inline-block; }
+
+/* the branches of a book */
+.branches { margin-top: 2.4rem; max-width: 40rem; }
+.branches p { margin: 0 0 .5rem; font: 500 .62rem/1.4 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dim); }
+.branches a { display: grid; grid-template-columns: 3.1rem minmax(0, 1fr) 2.4rem; gap: .8rem; align-items: baseline; padding: .34rem 0; border-top: 1px solid var(--line); text-decoration: none; }
+.branches a b { font: 400 .76rem/1.5 var(--mono); color: var(--sodium); }
+.branches a span { font: 400 1.04rem/1.3 var(--serif); color: var(--guide); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.branches a i { font: 400 .66rem/1.5 var(--mono); font-style: normal; color: var(--dim); text-align: right; }
+.branches a:hover span { color: var(--star); }
+
 .fnm { color: var(--dim); }
 
 /* notation inside the text */
@@ -230,6 +271,7 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
 .tn::before { content: "Translation"; color: var(--dim); }
 .r p:last-child, .tn p:last-child { margin-bottom: 0; }
 .r .r::before { display: none; }
+.note > .tn { margin: 0; }
 
 /* terms */
 .t { border-bottom: 1px dotted var(--ion); cursor: help; color: #d6dfec; }
@@ -277,8 +319,7 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
 .tablewrap { overflow-x: auto; margin: 1rem 0 0; }
 .kinds, .verdicts { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: .88rem; line-height: 1.5; }
 .kinds th, .kinds td, .verdicts th, .verdicts td { text-align: left; vertical-align: top; padding: .6rem .9rem .6rem 0; border-top: 1px solid var(--line); font-weight: 400; }
-.kinds th { color: var(--star); width: 8.5rem; }
-.kinds th span { display: block; font: italic 400 .95rem/1.3 var(--serif); color: var(--dim); }
+.kinds th { color: var(--star); width: 7.5rem; }
 .verdicts thead th { font: 500 .64rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); border-top: 0; }
 .verdicts td:first-child { color: var(--star); }
 .verdicts { margin-bottom: 1rem; }
@@ -400,7 +441,6 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
 }
 .num7 { font: 400 .8rem/1 var(--mono); color: var(--sodium); letter-spacing: .1em; margin-bottom: 2.2rem; }
 .seven .en { margin: 0; font: 400 clamp(1.7rem, 4.4vw, 3.2rem)/1.18 var(--serif); color: var(--star); max-width: 22em; text-wrap: balance; }
-.seven .de { margin: 1.4rem 0 0; font: italic 400 clamp(1.05rem, 2vw, 1.4rem)/1.35 var(--serif); color: var(--dim); }
 .void { height: 260vh; }
 
 /* ───────── after ───────── */
@@ -441,7 +481,6 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
 .ctx small { display: block; font: 500 .6rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; margin-bottom: .45rem; }
 .cur .num { font: 400 2.6rem/1 var(--serif); color: var(--sodium); margin-bottom: .7rem; font-variant-numeric: lining-nums; }
 .cur .wt { font-size: 1.36rem; }
-.cur .wd { display: block; margin-top: 1rem; padding-top: .9rem; border-top: 1px solid var(--line); }
 .cur .note { margin-top: .9rem; font-size: .82rem; line-height: 1.55; color: var(--dim); }
 .tostation { display: inline-block; margin-top: 1rem; font: 400 .72rem/1.4 var(--mono); letter-spacing: .06em; }
 .kids { margin-top: 1.6rem; }
@@ -454,7 +493,7 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
 
 /* ───────── narrow screens ───────── */
 @media (max-width: 1000px) {
-  :root { --hang: 0rem; --left: 16px; }
+  :root { --hang: 0rem; --left: 16px; --step: .7rem; }
   .scrim { background: rgba(4,6,11,.8); }
   .brand { display: none; }
   body[data-stage="0"] .hud::before { opacity: 1; }
@@ -466,6 +505,10 @@ figure.fig figcaption { font: 400 .78rem/1.5 var(--sans); color: var(--dim); max
   .tools button { padding: .62rem .6rem; letter-spacing: .04em; }
   .w .wn { position: static; display: block; width: auto; margin-bottom: .2rem; }
   .wt { font-size: 1.3rem; }
+  .w[data-lv="1"] .wt { font-size: 1.4rem; }
+  .w[data-lv="3"] .wt, .w[data-lv="4"] .wt, .w[data-lv="5"] .wt, .w[data-lv="6"] .wt { font-size: 1.2rem; }
+  .depth { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); background: rgba(8,12,20,.94); }
+  .branches a { grid-template-columns: 2.9rem minmax(0, 1fr) 2rem; gap: .5rem; }
   .lab { width: 100%; margin-left: 0; }
   .space-grid, .tt-grid, .two { grid-template-columns: minmax(0, 1fr); }
   .route a { grid-template-columns: 1.8rem minmax(0, 1fr); }

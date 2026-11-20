@@ -1,0 +1,239 @@
+@ 6
+The formula looks difficult. It has three parts, and you know all of them already. Select each part.
+
+@lab 6 form
+
+@ 6.001
+This is the limit, drawn from the inside, as {4.114} required. Everything that the procedure can reach is a proposition. Nothing else is.
+
+@ 6.01
+The same formula also gives the general form of an operation: the general way to go from some propositions to a new one.
+
+@h 6.02 Numbers
+
+@ 6.021
+Numbers come from operations. A number says how many times an operation was applied. Zero times is 0. One more time is “+ 1”. So a number is not an object. It is a mark of the form of a series.
+
+@ 6.022
+“Number” is a formal concept ({4.126}). It is expressed by a variable, not by a predicate.
+
+@ 6.03
+This bracket has the same pattern as the general form of proposition: start with 0, take any number, go to the next one.
+
+@ 6.031
+Frege and Russell had defined numbers as classes of classes. Wittgenstein thinks that this is unnecessary. A class collects things that happen to have a property. The generality of mathematics is not of this accidental kind.
+
+@h 6.1 Logic
+
+@ 6.11
+People had thought that logic is the most general science: a set of deep truths about everything. Wittgenstein's answer is sobering. The truths of logic are tautologies. They are true in all cases because they say nothing.
+
+@ 6.111
+A test for theories of logic. If a theory makes a law of logic look like a discovery about the world, the theory is wrong. “Each proposition is true or false” would then be like “each rose is yellow or red”: a claim that could be false.
+
+@ 6.113
+This is the special place of logic. For a logical proposition you can see in the sign alone that it is true. For every other proposition you cannot.
+
+@ 6.1201
+But tautologies are not without use. That certain propositions together give a tautology shows how those propositions are related. “Not both $p$ and not-$p$” is a tautology: this shows that $p$ and not-$p$ contradict each other. “If ($p$ implies $q$) and $p$, then $q$” is a tautology: this shows that $q$ follows.
+
+@ 6.1203
+This remark gives a method to test for tautology by hand, with brackets and lines in place of a table. A brace joins one truth-value of each part. A line carries that combination to the T or F of the whole. If all lines end at T, the proposition is a tautology.
+
+@ 6.121
+Wittgenstein compares this with a balance. In a logical proposition the parts are put together so that nothing is said. The state of balance shows how the parts are built.
+
+@ 6.1221
+So logical propositions are not strictly necessary. In a notation that is good enough, you see the relations between propositions directly.
+
+@ 6.1222
+Experience cannot refute a tautology. For the same reason, experience cannot confirm it.
+
+@ 6.1224
+We sometimes feel that we choose the truths of logic. What we choose is a notation. When the notation is fixed, the tautologies are fixed with it.
+
+@ 6.123
+The laws of logic are not subject to more laws of logic. Russell's theory needed a separate law for each level of his hierarchy. Wittgenstein says that one is sufficient.
+
+@ 6.1233
+A proposition is not logical because it holds for all things. “All men are mortal” holds for all men, but only as a matter of fact. A logical proposition holds in a different way: its denial is not a possible situation. Russell needed an “axiom of reducibility” for his system. Wittgenstein says that it is not logic: we can imagine a world in which it is false.
+
+@ 6.124
+Logic shows the “scaffolding” of the world. It assumes only that names have meaning and that elementary propositions have sense. Much in our signs is by agreement. In logic, the part that is not by agreement speaks.
+
+@ 6.1251
+Because everything is given with the notation, nothing new can be found in logic. There are no surprises.
+
+@ 6.1262
+A proof in logic is a calculation with signs. It does not show that a proposition is true to the facts. It only helps us to see that a complicated formula is a tautology.
+
+@ 6.1265
+A proof of a proposition with sense starts from true premises and shows that something is so. A proof in logic is different. Each logical proposition is itself the form of an inference, written as one formula. So each can be seen as its own proof.
+
+@ 6.1271
+No logical proposition is more basic than another. Which ones we take as “axioms” is arbitrary. Frege chose his axioms because they seemed self-evident. Wittgenstein does not accept that as a measure ({5.1363}).
+
+@ 6.13
+“[[transcendental|Transcendental]]” means here: logic is not one of the facts in the world. It is a condition for facts and pictures.
+
+@h 6.2 Mathematics
+
+@ 6.21
+An equation such as 2 × 2 = 4 does not describe a fact. It expresses no thought.
+
+@ 6.211
+We use mathematics to go from one proposition about the world to another. “I have two boxes with two apples in each. So I have four apples.” The equation itself is not about apples.
+
+@ 6.22
+Logic shows the logic of the world in tautologies. Mathematics shows it in equations.
+
+@ 6.2323
+An equation says that one expression can replace another. But if you understand both expressions, you see this already. Frege had said that “2 + 2” and “4” have the same meaning but different senses. Wittgenstein answers: the equation only marks the point of view from which we look at the two expressions. It adds no information about them.
+
+@ 6.2331
+Do we need a special intuition for mathematics? Language gives it: we see the result in the signs when we calculate. A calculation is not an experiment. Its result could not be different.
+
+@ 6.241
+Mathematics works by substitution: it replaces expressions by equal expressions. The proof of 2 × 2 = 4 shows this. It only counts how many times an operation is applied.
+
+@h 6.3 Science and the net
+
+@ 6.3
+In logic everything is regular and necessary. Outside logic nothing is necessary.
+
+@ 6.31
+The law of induction says that the future will be like the past. It has sense: it could be false. So it is not a law of logic, and we cannot know it in advance.
+
+@ 6.3211
+“Every event has a cause” is not one specific law. It is the name of a kind of law. It gives the form that laws of physics have. People expected a law of this form before they had found one.
+
+@ 6.34
+We do not know these principles as truths about nature. We know that descriptions of this form are possible.
+
+@ 6.341
+Wittgenstein now gives his image for a physical theory.
+
+@lab 6.341 mesh
+
+@ 6.342
+Newtonian mechanics is like a net with one shape of mesh. That the world can be described with this net tells us nothing about the world. Any world can be described with it, if the mesh is sufficiently fine. What tells us something is how simple the description becomes with this net, compared with a different one.
+
+@ 6.3432
+Mechanics tries to give all true descriptions of the world in one plan. Through the net, its laws are still about the things in the world. But they are always general: they speak of “any point”, never of this point.
+
+@ 6.35
+The properties of the net can be known in advance, because the net is our construction. Laws such as the law of causality describe the net. They do not describe the surface.
+
+@ 6.361
+“There are laws of nature” cannot be said. It shows itself: in the fact that we can describe the world with laws. Only connexions that follow a rule can be thought at all.
+
+@ 6.3611
+We never measure a process against time itself. We measure it against a second process, such as the movement of a clock. In the same way, we can describe one of two possible events only if something distinguishes it from the other. That difference is then what we call the cause.
+
+@ 6.36111
+An illustration with left and right. A right hand and a left hand have the same form, but one cannot take the place of the other. The same is true of the two figures $a$ and $b$ on the line. In a space with one more dimension, you could turn one into the other.
+
+@ 6.362
+The law of causality sets the limit of what can be described in this form. It does not set a limit to what can happen.
+
+@ 6.36311
+To expect that the future is like the past is not a logical inference. We choose the simplest law that fits what we have seen. This is a habit. It is a reasonable habit, but nothing guarantees it.
+
+@ 6.37
+The only necessity is logical necessity. No event makes another event necessary.
+
+@ 6.372
+The laws of nature describe regular patterns. They do not make things happen. They do not explain why there are patterns. Wittgenstein thinks that the modern world treats “law of nature” as a final answer, as earlier ages treated God or Fate. The ancients, he says, at least knew that they had come to a stop.
+
+@h 6.373 Will and necessity
+
+@ 6.374
+The world does not depend on my will. If what I wish occurs, no logical bond connects the wish and the event.
+
+@ 6.375
+As there is only logical necessity, there is only logical impossibility.
+
+@deep 6.3751 The first crack: colours
+“This point is red” and “this point is blue” cannot both be true. Wittgenstein says that the impossibility must be logical, because there is no other kind. But then the two sentences contradict each other. And elementary propositions cannot contradict each other ({4.211}).
+
+So he concludes that statements about colour are not elementary. A further analysis must make the hidden contradiction visible. He did not give this analysis.
+
+r: History: in 1929 he tried to give it, in the paper “Some Remarks on Logical Form”. He failed. Then he gave up the independence of elementary propositions. Many see this as the first crack. Through it the whole system later broke.
+
+@h 6.4 Value
+
+@ 6.4
+No proposition is higher than another. Each says that something is the case, and no more.
+
+@ 6.41
+The book now turns, in a few pages, to the subject that Wittgenstein thought most important. The argument is short. Every proposition describes a possible fact. Every fact is accidental: it could be different. But if something has value in itself, this cannot be an accident. So value is not a fact, and no proposition states it.
+
+Imagine a book that contains the complete description of the world. It would not contain one judgement that something is good or bad.
+
+@ 6.421
+Do not read this as contempt for ethics. It is the opposite. Wittgenstein takes ethics out of the area of facts, theories and proofs because he thinks that it is higher than they are. “Transcendental” is the word that he used for logic at {6.13}. Like logic, ethics is not in the world. It is a condition of the world as a whole.
+
+@ 6.422
+An ethical rule is not a rule with a payment or a penalty that comes later as an event. If there is a reward, it is in the action itself.
+
+@ 6.423
+The will that does good or bad is not a thing in the world, so nothing can be said about it. The will that psychology studies is one more fact.
+
+@ 6.43
+A good will or a bad will does not change any fact. It changes the world as a whole: the same facts, seen differently. The limits move. The content does not.
+
+@ 6.4311
+Death is not one of the events of a life. It is the end of the events. If eternity means no time, and not endless time, then to live in the present is to live in eternity.
+
+@ 6.4312
+To live for ever would not answer the question of what life is for. An endless life is as much a riddle as this one. The answer cannot be one more fact in space and time.
+
+@ 6.4321
+God is not one of the facts. The facts are what the problem is made of. They are not its solution.
+
+@ 6.45
+“[[mystical|The mystical]]” here does not mean visions or secret knowledge. Science can answer *how* the world is: which facts hold. *That* there is a world is not one more fact. No proposition says it, because a proposition says how things are, and it assumes that there is something.
+
+To see the world *sub specie aeterni* (“under the aspect of eternity”, a phrase from Spinoza) is to see it from no place in it: as one bounded whole.
+
+@h 6.5 The questions that disappear
+
+@ 6.5
+A question exists only where an answer can be said. So there is no question that is deep because it has no possible answer.
+
+@ 6.51
+The sceptic doubts everything. But a doubt needs a question, and a question needs a possible answer. Where nothing can be said, there is nothing to doubt. “Senseless” here has the strong meaning: nonsensical.
+
+@ 6.521
+The questions of life do not get an answer. They disappear as questions. A person for whom they have disappeared cannot say what he has learned.
+
+@ 6.522
+“Shows itself” is the same verb as in {4.1212}. This is the last use of the difference between saying and showing.
+
+@html 6.522
+<p>Before the last step, here are the verdicts of the book on each kind of sentence.</p>
+<div class="tablewrap"><table class="verdicts">
+<thead><tr><th>Kind of sentence</th><th>Example</th><th>Status in the Tractatus</th></tr></thead>
+<tbody>
+<tr><td>Natural science, everyday statements</td><td>“It rains.”</td><td>With sense. It says something. It can be true or false.</td></tr>
+<tr><td>Logic</td><td>“$p$ or not $p$”</td><td>Without sense. A tautology. It says nothing and shows the form of language and world.</td></tr>
+<tr><td>Mathematics</td><td>2 × 2 = 4</td><td>An equation, a “pseudo-proposition”. It shows that two expressions can replace each other.</td></tr>
+<tr><td>Principles of science</td><td>“Every event has a cause.”</td><td>Not a law, but the form of a law. It belongs to the net, not to the surface.</td></tr>
+<tr><td>Ethics, aesthetics, the meaning of life</td><td>“This is good.”</td><td>Cannot be expressed. Transcendental. It shows itself.</td></tr>
+<tr><td>Philosophy, including this book</td><td>“The world is everything that is the case.”</td><td>Nonsensical. An elucidation: a step on a ladder.</td></tr>
+</tbody></table></div>
+
+@h 6.53 The ladder
+
+@ 6.53
+The correct method would be to say nothing philosophical. You would only show each person who says something metaphysical that some of his signs have no meaning. The Tractatus does not follow this method. The next remark says what it does in its place.
+
+@tn 6.54
+“Senseless” has the strong meaning here: nonsensical. It is not the mild “without sense” of tautologies. Wittgenstein says that his own propositions are nonsense.
+
+@ 6.54
+This is the most surprising sentence in the book. Look back. “The world is the totality of facts.” “Objects are simple.” “A proposition is a picture.” Not one of these is a picture of a possible fact that could also be false. Not one is built from elementary propositions with N. By the measure of the book itself, they say nothing.
+
+The book is not a description of the limit. It is a ladder to a place from which you see the limit. Then the ladder must go.
+
+How can nonsense help someone to see? That question divides readers of the Tractatus to this day. After the last station you find their answers. First, take the last step.

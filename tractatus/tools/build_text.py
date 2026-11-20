@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build data/tlp.js from the Project Gutenberg TeX edition of the Tractatus.
 
-Source: Project Gutenberg eBook #5740 (C. K. Ogden's 1922 English translation
-together with the German original). Both texts are in the public domain.
+Source: Project Gutenberg eBook #5740 (the 1922 English translation by F. P. Ramsey,
+edited by C. K. Ogden), with the corrected readings of the Ludwig Wittgenstein
+Project's edition applied (see CORRECTIONS). The text is in the public domain.
 
 Usage:
     python3 tools/build_text.py [path/to/5740-t.tex]
@@ -382,6 +383,55 @@ def _dispatch(self, raw, mode):
 P.sub = _dispatch
 
 
+# Readings of the Ludwig Wittgenstein Project's English edition where it differs from
+# the 1922 first printing that Project Gutenberg transcribed. They are corrections made
+# in later printings of the same translation. tools/audit_text.py checks the result.
+CORRECTIONS = [
+    ("2.0131", "is a place for an argument.)", "is an argument place.)"),
+    ("2.03", "like the members of a chain", "like the links of a chain"),
+    ("3.05", "We could only know", "Only if we could know"),
+    ("3.313", "the variables become constants,", "the variable becomes constant,"),
+    ("3.331", "he has to speak of the meaning of the signs.", "he has to speak about the things his signs mean."),
+    ("4.023", "<p>It must therefore be", "<p>Reality must therefore be"),
+    ("4.122", "which present the atomic facts and", "which present the facts and"),
+    ("4.1241", "this property but the other that", "this property, the other that"),
+    ("4.1251", "Here the disputed question", "Now this settles the disputed question"),
+    ("4.1251", "external” disappears.", "external”."),
+    ("4.1252", "<i>aRx</i> . <i>aRy</i> . <i>yRb</i>", "<i>aRx</i> . <i>xRy</i> . <i>yRb</i>"),
+    ("4.126", "But it shows itself in the sign of this object itself.", "But it is shown in the symbol for the object itself."),
+    ("4.4611", "not senseless;", "not nonsensical;"),
+    ("5.152", "Independent propositions (<i>e.g.</i> any two elementary propositions) give", "Two elementary propositions give"),
+    ("5.4541", "must be simple for", "must be neat for"),
+    ("5.4541", "the standard of simplicity.", "the standard of neatness."),
+    ("5.513", "Thus even in Russell’s notation it is evident", "Thus in Russell’s notation also it appears evident"),
+    ("5.5351", "” and of that kind. And indeed this takes place when one would like to speak", "”. As, for instance, when one would speak"),
+    ("5.551", "decided without further trouble.", "decided off-hand."),
+    ("5.5541", "It should be possible to decide", "How could we decide"),
+    ("5.5541", "27-termed relation.", "27-termed relation?"),
+    ("5.5542", "what must <em>be</em> in order that something can", "what must there <em>be</em> in order that anything can"),
+    ("5.5562", "who understands the propositions", "who understands propositions"),
+    ("5.5563", "That most simple thing", "That simple thing"),
+    ("5.5563", "not a simile of truth", "not a model of the truth"),
+    ("5.557", "What lies in the application", "What lies in its application"),
+    ("5.557", "may not collide with", "may not conflict with"),
+    ("5.62", "which only I understand", "which I understand"),
+    ("6.1222", "be empirically established than", "be empirically confirmed than"),
+    ("6.1222", "being established by", "being confirmed by"),
+    ("6.124", "much is arbitrary, much not.", "something is arbitrary, something not."),
+    ("6.125", "even in the old logic,", "also with the old conception of logic,"),
+    ("6.126", "can be determined by determining", "can be calculated by calculating"),
+    ("6.342", "in which it is described, as is indeed the case.", "in which as a matter of fact it is described."),
+    ("6.3431", "Through the whole apparatus of logic the", "Through their whole logical apparatus the"),
+    ("6.35", "the network described.", "the network describes."),
+    ("6.372", "one clear conclusion, whereas in the modern system it should appear", "one clear terminus, whereas the modern system makes it appear"),
+    ("6.421", "Ethics are transcendental.", "Ethics is transcendental."),
+    ("6.421", "æsthetics", "aesthetics"),
+    ("6.423", "as the bearer of the ethical", "as the subject of the ethical"),
+    ("6.4312", "of the soul of man,", "of the human soul,"),
+    ("6.4312", "eternal survival also after death", "eternal survival after death"),
+]
+
+
 def strip_comments(tex):
     tex = re.sub(r"(?m)^[ \t]*%.*\n", "", tex)
     return re.sub(r"(?<!\\)%.*", "", tex)
@@ -424,26 +474,27 @@ def main():
         data = urllib.request.urlopen(SRC_URL).read()
     tex = strip_comments(data.decode("latin-1").replace("\r\n", "\n"))
     en = propositions(tex, "PropositionE")
-    de = propositions(tex, "PropositionG")
-    assert [n for n, *_ in en] == [n for n, *_ in de], "language order mismatch"
     known = {n for n, *_ in en}
     props = []
-    for (n, e, en_notes), (_, d, de_notes) in zip(en, de):
-        item = {"n": n, "p": parent_of(n, known), "en": e, "de": d}
+    for n, e, en_notes in en:
+        item = {"n": n, "p": parent_of(n, known), "en": e}
         if en_notes:
             item["enNote"] = en_notes
-            item["deNote"] = de_notes
         props.append(item)
+    by_n = {item["n"]: item for item in props}
+    for n, old, new in CORRECTIONS:
+        assert old in by_n[n]["en"], (n, old)
+        by_n[n]["en"] = by_n[n]["en"].replace(old, new)
     for item in props:
-        for lang in ("en", "de"):
-            assert "\\" not in item[lang], (item["n"], item[lang])
+        assert "\\" not in item["en"], (item["n"], item["en"])
     out = ROOT / "data" / "tlp.js"
     out.parent.mkdir(exist_ok=True)
     body = json.dumps(props, ensure_ascii=False, separators=(",", ":"))
     body = body.replace("},{", "},\n{")
     out.write_text(
-        "/* Tractatus Logico-Philosophicus. English: C. K. Ogden, 1922. German: 1921/1922.\n"
-        "   Generated by tools/build_text.py from Project Gutenberg eBook #5740. Public domain. */\n"
+        "/* Tractatus Logico-Philosophicus. English translation by F. P. Ramsey, edited by C. K. Ogden.\n"
+        "   Generated by tools/build_text.py from Project Gutenberg eBook #5740, with the corrected\n"
+        "   readings of the Ludwig Wittgenstein Project edition. Public domain. */\n"
         "window.TLP = " + body + ";\n", encoding="utf-8")
     print(f"{len(props)} propositions -> {out} ({out.stat().st_size // 1024} KB)")
 
