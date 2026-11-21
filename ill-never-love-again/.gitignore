@@ -1,0 +1,5 @@
+references/
+*.mp3
+*.wav
+__pycache__/
+renditions/selfcheck.json
