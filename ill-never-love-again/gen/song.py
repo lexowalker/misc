@@ -28,27 +28,27 @@ CHORUS_MELODY = ['| r:1 E4:1 G4:2 G4:1 G4:1 B4:2 A4:3 G4:1 E4:4',
                  '| r:2 B3:2 E4:2 E4:2 F#4:2 E4:2 C#4:2 A#3:2',
                  '| B3:10~ r:6']
 CHORUS_CHORDS = 'Em7:8 A7:8 Dmaj7:8 Gmaj7:8 C#m7b5:8 F#7:8 Gmaj7 Em7:8 F#7:8 Bm'
-CHORUS_WORDS = ("They tell me that it's time I tried. "
-                "I tell them what is near- ly true: I'll "
+CHORUS_WORDS = ("So here it is. It is- n't new, "
+                "and all of it is near- ly true: I'll "
                 "nev- er love a- gain. "
                 "I'd have to fin- ish lov- ing you.")
 
 LYRICS = {
-    'Verse-1': ("Your cup is still up on the shelf. "
-                "It's yours. I drink from some- thing else. "
-                "When I mean I, I still say we. "
-                "My friends have stopped cor- rect- ing me."),
+    'Verse-1': ("You laughed be- fore the joke was done. "
+                "You sang off- key and sang it loud. "
+                "You nev- er closed a cup- board door. "
+                "The house is ver- y ti- dy now."),
     'Chorus-1': CHORUS_WORDS,
     'Verse-2': ("There's some- one kind who stays some nights. "
-                "She says I'm some- where else. She's right. "
-                "Last week she put your cup a- way. "
-                "It's on the shelf a- gain to- day."),
+                "She waits un- til the joke is through. "
+                "She clos- es ev- ery cup- board door. "
+                "She's love- ly, and she is- n't you."),
     'Chorus-2': CHORUS_WORDS,
-    'Bridge': ("I'm told that it gets eas- i- er. "
-               "I hope that it does not. "
+    'Bridge': ("Time's meant to take the edge off this. "
+               "Let time, for once, be wrong. "
                "The day it does- n't hurt at all "
                "is when you're real- ly gone."),
-    'Coda': ("I still say we. I mean it now. I'll "
+    'Coda': ("One cup- board door stays o- pen now. I'll "
              "nev- er love a- gain. "
              "I nev- er"),
     'Outro': "stopped.",
@@ -166,16 +166,16 @@ def full_song():
 
 # The lyric as it reads on paper (the hyphenated version above is for the note setting).
 LINES = [
-    ('Verse-1', 'Verse 1', ["Your cup is still up on the shelf.", "It's yours. I drink from something else.",
-                            "When I mean \u201cI\u201d, I still say \u201cwe\u201d.", "My friends have stopped correcting me."]),
-    ('Chorus-1', 'Chorus', ["They tell me that it's time I tried.", "I tell them what is nearly true:",
+    ('Verse-1', 'Verse 1', ["You laughed before the joke was done.", "You sang off-key and sang it loud.",
+                            "You never closed a cupboard door.", "The house is very tidy now."]),
+    ('Chorus-1', 'Chorus', ["So here it is. It isn't new,", "and all of it is nearly true:",
                             "I'll never love again.", "I'd have to finish loving you."]),
-    ('Verse-2', 'Verse 2', ["There's someone kind who stays some nights.", "She says I'm somewhere else. She's right.",
-                            "Last week she put your cup away.", "It's on the shelf again today."]),
-    ('Chorus-2', 'Chorus', ["They tell me that it's time I tried.", "I tell them what is nearly true:",
+    ('Verse-2', 'Verse 2', ["There's someone kind who stays some nights.", "She waits until the joke is through.",
+                            "She closes every cupboard door.", "She's lovely, and she isn't you."]),
+    ('Chorus-2', 'Chorus', ["So here it is. It isn't new,", "and all of it is nearly true:",
                             "I'll never love again.", "I'd have to finish loving you."]),
-    ('Bridge', 'Bridge', ["I'm told that it gets easier.", "I hope that it does not.",
+    ('Bridge', 'Bridge', ["Time's meant to take the edge off this.", "Let time, for once, be wrong.",
                           "The day it doesn't hurt at all", "is when you're really gone."]),
     ('Solo-A', 'Guitar solo', None),
-    ('Coda', 'Coda', ["I still say \u201cwe\u201d. I mean it now.", "I'll never love again.", "I never stopped."]),
+    ('Coda', 'Coda', ["One cupboard door stays open now.", "I'll never love again.", "I never stopped."]),
 ]
