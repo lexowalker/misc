@@ -18,11 +18,11 @@ Lead guitar pitch-bend range: +/-12 semitones (RPN 0 is in the file). Set the sa
 | Check | Result | Data |
 |---|---|---|
 | Duration 4:00 to 5:00 | pass | music 280.0 s, MIDI 281.8 s, MP3 284.2 s |
-| Density rises A to C | pass | notes per second: A 1.24, B 1.83, C 8.40, D 5.10 |
-| Solo-D has theme and fast material | pass | 15 theme notes and 133 fast notes of 148; 12 of 36 Solo-A theme notes return in order; theme top D5 in Solo-A, E6 in Solo-D |
-| Strong beats are chord tones | pass | 102 of 102 lead and vocal notes; intentional tensions: 0 |
-| Range and playability | pass | fretted B3 to D6; highest sound E6 (by bend); bends up to 2.0 semitones, 9 of 11 on the G or B string, 2 on the high E; fastest notes 13.2 per second, at most 14 onsets in one second; largest fret move at speed 3; frets 2 to 22; 0 hard moves |
-| Originality | pass | 607 six-note windows compared; 1 share 5 intervals and rhythm with the reference; 1 of those are generic (an even run straight along a scale, or a 2-3 note loop); 0 real matches |
+| Density rises A to C | pass | notes per second: A 0.93, B 1.61, C 5.30, D 3.41 |
+| Solo-D has theme and fast material | pass | 12 theme notes and 84 fast notes of 100; 11 of 27 Solo-A theme notes return in order; theme top D5 in Solo-A, E6 in Solo-D |
+| Strong beats are chord tones | pass | 100 of 100 lead and vocal notes; intentional tensions: 0 |
+| Range and playability | pass | fretted B3 to D6; highest sound E6 (by bend); bends up to 2.0 semitones, 14 of 23 on the G or B string, 9 on the high E; fastest notes 13.2 per second, at most 14 onsets in one second; largest fret move at speed 3; frets 2 to 22; 0 hard moves |
+| Originality | pass | 476 six-note windows compared; 5 share 5 intervals and rhythm with the reference; 5 of those are generic (an even run straight along a scale, or a 2-3 note loop); 0 real matches |
 
 **Question for you:** Does the solo arrive too late at 2:40, or is the wait right?
 

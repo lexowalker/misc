@@ -30,9 +30,9 @@ for key, label, lines in LINES:
     s = start[key]
     if lines is None:
         body = ('<ol class="phases">'
-                '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Slow.</b> The theme, low and warm, in phrases that run across the bar lines. %.1f notes per second.</span></li>'
+                '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Slow.</b> The theme, low and warm, with slow bends and space between the phrases. %.1f notes per second.</span></li>'
                 '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Build.</b> One chord per bar. A rising sequence climbs two octaves. %.1f notes per second.</span></li>'
-                '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Fast.</b> Pentatonic fours, pull-off figures, harmonic-minor runs. %.1f notes per second, bursts of %.0f.</span></li>'
+                '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Fast.</b> Sextuplet lines that start from held, bent notes and land on them again. %.1f notes per second, bursts of %.0f.</span></li>'
                 '<li><button type="button" class="t" data-t="%.1f">%s</button><span><b>Together.</b> The theme one octave higher over the falling bass. Runs land on its long notes. The peak is a whole-step bend at fret 22 (%s). %.1f notes per second.</span></li>'
                 '</ol>' % (start['Solo-A']['start'], start['Solo-A']['mmss'], d['Solo-A'], start['Solo-B']['start'], start['Solo-B']['mmss'], d['Solo-B'],
                            start['Solo-C']['start'], start['Solo-C']['mmss'], d['Solo-C'], r['fastest_note_rate'],

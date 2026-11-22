@@ -341,7 +341,14 @@ def render_voice(piece, tr, notes, kind, rng):
         lvl = 0.7 if lvl is None else lvl
         dur_s = n['d'] * spq
         fast = dur_s < 0.2
-        jit = rng.uniform(-0.002, 0.002) if fast else rng.uniform(-0.007, 0.007)
+        if lead and not fast and (n['amt'] > 0 or dur_s >= 0.7):
+            # Subtle blues layback on bent and sustained lead notes
+            jit = rng.uniform(0.006, 0.020)
+        elif lead and fast:
+            # Gentle human micro-timing contour inside fast runs
+            jit = rng.uniform(-0.005, 0.006)
+        else:
+            jit = rng.uniform(-0.003, 0.003) if fast else rng.uniform(-0.008, 0.008)
         t = max(0.0, n['t'] + jit / spq)
         nxt = notes[i + 1] if i + 1 < len(notes) else None
         slur_next = nxt is not None and nxt['leg'] and abs(nxt['t'] - (n['t'] + n['d'])) < 1e-6
@@ -349,50 +356,57 @@ def render_voice(piece, tr, notes, kind, rng):
         if slur_next:
             d = gate + 0.02 / spq
         elif fast:
-            d = gate * 0.92
+            d = gate * 0.94
         else:
             d = gate - min(0.05 / spq, gate * 0.08)
-        # velocity
+        # velocity with subtle dynamic shaping on runs and bends
         vel = (62 + 50 * lvl) if lead else (70 + 30 * lvl)
         vel += 14 if n['acc'] else 0
+        vel += 6 if (lead and n['amt'] >= 1.0 and not n['swell']) else 0
         vel -= 16 if n['leg'] else 0
-        vel += rng.uniform(-3, 3)
+        vel += rng.uniform(-4, 4)
         if n['fb']:
             vel = 96
 
         # ---- pitch curve (semitones relative to the fretted note), time in seconds
         amt, mode = n['amt'], n['mode']
-        t_up = min(0.16, dur_s * 0.5)
+        t_up = min(0.18, dur_s * 0.45)
         if mode == 'slow':
-            t_up = min(0.9, dur_s * 0.45)
+            t_up = min(0.95, dur_s * 0.42)
         vib_on = n['vib'] > 0 and dur_s >= 0.4
         wide = n['vib'] >= 2
-        v_rate = 5.3 if wide else 4.9
-        v_depth = (0.42 if wide else 0.22) if lead else 0.13
-        v_delay = min(0.42, dur_s * 0.35) if mode in ('none', 'pre') else t_up + min(0.25, dur_s * 0.15)
-        v_ramp = 0.28
+        v_rate = 5.0 if wide else 4.7
+        v_depth = (0.48 if wide else 0.24) if lead else 0.13
+        v_delay = min(0.42, dur_s * 0.34) if mode in ('none', 'pre') else t_up + min(0.24, dur_s * 0.14)
+        v_ramp = 0.32
 
         def curve(x):
             b = 0.0
-            if mode in ('up', 'slow'):
+            if mode == 'slow':
+                # Lean briefly on the starting pitch before lifting into the bend
+                lead_in = t_up * 0.14
+                b = amt * smooth((x - lead_in) / max(0.04, t_up - lead_in))
+            elif mode == 'up':
                 b = amt * smooth(x / t_up)
             elif mode == 'updown':
-                tr_ = min(0.25, dur_s * 0.3)
-                b = amt * smooth(x / t_up) * (1 - smooth((x - (dur_s - tr_ * 1.3)) / tr_))
+                tr_ = min(0.28, dur_s * 0.32)
+                b = amt * smooth(x / t_up) * (1 - smooth((x - (dur_s - tr_ * 1.35)) / tr_))
             elif mode == 'pre':
                 hold = dur_s * 0.35
-                b = amt * (1 - smooth((x - hold) / min(0.22, dur_s * 0.3)))
-            if n['slide'] and x < 0.075:
-                b += -2.0 * (1 - x / 0.075)
-            if n['fall'] and x > dur_s - 0.2:
-                b += -5.0 * smooth((x - (dur_s - 0.2)) / 0.2)
+                b = amt * (1 - smooth((x - hold) / min(0.24, dur_s * 0.3)))
+            if n['slide'] and x < 0.085:
+                b += -2.0 * (1 - x / 0.085)
+            if n['fall'] and x > dur_s - 0.22:
+                b += -5.0 * smooth((x - (dur_s - 0.22)) / 0.22)
             if vib_on and x > v_delay:
                 env = smooth((x - v_delay) / v_ramp)
+                # Slight bloom over long sustains
+                bloom = 1.0 + 0.15 * smooth((x - v_delay) / max(0.5, dur_s - v_delay))
                 ph = 2 * math.pi * v_rate * (x - v_delay)
                 if mode in ('up', 'slow') or (mode == 'updown' and x < dur_s * 0.7):
-                    b += v_depth * env * (math.sin(ph) - 0.35)      # a bent string dips below the target
+                    b += v_depth * env * bloom * (math.sin(ph) - 0.35)      # a bent string dips below the target
                 else:
-                    b += v_depth * env * 0.8 * (1 - math.cos(ph))   # an unbent string can only go sharp
+                    b += v_depth * env * bloom * 0.8 * (1 - math.cos(ph))   # an unbent string can only go sharp
             return b
 
         static = mode == 'none' and not n['slide'] and not n['fall'] and not vib_on
