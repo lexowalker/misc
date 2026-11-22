@@ -3,6 +3,7 @@
 
 Each file is rendered as three stems (lead, guide vocal, band) so that the mix can be balanced
 with measured levels: the lead sits in front of the band, and the guide vocal stays audible.
+Option --instrumental: mute the guide vocal and write NAME-instrumental.mp3.
 Needs: fluidsynth, ffmpeg, a General MIDI soundfont (FluidR3_GM by default), numpy, soundfile.
 """
 import glob
@@ -48,7 +49,7 @@ def loud_rms(path):
     return 20 * np.log10(np.percentile(fr, 75)) if len(fr) else -120.0
 
 
-def render(path):
+def render(path, instrumental=False):
     mid = mido.MidiFile(path)
     base = os.path.splitext(path)[0]
     with tempfile.TemporaryDirectory() as tmp:
@@ -64,6 +65,9 @@ def render(path):
                             '-F', w, SF2, m], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             wavs[name], lv[name] = w, loud_rms(w)
         gains = {k: TARGET[k] - (lv[k] - lv['band']) for k in STEMS}
+        if instrumental:          # no guide vocal: leaves room for a singer
+            gains['vocal'] = -120.0
+            base += '-instrumental'
         ins, filt = [], []
         for i, k in enumerate(STEMS):
             ins += ['-i', wavs[k]]
@@ -84,9 +88,11 @@ def render(path):
 
 
 def main():
-    files = sys.argv[1:] or sorted(glob.glob(os.path.join(OUT, '*.mid'))) + sorted(glob.glob(os.path.join(HERE, 'song', '*.mid')))
+    inst = '--instrumental' in sys.argv
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    files = args or sorted(glob.glob(os.path.join(OUT, '*.mid'))) + sorted(glob.glob(os.path.join(HERE, 'song', '*.mid')))
     for f in files:
-        render(f)
+        render(f, inst)
 
 
 if __name__ == '__main__':
