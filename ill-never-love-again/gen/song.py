@@ -28,27 +28,27 @@ CHORUS_MELODY = ['| r:1 E4:1 G4:2 G4:1 G4:1 B4:2 A4:3 G4:1 E4:4',
                  '| r:2 B3:2 E4:2 E4:2 F#4:2 E4:2 C#4:2 A#3:2',
                  '| B3:10~ r:6']
 CHORUS_CHORDS = 'Em7:8 A7:8 Dmaj7:8 Gmaj7:8 C#m7b5:8 F#7:8 Gmaj7 Em7:8 F#7:8 Bm'
-CHORUS_WORDS = ("They ask me and I say I'm fine. "
-                "I've said it till it's near- ly true: I'll "
+CHORUS_WORDS = ("They tell me that it's time I tried. "
+                "I tell them what is near- ly true: I'll "
                 "nev- er love a- gain. "
                 "I'd have to fin- ish lov- ing you.")
 
 LYRICS = {
     'Verse-1': ("Your cup is still up on the shelf. "
-                "I wash it some- times. God knows why. "
-                "I leave the hall light on all night "
-                "the way I did when you'd come by."),
+                "It's yours. I drink from some- thing else. "
+                "When I mean I, I still say we. "
+                "My friends have stopped cor- rect- ing me."),
     'Chorus-1': CHORUS_WORDS,
-    'Verse-2': ("There's some- one kind who comes round now. "
-                "She's good to me; she does- n't ask. "
-                "Last week she moved that cup of yours. "
-                "When she went home I put it back."),
+    'Verse-2': ("There's some- one kind who stays some nights. "
+                "She says I'm some- where else. She's right. "
+                "Last week she put your cup a- way. "
+                "It's on the shelf a- gain to- day."),
     'Chorus-2': CHORUS_WORDS,
-    'Bridge': ("If this is all that's left of you, "
-               "this ache, then let it stay. "
-               "I'd rath- er keep the hurt I have "
-               "than have it healed a- way."),
-    'Coda': ("The light's still on. I let it burn. I'll "
+    'Bridge': ("I'm told that it gets eas- i- er. "
+               "I hope that it does not. "
+               "The day it does- n't hurt at all "
+               "is when you're real- ly gone."),
+    'Coda': ("I still say we. I mean it now. I'll "
              "nev- er love a- gain. "
              "I nev- er"),
     'Outro': "stopped.",
@@ -166,16 +166,16 @@ def full_song():
 
 # The lyric as it reads on paper (the hyphenated version above is for the note setting).
 LINES = [
-    ('Verse-1', 'Verse 1', ["Your cup is still up on the shelf.", "I wash it sometimes. God knows why.",
-                            "I leave the hall light on all night", "the way I did when you'd come by."]),
-    ('Chorus-1', 'Chorus', ["They ask me and I say I'm fine.", "I've said it till it's nearly true:",
+    ('Verse-1', 'Verse 1', ["Your cup is still up on the shelf.", "It's yours. I drink from something else.",
+                            "When I mean \u201cI\u201d, I still say \u201cwe\u201d.", "My friends have stopped correcting me."]),
+    ('Chorus-1', 'Chorus', ["They tell me that it's time I tried.", "I tell them what is nearly true:",
                             "I'll never love again.", "I'd have to finish loving you."]),
-    ('Verse-2', 'Verse 2', ["There's someone kind who comes round now.", "She's good to me; she doesn't ask.",
-                            "Last week she moved that cup of yours.", "When she went home I put it back."]),
-    ('Chorus-2', 'Chorus', ["They ask me and I say I'm fine.", "I've said it till it's nearly true:",
+    ('Verse-2', 'Verse 2', ["There's someone kind who stays some nights.", "She says I'm somewhere else. She's right.",
+                            "Last week she put your cup away.", "It's on the shelf again today."]),
+    ('Chorus-2', 'Chorus', ["They tell me that it's time I tried.", "I tell them what is nearly true:",
                             "I'll never love again.", "I'd have to finish loving you."]),
-    ('Bridge', 'Bridge', ["If this is all that's left of you,", "this ache, then let it stay.",
-                          "I'd rather keep the hurt I have", "than have it healed away."]),
+    ('Bridge', 'Bridge', ["I'm told that it gets easier.", "I hope that it does not.",
+                          "The day it doesn't hurt at all", "is when you're really gone."]),
     ('Solo-A', 'Guitar solo', None),
-    ('Coda', 'Coda', ["The light's still on. I let it burn.", "I'll never love again.", "I never stopped."]),
+    ('Coda', 'Coda', ["I still say \u201cwe\u201d. I mean it now.", "I'll never love again.", "I never stopped."]),
 ]
