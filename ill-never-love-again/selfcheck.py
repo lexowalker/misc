@@ -18,6 +18,7 @@ from gen.engine import GTR_HI, GTR_LO, name_of
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'renditions')
+LIMITS = (110, 130)
 REF = os.path.join(HERE, 'references', 'mxl', 'lg-45587443.xml')
 OPEN = [40, 45, 50, 55, 59, 64]            # E A D G B E
 FAST = 0.16                                # seconds: inter-onset time that counts as "fast"
@@ -182,7 +183,7 @@ def check(p, ref):
         r['mp3_seconds'] = round(float(subprocess.check_output(
             ['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mp3]).decode()), 1)
     dur = r.get('mp3_seconds', r['midi_seconds'])
-    r['duration_ok'] = 110 <= dur <= 130
+    r['duration_ok'] = LIMITS[0] <= dur <= LIMITS[1]
     # markers from the file itself
     t, tempo, marks = 0, 500000, []
     for msg in mido.merge_tracks(mid.tracks):
@@ -264,13 +265,20 @@ def tick(v):
     return 'not run' if v is None else ('pass' if v else 'FAIL')
 
 
-def notes_md(res):
-    L = ["# Rendition notes and self-check", '',
+SONG_HEAD = ["# Full song: notes and self-check", '',
+             'This file is written by `selfcheck.py --song`. Do not edit it by hand.', '',
+             'The lyrics are in `LYRICS.md`. The MIDI file also carries them as lyric events on the guide vocal track.', '',
+             'Lead guitar pitch-bend range: +/-12 semitones (RPN 0 is in the file). Set the same range if your synth ignores RPN.', '']
+
+
+def notes_md(res, head=None, dur_label='Duration 1:50 to 2:10'):
+    L = head or ["# Rendition notes and self-check", '',
          'This file is written by `selfcheck.py`. Do not edit it by hand.', '',
          'All five are sketches of one song, about two minutes each, with the same form:',
          'Intro, Verse, Chorus, Solo-A (slow), Solo-B (build), Solo-C (fast), Solo-D (recapitulation), Outro.',
          'The melodies are different in each rendition, so each one is a real alternative.', '',
          'Lead guitar pitch-bend range: +/-12 semitones (RPN 0 is in the file). Set the same range if your synth ignores RPN.', '']
+    L = list(L)
     for r in res:
         n = r['notes']
         L += ['## %s' % r['title'], '',
@@ -280,7 +288,7 @@ def notes_md(res):
               '- **Sections:** ' + ', '.join('%s %s' % (s['name'], s['mmss']) for s in r['sections']),
               '- **Tracks:** ' + ', '.join(r['tracks']), '',
               '| Check | Result | Data |', '|---|---|---|',
-              '| Duration 1:50 to 2:10 | %s | music %.1f s, MIDI %.1f s%s |' % (
+              '| ' + dur_label + ' | %s | music %.1f s, MIDI %.1f s%s |' % (
                   tick(r['duration_ok']), r['music_seconds'], r['midi_seconds'],
                   ', MP3 %.1f s' % r['mp3_seconds'] if 'mp3_seconds' in r else ''),
               '| Density rises A to C | %s | notes per second: A %.2f, B %.2f, C %.2f, D %.2f |' % (
@@ -323,9 +331,20 @@ def notes_md(res):
 
 def main():
     ref = ref_lines()
-    res = [check(make(), ref) for make in pieces.ALL]
+    global OUT, LIMITS
+    if '--song' in sys.argv:
+        from gen.song import full_song
+        OUT, LIMITS = os.path.join(HERE, 'song'), (240, 300)
+        p = full_song()
+        res = [check(p, ref)]
+        res[0]['lyrics'] = {k: ' '.join(v) for k, v in p.lyrics.items()}
+        res[0]['section_bars'] = {s.name: s.bars for s in p.sections}
+        md = notes_md(res, SONG_HEAD, 'Duration 4:00 to 5:00')
+    else:
+        res = [check(make(), ref) for make in pieces.ALL]
+        md = notes_md(res)
     json.dump(res, open(os.path.join(OUT, 'selfcheck.json'), 'w'), indent=1)
-    open(os.path.join(OUT, 'NOTES.md'), 'w').write(notes_md(res))
+    open(os.path.join(OUT, 'NOTES.md'), 'w').write(md)
     okall = True
     for r in res:
         flags = {k: r[k] for k in ('duration_ok', 'density_rises', 'solo_d_ok', 'strong_ok', 'range_ok', 'orig_ok')}

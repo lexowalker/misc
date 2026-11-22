@@ -695,6 +695,12 @@ def build_midi(piece, path):
     render_voice(piece, tracks['lead'], piece.voices['lead'], 'lead', rng)
     render_voice(piece, tracks['aux'], piece.voices['aux'], 'aux', rng)
     render_voice(piece, tracks['vocal'], piece.voices['vocal'], 'vocal', rng)
+    lyr = getattr(piece, 'lyrics', None)
+    if lyr:      # one MIDI lyric event per sung note
+        for sec, words in lyr.items():
+            sung = [n for n in piece.voices['vocal'] if n['section'] == sec]
+            for n, w in zip(sung, words):
+                tracks['vocal'].add(n['t'] * PPQ, mido.MetaMessage('lyrics', text=w if w.endswith('-') else w + ' '), 1)
     build_band(piece, tracks, rng)
     for k, tr in tracks.items():
         if k == 'strings' and not any(s.arr.get('strings') for s in piece.sections):

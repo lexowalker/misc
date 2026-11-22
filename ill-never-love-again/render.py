@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render renditions/*.mid to MP3 with FluidSynth and ffmpeg.
+"""Render renditions/*.mid and song/*.mid to MP3 with FluidSynth and ffmpeg.
 
 Each file is rendered as three stems (lead, guide vocal, band) so that the mix can be balanced
 with measured levels: the lead sits in front of the band, and the guide vocal stays audible.
@@ -84,7 +84,7 @@ def render(path):
 
 
 def main():
-    files = sys.argv[1:] or sorted(glob.glob(os.path.join(OUT, '*.mid')))
+    files = sys.argv[1:] or sorted(glob.glob(os.path.join(OUT, '*.mid'))) + sorted(glob.glob(os.path.join(HERE, 'song', '*.mid')))
     for f in files:
         render(f)
 

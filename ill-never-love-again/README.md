@@ -19,13 +19,16 @@ for the vocal, band and production around them.
 - [`renditions/`](renditions/): five two-minute MIDI sketches of the song, each
   in a different direction. [`renditions/NOTES.md`](renditions/NOTES.md) describes
   each one and gives the self-check results.
+- [`song/`](song/): the full song (4:40) as MIDI, with
+  [`song/LYRICS.md`](song/LYRICS.md) (the lyric and how it sits on the music) and
+  [`song/NOTES.md`](song/NOTES.md) (sections, self-check). `gen/song.py` is its score.
 - `gen/`, `generate.py`: the composition. `gen/pieces.py` holds the five scores
   as text; `gen/engine.py` turns them into MIDI with an expressive lead guitar
   (bends, vibrato, slides, swells) and a generated band.
 - `selfcheck.py`: data checks (duration, solo density, chord tones, range,
   playability, originality). It writes `renditions/NOTES.md`.
 - `render.py`: MIDI to MP3 with FluidSynth and ffmpeg.
-- `page.py`: builds the one-file listening page (players, section strips, notes).
+- `page.py`, `song_page.py`: build the one-file listening pages for the renditions and the full song.
 - `analysis/`: the scripts that made the reference profile.
 - `prompts/`: the briefs for this work.
 
@@ -33,16 +36,17 @@ for the vocal, band and production around them.
 
 ```bash
 pip install mido numpy soundfile
-python3 generate.py      # writes renditions/*.mid (deterministic)
-python3 selfcheck.py     # checks them and writes renditions/NOTES.md
+python3 generate.py          # writes renditions/*.mid and song/*.mid (deterministic)
+python3 selfcheck.py         # checks the renditions and writes renditions/NOTES.md
+python3 selfcheck.py --song  # checks the full song and writes song/NOTES.md
 ```
 
 To make audio you also need `fluidsynth`, `ffmpeg` and a General MIDI
 soundfont (`fluid-soundfont-gm` on Debian or Ubuntu; set `SOUNDFONT` for another):
 
 ```bash
-python3 render.py        # writes renditions/*.mp3 (not in git)
-python3 selfcheck.py     # run again to add the MP3 lengths
+python3 render.py        # writes renditions/*.mp3 and song/*.mp3 (not in git)
+python3 selfcheck.py     # run again to add the MP3 lengths (and with --song)
 ```
 
 The lead guitar track uses a pitch-bend range of ±12 semitones. The files set

@@ -3,3 +3,4 @@ references/
 *.wav
 __pycache__/
 renditions/selfcheck.json
+song/selfcheck.json
