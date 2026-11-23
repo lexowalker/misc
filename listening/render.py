@@ -57,7 +57,7 @@ def text_layer(c, frame_for_lum):
     box=(int((W-(r-l))/2),int(y+asc*0.25),int((W+(r-l))/2),int(y+asc*1.02))
     reg=frame_for_lum[box[1]:box[3],box[0]:box[2]]
     lum=(reg@np.float32([0.2126,0.7152,0.0722])).mean()/255
-    dark=lum>0.60
+    dark=lum>0.66
     a=np.asarray(m,np.float32)/255
     halo=np.asarray(m.filter(ImageFilter.GaussianBlur(34)),np.float32)/255
     halo=np.clip(halo*1.6,0,1)*(0.50 if not dark else 0.45)
@@ -66,7 +66,7 @@ def text_layer(c, frame_for_lum):
     col=np.float32([14,16,20]) if dark else np.float32([255,253,248]); hcol=np.float32([255,255,255]) if dark else np.float32([0,0,0])
     _txt[cid]=(a[...,None],halo[...,None],col,hcol); return _txt[cid]
 rng=np.random.default_rng(3)
-GRAIN=[cv2.resize(rng.normal(0,1,(H//2,W//2)).astype(np.float32),(W,H),interpolation=cv2.INTER_LINEAR)[...,None]*4.2 for _ in range(6)]
+GRAIN=[cv2.resize(rng.normal(0,1,(H//2,W//2)).astype(np.float32),(W,H),interpolation=cv2.INTER_LINEAR)[...,None]*2.6 for _ in range(6)]
 yy,xx=np.mgrid[0:H,0:W].astype(np.float32); VIG=(1-0.30*np.clip((((xx-W/2)/(W/2))**2+((yy-H/2)/(H/2))**2)-0.35,0,None)**1.2)[...,None]
 def cue_at(t):
     lo,hi=0,len(CUES)-1
@@ -89,7 +89,7 @@ def frame(n):
                 p=CUES[i-1]; k=(t-c["t"])/xf; k=k*k*(3-2*k)
                 prev=view(p["id"],i-1,1.0+ (t-c["t"])/p["dur"],p["dur"]) if not any(a<=p["t"]+p["dur"]-0.01<b for a,b in BLACK) else 0
                 img=prev*(1-k)+img*k
-        a,halo,col,hcol=text_layer(c,img)
+        a,halo,col,hcol=text_layer(c,img if c['id'] in _txt else view(c['id'],i,0.5,c['dur']))
         o=1.0
         if c["dur"]>=1.0: o=min(1.0,(t-c["t"])/max(xf,0.12))
         if c["dur"]>=1.5 and i+1<len(CUES) and CUES[i+1]["dur"]>=1.0: o=min(o,max(0.0,(c["t"]+c["dur"]-t)/0.2))
@@ -105,7 +105,7 @@ if __name__=="__main__":
     if sys.argv[1]=="--still":
         Image.fromarray(frame(int(float(sys.argv[2])*FPS))).save(sys.argv[3],quality=88); sys.exit()
     out=sys.argv[1]; t0=float(sys.argv[2]) if len(sys.argv)>2 else 0; t1=float(sys.argv[3]) if len(sys.argv)>3 else END
-    crf=sys.argv[4] if len(sys.argv)>4 else "17"
+    crf=sys.argv[4] if len(sys.argv)>4 else "21"
     p=subprocess.Popen(["ffmpeg","-v","error","-y","-f","rawvideo","-pix_fmt","rgb24","-s",f"{W}x{H}","-r",str(FPS),"-i","-","-c:v","libx264","-preset","medium","-crf",crf,"-pix_fmt","yuv420p",out],stdin=subprocess.PIPE)
     for n in range(int(t0*FPS),int(t1*FPS)): p.stdin.write(frame(n).tobytes())
     p.stdin.close(); p.wait()
