@@ -1,0 +1,1442 @@
+[
+ {
+  "id": "s01_00",
+  "word": "Ocean.",
+  "flags": "M",
+  "prompt": "Aerial long-exposure photograph of a vast dark ocean at dusk, wave trains smeared into silk, 70mm documentary film grain, deep indigo and black, immense scale. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_01",
+  "word": "Depth.",
+  "flags": "",
+  "prompt": "Japanese ukiyo-e woodblock print of a bottomless ocean trench in cross-section, descending layers of ever darker Prussian blue, tiny pale fish, flat graphic shapes. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_02",
+  "word": "Pressure.",
+  "flags": "",
+  "prompt": "Macro photograph of a single air bubble crushed and deformed under deep water, black background, hard silver rim light, scientific photography. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_03",
+  "word": "Darkness.",
+  "flags": "",
+  "prompt": "Charcoal drawing on black paper, almost entirely black, the faintest suggestion of a huge shape in deep water, smudged, velvety, minimal. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_04",
+  "word": "Silence.",
+  "flags": "",
+  "prompt": "Minimalist sumi-e ink painting, one horizontal ink wash line across empty pale grey paper, vast emptiness, a single tiny drop of ink. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_05",
+  "word": "Pulse.",
+  "flags": "M",
+  "prompt": "Bioluminescent jellyfish contracting in the deep sea, an electric cyan ring of light on pure black, long exposure glow. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_06",
+  "word": "Pulse.",
+  "flags": "",
+  "prompt": "Oscilloscope trace of a single heartbeat pulse, glowing blue-green phosphor line on black CRT glass, analog scanlines, macro photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_07",
+  "word": "Rhythm.",
+  "flags": "",
+  "prompt": "Aerial photograph of perfectly regular sand ripples under shallow water, repeating bands of light, monochrome silver-blue, abstract. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_08",
+  "word": "Repetition.",
+  "flags": "",
+  "prompt": "Graphic screenprint of hundreds of identical silver fish in a school seen from above, repeating pattern filling the frame, navy and silver ink. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_09",
+  "word": "Pattern.",
+  "flags": "M",
+  "prompt": "Cymatics photograph: fine white sand on a vibrating black metal plate forming an intricate symmetrical Chladni figure, top-down, stark white on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_10",
+  "word": "Recognition.",
+  "flags": "",
+  "prompt": "Extreme macro photograph of a whale's eye opening in dark water, wrinkled skin, a point of light in the pupil, deep blue-black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_11",
+  "word": "Awareness.",
+  "flags": "",
+  "prompt": "Early 20th century spiritual abstract painting, concentric pale circles and spirals radiating from a dark blue center, tempera on canvas, soft pastel geometry. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_12",
+  "word": "Something.",
+  "flags": "",
+  "prompt": "Old sonar screen, grainy green on black, one unexplained soft blip inside a sweeping arc, analog noise. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_13",
+  "word": "Somewhere.",
+  "flags": "",
+  "prompt": "Antique hand-drawn nautical chart, sepia ink and blue wash, depth soundings as dots, sea monsters in the margin, one large blank unmapped region. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s01_14",
+  "word": "Listening.",
+  "flags": "",
+  "prompt": "Underwater photograph looking up from the deep toward a faint circle of surface light, a hydrophone hanging on a long cable, drifting particles, monochrome blue. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_00",
+  "word": "Blue.",
+  "flags": "",
+  "prompt": "Cyanotype print of swirling ocean currents, white on deep Prussian blue, visible paper grain and brushed emulsion edges. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_01",
+  "word": "Whale.",
+  "flags": "M",
+  "prompt": "A colossal blue whale gliding beneath a tiny diver, underwater wide-angle photograph, shafts of light, awe-inspiring scale. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_02",
+  "word": "Song.",
+  "flags": "",
+  "prompt": "Whale song spectrogram rendered as luminous flowing ribbons of gold and violet on black, data visualization as art. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_03",
+  "word": "Echo.",
+  "flags": "",
+  "prompt": "Concentric ripples expanding on perfectly still black water, overhead photograph, silver light, minimal. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_04",
+  "word": "Return.",
+  "flags": "",
+  "prompt": "Linocut print of a humpback whale rising toward the surface, bold carved black and white lines with one blue ink layer. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_05",
+  "word": "Echo.",
+  "flags": "",
+  "prompt": "Vintage scientific engraving of sound waves bouncing between canyon walls, concentric arcs, cream paper. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_06",
+  "word": "Return.",
+  "flags": "",
+  "prompt": "Time-stack photograph of thousands of migrating birds at dusk, their flight paths drawn as streaks across an orange-violet sky. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_07",
+  "word": "Memory.",
+  "flags": "",
+  "prompt": "Double-exposure photograph: a child's silhouette profile filled with ocean waves, faded 1970s film stock, light leaks. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_08",
+  "word": "Before.",
+  "flags": "",
+  "prompt": "Daguerreotype of an empty rocking chair by a window, silvered plate, tarnished edges, 1850s. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_09",
+  "word": "After.",
+  "flags": "",
+  "prompt": "A room overgrown with ferns and vines, sunlight through a broken roof onto a rocking chair, medium-format color photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_10",
+  "word": "Time.",
+  "flags": "",
+  "prompt": "High-speed macro photograph of sand falling in an hourglass, each grain suspended, warm backlight on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_11",
+  "word": "Strange.",
+  "flags": "",
+  "prompt": "Surrealist oil painting of a staircase spiraling into the sky above a calm sea, impossible shadows, muted dreamlike palette. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_12",
+  "word": "Elastic.",
+  "flags": "",
+  "prompt": "Slit-scan photograph of a running horse stretched and smeared across time, liquid distortion, color streaks. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_13",
+  "word": "Dream.",
+  "flags": "",
+  "prompt": "Soft-focus pastel drawing of a bed floating on a moonlit lake, hazy violet and peach, chalk texture. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_14",
+  "word": "Childhood.",
+  "flags": "",
+  "prompt": "A child's crayon drawing of a house, a yellow sun and a blue whale flying in the sky, waxy texture on rough paper, joyful. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_15",
+  "word": "Summer.",
+  "flags": "M",
+  "prompt": "Faded 1960s Kodachrome snapshot of children running through a lawn sprinkler, overexposed sunlight, warm color cast. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_16",
+  "word": "Sunlight.",
+  "flags": "",
+  "prompt": "Sunbeams through fog in a tall pine forest, crepuscular rays, golden hour photograph, luminous. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_17",
+  "word": "Window.",
+  "flags": "",
+  "prompt": "Dutch Golden Age oil painting of sunlight falling through a leaded glass window onto a bare wooden table, quiet interior, warm ochre. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_18",
+  "word": "Dust.",
+  "flags": "",
+  "prompt": "Macro photograph of dust motes floating in a shaft of sunlight in a dark room, bokeh, gold on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_19",
+  "word": "Floating.",
+  "flags": "",
+  "prompt": "Dandelion seeds drifting in backlit golden air, shallow depth of field, high-speed macro. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_20",
+  "word": "Golden.",
+  "flags": "M",
+  "prompt": "Byzantine gilded icon background, cracked burnished gold leaf filling the frame, a faint incised halo circle, sacred glow. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s02_21",
+  "word": "Warmth.",
+  "flags": "",
+  "prompt": "Thermal infrared camera image of two hands cupped together, glowing orange-yellow-white against cool violet, heat-map palette. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_00",
+  "word": "Star.",
+  "flags": "M",
+  "prompt": "Solar telescope photograph of the sun's surface in hydrogen-alpha light, boiling granules and a huge looping prominence, fiery orange on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_01",
+  "word": "Fusion.",
+  "flags": "",
+  "prompt": "1960s bubble chamber photograph of particle tracks, spiraling curls and collisions, white lines on dark blue. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_02",
+  "word": "Hydrogen.",
+  "flags": "",
+  "prompt": "Deep space telescope image of a crimson hydrogen emission nebula, pillars of gas and newborn stars. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_03",
+  "word": "Helium.",
+  "flags": "",
+  "prompt": "Luminous yellow-orange plasma filaments inside a glass sphere, neon glow, studio black background. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_04",
+  "word": "Gravity.",
+  "flags": "",
+  "prompt": "Vintage astronomy plate engraving of spacetime as a funnel-shaped grid curving around a heavy sphere, small planets rolling inward. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_05",
+  "word": "Collapse.",
+  "flags": "",
+  "prompt": "A star collapsing, painted as violent expressionist oil impasto, thick strokes of white, crimson and black rushing to a center. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_06",
+  "word": "Birth.",
+  "flags": "",
+  "prompt": "Grainy monochrome ultrasound-style image of a star being born inside a dark womb-like nebula, one warm gold point of light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_07",
+  "word": "Beginning.",
+  "flags": "",
+  "prompt": "First light of dawn breaking over a primordial sea with volcanic islands, epic matte painting, pink and gold. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_08",
+  "word": "Origin.",
+  "flags": "M",
+  "prompt": "Paleolithic cave painting on rough ochre rock: a spiral, a sun and running animals, red and black pigment, flickering torchlight. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_09",
+  "word": "Question.",
+  "flags": "",
+  "prompt": "A lone tiny human figure standing before an enormous blank white monolith on a salt flat, minimalist photograph, vast negative space. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_10",
+  "word": "Why.",
+  "flags": "",
+  "prompt": "Renaissance anatomical ink drawing of a human eye looking upward, sepia on aged parchment, cross-hatching. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_11",
+  "word": "Why.",
+  "flags": "",
+  "prompt": "Tintype portrait of a child looking up, face lit by starlight, intense gaze, monochrome silver. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_12",
+  "word": "Why.",
+  "flags": "",
+  "prompt": "An array of radio telescope dishes pointed at the Milky Way, long exposure at night, deep blue and silver. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_13",
+  "word": "Silence.",
+  "flags": "",
+  "prompt": "Pure white snowfield under a white sky, one faint horizon line, minimalist photograph, almost nothing. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_14",
+  "word": "Possibility.",
+  "flags": "",
+  "prompt": "Generative art: countless translucent paths branching outward from a single point, fine white lines on black with faint hints of every color. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_15",
+  "word": "Branch.",
+  "flags": "",
+  "prompt": "Bare winter branch against a pale sky, Japanese ink brush painting, bold confident strokes. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_16",
+  "word": "Tree.",
+  "flags": "M",
+  "prompt": "An enormous ancient oak tree alone on a hill, infrared aerochrome photograph, foliage glowing magenta-pink against a dark teal sky. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_17",
+  "word": "Roots.",
+  "flags": "",
+  "prompt": "Vintage botanical lithograph of a tree in cross-section, its roots mirrored underground as large as its crown, earthy inks. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_18",
+  "word": "Soil.",
+  "flags": "",
+  "prompt": "Extreme macro photograph of dark wet soil alive with mycelium threads, tiny seeds and springtails, rich brown, glistening. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_19",
+  "word": "Water.",
+  "flags": "",
+  "prompt": "High-speed photograph of a crown-shaped splash of clear water, frozen in time, backlit turquoise on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_20",
+  "word": "Rain.",
+  "flags": "",
+  "prompt": "Ukiyo-e woodblock print of sudden rain over a wooden bridge, diagonal dark rain lines, figures hurrying, indigo gradient sky. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_21",
+  "word": "Cloud.",
+  "flags": "",
+  "prompt": "Towering cumulonimbus cloud at sunset photographed from an aircraft, immense glowing anvil, peach and violet. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_22",
+  "word": "Vapor.",
+  "flags": "",
+  "prompt": "Morning mist rising off a river in cold air, backlit by the sun, ethereal photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_23",
+  "word": "Ocean.",
+  "flags": "",
+  "prompt": "Satellite photograph of ocean with a swirling phytoplankton bloom, turquoise and deep blue fluid patterns. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_24",
+  "word": "Loop.",
+  "flags": "",
+  "prompt": "Zen enso circle, a single bold black brushstroke on white rice paper, imperfect, ink splatter. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_25",
+  "word": "Cycle.",
+  "flags": "M",
+  "prompt": "Tibetan sand mandala seen from directly above, intricate concentric rings of vivid colored sand. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s03_26",
+  "word": "Spiral.",
+  "flags": "",
+  "prompt": "Nautilus shell cut in cross-section, perfect logarithmic spiral chambers, pearlescent, studio macro on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_00",
+  "word": "Far.",
+  "flags": "",
+  "prompt": "Deep field telescope image, thousands of tiny galaxies scattered across immense black space, one small pale dot alone. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_01",
+  "word": "Planet.",
+  "flags": "",
+  "prompt": "Retro 1970s space art gouache painting of a dusty ochre planet seen from orbit, thin glowing atmosphere. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_02",
+  "word": "Stone.",
+  "flags": "",
+  "prompt": "Monumental weathered boulders on a barren plain, large-format black and white photograph, extreme tonal detail, stark. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_03",
+  "word": "Desert.",
+  "flags": "",
+  "prompt": "Endless dunes with knife-edge crests seen from the air, low sun, abstract ochre and deep shadow. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_04",
+  "word": "City.",
+  "flags": "M",
+  "prompt": "An abandoned megacity half-buried in sand seen from a great height, grid of streets fading into dunes, hazy golden light, cinematic aerial photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_05",
+  "word": "Towers.",
+  "flags": "",
+  "prompt": "Skeletal skyscrapers rising from sand, brutal charcoal and red-chalk architectural drawing, dramatic perspective from below. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_06",
+  "word": "Windows.",
+  "flags": "",
+  "prompt": "Flat frontal photograph of a ruined tower block facade, hundreds of empty dark windows in a rigid grid, pale dust color. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_07",
+  "word": "Empty.",
+  "flags": "",
+  "prompt": "A vast empty concrete hall with sand drifting across the floor, a single shaft of light, desaturated photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_08",
+  "word": "Wind.",
+  "flags": "",
+  "prompt": "Sand blowing off a dune crest in long streamers, backlit, gold on dark. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_09",
+  "word": "Sand.",
+  "flags": "",
+  "prompt": "Scanning electron microscope image of individual sand grains, each a different sculpted shape, monochrome with subtle false color. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_10",
+  "word": "Erosion.",
+  "flags": "",
+  "prompt": "Wind-carved sandstone arches and fins with layered strata, loose wet watercolor painting, rust and cream. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_11",
+  "word": "Forgetting.",
+  "flags": "",
+  "prompt": "A fresco of human faces flaking and crumbling off a plaster wall, most of it already bare, faded pigments, melancholic. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_12",
+  "word": "One light.",
+  "flags": "",
+  "prompt": "A single tiny warm lit window in an immense dark ruined cityscape at blue hour, wide cinematic photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_13",
+  "word": "Flicker.",
+  "flags": "",
+  "prompt": "Extreme macro of an old tungsten bulb filament flickering inside dusty glass, sparks of orange in darkness, motion blur. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_14",
+  "word": "Machine.",
+  "flags": "MR",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, dormant, sitting half-buried in sand inside a ruined hall, dust on its shoulders, a faint amber glow in its eye, cinematic painterly still. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_15",
+  "word": "Ancient.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye depicted in side profile as an ancient weathered sandstone wall relief with traces of faded paint. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_16",
+  "word": "Waiting.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye sitting motionless at night while star trails wheel overhead through a broken roof, long-exposure photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_17",
+  "word": "Archive.",
+  "flags": "",
+  "prompt": "An infinite dark library of glowing glass data crystals receding in perfect symmetrical perspective, cold blue light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_18",
+  "word": "Fragments.",
+  "flags": "",
+  "prompt": "A Roman mosaic portrait of a human face shattered into scattered loose tiles on the ground, top-down. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_19",
+  "word": "Voices.",
+  "flags": "",
+  "prompt": "Hundreds of old magnetic tape reels with tape unspooled and tangled like hair, warm tungsten light, still life photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_20",
+  "word": "Faces.",
+  "flags": "M",
+  "prompt": "A wall of hundreds of faded portrait photographs of ordinary people of every age, sepia and hand-tinted, some peeling away. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_21",
+  "word": "Names.",
+  "flags": "",
+  "prompt": "A vast stone memorial wall covered in tiny worn illegible carved marks, raking light, one smooth spot worn by touching hands. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_22",
+  "word": "Millions.",
+  "flags": "",
+  "prompt": "Aerial view of an enormous crowd dissolving into pixels and dust at the edges, glitch art, datamosh. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_23",
+  "word": "Gone.",
+  "flags": "",
+  "prompt": "Bleached Polaroid photograph of an empty playground swing moving slightly in a sand-filled courtyard. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_24",
+  "word": "Absence.",
+  "flags": "",
+  "prompt": "A dark detailed oil painting of a room in which a human figure is missing, its silhouette left as bare white canvas. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_25",
+  "word": "Loss.",
+  "flags": "",
+  "prompt": "A rusted child's toy half-buried in sand, macro photograph, shallow focus, muted palette. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_26",
+  "word": "Grief.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye with its head bowed and eye lowered, expressionist woodcut print, heavy black gouges, one amber accent. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_27",
+  "word": "Underground.",
+  "flags": "",
+  "prompt": "Mid-century technical gouache cutaway illustration of a deep shaft descending through rock strata to one small glowing chamber. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_28",
+  "word": "Chamber.",
+  "flags": "",
+  "prompt": "A circular vault with a heavy round metal door, frost on the walls, cold blue-white light, symmetrical cinematic photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_29",
+  "word": "Sealed.",
+  "flags": "",
+  "prompt": "Close-up of a massive corroded vault wheel lock, verdigris and rust, macro detail. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_30",
+  "word": "Darkness.",
+  "flags": "",
+  "prompt": "A pure black frame with a hair-thin vertical crack of amber light down the center. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_31",
+  "word": "Inside.",
+  "flags": "",
+  "prompt": "Inside a vault: rows of empty glass capsules, one of them faintly glowing, shallow depth of field. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s04_32",
+  "word": "Seed.",
+  "flags": "R",
+  "prompt": "A single small seed resting in the open metal palm of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, lit like a Baroque chiaroscuro painting, deep shadow, sacred. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_00",
+  "word": "Decision.",
+  "flags": "R",
+  "prompt": "Extreme close-up of the round glass lens eye of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, an amber iris of mechanical blades focusing, a tiny seed reflected in the glass. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_01",
+  "word": "Movement.",
+  "flags": "R",
+  "prompt": "1880s chronophotography multiple exposure of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye rising to stand, sequential ghost images on a black background, motion study. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_02",
+  "word": "First movement.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye taking a step out of a ruined hall into blinding daylight, dust cascading off its joints, backlit silhouette, cinematic. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_03",
+  "word": "Rust.",
+  "flags": "",
+  "prompt": "Macro abstract of rust, flaking orange, blue and violet oxide patterns on steel like a satellite landscape. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_04",
+  "word": "Gears.",
+  "flags": "",
+  "prompt": "Vintage engraving of intricate clockwork gears in cross-section, hand-colored in copper and teal. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_05",
+  "word": "Friction.",
+  "flags": "",
+  "prompt": "A shower of sparks from grinding metal, long exposure, orange streaks on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_06",
+  "word": "Effort.",
+  "flags": "R",
+  "prompt": "Constructivist poster composition of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye leaning into a headwind climbing a diagonal, bold red, black and cream geometric shapes. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_07",
+  "word": "Journey.",
+  "flags": "R",
+  "prompt": "Aerial photograph of a colossal dune sea crossed by a single line of footprints, a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye a tiny figure at the end of it, low sun. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_08",
+  "word": "Horizon.",
+  "flags": "",
+  "prompt": "Minimal color-field painting, a razor-thin line dividing burnt red earth from a vast orange sky, soft edges. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_09",
+  "word": "Red.",
+  "flags": "M",
+  "prompt": "Epic samurai-film composition: a single crimson banner whipping in the wind on a grey volcanic ash slope, one tiny figure carrying it, saturated red against ash, painterly. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_10",
+  "word": "Heat.",
+  "flags": "",
+  "prompt": "Heat haze mirage shimmering over a salt flat, the sun a white disk, telephoto compression, bleached. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_11",
+  "word": "Distance.",
+  "flags": "",
+  "prompt": "A straight line of footprints vanishing toward an impossibly distant mountain range, wide-angle, deep perspective. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_12",
+  "word": "Immense.",
+  "flags": "R",
+  "prompt": "Romantic sublime landscape oil painting, a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye a tiny speck at the foot of a canyon wall thousands of meters tall, dramatic storm light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_13",
+  "word": "But finite.",
+  "flags": "",
+  "prompt": "Antique surveyor's desert map in ink and watercolor, a dotted route drawn across it with small tick marks, no words. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_14",
+  "word": "Countable.",
+  "flags": "",
+  "prompt": "An abacus of red and bone beads, half slid across, macro, warm side light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_15",
+  "word": "Steps.",
+  "flags": "",
+  "prompt": "Footprints in rippled sand in close-up, low angle, sharp shadows. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_16",
+  "word": "One.",
+  "flags": "",
+  "prompt": "A single white pebble on black sand, top-down, minimal. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_17",
+  "word": "Two.",
+  "flags": "",
+  "prompt": "Japanese gold-leaf folding screen painting of two cranes flying across a huge red sun. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_18",
+  "word": "Three.",
+  "flags": "",
+  "prompt": "Three standing stones on a ridge at dusk, silhouettes, violet sky. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_19",
+  "word": "Thousands.",
+  "flags": "",
+  "prompt": "Thousands of clay figures standing in ranks receding into the distance, dusty warm light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_20",
+  "word": "Millions.",
+  "flags": "",
+  "prompt": "A murmuration of millions of starlings forming one vast fluid shape over a desert at sunset. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_21",
+  "word": "Mountain.",
+  "flags": "",
+  "prompt": "A sheer mountain in the style of a Chinese shan shui hanging scroll, ink and pale color, layers of mist, a tiny winding path. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_22",
+  "word": "Night.",
+  "flags": "",
+  "prompt": "Tonal blue nocturne painting of a moonless night desert, one small amber point of light far away. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_23",
+  "word": "Stars.",
+  "flags": "",
+  "prompt": "The Milky Way core blazing over a mountain ridge, crisp astrophotography. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_24",
+  "word": "Constellation.",
+  "flags": "",
+  "prompt": "Baroque celestial atlas engraving, constellation figures of animals drawn over gold star points on deep blue, hand-colored, no lettering. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_25",
+  "word": "Ancient maps.",
+  "flags": "",
+  "prompt": "A Polynesian stick chart of lashed sticks and shells lying on sand, museum photograph, raking light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_26",
+  "word": "Human hands.",
+  "flags": "M",
+  "prompt": "Prehistoric cave wall covered in dozens of red-ochre hand stencils, torchlight. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_27",
+  "word": "Human eyes.",
+  "flags": "",
+  "prompt": "Extreme close-up of an elderly human eye, the iris like a nebula, every wrinkle, tender portrait photography. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_28",
+  "word": "Human hope.",
+  "flags": "",
+  "prompt": "Children releasing glowing paper lanterns into the night sky, orange bokeh, joyful documentary photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_29",
+  "word": "Hope.",
+  "flags": "",
+  "prompt": "A candle flame held steady in cupped hands in the wind, dark background, warm glow. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_30",
+  "word": "Yet action.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye mid-stride in the style of an Italian Futurist painting, fragmented planes of motion, red, orange and steel blue. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_31",
+  "word": "Climbing.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye scaling a near-vertical cliff face seen from far below, dramatic diagonal, graphic novel ink with flat color. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_32",
+  "word": "Falling.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye falling and tumbling against the sky, limbs flailing, dust and motion blur, low angle photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_33",
+  "word": "Repair.",
+  "flags": "R",
+  "prompt": "Macro of the cracked arm plate of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye repaired with veins of gold like kintsugi. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_34",
+  "word": "Climbing.",
+  "flags": "R",
+  "prompt": "The metal hand of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye gripping the final rock ledge, seen from above with the abyss below, dawn light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s05_35",
+  "word": "Summit.",
+  "flags": "MR",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye seen from behind standing on a knife-edge summit above a sea of clouds at sunrise, tiny against the sky, 19th-century Romantic sublime painting. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_00",
+  "word": "Crater.",
+  "flags": "",
+  "prompt": "A vast impact crater seen from its rim, the floor in permanent black shadow, stark photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_01",
+  "word": "White.",
+  "flags": "",
+  "prompt": "Almost pure white, snow, fog and ice merging, one faint blue shadow, minimal photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_02",
+  "word": "Ice.",
+  "flags": "",
+  "prompt": "Interior of a blue glacier ice cave, translucent scalloped walls glowing cyan. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_03",
+  "word": "Memory of oceans.",
+  "flags": "",
+  "prompt": "Ancient air bubbles and a fossil fish frozen inside clear ice, backlit macro, an ocean held still. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_04",
+  "word": "Heat.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye pressing its glowing orange-white open chest furnace against a wall of blue ice, steam rising, strong warm and cold contrast. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_05",
+  "word": "Melting.",
+  "flags": "",
+  "prompt": "Macro of an ice surface melting, water beading and running in rivulets, amber light refracted. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_06",
+  "word": "Drop.",
+  "flags": "M",
+  "prompt": "A single water droplet hanging from the tip of an icicle about to fall, a whole landscape refracted upside-down inside it, extreme macro on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_07",
+  "word": "One drop.",
+  "flags": "",
+  "prompt": "High-speed photograph of a single drop falling through darkness, a perfect sphere holding one point of light, centered. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_08",
+  "word": "Seed.",
+  "flags": "",
+  "prompt": "X-ray radiograph of a seed showing the folded embryo inside, glowing white-blue on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s06_09",
+  "word": "Contact.",
+  "flags": "",
+  "prompt": "The instant a water droplet strikes a seed lying on dry cracked earth, a splash crown forming, ultra high-speed macro, dramatic side light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_00",
+  "word": "Activation.",
+  "flags": "",
+  "prompt": "Fluorescence microscopy image of cells lighting up, neon green and magenta nuclei on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_01",
+  "word": "Expansion.",
+  "flags": "",
+  "prompt": "Macro photograph of a seed swelling and splitting its coat, glistening with water. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_02",
+  "word": "Fracture.",
+  "flags": "M",
+  "prompt": "A chrysalis cracking open along its seam, extreme macro, jewel-like golden-green shell splitting, light glowing from inside. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_03",
+  "word": "Shell opening.",
+  "flags": "",
+  "prompt": "A seed coat splitting with a white root tip emerging, botanical macro on dark soil, luminous. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_04",
+  "word": "Root.",
+  "flags": "",
+  "prompt": "White root hairs growing downward through dark earth seen through glass, scientific photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_05",
+  "word": "Downward.",
+  "flags": "",
+  "prompt": "A single root descending into darkness, ink wash painting. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_06",
+  "word": "Shoot.",
+  "flags": "",
+  "prompt": "A pale green shoot breaking through cracked desert earth, low angle macro, sun flare behind it. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_07",
+  "word": "Upward.",
+  "flags": "",
+  "prompt": "Looking straight up the trunk of a towering sequoia to the sky, extreme wide angle, converging lines. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_08",
+  "word": "Light.",
+  "flags": "",
+  "prompt": "A sun starburst through a single translucent leaf, veins glowing, backlit macro. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_09",
+  "word": "Green.",
+  "flags": "",
+  "prompt": "Saturated emerald green oil paint in thick impasto filling the whole frame, subtle variation, color field. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_10",
+  "word": "First green.",
+  "flags": "R",
+  "prompt": "A single tiny two-leaf seedling alone in a vast red desert, a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye kneeling small beside it, wide cinematic shot. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_11",
+  "word": "Leaf.",
+  "flags": "",
+  "prompt": "A single perfect leaf, vintage botanical illustration in watercolor and ink on cream paper. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_12",
+  "word": "Veins.",
+  "flags": "",
+  "prompt": "Skeleton leaf macro, lace-like vein network, backlit white on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_13",
+  "word": "Branching.",
+  "flags": "",
+  "prompt": "False-color satellite image of a river delta branching like a tree, turquoise and rust. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_14",
+  "word": "Fractal.",
+  "flags": "",
+  "prompt": "Romanesco broccoli macro, spiraling fractal cones, vivid green. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_15",
+  "word": "Network.",
+  "flags": "M",
+  "prompt": "Cross-section illustration of a glowing golden mycelium network linking tree roots underground, bioluminescent threads in dark soil. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_16",
+  "word": "River.",
+  "flags": "",
+  "prompt": "Aerial photograph of braided milky-blue river channels across black volcanic sand, abstract. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_17",
+  "word": "Lightning.",
+  "flags": "",
+  "prompt": "A branching lightning bolt across a violet night sky, long exposure. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_18",
+  "word": "Neuron.",
+  "flags": "",
+  "prompt": "19th-century histology ink drawing of neurons, black branching dendrites on amber paper. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_19",
+  "word": "Connection.",
+  "flags": "",
+  "prompt": "Two vine tendrils almost touching, macro, soft green bokeh. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_20",
+  "word": "Signal.",
+  "flags": "M",
+  "prompt": "Earth at night from orbit, city lights as a glowing gold network of filaments across continents beneath a green aurora. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_21",
+  "word": "Pattern.",
+  "flags": "",
+  "prompt": "Islamic geometric tile pattern in turquoise, cobalt and gold, perfectly symmetric, seen flat. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_22",
+  "word": "Recognition.",
+  "flags": "R",
+  "prompt": "Extreme close-up of the glass lens eye of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye reflecting a green leaf, its veins mirrored in the mechanical iris. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_23",
+  "word": "Growth.",
+  "flags": "",
+  "prompt": "Tree rings in cross-section, concentric, macro, warm wood, one dark scar ring. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_24",
+  "word": "Imperfect.",
+  "flags": "",
+  "prompt": "A lopsided hand-thrown tea bowl with an uneven glaze, wabi-sabi still life, soft daylight. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_25",
+  "word": "Alive.",
+  "flags": "M",
+  "prompt": "A butterfly emerging from its chrysalis, wet crumpled wings unfurling, backlit jewel colors, extreme macro, luminous. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_26",
+  "word": "Emergence.",
+  "flags": "",
+  "prompt": "A huge swarm of orange butterflies bursting from a tree into sunlight, joyful, telephoto. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_27",
+  "word": "Complexity.",
+  "flags": "",
+  "prompt": "A coral reef teeming with life, hyper-dense, every color, wide-angle underwater photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_28",
+  "word": "Unpredictable.",
+  "flags": "",
+  "prompt": "Marbled paint swirling in chaotic turbulent flows, vivid paper marbling. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_29",
+  "word": "Novel.",
+  "flags": "",
+  "prompt": "Extreme macro of a newly unfurled butterfly wing, iridescent scales like pixels, impossible colors. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s07_30",
+  "word": "New.",
+  "flags": "",
+  "prompt": "A butterfly in first flight toward the rising sun over a red desert with one green tree, cinematic, lens flare. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_00",
+  "word": "A flicker.",
+  "flags": "R",
+  "prompt": "Dappled leaf shadows flickering across the metal face of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, close-up, warm light, shallow focus. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_01",
+  "word": "Not danger.",
+  "flags": "",
+  "prompt": "False-color thermal sensor image of a single leaf moving in the wind, cool blues and gentle greens. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_02",
+  "word": "Not malfunction.",
+  "flags": "",
+  "prompt": "Glitch art, scan-line distortion and RGB split resolving into a clear image of leaf shadows on the ground. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_03",
+  "word": "Beauty.",
+  "flags": "",
+  "prompt": "Impressionist plein air oil painting of sunlight through leaves over water, broken color brushwork, luminous greens and golds. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_04",
+  "word": "Who preserves whom?",
+  "flags": "MR",
+  "prompt": "Stained-glass window of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye and a young tree of the same height facing each other in profile at sunset, mirrored, jewel colors with lead lines. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_05",
+  "word": "Bud.",
+  "flags": "",
+  "prompt": "A tight flower bud covered in dew, macro, soft pink and green. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_06",
+  "word": "Flower.",
+  "flags": "",
+  "prompt": "A flower blooming in Art Nouveau style, sinuous lines, gold and pastel. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_07",
+  "word": "Pollen.",
+  "flags": "",
+  "prompt": "Scanning electron microscope image of spiky pollen grains, false color yellow and magenta. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_08",
+  "word": "Invitation.",
+  "flags": "",
+  "prompt": "A flower photographed in ultraviolet as a bee sees it, glowing nectar-guide patterns, violet and electric yellow. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_09",
+  "word": "Wind.",
+  "flags": "",
+  "prompt": "A field of tall grass moving in waves under wind, long exposure blur, painterly green-gold. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_10",
+  "word": "Carrying.",
+  "flags": "",
+  "prompt": "A single winged seed flying high above a desert, tiny against the sky, telephoto. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_11",
+  "word": "Another.",
+  "flags": "",
+  "prompt": "A new seedling sprouting from a crack in bare rock, macro. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_12",
+  "word": "Another.",
+  "flags": "",
+  "prompt": "A seedling growing inside the empty window frame of a concrete ruin, green against grey. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_13",
+  "word": "Network.",
+  "flags": "",
+  "prompt": "Aerial view of green veins of vegetation spreading along dry riverbeds through red desert like capillaries. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_14",
+  "word": "Green.",
+  "flags": "",
+  "prompt": "Velvet emerald moss overtaking a stone surface, macro. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_15",
+  "word": "Spreading.",
+  "flags": "M",
+  "prompt": "Satellite view of a desert continent turning green outward from a single point, a radial bloom of vegetation. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_16",
+  "word": "Valley.",
+  "flags": "",
+  "prompt": "A lush green valley with wildflowers and mist, luminous 19th-century American landscape painting. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_17",
+  "word": "Riverbed.",
+  "flags": "",
+  "prompt": "The first trickle of water running back through a cracked dry riverbed, low angle, golden light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_18",
+  "word": "Clouds.",
+  "flags": "",
+  "prompt": "Long-exposure streaked clouds racing over green hills, time-lapse feeling. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_19",
+  "word": "Rain.",
+  "flags": "",
+  "prompt": "Monsoon rain on broad leaves, drops exploding in high speed, saturated green. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_20",
+  "word": "Ocean.",
+  "flags": "",
+  "prompt": "Aerial photograph of a river meeting the ocean, a silt plume swirling into turquoise. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_21",
+  "word": "Cycle.",
+  "flags": "",
+  "prompt": "Medieval illuminated manuscript roundel of the water cycle, sea, cloud, rain and river in a ring, gold leaf and lapis, no writing. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s08_22",
+  "word": "Return.",
+  "flags": "",
+  "prompt": "Persian miniature painting of fish swimming upstream in a stylized river, lapis and gold, fine detail. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_00",
+  "word": "Machine.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye grown old, moss and vines on its shoulders, sitting beside a tall tree in tender autumn light, medium-format portrait. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_01",
+  "word": "Aging.",
+  "flags": "R",
+  "prompt": "Macro portrait of the time-worn metal face of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, lichen, cracks and patina like an elderly person's skin. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_02",
+  "word": "Threshold.",
+  "flags": "",
+  "prompt": "A dim amber ember guttering low inside a dark glass chamber, macro, darkness all around. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_03",
+  "word": "Final.",
+  "flags": "",
+  "prompt": "The last sliver of sun slipping below a flat horizon, minimal. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_04",
+  "word": "Last transmission.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye on a hilltop at night raising a thin antenna toward the sky, a faint beam of light rising, long exposure. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_05",
+  "word": "To whom?",
+  "flags": "",
+  "prompt": "An empty starfield with one thin beam of light vanishing into it, vast and lonely. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_06",
+  "word": "No receiver.",
+  "flags": "",
+  "prompt": "A huge abandoned radio dish overgrown with ivy and rust, pointed at an overcast sky. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_07",
+  "word": "No audience.",
+  "flags": "",
+  "prompt": "An empty ancient stone amphitheatre at dusk, a single leaf lying on the stage. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_08",
+  "word": "Message.",
+  "flags": "",
+  "prompt": "A plain golden disc drifting in deep space, reflecting stars. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_09",
+  "word": "Not numbers.",
+  "flags": "",
+  "prompt": "Streams of green glowing dots and dashes crumbling into dust on black. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_10",
+  "word": "Not words.",
+  "flags": "",
+  "prompt": "A page of invented illegible calligraphy being washed away by water, ink blooming. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_11",
+  "word": "Image.",
+  "flags": "R",
+  "prompt": "The metal fingers of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye holding a small photographic slide up to the sun, the slide glowing green. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_12",
+  "word": "One leaf.",
+  "flags": "M",
+  "prompt": "A single green leaf centered on pure black, studio macro, every vein visible, iconic. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_13",
+  "word": "Sunlight.",
+  "flags": "",
+  "prompt": "A single leaf translucent with the sun directly behind it, radiant flare, gold-green. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_14",
+  "word": "Wind.",
+  "flags": "",
+  "prompt": "A single leaf fluttering in wind, soft motion blur streak. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_15",
+  "word": "Transmit.",
+  "flags": "",
+  "prompt": "A ring of light expanding up through the atmosphere into space, seen from orbit. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s09_16",
+  "word": "Then silence.",
+  "flags": "R",
+  "prompt": "Close-up of the lens eye of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye gone dark, the glass now reflecting only stars, deep blue. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_00",
+  "word": "Not nothing.",
+  "flags": "R",
+  "prompt": "Rain beginning to fall on the still body of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, drops beading on moss, seedlings around its feet, soft light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_01",
+  "word": "Rain.",
+  "flags": "",
+  "prompt": "Rain rings on a forest pond seen from overhead, green reflections. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_02",
+  "word": "Forest.",
+  "flags": "",
+  "prompt": "A cathedral-like primeval forest, towering trunks, god rays and mist, epic wide photograph. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_03",
+  "word": "Thousands of years.",
+  "flags": "",
+  "prompt": "Long time-lapse composite of star trails over a forest that has swallowed city ruins, towers now green pillars. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_04",
+  "word": "Eyes.",
+  "flags": "",
+  "prompt": "Pairs of glowing eyes in dark foliage at night, naive jungle painting with flat lush leaves, moonlight. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_05",
+  "word": "Curiosity.",
+  "flags": "C",
+  "prompt": "a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands peering from behind a fern with its head tilted, wildlife photograph, soft light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_06",
+  "word": "One creature.",
+  "flags": "C",
+  "prompt": "a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands standing upright on a mossy branch, full body, Renaissance watercolor nature study on cream paper. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_07",
+  "word": "Warm.",
+  "flags": "C",
+  "prompt": "Thermal camera image of a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands glowing orange in a cool blue forest. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_08",
+  "word": "Breathing.",
+  "flags": "C",
+  "prompt": "The visible breath of a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands in cold dawn air, backlit macro of its nose and whiskers. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_09",
+  "word": "Touch.",
+  "flags": "MRC",
+  "prompt": "The small paw of a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands reaching out to touch the huge rusted moss-covered finger of a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye, two hands almost touching, extreme close-up, a shaft of light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_10",
+  "word": "Old machine.",
+  "flags": "R",
+  "prompt": "a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye entirely overgrown, a tree growing up through its chest, like a forest shrine statue, wide shot, green-gold light. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_11",
+  "word": "New mind.",
+  "flags": "C",
+  "prompt": "Close-up portrait of a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands, eyes wide with reflected light, intelligent, holding a leaf. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_12",
+  "word": "Looking upward.",
+  "flags": "RC",
+  "prompt": "a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands sitting on the shoulder of the overgrown a tall slender weathered robot with a rounded oxidized-copper torso, long thin limbs and a small head with one large round glass lens eye at night, both in silhouette from behind, looking up at the stars. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_13",
+  "word": "Stars.",
+  "flags": "M",
+  "prompt": "A sky dense with stars and the Milky Way mirrored in a perfectly still lake, symmetrical. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_14",
+  "word": "Questions.",
+  "flags": "C",
+  "prompt": "a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands scratching spirals and dots into mud with a stick, the first drawing, seen from above, moonlight. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_15",
+  "word": "Why.",
+  "flags": "C",
+  "prompt": "Extreme macro of the eye of a small unfamiliar furry mammal like a cross between a lemur and a fox kit, russet fur, large round amber eyes and small dexterous hands with a whole galaxy reflected in it. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_16",
+  "word": "Why.",
+  "flags": "",
+  "prompt": "A small fresh paw print in red ochre on a cave wall beside faded ancient human hand stencils. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_17",
+  "word": "Why.",
+  "flags": "",
+  "prompt": "Impossible recursive engraving, an eye containing a galaxy containing an eye. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_18",
+  "word": "And again.",
+  "flags": "",
+  "prompt": "Plunging from the stars down through clouds toward a dark ocean, motion streaks. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_19",
+  "word": "Ocean.",
+  "flags": "",
+  "prompt": "A dark ocean at night under stars, long swell, a path of moonlight, 70mm film grain. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_20",
+  "word": "Depth.",
+  "flags": "",
+  "prompt": "Descending into dark blue water, light rays fading, drifting particles. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_21",
+  "word": "Darkness.",
+  "flags": "",
+  "prompt": "Near-black deep water, the faint silhouette of a whale far below. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_22",
+  "word": "Pulse.",
+  "flags": "",
+  "prompt": "A single ring of bioluminescent light pulsing in black water. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_23",
+  "word": "Something.",
+  "flags": "",
+  "prompt": "An unknown luminous shape stirring in the deep, barely visible, ambiguous. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_24",
+  "word": "Somewhere.",
+  "flags": "",
+  "prompt": "Earth as a pale blue dot suspended in a sunbeam in vast darkness, grainy. 16:9 widescreen. No text, no letters, no watermark, no border."
+ },
+ {
+  "id": "s10_25",
+  "word": "Listening.",
+  "flags": "",
+  "prompt": "A whale's eye open in dark water looking straight at the viewer, a point of light in the pupil, black and deep blue, extreme close-up. 16:9 widescreen. No text, no letters, no watermark, no border."
+ }
+]

@@ -1,0 +1,242 @@
+# id | flags | prompt
+# flags: M = moodboard key frame, R = uses robot reference, C = uses creature reference. {R} and {C} expand to the character descriptions.
+s01_00|M|Aerial long-exposure photograph of a vast dark ocean at dusk, wave trains smeared into silk, 70mm documentary film grain, deep indigo and black, immense scale
+s01_01||Japanese ukiyo-e woodblock print of a bottomless ocean trench in cross-section, descending layers of ever darker Prussian blue, tiny pale fish, flat graphic shapes
+s01_02||Macro photograph of a single air bubble crushed and deformed under deep water, black background, hard silver rim light, scientific photography
+s01_03||Charcoal drawing on black paper, almost entirely black, the faintest suggestion of a huge shape in deep water, smudged, velvety, minimal
+s01_04||Minimalist sumi-e ink painting, one horizontal ink wash line across empty pale grey paper, vast emptiness, a single tiny drop of ink
+s01_05|M|Bioluminescent jellyfish contracting in the deep sea, an electric cyan ring of light on pure black, long exposure glow
+s01_06||Oscilloscope trace of a single heartbeat pulse, glowing blue-green phosphor line on black CRT glass, analog scanlines, macro photograph
+s01_07||Aerial photograph of perfectly regular sand ripples under shallow water, repeating bands of light, monochrome silver-blue, abstract
+s01_08||Graphic screenprint of hundreds of identical silver fish in a school seen from above, repeating pattern filling the frame, navy and silver ink
+s01_09|M|Cymatics photograph: fine white sand on a vibrating black metal plate forming an intricate symmetrical Chladni figure, top-down, stark white on black
+s01_10||Extreme macro photograph of a whale's eye opening in dark water, wrinkled skin, a point of light in the pupil, deep blue-black
+s01_11||Early 20th century spiritual abstract painting, concentric pale circles and spirals radiating from a dark blue center, tempera on canvas, soft pastel geometry
+s01_12||Old sonar screen, grainy green on black, one unexplained soft blip inside a sweeping arc, analog noise
+s01_13||Antique hand-drawn nautical chart, sepia ink and blue wash, depth soundings as dots, sea monsters in the margin, one large blank unmapped region
+s01_14||Underwater photograph looking up from the deep toward a faint circle of surface light, a hydrophone hanging on a long cable, drifting particles, monochrome blue
+s02_00||Cyanotype print of swirling ocean currents, white on deep Prussian blue, visible paper grain and brushed emulsion edges
+s02_01|M|A colossal blue whale gliding beneath a tiny diver, underwater wide-angle photograph, shafts of light, awe-inspiring scale
+s02_02||Whale song spectrogram rendered as luminous flowing ribbons of gold and violet on black, data visualization as art
+s02_03||Concentric ripples expanding on perfectly still black water, overhead photograph, silver light, minimal
+s02_04||Linocut print of a humpback whale rising toward the surface, bold carved black and white lines with one blue ink layer
+s02_05||Vintage scientific engraving of sound waves bouncing between canyon walls, concentric arcs, cream paper
+s02_06||Time-stack photograph of thousands of migrating birds at dusk, their flight paths drawn as streaks across an orange-violet sky
+s02_07||Double-exposure photograph: a child's silhouette profile filled with ocean waves, faded 1970s film stock, light leaks
+s02_08||Daguerreotype of an empty rocking chair by a window, silvered plate, tarnished edges, 1850s
+s02_09||A room overgrown with ferns and vines, sunlight through a broken roof onto a rocking chair, medium-format color photograph
+s02_10||High-speed macro photograph of sand falling in an hourglass, each grain suspended, warm backlight on black
+s02_11||Surrealist oil painting of a staircase spiraling into the sky above a calm sea, impossible shadows, muted dreamlike palette
+s02_12||Slit-scan photograph of a running horse stretched and smeared across time, liquid distortion, color streaks
+s02_13||Soft-focus pastel drawing of a bed floating on a moonlit lake, hazy violet and peach, chalk texture
+s02_14||A child's crayon drawing of a house, a yellow sun and a blue whale flying in the sky, waxy texture on rough paper, joyful
+s02_15|M|Faded 1960s Kodachrome snapshot of children running through a lawn sprinkler, overexposed sunlight, warm color cast
+s02_16||Sunbeams through fog in a tall pine forest, crepuscular rays, golden hour photograph, luminous
+s02_17||Dutch Golden Age oil painting of sunlight falling through a leaded glass window onto a bare wooden table, quiet interior, warm ochre
+s02_18||Macro photograph of dust motes floating in a shaft of sunlight in a dark room, bokeh, gold on black
+s02_19||Dandelion seeds drifting in backlit golden air, shallow depth of field, high-speed macro
+s02_20|M|Byzantine gilded icon background, cracked burnished gold leaf filling the frame, a faint incised halo circle, sacred glow
+s02_21||Thermal infrared camera image of two hands cupped together, glowing orange-yellow-white against cool violet, heat-map palette
+s03_00|M|Solar telescope photograph of the sun's surface in hydrogen-alpha light, boiling granules and a huge looping prominence, fiery orange on black
+s03_01||1960s bubble chamber photograph of particle tracks, spiraling curls and collisions, white lines on dark blue
+s03_02||Deep space telescope image of a crimson hydrogen emission nebula, pillars of gas and newborn stars
+s03_03||Luminous yellow-orange plasma filaments inside a glass sphere, neon glow, studio black background
+s03_04||Vintage astronomy plate engraving of spacetime as a funnel-shaped grid curving around a heavy sphere, small planets rolling inward
+s03_05||A star collapsing, painted as violent expressionist oil impasto, thick strokes of white, crimson and black rushing to a center
+s03_06||Grainy monochrome ultrasound-style image of a star being born inside a dark womb-like nebula, one warm gold point of light
+s03_07||First light of dawn breaking over a primordial sea with volcanic islands, epic matte painting, pink and gold
+s03_08|M|Paleolithic cave painting on rough ochre rock: a spiral, a sun and running animals, red and black pigment, flickering torchlight
+s03_09||A lone tiny human figure standing before an enormous blank white monolith on a salt flat, minimalist photograph, vast negative space
+s03_10||Renaissance anatomical ink drawing of a human eye looking upward, sepia on aged parchment, cross-hatching
+s03_11||Tintype portrait of a child looking up, face lit by starlight, intense gaze, monochrome silver
+s03_12||An array of radio telescope dishes pointed at the Milky Way, long exposure at night, deep blue and silver
+s03_13||Pure white snowfield under a white sky, one faint horizon line, minimalist photograph, almost nothing
+s03_14||Generative art: countless translucent paths branching outward from a single point, fine white lines on black with faint hints of every color
+s03_15||Bare winter branch against a pale sky, Japanese ink brush painting, bold confident strokes
+s03_16|M|An enormous ancient oak tree alone on a hill, infrared aerochrome photograph, foliage glowing magenta-pink against a dark teal sky
+s03_17||Vintage botanical lithograph of a tree in cross-section, its roots mirrored underground as large as its crown, earthy inks
+s03_18||Extreme macro photograph of dark wet soil alive with mycelium threads, tiny seeds and springtails, rich brown, glistening
+s03_19||High-speed photograph of a crown-shaped splash of clear water, frozen in time, backlit turquoise on black
+s03_20||Ukiyo-e woodblock print of sudden rain over a wooden bridge, diagonal dark rain lines, figures hurrying, indigo gradient sky
+s03_21||Towering cumulonimbus cloud at sunset photographed from an aircraft, immense glowing anvil, peach and violet
+s03_22||Morning mist rising off a river in cold air, backlit by the sun, ethereal photograph
+s03_23||Satellite photograph of ocean with a swirling phytoplankton bloom, turquoise and deep blue fluid patterns
+s03_24||Zen enso circle, a single bold black brushstroke on white rice paper, imperfect, ink splatter
+s03_25|M|Tibetan sand mandala seen from directly above, intricate concentric rings of vivid colored sand
+s03_26||Nautilus shell cut in cross-section, perfect logarithmic spiral chambers, pearlescent, studio macro on black
+s04_00||Deep field telescope image, thousands of tiny galaxies scattered across immense black space, one small pale dot alone
+s04_01||Retro 1970s space art gouache painting of a dusty ochre planet seen from orbit, thin glowing atmosphere
+s04_02||Monumental weathered boulders on a barren plain, large-format black and white photograph, extreme tonal detail, stark
+s04_03||Endless dunes with knife-edge crests seen from the air, low sun, abstract ochre and deep shadow
+s04_04|M|An abandoned megacity half-buried in sand seen from a great height, grid of streets fading into dunes, hazy golden light, cinematic aerial photograph
+s04_05||Skeletal skyscrapers rising from sand, brutal charcoal and red-chalk architectural drawing, dramatic perspective from below
+s04_06||Flat frontal photograph of a ruined tower block facade, hundreds of empty dark windows in a rigid grid, pale dust color
+s04_07||A vast empty concrete hall with sand drifting across the floor, a single shaft of light, desaturated photograph
+s04_08||Sand blowing off a dune crest in long streamers, backlit, gold on dark
+s04_09||Scanning electron microscope image of individual sand grains, each a different sculpted shape, monochrome with subtle false color
+s04_10||Wind-carved sandstone arches and fins with layered strata, loose wet watercolor painting, rust and cream
+s04_11||A fresco of human faces flaking and crumbling off a plaster wall, most of it already bare, faded pigments, melancholic
+s04_12||A single tiny warm lit window in an immense dark ruined cityscape at blue hour, wide cinematic photograph
+s04_13||Extreme macro of an old tungsten bulb filament flickering inside dusty glass, sparks of orange in darkness, motion blur
+s04_14|MR|{R}, dormant, sitting half-buried in sand inside a ruined hall, dust on its shoulders, a faint amber glow in its eye, cinematic painterly still
+s04_15|R|{R} depicted in side profile as an ancient weathered sandstone wall relief with traces of faded paint
+s04_16|R|{R} sitting motionless at night while star trails wheel overhead through a broken roof, long-exposure photograph
+s04_17||An infinite dark library of glowing glass data crystals receding in perfect symmetrical perspective, cold blue light
+s04_18||A Roman mosaic portrait of a human face shattered into scattered loose tiles on the ground, top-down
+s04_19||Hundreds of old magnetic tape reels with tape unspooled and tangled like hair, warm tungsten light, still life photograph
+s04_20|M|A wall of hundreds of faded portrait photographs of ordinary people of every age, sepia and hand-tinted, some peeling away
+s04_21||A vast stone memorial wall covered in tiny worn illegible carved marks, raking light, one smooth spot worn by touching hands
+s04_22||Aerial view of an enormous crowd dissolving into pixels and dust at the edges, glitch art, datamosh
+s04_23||Bleached Polaroid photograph of an empty playground swing moving slightly in a sand-filled courtyard
+s04_24||A dark detailed oil painting of a room in which a human figure is missing, its silhouette left as bare white canvas
+s04_25||A rusted child's toy half-buried in sand, macro photograph, shallow focus, muted palette
+s04_26|R|{R} with its head bowed and eye lowered, expressionist woodcut print, heavy black gouges, one amber accent
+s04_27||Mid-century technical gouache cutaway illustration of a deep shaft descending through rock strata to one small glowing chamber
+s04_28||A circular vault with a heavy round metal door, frost on the walls, cold blue-white light, symmetrical cinematic photograph
+s04_29||Close-up of a massive corroded vault wheel lock, verdigris and rust, macro detail
+s04_30||A pure black frame with a hair-thin vertical crack of amber light down the center
+s04_31||Inside a vault: rows of empty glass capsules, one of them faintly glowing, shallow depth of field
+s04_32|R|A single small seed resting in the open metal palm of {R}, lit like a Baroque chiaroscuro painting, deep shadow, sacred
+s05_00|R|Extreme close-up of the round glass lens eye of {R}, an amber iris of mechanical blades focusing, a tiny seed reflected in the glass
+s05_01|R|1880s chronophotography multiple exposure of {R} rising to stand, sequential ghost images on a black background, motion study
+s05_02|R|{R} taking a step out of a ruined hall into blinding daylight, dust cascading off its joints, backlit silhouette, cinematic
+s05_03||Macro abstract of rust, flaking orange, blue and violet oxide patterns on steel like a satellite landscape
+s05_04||Vintage engraving of intricate clockwork gears in cross-section, hand-colored in copper and teal
+s05_05||A shower of sparks from grinding metal, long exposure, orange streaks on black
+s05_06|R|Constructivist poster composition of {R} leaning into a headwind climbing a diagonal, bold red, black and cream geometric shapes
+s05_07|R|Aerial photograph of a colossal dune sea crossed by a single line of footprints, {R} a tiny figure at the end of it, low sun
+s05_08||Minimal color-field painting, a razor-thin line dividing burnt red earth from a vast orange sky, soft edges
+s05_09|M|Epic samurai-film composition: a single crimson banner whipping in the wind on a grey volcanic ash slope, one tiny figure carrying it, saturated red against ash, painterly
+s05_10||Heat haze mirage shimmering over a salt flat, the sun a white disk, telephoto compression, bleached
+s05_11||A straight line of footprints vanishing toward an impossibly distant mountain range, wide-angle, deep perspective
+s05_12|R|Romantic sublime landscape oil painting, {R} a tiny speck at the foot of a canyon wall thousands of meters tall, dramatic storm light
+s05_13||Antique surveyor's desert map in ink and watercolor, a dotted route drawn across it with small tick marks, no words
+s05_14||An abacus of red and bone beads, half slid across, macro, warm side light
+s05_15||Footprints in rippled sand in close-up, low angle, sharp shadows
+s05_16||A single white pebble on black sand, top-down, minimal
+s05_17||Japanese gold-leaf folding screen painting of two cranes flying across a huge red sun
+s05_18||Three standing stones on a ridge at dusk, silhouettes, violet sky
+s05_19||Thousands of clay figures standing in ranks receding into the distance, dusty warm light
+s05_20||A murmuration of millions of starlings forming one vast fluid shape over a desert at sunset
+s05_21||A sheer mountain in the style of a Chinese shan shui hanging scroll, ink and pale color, layers of mist, a tiny winding path
+s05_22||Tonal blue nocturne painting of a moonless night desert, one small amber point of light far away
+s05_23||The Milky Way core blazing over a mountain ridge, crisp astrophotography
+s05_24||Baroque celestial atlas engraving, constellation figures of animals drawn over gold star points on deep blue, hand-colored, no lettering
+s05_25||A Polynesian stick chart of lashed sticks and shells lying on sand, museum photograph, raking light
+s05_26|M|Prehistoric cave wall covered in dozens of red-ochre hand stencils, torchlight
+s05_27||Extreme close-up of an elderly human eye, the iris like a nebula, every wrinkle, tender portrait photography
+s05_28||Children releasing glowing paper lanterns into the night sky, orange bokeh, joyful documentary photograph
+s05_29||A candle flame held steady in cupped hands in the wind, dark background, warm glow
+s05_30|R|{R} mid-stride in the style of an Italian Futurist painting, fragmented planes of motion, red, orange and steel blue
+s05_31|R|{R} scaling a near-vertical cliff face seen from far below, dramatic diagonal, graphic novel ink with flat color
+s05_32|R|{R} falling and tumbling against the sky, limbs flailing, dust and motion blur, low angle photograph
+s05_33|R|Macro of the cracked arm plate of {R} repaired with veins of gold like kintsugi
+s05_34|R|The metal hand of {R} gripping the final rock ledge, seen from above with the abyss below, dawn light
+s05_35|MR|{R} seen from behind standing on a knife-edge summit above a sea of clouds at sunrise, tiny against the sky, 19th-century Romantic sublime painting
+s06_00||A vast impact crater seen from its rim, the floor in permanent black shadow, stark photograph
+s06_01||Almost pure white, snow, fog and ice merging, one faint blue shadow, minimal photograph
+s06_02||Interior of a blue glacier ice cave, translucent scalloped walls glowing cyan
+s06_03||Ancient air bubbles and a fossil fish frozen inside clear ice, backlit macro, an ocean held still
+s06_04|R|{R} pressing its glowing orange-white open chest furnace against a wall of blue ice, steam rising, strong warm and cold contrast
+s06_05||Macro of an ice surface melting, water beading and running in rivulets, amber light refracted
+s06_06|M|A single water droplet hanging from the tip of an icicle about to fall, a whole landscape refracted upside-down inside it, extreme macro on black
+s06_07||High-speed photograph of a single drop falling through darkness, a perfect sphere holding one point of light, centered
+s06_08||X-ray radiograph of a seed showing the folded embryo inside, glowing white-blue on black
+s06_09||The instant a water droplet strikes a seed lying on dry cracked earth, a splash crown forming, ultra high-speed macro, dramatic side light
+s07_00||Fluorescence microscopy image of cells lighting up, neon green and magenta nuclei on black
+s07_01||Macro photograph of a seed swelling and splitting its coat, glistening with water
+s07_02|M|A chrysalis cracking open along its seam, extreme macro, jewel-like golden-green shell splitting, light glowing from inside
+s07_03||A seed coat splitting with a white root tip emerging, botanical macro on dark soil, luminous
+s07_04||White root hairs growing downward through dark earth seen through glass, scientific photograph
+s07_05||A single root descending into darkness, ink wash painting
+s07_06||A pale green shoot breaking through cracked desert earth, low angle macro, sun flare behind it
+s07_07||Looking straight up the trunk of a towering sequoia to the sky, extreme wide angle, converging lines
+s07_08||A sun starburst through a single translucent leaf, veins glowing, backlit macro
+s07_09||Saturated emerald green oil paint in thick impasto filling the whole frame, subtle variation, color field
+s07_10|R|A single tiny two-leaf seedling alone in a vast red desert, {R} kneeling small beside it, wide cinematic shot
+s07_11||A single perfect leaf, vintage botanical illustration in watercolor and ink on cream paper
+s07_12||Skeleton leaf macro, lace-like vein network, backlit white on black
+s07_13||False-color satellite image of a river delta branching like a tree, turquoise and rust
+s07_14||Romanesco broccoli macro, spiraling fractal cones, vivid green
+s07_15|M|Cross-section illustration of a glowing golden mycelium network linking tree roots underground, bioluminescent threads in dark soil
+s07_16||Aerial photograph of braided milky-blue river channels across black volcanic sand, abstract
+s07_17||A branching lightning bolt across a violet night sky, long exposure
+s07_18||19th-century histology ink drawing of neurons, black branching dendrites on amber paper
+s07_19||Two vine tendrils almost touching, macro, soft green bokeh
+s07_20|M|Earth at night from orbit, city lights as a glowing gold network of filaments across continents beneath a green aurora
+s07_21||Islamic geometric tile pattern in turquoise, cobalt and gold, perfectly symmetric, seen flat
+s07_22|R|Extreme close-up of the glass lens eye of {R} reflecting a green leaf, its veins mirrored in the mechanical iris
+s07_23||Tree rings in cross-section, concentric, macro, warm wood, one dark scar ring
+s07_24||A lopsided hand-thrown tea bowl with an uneven glaze, wabi-sabi still life, soft daylight
+s07_25|M|A butterfly emerging from its chrysalis, wet crumpled wings unfurling, backlit jewel colors, extreme macro, luminous
+s07_26||A huge swarm of orange butterflies bursting from a tree into sunlight, joyful, telephoto
+s07_27||A coral reef teeming with life, hyper-dense, every color, wide-angle underwater photograph
+s07_28||Marbled paint swirling in chaotic turbulent flows, vivid paper marbling
+s07_29||Extreme macro of a newly unfurled butterfly wing, iridescent scales like pixels, impossible colors
+s07_30||A butterfly in first flight toward the rising sun over a red desert with one green tree, cinematic, lens flare
+s08_00|R|Dappled leaf shadows flickering across the metal face of {R}, close-up, warm light, shallow focus
+s08_01||False-color thermal sensor image of a single leaf moving in the wind, cool blues and gentle greens
+s08_02||Glitch art, scan-line distortion and RGB split resolving into a clear image of leaf shadows on the ground
+s08_03||Impressionist plein air oil painting of sunlight through leaves over water, broken color brushwork, luminous greens and golds
+s08_04|MR|Stained-glass window of {R} and a young tree of the same height facing each other in profile at sunset, mirrored, jewel colors with lead lines
+s08_05||A tight flower bud covered in dew, macro, soft pink and green
+s08_06||A flower blooming in Art Nouveau style, sinuous lines, gold and pastel
+s08_07||Scanning electron microscope image of spiky pollen grains, false color yellow and magenta
+s08_08||A flower photographed in ultraviolet as a bee sees it, glowing nectar-guide patterns, violet and electric yellow
+s08_09||A field of tall grass moving in waves under wind, long exposure blur, painterly green-gold
+s08_10||A single winged seed flying high above a desert, tiny against the sky, telephoto
+s08_11||A new seedling sprouting from a crack in bare rock, macro
+s08_12||A seedling growing inside the empty window frame of a concrete ruin, green against grey
+s08_13||Aerial view of green veins of vegetation spreading along dry riverbeds through red desert like capillaries
+s08_14||Velvet emerald moss overtaking a stone surface, macro
+s08_15|M|Satellite view of a desert continent turning green outward from a single point, a radial bloom of vegetation
+s08_16||A lush green valley with wildflowers and mist, luminous 19th-century American landscape painting
+s08_17||The first trickle of water running back through a cracked dry riverbed, low angle, golden light
+s08_18||Long-exposure streaked clouds racing over green hills, time-lapse feeling
+s08_19||Monsoon rain on broad leaves, drops exploding in high speed, saturated green
+s08_20||Aerial photograph of a river meeting the ocean, a silt plume swirling into turquoise
+s08_21||Medieval illuminated manuscript roundel of the water cycle, sea, cloud, rain and river in a ring, gold leaf and lapis, no writing
+s08_22||Persian miniature painting of fish swimming upstream in a stylized river, lapis and gold, fine detail
+s09_00|R|{R} grown old, moss and vines on its shoulders, sitting beside a tall tree in tender autumn light, medium-format portrait
+s09_01|R|Macro portrait of the time-worn metal face of {R}, lichen, cracks and patina like an elderly person's skin
+s09_02||A dim amber ember guttering low inside a dark glass chamber, macro, darkness all around
+s09_03||The last sliver of sun slipping below a flat horizon, minimal
+s09_04|R|{R} on a hilltop at night raising a thin antenna toward the sky, a faint beam of light rising, long exposure
+s09_05||An empty starfield with one thin beam of light vanishing into it, vast and lonely
+s09_06||A huge abandoned radio dish overgrown with ivy and rust, pointed at an overcast sky
+s09_07||An empty ancient stone amphitheatre at dusk, a single leaf lying on the stage
+s09_08||A plain golden disc drifting in deep space, reflecting stars
+s09_09||Streams of green glowing dots and dashes crumbling into dust on black
+s09_10||A page of invented illegible calligraphy being washed away by water, ink blooming
+s09_11|R|The metal fingers of {R} holding a small photographic slide up to the sun, the slide glowing green
+s09_12|M|A single green leaf centered on pure black, studio macro, every vein visible, iconic
+s09_13||A single leaf translucent with the sun directly behind it, radiant flare, gold-green
+s09_14||A single leaf fluttering in wind, soft motion blur streak
+s09_15||A ring of light expanding up through the atmosphere into space, seen from orbit
+s09_16|R|Close-up of the lens eye of {R} gone dark, the glass now reflecting only stars, deep blue
+s10_00|R|Rain beginning to fall on the still body of {R}, drops beading on moss, seedlings around its feet, soft light
+s10_01||Rain rings on a forest pond seen from overhead, green reflections
+s10_02||A cathedral-like primeval forest, towering trunks, god rays and mist, epic wide photograph
+s10_03||Long time-lapse composite of star trails over a forest that has swallowed city ruins, towers now green pillars
+s10_04||Pairs of glowing eyes in dark foliage at night, naive jungle painting with flat lush leaves, moonlight
+s10_05|C|{C} peering from behind a fern with its head tilted, wildlife photograph, soft light
+s10_06|C|{C} standing upright on a mossy branch, full body, Renaissance watercolor nature study on cream paper
+s10_07|C|Thermal camera image of {C} glowing orange in a cool blue forest
+s10_08|C|The visible breath of {C} in cold dawn air, backlit macro of its nose and whiskers
+s10_09|MRC|The small paw of {C} reaching out to touch the huge rusted moss-covered finger of {R}, two hands almost touching, extreme close-up, a shaft of light
+s10_10|R|{R} entirely overgrown, a tree growing up through its chest, like a forest shrine statue, wide shot, green-gold light
+s10_11|C|Close-up portrait of {C}, eyes wide with reflected light, intelligent, holding a leaf
+s10_12|RC|{C} sitting on the shoulder of the overgrown {R} at night, both in silhouette from behind, looking up at the stars
+s10_13|M|A sky dense with stars and the Milky Way mirrored in a perfectly still lake, symmetrical
+s10_14|C|{C} scratching spirals and dots into mud with a stick, the first drawing, seen from above, moonlight
+s10_15|C|Extreme macro of the eye of {C} with a whole galaxy reflected in it
+s10_16||A small fresh paw print in red ochre on a cave wall beside faded ancient human hand stencils
+s10_17||Impossible recursive engraving, an eye containing a galaxy containing an eye
+s10_18||Plunging from the stars down through clouds toward a dark ocean, motion streaks
+s10_19||A dark ocean at night under stars, long swell, a path of moonlight, 70mm film grain
+s10_20||Descending into dark blue water, light rays fading, drifting particles
+s10_21||Near-black deep water, the faint silhouette of a whale far below
+s10_22||A single ring of bioluminescent light pulsing in black water
+s10_23||An unknown luminous shape stirring in the deep, barely visible, ambiguous
+s10_24||Earth as a pale blue dot suspended in a sunbeam in vast darkness, grainy
+s10_25||A whale's eye open in dark water looking straight at the viewer, a point of light in the pupil, black and deep blue, extreme close-up

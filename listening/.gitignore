@@ -1,0 +1,6 @@
+frames/
+build/
+audio/words/
+audio/words.json
+runs/agentE_tmp/
+__pycache__/

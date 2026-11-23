@@ -1,0 +1,170 @@
+{
+ "ref_robot": {
+  "run_id": "run_m173k75ystdx0pqvxvbwebpyg18js91e",
+  "node_id": "25fcea73-24b2-4795-925d-5efd4e9c0c5e",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m173k75ystdx0pqvxvbwebpyg18js91e-0.png",
+  "cost": 0.077
+ },
+ "ref_creature": {
+  "run_id": "run_m177w1wfkqqdx6m2mbrzp6npwx8jrj9g",
+  "node_id": "b69ba11c-be29-4e3e-9641-2c11145de881",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m177w1wfkqqdx6m2mbrzp6npwx8jrj9g-0.png",
+  "cost": 0.077
+ },
+ "s01_00": {
+  "run_id": "run_m17ae2sd64agwvyd8ma1n1jgn18jsjwb",
+  "node_id": "4e7344a4-ac34-40f0-9001-8c9d08c4b29e",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/c2801fa0-ab97-4ded-9591-09e11a0f8f84.png",
+  "cost": 0.024
+ },
+ "s01_05": {
+  "run_id": "run_m170qasbqs3tvka5drzfmrz7458jr88f",
+  "node_id": "8f3b8113-3c64-4989-ae46-f1c826642f8c",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/a286bf2b-7047-4c49-9c22-53848fff305e.png",
+  "cost": 0.024
+ },
+ "s01_09": {
+  "run_id": "run_m1742g6xnje4de103mq65016518jsam6",
+  "node_id": "a12e3fd5-7cf7-44fd-a5d3-fe6aba784437",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/329037e4-9f2f-45d8-b0f3-af009e1d9a93.png",
+  "cost": 0.024
+ },
+ "s02_01": {
+  "run_id": "run_m177y3vjw8v6n3xq2qandbvfs98jrpz2",
+  "node_id": "b2d7fe93-68fe-419f-9364-00de2524cf16",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/a1bd39dd-abd8-40e8-b970-d8d97eb079d9.png",
+  "cost": 0.024
+ },
+ "s02_15": {
+  "run_id": "run_m176xz28388tbc4xpapftdnjk58jr5hx",
+  "node_id": "fca1e660-6e2b-44b5-8d13-5b496487b64c",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/9af414f5-efc1-4425-a1ae-ed10ece3cadb.png",
+  "cost": 0.024
+ },
+ "s02_20": {
+  "run_id": "run_m1785wxxrdp7nrq976kyd13z758jr4s1",
+  "node_id": "fff32768-2121-4777-81de-312ab6ab74d9",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/2c8d81c5-1b1c-41e6-bcd1-654c92222de5.png",
+  "cost": 0.024
+ },
+ "s03_00": {
+  "run_id": "run_m17e8b3p0g44z64etsp0m4fhyn8jsda3",
+  "node_id": "e957e3d6-3c7d-4cf2-aebd-53835929ea05",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/d28784a8-602a-4fcf-8445-2fb029b8b44e.png",
+  "cost": 0.024
+ },
+ "s03_08": {
+  "run_id": "run_m171tasxy780skr49a5ddxzhqx8jsrcg",
+  "node_id": "ee039308-5136-4bb5-9117-de0e9fc93404",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/c1f67ea1-acab-49e8-94d5-6da09cac792c.png",
+  "cost": 0.024
+ },
+ "s03_16": {
+  "run_id": "run_m17fms57xz1g18d4xkbbvyt8hh8jsdc2",
+  "node_id": "a36cb385-43f8-44e8-849f-3e2a32297666",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/affe0bab-d425-4d0a-a020-8e7b341ea898.png",
+  "cost": 0.024
+ },
+ "s03_25": {
+  "run_id": "run_m170b1hasxb2zpva3rw77xwb818jrh3k",
+  "node_id": "81661f84-825a-4442-bbc6-6dffaf7a2a20",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/0b1915e4-99c7-4af5-af6a-453f3742bb3f.png",
+  "cost": 0.024
+ },
+ "s04_04": {
+  "run_id": "run_m177c5kfyyq8z1p6jpvwrr3mdd8jrfb4",
+  "node_id": "9bc78e02-5785-4f54-bc58-f5389d217e28",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/e66a77f7-16b6-47a4-ad24-7fc858da3568.png",
+  "cost": 0.024
+ },
+ "s04_14": {
+  "run_id": "run_m17ak1mnk506scgpjwag12fx0x8jrxfg",
+  "node_id": "21b14fbb-fc0e-4abc-9e78-55a9515d560f",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m17ak1mnk506scgpjwag12fx0x8jrxfg-0.png",
+  "cost": 0.077
+ },
+ "s04_20": {
+  "run_id": "run_m179mzkwrsmxx0rq5832pyzwt18jrj5t",
+  "node_id": "1902d34b-a6aa-41c8-90e2-29fd8778d4b0",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/d455e3c6-2de4-4907-bc9b-15984980ab13.png",
+  "cost": 0.024
+ },
+ "s05_09": {
+  "run_id": "run_m176q9tyfk14cfyv6qpwws9ees8jrwkj",
+  "node_id": "eb4f9110-fcd4-44ef-8322-ead7e5dbfd08",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/6695f276-d619-41fc-8738-1735ce73c142.png",
+  "cost": 0.024
+ },
+ "s05_26": {
+  "run_id": "run_m1701fkh8s51hxgjpc4v9nanzh8jsr2r",
+  "node_id": "b3d3cb8a-8c66-43a5-a721-5a9b952c5757",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/aaf30693-c7bd-4be3-91ed-de3f191946fa.png",
+  "cost": 0.024
+ },
+ "s05_35": {
+  "run_id": "run_m1719309pds3b77949j9h2x61s8jrm02",
+  "node_id": "f632ed0d-26f2-475e-b758-e743334ba890",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m1719309pds3b77949j9h2x61s8jrm02-0.png",
+  "cost": 0.077
+ },
+ "s06_06": {
+  "run_id": "run_m170z9288ht8ywnar4aq4bd9sx8jsdk8",
+  "node_id": "039dc2b6-3397-451b-8712-bee58618e7b8",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/9e51046d-4f79-4523-b056-0b28cbb549bb.png",
+  "cost": 0.024
+ },
+ "s07_02": {
+  "run_id": "run_m177d06t8bkpa7ref37q2bc7bd8jsfay",
+  "node_id": "0c90c6b7-d1f5-4ec5-819f-1d6328d50aa0",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/18631441-3787-4ef0-839c-663cf2ef1648.png",
+  "cost": 0.024
+ },
+ "s07_15": {
+  "run_id": "run_m176v43mnz9p9j1gqevh3kc3m98jrbws",
+  "node_id": "ceb09d48-8f49-45ad-8e81-a2033574e28d",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/a0635ba2-ea48-4028-b81c-722ccaac489d.png",
+  "cost": 0.024
+ },
+ "s07_20": {
+  "run_id": "run_m17cf7zzdfhfs7eq4jf25xy2t58jsyr7",
+  "node_id": "28243ac6-a388-4567-9cc4-f023e6794f68",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/a79f600d-ebd8-4f05-a1b9-24368cbb780f.png",
+  "cost": 0.024
+ },
+ "s07_25": {
+  "run_id": "run_m171v9y0q9833n4xhy9zm9wt6n8jsbcj",
+  "node_id": "ca51d728-6ef0-4b21-9b9e-4773406aca15",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/edfe8bbe-93a9-4861-83bb-c55f12145554.png",
+  "cost": 0.024
+ },
+ "s08_04": {
+  "run_id": "run_m175mgyewspv7pxwwsd2mjhkps8jr45m",
+  "node_id": "5fafb2de-6d25-45da-8180-abd0b34f281f",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m175mgyewspv7pxwwsd2mjhkps8jr45m-0.png",
+  "cost": 0.077
+ },
+ "s08_15": {
+  "run_id": "run_m17bgw34hezdhfgsne6xq9a5ns8js6qw",
+  "node_id": "c8bba11e-e87a-44c1-ac65-c5da6199c1d7",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/6dd00d4b-2315-4800-87b6-ddb76589633e.png",
+  "cost": 0.024
+ },
+ "s09_12": {
+  "run_id": "run_m17ec2x1s7mdpsxn3ehfj083hh8jsty1",
+  "node_id": "1e0ca0c2-9939-43e8-96ab-7550c5f40163",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/9cac37d6-aac7-4c4d-bf5c-e87c52fc8d2a.png",
+  "cost": 0.024
+ },
+ "s10_09": {
+  "run_id": "run_m1759c7v72dc7tkbkzvgwnpp1h8jrc0n",
+  "node_id": "2d2c7d18-7432-4d4e-b9fb-241e28781903",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/px765s3tq9475qtph5th1et06985rndw/gen-m1759c7v72dc7tkbkzvgwnpp1h8jrc0n-0.png",
+  "cost": 0.077
+ },
+ "s10_13": {
+  "run_id": "run_m17870yc1rqgm93rppzsp830cd8jr4g5",
+  "node_id": "8e74dd32-4f01-44ad-8384-1e421b1f81e6",
+  "url": "https://media.flora.ai/node-inputs/2026/11/23/anonymous/aa1bfd75-817f-4a69-be1e-838b6ac1297a.png",
+  "cost": 0.024
+ }
+}
