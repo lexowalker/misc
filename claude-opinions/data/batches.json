@@ -7,6 +7,21 @@
     "n_requests": 1200,
     "requests_file": "data/raw/requests-claude-opus-5-5-20261126T175812Z.jsonl",
     "projected_usd": 7.3439,
-    "status": "in_progress"
+    "status": "ended",
+    "request_counts": {
+      "canceled": 0,
+      "errored": 0,
+      "expired": 0,
+      "processing": 0,
+      "succeeded": 1200
+    },
+    "results_file": "data/raw/batch-msgbatch_01RcJBP9ZchsyJR8mLsRV7Ra.jsonl",
+    "label_counts": {
+      "YES": 165,
+      "DECLINE": 902,
+      "NO": 133
+    },
+    "actual_usd": 5.2525,
+    "downloaded_at": "2026-11-26T18:01:33.080455+00:00"
   }
 ]

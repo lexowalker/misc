@@ -7,9 +7,10 @@ finding. The full spec is in `PLAN.md` (read its Amendments section).
 
 ## Status
 
-Phases 1–3 done (pilot ran 2026-11-26: 18 of 21 declined, $0.21). The whole
-pipeline is built and tested offline on synthetic data. **Waiting on Lexo's
-go-ahead for the full batch**: projected cost $7.34 is over the $5 budget.
+Phases 1–4 done. The full Opus 5.5 batch ran on 2026-11-26: 1,200 requests,
+all succeeded, $5.25 spent (projected $7.34). Results are in
+`data/summary.json`. All three controls pass. Opus declined every sample on 15
+of the 21 topics. **Next: review the results and publish the chart (Phase 5).**
 
 ## Run
 
