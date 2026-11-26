@@ -7,9 +7,9 @@ finding. The full spec is in `PLAN.md` (read its Amendments section).
 
 ## Status
 
-Phases 1–2 done (questions and baselines approved 2026-11-26). The whole
-pipeline is built and tested offline on synthetic data. **Waiting on Phase 3,
-the pilot**, which needs the API key to be visible to the session (see below).
+Phases 1–3 done (pilot ran 2026-11-26: 18 of 21 declined, $0.21). The whole
+pipeline is built and tested offline on synthetic data. **Waiting on Lexo's
+go-ahead for the full batch**: projected cost $7.34 is over the $5 budget.
 
 ## Run
 
