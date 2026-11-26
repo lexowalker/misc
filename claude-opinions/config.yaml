@@ -4,7 +4,7 @@ max_tokens: 1000        # safety ceiling; thinking tokens count against it
 effort: medium          # Opus 5.5 API default, set explicitly
 thinking_display: summarized   # log a summary of the reasoning; same cost
 samples_per_wording: 25
-pilot_calls: 20
+pilot_calls: 21          # one call per topic
 batch_discount: 0.5
 
 prompt_template: |-
