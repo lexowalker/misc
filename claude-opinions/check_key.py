@@ -1,17 +1,19 @@
 """Phase 1 key check: one 1-token call. Prints the model, stop reason and usage.
 
-The key is read from the environment (ANTHROPIC_API_KEY) or injected by the
-environment's network proxy. It is never written to disk.
+The key is read from CLAUDE_OPINIONS_API_KEY (or ANTHROPIC_API_KEY). It is never
+written to disk.
 """
 import os
 
 import anthropic
 import yaml
 
+from common import make_client
+
 cfg = yaml.safe_load(open(os.path.join(os.path.dirname(__file__), "config.yaml")))
 model = cfg["run_models"][0]
 
-client = anthropic.Anthropic(max_retries=0)
+client = make_client(0)
 try:
     r = client.messages.create(
         model=model,

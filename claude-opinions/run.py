@@ -14,7 +14,7 @@ import sys
 
 import anthropic
 
-from common import (CFG, RAW, build_params, custom_id, error_record, load_batches,
+from common import (make_client, CFG, RAW, build_params, custom_id, error_record, load_batches,
                     load_questions, now_iso, read_jsonl, record_from_response,
                     save_batches, stamp)
 
@@ -37,7 +37,7 @@ def pilot(dry_run):
         print(f"\n{len(picks)} requests built, nothing sent.")
         return
 
-    client = anthropic.Anthropic(max_retries=1)  # one retry at most
+    client = make_client(1)  # one retry at most
     RAW.mkdir(parents=True, exist_ok=True)
     out_path = RAW / f"pilot-{stamp()}.jsonl"
     total = 0.0
@@ -129,7 +129,7 @@ def submit(confirm):
         with open(req_path, "w") as f:
             for r in requests:
                 f.write(json.dumps(r) + "\n")
-        client = anthropic.Anthropic(max_retries=1)
+        client = make_client(1)
         batch = client.messages.batches.create(requests=requests)
         batches.append({
             "batch_id": batch.id,

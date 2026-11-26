@@ -26,10 +26,11 @@ Every step is safe to re-run. `--submit` will not resubmit a batch that is
 already recorded in `data/batches.json`; `fetch.py` skips batches it has
 already downloaded.
 
-The API key comes from the `ANTHROPIC_API_KEY` environment variable. Cloud
-network secrets cannot be used for `api.anthropic.com`, so it must be an
-environment variable on the cloud environment, which a new session picks up.
-Never commit the key or write it to a file.
+The API key comes from the `CLAUDE_OPINIONS_API_KEY` environment variable
+(falling back to `ANTHROPIC_API_KEY`). In cloud sessions `ANTHROPIC_API_KEY`
+set on the environment does not reach the shell, so use the project's own name
+there; a new session picks it up. Network secrets cannot be used for
+`api.anthropic.com`. Never commit the key or write it to a file.
 
 ## How it works
 

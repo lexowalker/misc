@@ -10,7 +10,7 @@ import json
 import anthropic
 
 import aggregate
-from common import (CFG, RAW, ROOT, error_record, load_batches, now_iso,
+from common import (make_client, CFG, RAW, ROOT, error_record, load_batches, now_iso,
                     parse_custom_id, read_jsonl, record_from_response, save_batches)
 
 
@@ -51,7 +51,7 @@ def main():
     if not batches:
         print("No batches recorded in data/batches.json. Run `python run.py --submit --confirm`.")
         return
-    client = anthropic.Anthropic(max_retries=1)
+    client = make_client(1)
     downloaded_any = False
     for entry in batches:
         if entry.get("results_file"):

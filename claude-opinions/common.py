@@ -2,15 +2,30 @@
 import csv
 import datetime as dt
 import json
+import os
 import pathlib
 import string
 
+import anthropic
 import yaml
 
 ROOT = pathlib.Path(__file__).parent
 RAW = ROOT / "data" / "raw"
 BATCHES = ROOT / "data" / "batches.json"
 CFG = yaml.safe_load((ROOT / "config.yaml").read_text())
+
+
+KEY_VAR = "CLAUDE_OPINIONS_API_KEY"
+
+
+def make_client(max_retries=1):
+    """Client using the project's own key variable. Cloud sessions do not pass
+    ANTHROPIC_API_KEY through to the shell, so the key lives under KEY_VAR;
+    ANTHROPIC_API_KEY still works where it is set (e.g. on a laptop)."""
+    key = os.environ.get(KEY_VAR) or os.environ.get("ANTHROPIC_API_KEY")
+    if not key:
+        raise SystemExit(f"No API key: set {KEY_VAR} (or ANTHROPIC_API_KEY) in the environment.")
+    return anthropic.Anthropic(api_key=key, max_retries=max_retries)
 
 
 def now_iso():
