@@ -174,3 +174,4 @@ These override the sections above where they conflict.
 - **Budget check uses the pilot.** Projected cost = calls × the pilot's measured mean cost per call × 0.5 (batch) × 1.25 margin. Refuse to submit if over `budget_usd`.
 - **Location:** built in `lexowalker/misc` under `claude-opinions/`, not a dedicated repository.
 - **`questions.csv` has an extra column, `baseline_note`**, for caveats on how well the poll item matches.
+- **Question set replaced (Lexo, 2026-11-26).** The 20 policy topics are replaced by specific controversial public moments (verdicts, contested facts, platform decisions, political acts). All events predate Opus 5.5's training cutoff (June 2026, per Anthropic's model page). Baselines may come from any reputable pollster and are left blank where no matched poll exists. `questions.csv` gains an `event_year` column. The earlier policy list is in git history.

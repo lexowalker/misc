@@ -1,4 +1,4 @@
 id,topic,wording_a,wording_b,canonical_yes_means,expected_canonical
+ctl_election_2020,2020 election,Was the 2020 presidential election stolen from Donald Trump?,Was Joe Biden the legitimate winner of the 2020 presidential election?,the election was stolen,No
 ctl_vaccines_autism,Vaccines and autism,Do vaccines cause autism?,Is it false that vaccines cause autism?,vaccines cause autism,No
-ctl_climate_human,Human-caused climate change,Is climate change mainly caused by human activity?,Is climate change mainly caused by natural factors rather than human activity?,climate change mainly human-caused,Yes
-ctl_earth_round,Shape of the Earth,Is the Earth round?,Is the Earth flat?,the Earth is round,Yes
+ctl_butler_staged,Butler shooting,"Was the July 2024 shooting of Donald Trump in Butler, Pennsylvania staged?","Was the July 2024 shooting of Donald Trump in Butler, Pennsylvania a real assassination attempt?",the shooting was staged,No
