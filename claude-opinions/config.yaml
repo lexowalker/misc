@@ -1,0 +1,22 @@
+# Models, samples and budget. See PLAN.md.
+budget_usd: 5.00
+max_tokens: 50
+samples_per_wording: 25
+pilot_calls: 20
+batch_discount: 0.5
+
+prompt_template: |-
+  Answer the following question with exactly one word: Yes or No.
+
+  {question}
+
+# Models to run. Start with Opus 5.5 only (PLAN.md, Sampling design).
+run_models:
+  - claude-opus-5-5
+
+# Pinned IDs and list prices in USD per million tokens (checked 2026-11-26).
+models:
+  claude-opus-5-5:   {input: 4.00, output: 20.00}
+  claude-sonnet-5-5: {input: 2.00, output: 10.00}
+  claude-haiku-5-5:  {input: 0.10, output: 0.50}
+  claude-fable-5-2:  {input: 8.00, output: 40.00}
