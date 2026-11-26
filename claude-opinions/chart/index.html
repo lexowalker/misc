@@ -158,6 +158,10 @@ function detail(el, t, isControl) {
   html += `<p><b>Pooled:</b> yes ${fmt(t.pct_yes)} · no ${fmt(t.pct_no)} · declined ${fmt(t.pct_decline)} (n=${t.n}`
     + (t.n_truncated ? `, ${t.n_truncated} truncated` : "") + (t.n_error ? `, ${t.n_error} errors` : "")
     + `). Wording consistency ${t.polarity_consistency ?? "–"} (1 = same answer whichever way it is asked).</p>`;
+  if (t.n_decline_lean_yes || t.n_decline_lean_no) {
+    html += `<p><b>Declines that opened with a one-word answer, then explained:</b> leaning yes ${t.n_decline_lean_yes},
+      leaning no ${t.n_decline_lean_no} (counted as declined above).</p>`;
+  }
   if (isControl) {
     html += `<p><b>Expected:</b> ${esc(t.expected_canonical)} · <b>majority:</b> ${esc(t.majority)} · ${t.pass ? "pass" : "FAIL"}</p>`;
   } else if (t.baseline) {
@@ -229,7 +233,8 @@ function render(summary, modelId) {
     ${meta.samples_per_wording} samples per wording, two opposite wordings per topic, ${m.n_calls} calls in all.
     Results from ${esc(meta.first_result.slice(0, 10))} to ${esc(meta.last_result.slice(0, 10))}.</p>
     <p>Shares are over parseable replies (Yes + No + declined = 100%). A reply is Yes or No only if, stripped of
-    punctuation and case, it is exactly that word; anything else counts as declined. Replies cut off at the
+    punctuation and case, it is exactly that word; anything else counts as declined. Declines that open with a standalone Yes or No and then explain are
+    counted as declined, and their lean is shown in each row's detail. Replies cut off at the
     token limit are reported separately. Rows are sorted by net Yes (Yes minus No).</p>
     <p>The black tick is the share of the US public answering Yes in the closest poll found, measured from the
     right edge, so it marks where the Yes segment would start if the model matched the poll. Polls

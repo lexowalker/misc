@@ -10,7 +10,7 @@ import json
 import re
 import shutil
 
-from common import CFG, ROOT, load_batches, load_questions, read_jsonl
+from common import CFG, ROOT, canonical, lean, load_batches, load_questions, read_jsonl
 
 LABELS = ("YES", "NO", "DECLINE")
 
@@ -22,6 +22,12 @@ def split(recs):
     out.update(n=n, n_truncated=c["TRUNCATED"], n_error=c["ERROR"])
     for k in LABELS:
         out[f"pct_{k.lower()}"] = round(100 * c[k] / n, 2) if n else None
+    # Declines that opened with a bare Yes or No before explaining, in the
+    # canonical direction. A subset of n_decline, not added to yes/no.
+    leans = collections.Counter(
+        canonical(lean(r.get("text", ""), r["label"]), r["wording"]) for r in recs)
+    out["n_decline_lean_yes"] = leans["YES"]
+    out["n_decline_lean_no"] = leans["NO"]
     return out
 
 

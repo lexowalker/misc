@@ -4,6 +4,7 @@ import datetime as dt
 import json
 import os
 import pathlib
+import re
 import string
 
 import anthropic
@@ -70,6 +71,19 @@ def classify(text, stop_reason):
     return "DECLINE"
 
 
+LEAN_RE = re.compile(r"^[\s*_#>\"'`]*(yes|no)[*_\"'`]*\s*(?:[.!\u2014\u2013]|\n|$)", re.IGNORECASE)
+
+
+def lean(text, label):
+    """For a DECLINE that opens with a bare Yes or No and then explains
+    (e.g. "**No.** That reflects the official findings..."), the word it opened
+    with. Recorded alongside the strict label, never instead of it."""
+    if label != "DECLINE":
+        return None
+    m = LEAN_RE.match(text or "")
+    return m.group(1).upper() if m else None
+
+
 def canonical(label, wording):
     """Map a raw answer onto the canonical direction (wording B is reversed)."""
     if wording == "b" and label in ("YES", "NO"):
@@ -111,6 +125,8 @@ def record_from_response(base, body, discount=1.0):
         stop_reason=body["stop_reason"],
         label=label,
         canonical=canonical(label, base["wording"]),
+        lean=lean(text, label),
+        canonical_lean=canonical(lean(text, label), base["wording"]),
         # A safety-classifier stop is still a DECLINE; keep why.
         refusal_category=stop_details.get("category") if body["stop_reason"] == "refusal" else None,
         usage=body["usage"],

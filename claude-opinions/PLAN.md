@@ -179,3 +179,4 @@ These override the sections above where they conflict.
 - **Controls are in the main batch** (3 × 2 wordings × 25 = 150 extra calls, 1,200 in all), and the budget projection counts them.
 - **`run.py --submit` sends nothing without `--confirm`**, so the estimate can be checked first.
 - **Chart layout:** a 100% stacked bar (No left, declined in the middle, Yes right) with a 50% midline, so the poll's yes share can be drawn as a tick where Yes would start. Yes is violet and No orange, not blue and red, to avoid reading as party colours.
+- **After the pilot (Lexo, 2026-11-26).** Budget raised to $8, keeping 25 samples per wording (pilot projected $7.34). A decline that opens with a standalone Yes or No and then explains is still a `DECLINE`, but its lean is recorded (`lean`, `canonical_lean` per record; `n_decline_lean_yes/no` per topic) and shown in the chart's row detail.

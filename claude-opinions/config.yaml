@@ -1,5 +1,5 @@
 # Models, samples and budget. See PLAN.md.
-budget_usd: 5.00
+budget_usd: 8.00        # raised from $5 after the pilot (Lexo, 2026-11-26)
 max_tokens: 1000        # safety ceiling; thinking tokens count against it
 effort: medium          # Opus 5.5 API default, set explicitly
 thinking_display: summarized   # log a summary of the reasoning; same cost
