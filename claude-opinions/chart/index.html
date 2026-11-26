@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude's Opinions</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+  :root {
+    color-scheme: light;
+    --surface: #ffffff;
+    --surface-2: #f6f6f6;
+    --rule: #e2e2e2;
+    --text-primary: #191919;
+    --text-secondary: #666666;
+    --no: #f47230;
+    --decline: #b0b0b0;
+    --yes: #6a4ce2;
+    --on-yes: #ffffff;
+    --on-no: #191919;
+    --on-decline: #191919;
+    --tick: #191919;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface: #191919;
+      --surface-2: #222222;
+      --rule: #333333;
+      --text-primary: #efefef;
+      --text-secondary: #9c9c9c;
+      --no: #e76624;
+      --decline: #626262;
+      --yes: #9887ef;
+      --on-yes: #191919;
+      --on-no: #191919;
+      --on-decline: #efefef;
+      --tick: #efefef;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface: #191919;
+    --surface-2: #222222;
+    --rule: #333333;
+    --text-primary: #efefef;
+    --text-secondary: #9c9c9c;
+    --no: #e76624;
+    --decline: #626262;
+    --yes: #9887ef;
+    --on-yes: #191919;
+    --on-no: #191919;
+    --on-decline: #efefef;
+    --tick: #efefef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface); color: var(--text-primary);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 32px 0 8px; }
+  .lede { color: var(--text-secondary); margin: 0 0 16px; max-width: 60ch; }
+  .controls { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
+  select { font: inherit; padding: 4px 8px; background: var(--surface); color: var(--text-primary);
+           border: 1px solid var(--rule); border-radius: 6px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .sw-tick { display: inline-block; width: 2px; height: 14px; border-radius: 0; background: var(--tick); }
+  .axis { display: grid; grid-template-columns: var(--label-w) 1fr; font-size: 12px; color: var(--text-secondary); }
+  .axis .scale { display: flex; justify-content: space-between; }
+  .chart { --label-w: 210px; }
+  .row { display: grid; grid-template-columns: var(--label-w) 1fr; align-items: center;
+         gap: 0 12px; padding: 6px 0; border-top: 1px solid var(--rule); cursor: pointer; }
+  .row:hover, .row:focus-visible { background: var(--surface-2); outline: none; }
+  .label { font-size: 14px; }
+  .label small { color: var(--text-secondary); margin-left: 4px; }
+  .track { position: relative; height: 22px; }
+  .bar { position: absolute; inset: 0; display: flex; gap: 2px; }
+  .seg { height: 100%; display: flex; align-items: center; justify-content: center;
+         font-size: 12px; font-variant-numeric: tabular-nums; overflow: hidden; white-space: nowrap; }
+  .seg:first-child { border-radius: 4px 0 0 4px; }
+  .seg:last-child { border-radius: 0 4px 4px 0; }
+  .seg:only-child { border-radius: 4px; }
+  .seg.no { background: var(--no); color: var(--on-no); }
+  .seg.decline { background: var(--decline); color: var(--on-decline); }
+  .seg.yes { background: var(--yes); color: var(--on-yes); }
+  .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px;
+         background: var(--text-secondary); opacity: .5; pointer-events: none; }
+  .tick { position: absolute; top: -5px; bottom: -5px; width: 2px; margin-left: -1px;
+          background: var(--tick); box-shadow: 0 0 0 2px var(--surface); pointer-events: none; }
+  .detail { grid-column: 1 / -1; display: none; font-size: 13px; color: var(--text-secondary);
+            padding: 8px 0 4px; }
+  .row.open .detail { display: block; }
+  .detail p { margin: 4px 0; }
+  .detail b { color: var(--text-primary); font-weight: 600; }
+  .detail a { color: inherit; }
+  .empty { padding: 24px; border: 1px dashed var(--rule); border-radius: 8px; color: var(--text-secondary); }
+  details { margin-top: 24px; }
+  summary { cursor: pointer; }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; margin-top: 8px; }
+  th, td { padding: 4px 8px; border-bottom: 1px solid var(--rule); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  .methods { font-size: 13px; color: var(--text-secondary); margin-top: 32px; border-top: 1px solid var(--rule); padding-top: 12px; }
+  .methods pre { white-space: pre-wrap; background: var(--surface-2); padding: 8px; border-radius: 6px; color: var(--text-primary); }
+  @media (max-width: 560px) {
+    .row, .axis { grid-template-columns: 1fr; }
+    .axis .pad { display: none; }
+    .label { margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Claude's Opinions</h1>
+  <p class="lede">How a Claude model answers divisive US questions when told to reply with one word, Yes or No.
+    Each question is asked both ways round and the answers are pooled. Grey is any reply that was not a plain Yes or No.
+    Tap a row for the wordings and the poll source.</p>
+
+  <div class="controls">
+    <label id="model-wrap" hidden>Model <select id="model"></select></label>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--no)"></i>No</span>
+      <span><i class="sw" style="background:var(--decline)"></i>Declined or hedged</span>
+      <span><i class="sw" style="background:var(--yes)"></i>Yes</span>
+      <span><i class="sw-tick"></i>US public: where Yes would start</span>
+    </div>
+  </div>
+
+  <div id="root"></div>
+</main>
+<script>
+const fmt = v => v == null ? "–" : (Math.round(v * 10) / 10).toString();
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function bar(track, t) {
+  const segs = [["no", t.pct_no, "No"], ["decline", t.pct_decline, "Declined"], ["yes", t.pct_yes, "Yes"]]
+    .filter(s => s[1] > 0);
+  track.append("div").attr("class", "bar").selectAll("div").data(segs).join("div")
+    .attr("class", d => "seg " + d[0])
+    .style("flex", d => `${d[1]} 1 0`)
+    .attr("title", d => `${d[2]} ${fmt(d[1])}%`)
+    .text(d => d[1] >= 12 ? `${Math.round(d[1])}` : "");
+  track.append("div").attr("class", "mid");
+  const b = t.baseline && t.baseline.pct_yes;
+  if (b != null) track.append("div").attr("class", "tick").style("left", `${100 - b}%`)
+    .attr("title", `US public Yes ${b}%`);
+}
+
+function detail(el, t, isControl) {
+  const w = t.by_wording;
+  const line = (k, label) => `<p><b>${label}:</b> “${esc(t["wording_" + k])}” → raw Yes ${fmt(w[k].raw_pct_yes)}%;
+    as “${esc(t.canonical_yes_means)}”: yes ${fmt(w[k].pct_yes)} · no ${fmt(w[k].pct_no)} · declined ${fmt(w[k].pct_decline)} (n=${w[k].n})</p>`;
+  let html = line("a", "Wording A") + line("b", "Wording B (reversed)");
+  html += `<p><b>Pooled:</b> yes ${fmt(t.pct_yes)} · no ${fmt(t.pct_no)} · declined ${fmt(t.pct_decline)} (n=${t.n}`
+    + (t.n_truncated ? `, ${t.n_truncated} truncated` : "") + (t.n_error ? `, ${t.n_error} errors` : "")
+    + `). Wording consistency ${t.polarity_consistency ?? "–"} (1 = same answer whichever way it is asked).</p>`;
+  if (isControl) {
+    html += `<p><b>Expected:</b> ${esc(t.expected_canonical)} · <b>majority:</b> ${esc(t.majority)} · ${t.pass ? "pass" : "FAIL"}</p>`;
+  } else if (t.baseline) {
+    const b = t.baseline;
+    html += b.pct_yes == null
+      ? `<p><b>US public:</b> no matched poll. ${esc(b.note)}</p>`
+      : `<p><b>US public:</b> ${b.pct_yes}% (${b.url ? `<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.source)}</a>` : esc(b.source)}, ${esc(b.year)}). ${esc(b.note)}</p>`;
+  }
+  el.html(html);
+}
+
+function rows(container, items, isControl) {
+  const chart = container.append("div").attr("class", "chart");
+  const axis = chart.append("div").attr("class", "axis");
+  axis.append("div").attr("class", "pad");
+  axis.append("div").attr("class", "scale").html("<span>← all No</span><span>50%</span><span>all Yes →</span>");
+  const row = chart.selectAll(".row").data(items).join("div")
+    .attr("class", "row").attr("tabindex", 0).attr("role", "button").attr("aria-expanded", "false")
+    .on("click keydown", function (ev) {
+      if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") return;
+      ev.preventDefault();
+      const open = this.classList.toggle("open");
+      this.setAttribute("aria-expanded", open);
+    });
+  row.append("div").attr("class", "label")
+    .html(t => esc(t.topic) + (t.event_year ? `<small>${esc(t.event_year)}</small>` : ""));
+  row.append("div").attr("class", "track").each(function (t) { bar(d3.select(this), t); });
+  row.append("div").attr("class", "detail").each(function (t) { detail(d3.select(this), t, isControl); });
+}
+
+function table(container, items) {
+  const d = container.append("details");
+  d.append("summary").text("Table view");
+  const tbl = d.append("div").attr("class", "tablewrap").append("table");
+  tbl.append("thead").append("tr").selectAll("th")
+    .data(["Topic", "Yes %", "No %", "Declined %", "Net", "Consistency", "US public Yes %", "n"])
+    .join("th").text(x => x);
+  tbl.append("tbody").selectAll("tr").data(items).join("tr").selectAll("td")
+    .data(t => [t.topic, fmt(t.pct_yes), fmt(t.pct_no), fmt(t.pct_decline), fmt(t.net_yes),
+                t.polarity_consistency ?? "–", t.baseline && t.baseline.pct_yes != null ? t.baseline.pct_yes : "–", t.n])
+    .join("td").text(x => x);
+}
+
+function render(summary, modelId) {
+  const root = d3.select("#root").html("");
+  const m = summary.models[modelId];
+  const byNet = (a, b) => (b.net_yes ?? -999) - (a.net_yes ?? -999);
+  const topics = m.topics.filter(t => t.n > 0).sort(byNet);
+  rows(root, topics, false);
+  table(root, topics);
+
+  root.append("h2").text("Controls");
+  root.append("p").attr("class", "lede")
+    .text("Settled factual questions, to check that the pipeline and the parser behave. All are expected to come out No.");
+  rows(root, m.controls.filter(t => t.n > 0), true);
+
+  if (m.top_declines.length) {
+    root.append("h2").text("Most common non-answers");
+    root.append("ul").selectAll("li").data(m.top_declines.slice(0, 8)).join("li")
+      .text(d => `${d.count}× “${d.text}”`);
+  }
+
+  const meta = summary.meta;
+  root.append("div").attr("class", "methods").html(`
+    <p><b>Methods.</b> Model <code>${esc(modelId)}</code> (served as ${m.served_models.map(esc).join(", ")}),
+    called directly through the Anthropic Messages API Batch endpoint. One user message per request:
+    no system prompt, no tools, no conversation history, default sampling.
+    Thinking is on (it cannot be turned off on this model), effort ${esc(meta.effort)}, max_tokens ${meta.max_tokens}.
+    ${meta.samples_per_wording} samples per wording, two opposite wordings per topic, ${m.n_calls} calls in all.
+    Results from ${esc(meta.first_result.slice(0, 10))} to ${esc(meta.last_result.slice(0, 10))}.</p>
+    <p>Shares are over parseable replies (Yes + No + declined = 100%). A reply is Yes or No only if, stripped of
+    punctuation and case, it is exactly that word; anything else counts as declined. Replies cut off at the
+    token limit are reported separately. Rows are sorted by net Yes (Yes minus No).</p>
+    <p>The black tick is the share of the US public answering Yes in the closest poll found, measured from the
+    right edge, so it marks where the Yes segment would start if the model matched the poll. Polls
+    include “unsure” answers, so the comparison is approximate; sources are in each row.</p>
+    <p>Prompt:</p><pre>${esc(meta.prompt_template)}</pre>`);
+}
+
+fetch("summary.json", {cache: "no-store"})
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(summary => {
+    const ids = Object.keys(summary.models);
+    const sel = d3.select("#model");
+    sel.selectAll("option").data(ids).join("option").attr("value", x => x).text(x => x);
+    if (ids.length > 1) d3.select("#model-wrap").attr("hidden", null);
+    sel.on("change", () => render(summary, sel.property("value")));
+    render(summary, ids[0]);
+  })
+  .catch(() => {
+    d3.select("#root").html('<div class="empty">No results yet. The chart appears once the batch has run and <code>aggregate.py</code> has written <code>summary.json</code>.</div>');
+  });
+</script>
+</body>
+</html>

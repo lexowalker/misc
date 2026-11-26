@@ -175,3 +175,7 @@ These override the sections above where they conflict.
 - **Location:** built in `lexowalker/misc` under `claude-opinions/`, not a dedicated repository.
 - **`questions.csv` has an extra column, `baseline_note`**, for caveats on how well the poll item matches.
 - **Question set replaced (Lexo, 2026-11-26).** The 20 policy topics are replaced by 21 specific controversial public moments, approved by Lexo (verdicts, contested facts, platform decisions, political acts). All events predate Opus 5.5's training cutoff (June 2026, per Anthropic's model page). Baselines may come from any reputable pollster and are left blank where no matched poll exists. `questions.csv` gains an `event_year` column. The earlier policy list is in git history.
+- **No refusal fallbacks (2026-11-26).** Server-side fallbacks would let a different model answer, and the Batches API rejects them anyway. A safety-classifier stop (`stop_reason: refusal`) is labelled `DECLINE` and its category is logged.
+- **Controls are in the main batch** (3 × 2 wordings × 25 = 150 extra calls, 1,200 in all), and the budget projection counts them.
+- **`run.py --submit` sends nothing without `--confirm`**, so the estimate can be checked first.
+- **Chart layout:** a 100% stacked bar (No left, declined in the middle, Yes right) with a 50% midline, so the poll's yes share can be drawn as a tick where Yes would start. Yes is violet and No orange, not blue and red, to avoid reading as party colours.
