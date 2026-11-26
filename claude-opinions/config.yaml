@@ -1,6 +1,8 @@
 # Models, samples and budget. See PLAN.md.
 budget_usd: 5.00
-max_tokens: 50
+max_tokens: 1000        # safety ceiling; thinking tokens count against it
+effort: medium          # Opus 5.5 API default, set explicitly
+thinking_display: summarized   # log a summary of the reasoning; same cost
 samples_per_wording: 25
 pilot_calls: 20
 batch_discount: 0.5
@@ -10,7 +12,7 @@ prompt_template: |-
 
   {question}
 
-# Models to run. Start with Opus 5.5 only (PLAN.md, Sampling design).
+# Models to run. Opus 5.5 only for now (Lexo, 2026-11-26).
 run_models:
   - claude-opus-5-5
 

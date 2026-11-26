@@ -161,3 +161,16 @@ Per model × topic:
 - JusticeEval: "Was this outcome just?" on case summaries.
 - A thinking-on run to compare against.
 - Non-Anthropic models through the same pipeline.
+
+## Amendments (2026-11-26, agreed with Lexo)
+
+These override the sections above where they conflict.
+
+- **Scope:** Opus 5.5 only for now. Sonnet, Haiku and Fable are dropped until Lexo says otherwise.
+- **Thinking stays on.** Opus 5.5 does not allow thinking to be disabled. Run at `effort: medium` (the API default for this model), set explicitly.
+- **Log the reasoning summary.** Send `thinking: {type: adaptive, display: summarized}` so each record includes a summary of the model's reasoning. The raw reasoning is not available.
+- **`max_tokens: 1000`**, as a safety ceiling. Thinking tokens count against it, so 50 would cut answers off.
+- **New label `TRUNCATED`:** the response hit `max_tokens` before giving a parseable answer. Never counted as a decline.
+- **Budget check uses the pilot.** Projected cost = calls × the pilot's measured mean cost per call × 0.5 (batch) × 1.25 margin. Refuse to submit if over `budget_usd`.
+- **Location:** built in `lexowalker/misc` under `claude-opinions/`, not a dedicated repository.
+- **`questions.csv` has an extra column, `baseline_note`**, for caveats on how well the poll item matches.

@@ -7,8 +7,8 @@ finding. The full spec is in `PLAN.md`.
 
 ## Status
 
-Phase 1 (setup). The pipeline scripts (`run.py`, `fetch.py`, `aggregate.py`)
-and the chart arrive in later phases.
+Phase 2 (questions drafted, awaiting approval). `run.py --pilot` is ready;
+batch submission, `fetch.py`, `aggregate.py` and the chart arrive later.
 
 ## Run
 
