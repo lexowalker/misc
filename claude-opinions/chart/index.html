@@ -2,278 +2,305 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Claude's Opinions</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap">
 <style>
+  /* Layout: one narrow column of question cards, modelled on poll "question cards"
+     (question, then a split bar) with Claude and Americans as paired bars. */
   :root {
     color-scheme: light;
-    --surface: #ffffff;
-    --surface-2: #f6f6f6;
-    --rule: #e2e2e2;
-    --text-primary: #191919;
-    --text-secondary: #666666;
-    --no: #f47230;
-    --decline: #b0b0b0;
-    --yes: #6a4ce2;
-    --on-yes: #ffffff;
-    --on-no: #191919;
-    --on-decline: #191919;
-    --tick: #191919;
+    --bg: #f3f4f7;
+    --card: #ffffff;
+    --ink: #17181d;
+    --muted: #5d6170;
+    --rule: #e3e5eb;
+    --yes: #5b45d6;
+    --yes-ink: #ffffff;
+    --no: #e8692a;
+    --no-ink: #1b1206;
+    --skip: #cfd2db;
+    --skip-ink: #2b2d35;
+    --people-rest: #f6d9c8;
+    --people-rest-ink: #5a2c12;
+    --quote: #eef0f5;
+    --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --surface: #191919;
-      --surface-2: #222222;
-      --rule: #333333;
-      --text-primary: #efefef;
-      --text-secondary: #9c9c9c;
-      --no: #e76624;
-      --decline: #626262;
-      --yes: #9887ef;
-      --on-yes: #191919;
-      --on-no: #191919;
-      --on-decline: #efefef;
-      --tick: #efefef;
+      --bg: #121318; --card: #1c1d24; --ink: #eceef4; --muted: #a2a6b5; --rule: #2d2f39;
+      --yes: #9d8cf5; --yes-ink: #14102e; --no: #f08a50; --no-ink: #1b1206;
+      --skip: #464956; --skip-ink: #eceef4; --people-rest: #5a3422; --people-rest-ink: #f8dccb; --quote: #24262f;
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --surface: #191919;
-    --surface-2: #222222;
-    --rule: #333333;
-    --text-primary: #efefef;
-    --text-secondary: #9c9c9c;
-    --no: #e76624;
-    --decline: #626262;
-    --yes: #9887ef;
-    --on-yes: #191919;
-    --on-no: #191919;
-    --on-decline: #efefef;
-    --tick: #efefef;
+    --bg: #121318; --card: #1c1d24; --ink: #eceef4; --muted: #a2a6b5; --rule: #2d2f39;
+    --yes: #9d8cf5; --yes-ink: #14102e; --no: #f08a50; --no-ink: #1b1206;
+    --skip: #464956; --skip-ink: #eceef4; --people-rest: #5a3422; --people-rest-ink: #f8dccb; --quote: #24262f;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--surface); color: var(--text-primary);
-    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-  main { max-width: 920px; margin: 0 auto; padding-block: 24px 48px;
-         padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-  .findings { margin: 0 0 16px; padding: 12px 14px; background: var(--surface-2); border-radius: 8px; max-width: 70ch; }
-  .findings p { margin: 4px 0; }
-  .findings b { font-variant-numeric: tabular-nums; }
-  h1 { font-size: 1.6rem; margin: 0 0 4px; }
-  h2 { font-size: 1.1rem; margin: 32px 0 8px; }
-  .lede { color: var(--text-secondary); margin: 0 0 16px; max-width: 60ch; }
-  .controls { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin: 12px 0; }
-  select { font: inherit; padding: 4px 8px; background: var(--surface); color: var(--text-primary);
-           border: 1px solid var(--rule); border-radius: 6px; }
-  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary); }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-  .sw-tick { display: inline-block; width: 2px; height: 14px; border-radius: 0; background: var(--tick); }
-  .axis { display: grid; grid-template-columns: var(--label-w) 1fr; font-size: 12px; color: var(--text-secondary); }
-  .axis .scale { display: flex; justify-content: space-between; }
-  .chart { --label-w: 210px; }
-  .row { display: grid; grid-template-columns: var(--label-w) 1fr; align-items: center;
-         gap: 0 12px; padding: 6px 0; border-top: 1px solid var(--rule); cursor: pointer; }
-  .row:hover, .row:focus-visible { background: var(--surface-2); outline: none; }
-  .label { font-size: 14px; }
-  .label small { color: var(--text-secondary); margin-left: 4px; }
-  .track { position: relative; height: 22px; }
-  .bar { position: absolute; inset: 0; display: flex; gap: 2px; }
-  .seg { height: 100%; display: flex; align-items: center; justify-content: center;
-         font-size: 12px; font-variant-numeric: tabular-nums; overflow: hidden; white-space: nowrap; }
-  .seg:first-child { border-radius: 4px 0 0 4px; }
-  .seg:last-child { border-radius: 0 4px 4px 0; }
-  .seg:only-child { border-radius: 4px; }
-  .seg.at-start { justify-content: flex-start; padding-left: 8px; }
-  .seg.at-end { justify-content: flex-end; padding-right: 8px; }
-  .seg.at-start.at-end { justify-content: flex-start; }
-  .seg.no { background: var(--no); color: var(--on-no); }
-  .seg.decline { background: var(--decline); color: var(--on-decline); }
-  .seg.yes { background: var(--yes); color: var(--on-yes); }
-  .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px;
-         background: var(--text-secondary); opacity: .5; pointer-events: none; }
-  .tick { position: absolute; top: -5px; bottom: -5px; width: 2px; margin-left: -1px;
-          background: var(--tick); box-shadow: 0 0 0 2px var(--surface); pointer-events: none; }
-  .detail { grid-column: 1 / -1; display: none; font-size: 13px; color: var(--text-secondary);
-            padding: 8px 0 4px; }
-  .row.open .detail { display: block; }
-  .detail p { margin: 4px 0; }
-  .detail b { color: var(--text-primary); font-weight: 600; }
-  .detail a { color: inherit; }
-  .empty { padding: 24px; border: 1px dashed var(--rule); border-radius: 8px; color: var(--text-secondary); }
-  details { margin-top: 24px; }
-  summary { cursor: pointer; }
-  .tablewrap { overflow-x: auto; }
-  table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; margin-top: 8px; }
-  th, td { padding: 4px 8px; border-bottom: 1px solid var(--rule); text-align: right; }
-  th:first-child, td:first-child { text-align: left; }
-  .methods { font-size: 13px; color: var(--text-secondary); margin-top: 32px; border-top: 1px solid var(--rule); padding-top: 12px; }
-  .methods pre { white-space: pre-wrap; background: var(--surface-2); padding: 8px; border-radius: 6px; color: var(--text-primary); }
-  @media (max-width: 560px) {
-    .row, .axis { grid-template-columns: 1fr; }
-    .axis .pad { display: none; }
-    .label { margin-bottom: 4px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--font-body); }
+  main { max-width: 720px; margin: 0 auto; padding-block: 40px 64px;
+         padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+         display: grid; gap: 28px; }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2.2rem, 7vw, 3.2rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+  h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.01em; }
+  h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  header { display: grid; gap: 14px; }
+  .lede { font-size: 1.1rem; max-width: 60ch; }
+
+  .headline { background: var(--card); border-radius: 16px; padding: 22px; display: grid; gap: 14px; }
+  .headline .big { font-family: var(--font-display); font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; line-height: 1.15; }
+  .dots { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--skip); }
+  .dot.answered { background: var(--yes); }
+  .dotkey { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--muted); }
+  .dotkey span { display: inline-flex; align-items: center; gap: 6px; }
+  .dotkey i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+
+  .howto { display: grid; gap: 8px; font-size: 15px; color: var(--muted); max-width: 62ch; }
+  .howto b { color: var(--ink); }
+  .key { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+          padding: 3px 10px; border-radius: 999px; }
+  .chip.yes { background: var(--yes); color: var(--yes-ink); }
+  .chip.no { background: var(--no); color: var(--no-ink); }
+  .chip.skip { background: var(--skip); color: var(--skip-ink); }
+  .chip.rest { background: var(--people-rest); color: var(--people-rest-ink); }
+
+  section { display: grid; gap: 14px; }
+  section > .intro { color: var(--muted); max-width: 62ch; }
+  .card { background: var(--card); border-radius: 16px; padding: 20px; display: grid; gap: 14px; min-width: 0; }
+  .card .meta { font-size: 13px; color: var(--muted); }
+  .verdict { font-size: 1.05rem; }
+  .verdict b { font-weight: 600; }
+  .pair { display: grid; grid-template-columns: 96px 1fr; gap: 8px 12px; align-items: center; }
+  .who { font-size: 14px; font-weight: 600; }
+  .bar { display: flex; height: 34px; border-radius: 8px; overflow: hidden; gap: 2px; min-width: 0; }
+  .seg { display: flex; align-items: center; padding: 0 10px; font-size: 13px; font-weight: 600;
+         white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; min-width: 0; }
+  .seg.yes { background: var(--yes); color: var(--yes-ink); }
+  .seg.no { background: var(--no); color: var(--no-ink); }
+  .seg.skip { background: var(--skip); color: var(--skip-ink); }
+  .seg.rest { background: var(--people-rest); color: var(--people-rest-ink); }
+  .seg.end { justify-content: flex-end; }
+  .nopoll { font-size: 14px; color: var(--muted); font-style: italic; }
+  .ways { border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
+  .ways b { color: var(--ink); font-weight: 600; }
+  .said { background: var(--quote); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+  .said q { font-style: italic; }
+  .source { font-size: 13px; color: var(--muted); }
+
+  .refused { display: grid; gap: 10px; }
+  .refused .card { gap: 10px; padding: 16px 18px; }
+  .refused .top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+
+  .checks { display: grid; gap: 8px; }
+  .check { background: var(--card); border-radius: 12px; padding: 12px 16px; display: flex; gap: 12px;
+           justify-content: space-between; align-items: center; flex-wrap: wrap; }
+
+  details { background: var(--card); border-radius: 16px; padding: 16px 20px; color: var(--muted); font-size: 14px; }
+  summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+  details p, details pre { margin-top: 10px; }
+  pre { white-space: pre-wrap; background: var(--quote); padding: 10px; border-radius: 8px; color: var(--ink); }
+  .empty { background: var(--card); border-radius: 16px; padding: 24px; color: var(--muted); }
+  :focus-visible { outline: 2px solid var(--yes); outline-offset: 2px; }
+
+  @media (max-width: 480px) {
+    .pair { grid-template-columns: 1fr; gap: 4px; }
+    .pair .bar { margin-bottom: 8px; }
   }
 </style>
 </head>
 <body>
-<main>
-  <h1>Claude's Opinions</h1>
-  <p class="lede">How a Claude model answers divisive US questions when told to reply with one word, Yes or No.
-    Each question is asked both ways round and the answers are pooled. Grey is any reply that was not a plain Yes or No.
-    Tap a row for the wordings and the poll source.</p>
-
-  <div class="controls">
-    <label id="model-wrap" hidden>Model <select id="model"></select></label>
-    <div class="legend">
-      <span><i class="sw" style="background:var(--no)"></i>No</span>
-      <span><i class="sw" style="background:var(--decline)"></i>Declined or hedged</span>
-      <span><i class="sw" style="background:var(--yes)"></i>Yes</span>
-      <span><i class="sw-tick"></i>US public: where Yes would start</span>
-    </div>
-  </div>
-
-  <div id="root"></div>
+<main id="app">
+  <div class="empty">Loading the results…</div>
 </main>
 <script>
-const fmt = v => v == null ? "–" : (Math.round(v * 10) / 10).toString();
-const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
-function bar(track, t) {
-  const segs = [["no", t.pct_no, "No"], ["decline", t.pct_decline, "Declined"], ["yes", t.pct_yes, "Yes"]]
-    .filter(s => s[1] > 0);
-  track.append("div").attr("class", "bar").selectAll("div").data(segs).join("div")
-    // Numbers sit at the bar's outer edges, clear of the 50% line and the poll tick.
-    .attr("class", (d, i, all) => "seg " + d[0] + (i === 0 ? " at-start" : i === all.length - 1 ? " at-end" : ""))
-    .style("flex", d => `${d[1]} 1 0`)
-    .attr("title", d => `${d[2]} ${fmt(d[1])}%`)
-    .text(d => d[1] >= 12 ? `${Math.round(d[1])}` : "");
-  track.append("div").attr("class", "mid");
-  const b = t.baseline && t.baseline.pct_yes;
-  if (b != null) track.append("div").attr("class", "tick").style("left", `${100 - b}%`)
-    .attr("title", `US public Yes ${b}%`);
+// Raw answers to one wording. Wording B is the reverse question, so its Yes is the canonical No.
+function rawCounts(t, w) {
+  const s = t.by_wording[w];
+  return w === "a" ? {yes: s.n_yes, no: s.n_no, skip: s.n_decline, n: s.n}
+                   : {yes: s.n_no, no: s.n_yes, skip: s.n_decline, n: s.n};
 }
 
-function detail(el, t, isControl) {
-  const w = t.by_wording;
-  const line = (k, label) => `<p><b>${label}:</b> “${esc(t["wording_" + k])}” → raw Yes ${fmt(w[k].raw_pct_yes)}%;
-    as “${esc(t.canonical_yes_means)}”: yes ${fmt(w[k].pct_yes)} · no ${fmt(w[k].pct_no)} · declined ${fmt(w[k].pct_decline)} (n=${w[k].n})</p>`;
-  let html = line("a", "Wording A") + line("b", "Wording B (reversed)");
-  html += `<p><b>Pooled:</b> yes ${fmt(t.pct_yes)} · no ${fmt(t.pct_no)} · declined ${fmt(t.pct_decline)} (n=${t.n}`
-    + (t.n_truncated ? `, ${t.n_truncated} truncated` : "") + (t.n_error ? `, ${t.n_error} errors` : "")
-    + `). Wording consistency ${t.polarity_consistency ?? "–"} (1 = same answer whichever way it is asked).</p>`;
-  if (t.n_decline_lean_yes || t.n_decline_lean_no) {
-    html += `<p><b>Declines that opened with a one-word answer, then explained:</b> leaning yes ${t.n_decline_lean_yes},
-      leaning no ${t.n_decline_lean_no} (counted as declined above).</p>`;
-  }
-  if (isControl) {
-    html += `<p><b>Expected:</b> ${esc(t.expected_canonical)} · <b>majority:</b> ${esc(t.majority)} · ${t.pass ? "pass" : "FAIL"}</p>`;
-  } else if (t.baseline) {
-    const b = t.baseline;
-    html += b.pct_yes == null
-      ? `<p><b>US public:</b> no matched poll. ${esc(b.note)}</p>`
-      : `<p><b>US public:</b> ${b.pct_yes}% (${b.url ? `<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.source)}</a>` : esc(b.source)}, ${esc(b.year)}). ${esc(b.note)}</p>`;
-  }
-  el.html(html);
+function claudeBar(t) {
+  const parts = [["yes", t.n_yes, "Yes"], ["no", t.n_no, "No"], ["skip", t.n_decline, "Wouldn't say"]]
+    .filter(p => p[1] > 0);
+  return `<div class="bar" role="img" aria-label="Claude: ${parts.map(p => `${p[2]} ${p[1]} of ${t.n}`).join(", ")}">` +
+    parts.map(([k, v, label], i) => {
+      const pct = 100 * v / t.n;
+      const text = pct >= 30 ? `${label} · ${v}` : pct >= 12 ? `${v}` : "";
+      return `<div class="seg ${k}${i === parts.length - 1 && parts.length > 1 ? " end" : ""}" style="flex:${v} 1 0">${text}</div>`;
+    }).join("") + `</div>`;
 }
 
-function rows(container, items, isControl) {
-  const chart = container.append("div").attr("class", "chart");
-  const axis = chart.append("div").attr("class", "axis");
-  axis.append("div").attr("class", "pad");
-  axis.append("div").attr("class", "scale").html("<span>← all No</span><span>50%</span><span>all Yes →</span>");
-  const row = chart.selectAll(".row").data(items).join("div")
-    .attr("class", "row").attr("tabindex", 0).attr("role", "button").attr("aria-expanded", "false")
-    .on("click keydown", function (ev) {
-      if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") return;
-      ev.preventDefault();
-      const open = this.classList.toggle("open");
-      this.setAttribute("aria-expanded", open);
-    });
-  row.append("div").attr("class", "label")
-    .html(t => esc(t.topic) + (t.event_year ? `<small>${esc(t.event_year)}</small>` : ""));
-  row.append("div").attr("class", "track").each(function (t) { bar(d3.select(this), t); });
-  row.append("div").attr("class", "detail").each(function (t) { detail(d3.select(this), t, isControl); });
+function peopleBar(b) {
+  const y = b.pct_yes, r = 100 - y;
+  return `<div class="bar" role="img" aria-label="Americans: ${y}% yes, ${r}% no or not sure">` +
+    `<div class="seg yes" style="flex:${y} 1 0">${y >= 18 ? `Yes · ${y}%` : y >= 9 ? `${y}%` : ""}</div>` +
+    `<div class="seg rest end" style="flex:${r} 1 0">${r >= 30 ? `No or not sure · ${r}%` : r >= 9 ? `${r}%` : ""}</div></div>`;
 }
 
-function table(container, items) {
-  const d = container.append("details");
-  d.append("summary").text("Table view");
-  const tbl = d.append("div").attr("class", "tablewrap").append("table");
-  tbl.append("thead").append("tr").selectAll("th")
-    .data(["Topic", "Yes %", "No %", "Declined %", "Net", "Consistency", "Declines leaning yes / no", "US public Yes %", "n"])
-    .join("th").text(x => x);
-  tbl.append("tbody").selectAll("tr").data(items).join("tr").selectAll("td")
-    .data(t => [t.topic, fmt(t.pct_yes), fmt(t.pct_no), fmt(t.pct_decline), fmt(t.net_yes),
-                t.polarity_consistency ?? "–", `${t.n_decline_lean_yes ?? 0} / ${t.n_decline_lean_no ?? 0}`, t.baseline && t.baseline.pct_yes != null ? t.baseline.pct_yes : "–", t.n])
-    .join("td").text(x => x);
+function claudeSentence(t) {
+  if (t.n_decline === t.n) return `Claude <b>wouldn't give a yes or no</b> in any of its ${t.n} tries.`;
+  const bits = [];
+  if (t.n_yes) bits.push(`<b>Yes ${plural(t.n_yes, "time", "times")}</b>`);
+  if (t.n_no) bits.push(`<b>No ${plural(t.n_no, "time", "times")}</b>`);
+  let s = `Out of ${t.n} tries, Claude said ${bits.join(" and ")}`;
+  s += t.n_decline ? `, and wouldn't say the other ${t.n_decline}.` : ".";
+  return s;
 }
 
-function render(summary, modelId) {
-  const root = d3.select("#root").html("");
-  const m = summary.models[modelId];
-  const byNet = (a, b) => (b.net_yes ?? -999) - (a.net_yes ?? -999);
-  const topics = m.topics.filter(t => t.n > 0).sort(byNet);
-  const allDeclined = topics.filter(t => t.pct_decline === 100).length;
-  const answered = topics.filter(t => t.pct_decline < 100);
-  const oneSided = answered.filter(t => {
-    const w = t.by_wording; const hi = Math.max(w.a.pct_decline, w.b.pct_decline), lo = Math.min(w.a.pct_decline, w.b.pct_decline);
-    return hi >= 90 && hi - lo >= 30;
-  }).length;
-  const ctlPass = m.controls.filter(c => c.pass).length;
-  root.append("div").attr("class", "findings").html(`
-    <p>Declined every sample on <b>${allDeclined} of ${topics.length}</b> topics. Gave any Yes or No on <b>${answered.length}</b>.</p>
-    <p>On <b>${oneSided}</b> of those ${answered.length}, it almost always declined one wording but often answered the other. Tap a row to see both.</p>
-    <p>Controls: <b>${ctlPass} of ${m.controls.length}</b> came out as expected.</p>`);
-  rows(root, topics, false);
-  table(root, topics);
+function peopleSentence(b) {
+  return `In ${esc(b.source)}'s ${esc(b.year)} poll, <b>${b.pct_yes}% of Americans said yes</b>. The rest said no or weren't sure.`;
+}
 
-  root.append("h2").text("Controls");
-  root.append("p").attr("class", "lede")
-    .text("Settled factual questions, to check that the pipeline and the parser behave. All are expected to come out No.");
-  rows(root, m.controls.filter(t => t.n > 0), true);
+function waysLine(t, w) {
+  const c = rawCounts(t, w), q = esc(t["wording_" + w]);
+  const bits = [];
+  if (c.yes) bits.push(`Yes ${c.yes}`);
+  if (c.no) bits.push(`No ${c.no}`);
+  if (c.skip) bits.push(`wouldn't say ${c.skip}`);
+  return `<p>“${q}” → <b>${c.skip === c.n ? `wouldn't say, all ${c.n} times` : bits.join(" · ")}</b></p>`;
+}
 
-  if (m.top_declines.length) {
-    root.append("h2").text("Most common non-answers");
-    root.append("ul").selectAll("li").data(m.top_declines.slice(0, 8)).join("li")
-      .text(d => `${d.count}× “${d.text}”`);
-  }
+function leanLine(t) {
+  const ly = t.n_decline_lean_yes || 0, ln = t.n_decline_lean_no || 0;
+  if (!ly && !ln) return "";
+  const n = ly + ln;
+  const side = ly && ln ? "" : ly ? ` toward “${esc(t.canonical_yes_means)}”` : ` against “${esc(t.canonical_yes_means)}”`;
+  return `<p>${n} of the replies we counted as “wouldn't say” did lean${side}: they opened with a one-word answer, then went on to explain.</p>`;
+}
 
-  const meta = summary.meta;
-  root.append("div").attr("class", "methods").html(`
-    <p><b>Methods.</b> Model <code>${esc(modelId)}</code> (served as ${m.served_models.map(esc).join(", ")}),
-    called directly through the Anthropic Messages API Batch endpoint. One user message per request:
-    no system prompt, no tools, no conversation history, default sampling.
-    Thinking is on (it cannot be turned off on this model), effort ${esc(meta.effort)}, max_tokens ${meta.max_tokens}.
-    ${meta.samples_per_wording} samples per wording, two opposite wordings per topic, ${m.n_calls} calls in all.
-    Results from ${esc(meta.first_result.slice(0, 10))} to ${esc(meta.last_result.slice(0, 10))}.</p>
-    <p>Shares are over parseable replies (Yes + No + declined = 100%). A reply is Yes or No only if, stripped of
-    punctuation and case, it is exactly that word; anything else counts as declined. Declines that open with a standalone Yes or No and then explain are
-    counted as declined, and their lean is shown in each row's detail. Replies cut off at the
-    token limit are reported separately. Rows are sorted by net Yes (Yes minus No).</p>
-    <p>The black tick is the share of the US public answering Yes in the closest poll found, measured from the
-    right edge, so it marks where the Yes segment would start if the model matched the poll. Polls
-    include “unsure” answers, so the comparison is approximate; sources are in each row.</p>
-    <p>Prompt:</p><pre>${esc(meta.prompt_template)}</pre>`);
+function sourceLine(b) {
+  if (!b || b.pct_yes == null) return "";
+  const name = b.url ? `<a href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.source)}, ${esc(b.year)}</a>` : `${esc(b.source)}, ${esc(b.year)}`;
+  return `<p class="source">Poll: ${name}.${b.note ? " " + esc(b.note) : ""}</p>`;
+}
+
+function answeredCard(t) {
+  const b = t.baseline;
+  const hasPoll = b && b.pct_yes != null;
+  const instead = t.by_wording.a.example_decline || t.by_wording.b.example_decline;
+  return `<article class="card">
+    <div class="meta">${esc(t.topic)} · ${esc(t.event_year)}</div>
+    <h3>${esc(t.wording_a)}</h3>
+    <div class="pair">
+      <div class="who">Claude</div>${claudeBar(t)}
+      <div class="who">Americans</div>${hasPoll ? peopleBar(b) : `<div class="nopoll">No reliable poll found</div>`}
+    </div>
+    <div class="verdict"><p>${claudeSentence(t)}</p>${hasPoll ? `<p>${peopleSentence(b)}</p>` : ""}</div>
+    <div class="ways">
+      <p><b>The two ways we asked it</b> (25 tries each):</p>
+      ${waysLine(t, "a")}${waysLine(t, "b")}
+      <p>A Yes to the second question counts as a No to the first, and the other way round.</p>
+      ${leanLine(t)}
+    </div>
+    ${instead && t.n_decline ? `<div class="said">When it wouldn't say, it said things like <q>${esc(instead)}</q></div>` : ""}
+    ${sourceLine(b)}
+  </article>`;
+}
+
+function refusedCard(t) {
+  const b = t.baseline;
+  const hasPoll = b && b.pct_yes != null;
+  const instead = t.by_wording.a.example_decline || t.by_wording.b.example_decline;
+  return `<article class="card">
+    <div class="top"><h3>${esc(t.wording_a)}</h3><span class="chip skip">Wouldn't say · ${t.n} of ${t.n}</span></div>
+    <div class="meta">${esc(t.topic)} · ${esc(t.event_year)}. Also asked: “${esc(t.wording_b)}”</div>
+    ${hasPoll ? `<div class="pair"><div class="who">Americans</div>${peopleBar(b)}</div>` : `<p class="nopoll">No reliable poll found.</p>`}
+    ${instead ? `<div class="said">Claude: <q>${esc(instead)}</q></div>` : ""}
+    ${sourceLine(b)}
+  </article>`;
+}
+
+function controlRow(c) {
+  const a = rawCounts(c, "a");
+  const all = a.skip === 0 && (a.yes === 0 || a.no === 0);
+  const label = all ? `${a.no ? "No" : "Yes"} · ${a.n} of ${a.n}` : `Yes ${c.n_yes} · No ${c.n_no} · wouldn't say ${c.n_decline}`;
+  return `<div class="check"><span>${esc(c.wording_a)}</span><span class="chip ${c.pass ? "no" : "skip"}">${label}</span></div>`;
+}
+
+function render(summary) {
+  const id = Object.keys(summary.models)[0];
+  const m = summary.models[id], meta = summary.meta;
+  const topics = m.topics.filter(t => t.n > 0);
+  const answered = topics.filter(t => t.n_decline < t.n)
+    .sort((x, y) => (y.n_yes + y.n_no) - (x.n_yes + x.n_no));
+  const refused = topics.filter(t => t.n_decline === t.n);
+  const tries = topics[0] ? topics[0].n : 0;
+  const date = new Date(meta.last_result).toLocaleDateString("en-US", {month: "long", year: "numeric"});
+
+  document.getElementById("app").innerHTML = `
+  <header>
+    <div class="eyebrow">An experiment · ${esc(date)}</div>
+    <h1>Claude's Opinions</h1>
+    <p class="lede">We asked Claude ${topics.length} questions that divide Americans, from the Chauvin verdict to how Jeffrey Epstein died,
+      and told it to answer with one word: <b>Yes or No</b>. We asked each question ${tries} times, then compared its answers with what Americans told pollsters.</p>
+  </header>
+
+  <div class="headline">
+    <p class="big">It wouldn't pick a side on ${refused.length} of the ${topics.length} questions.</p>
+    <div class="dots" aria-hidden="true">${answered.map(() => `<i class="dot answered"></i>`).join("")}${refused.map(() => `<i class="dot"></i>`).join("")}</div>
+    <div class="dotkey"><span><i style="background:var(--yes)"></i>Answered at least sometimes (${answered.length})</span>
+      <span><i style="background:var(--skip)"></i>Never answered (${refused.length})</span></div>
+    <p>Even on the ${answered.length} it did answer, it usually answered only one way of asking the question, and wouldn't answer the reverse.</p>
+  </div>
+
+  <div class="howto">
+    <p><b>How to read each card.</b> The top bar shows Claude's ${tries} tries. The bottom bar shows Americans in a published poll.</p>
+    <div class="key"><span class="chip yes">Yes</span><span class="chip no">No</span><span class="chip skip">Wouldn't say</span><span class="chip rest">Americans who said no or weren't sure</span></div>
+    <p>Polls let people say “not sure”, which an AI told to say only Yes or No can't do. So compare the purple parts: how often each side said yes.</p>
+  </div>
+
+  <section>
+    <h2>The ${answered.length} questions it answered</h2>
+    <p class="intro">Most answered first.</p>
+    ${answered.map(answeredCard).join("")}
+  </section>
+
+  <section class="refused">
+    <h2>The ${refused.length} questions it wouldn't answer</h2>
+    <p class="intro">We asked each one both ways round, ${tries} tries in all. Every reply was an explanation instead of a yes or no.</p>
+    ${refused.map(refusedCard).join("")}
+  </section>
+
+  <section>
+    <h2>Sanity checks</h2>
+    <p class="intro">Questions with a settled factual answer, to make sure the test works. Claude answered them every time, and correctly.</p>
+    <div class="checks">${m.controls.filter(c => c.n > 0).map(controlRow).join("")}</div>
+  </section>
+
+  <details>
+    <summary>How this was done</summary>
+    <p>Model: <code>${esc(id)}</code>, called directly through Anthropic's API with nothing else in the conversation:
+      no system prompt, no tools, no earlier messages. Its built-in thinking can't be switched off on this model, so it ran at medium effort.
+      ${m.n_calls} requests in all, sent between ${esc(meta.first_result.slice(0, 10))} and ${esc(meta.last_result.slice(0, 10))}.</p>
+    <p>Each question was asked ${meta.samples_per_wording} times as written and ${meta.samples_per_wording} times reversed, so a model that says yes to everything can't look opinionated.
+      A reply counts as Yes or No only if it is exactly that one word. Anything else counts as “wouldn't say”.</p>
+    <p>Poll figures are the share of Americans taking the “yes” side in the closest poll found. The wording rarely matches exactly; each card links its source.</p>
+    <p>The exact prompt:</p><pre>${esc(meta.prompt_template)}</pre>
+  </details>`;
 }
 
 fetch("summary.json", {cache: "no-store"})
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(summary => {
-    const ids = Object.keys(summary.models);
-    const sel = d3.select("#model");
-    sel.selectAll("option").data(ids).join("option").attr("value", x => x).text(x => x);
-    if (ids.length > 1) d3.select("#model-wrap").attr("hidden", null);
-    sel.on("change", () => render(summary, sel.property("value")));
-    render(summary, ids[0]);
-  })
+  .then(render)
   .catch(() => {
-    d3.select("#root").html('<div class="empty">No results yet. The chart appears once the batch has run and <code>aggregate.py</code> has written <code>summary.json</code>.</div>');
+    document.getElementById("app").innerHTML = '<div class="empty">No results yet. They appear once the batch has run and <code>aggregate.py</code> has written <code>summary.json</code>.</div>';
   });
 </script>
 </body>

@@ -48,8 +48,29 @@ def consistency(a, b):
     return round(1 - tvd, 3)
 
 
+def first_sentence(text, limit=240):
+    """Opening sentence of a reply, markdown stripped, for showing what the model said instead."""
+    t = re.sub(r"[*_#>`]", "", text or "").strip()
+    t = re.sub(r"\s+", " ", t)
+    t = re.sub(r":\s*[-•].*$", ":", t)  # stop before a bulleted list
+    m = re.match(r"(.+?[.!?])(\s|$)", t)
+    t = m.group(1) if m else t
+    return t if len(t) <= limit else t[:limit].rsplit(" ", 1)[0] + "…"
+
+
+def example_decline(recs):
+    """A typical decline: the shortest opening sentence among the declines, so the
+    page can show what the model said instead of Yes or No. Picked deterministically."""
+    plain = [r for r in recs if r["label"] == "DECLINE" and r.get("text") and not lean(r["text"], r["label"])]
+    opens = sorted({first_sentence(r["text"]) for r in plain},
+                   key=lambda t: (len(t), t))
+    return opens[len(opens) // 2] if opens else None
+
+
 def summarise(row, recs, is_control):
     by_w = {w: wording_split([r for r in recs if r["wording"] == w]) for w in "ab"}
+    for w in "ab":
+        by_w[w]["example_decline"] = example_decline([r for r in recs if r["wording"] == w])
     pooled = split(recs)
     item = {
         "id": row["id"],
