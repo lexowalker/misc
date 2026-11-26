@@ -10,7 +10,9 @@ finding. The full spec is in `PLAN.md` (read its Amendments section).
 Phases 1–4 done. The full Opus 5.5 batch ran on 2026-11-26: 1,200 requests,
 all succeeded, $5.25 spent (projected $7.34). Results are in
 `data/summary.json`. All three controls pass. Opus declined every sample on 15
-of the 21 topics. **Next: review the results and publish the chart (Phase 5).**
+of the 21 topics. The chart is published as a private claude.ai page:
+https://claude.ai/artifact/UtfWNTBv4AKDEZVZSbWX35 (republish from a copy of
+`chart/index.html` without its doctype/html/head/body wrapper, plus `summary.json`).
 
 ## Run
 

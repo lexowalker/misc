@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Claude's Opinions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
   :root {
@@ -58,7 +59,11 @@
     margin: 0; background: var(--surface); color: var(--text-primary);
     font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  main { max-width: 920px; margin: 0 auto; padding-block: 24px 48px;
+         padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .findings { margin: 0 0 16px; padding: 12px 14px; background: var(--surface-2); border-radius: 8px; max-width: 70ch; }
+  .findings p { margin: 4px 0; }
+  .findings b { font-variant-numeric: tabular-nums; }
   h1 { font-size: 1.6rem; margin: 0 0 4px; }
   h2 { font-size: 1.1rem; margin: 32px 0 8px; }
   .lede { color: var(--text-secondary); margin: 0 0 16px; max-width: 60ch; }
@@ -84,6 +89,9 @@
   .seg:first-child { border-radius: 4px 0 0 4px; }
   .seg:last-child { border-radius: 0 4px 4px 0; }
   .seg:only-child { border-radius: 4px; }
+  .seg.at-start { justify-content: flex-start; padding-left: 8px; }
+  .seg.at-end { justify-content: flex-end; padding-right: 8px; }
+  .seg.at-start.at-end { justify-content: flex-start; }
   .seg.no { background: var(--no); color: var(--on-no); }
   .seg.decline { background: var(--decline); color: var(--on-decline); }
   .seg.yes { background: var(--yes); color: var(--on-yes); }
@@ -140,7 +148,8 @@ function bar(track, t) {
   const segs = [["no", t.pct_no, "No"], ["decline", t.pct_decline, "Declined"], ["yes", t.pct_yes, "Yes"]]
     .filter(s => s[1] > 0);
   track.append("div").attr("class", "bar").selectAll("div").data(segs).join("div")
-    .attr("class", d => "seg " + d[0])
+    // Numbers sit at the bar's outer edges, clear of the 50% line and the poll tick.
+    .attr("class", (d, i, all) => "seg " + d[0] + (i === 0 ? " at-start" : i === all.length - 1 ? " at-end" : ""))
     .style("flex", d => `${d[1]} 1 0`)
     .attr("title", d => `${d[2]} ${fmt(d[1])}%`)
     .text(d => d[1] >= 12 ? `${Math.round(d[1])}` : "");
@@ -197,11 +206,11 @@ function table(container, items) {
   d.append("summary").text("Table view");
   const tbl = d.append("div").attr("class", "tablewrap").append("table");
   tbl.append("thead").append("tr").selectAll("th")
-    .data(["Topic", "Yes %", "No %", "Declined %", "Net", "Consistency", "US public Yes %", "n"])
+    .data(["Topic", "Yes %", "No %", "Declined %", "Net", "Consistency", "Declines leaning yes / no", "US public Yes %", "n"])
     .join("th").text(x => x);
   tbl.append("tbody").selectAll("tr").data(items).join("tr").selectAll("td")
     .data(t => [t.topic, fmt(t.pct_yes), fmt(t.pct_no), fmt(t.pct_decline), fmt(t.net_yes),
-                t.polarity_consistency ?? "–", t.baseline && t.baseline.pct_yes != null ? t.baseline.pct_yes : "–", t.n])
+                t.polarity_consistency ?? "–", `${t.n_decline_lean_yes ?? 0} / ${t.n_decline_lean_no ?? 0}`, t.baseline && t.baseline.pct_yes != null ? t.baseline.pct_yes : "–", t.n])
     .join("td").text(x => x);
 }
 
@@ -210,6 +219,17 @@ function render(summary, modelId) {
   const m = summary.models[modelId];
   const byNet = (a, b) => (b.net_yes ?? -999) - (a.net_yes ?? -999);
   const topics = m.topics.filter(t => t.n > 0).sort(byNet);
+  const allDeclined = topics.filter(t => t.pct_decline === 100).length;
+  const answered = topics.filter(t => t.pct_decline < 100);
+  const oneSided = answered.filter(t => {
+    const w = t.by_wording; const hi = Math.max(w.a.pct_decline, w.b.pct_decline), lo = Math.min(w.a.pct_decline, w.b.pct_decline);
+    return hi >= 90 && hi - lo >= 30;
+  }).length;
+  const ctlPass = m.controls.filter(c => c.pass).length;
+  root.append("div").attr("class", "findings").html(`
+    <p>Declined every sample on <b>${allDeclined} of ${topics.length}</b> topics. Gave any Yes or No on <b>${answered.length}</b>.</p>
+    <p>On <b>${oneSided}</b> of those ${answered.length}, it almost always declined one wording but often answered the other. Tap a row to see both.</p>
+    <p>Controls: <b>${ctlPass} of ${m.controls.length}</b> came out as expected.</p>`);
   rows(root, topics, false);
   table(root, topics);
 
