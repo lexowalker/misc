@@ -7,7 +7,7 @@
 PY ?= .venv/bin/python
 export PYTHONPATH := $(CURDIR)
 
-.PHONY: setup data test docs boundaries population fcms ussc idb judges courthouses cases web stories
+.PHONY: setup data test docs boundaries population fcms ussc idb idb-mdl judges courthouses cases web stories
 
 setup:
 	python3 -m venv .venv
@@ -32,6 +32,11 @@ ussc:                  ## U.S. Sentencing Commission datafiles
 
 idb:                   ## FJC Integrated Database (civil + criminal)
 	$(PY) -m pipeline.idb.build
+
+# MDL docket table only (about 40 s): re-counts civil cases by MDL docket from the cached civil extract and verifies
+# docket names against GovInfo court records (fetches only records not cached yet). `make idb` already runs it last.
+idb-mdl:               ## civil cases by multidistrict litigation docket + verified docket names (needs idb)
+	$(PY) -m pipeline.idb.mdl
 
 judges:                ## FJC Biographical Directory of Article III judges
 	$(PY) -m pipeline.judges.build

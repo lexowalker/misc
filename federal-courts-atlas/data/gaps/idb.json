@@ -71,11 +71,42 @@
  },
  "civil_mdl_docket_names_unverified": {
   "lane": "idb",
-  "description": "No GovInfo court record could be matched to these MDL docket numbers, so the atlas names them by number only: MDL 2753, MDL 2873.",
+  "description": "No GovInfo court record could be matched to these MDL docket numbers, so the atlas names them by number only: MDL 1507, MDL 2197, MDL 2299, MDL 2325, MDL 2326, MDL 2327, MDL 2391, MDL 2502, MDL 2545, MDL 2753, MDL 2782, MDL 2873, MDL 3060.",
   "variables": [],
   "districts": [],
   "periods": [],
   "reason": "litigation name not verified from an allowed source"
+ },
+ "civil_mdl_docket_not_coded_early_years": {
+  "lane": "idb",
+  "description": "MDL docket numbers are almost never filled in for civil cases closed before FY 2010: 223 of 5,420,719 termination records for FY 1988 to 2009 carry one (civil_mdl_coverage.csv). MDL notes on district pages therefore start in FY 2010.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   1988,
+   1989,
+   1990,
+   1991,
+   1992,
+   1993,
+   1994,
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009
+  ],
+  "reason": "field not coded in the source for those years"
  },
  "criminal_before_fy1996": {
   "lane": "idb",

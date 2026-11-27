@@ -13,7 +13,7 @@ reads "No data" and a missing file shows a designed empty state.
 | `src/pages/district/stats.ts` | Key statistics by family, and "What stands out" with per-sentence verification. |
 | `src/pages/district/bench.ts` | The bench timeline and its table (lazy chunk). |
 | `src/pages/district/mix.ts` | Nature-of-suit and offense mix bars; how cases end (civil and criminal dispositions, with a year switch); offenses of people sentenced (USSC); sentencing composition chart and table (lazy chunk). |
-| `src/pages/district/context.ts` | The multidistrict litigation (MDL) note, in a compact form under "What stands out" and in full above the key statistics and in the case mix. |
+| `src/pages/district/context.ts` | The multidistrict litigation (MDL) note, in a compact form under "What stands out" and in full above the key statistics and in the case mix. Since the polish pass it covers every year from FY 2010 (22 districts). |
 | `src/pages/district/geography.ts` | Divisions, places of holding court, statutory carve-outs, county list, courthouse buildings (lazy chunk). |
 | `src/pages/district/cases.ts` | Recent CourtListener items or the empty state (lazy chunk). |
 | `src/styles/district.css` | All district styles, including four page-scoped chart colors (below). |
@@ -53,9 +53,13 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    When a district has no outlier sentence (profile `kind` `size_and_circuit`: oknd, waed and idd in this build),
    the size-and-circuit sentence is followed by the note that no measure used for the summary puts the district at
    an extreme, so the section's dek is not read as covering the size sentence (recheck lane, Nov 27).
-   For the 8 districts with a profile `mdl_context` (azd, flnd, laed, mnd, nhd, njd, ohnd, scd), a compact
-   "Context: multidistrict litigation" note follows the sentences: each docket (named only when GovInfo verifies
-   it) and its sentences, a derived source chip, and a link that scrolls to the full note.
+   For the 22 districts with a profile `mdl_context` (polish pass, Nov 27: every year the civil series show from
+   FY 2010, so also ohsd, wvsd, ared, rid and others whose dockets ended earlier), a compact "Context: multidistrict
+   litigation" note follows the sentences ("multidistrict litigation" is the glossary term, 28 U.S.C. § 1407(a)):
+   the dockets above 25% in FY 2025 or FY 2026 with their sentences (or, when none is, the most recent docket with
+   its latest-year sentence), then one line for the rest ("Also above a quarter in earlier years: MDL 2592 (FY 2015
+   to 2023), MDL 2179 (FY 2013) and MDL 1657 (FY 2010)."), a derived source chip, and a link that scrolls to the full
+   note. Dockets are named only when GovInfo verifies them; otherwise by number.
 4. **Key statistics.** Grouped as Speed, Workload, Sentencing, Case mix. The 15 featured measures show first;
    "Show N more … measures" reveals the rest (45 in all). Each row: label and period; value with unit (or
    "No data", plus "Last reported for FY …" when older data exist); rank phrased with an explicit direction
@@ -66,8 +70,11 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    this measure" (explainer, "Higher means", series breaks, caveats, links to the table and the map).
    Periods use `periodLabelFor` with the catalog record, so IDB FY 2026 rows read "FY 2026 (preliminary)" (also in
    "Last reported for" and in the claim line of "See the measure"). For the MDL districts the full note
-   (`#mdl-note`) sits above the measures: what an MDL docket is, one line per district-year, the history of the
-   same docket, the rule for when a note appears, and the sources (IDB file, civil codebook, GovInfo record).
+   (`#mdl-note`) sits above the measures: an intro whose "multidistrict litigation (MDL)" opens the glossary
+   definition, each docket with its latest year above 25% and the headline years as sentences and the other years
+   as history lines, the rule for when a note appears (from FY 2010, the first year the FJC records carry docket
+   numbers), and the sources (IDB file, civil codebook, GovInfo records). A docket whose transferee court is another
+   district names it ("case 2:01-md-00875, E.D. Pa." for MDL 875 in N.D. Ohio).
 5. **The bench over time.** One row per FJC service record: initials avatar ringed in the party color, name
    (last name only on phones), a D / R / O letter tag (the non-color cue), and a bar from start of service to
    senior status in the party color, then a fainter band of the same hue for senior service. Ongoing service
@@ -138,7 +145,8 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
 - Composition chart: focusable, Left / Right / Home / End step through years, a live region reads the year's
   four shares; table view.
 - Every value in the mix bars is printed as text; the all-district share is in visually hidden text per row.
-- Glossary terms: Article III / IV, senior status, division, guideline range, §5K1.1, §5K3.1.
+- Glossary terms: Article III / IV, senior status, division, guideline range, §5K1.1, §5K3.1, multidistrict
+  litigation (MDL).
 - Smooth scrolling and the "See the measure" flash are disabled under `prefers-reduced-motion` (the flash
   becomes a focus outline).
 
@@ -179,6 +187,15 @@ design, both projects). Expectations about numbers are read from `public/data/` 
   duty-station line; the flnd MDL note in brief, in key statistics (names, history, derived chip, the scroll link
   focuses it) and in the case mix, and no note on vaed; dark captures; an axe scan of flnd in both themes after
   switching years and opening the definitions (0 serious or critical). flnd and txwd joined the sample sweep.
+
+Polish pass (Nov 27): the flnd MDL test now checks the compact note's current dockets and "earlier" line, the
+glossary popover on the kicker (cite 28 U.S.C. § 1407(a)), the intro term, the rule and every sentence and history
+line; a new test does the same for ohsd (no current docket), wvsd (three unnamed dockets) and laed (one current,
+three earlier), including that unnamed dockets have no title and that the case-mix note appears only when a docket
+is current; the dark-mode test adds ohsd and laed captures. `district.spec.ts` now runs 60 tests over the two
+projects (59 passed, 1 skipped by design in the full run).
+Reviewed at 1280 and 375 px, light and dark: `district-{flnd,ohsd,wvsd,laed}-mdl[-brief].jpg`,
+`district-{ohsd,laed}-dark-mdl[-brief].jpg`. Full suite: see `docs/lanes/frontend.md`.
 
 Review captures (JPEG) in `tests/e2e/__screenshots__/{desktop,mobile}/`: `district-<id>.jpg` for the sample
 districts, `district-gud-full.jpg`, `district-txed-dark.jpg`, `district-txed-dark-mix.jpg`,

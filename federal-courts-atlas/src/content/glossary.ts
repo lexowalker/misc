@@ -249,6 +249,14 @@ const ENTRIES = entries([
     cite: '28 U.S.C. §§ 2241, 2254, 2255; 42 U.S.C. § 1983',
   },
   {
+    id: 'mdl',
+    term: 'multidistrict litigation (MDL)',
+    definition:
+      'A way of handling civil cases that are pending in different federal districts and share one or more common questions of fact. The Judicial Panel on Multidistrict Litigation may transfer them to a single district for coordinated or consolidated pretrial proceedings, when it finds that doing so will serve the convenience of the parties and witnesses and the just and efficient conduct of the cases. The Panel sends each case back to the district it came from at or before the end of those pretrial proceedings, unless the case has already ended.',
+    cite: '28 U.S.C. § 1407(a)',
+    see: ['district', 'termination'],
+  },
+  {
     id: 'termination',
     term: 'termination',
     definition:

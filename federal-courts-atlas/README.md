@@ -4,9 +4,9 @@ An interactive atlas of the 94 U.S. federal district courts: how fast they move,
 they sentence, and what kinds of cases they hear. Every number comes from a cited public source. Where a value
 could not be sourced, the site says "No data" and the gap is logged in `DATA_GAPS.md`.
 
-The site has a national map with 40-plus measures in four families (the list is `public/data/variables.json`), a
+The site has a national map with 45 measures in four families (the list is `public/data/variables.json`), a
 time machine, a profile for every district, compare mode, five guided stories, a three.js courtroom, a Learn page
-with a glossary, and place search.
+with a glossary of 54 terms, and place search.
 
 ## Run it
 
@@ -23,6 +23,7 @@ npm run preview   # serve dist/ on :4173
 make data         # every lane, in order: boundaries population fcms ussc idb judges courthouses cases stories web docs
 make web          # just rebuild public/data/ from data/processed/ (run make stories first; web hashes every file)
 make docs         # regenerate SOURCES.md and DATA_GAPS.md
+make idb-mdl      # only the civil MDL docket table and its GovInfo-verified names (about 40 s; make idb runs it too)
 ```
 
 - Order matters where a lane reads another's output: population and courthouses need boundaries, `web` needs all
@@ -45,6 +46,10 @@ CI=1 E2E_PORT=4502 npx playwright test --trace off              # same, on your 
 CI=1 E2E_PORT=4502 npx playwright test tests/e2e/visual.spec.ts --update-snapshots   # refresh visual baselines
 npm run check:palette    # color-blind and contrast check of the map color ramps
 ```
+
+Last full run (polish pass, Nov 27, 2026): `make test` 1,252 passed; `npm run typecheck` clean; Playwright
+(`CI=1 E2E_PORT=4601 npx playwright test --trace off`) 361 passed, 11 skipped by design (touch-only tests on desktop,
+desktop-only measurements on mobile), 0 failed, including the visual baselines.
 
 - Playwright is pinned to exactly **1.63.0** to match the Chromium build in `/opt/pw-browsers`. **Never run
   `playwright install`**; it would download a different browser and break the pin.

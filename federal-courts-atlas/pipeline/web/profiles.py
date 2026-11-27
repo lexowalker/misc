@@ -490,8 +490,13 @@ def sentenced_offenses(d: str) -> dict | None:
 
 # ---- Multidistrict litigation context -------------------------------------------------------------------------
 MDL_SHARE = 25.0   # a docket above this share of a district's civil cases in a year shown gets a note
-MDL_INTRO = ("A multidistrict litigation (MDL) docket brings similar civil cases from many districts before one "
-             "court for pretrial proceedings. In each year listed here, a single docket made up more than a quarter "
+# The civil measures whose sparklines and history the profile shows; a note covers every year they span in which
+# the FJC records carry MDL docket numbers (IDB lane civil_mdl_meta.json: first_coded_fy).
+MDL_CIVIL_SERIES = ("civil_disposition_months", "civil_trial_months", "civil_over_3yrs_pct",
+                    "civil_filings_per_judgeship", "pending_per_judgeship", "terminations_per_judgeship",
+                    "civil_filings_per_100k", "patent_filings", "pro_se_pct", "prisoner_petitions_pct",
+                    "civil_trial_rate_pct")
+MDL_INTRO = ("In each year listed here, a single multidistrict litigation (MDL) docket made up more than a quarter "
              "of the civil cases this court received or closed.")
 MDL_FORMULA = ("share = 100 × civil cases carrying the MDL docket number ÷ all civil cases filed (or closed) in the "
                "district that fiscal year, counted from FJC case records; a note appears when one docket is above 25%")
@@ -528,6 +533,20 @@ def _mdl_tables() -> tuple[pd.DataFrame, pd.DataFrame] | None:
     return t, names
 
 
+def mdl_first_coded_year() -> int | None:
+    """First fiscal year in which the FJC civil records carry MDL docket numbers (IDB lane coverage table)."""
+    meta = PROC / "idb" / "civil_mdl_meta.json"
+    if not meta.exists():
+        return None
+    import json
+    return int(json.loads(meta.read_text())["first_coded_fy"])
+
+
+def mdl_label(dk: str) -> str:
+    """MDL 0875 in the FJC field is the Panel's MDL No. 875."""
+    return f"MDL {int(dk)}"
+
+
 def national_mdl_note(year: int, cohort: str) -> dict | None:
     """When one MDL docket is more than a quarter of all districts' civil cases filed (or closed) in a year, the
     all-district comparison ticks for that year include those cases; say so next to them."""
@@ -546,11 +565,22 @@ def national_mdl_note(year: int, cohort: str) -> dict | None:
     what = "civil cases filed" if cohort == "filed" else "civil cases closed"
     return {
         "text": (f"{int(r['count']):,} of the {int(r['total']):,} {what} in all districts in {_fy(year)} were part of "
-                 f"MDL {dk}{where}, one multidistrict litigation docket. The all-district shares for that year include "
-                 "them."),
+                 f"{mdl_label(dk)}{where}, one multidistrict litigation docket. The all-district shares for that year "
+                 "include them."),
         "year": year, "cohort": cohort, "docket": dk, "count": int(r["count"]), "total": int(r["total"]),
         "share": float(r["share"]), "source_ids": ["idb_civil_cv88on"],
     }
+
+
+def mdl_years(vfs: dict[str, dict]) -> tuple[list[int], list[int]]:
+    """(years checked, focus years). Checked: every year the profile's civil series show from the first year the
+    FJC records carry docket numbers. Focus: the latest FCMS civil year and the latest IDB year (what the page
+    headlines), which always get their own sentence."""
+    focus = sorted({vfs["civil_filings_per_judgeship"]["years"][-1], vfs["civil_trial_rate_pct"]["years"][-1]})
+    shown = sorted({int(y) for v in MDL_CIVIL_SERIES if v in vfs for y in vfs[v]["years"]})
+    first = mdl_first_coded_year()
+    checked = [y for y in shown if first is not None and y >= first]
+    return checked, focus
 
 
 def mdl_context(d: str, vfs: dict[str, dict]) -> dict | None:
@@ -558,56 +588,73 @@ def mdl_context(d: str, vfs: dict[str, dict]) -> dict | None:
     if got is None:
         return None
     t, names = got
-    years = sorted({vfs["civil_filings_per_judgeship"]["years"][-1], vfs["civil_trial_rate_pct"]["years"][-1]})
-    mine = t[(t["district_id"] == d) & (t["share"] > MDL_SHARE)]
-    notes = mine[mine["period"].isin(years)]
-    if notes.empty:
+    years, focus = mdl_years(vfs)
+    if not years:
+        return None
+    mine = t[(t["district_id"] == d) & (t["share"] > MDL_SHARE) & t["period"].isin(years)]
+    if mine.empty:
         return None
     short = BY_ID[d].short
     noun = {"filed": "civil cases filed in", "terminated": "civil cases closed in"}
-    order = notes.groupby("mdl_docket")["share"].max().sort_values(ascending=False).index.tolist()
+    latest = mine.groupby("mdl_docket")["period"].max()
+    peak = mine.groupby("mdl_docket")["share"].max()
+    current = set(mine.loc[mine["period"].isin(focus), "mdl_docket"])
+    # Dockets above 25% in a focus year first (largest share first), then the others, most recent first.
+    order = sorted(latest.index, key=lambda k: (0, -float(peak[k]), 0, k) if k in current
+                   else (1, -int(latest[k]), -float(peak[k]), k))
     dockets, all_srcs = [], {"idb_civil_cv88on", "idb_civil_codebook"}
     for dk in order:
-        rows = notes[notes["mdl_docket"] == dk].sort_values(["period", "cohort"], ascending=[False, True])
+        rows_all = mine[mine["mdl_docket"] == dk]
+        sentence_years = {int(latest[dk])} | (set(focus) & set(rows_all["period"].astype(int)))
+        rows = rows_all[rows_all["period"].isin(sentence_years)].sort_values(["period", "cohort"],
+                                                                             ascending=[False, True])
+        label = mdl_label(dk)
         sentences = []
         for r in rows.itertuples(index=False):
             sentences.append({
                 "text": (f"In {_fy(int(r.period))}, {int(r.count):,} of the {int(r.total):,} {noun[r.cohort]} "
-                         f"{short} were part of MDL {dk}."),
+                         f"{short} were part of {label}."),
                 "year": int(r.period), "cohort": r.cohort, "count": int(r.count), "total": int(r.total),
                 "share": float(r.share), "preliminary": int(r.period) >= IDB_PRELIM_FROM,
             })
         history = []
         for cohort in ("filed", "terminated"):
             shown = set(rows.loc[rows["cohort"] == cohort, "period"].astype(int))
-            h = mine[(mine["mdl_docket"] == dk) & (mine["cohort"] == cohort) & ~mine["period"].isin(shown)]
+            h = rows_all[(rows_all["cohort"] == cohort) & ~rows_all["period"].isin(shown)]
             if h.empty:
                 continue
-            peak = h.sort_values(["count", "period"], ascending=[False, False]).iloc[0]
+            pk = h.sort_values(["count", "period"], ascending=[False, False]).iloc[0]
             what = "filed in" if cohort == "filed" else "closed in"
             hy = h["period"].astype(int).tolist()
             lead = f"It also made up more than a quarter of the civil cases {what} {short} in {_year_runs(hy)}"
-            text = (f"{lead}: {int(peak['count']):,} of {int(peak['total']):,}." if len(hy) == 1 else
-                    f"{lead}; the most was {int(peak['count']):,} of {int(peak['total']):,} in {_fy(int(peak['period']))}.")
+            text = (f"{lead}: {int(pk['count']):,} of {int(pk['total']):,}." if len(hy) == 1 else
+                    f"{lead}; the most was {int(pk['count']):,} of {int(pk['total']):,} in {_fy(int(pk['period']))}.")
             history.append({
                 "text": text,
-                "cohort": cohort, "years": sorted(int(x) for x in h["period"]), "peak_year": int(peak["period"]),
-                "peak_count": int(peak["count"]), "peak_total": int(peak["total"]),
+                "cohort": cohort, "years": sorted(int(x) for x in h["period"]), "peak_year": int(pk["period"]),
+                "peak_count": int(pk["count"]), "peak_total": int(pk["total"]),
             })
+        all_years = sorted({int(y) for y in rows_all["period"]})
+        item = {"docket": dk, "label": label, "sentences": sentences, "history": history,
+                "latest_year": int(latest[dk]), "years": all_years, "years_text": _year_runs(all_years),
+                "current": dk in current, "source_ids": ["idb_civil_cv88on"]}
         nm = names[names["mdl_docket"] == dk]
-        item = {"docket": dk, "sentences": sentences, "history": history, "source_ids": ["idb_civil_cv88on"]}
         if not nm.empty:
             n0 = nm.iloc[0]
             item.update({"name": n0["title"], "case_number": n0["case_number"], "court": n0["district_id"],
                          "name_source_id": n0["source_id"]})
+            if n0["district_id"] != d:
+                item["court_short"] = BY_ID[n0["district_id"]].short
             item["source_ids"].append(n0["source_id"])
             all_srcs.add(n0["source_id"])
         dockets.append(item)
     return {
-        "intro": MDL_INTRO, "dockets": dockets, "years": years, "threshold_pct": MDL_SHARE,
-        "rule": (f"Shown when one MDL docket made up more than 25% of the court's civil cases filed or closed in "
-                 f"{' or '.join(_fy(y) for y in years)}, counted from FJC case records. A docket is named only when a "
-                 "court record on GovInfo confirms the name; otherwise it is shown by number."),
+        "intro": MDL_INTRO, "dockets": dockets, "years": years, "focus_years": focus, "threshold_pct": MDL_SHARE,
+        "rule": (f"Shown when one MDL docket made up more than 25% of the court's civil cases filed or closed in a "
+                 f"fiscal year from FY {years[0]} to {_fy(years[-1])}, counted from FJC case records. Those records "
+                 f"carry MDL docket numbers for cases closed from FY {years[0]} on, so earlier years are not checked. "
+                 "A docket is named only when a court record on GovInfo confirms the name; otherwise it is shown by "
+                 "number."),
         "derived": True, "formula": MDL_FORMULA, "source_ids": sorted(all_srcs),
     }
 

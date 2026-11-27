@@ -5,9 +5,9 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 `public/data/geo/divisions.json` and `geo/courthouses.json`). It never fetches anything and never calls a model.
 
 - **Rebuild:** `make web` (= `PYTHONPATH=. .venv/bin/python -m pipeline.web.build`, about 6 seconds).
-- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (156 tests) and
+- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (157 tests) and
   `tests/pipeline/test_data_audit_fixes.py` (16 tests, data audit of 2026-11-27). The whole pipeline suite passes
-  (1,248 tests on 2026-11-27, after the profile additions below). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
+  (1,252 tests on 2026-11-27, after the polish pass below). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
   plus the existing suite (50 passed, 4 skipped by design).
 - **Deterministic:** two runs on the same inputs give byte-identical files (tested by hashing every file before and
   after a rebuild). Dictionaries are written with sorted keys; `manifest.json` uses the newest source retrieval date
@@ -24,7 +24,7 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 | `judges.json` | `{_meta, <district>: [records]}`: every FJC service record on a current district court, oldest first. Public fields only: name, sort name, initials, appointing president and party exactly as FJC gives them, `party_of_appointing_president` (resolved for statutory reassignments, with `reassignment: true`, `party_note` and `president_of_record`), appointment kind, commission, recess appointment and service start dates, senior status date (and the effective date when it differs), service end date and reason, active service end, seat id. No photos, no performance statistics. Biography link template `https://www.fjc.gov/node/{nid}` in `_meta`. | 1.5 MB |
 | `judges/<district>.json` | The same records for one district (up to 77 KB; under 1 KB for the territories), so a profile page does not load all 3,412. | |
 | `cases/<district>.json` | The cases lane's items, normalized: `{district_id, district_name, retrieved_at, selection, source_ids, publisher, items: [{id, kind: docket or opinion, item_type, case_name, url, date_filed, date_terminated, docket_number, docket_type, nature_of_suit, cause, court_id, opinion_status, source_id}], note?}`. | 1 to 5 KB |
-| `profiles/<district>.json` | `distinctive` (paragraph, sentences with claims, the size-and-circuit context sentence, method), `key_stats` (one row per catalog variable: latest year, value, rank, ranked_of, national, full series, derived flag, sources, note), `case_mix` (civil nature-of-suit mix and criminal offense mix for the latest IDB year with national shares; how civil and criminal cases ended, latest IDB year plus the latest cross-checked year; offenses of people sentenced, latest USSC year; the USSC four-way sentencing composition by year) and, for 8 districts, `mdl_context` (below). | 43 to 51 KB |
+| `profiles/<district>.json` | `distinctive` (paragraph, sentences with claims, the size-and-circuit context sentence, method), `key_stats` (one row per catalog variable: latest year, value, rank, ranked_of, national, full series, derived flag, sources, note), `case_mix` (civil nature-of-suit mix and criminal offense mix for the latest IDB year with national shares; how civil and criminal cases ended, latest IDB year plus the latest cross-checked year; offenses of people sentenced, latest USSC year; the USSC four-way sentencing composition by year) and, for 22 districts, `mdl_context` (below). | 43 to 52 KB |
 | `sources.json` | Every source id referenced by any public file (values, profiles, districts, judges, cases, and the geo files' `source_id`/`source_ids`), keyed by id: `lane, url, dataset, publisher, vintage, retrieved_at`. No local paths or hashes. Plus three citation "series" records (below). 910 entries. | 381 KB |
 | `manifest.json` | `version` (first 10 hex of a hash over all file hashes), `build_date`, counts, and `files: {path: {sha256, bytes}}` for every file under `public/data/` (including geo/ and search/). | 44 KB |
 
@@ -233,17 +233,35 @@ composition gives both USSC series separately with a note.
 - **`national_note`** on a civil block year when one MDL docket is more than 25% of all districts' civil cases filed
   (or closed) that year. Today only FY 2025 closings qualify: 147,231 of the 407,539 civil cases closed nationally
   were in MDL 2885 (N.D. Fla.), so the all-district ticks for that year say they include them.
-- **`mdl_context`** (top level of the profile): for each district-year shown on the page (FY 2025, the latest FCMS
-  year, and FY 2026, the latest IDB year) where one MDL docket made up more than 25% of the district's civil cases
-  filed or closed (IDB lane `civil_mdl_dockets`), one sentence per year and cohort ("In FY 2025, 147,231 of the
-  149,260 civil cases closed in N.D. Fla. were part of MDL 2885."), plus a history line for the other years in which
-  the same docket was above 25% (with the year that had the most cases). Counts only in the text; the 25% test is
-  derived and its formula is on the block. A docket is named only from `civil_mdl_docket_names.csv` (GovInfo-verified)
-  and the GovInfo record is cited. Districts with a note: azd, flnd, laed, mnd, nhd, njd, ohnd, scd.
-  `test_profile_mdl_context_complete_and_exact` checks completeness (every qualifying district-year has a sentence and
-  no other does), every count, the "(preliminary)" label for FY 2026 and the names.
-- The data contract's profile line (`docs/DATA_CONTRACT.md`) lists only `distinctive`, `key_stats` and the first two
-  case-mix blocks; these fields are additive and documented here.
+- **`mdl_context`** (top level of the profile; extended in the polish pass, Nov 27): every year the profile's civil
+  series show (`MDL_CIVIL_SERIES`: civil medians, filings, closings, pending, per-capita, patent, pro se, prisoner and
+  trial measures, FY 1988 to 2026) from FY 2010, the first year the FJC records carry MDL docket numbers (IDB lane
+  `civil_mdl_meta.json`; 223 of 5,420,719 termination records for FY 1988 to 2009 carry one), is checked for a docket
+  above 25% of the district's civil cases filed or closed (IDB lane `civil_mdl_dockets`). Each such docket gets
+  sentences for its latest year above 25% and for the headline years (FY 2025, the latest FCMS year; FY 2026, the
+  latest IDB year), e.g. "In FY 2024, 3,817 of the 6,099 civil cases filed in S.D. Ohio were part of MDL 2846.", and
+  one history line per cohort for its other years, with the year that had the most cases. Dockets above 25% in a
+  headline year come first (largest share first), then the others, most recent first. Each docket also carries
+  `label` ("MDL 875" for the FJC's "0875"), `latest_year`, `years`, `years_text`, `current` and, when the transferee
+  court is another district, `court_short`. Counts only in the text; the 25% test is derived and its formula is on
+  the block. A docket is named only from `civil_mdl_docket_names.csv` (GovInfo-verified) and the record is cited;
+  otherwise by number. Districts with a note (22): ared, azd, flnd, flsd, gand, ilnd, innd, insd, ksd, laed, lawd,
+  mad, mnd, moed, nhd, njd, ohnd, ohsd, rid, scd, txnd, wvsd. `test_profile_mdl_context_complete_and_exact` checks
+  completeness (every qualifying district-year is a sentence or in a history line, and nothing else), every count,
+  the order, the "(preliminary)" label for FY 2026 and the names.
+- **National MDL caveats** (`pipeline/web/mdl_caveats.py`, polish pass): MDL 2885 is the only docket above 25% of all
+  districts' civil cases filed or closed in a year (FY 2020 filings, FY 2024 and 2025 closings). The 11 measures built
+  on civil filings, closings or pending cases carry one caveat naming it, N.D. Fla. and the years in which it was
+  most of that court's filings (FY 2020 to 2024) or closings (FY 2021 to 2025), with counts copied from the MDL table
+  (for example "147,231 of the 407,539 closed in all districts that year"): civil, total and weighted filings per
+  judgeship, civil filings per 100,000, pro se and prisoner-petition shares (filings); closings per judgeship, civil
+  median time and civil trial rate (closings); pending per judgeship and civil cases over three years (both). It
+  replaces the general MDL caveats on pending, over-three-years and pro se, so nothing is said twice; `mdl_caveat` on
+  the catalog entry holds the structured form. Not affected and so without one: patent filings and patent share (no
+  MDL 2885 case has nature of suit 830 or 835), civil time to trial and trials per judgeship (19 MDL 2885 cases ended
+  in a trial disposition). The profile's "How cases end" FY 2025 block already has its all-district note.
+  `test_national_mdl_caveats` re-derives every number and year.
+- The data contract's profile line (`docs/DATA_CONTRACT.md`) now lists these fields.
 
 ## Caveats
 

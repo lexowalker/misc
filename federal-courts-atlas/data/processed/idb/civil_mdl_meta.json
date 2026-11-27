@@ -1,0 +1,9 @@
+{
+ "coded_min_records": 1000,
+ "first_coded_fy": 2010,
+ "name_share_pct": 25.0,
+ "records_before_first_coded_fy": 5420719,
+ "records_with_docket_before_first_coded_fy": 223,
+ "source_id": "idb_civil_cv88on",
+ "table": "civil_mdl_coverage.csv"
+}

@@ -29,6 +29,7 @@ from .catalog import BY_ID as CAT, CATALOG
 from .common import (APPROX_POP_DISTRICTS, APPROX_POP_NOTE, GAPS, LANE, PUB, ROOT, SRC, clean_text, lane_sources,
                      num, read_json, table, write_json)
 from .profiles import IDB_PRELIM_FROM, all_profiles
+from .mdl_caveats import apply as apply_mdl_caveat, national_mdl_caveats
 from .values import build_values_file
 
 BUILD_ONLY_KEYS = {"input", "fact", "base"}
@@ -413,7 +414,8 @@ def main() -> None:
         vf, c = build_values_file(spec)
         vfs[spec["id"]] = vf
         cells[spec["id"]] = c
-    variables = [variable_entry(spec, vfs[spec["id"]]) for spec in CATALOG]
+    mdl_cav = national_mdl_caveats()  # MDL 2885 caveats on the measures it touches (counts from the IDB lane)
+    variables = [apply_mdl_caveat(variable_entry(spec, vfs[spec["id"]]), mdl_cav) for spec in CATALOG]
     districts = build_districts()
     judges = build_judges()
     cases = build_cases()

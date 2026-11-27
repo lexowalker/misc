@@ -45,7 +45,7 @@ src/map/thumbnail.ts           small-multiple thumbnail maps (static SVG, decima
 src/map/locator.ts             locator map: one district highlighted in state context + national key map
 src/map/labels.ts              greedy collision-avoided label placement; canvas text measuring
 src/components/                tooltip, legend (+ No-data hatch), data-table, sparkline, year-slider, glossary, source-chip, states
-src/content/glossary.ts        53 plain-English, cited definitions (all 31 required terms + procedure terms used on Learn
+src/content/glossary.ts        54 plain-English, cited definitions (all 31 required terms + procedure terms used on Learn
                                + terms used in measure names); GlossaryId type lists every id
 src/content/variable-terms.ts  which glossary terms each measure's label uses (typed by GlossaryId) + fixed heading phrases
 src/content/events.ts          Booker, TC Heartland, First Step Act, COVID-19 with exact dates, eventDateLabel() (AP style)
@@ -262,7 +262,8 @@ years). Serious or critical violations fail. One narrow exclusion: inline glossa
 `target-size`, because WCAG 2.5.8 exempts targets inside a sentence. The UI audit's review captures are
 `__screenshots__/{desktop,mobile,tablet}/ui-*.jpg`.
 
-Last full run (integration pass, `CI=1 E2E_PORT=4210 npx playwright test --trace off`): 279 passed, 9 skipped by
+Latest full run: see the polish pass at the end of this report (361 passed, 11 skipped). Integration pass
+(`CI=1 E2E_PORT=4210 npx playwright test --trace off`): 279 passed, 9 skipped by
 design (touch-only tests on desktop, mouse-only and desktop-only measurements on mobile), 0 failed.
 
 `choropleth.spec.ts` exercises the data path before any statistics exist without inventing any. It intercepts
@@ -396,3 +397,21 @@ UX follow-up (Nov 27, completeness review of the brief):
   four more times on its own: stable).
 - Not checked: real touch devices (taps were checked in Chromium's mobile emulation only), screen readers, and
   window widths other than those listed.
+
+Polish pass (Nov 27):
+
+- **Counts today:** 45 map variables in four families, 5 stories, 54 glossary entries.
+- **Glossary:** new entry `mdl` ("multidistrict litigation (MDL)"), paraphrased from the cached text of 28 U.S.C.
+  § 1407(a) (www.law.cornell.edu, fetched through `pipeline.common.http.fetch`): the Judicial Panel on Multidistrict
+  Litigation may transfer civil cases with one or more common questions of fact to one district for coordinated or
+  consolidated pretrial proceedings, and sends each back at or before the end of those proceedings unless it has
+  already ended. The profile's MDL note uses it through `term()` (the intro's own definition was removed; the compact
+  note's kicker carries the label variant). `criminal_dismissed_pct` and `sentenced_child_pornography_pct` got no
+  `variable-terms` entry: no glossary term fits ("dismissed" and offense types have no entry), and none was invented.
+  The border-districts story's method note now marks "section 5K3.1" with the `5k3-1` term (`[[5k3-1|section
+  5K3.1]]`, rendered by `rich()`).
+- **Compare "Year shown" menu:** a year that is preliminary for some measures reads "FY 2026 (preliminary for IDB
+  measures)" (the live announcement too), from the catalog's `preliminary_years`, in the same "(preliminary)" words
+  `periodLabelFor` uses. Other years keep the plain label.
+- **Full suite** (`CI=1 E2E_PORT=4601 npx playwright test --trace off`): 361 passed, 11 skipped by design, 0 failed,
+  including `visual.spec.ts` (baselines unchanged) and `a11y.spec.ts`. Pipeline: 1,252 passed. Typecheck clean.

@@ -6,7 +6,8 @@
 // A label that no longer contains `text` simply shows plain words (tests/e2e/glossary-labels.spec.ts reports it).
 // `term` is typed as GlossaryId, so an id that is not in src/content/glossary.ts fails `npm run typecheck`.
 // Measures whose labels hold no legal term (average sentence, shares of offense types, per-resident rates) have
-// no entry on purpose.
+// no entry on purpose. criminal_dismissed_pct ("dismissed") and sentenced_child_pornography_pct have none either:
+// the glossary has no entry for a dismissal or an offense type, and none is invented here.
 
 import type { GlossaryId } from './glossary.ts';
 

@@ -463,6 +463,16 @@ export async function render(ctx: PageContext): Promise<() => void> {
   for (const v of variables) for (const y of v.years ?? []) yearCount.set(y, (yearCount.get(y) ?? 0) + 1);
   const allYears = [...yearCount].filter(([, c]) => c >= Math.min(5, variables.length)).map(([y]) => y).sort((a, b) => b - a);
   if (chosenYear !== null && !allYears.includes(chosenYear)) chosenYear = null;
+  // The menu spans FCMS, USSC and IDB measures. A year that is preliminary for some of them (IDB FY 2026) says so
+  // and for which, in the same words periodLabelFor adds to those measures' own labels.
+  const prelimLanes = new Map<number, Set<string>>();
+  for (const v of variables) for (const y of v.preliminary_years ?? []) prelimLanes.set(y, (prelimLanes.get(y) ?? new Set()).add(v.lane ?? ''));
+  const yearOptionLabel = (y: number): string => {
+    const lanes = prelimLanes.get(y);
+    if (!lanes) return periodLabel(y, 'FY_SEP30');
+    const which = lanes.size === 1 && lanes.has('idb') ? 'IDB measures' : 'some measures';
+    return `${periodLabel(y, 'FY_SEP30')} (preliminary for ${which})`;
+  };
 
   const files = new Map<string, FileState>();
   const ensure = async (vs: Variable[]): Promise<void> => {
@@ -546,8 +556,16 @@ export async function render(ctx: PageContext): Promise<() => void> {
   const toolbar = (): HTMLElement => {
     const sel = h('select', { id: 'cmp-year', class: 'cmp-year__select' });
     sel.append(h('option', { value: '' }, 'Latest common year'));
-    for (const y of allYears) sel.append(h('option', { value: String(y) }, periodLabel(y, 'FY_SEP30')));
+    for (const y of allYears) sel.append(h('option', { value: String(y) }, yearOptionLabel(y)));
     sel.value = chosenYear === null ? '' : String(chosenYear);
+    // A native select cannot wrap, and the lead column is narrow, so "FY 2026 (preliminary for IDB measures)" was
+    // cut off on desktop. What shows is a copy of the chosen option that wraps; the select sits on top of it,
+    // invisible, so clicks, keys and screen readers still use the native control.
+    const face = h('span', { class: 'cmp-year__face', 'aria-hidden': 'true' });
+    const syncFace = () => {
+      face.textContent = sel.selectedOptions[0]?.textContent ?? '';
+    };
+    syncFace();
     const yearNote = () =>
       chosenYear === null ? 'Each measure shows the latest year in which every chosen district has data.' : 'Every measure shows this year. Some series do not reach it.';
     const note = h('p', { class: 'cmp-year__note' }, yearNote());
@@ -555,9 +573,10 @@ export async function render(ctx: PageContext): Promise<() => void> {
     sel.addEventListener('change', () => {
       chosenYear = sel.value ? parseInt(sel.value, 10) : null;
       syncUrl(ids, chosenYear);
+      syncFace();
       note.textContent = yearNote();
       drawBody();
-      live.textContent = chosenYear === null ? 'Each measure shows its latest common year.' : `Every measure shows ${periodLabel(chosenYear, 'FY_SEP30')}.`;
+      live.textContent = chosenYear === null ? 'Each measure shows its latest common year.' : `Every measure shows ${yearOptionLabel(chosenYear)}.`;
     });
     return h(
       'div',
@@ -566,7 +585,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
         'div',
         { class: 'cmp-year' },
         h('label', { for: 'cmp-year', class: 'cmp-year__label caps' }, 'Year shown'),
-        h('div', { class: 'select-wrap cmp-year__wrap' }, sel),
+        h('div', { class: 'select-wrap cmp-year__wrap' }, face, sel),
         note,
       ),
       h(

@@ -97,7 +97,8 @@ public/data/variables.json           [{id, family: speed|workload|sentencing|cas
                                        explainer, caveats: [..], source_ids, derived, formula|null, derived_years?,
                                        formula_by_basis?, higher_means, years, period_type, lane, lane_table,
                                        lane_variable | lane_inputs, default_rank_direction, breaks, featured,
-                                       preliminary_years?, ...}]
+                                       preliminary_years?, mdl_caveat?: {text, docket, district_id, cohorts,
+                                       years, source_ids}, ...}]
 public/data/values/<variable>.json   {variable, period_type, unit, years, values:{district_id:{year:value}},
                                        ranks:{district_id:{year:rank}} (1 = highest, ties share), ranked_of:{year:n},
                                        provenance:{source_id:{dataset, publisher, url, vintage, retrieved_at}},
@@ -109,7 +110,22 @@ public/data/judges/<district>.json   {district_id, source_ids, note, judges: [..
 public/data/cases/<district>.json    {district_id, retrieved_at, selection, source_ids, items: [0-5 CourtListener items], note?}
 public/data/profiles/<district>.json {distinctive: {paragraph, sentences: [{text, claims}], context, method},
                                        key_stats: [...], case_mix: {civil_nature_of_suit, criminal_offense,
-                                       sentencing_composition}}
+                                       sentencing_composition, civil_disposition?, criminal_disposition?,
+                                       sentenced_offense?}, mdl_context?}
+                                       Mix blocks (civil_nature_of_suit, criminal_offense, civil_disposition,
+                                       criminal_disposition, sentenced_offense): {year, period_type, total,
+                                       national_total, groups: [{id, label, count, share, national_count?,
+                                       national_share?, derived?, formula?}], source_ids, source, basis, derived,
+                                       formula|null, preliminary?, other_years?: [{year, period_type, total,
+                                       national_total, groups, source_ids, preliminary, national_note?}],
+                                       national_note?: {text, year, cohort, docket, count, total, share,
+                                       source_ids}, definitions?, order?: "fixed"} (other_years, definitions and
+                                       order on the disposition and sentenced-offense blocks only)
+                                       mdl_context: {intro, dockets: [{docket, label, name?, case_number?, court?,
+                                       court_short?, name_source_id?, sentences: [{text, year, cohort, count, total,
+                                       share, preliminary}], history: [{text, cohort, years, peak_year, peak_count,
+                                       peak_total}], latest_year, years, years_text, current, source_ids}], years,
+                                       focus_years, threshold_pct, rule, derived, formula, source_ids}
 public/data/sources.json             {source_id: {lane, url, dataset, publisher, vintage, retrieved_at, kind?, members?}}
                                        for every id referenced by a public file, plus "series" citation records
 public/data/search/                  search index (courthouses lane; see docs/lanes/courthouses.md)

@@ -16,8 +16,8 @@ also streams the two zips into Parquet extracts, about 5 more minutes).
 **MDL docket table only:** `PYTHONPATH=. .venv/bin/python -m pipeline.idb.mdl` (about 40 seconds; reads the cached civil
 extract, downloads nothing new except the GovInfo name records it has not cached yet). The full build runs it as its
 last step.
-**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_idb*.py` (179 tests, 7 of them in
-`test_idb_mdl.py`).
+**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_idb*.py` (182 tests, 10 of them in
+`test_idb_mdl.py`). Also `make idb-mdl`.
 **Extra dependency:** `zipfile-deflate64` (requirements/idb.txt). The criminal zip uses Deflate64 (zip method 9),
 which the standard-library `zipfile` cannot read.
 
@@ -38,7 +38,7 @@ retrieval time (2026-11-27) and sha256.
 | `ao_nos_descriptions` | AO Civil Nature of Suit Code Descriptions | https://www.uscourts.gov/sites/default/files/document/nos_code_descriptions.pdf |
 | `ao_jb_<table>_<FY>` (121 files) | AO *Judicial Business* tables C-1, C-4, D-1, D-4 (FY1997-2025) and D-2 (FY2009, 2014, 2019, 2024, 2025), used only for reconciliation. PDFs through FY2016; xlsx from FY2017. | `https://www.uscourts.gov/data-news/data-tables/<FY>/09/30/judicial-business/<table>` |
 
-| `govinfo_uscourts_<court>_<case>` (7 records) | GovInfo "United States Courts Opinions" (USCOURTS) MODS metadata for the transferee court's MDL case, used only to verify a docket's litigation name and case number (section 4a). | `https://www.govinfo.gov/metadata/pkg/USCOURTS-<court>-<case>/mods.xml` |
+| `govinfo_uscourts_<court>_<case>` (26 records) | GovInfo "United States Courts Opinions" (USCOURTS) MODS metadata for the transferee court's MDL case, used only to verify a docket's litigation name and case number (section 4a). | `https://www.govinfo.gov/metadata/pkg/USCOURTS-<court>-<case>/mods.xml` |
 
 Dataset pages used for discovery:
 https://www.fjc.gov/research/idb/civil-cases-filed-terminated-and-pending-sy-1988-present and
@@ -204,6 +204,7 @@ cases from FY1988 on, or 0.16% of filings.
 | `build_meta.json` | De-duplication counts, structural checks, unlisted NOS codes. |
 | `civil_mdl_dockets.{parquet,csv}` | Civil cases by multidistrict litigation (MDL) docket: district, FY, cohort (`filed` or `terminated`), 4-digit MDLDOCK, count, the district's civil total for that cohort and year, share, source locator. Section 4a. |
 | `civil_mdl_docket_names.csv` | Verified litigation names for the dockets the site names: docket, transferee district, case number, title as GovInfo prints it, display title, GovInfo source id. |
+| `civil_mdl_coverage.csv`, `civil_mdl_meta.json` | Civil termination records per termination FY and how many carry a 4-digit MDL docket number (`coded` when at least 1,000 do); the meta file gives `first_coded_fy` (2010). Section 4a. |
 
 ### 4a. Civil cases by MDL docket (`pipeline/idb/mdl.py`)
 
@@ -234,6 +235,20 @@ cases from FY1988 on, or 0.16% of filings.
   the "In re:" prefix; the title as printed is kept beside it.
 * **Independent recount** (`test_idb_mdl.py`): N.D. Fla. (IDB code 29) FY2021 filings and FY2025 terminations by
   docket, re-counted from the civil extract with code that does not use `pipeline.idb.mdl`.
+* **Coverage (polish pass, Nov 27).** MDLDOCK is almost never filled in before FY2010: 223 of the 5,420,719 civil
+  termination records for FY1988-2009 carry a 4-digit docket (no year more than 99), against 2,336 to 163,348 a year
+  from FY2010 (`civil_mdl_coverage.csv`). Filing-cohort counts for FY2005-2009 in `civil_mdl_dockets` therefore miss
+  the cases that closed before FY2010. The web lane's district notes start in FY2010 (`civil_mdl_meta.json`,
+  `first_coded_fy`; gap `civil_mdl_docket_not_coded_early_years`).
+* **Names for every year (polish pass).** Name lookups now cover every docket above 25% of a district's civil cases
+  filed or closed in any year from FY2010 (39 dockets), not only the latest two years. 26 verify. The case type may
+  also be `ml` (S.D. Ind. uses `1:14-ml-02570`). `display_title` keeps Roman numerals and a few acronyms (ABG, AFFF,
+  AG, IVC) in capitals, treats a title as all-capital when at least 90% of its letters are, and drops a docketing note
+  in double asterisks ("**COUNSEL: DO NOT ADD PARTIES.**" on the D. Kan. record); the title as printed is kept beside
+  it. By number only (no verified record; gap `civil_mdl_docket_names_unverified`): 1507 (E.D. Ark.; its GovInfo
+  record has a civil case number, 4:03-cv-01507), 2197, 2299, 2325, 2326, 2327, 2391, 2502, 2545 and 3060 (N.D. Ill.
+  records with civil case numbers), 2753, 2782, 2873. MDL 875 (the FJC's "0875", above 25% of N.D. Ohio's FY2015
+  filings) is named from its E.D. Pa. transferee record.
 
 ## 5. Coverage
 

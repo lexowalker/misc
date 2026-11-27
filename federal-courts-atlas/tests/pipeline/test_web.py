@@ -571,45 +571,121 @@ def test_national_mdl_notes_on_civil_blocks():
 
 
 def test_profile_mdl_context_complete_and_exact():
-    """A note for every district-year shown where one MDL docket is above 25% of civil cases filed or closed, and
-    nowhere else; each number equals the IDB lane's MDL table; names only with a cited GovInfo record."""
+    """A note for every district-year the profile's civil series show (from the first year the FJC records carry
+    docket numbers) where one MDL docket is above 25% of civil cases filed or closed, and nowhere else. Each docket
+    gets sentences for its latest such year and for the headline years, and history lines for the rest; each
+    number equals the IDB lane's MDL table; names only with a cited GovInfo record."""
+    from pipeline.web.profiles import MDL_CIVIL_SERIES
     mdl = lane_table("idb", "civil_mdl_dockets")
     names = pd.read_csv(PROC / "idb" / "civil_mdl_docket_names.csv", dtype=str).set_index("mdl_docket")
-    years = sorted({VAR_BY_ID["civil_filings_per_judgeship"]["years"][-1], VAR_BY_ID["civil_trial_rate_pct"]["years"][-1]})
-    big = mdl[(mdl["district_id"] != "_national") & (mdl["share"] > 25)]
-    expected = {(r.district_id, int(r.period), r.cohort, r.mdl_docket) for r in big.itertuples() if int(r.period) in years}
+    first = json.loads((PROC / "idb" / "civil_mdl_meta.json").read_text())["first_coded_fy"]
+    assert first == 2010
+    shown = sorted({int(y) for v in MDL_CIVIL_SERIES for y in VAR_BY_ID[v]["years"]})
+    years = [y for y in shown if y >= first]
+    focus = sorted({VAR_BY_ID["civil_filings_per_judgeship"]["years"][-1], VAR_BY_ID["civil_trial_rate_pct"]["years"][-1]})
+    assert years[0] == first and years[-1] == max(shown) and set(focus) <= set(years)
+    big = mdl[(mdl["district_id"] != "_national") & (mdl["share"] > 25) & mdl["period"].isin(years)]
+    expected = {(r.district_id, int(r.period), r.cohort, r.mdl_docket) for r in big.itertuples()}
     got = set()
     for d, p in PROFILES.items():
         m = p.get("mdl_context")
         if not m:
+            assert big[big["district_id"] == d].empty, d
             continue
-        assert m["years"] == years and m["derived"] and m["formula"]
+        assert m["years"] == years and m["focus_years"] == focus and m["derived"] and m["formula"]
+        assert f"from FY {first} to FY {years[-1]}" in m["rule"]
         assert set(m["source_ids"]) <= set(SOURCES)
+        flags = [item["current"] for item in m["dockets"]]
+        assert flags == sorted(flags, reverse=True), d  # dockets above 25% in a headline year come first
+        older = [i["latest_year"] for i in m["dockets"] if not i["current"]]
+        assert older == sorted(older, reverse=True), d  # then the others, most recent first
         for item in m["dockets"]:
             dk = item["docket"]
+            rows = big[(big["district_id"] == d) & (big["mdl_docket"] == dk)]
+            latest = int(rows["period"].max())
+            assert item["latest_year"] == latest and item["years"] == sorted({int(y) for y in rows["period"]})
+            assert item["label"] == f"MDL {int(dk)}"
+            assert item["current"] == bool(set(rows["period"].astype(int)) & set(focus))
+            want = {(int(r.period), r.cohort) for r in rows.itertuples() if int(r.period) == latest or int(r.period) in focus}
+            assert {(s["year"], s["cohort"]) for s in item["sentences"]} == want, (d, dk)
             for s in item["sentences"]:
                 got.add((d, s["year"], s["cohort"], dk))
-                row = mdl[(mdl["district_id"] == d) & (mdl["period"] == s["year"]) & (mdl["cohort"] == s["cohort"])
-                          & (mdl["mdl_docket"] == dk)].iloc[0]
+                row = rows[(rows["period"] == s["year"]) & (rows["cohort"] == s["cohort"])].iloc[0]
                 assert (s["count"], s["total"]) == (row["count"], row["total"])
-                assert f"{s['count']:,} of the {s['total']:,}" in s["text"] and f"MDL {dk}" in s["text"]
+                assert f"{s['count']:,} of the {s['total']:,}" in s["text"] and f"{item['label']}." in s["text"]
                 assert ("(preliminary)" in s["text"]) == (s["year"] >= 2026)
             for h in item["history"]:
-                rows = big[(big["district_id"] == d) & (big["mdl_docket"] == dk) & (big["cohort"] == h["cohort"])]
-                shown = {s["year"] for s in item["sentences"] if s["cohort"] == h["cohort"]}
-                assert h["years"] == sorted(int(y) for y in rows["period"] if int(y) not in shown)
-                peak = rows[rows["period"] == h["peak_year"]].iloc[0]
+                hr = rows[rows["cohort"] == h["cohort"]]
+                shown_y = {s["year"] for s in item["sentences"] if s["cohort"] == h["cohort"]}
+                assert h["years"] == sorted(int(y) for y in hr["period"] if int(y) not in shown_y)
+                for y in h["years"]:
+                    got.add((d, y, h["cohort"], dk))
+                peak = hr[hr["period"] == h["peak_year"]].iloc[0]
+                assert h["peak_count"] == hr[hr["period"].isin(h["years"])]["count"].max()
                 assert (h["peak_count"], h["peak_total"]) == (peak["count"], peak["total"])
                 assert f"{h['peak_count']:,} of {h['peak_total']:,}" in h["text"]
             if dk in names.index:
                 assert item["name"] == names.loc[dk, "title"]
                 assert item["name_source_id"] == names.loc[dk, "source_id"] in item["source_ids"]
+                assert ("court_short" in item) == (names.loc[dk, "district_id"] != d)
             else:
-                assert "name" not in item
-            for t in [s["text"] for s in item["sentences"]] + [h["text"] for h in item["history"]] + [m["intro"], m["rule"]]:
+                assert "name" not in item and "case_number" not in item
+            for t in ([s["text"] for s in item["sentences"]] + [h["text"] for h in item["history"]]
+                      + [m["intro"], m["rule"], item["years_text"]]):
                 assert "\u2014" not in t and not BANNED_WORDS.search(t), t
     assert got == expected
-    assert "flnd" in {d for d, *_ in got}
+    have = {d for d, *_ in got}
+    assert {"flnd", "ohsd", "wvsd", "laed"} <= have
+    # earlier-year dockets named in the task: S.D. Ohio 2846, S.D. W. Va. 2326 and 2327, E.D. La. 2592
+    for d, dk in [("ohsd", "2846"), ("wvsd", "2326"), ("wvsd", "2327"), ("laed", "2592")]:
+        assert dk in {i["docket"] for i in PROFILES[d]["mdl_context"]["dockets"]}, (d, dk)
+
+
+def test_national_mdl_caveats():
+    """Measures built on civil filings, closings or pending cases name MDL 2885 (N.D. Fla.) and its years in a
+    caveat, with counts copied from the IDB lane's MDL table; the general MDL caveats they replace are gone, no
+    caveat repeats, and measures MDL 2885 does not touch carry none."""
+    from pipeline.web.mdl_caveats import CLOSED_VARS, FILED_VARS, PENDING_VARS, REPLACES
+    mdl = lane_table("idb", "civil_mdl_dockets")
+    fl = mdl[(mdl["district_id"] == "flnd") & (mdl["mdl_docket"] == "2885")]
+    nat = mdl[(mdl["district_id"] == "_national") & (mdl["mdl_docket"] == "2885")]
+    years = {c: sorted(int(y) for y in fl[(fl["cohort"] == c) & (fl["share"] > 50)]["period"]) for c in ("filed", "terminated")}
+    assert years == {"filed": [2020, 2021, 2022, 2023, 2024], "terminated": [2021, 2022, 2023, 2024, 2025]}
+    affected = FILED_VARS | CLOSED_VARS | PENDING_VARS
+    for v in VARIABLES:
+        cav = v["caveats"]
+        assert len(cav) == len(set(cav)), v["id"]
+        if v["id"] not in affected:
+            assert "mdl_caveat" not in v and not any("MDL 2885" in c for c in cav), v["id"]
+            continue
+        m = v["mdl_caveat"]
+        assert m["text"] in cav and sum("MDL 2885" in c for c in cav) == 1, v["id"]
+        assert m["docket"] == "2885" and m["district_id"] == "flnd" and m["source_ids"] == ["idb_civil_cv88on"]
+        assert cav[-1].startswith("Ranks are derived"), v["id"]
+        if v["id"] in REPLACES:
+            assert REPLACES[v["id"]] not in cav
+        t = m["text"]
+        assert "N.D. Fla." in t and "multidistrict litigation docket, MDL 2885" in t and "(FJC case records)" in t
+        assert "\u2014" not in t and not BANNED_WORDS.search(t)
+        for c in m["cohorts"]:
+            run = f"FY {years[c][0]} to {years[c][-1]}"
+            assert run in t, (v["id"], run)
+            rows = fl[fl["cohort"] == c]
+            pk = rows.loc[rows["count"].idxmax()]
+            if v["id"] in PENDING_VARS and c == "terminated":
+                continue  # the pending caveat quotes the filing peak only
+            assert f"{int(pk['count']):,} of {int(pk['total']):,} in FY {int(pk['period'])}" in t
+            if v["id"] not in PENDING_VARS:
+                n = nat[(nat["cohort"] == c) & (nat["period"] == pk["period"])].iloc[0]
+                assert f"{int(n['count']):,} of the {int(n['total']):,}" in t
+        assert m["years"] == sorted({y for c in m["cohorts"] for y in years[c]})
+        if v["national_available"] or v["id"] == "pending_per_judgeship":
+            assert "national" in t, v["id"]
+        else:
+            assert "national" not in t, v["id"]
+    # the pinned national figures named in the task
+    assert "147,231 of the 407,539 closed in all districts" in VAR_BY_ID["terminations_per_judgeship"]["mdl_caveat"]["text"]
+    assert "202,695 of the 470,373 filed in all districts" in VAR_BY_ID["civil_filings_per_judgeship"]["mdl_caveat"]["text"]
 
 
 def test_overlap_years_of_four_way_series_agree():

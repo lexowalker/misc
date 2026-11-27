@@ -91,6 +91,10 @@ async function open(page: Page, hash: string): Promise<void> {
 
 /** Wait until every row on the page has its data (no skeleton rows left) and the summary is computed. */
 async function ready(page: Page): Promise<void> {
+  // First wait for the page to draw: the heading comes first, and "no loading rows" is also true before any row
+  // exists (second recheck, Nov 27: a run read the year menu before it was drawn and found no options).
+  await expect(page.locator('#cmp-year')).toBeAttached({ timeout: 20_000 });
+  await expect(page.locator('.cmp-tr:not(.cmp-tr--head)').first()).toBeAttached({ timeout: 20_000 });
   await expect(page.locator('.cmp-tr--loading')).toHaveCount(0, { timeout: 20_000 });
   await expect(page.locator('.cmp-sum__loading')).toHaveCount(0, { timeout: 20_000 });
 }
@@ -290,6 +294,35 @@ test('year selector: one year for every row, URL sync, and series that do not re
   // Back to the default.
   await page.locator('#cmp-year').selectOption('');
   await expect(page).not.toHaveURL(/y=/);
+});
+
+test('year menu labels a year that is preliminary for IDB measures', async ({ page }) => {
+  await open(page, '#/compare?d=vaed,txed');
+  await ready(page);
+  const prelim = [...new Set(variables.flatMap((v) => (v as { preliminary_years?: number[] }).preliminary_years ?? []))];
+  expect(prelim.length).toBeGreaterThan(0);
+  const options = page.locator('#cmp-year option');
+  const texts = await options.allTextContents();
+  for (const y of prelim) expect(texts).toContain(`FY ${y} (preliminary for IDB measures)`);
+  // Years that are final everywhere keep the plain label.
+  expect(texts).toContain('FY 2025');
+  expect(texts.filter((t) => t.includes('preliminary'))).toHaveLength(prelim.length);
+  await page.locator('#cmp-year').selectOption(String(prelim[0]));
+  await expect(page.locator('[role="status"]').filter({ hasText: 'Every measure shows' })).toHaveText(`Every measure shows FY ${prelim[0]} (preliminary for IDB measures).`);
+  // The closed menu shows the whole label (recheck, Nov 27: a native select cut it to "FY 2026 (preliminary for IDB
+  // me" in the narrow desktop column). The face wraps instead, inside its column, and draws the focus ring.
+  const face = page.locator('.cmp-year__face');
+  await expect(face).toHaveText(`FY ${prelim[0]} (preliminary for IDB measures)`);
+  const fit = await face.evaluate((el) => ({ sw: el.scrollWidth, cw: el.clientWidth, parent: el.parentElement!.getBoundingClientRect().width, w: el.getBoundingClientRect().width }));
+  expect(fit.sw).toBeLessThanOrEqual(fit.cw);
+  expect(fit.w).toBeLessThanOrEqual(fit.parent + 0.5);
+  const sel = await page.locator('#cmp-year').boundingBox();
+  const fb = await face.boundingBox();
+  expect(Math.abs(sel!.height - fb!.height)).toBeLessThan(1);
+  await page.locator('#cmp-year').focus();
+  await page.keyboard.press('ArrowDown');
+  await expect(face).toHaveText('FY 2025');
+  await expect(face).toHaveCSS('outline-style', 'solid');
 });
 
 test('derived rows carry the formula; territories show No data for per-capita rates; cell notes are shown', async ({ page, isMobile }, testInfo) => {

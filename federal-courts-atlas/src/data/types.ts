@@ -392,12 +392,23 @@ export interface MdlHistory {
 }
 
 export interface MdlDocket {
+  /** The 4-digit docket number as the FJC records give it ("0875"). */
   docket: string;
+  /** Reader label ("MDL 875"). */
+  label?: string;
   /** Litigation name, only when a GovInfo court record confirms it. */
   name?: string;
   case_number?: string;
   court?: string;
+  /** The transferee court's short name, when it is not this district. */
+  court_short?: string;
   name_source_id?: string;
+  /** The latest year the docket was above the threshold, every such year, and those years in words. */
+  latest_year?: number;
+  years?: number[];
+  years_text?: string;
+  /** Above the threshold in one of the years the page headlines (MdlContext.focus_years). */
+  current?: boolean;
   sentences: MdlSentence[];
   history: MdlHistory[];
   source_ids: string[];
@@ -406,7 +417,10 @@ export interface MdlDocket {
 export interface MdlContext {
   intro: string;
   dockets: MdlDocket[];
+  /** Every fiscal year checked. */
   years: number[];
+  /** The latest FCMS and IDB years, which always get their own sentence. */
+  focus_years?: number[];
   threshold_pct: number;
   rule: string;
   derived: boolean;

@@ -1933,3 +1933,17 @@
   margin-top: var(--space-3);
   padding-top: var(--space-3);
 }
+
+.mdl-note--compact .mdl-note__earlier {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+/* The glossary term in the compact note's kicker reads in the kicker's capitals, like the rest of the line. */
+.mdl-note__kicker .term {
+  text-transform: inherit;
+  letter-spacing: inherit;
+}

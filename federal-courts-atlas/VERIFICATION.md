@@ -169,6 +169,26 @@ year on every FY 2024 to 2026 record.
 | 229 | MDL note, first sentence | national | what an MDL docket is | current | cases from many districts, one court, pretrial proceedings | 28 U.S.C. § 1407(a), fetched from LII by the recheck | match |
 | 230 | child pornography measure, caveat | national | own USSC category from FY 2010 | FY 2010 | "first reported ... in FY 2010" | FY 2008 packet `4584cfe715ce20ed293498a3.pdf` lists "Pornography/Prostitution"; USSC codebook: OFFTYPSB from FY 2010 | match |
 | 231 | same caveat; Offenses of people sentenced note | national | classification by main guideline from FY 2018 | FY 2018 | "main guideline applied" | USSC codebook `36b420a2608f0e77db3cad32.pdf`: OFFGUIDE "generated mainly from the primary guideline", used from FY 2018 | match |
+| 232 | profile MDL note, brief and full | ohsd | civil cases filed in MDL 2846 | FY 2024 | 3,817 of 6,099 | IDB civil `www.fjc.gov/8248453448ff200d56a790af.zip`, DISTRICT 48, filing cohort, MDLDOCK 2846 | match |
+| 233 | full MDL note, history | ohsd | MDL 2846 filings above a quarter; the most | FY 2019-2023; FY 2021 | 5,226 of 7,576 | same file, filing cohort | match |
+| 234 | profile MDL note | ohsd | MDL 2433: closed; filed | FY 2019; FY 2015 | 3,562 of 5,987; 2,663 of 5,245 | same file, termination and filing cohorts | match |
+| 235 | profile MDL note | wvsd | civil cases closed in MDL 2327 | FY 2020 | 1,391 of 3,321 | same file, DISTRICT 25, termination cohort | match |
+| 236 | full MDL note, history | wvsd | MDL 2327: filed, the most; closed, the most | FY 2012-2018, FY 2014; FY 2017-2019, FY 2019 | 12,474 of 36,364; 17,082 of 41,663 | same file | match |
+| 237 | full MDL note | wvsd | MDL 2326 closed; MDL 2325 closed, filed, closed | FY 2020; FY 2016, FY 2013, FY 2015 | 970 of 3,321; 5,746 of 17,561, 7,717 of 27,962, 8,527 of 12,594 | same file | match |
+| 238 | profile MDL note, brief and full | laed | civil cases closed in MDL 2740 | FY 2026 (preliminary), FY 2025 | 3,273 of 5,870; 6,058 of 10,713 | same file, DISTRICT 3L, termination cohort | match |
+| 239 | full MDL note | laed | MDL 2592: closed; filed, the most; closed, the most | FY 2023; FY 2016; FY 2020 | 2,002 of 6,925; 11,513 of 16,541; 11,638 of 16,978 | same file | match |
+| 240 | full MDL note | laed | MDL 2179 filed; MDL 1657 closed | FY 2013; FY 2010 | 2,195 of 6,505; 5,159 of 9,742 | same file | match |
+| 241 | MDL notes on all 22 districts | 22 districts | every docket above 25% of civil cases filed or closed | FY 2010-2026 | 150 docket-years: 43 sentences, 107 years in history lines | same file, both cohorts, every district | match (the recount found the same 150 and no others; every count, total, peak, year list and latest year equal) |
+| 242 | MDL 2885 caveat on 6 filing measures | flnd; all 94 | civil cases filed in MDL 2885 | FY 2020 | 202,693 of 204,990; 202,695 of 470,373 | same file, filing cohort | match |
+| 243 | MDL 2885 caveat on 6 closing measures | flnd; all 94 | civil cases closed in MDL 2885 | FY 2025 | 147,231 of 149,260; 147,231 of 407,539 | same file, termination cohort | match |
+| 244 | same caveats, year spans | flnd | "most" of filings; "most" of closings | FY 2020-2024; FY 2021-2025 | the spans shown | same file: filings 93.6% to 98.9% (FY 2019 45.7%, FY 2025 0.5%); closings 86.2% to 98.7% (FY 2020 32.3%) | match |
+| 245 | same caveats (why only MDL 2885) | all 94 | dockets above 25% of all districts' civil cases | FY 2010-2026 | MDL 2885 only | same file: FY 2020 filings 43.1%, FY 2024 closings 35.1%, FY 2025 closings 36.1%; no other docket-year | match |
+| 246 | pro se caveat | flnd | "Many are coded pro se" | FY 2020 | (no number shown) | same file: 109,944 of the 202,695 MDL 2885 filings carry PROSE 1, 2 or 3 | match |
+| 247 | MDL note rule text | all 94 | docket numbers coded from FY 2010 | FY 1988-2009 | 223 of 5,420,719 termination records carry one | same file: at most 99 in any year before FY 2010; 2,336 to 163,348 a year from FY 2010 | match |
+| 248 | measures left without the caveat (docs only) | all 94 | MDL 2885 cases with nature of suit 830 or 835; with a trial disposition | FY 2019-2026 | 0; 19 (FY 2021-2022) | same file, DISP 7-9 | match (19 = 5 in FY 2021, 14 in FY 2022; that is 5 of N.D. Fla.'s 20 and 14 of its 57 trial-disposition closings, not above a quarter) |
+| 249 | MDL notes, docket names | 22 districts | name, case number, transferee court | various | 26 named dockets | GovInfo MODS records listed in `data/sources/idb.json` (`govinfo_uscourts_*`) | match (26 of 26: file sha256 equal to the manifest, `caseNumber` ends in the docket as md, mn or ml, `courtCode` is the transferee court, title equal once "In re" and a docketing note are set aside); 13 dockets shown by number only |
+| 250 | glossary, multidistrict litigation (MDL) | national | what an MDL is | current | transfer of civil cases sharing common questions of fact, convenience and just and efficient conduct, remand at or before the end of pretrial proceedings | 28 U.S.C. § 1407(a), cached LII page `www.law.cornell.edu/48637b966c6d9fd4e652ceee.bin` (sha256 162e0544...) | match ("a single district" rests on (a)'s "coordinated or consolidated pretrial proceedings" and (b)'s "the transferee district") |
+| 251 | MDL 2885 caveats, "count in" | flnd | whether FCMS counts include MDL cases | FY 2020-2025 | (no number shown) | AO profile explanation `www.uscourts.gov/15d2d50a078fed33d349b32a.xlsx` (medians "of all closed cases"; filings, terminations and pending "including transfers"); AO Table C-1 FY 2018-2025 note (pending "includes cases that have been transferred under a Multidistrict Litigation (MDL) order"); N.D. Fla. FCMS series | consistent (weighted filings per judgeship 950 to 35,559 from FY 2019 to 2020; civil median 5.3 to 47.7 months from FY 2021 to 2025). No AO text names MDL cases for medians or weighted filings |
 
 Beyond these rows, the recheck recomputed every group in the two "How cases end" panels for vaed, flnd and nmid in
 both years, for the district and the all-district column. That is 120 civil and 72 criminal cells, all equal to
@@ -187,6 +207,25 @@ equal to the values file).
   measures.
 - A doc said the visual-regression set has 20 baselines. It has 16 (8 views at 2 widths, 901 KB); corrected in
   `docs/lanes/frontend.md`.
+
+**Second recheck (after the polish pass, Nov 27).** The polish pass extended the MDL notes to every year from FY 2010
+(22 districts), added one MDL 2885 caveat to 11 measures, relabeled the compare page's year menu and added a glossary
+entry for multidistrict litigation. A second recheck lane, which did not build any of it, traced it again with its own
+code (rows 232 to 251). It streamed `cv88on.txt` out of the FJC zip, split each line itself (the first 21 fields from
+the left and the last 23 from the right, because party names can hold a tab) and rebuilt both cohorts from the
+codebook's rules: 11,071,506 records and 11,035,840 cases after de-duplication, with no tie that changes a count. It
+read the docket names from the cached GovInfo MODS files with an XML parser and the glossary entry against the cached
+text of 28 U.S.C. § 1407. It also looked at 60 captures of the changed views: the ohsd, wvsd, laed and flnd notes
+(brief, full and glossary popover), the compare year menu, a caveat on the home map and on the table page, each at
+1280 and 375 px in light and dark. No page scrolled sideways and no page logged an error.
+
+**Fixed by the second recheck** (display only; no value changed):
+
+- On desktop, the compare page's "Year shown" menu cut its new label to "FY 2026 (preliminary for IDB me". A native
+  select cannot wrap, and the column is about 16 rem wide. The closed menu now shows a copy of the chosen option
+  that wraps, and the native select lies on top of it, invisible, so clicks, keys and screen readers still use it.
+  A compare test now checks that the whole label shows without clipping and that the arrow keys still change the
+  year.
 
 ## Boundary audit
 
@@ -269,8 +308,9 @@ Home page JavaScript before first paint: 78 KB transferred; the three.js courtro
   compare with: only the civil closing totals match Table C-1. The settled, voluntary and other-dismissal codes
   depend on how each clerk's office codes cases. The criminal groups match AO Table D-4 nationally for FY 2005 to
   2025; D-4 has no district rows.
-- **MDL dockets 2873 (D.S.C.) and 2753 (D.N.H.)** are shown by number only; their names were not found on GovInfo.
-  Dockets that passed 25% only before FY 2025 (for example S.D. Ohio, S.D. W. Va.) get no note.
+- **13 MDL dockets are shown by number only** (1507, 2197, 2299, 2325, 2326, 2327, 2391, 2502, 2545, 2753, 2782,
+  2873, 3060); no GovInfo record that names them was found. MDL notes start in FY 2010, because the FJC records
+  almost never carry a docket number before then, so a docket that dominated a court only before FY 2010 gets no note.
 - **Not re-checked by the final recheck:** the new glossary statement that drug-patent (Hatch-Waxman) cases carry
   nature-of-suit code 835 since 2017 (it rests on the IDB lane's first 835 filing, June 2017); the other new
   glossary definitions beyond those in the additions table; numbers for districts other than those in the table.
@@ -286,7 +326,8 @@ Home page JavaScript before first paint: 78 KB transferred; the three.js courtro
 - **Not read for wording:** CourtListener case titles, judge biographical records, courthouse notes.
 - **Boundaries:** the Fort Bragg, Camp Mackall and Butner areas use Census landmark polygons as a stand-in for the
   surveyed legal lines.
-- **N.D. Fla.** shows 37,423 cases closed per judgeship in FY 2025, as published. The profile now carries an MDL
-  note (147,231 of its 149,260 civil cases closed that year were in MDL 2885). Other measures that count FY 2025
-  civil closings nationally (for example the all-district civil trial rate) also include those cases; only the
-  profile's "How cases end" panel says so.
+- **N.D. Fla.** shows 37,423 cases closed per judgeship in FY 2025, as published. The profile carries an MDL note
+  (147,231 of its 149,260 civil cases closed that year were in MDL 2885), and the 11 measures built on civil filings,
+  closings or pending cases carry a caveat naming MDL 2885 (rows 242 to 248). That FCMS counts and medians include
+  MDL cases rests on the AO's definitions and on N.D. Fla.'s own series (row 251); no AO text says so for medians or
+  weighted filings in so many words.

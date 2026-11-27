@@ -1352,6 +1352,17 @@
   "sha256": "bb95000e70479ad56d37d3009484d7bf099c3e2e060dfe87ace7b791e1e92164",
   "notes": "Found on https://www.uscourts.gov/forms-rules/forms/civil-cover-sheet."
  },
+ "govinfo_uscourts_azd_2_15_md_02641": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-azd-2_15-md-02641/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: Bard IVC Filters Products Liability Litigation, case 2:15-md-02641 (District of Arizona), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:09+00:00",
+  "retrieved_at": "2026-11-27T15:48:09+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/31625b210d6633a0436e95da.xml",
+  "sha256": "cdab0260aa6e089a9cd408c20902e179888549f15e30d6af785cb74efe2ba948",
+  "notes": "Used only for the litigation name and case number of MDL docket 2641. Package page: https://www.govinfo.gov/app/details/USCOURTS-azd-2_15-md-02641."
+ },
  "govinfo_uscourts_azd_2_23_md_03081": {
   "lane": "idb",
   "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-azd-2_23-md-03081/mods.xml",
@@ -1362,6 +1373,17 @@
   "local_path": "data/raw/http/www.govinfo.gov/5c7e6b1924d4dac7b9f55056.xml",
   "sha256": "1a01f194d5ef0db01d8a8890ce095b8938c67d63ef76bc2cd05f0e2f1037c764",
   "notes": "Used only for the litigation name and case number of MDL docket 3081. Package page: https://www.govinfo.gov/app/details/USCOURTS-azd-2_23-md-03081."
+ },
+ "govinfo_uscourts_flnd_3_16_md_02734": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-flnd-3_16-md-02734/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: ABILIFY (ARIPIPRAZOLE) PRODUCTS LIABILITY LITIGATION, case 3:16-md-02734 (Northern District of Florida), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:10+00:00",
+  "retrieved_at": "2026-11-27T15:48:10+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/2905db990e1e63136096c110.xml",
+  "sha256": "533c8013c64e397be157e376e725d7656a15723d470aaaf75f50b17dcf6401d0",
+  "notes": "Used only for the litigation name and case number of MDL docket 2734. Package page: https://www.govinfo.gov/app/details/USCOURTS-flnd-3_16-md-02734."
  },
  "govinfo_uscourts_flnd_3_19_md_02885": {
   "lane": "idb",
@@ -1385,6 +1407,72 @@
   "sha256": "4ef82419ae2b9ba4e125282a58a8093d6e0485b7deacb3d8e1b001ba0c0f8f2c",
   "notes": "Used only for the litigation name and case number of MDL docket 3140. Package page: https://www.govinfo.gov/app/details/USCOURTS-flnd-3_25-md-03140."
  },
+ "govinfo_uscourts_flsd_9_20_md_02924": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-flsd-9_20-md-02924/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: ZANTAC (RANITIDINE) PRODUCTS LIABILITY LITIGATION, case 9:20-md-02924 (Southern District of Florida), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:10+00:00",
+  "retrieved_at": "2026-11-27T15:48:10+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/b58f4bd5c003071c89a93775.xml",
+  "sha256": "d7cc4cb08caea20f43661327f9980954d70e002932c26d0e32e84b7f294e3ee3",
+  "notes": "Used only for the litigation name and case number of MDL docket 2924. Package page: https://www.govinfo.gov/app/details/USCOURTS-flsd-9_20-md-02924."
+ },
+ "govinfo_uscourts_insd_1_14_ml_02570": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-insd-1_14-ml-02570/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: COOK MEDICAL INC., case 1:14-ml-02570 (Southern District of Indiana), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:13+00:00",
+  "retrieved_at": "2026-11-27T15:48:13+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/cf5c28791c66adb6216a2aa2.xml",
+  "sha256": "d0fcc92a8c4351d689eb827564b0e6e3725844260c561cc3def22d95d206dab4",
+  "notes": "Used only for the litigation name and case number of MDL docket 2570. Package page: https://www.govinfo.gov/app/details/USCOURTS-insd-1_14-ml-02570."
+ },
+ "govinfo_uscourts_ksd_2_14_md_02591": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ksd-2_14-md-02591/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Syngenta AG MIR162 Corn Litigation **COUNSEL: DO NOT ADD PARTIES.**, case 2:14-md-02591 (District of Kansas), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:14+00:00",
+  "retrieved_at": "2026-11-27T15:48:14+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/b09470c60e300976c12640ae.xml",
+  "sha256": "8457e7a19e7178ba174010d916962d4a58cafcb674eb767ee64ca78c0a713d95",
+  "notes": "Used only for the litigation name and case number of MDL docket 2591. Package page: https://www.govinfo.gov/app/details/USCOURTS-ksd-2_14-md-02591."
+ },
+ "govinfo_uscourts_laed_2_05_md_01657": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-laed-2_05-md-01657/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Vioxx Products Liability Litigation, case 2:05-md-01657 (Eastern District of Louisiana), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:14+00:00",
+  "retrieved_at": "2026-11-27T15:48:14+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/bfb10c8725a3a3125783c483.xml",
+  "sha256": "5509bd374aaf96568018f28c546ce264302a9de976b5c258800e35e060cb214e",
+  "notes": "Used only for the litigation name and case number of MDL docket 1657. Package page: https://www.govinfo.gov/app/details/USCOURTS-laed-2_05-md-01657."
+ },
+ "govinfo_uscourts_laed_2_10_md_02179": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-laed-2_10-md-02179/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Oil Spill by the Oil Rig \"Deepwater Horizon\" in the Gulf of Mexico, on April 20, 2010, case 2:10-md-02179 (Eastern District of Louisiana), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:15+00:00",
+  "retrieved_at": "2026-11-27T15:48:15+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/b246df348769b79e980f5b03.xml",
+  "sha256": "94421698070b3328769a8c29d0537d4eadd5c7e64b1a2427ac7ed17af3756f40",
+  "notes": "Used only for the litigation name and case number of MDL docket 2179. Package page: https://www.govinfo.gov/app/details/USCOURTS-laed-2_10-md-02179."
+ },
+ "govinfo_uscourts_laed_2_14_md_02592": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-laed-2_14-md-02592/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Xarelto (Rivaroxaban) Products Liability Litigation, case 2:14-md-02592 (Eastern District of Louisiana), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:15+00:00",
+  "retrieved_at": "2026-11-27T15:48:15+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/b8ee8102eba603ec7c115d16.xml",
+  "sha256": "bf4a950047d04685a95e48a8743c63cb9519444598ce4fe47263a034c6b94db4",
+  "notes": "Used only for the litigation name and case number of MDL docket 2592. Package page: https://www.govinfo.gov/app/details/USCOURTS-laed-2_14-md-02592."
+ },
  "govinfo_uscourts_laed_2_16_md_02740": {
   "lane": "idb",
   "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-laed-2_16-md-02740/mods.xml",
@@ -1395,6 +1483,39 @@
   "local_path": "data/raw/http/www.govinfo.gov/80d19d3d4a80bb297df2d782.xml",
   "sha256": "e0a102798fc755a7ae92b6b40943a26fd42e606b360a5d1d62580e0b48add50b",
   "notes": "Used only for the litigation name and case number of MDL docket 2740. Package page: https://www.govinfo.gov/app/details/USCOURTS-laed-2_16-md-02740."
+ },
+ "govinfo_uscourts_mad_1_13_md_02428": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-mad-1_13-md-02428/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Fresenius Granuflo/Naturalyte Dialysate Products Liability Litigation, case 1:13-md-02428 (District of Massachusetts), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:16+00:00",
+  "retrieved_at": "2026-11-27T15:48:16+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/2ae05e762022f516c5e56a71.xml",
+  "sha256": "08b56a981b9c2be28c4d8be67732a7e914aca7e1d00adb51163e7660fe6c4c03",
+  "notes": "Used only for the litigation name and case number of MDL docket 2428. Package page: https://www.govinfo.gov/app/details/USCOURTS-mad-1_13-md-02428."
+ },
+ "govinfo_uscourts_mnd_0_08_md_01943": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-mnd-0_08-md-01943/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Levaquin Products Liability Litigation, case 0:08-md-01943 (District of Minnesota), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:17+00:00",
+  "retrieved_at": "2026-11-27T15:48:17+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/dad6fca2c3484abd2001700c.xml",
+  "sha256": "db44862131450b1cca05209e5dfd1c56152635567b89d8bfa4fdb695f06ba43b",
+  "notes": "Used only for the litigation name and case number of MDL docket 1943. Package page: https://www.govinfo.gov/app/details/USCOURTS-mnd-0_08-md-01943."
+ },
+ "govinfo_uscourts_mnd_0_13_md_02441": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-mnd-0_13-md-02441/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: STRYKER REJUVENATE AND ABG II HIP IMPLANT PRODUCTS LIABILITY LITIGATION, case 0:13-md-02441 (District of Minnesota), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:17+00:00",
+  "retrieved_at": "2026-11-27T15:48:17+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/0a14c974458cf394ce08516a.xml",
+  "sha256": "60da88e220f9eadaf37d27fa2df59146e6991a36bc12ceee8fc9fbf81ac65f44",
+  "notes": "Used only for the litigation name and case number of MDL docket 2441. Package page: https://www.govinfo.gov/app/details/USCOURTS-mnd-0_13-md-02441."
  },
  "govinfo_uscourts_mnd_0_15_md_02666": {
   "lane": "idb",
@@ -1407,6 +1528,28 @@
   "sha256": "ae87d50bc0bb7b32edd1287317b0701582f32ed996d298028c4482745cf2616f",
   "notes": "Used only for the litigation name and case number of MDL docket 2666. Package page: https://www.govinfo.gov/app/details/USCOURTS-mnd-0_15-md-02666."
  },
+ "govinfo_uscourts_moed_4_08_md_01964": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-moed-4_08-md-01964/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Nuvaring Products Liability Litigation, case 4:08-md-01964 (Eastern District of Missouri), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:18+00:00",
+  "retrieved_at": "2026-11-27T15:48:18+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/caae37fa86e65e8710b813db.xml",
+  "sha256": "ccc703dee393f5919db57844ac0d1a1d975dc076eb6c852b45468da4afa3f91d",
+  "notes": "Used only for the litigation name and case number of MDL docket 1964. Package page: https://www.govinfo.gov/app/details/USCOURTS-moed-4_08-md-01964."
+ },
+ "govinfo_uscourts_njd_2_17_md_02789": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-njd-2_17-md-02789/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): PROTON-PUMP INHIBITOR PRODUCTS LIABILITY LITIGATION (No. II), case 2:17-md-02789 (District of New Jersey), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:18+00:00",
+  "retrieved_at": "2026-11-27T15:48:18+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/6359ebf608353c29433bbe74.xml",
+  "sha256": "e81805420f7a320702fa23589d7d7d91bfadd41f506411e18a1597d07e109720",
+  "notes": "Used only for the litigation name and case number of MDL docket 2789. Package page: https://www.govinfo.gov/app/details/USCOURTS-njd-2_17-md-02789."
+ },
  "govinfo_uscourts_njd_3_16_md_02738": {
   "lane": "idb",
   "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-njd-3_16-md-02738/mods.xml",
@@ -1418,6 +1561,17 @@
   "sha256": "a8d84d6437d1e00d744e5547037980b20d02ce3a63c2c317af2df7940be4f2dd",
   "notes": "Used only for the litigation name and case number of MDL docket 2738. Package page: https://www.govinfo.gov/app/details/USCOURTS-njd-3_16-md-02738."
  },
+ "govinfo_uscourts_ohnd_1_17_md_02804": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ohnd-1_17-md-02804/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: National Prescription Opiate Litigation, case 1:17-md-02804 (Northern District of Ohio), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:20+00:00",
+  "retrieved_at": "2026-11-27T15:48:20+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/9b56e6359c61725900d257ff.xml",
+  "sha256": "e8e3d0f3991ecca24ebb350284473f34ecc81c1272960ea0d8222af5fd1cd74f",
+  "notes": "Used only for the litigation name and case number of MDL docket 2804. Package page: https://www.govinfo.gov/app/details/USCOURTS-ohnd-1_17-md-02804."
+ },
  "govinfo_uscourts_ohnd_1_24_md_03092": {
   "lane": "idb",
   "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ohnd-1_24-md-03092/mods.xml",
@@ -1428,6 +1582,61 @@
   "local_path": "data/raw/http/www.govinfo.gov/80ae892f47b24d2013e379c2.xml",
   "sha256": "c1d9bdbce5f753939019e49e9cae90106e7c45d509d80a9a4da7c1e4407c96d3",
   "notes": "Used only for the litigation name and case number of MDL docket 3092. Package page: https://www.govinfo.gov/app/details/USCOURTS-ohnd-1_24-md-03092."
+ },
+ "govinfo_uscourts_ohsd_2_13_md_02433": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ohsd-2_13-md-02433/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In re: E. I. du Pont de Nemours and Company C-8 Personal Injury Litigation, case 2:13-md-02433 (Southern District of Ohio), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:20+00:00",
+  "retrieved_at": "2026-11-27T15:48:20+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/70c1a605e765f9fa6c7cc167.xml",
+  "sha256": "90616f851cc98ce6f8d6e96653e8dfc6082b422203f412aa427d1a1313fee11a",
+  "notes": "Used only for the litigation name and case number of MDL docket 2433. Package page: https://www.govinfo.gov/app/details/USCOURTS-ohsd-2_13-md-02433."
+ },
+ "govinfo_uscourts_ohsd_2_18_md_02846": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ohsd-2_18-md-02846/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In re: Davol, Inc./C.R. Bard, Inc. Polypropylene Hernia Mesh Products Liability Litigation, case 2:18-md-02846 (Southern District of Ohio), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:21+00:00",
+  "retrieved_at": "2026-11-27T15:48:21+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/fe87f1872b8d3f97e14d9a24.xml",
+  "sha256": "cee999097852c2d762fb32e001afc07e0462352139b3c31cce86335bbed2a7a6",
+  "notes": "Used only for the litigation name and case number of MDL docket 2846. Package page: https://www.govinfo.gov/app/details/USCOURTS-ohsd-2_18-md-02846."
+ },
+ "govinfo_uscourts_paed_2_01_md_00875": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-paed-2_01-md-00875/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: ASBESTOS PROD LIABILITY, case 2:01-md-00875 (Eastern District of Pennsylvania), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:19+00:00",
+  "retrieved_at": "2026-11-27T15:48:19+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/1152e2673f8cfa36031c83a3.xml",
+  "sha256": "bb0965984ca15fe999b02f09e28b9214f3cdaf921579c8be2a309716d86cc4b7",
+  "notes": "Used only for the litigation name and case number of MDL docket 0875. Package page: https://www.govinfo.gov/app/details/USCOURTS-paed-2_01-md-00875."
+ },
+ "govinfo_uscourts_rid_1_07_md_01842": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-rid-1_07-md-01842/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Kugel Mesh Hernia Patch Products Liability Litigation, case 1:07-md-01842 (District of Rhode Island), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:21+00:00",
+  "retrieved_at": "2026-11-27T15:48:21+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/001050d3cb90145424473539.xml",
+  "sha256": "cad54fae62a8ec78791bd40e126f012900c221c2028c609169ec564c4b0f946e",
+  "notes": "Used only for the litigation name and case number of MDL docket 1842. Package page: https://www.govinfo.gov/app/details/USCOURTS-rid-1_07-md-01842."
+ },
+ "govinfo_uscourts_txnd_3_11_md_02244": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-txnd-3_11-md-02244/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: DePuy Orthopaedics, Inc, Pinnacle Hip Implant Products Liability Litigation, case 3:11-md-02244 (Northern District of Texas), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T15:48:22+00:00",
+  "retrieved_at": "2026-11-27T15:48:22+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/1e72d8c6c9d2031d64070a6d.xml",
+  "sha256": "25935010db9f3787757a59ddc9b7753cb0ef33b6f8db2e6ea0da792b0681a0a8",
+  "notes": "Used only for the litigation name and case number of MDL docket 2244. Package page: https://www.govinfo.gov/app/details/USCOURTS-txnd-3_11-md-02244."
  },
  "idb_civil_codebook": {
   "lane": "idb",

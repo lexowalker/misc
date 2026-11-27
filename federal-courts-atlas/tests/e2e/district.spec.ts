@@ -321,36 +321,94 @@ test('bench notes that duty stations are not in the FJC export', async ({ page }
   await expect(page.locator('#sec-bench .bench__note--duty')).toHaveText('Duty stations are not in the FJC directory export, so judges are listed by district.');
 });
 
+type MdlDocketJson = { docket: string; label?: string; name?: string; court_short?: string; current?: boolean; years_text?: string; sentences: Array<{ text: string; year: number }>; history: Array<{ text: string }> };
+type MdlJson = { intro: string; rule: string; years: number[]; dockets: MdlDocketJson[] };
+
 test('multidistrict litigation note on N.D. Fla., near the statistics it bears on', async ({ page }, testInfo) => {
-  type Mdl = { dockets: Array<{ docket: string; name?: string; sentences: Array<{ text: string; year: number }>; history: Array<{ text: string }> }> };
-  const prof = readJson('profiles/flnd.json') as { mdl_context?: Mdl };
+  const prof = readJson('profiles/flnd.json') as { mdl_context?: MdlJson };
   const mdl = prof.mdl_context!;
   expect(mdl.dockets.map((d) => d.docket)).toContain('2885');
   await open(page, 'flnd');
-  // In brief: next to the sentences.
+  // In brief: next to the sentences. Dockets above a quarter in the headline years get their sentences; older ones
+  // share one line.
   const brief = page.locator('#sec-standout .mdl-note--compact');
   await expect(brief).toBeVisible();
-  for (const d of mdl.dockets) for (const s of d.sentences) await expect(brief).toContainText(s.text);
+  for (const d of mdl.dockets.filter((x) => x.current)) for (const s of d.sentences) await expect(brief).toContainText(s.text);
+  for (const d of mdl.dockets.filter((x) => !x.current)) {
+    await expect(brief.locator('.mdl-note__earlier')).toContainText(`${d.label} (${d.years_text})`);
+    for (const s of d.sentences) await expect(brief).not.toContainText(s.text);
+  }
+  // The kicker's "multidistrict litigation" opens the glossary definition (28 U.S.C. § 1407(a)).
+  await brief.locator('.mdl-note__kicker .term').click();
+  await expect(page.locator('.gloss-pop')).toHaveAttribute('data-open', 'true');
+  await expect(page.locator('.gloss-pop__cite')).toHaveText('28 U.S.C. § 1407(a)');
+  await page.keyboard.press('Escape');
   // Key statistics: the full note with names, history and the rule, above the measures.
   const full = page.locator('#mdl-note');
+  // The intro marks "multidistrict litigation (MDL)" as a glossary term (its definition sits in hidden text).
+  await expect(full.locator('.mdl-note__intro .term')).toHaveText('multidistrict litigation (MDL)');
+  for (const part of mdl.intro.split('multidistrict litigation (MDL)')) await expect(full.locator('.mdl-note__intro')).toContainText(part);
+  await expect(full.locator('.mdl-note__rule')).toHaveText(mdl.rule);
   for (const d of mdl.dockets) {
-    await expect(full).toContainText(`MDL ${d.docket}`);
+    await expect(full).toContainText(d.label!);
     if (d.name) await expect(full).toContainText(d.name);
+    for (const s of d.sentences) await expect(full).toContainText(s.text);
     for (const h of d.history) await expect(full).toContainText(h.text);
   }
   await expect(full.locator('.source-chip')).toContainText('Derived');
-  await brief.getByRole('link', { name: /What an MDL docket is/ }).click();
+  await brief.getByRole('link', { name: /Every year and docket/ }).click();
   await expect(full).toBeFocused();
   await expect(full).toBeInViewport();
   await settle(page);
   await shot(page, testInfo, 'district-flnd-mdl', false);
-  // Case mix: the note for the IDB years shown there.
+  // Case mix: the note for the IDB years shown there (FY 2025 and 2026 sentences only, no older docket).
   await page.locator('#sec-mix').scrollIntoViewIfNeeded();
   await expect(page.locator('#sec-mix .mdl-note')).toContainText('MDL 2885');
-  // A district without a dominant docket has no note.
+  for (const d of mdl.dockets.filter((x) => !x.current)) await expect(page.locator('#sec-mix .mdl-note')).not.toContainText(d.label!);
+  // A district without a dominant docket in any year from FY 2010 has no note.
   await open(page, 'vaed');
   await renderAll(page);
   await expect(page.locator('.mdl-note')).toHaveCount(0);
+});
+
+test('MDL notes for earlier years: S.D. Ohio, S.D. W. Va., E.D. La.', async ({ page }, testInfo) => {
+  for (const id of ['ohsd', 'wvsd', 'laed']) {
+    const mdl = (readJson(`profiles/${id}.json`) as { mdl_context?: MdlJson }).mdl_context!;
+    expect(mdl.dockets.length, id).toBeGreaterThan(0);
+    await open(page, id);
+    const brief = page.locator('#sec-standout .mdl-note--compact');
+    await expect(brief).toBeVisible();
+    const current = mdl.dockets.filter((d) => d.current);
+    const lead = current.length ? current : mdl.dockets.slice(0, 1);
+    for (const d of lead) for (const s of d.sentences) await expect(brief).toContainText(s.text);
+    const rest = mdl.dockets.filter((d) => !lead.includes(d));
+    if (rest.length) {
+      await expect(brief.locator('.mdl-note__earlier')).toContainText(current.length ? 'Also above a quarter in earlier years:' : 'Also above a quarter:');
+      for (const d of rest) await expect(brief.locator('.mdl-note__earlier')).toContainText(`${d.label} (${d.years_text})`);
+    }
+    const full = page.locator('#mdl-note');
+    for (const d of mdl.dockets) {
+      await expect(full.locator('.mdl-note__docket', { hasText: d.label! }).first()).toBeVisible();
+      if (d.name) await expect(full).toContainText(d.name);
+      for (const s of d.sentences) await expect(full).toContainText(s.text);
+      for (const h of d.history) await expect(full).toContainText(h.text);
+    }
+    // Unnamed dockets (no GovInfo record found) are shown by number only.
+    for (const d of mdl.dockets.filter((x) => !x.name)) {
+      await expect(full.locator('.mdl-note__docket', { hasText: d.label! }).first().locator('i')).toHaveCount(0);
+    }
+    await expect(full.locator('.mdl-note__rule')).toContainText('from FY 2010');
+    // The case-mix note shows only the headline years, so a district whose dockets all ended earlier has none there.
+    await page.locator('#sec-mix').scrollIntoViewIfNeeded();
+    await expect(page.locator('#mix-ends')).toBeVisible();
+    await expect(page.locator('#sec-mix .mdl-note')).toHaveCount(current.length ? 1 : 0);
+    await page.locator('#sec-standout').scrollIntoViewIfNeeded();
+    await settle(page);
+    await shot(page, testInfo, `district-${id}-mdl-brief`, false);
+    await full.scrollIntoViewIfNeeded();
+    await settle(page);
+    await shot(page, testInfo, `district-${id}-mdl`, false);
+  }
 });
 
 test('dark mode: MDL note and how cases end', async ({ page }, testInfo) => {
@@ -364,6 +422,16 @@ test('dark mode: MDL note and how cases end', async ({ page }, testInfo) => {
   await page.locator('#mix-ends').scrollIntoViewIfNeeded();
   await settle(page);
   await shot(page, testInfo, 'district-flnd-dark-ends', false);
+  // Earlier-year notes in dark mode (S.D. Ohio: no current docket; E.D. La.: one current, three earlier).
+  for (const id of ['ohsd', 'laed']) {
+    await open(page, id);
+    await page.locator('#sec-standout').scrollIntoViewIfNeeded();
+    await settle(page);
+    await shot(page, testInfo, `district-${id}-dark-mdl-brief`, false);
+    await page.locator('#mdl-note').scrollIntoViewIfNeeded();
+    await settle(page);
+    await shot(page, testInfo, `district-${id}-dark-mdl`, false);
+  }
 });
 
 test('axe: the MDL note, year switches and new case-mix blocks have no serious or critical violations (flnd)', async ({ page }) => {

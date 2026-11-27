@@ -5,6 +5,7 @@
    "Values are exactly as printed in the AO's September district profiles. FY 1999 to 2003 come from the back columns of the FY 2004 profile, because the older files online are scanned images.",
    "The AO leaves out land condemnation, prisoner petitions, deportation reviews, recovery of overpayments and enforcement of judgments.",
    "Large waves of related cases (for example, mass torts) can move a district's median sharply from one year to the next.",
+   "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They are among the cases behind N.D. Fla.'s median and the national median for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "asc",
@@ -24,6 +25,24 @@
   "lane_table": "observations",
   "lane_variable": "fcms_median_months_civil_filing_to_disposition",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "terminated"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They are among the cases behind N.D. Fla.'s median and the national median for those years.",
+   "years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ]
+  },
   "n_years": 27,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -188,7 +207,7 @@
   "breaks": [],
   "caveats": [
    "Values are exactly as printed in the AO's September district profiles. FY 1999 to 2003 come from the back columns of the FY 2004 profile, because the older files online are scanned images.",
-   "One multidistrict litigation (MDL) docket can hold thousands of old cases and dominate a district's share.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885 (202,693 of 204,990 in FY 2020), and so were most of those it closed in FY 2021 to 2025 (FJC case records). Those still open three years after filing count in N.D. Fla.'s share and the national share.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "asc",
@@ -208,6 +227,26 @@
   "lane_table": "observations",
   "lane_variable": "fcms_civil_over_3yrs_pct",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed",
+    "terminated"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885 (202,693 of 204,990 in FY 2020), and so were most of those it closed in FY 2021 to 2025 (FJC case records). Those still open three years after filing count in N.D. Fla.'s share and the national share.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ]
+  },
   "n_years": 27,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -253,6 +292,7 @@
    "Case weights were revised for use after December 2015, and the AO reprinted FY 2010 to 2014 with the new weights. This series uses the revised weights for every year shown, so it starts in FY 2010.",
    "The AO prints no weighted filings for the three territorial courts (Guam, Northern Mariana Islands, Virgin Islands).",
    "Judgeships are authorized positions, not judges in office. Senior judges also hear cases.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -272,6 +312,24 @@
   "lane_table": "observations_current_method",
   "lane_variable": "fcms_weighted_filings_per_judgeship",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 16,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -305,6 +363,7 @@
   "caveats": [
    "Since March 2012 the AO counts criminal defendants rather than cases. This series uses the current method for every year from FY 2005, read from the earliest profile that prints each year that way. Earlier years are left out rather than mixed with the old method.",
    "Judgeships are authorized positions, not judges in office.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -324,6 +383,24 @@
   "lane_table": "observations_current_method",
   "lane_variable": "fcms_filings_per_judgeship_total",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 21,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -362,6 +439,7 @@
   "caveats": [
    "Values are exactly as printed in the AO's September district profiles. FY 1999 to 2003 come from the back columns of the FY 2004 profile, because the older files online are scanned images.",
    "Judgeships are authorized positions, not judges in office.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -381,6 +459,24 @@
   "lane_table": "observations",
   "lane_variable": "fcms_filings_per_judgeship_civil",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 27,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -424,7 +520,7 @@
   "breaks": [],
   "caveats": [
    "Since March 2012 the AO counts criminal defendants rather than cases. This series uses the current method for every year from FY 2005, read from the earliest profile that prints each year that way. Earlier years are left out rather than mixed with the old method.",
-   "One large multidistrict litigation (MDL) docket can dominate this measure.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885 (202,693 of 204,990 in FY 2020), and so were most of those it closed in FY 2021 to 2025 (FJC case records). While open, they count in N.D. Fla.'s pending cases, its rank and the national figure.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -444,6 +540,26 @@
   "lane_table": "observations_current_method",
   "lane_variable": "fcms_pending_per_judgeship",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed",
+    "terminated"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885 (202,693 of 204,990 in FY 2020), and so were most of those it closed in FY 2021 to 2025 (FJC case records). While open, they count in N.D. Fla.'s pending cases, its rank and the national figure.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ]
+  },
   "n_years": 21,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -481,6 +597,7 @@
   "breaks": [],
   "caveats": [
    "Since March 2012 the AO counts criminal defendants rather than cases. This series uses the current method for every year from FY 2005, read from the earliest profile that prints each year that way. Earlier years are left out rather than mixed with the old method.",
+   "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -500,6 +617,24 @@
   "lane_table": "observations_current_method",
   "lane_variable": "fcms_terminations_per_judgeship",
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "terminated"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They count in N.D. Fla.'s values, its rank and the national figure for those years.",
+   "years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ]
+  },
   "n_years": 21,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -728,6 +863,7 @@
    "Population is the Census Bureau's July 1 estimate for the district's counties, matched to the fiscal year that contains that July 1. The three territorial courts have no annual estimates, so they show No data.",
    "For Montana, Idaho, Wyoming and the Eastern and Middle Districts of North Carolina the population is approximate: a few counties are split by statute (Yellowstone, Fort Bragg, Butner), and the whole county is counted in one district.",
    "Many civil cases are filed where a company or agency is based, or are transferred in, so filings do not only reflect local residents.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values and its rank for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -757,6 +893,24 @@
    }
   ],
   "last_year": 2025,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They count in N.D. Fla.'s values and its rank for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 22,
   "national_available": false,
   "period_type": "FY_SEP30",
@@ -2155,7 +2309,7 @@
   "breaks": [],
   "caveats": [
    "The pro se code has no AO quality control and is blank before FY 1999.",
-   "Mass-tort waves can carry pro se codes in bulk: N.D. Fla. received hundreds of thousands of mass-tort filings in FY 2020 to 2024, many of them coded pro se.",
+   "Mass-tort cases can carry pro se codes in bulk. Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). Many are coded pro se, and they count in N.D. Fla.'s share and the national share for those years.",
    "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
@@ -2178,6 +2332,24 @@
   "lane_table": "observations",
   "lane_variable": "idb_civil_pct_pro_se",
   "last_year": 2026,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Mass-tort cases can carry pro se codes in bulk. Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). Many are coded pro se, and they count in N.D. Fla.'s share and the national share for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 28,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -2229,6 +2401,7 @@
    "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
+   "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They are in the denominator of N.D. Fla.'s share and of the national share for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -2248,6 +2421,24 @@
   "lane_table": "observations",
   "lane_variable": "idb_civil_pct_prisoner_petitions",
   "last_year": 2026,
+  "mdl_caveat": {
+   "cohorts": [
+    "filed"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases filed in N.D. Fla. in FY 2020 to 2024 were part of one multidistrict litigation docket, MDL 2885: 202,693 of 204,990 in FY 2020, and 202,695 of the 470,373 filed in all districts that year (FJC case records). They are in the denominator of N.D. Fla.'s share and of the national share for those years.",
+   "years": [
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ]
+  },
   "n_years": 39,
   "national_available": true,
   "period_type": "FY_SEP30",
@@ -2309,6 +2500,7 @@
    "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
+   "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They are in the denominator of N.D. Fla.'s rate and of the national rate for those years.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -2328,6 +2520,24 @@
   "lane_table": "observations",
   "lane_variable": "idb_civil_trial_rate",
   "last_year": 2026,
+  "mdl_caveat": {
+   "cohorts": [
+    "terminated"
+   ],
+   "district_id": "flnd",
+   "docket": "2885",
+   "source_ids": [
+    "idb_civil_cv88on"
+   ],
+   "text": "Most civil cases closed in N.D. Fla. in FY 2021 to 2025 were part of one multidistrict litigation docket, MDL 2885: 147,231 of 149,260 in FY 2025, and 147,231 of the 407,539 closed in all districts that year (FJC case records). They are in the denominator of N.D. Fla.'s rate and of the national rate for those years.",
+   "years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ]
+  },
   "n_years": 39,
   "national_available": true,
   "period_type": "FY_SEP30",

@@ -16,11 +16,17 @@ Output ``data/processed/idb/civil_mdl_dockets.{parquet,csv}``: one row per distr
 docket holds at least ``MIN_COUNT`` cases and at least ``MIN_SHARE`` percent of the district's civil cases in that
 cohort and year, plus ``_national`` rows for the same docket, year and cohort. ``share`` is 100 x count / total.
 
-Docket names: ``civil_mdl_docket_names.csv``. A name is used only when a GovInfo "United States Courts Opinions"
+Docket names: ``civil_mdl_docket_names.csv``, for every docket that is above 25% of a district's civil cases filed
+or closed in any year from ``FIRST_CODED_FY``. A name is used only when a GovInfo "United States Courts Opinions"
 (USCOURTS) record for the transferee court is found whose MODS metadata gives a case number ending in the docket
-number (``md-0NNNN`` / ``mn-0NNNN``) and whose author is that district court. The package ids tried are listed in
-``NAME_CANDIDATES`` (typed in; each is verified against the record, never trusted on its own). A docket without a
-verified record is shown by number only.
+number with a multidistrict case type (``md-0NNNN``, ``mn-0NNNN`` in D.S.C. or ``ml-0NNNN`` in S.D. Ind.) and whose
+author is that district court. The package ids tried are listed in ``NAME_CANDIDATES`` (typed in; each is verified
+against the record, never trusted on its own). A docket without a verified record is shown by number only.
+
+Coverage: ``civil_mdl_coverage.csv`` counts, for every termination fiscal year, the civil termination records and
+those carrying a 4-digit docket number. Almost no record closed before FY 2010 carries one, so docket counts are
+complete only from ``FIRST_CODED_FY`` (filings of a year are complete once every case filed that year closed in a
+coded year or is still pending). ``civil_mdl_meta.json`` records that year.
 """
 from __future__ import annotations
 
@@ -45,8 +51,13 @@ SOURCE_ID = "idb_civil_cv88on"
 MIN_COUNT = 100
 MIN_SHARE = 5.0
 DOCKET_RE = r"\d{4}"
+NAME_SHARE = 25.0      # dockets above this share of a district's civil cases in a coded year get a name lookup
+CODED_MIN = 1000       # a termination year counts as coded when at least this many records carry a docket number
+CASE_TYPES = "md|mn|ml"  # multidistrict case types in the transferee court's case number
 
-# docket -> (transferee district, GovInfo USCOURTS package id to try). Verified against the record before use.
+# docket -> (transferee district, GovInfo USCOURTS package id to try). Verified against the record before use; a
+# candidate that does not verify (no such page, or a case number without a multidistrict case type) is listed so the
+# attempt is on record, and its docket is shown by number only.
 NAME_CANDIDATES: dict[str, tuple[str, str]] = {
     "2885": ("flnd", "USCOURTS-flnd-3_19-md-02885"),
     "3140": ("flnd", "USCOURTS-flnd-3_25-md-03140"),
@@ -57,10 +68,44 @@ NAME_CANDIDATES: dict[str, tuple[str, str]] = {
     "3092": ("ohnd", "USCOURTS-ohnd-1_24-md-03092"),
     "2740": ("laed", "USCOURTS-laed-2_16-md-02740"),
     "2753": ("nhd", "USCOURTS-nhd-1_16-md-02753"),
+    # Added for the earlier-year notes (polish pass, 2026-11-27).
+    "0875": ("paed", "USCOURTS-paed-2_01-md-00875"),
+    "1507": ("ared", "USCOURTS-ared-4_03-cv-01507"),    # civil (cv) case number: does not verify
+    "1657": ("laed", "USCOURTS-laed-2_05-md-01657"),
+    "1842": ("rid", "USCOURTS-rid-1_07-md-01842"),
+    "1943": ("mnd", "USCOURTS-mnd-0_08-md-01943"),
+    "1964": ("moed", "USCOURTS-moed-4_08-md-01964"),
+    "2179": ("laed", "USCOURTS-laed-2_10-md-02179"),
+    "2197": ("ohnd", "USCOURTS-ohnd-1_10-md-02197"),
+    "2244": ("txnd", "USCOURTS-txnd-3_11-md-02244"),
+    "2299": ("lawd", "USCOURTS-lawd-6_11-md-02299"),
+    "2325": ("wvsd", "USCOURTS-wvsd-2_12-md-02325"),
+    "2326": ("wvsd", "USCOURTS-wvsd-2_12-md-02326"),
+    "2327": ("wvsd", "USCOURTS-wvsd-2_12-md-02327"),
+    "2391": ("innd", "USCOURTS-innd-3_12-md-02391"),
+    "2428": ("mad", "USCOURTS-mad-1_13-md-02428"),
+    "2433": ("ohsd", "USCOURTS-ohsd-2_13-md-02433"),
+    "2441": ("mnd", "USCOURTS-mnd-0_13-md-02441"),
+    "2502": ("scd", "USCOURTS-scd-2_14-mn-02502"),
+    "2545": ("ilnd", "USCOURTS-ilnd-1_14-cv-01748"),    # civil (cv) case number: does not verify
+    "2570": ("insd", "USCOURTS-insd-1_14-ml-02570"),
+    "2591": ("ksd", "USCOURTS-ksd-2_14-md-02591"),
+    "2592": ("laed", "USCOURTS-laed-2_14-md-02592"),
+    "2641": ("azd", "USCOURTS-azd-2_15-md-02641"),
+    "2734": ("flnd", "USCOURTS-flnd-3_16-md-02734"),
+    "2782": ("gand", "USCOURTS-gand-1_17-md-02782"),
+    "2789": ("njd", "USCOURTS-njd-2_17-md-02789"),
+    "2804": ("ohnd", "USCOURTS-ohnd-1_17-md-02804"),
+    "2846": ("ohsd", "USCOURTS-ohsd-2_18-md-02846"),
+    "2924": ("flsd", "USCOURTS-flsd-9_20-md-02924"),
+    "3060": ("ilnd", "USCOURTS-ilnd-1_23-cv-00818"),    # civil (cv) case number: does not verify
 }
 GOVINFO_MODS = "https://www.govinfo.gov/metadata/pkg/{pkg}/mods.xml"
 GOVINFO_DETAILS = "https://www.govinfo.gov/app/details/{pkg}"
 SMALL_WORDS = {"a", "an", "and", "as", "at", "by", "for", "in", "of", "on", "or", "re", "the", "to"}
+KEEP_CAPS = {"ABG", "AFFF", "AG", "IVC"}   # acronyms in printed titles, kept in capitals by display_title
+ROMAN_RE = re.compile(r"[IVX]{1,5}")
+NOTE_RE = re.compile(r"\s*\*\*[^*]*\*\*\s*$")   # a docketing note appended to a title ("**COUNSEL: ...**")
 
 
 def log(*a):
@@ -119,15 +164,17 @@ def select(t: pd.DataFrame) -> pd.DataFrame:
 
 
 def display_title(raw: str) -> str:
-    """GovInfo prints some titles in capitals; show them in title case (words with digits kept as printed)."""
-    t = re.sub(r"^in re:\s*", "In re: ", html.unescape(raw).strip(), flags=re.I)
+    """GovInfo prints some titles in capitals; show them in title case (words with digits, Roman numerals and a few
+    acronyms kept as printed). A docketing note appended in double asterisks is dropped from the display title."""
+    t = re.sub(r"^in re:\s*", "In re: ", NOTE_RE.sub("", html.unescape(raw).strip()), flags=re.I)
     body = t[len("In re: "):] if t.startswith("In re: ") else t
-    if body != body.upper():  # already in mixed case: keep as printed
+    letters = [ch for ch in body if ch.isalpha()]
+    if letters and sum(ch.isupper() for ch in letters) < 0.9 * len(letters):  # mixed case: keep as printed
         return t
     words = []
     for i, w in enumerate(t.split()):
         pre, core, post = re.fullmatch(r"([^A-Za-z0-9]*)(.*?)([^A-Za-z0-9]*)", w).groups()
-        if any(ch.isdigit() for ch in core):
+        if any(ch.isdigit() for ch in core) or core in KEEP_CAPS or ROMAN_RE.fullmatch(core):
             words.append(w)
             continue
         lc = core.lower()
@@ -148,7 +195,7 @@ def verify_name(docket: str, district_id: str, pkg: str) -> dict | None:
     court = BY_ID[district_id].name
     authors = set(re.findall(r"<namePart>United States District Court ([^<]*)</namePart>", text))
     titles = Counter(re.findall(r"<title>([^<]*)</title>", text))
-    ok_number = any(re.search(rf"-(md|mn)-0?{docket}$", n) for n in numbers)
+    ok_number = any(re.search(rf"-({CASE_TYPES})-0?{docket}$", n) for n in numbers)
     ok_court = court in authors
     if not (ok_number and ok_court and titles):
         log(f"  {docket}: {pkg} does not verify (case numbers {sorted(numbers)[:3]}, courts {sorted(authors)[:2]})")
@@ -185,20 +232,62 @@ def names(dockets: set[str]) -> pd.DataFrame:
     return pd.DataFrame(rows, columns=cols)
 
 
+def coverage(term: pd.DataFrame) -> pd.DataFrame:
+    """Civil termination records per termination fiscal year, and how many carry a 4-digit docket number."""
+    valid = term["MDLDOCK"].str.fullmatch(DOCKET_RE, na=False) & (term["MDLDOCK"] != "0000")
+    c = (term.assign(_v=valid).groupby("TFY")
+         .agg(records=("_v", "size"), records_with_docket=("_v", "sum")).reset_index()
+         .rename(columns={"TFY": "period"}))
+    c["period"] = c["period"].astype(int)
+    c["records_with_docket"] = c["records_with_docket"].astype(int)
+    c["coded"] = c["records_with_docket"] >= CODED_MIN
+    return c
+
+
+def first_coded_year(cov: pd.DataFrame) -> int:
+    """The first termination year from which every year is coded (at least CODED_MIN records with a docket)."""
+    years = cov.sort_values("period")
+    first = None
+    for y, ok in zip(years["period"], years["coded"]):
+        if ok and first is None:
+            first = int(y)
+        elif not ok:
+            first = None
+    if first is None:
+        raise RuntimeError("no coded termination years in the civil file")
+    return first
+
+
 def build(extract=None) -> pd.DataFrame:
     extract = extract or civil_extract()
     df = load(extract)
     fil = civil.filings(df)
     term = civil.terminations(df)
     t = pd.concat([docket_counts(fil, "FFY", "filed"), docket_counts(term, "TFY", "terminated")], ignore_index=True)
+    cov = coverage(term)
     del df, fil, term
     out = select(t)
     OUT.mkdir(parents=True, exist_ok=True)
     out.to_parquet(OUT / "civil_mdl_dockets.parquet", index=False)
     out.to_csv(OUT / "civil_mdl_dockets.csv", index=False)
-    # Names for the dockets that make up more than a quarter of a district's civil cases in the latest two years.
-    last = int(out["period"].max())
-    big = out[(out["district_id"] != "_national") & (out["period"] >= last - 1) & (out["share"] > 25)]
+    first = first_coded_year(cov)
+    cov.to_csv(OUT / "civil_mdl_coverage.csv", index=False)
+    before = cov[cov["period"] < first]
+    (OUT / "civil_mdl_meta.json").write_text(json.dumps({
+        "first_coded_fy": first, "coded_min_records": CODED_MIN, "name_share_pct": NAME_SHARE,
+        "records_before_first_coded_fy": int(before["records"].sum()),
+        "records_with_docket_before_first_coded_fy": int(before["records_with_docket"].sum()),
+        "source_id": SOURCE_ID, "table": "civil_mdl_coverage.csv",
+    }, indent=1, sort_keys=True) + "\n")
+    record_gap(LANE, "civil_mdl_docket_not_coded_early_years",
+               description=(f"MDL docket numbers are almost never filled in for civil cases closed before FY {first}: "
+                            f"{int(before['records_with_docket'].sum()):,} of {int(before['records'].sum()):,} "
+                            f"termination records for FY {int(before['period'].min())} to {first - 1} carry one "
+                            f"(civil_mdl_coverage.csv). MDL notes on district pages therefore start in FY {first}."),
+               periods=sorted(int(y) for y in before["period"]),
+               reason="field not coded in the source for those years")
+    # Names for every docket above a quarter of a district's civil cases filed or closed in a coded year.
+    big = out[(out["district_id"] != "_national") & (out["period"] >= first) & (out["share"] > NAME_SHARE)]
     nm = names(set(big["mdl_docket"]))
     nm.to_csv(OUT / "civil_mdl_docket_names.csv", index=False)
     log(f"{len(out):,} rows ({out['mdl_docket'].nunique()} dockets, {out['district_id'].nunique() - 1} districts); "

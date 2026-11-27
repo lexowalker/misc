@@ -20,7 +20,13 @@ updates as the reader adds, removes or changes the year (commas stay readable), 
    value. If no year has all of them, the row shows the latest year with the most districts and says so ("the latest
    year with data for two of three"). Choosing a year applies it to every row; a row whose series does not reach it
    says "Not published for FY 2010. This series covers FY 2014 to FY 2025." and shows No data. The year list holds
-   every year covered by at least five measures (FY 1988 on).
+   every year covered by at least five measures (FY 1988 on). A year that is preliminary for some measures reads
+   "FY 2026 (preliminary for IDB measures)" in the menu and in the live announcement (polish pass, Nov 27; from the
+   catalog's `preliminary_years`, the same "(preliminary)" wording as `periodLabelFor`). A native select cannot wrap,
+   and on desktop the lead column cut that label to "FY 2026 (preliminary for IDB me". Since the second recheck
+   (Nov 27) the closed menu shows a copy of the chosen option (`.cmp-year__face`, hidden from screen readers) that
+   wraps; the select lies on top of it with opacity 0 and still takes every click, tap and key, and the face draws
+   its focus ring.
 4. **Where they differ most** (derived). Among the catalog's main measures (`featured: true`, 15 today), the three
    that put the chosen districts furthest apart in the national rankings. For each: the higher and lower district,
    their values and ranks, a strip showing both positions from lowest to highest, and the difference (percentage
@@ -112,6 +118,10 @@ keyboard test runs on desktop only). Every expected number is computed in the te
 - Picker: by short form, id and plain words; URL sync; four maximum; remove; duplicates refused; Escape closes.
 - Year selector on the four border districts: one year for every row, values for that year, "Not published" rows,
   URL `y=`, kept after reload, back to the default.
+- Year menu (polish pass): every preliminary year reads "FY <year> (preliminary for IDB measures)", final years keep
+  the plain label, and choosing it announces the same label. The closed menu shows the whole label without
+  clipping, and arrow keys still change the year with the focus ring on the face (second recheck). Full suite after
+  the polish pass: see `docs/lanes/frontend.md`.
 - E.D. Va. + D. Guam: a derived per-capita row (formula text equals `variables.json`), No data for Guam, a cell note
   shown in full; tap opens and closes the formula on mobile.
 - Empty and one-district states; keyboard add and family expansion; dark mode; labels verbatim from the catalog.
