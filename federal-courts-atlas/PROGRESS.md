@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 13:40 UTC. Data pipeline and website built; verification next._
+_Last updated: 2026-11-27 14:50 UTC. Pipeline, website and verification done; closing the last gaps._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -18,7 +18,7 @@ _Last updated: 2026-11-27 13:40 UTC. Data pipeline and website built; verificati
 - **Audits**: `docs/audits/boundary_audit.md` (passed, 5 minor issues fixed or documented) and
   `docs/audits/stats_audit.md` (51 of 51 sampled cells matched; 1 blocker, 1 major and 6 minor issues, all fixed or
   documented, then rechecked against the raw sources). 678 pipeline tests pass.
-- `SOURCES.md` (1,547 source files) and `DATA_GAPS.md` generated from the lane fragments.
+- `SOURCES.md` (1,550 source files) and `DATA_GAPS.md` generated from the lane fragments.
 
 - **Website** (workflow 2, finished 12:00 UTC). Reports in `docs/lanes/`:
   - web data: `public/data/` with 41 map variables in four families (all 12+ years), 94 district files, judges,
@@ -29,10 +29,19 @@ _Last updated: 2026-11-27 13:40 UTC. Data pipeline and website built; verificati
   - integration: 279 e2e passed (9 skipped by design), 861 pipeline tests pass, first map paint 0.26-0.41 s
     (0.89 s at 4x CPU throttle); no em-dash in `src/` or `public/data/`.
 
+- **Verification** (workflow 3, finished 14:45 UTC). See `VERIFICATION.md` and `docs/audits/`:
+  - data audit: 70 displayed numbers traced to raw files by two independent auditors; 67 matched, 3 carried the
+    wrong label (a USSC printed rounding vs our exact ratio) and are now marked derived. No value changed.
+  - copy audit: about 1,400 sentences; 57 findings (5 strike, 34 fix, 18 nit), all resolved.
+  - UI audit: 181 screenshots at 1280, 768 and 375 px in both themes; axe-core scan with 0 serious or critical
+    violations; tap-to-open formulas for iOS; table view now shows cell notes and derived tags.
+  - Now 43 map variables (two juror measures added for the courtroom jury box).
+  - Tests: 1,228 pipeline, 321 e2e passed (9 skipped by design), typecheck clean, first map paint 0.40 s.
+
 ## In progress
-- Workflow 3 (verification): data, copy and UI audits are done and their fixes applied (copy rewrites, USSC
-  derived-value labeling, two juror variables for the courtroom, accessibility and layout fixes). The recheck lane is
-  rebuilding, rerunning every suite, re-verifying each fix and writing `VERIFICATION.md`. A completeness critic follows.
+- Workflow 4: closing gaps a completeness review found: "how cases end" (IDB disposition mix) and more USSC offense
+  categories on profiles, preliminary labels for IDB FY 2026 on profiles, glossary tooltips on measure labels,
+  N.D. Fla. mass-tort context, README test instructions, small doc fixes, visual regression baselines.
 
 ## Next
 - Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
