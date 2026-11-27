@@ -1,4 +1,4 @@
-# The Federal Courts Atlas — reproducible data pipeline.
+# The Federal Courts Atlas: reproducible data pipeline.
 #   make setup   create .venv and install Python + Node deps
 #   make data    rebuild every dataset from public sources into data/ and public/data/
 #   make test    run pipeline unit tests

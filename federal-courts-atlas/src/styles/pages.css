@@ -584,3 +584,8 @@
 .src-group > .data-table-wrap {
   margin-bottom: var(--space-5);
 }
+
+/* The group heading already names the group and its count; the table keeps its screen-reader caption. */
+.src-group .data-table__caption {
+  display: none;
+}

@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 09:35 UTC (overnight build). Data pipeline complete; website build running._
+_Last updated: 2026-11-27 12:05 UTC. Data pipeline and website built; verification next._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -20,14 +20,19 @@ _Last updated: 2026-11-27 09:35 UTC (overnight build). Data pipeline complete; w
   documented, then rechecked against the raw sources). 678 pipeline tests pass.
 - `SOURCES.md` (1,547 source files) and `DATA_GAPS.md` generated from the lane fragments.
 
+- **Website** (workflow 2, finished 12:00 UTC). Reports in `docs/lanes/`:
+  - web data: `public/data/` with 41 map variables in four families (all 12+ years), 94 district files, judges,
+    cases, profiles with fact-checked "distinctive" paragraphs (each sentence carries re-verifiable claims).
+  - home (variable switcher with thumbnails, place search), district profiles, compare (2-4 districts), search,
+    5 scrollytelling stories (Rocket Docket, Patent Capital, Border Districts, After Booker, Where Trials Went),
+    three.js courtroom, sources page grouped by dataset.
+  - integration: 279 e2e passed (9 skipped by design), 861 pipeline tests pass, first map paint 0.26-0.41 s
+    (0.89 s at 4x CPU throttle); no em-dash in `src/` or `public/data/`.
+
 ## In progress
-- Workflow 2 (website): all page lanes are built with e2e specs: home (variable switcher, place search), district
-  profiles, compare, search, stories and the three.js courtroom (`docs/lanes/*.md`). The integration pass (full e2e
-  suite, cross-lane fixes) is running.
+- Workflow 3: verification (data audit into `VERIFICATION.md`, copy audit, UI audit), then fixes.
 
 ## Next
-- Workflow 3: verification lanes (data audit of 50+ numbers into `VERIFICATION.md`, copy audit, UI audit with
-  screenshots at desktop and mobile), then fixes.
 - Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
 
 ## Blocked / notes

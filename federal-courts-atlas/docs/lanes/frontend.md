@@ -221,8 +221,19 @@ Each page has its own lane report.
 captures, the mobile menu collapses with ≥44px rows, no horizontal overflow at 1280 or 375); `map.spec.ts` (94
 paths with names, territories inside insets, zoom buttons, hi-res swap and back, keyboard order, focus tooltip,
 +/0 keys, Enter navigates, hover or tap tooltip, table toggle and sort, theme toggle persists across reload,
-glossary popover and `aria-describedby`); `choropleth.spec.ts`; `perf.spec.ts`. Last full run: 50 passed, 4
-skipped by design (hover tests on touch, tap tests on mouse, perf on mobile).
+glossary popover and `aria-describedby`); `choropleth.spec.ts`; `perf.spec.ts`. Each page lane adds its own spec
+(`home`, `search`, `district`, `compare`, `stories`, `courtroom`, `web-data`).
+
+`integration.spec.ts` (integration pass) visits every route in light and dark at 1280 and 375 px: `#/`, two
+districts (one a territory), compare, the stories index, every story, the courtroom, learn, search, sources and a
+table. Each visit scrolls the whole page so lazy sections render, then checks the heading, the theme, console
+errors, the page's scroll width, and any visible element that crosses the viewport edge without a scrolling or
+clipping parent. It also checks that the home page never loads three.js and stays within a JavaScript budget, and it
+covers the cross-lane fixes (story address shorthand, unknown measure, fractional judgeships, tap-to-open formulas,
+inset labels clear of land, grouped sources). It saves the final review set as `final-<page>-<theme>.jpg`.
+
+Last full run (integration pass, `CI=1 E2E_PORT=4210 npx playwright test --trace off`): 279 passed, 9 skipped by
+design (touch-only tests on desktop, mouse-only and desktop-only measurements on mobile), 0 failed.
 
 `choropleth.spec.ts` exercises the data path before any statistics exist without inventing any. It intercepts
 `variables.json` and `values/__test_county_count.json` *inside the test only* and serves the number of counties in
@@ -243,10 +254,14 @@ Measured with Playwright against `vite preview` with the cache disabled (`tests/
 |---|---|---|---|
 | unthrottled (shared 4-CPU box) | **290–530 ms** | 260–420 ms | 90–170 ms |
 | 4× CPU throttling | **0.85–1.37 s** | 0.72–1.26 s | 185–230 ms |
+| integration pass, all pages built: unthrottled | **262–410 ms** | 254–400 ms | 100 ms |
+| integration pass, all pages built: 4× CPU | **0.89 s** | 0.87 s | 212–236 ms |
 
 The test asserts under 2 s, that the hi-res topology does not load at national view, and that three.js is not
-requested. Initial JavaScript is about 57 KB gzip (entry 29 KB + home chunk 28 KB, which includes d3-geo, d3-zoom
-and topojson). Main CSS is 8.6 KB gzip. Fonts swap in and never block the map. What made the difference:
+requested. With every page built, the home page loads 11 scripts: 73 KB over the wire, 200 KB decoded, all of it
+before the first map paint (entry 29 KB gzip + home chunk 32 KB gzip, which includes d3-geo, d3-zoom, topojson and
+the variable switcher). No three.js or courtroom chunk is requested, even after the idle-time thumbnails load.
+Main CSS is 8.7 KB gzip. Fonts swap in and never block the map. What made the difference:
 the lo topology fetch starts in `main.ts` in parallel with the home chunk; each feature is projected once and
 measured on planar coordinates (instead of four projections per feature); resampling is off; each border mesh is
 computed once and routed to regions; state outlines are lazy.
