@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hatchet v. Optimizely North America Inc.",
+   "court": "District Court, S.D. New York",
+   "court_id": "nysd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-10417",
+   "docket_type": "cv",
+   "nature_of_suit": "360 P.I.: Other",
+   "cause": "28:1332 Diversity Action",
+   "url": "https://www.courtlistener.com/docket/75179208/hatchet-v-optimizely-north-america-inc/",
+   "courtlistener_id": 75179208,
+   "retrieved_at": "2026-11-27T07:43:54+00:00",
+   "source_id": "cl_search_nysd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Police & Fire Retirement System of the City of Detroit v. Trip.com Group Limited",
+   "court": "District Court, S.D. New York",
+   "court_id": "nysd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-10416",
+   "docket_type": "cv",
+   "nature_of_suit": "850 Securities/Commodities",
+   "cause": "15:78j(b)ss Stockholder Suit",
+   "url": "https://www.courtlistener.com/docket/75179078/police-fire-retirement-system-of-the-city-of-detroit-v-tripcom-group/",
+   "courtlistener_id": 75179078,
+   "retrieved_at": "2026-11-27T07:43:54+00:00",
+   "source_id": "cl_search_nysd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Jackson v. Raels, Inc.",
+   "court": "District Court, S.D. New York",
+   "court_id": "nysd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-10434",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180833/jackson-v-raels-inc/",
+   "courtlistener_id": 75180833,
+   "retrieved_at": "2026-11-27T07:43:54+00:00",
+   "source_id": "cl_search_nysd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Jackson v. Solely International Inc.",
+   "court": "District Court, S.D. New York",
+   "court_id": "nysd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-10433",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180555/jackson-v-solely-international-inc/",
+   "courtlistener_id": 75180555,
+   "retrieved_at": "2026-11-27T07:43:54+00:00",
+   "source_id": "cl_search_nysd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nysd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:43:54+00:00"
 }

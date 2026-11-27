@@ -171,6 +171,30 @@ def direction_word(label: str) -> str | None:
     return _DIR_WORDS.get(_letters(label))
 
 
+_HEADER_DIR = re.compile(r"(north|south|east|west|mid|cent)")
+_HEADER_DIR_WORD = {"north": "Northern", "south": "Southern", "east": "Eastern", "west": "Western", "mid": "Middle",
+                    "cent": "Central"}
+
+
+def district_from_header(header: str) -> str | None:
+    """Resolve the district named in a packet table's column header to an id, or None.
+
+    FY1995-FY2001 district packets print the columns as 'National | <district>', with the
+    district spelled in several ways across years: "Louisiana, Middle", "Middle Louisiana",
+    "Mississippi South", "Eastern Michigan", "Guam", "Northern Mariana Island". A header naming
+    only a multi-district state ("Georgia", "State of California") resolves to None.
+    """
+    s = _letters(re.sub(r"\bNational\b", " ", header))
+    if "mariana" in s:
+        return "nmid"
+    keys = sorted((k for k in _TABLE_NAMES if k in s), key=len, reverse=True)
+    if not keys:
+        return None
+    rest = s.replace(keys[0], " ", 1)        # "northcarolina" must not supply the direction
+    m = _HEADER_DIR.search(rest)
+    return table_district(_TABLE_NAMES[keys[0]], _HEADER_DIR_WORD[m.group(1)] if m else None)
+
+
 def district_from_prose(name: str) -> str | None:
     """Resolve a district named in packet note prose ("District of Alabama, Northern",
     "Eastern District of Virginia", "District of the Northern Mariana Islands") to an id.

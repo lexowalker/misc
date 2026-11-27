@@ -29,17 +29,17 @@
   },
   {
    "item_type": "recap_docket",
-   "case_name": "CHEN v. Warden of Adelanto ICE Processing Center",
+   "case_name": "Bivings v. Colon",
    "court": "District Court, C.D. California",
    "court_id": "cacd",
    "date_filed": "2026-11-26",
    "date_terminated": null,
-   "docket_number": "5:26-cv-07179",
+   "docket_number": "2:26-cv-13840",
    "docket_type": "cv",
    "nature_of_suit": null,
    "cause": null,
-   "url": "https://www.courtlistener.com/docket/75181091/chen-v-warden-of-adelanto-ice-processing-center/",
-   "courtlistener_id": 75181091,
+   "url": "https://www.courtlistener.com/docket/75181069/bivings-v-colon/",
+   "courtlistener_id": 75181069,
    "retrieved_at": "2026-11-27T06:42:55+00:00",
    "source_id": "cl_search_cacd_recap"
   },
@@ -99,6 +99,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=cacd&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:43:02+00:00"
 }

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lares v. Zorro Enterprises Corp.",
+   "court": "District Court, E.D. New York",
+   "court_id": "nyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-07652",
+   "docket_type": "cv",
+   "nature_of_suit": "710 Labor: Fair Standards",
+   "cause": "29:201 Fair Labor Standards Act",
+   "url": "https://www.courtlistener.com/docket/75178170/lares-v-zorro-enterprises-corp/",
+   "courtlistener_id": 75178170,
+   "retrieved_at": "2026-11-27T07:43:10+00:00",
+   "source_id": "cl_search_nyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Martinez v. Cards and Coffee LLC",
+   "court": "District Court, E.D. New York",
+   "court_id": "nyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-07644",
+   "docket_type": "cv",
+   "nature_of_suit": "446 Civil Rights: Americans with Disabilities - Other",
+   "cause": "42:1201 Civil Rights (Disability)",
+   "url": "https://www.courtlistener.com/docket/75176637/martinez-v-cards-and-coffee-llc/",
+   "courtlistener_id": 75176637,
+   "retrieved_at": "2026-11-27T07:43:10+00:00",
+   "source_id": "cl_search_nyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Cook v. Trans Union, LLC",
+   "court": "District Court, E.D. New York",
+   "court_id": "nyed",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-07665",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180907/cook-v-trans-union-llc/",
+   "courtlistener_id": 75180907,
+   "retrieved_at": "2026-11-27T07:43:10+00:00",
+   "source_id": "cl_search_nyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Estrada Refugio v. New York City Department of Education",
+   "court": "District Court, E.D. New York",
+   "court_id": "nyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-07663",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179821/estrada-refugio-v-new-york-city-department-of-education/",
+   "courtlistener_id": 75179821,
+   "retrieved_at": "2026-11-27T07:43:10+00:00",
+   "source_id": "cl_search_nyed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nyed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:43:10+00:00"
 }

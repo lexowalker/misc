@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "AJADI v. Rubio",
+   "court": "District Court, D. Maryland",
+   "court_id": "mdd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04942",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180959/ajadi-v-rubio/",
+   "courtlistener_id": 75180959,
+   "retrieved_at": "2026-11-27T07:39:59+00:00",
+   "source_id": "cl_search_mdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hume v. University of Maryland Medical System",
+   "court": "District Court, D. Maryland",
+   "court_id": "mdd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04938",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179505/hume-v-university-of-maryland-medical-system/",
+   "courtlistener_id": 75179505,
+   "retrieved_at": "2026-11-27T07:39:59+00:00",
+   "source_id": "cl_search_mdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Oscar Health Maintenance Organization of Florida, Inc. v. United States Centers for Medicare & Medicaid Services",
+   "court": "District Court, D. Maryland",
+   "court_id": "mdd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04934",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178303/oscar-health-maintenance-organization-of-florida-inc-v-united-states/",
+   "courtlistener_id": 75178303,
+   "retrieved_at": "2026-11-27T07:39:59+00:00",
+   "source_id": "cl_search_mdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Conoco v. Anne Arundel County, Maryland",
+   "court": "District Court, D. Maryland",
+   "court_id": "mdd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04933",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177520/conoco-v-anne-arundel-county-maryland/",
+   "courtlistener_id": 75177520,
+   "retrieved_at": "2026-11-27T07:39:59+00:00",
+   "source_id": "cl_search_mdd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=mdd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:39:59+00:00"
 }

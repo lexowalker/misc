@@ -116,6 +116,29 @@
   "periods": "fraud: 2018+; fraud_theft_embezzlement: <=2017",
   "reason": "definitional break (OFFGUIDE)"
  },
+ "ussc_fy1995_1999_packets_do_not_sum_to_national": {
+  "lane": "ussc",
+  "description": "FY1995-FY1999 district packet counts do not always add up to the national packet figures. With all 94 districts present: FY1999 ussc_cases_prison_term districts 45,436 vs national 45,379 (+57). In 29 other variable-years a shortfall remains where district-years are missing (packet not posted or failing a safety check); there it cannot be told apart from the missing districts' own counts, and the missing values are NOT filled from the residual. Each district value is as printed in its own packet; the national value is the packet's national column. Do not present FY1995-FY1999 district counts as summing to the nation. FY2000-FY2001 reconcile exactly; FY2002+ come from one datafile and add up exactly. Full table: data/processed/ussc/packet_reconciliation.csv.",
+  "variables": [
+   "ussc_cases_offense_known",
+   "ussc_cases_prison_term",
+   "ussc_cases_total",
+   "ussc_count_offense_drug_trafficking",
+   "ussc_count_offense_firearms",
+   "ussc_count_offense_fraud",
+   "ussc_count_offense_immigration",
+   "ussc_count_offense_other"
+  ],
+  "districts": "all",
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999
+  ],
+  "reason": "separately printed USSC district packets vs their national columns (source inconsistency where all districts are present; not a parse error: the statistics audit's independent re-read reproduces every district value)"
+ },
  "ussc_fy1995_2001_datafile_only_measures": {
   "lane": "ussc",
   "description": "FY1995-FY2001 come from published packets, which do not print the inputs for these measures (fine-only counts; probation-as-zero sentence lengths; \u00a75K3.1; four-way range grouping; child pornography).",
@@ -139,19 +162,21 @@
  },
  "ussc_missing_cells_ussc_cases_offense_known": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_cases_offense_known"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_cases_prison_term": {
   "lane": "ussc",
@@ -202,83 +227,93 @@
  },
  "ussc_missing_cells_ussc_count_offense_drug_trafficking": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_count_offense_drug_trafficking"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_count_offense_firearms": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_count_offense_firearms"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_count_offense_fraud": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_count_offense_fraud"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_count_offense_immigration": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_count_offense_immigration"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_count_offense_other": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_count_offense_other"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_mean_prison_months": {
   "lane": "ussc",
@@ -330,83 +365,93 @@
  },
  "ussc_missing_cells_ussc_pct_offense_drug_trafficking": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_pct_offense_drug_trafficking"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_pct_offense_firearms": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_pct_offense_firearms"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_pct_offense_fraud": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_pct_offense_fraud"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_pct_offense_immigration": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_pct_offense_immigration"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_missing_cells_ussc_pct_offense_other": {
   "lane": "ussc",
-  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "description": "4 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
   "variables": [
    "ussc_pct_offense_other"
   ],
   "districts": [
+   "lawd",
    "nmid"
   ],
   "periods": [
    1995,
    1996,
-   1997
+   1997,
+   1998
   ],
-  "reason": "nmid:1995; nmid:1996; nmid:1997"
+  "reason": "nmid:1995; nmid:1996; nmid:1997; lawd:1998"
  },
  "ussc_packet_fallback_skipped_imprisonment_length_table_7": {
   "lane": "ussc",
@@ -430,7 +475,23 @@
    1996,
    1998
   ],
-  "reason": "alnd FY1995: Table 7 note names another district: District of Alaska (akd); caed FY1995: Table 7 note names another district: District of California, Central (cacd); cod FY1995: Table 7 note names another district: District of Connecticut (ctd); cand FY1996: TOTAL row incomplete in the PDF text layer; ncmd FY1996: Table 7 heading not found in the PDF text layer; gamd FY1998: N 1044.0 exceeds cases total; lawd FY1998: Table 7 note names another district: Middle District of Louisiana (lamd)"
+  "reason": "alnd FY1995: Table 7 not for this district: column header reads 'Alaska' (akd); caed FY1995: Table 7 not for this district: column header reads 'California, Central' (cacd); cod FY1995: Table 7 not for this district: column header reads 'Connecticut' (ctd); cand FY1996: TOTAL row incomplete in the PDF text layer; ncmd FY1996: Table 7 heading not found in the PDF text layer; gamd FY1998: Table 7 not for this district: column header reads 'Georgia' (not a single district); lawd FY1998: Table 7 not for this district: column header reads 'Middle Louisiana' (lamd)"
+ },
+ "ussc_packet_fallback_skipped_offense_mix_table_1": {
+  "lane": "ussc",
+  "description": "FY1995-FY2001 packet values for offense mix (Table 1) not used for 1 district-years because a safety check failed (see reason).",
+  "variables": [
+   "ussc_cases_offense_known",
+   "ussc_pct_offense_*",
+   "ussc_count_offense_*"
+  ],
+  "districts": [
+   "lawd"
+  ],
+  "periods": [
+   1998
+  ],
+  "reason": "lawd FY1998: Table 1 not for this district: column header reads 'Middle Louisiana' (lamd)"
  },
  "ussc_packet_fallback_skipped_ussc_cases_total": {
   "lane": "ussc",

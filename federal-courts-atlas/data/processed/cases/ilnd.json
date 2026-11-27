@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Zoldjalali v. Guggenheim Strategic Opportunities Fund",
+   "court": "District Court, N.D. Illinois",
+   "court_id": "ilnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-14775",
+   "docket_type": "cv",
+   "nature_of_suit": "850 Securities/Commodities",
+   "cause": "15:78m(a) Securities Exchange Act",
+   "url": "https://www.courtlistener.com/docket/75179750/zoldjalali-v-guggenheim-strategic-opportunities-fund/",
+   "courtlistener_id": 75179750,
+   "retrieved_at": "2026-11-27T07:36:44+00:00",
+   "source_id": "cl_search_ilnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mayberry v. Lucas",
+   "court": "District Court, N.D. Illinois",
+   "court_id": "ilnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-14778",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179901/mayberry-v-lucas/",
+   "courtlistener_id": 75179901,
+   "retrieved_at": "2026-11-27T07:36:44+00:00",
+   "source_id": "cl_search_ilnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Knighten v. LOreal USA, Inc.",
+   "court": "District Court, N.D. Illinois",
+   "court_id": "ilnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-14777",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179818/knighten-v-loreal-usa-inc/",
+   "courtlistener_id": 75179818,
+   "retrieved_at": "2026-11-27T07:36:44+00:00",
+   "source_id": "cl_search_ilnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Tabb v. First Hospitality, LLC",
+   "court": "District Court, N.D. Illinois",
+   "court_id": "ilnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-14773",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179325/tabb-v-first-hospitality-llc/",
+   "courtlistener_id": 75179325,
+   "retrieved_at": "2026-11-27T07:36:44+00:00",
+   "source_id": "cl_search_ilnd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ilnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:36:44+00:00"
 }

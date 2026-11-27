@@ -141,11 +141,17 @@ def _by(df: pd.DataFrame, mask: pd.Series | None = None) -> pd.core.groupby.Seri
 def sentence_2018(fy: int, df: pd.DataFrame) -> pd.Series:
     """FY2018+ USSC 'sentence length' convention: months of imprisonment plus alternative
     confinement, probation-only (and fine-only) = 0, terms over 470 months = 469.99, life = 470.
-    SENSPCAP from FY2018; for earlier years the identical rule applied to SENSPLT0."""
+    SENSPCAP from FY2018; for earlier years the identical rule applied to SENSPLT0.
+
+    A missing SENSPLT0 stays missing (the case is left out of the mean, median and N, as a
+    missing SENSPCAP is from FY2018). ``Series.mask`` is used deliberately: ``s.where(s <= 470,
+    469.99)`` would also replace NaN (``NaN <= 470`` is False) and count every case with no
+    sentence information as 469.99 months. With ``mask`` the rule reproduces SENSPCAP record for
+    record, missing values included, in every year where both variables exist."""
     if fy >= 2018:
         return df["SENSPCAP"]
     s = df["SENSPLT0"]
-    return s.where(s <= 470, 469.99)
+    return s.mask(s > 470, 469.99)
 
 
 def prison_term_pre2018(fy: int, df: pd.DataFrame, offense_known: pd.Series) -> pd.Series:

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Kurtz v. Hilton Garden Holtel - Management",
+   "court": "District Court, D. Nebraska",
+   "court_id": "ned",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "8:26-cv-00739",
+   "docket_type": "cv",
+   "nature_of_suit": "Civil Rights: Other",
+   "cause": "28:1331 Fed. Question",
+   "url": "https://www.courtlistener.com/docket/75170304/kurtz-v-hilton-garden-holtel-management/",
+   "courtlistener_id": 75170304,
+   "retrieved_at": "2026-11-27T07:42:07+00:00",
+   "source_id": "cl_search_ned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Oporta v. Warden McCook Detention Center",
+   "court": "District Court, D. Nebraska",
+   "court_id": "ned",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "8:26-cv-00736",
+   "docket_type": "cv",
+   "nature_of_suit": "Habeas Corpus: Alien Detainee",
+   "cause": "28:2241 Petition for Writ of Habeas Corpus (federa",
+   "url": "https://www.courtlistener.com/docket/75169743/oporta-v-warden-mccook-detention-center/",
+   "courtlistener_id": 75169743,
+   "retrieved_at": "2026-11-27T07:42:07+00:00",
+   "source_id": "cl_search_ned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gardner v. State of Nebraska",
+   "court": "District Court, D. Nebraska",
+   "court_id": "ned",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "8:26-cv-00738",
+   "docket_type": "cv",
+   "nature_of_suit": "Habeas Corpus: General",
+   "cause": "28:2254 Petition for Writ of Habeas Corpus (State)",
+   "url": "https://www.courtlistener.com/docket/75169127/gardner-v-state-of-nebraska/",
+   "courtlistener_id": 75169127,
+   "retrieved_at": "2026-11-27T07:42:07+00:00",
+   "source_id": "cl_search_ned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gonzalez v. Nebraska Department of Health and Human Services",
+   "court": "District Court, D. Nebraska",
+   "court_id": "ned",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-05023",
+   "docket_type": "cv",
+   "nature_of_suit": "446 Civil Rights: Americans with Disabilities - Other",
+   "cause": "42:12131 Americans with Disabilities Act",
+   "url": "https://www.courtlistener.com/docket/75161321/gonzalez-v-nebraska-department-of-health-and-human-services/",
+   "courtlistener_id": 75161321,
+   "retrieved_at": "2026-11-27T07:42:07+00:00",
+   "source_id": "cl_search_ned_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ned&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:42:07+00:00"
 }

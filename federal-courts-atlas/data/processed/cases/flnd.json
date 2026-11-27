@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "YOUNGQUIST v. PFIZER INC",
+   "court": "District Court, N.D. Florida",
+   "court_id": "flnd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-05690",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180859/youngquist-v-pfizer-inc/",
+   "courtlistener_id": 75180859,
+   "retrieved_at": "2026-11-27T07:35:03+00:00",
+   "source_id": "cl_search_flnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "WILLIAMS v. PFIZER INC",
+   "court": "District Court, N.D. Florida",
+   "court_id": "flnd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-05689",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180856/williams-v-pfizer-inc/",
+   "courtlistener_id": 75180856,
+   "retrieved_at": "2026-11-27T07:35:03+00:00",
+   "source_id": "cl_search_flnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "TURNER v. PFIZER INC",
+   "court": "District Court, N.D. Florida",
+   "court_id": "flnd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-05688",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180840/turner-v-pfizer-inc/",
+   "courtlistener_id": 75180840,
+   "retrieved_at": "2026-11-27T07:35:03+00:00",
+   "source_id": "cl_search_flnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "SNIPES v. PFIZER INC",
+   "court": "District Court, N.D. Florida",
+   "court_id": "flnd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-05687",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180836/snipes-v-pfizer-inc/",
+   "courtlistener_id": 75180836,
+   "retrieved_at": "2026-11-27T07:35:03+00:00",
+   "source_id": "cl_search_flnd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=flnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:35:03+00:00"
 }

@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Whitecotton v. Carver",
+   "court": "District Court, D. Idaho",
+   "court_id": "idd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00807",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179012/whitecotton-v-carver/",
+   "courtlistener_id": 75179012,
+   "retrieved_at": "2026-11-27T07:36:43+00:00",
+   "source_id": "cl_search_idd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Selland Construction, Inc. v. Worley Highway District",
+   "court": "District Court, D. Idaho",
+   "court_id": "idd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00805",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176545/selland-construction-inc-v-worley-highway-district/",
+   "courtlistener_id": 75176545,
+   "retrieved_at": "2026-11-27T07:36:43+00:00",
+   "source_id": "cl_search_idd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hoyt v. Northwestern Mutual Life Insurance Company",
+   "court": "District Court, D. Idaho",
+   "court_id": "idd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00804",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75171866/hoyt-v-northwestern-mutual-life-insurance-company/",
+   "courtlistener_id": 75171866,
+   "retrieved_at": "2026-11-27T07:36:43+00:00",
+   "source_id": "cl_search_idd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Allan",
+   "court": "District Court, D. Idaho",
+   "court_id": "idd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cr-00328",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75170527/united-states-v-allan/",
+   "courtlistener_id": 75170527,
+   "retrieved_at": "2026-11-27T07:36:43+00:00",
+   "source_id": "cl_search_idd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Hernandez",
+   "court": "District Court, D. Idaho",
+   "court_id": "idd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cr-00329",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75170279/united-states-v-hernandez/",
+   "courtlistener_id": 75170279,
+   "retrieved_at": "2026-11-27T07:36:43+00:00",
+   "source_id": "cl_search_idd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=idd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:36:43+00:00"
 }

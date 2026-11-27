@@ -16,8 +16,8 @@ from __future__ import annotations
 
 import re
 
-from .crosswalk import district_from_prose
-from .packets import all_district_rows, find_table, labelled_rows, packet_text, split_tables
+from .crosswalk import district_from_header, district_from_prose
+from .packets import Table, all_district_rows, find_table, labelled_rows, packet_text, split_tables
 from .validate import OFFENSE_LABELS, _norm
 
 PT = "FY_SEP30"
@@ -63,11 +63,41 @@ def note_districts(text: str) -> list[tuple[float, str | None, str]]:
             for n, name in NOTE_RE.findall(text)]
 
 
+_HEADER_LINE = re.compile(r"\bNational\b")
+
+
+def column_header(table: Table) -> str | None:
+    """The district column header of a district-packet table: the text after 'National' on the
+    first number-free header line ('National   Middle Louisiana' -> 'Middle Louisiana')."""
+    for ln in table.lines[:25]:
+        if _HEADER_LINE.search(ln) and not re.search(r"\d", ln):
+            rest = re.sub(r"\s+", " ", _HEADER_LINE.sub(" ", ln, count=1)).strip()
+            if rest:
+                return rest
+    return None
+
+
+def header_problem(table: Table, did: str) -> str | None:
+    """Why ``table`` must not be used for ``did`` judged by its column header, or None if the header
+    names ``did``. The header labels the column the values are read from, so it is authoritative: the
+    FY1998 W.D. La. packet (LAW98.pdf) is M.D. La.'s packet throughout ('Middle Louisiana' in every
+    header) although only some of its notes name a district."""
+    h = column_header(table)
+    if h is None:
+        return "no 'National | <district>' column header found"
+    rid = district_from_header(h)
+    if rid != did:
+        return f"column header reads '{h}' ({rid or 'not a single district'})"
+    return None
+
+
 def district_values(fy: int, did: str, text: str, src: str, fname: str, national: bool = False,
                     problems: list | None = None) -> list[dict]:
     """Cases total, offense mix and imprisonment length for one district (or 'US' columns).
 
     Safety checks (the FY1995-FY2001 packets contain copy-and-paste slips):
+      * a table whose district column header does not name this district is not used (the header
+        labels the column the values come from);
       * a table whose notes name a *different* district is not used for this district;
       * the cases total is taken only from notes that name this district, and only if they agree;
       * Table 7 needs a complete TOTAL row (6 numbers); counts must not exceed the cases total.
@@ -82,9 +112,11 @@ def district_values(fy: int, did: str, text: str, src: str, fname: str, national
     def foreign(t) -> str | None:
         if national:
             return None
+        if (bad_header := header_problem(t, did)) is not None:
+            return bad_header
         for _n, rid, raw in note_districts(t.text):
             if rid is not None and rid != did:
-                return f"{raw} ({rid})"
+                return f"note names {raw} ({rid})"
         return None
 
     # cases total
@@ -114,7 +146,7 @@ def district_values(fy: int, did: str, text: str, src: str, fname: str, national
 
     t1 = find_table(tables, 1)
     if t1 is not None and (bad := foreign(t1)):
-        problems.append((fy, did, "offense mix (Table 1)", f"Table 1 note names another district: {bad}"))
+        problems.append((fy, did, "offense mix (Table 1)", f"Table 1 not for this district: {bad}"))
         t1 = None
     if t1 is not None:
         counts: dict[str, float] = {}
@@ -155,7 +187,7 @@ def district_values(fy: int, did: str, text: str, src: str, fname: str, national
     if t7 is None:
         problems.append((fy, did, "imprisonment length (Table 7)", "Table 7 heading not found in the PDF text layer"))
     elif bad := foreign(t7):
-        problems.append((fy, did, "imprisonment length (Table 7)", f"Table 7 note names another district: {bad}"))
+        problems.append((fy, did, "imprisonment length (Table 7)", f"Table 7 not for this district: {bad}"))
     else:
         done = False
         for label, nums in labelled_rows(t7):

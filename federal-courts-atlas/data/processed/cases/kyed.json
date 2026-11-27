@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Center for Responsible Commerce v. Lexington-Fayette Urban County Government",
+   "court": "District Court, E.D. Kentucky",
+   "court_id": "kyed",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00460",
+   "docket_type": "cv",
+   "nature_of_suit": "440 Civil Rights: Other",
+   "cause": "42:1983 Civil Rights Act",
+   "url": "https://www.courtlistener.com/docket/75161757/center-for-responsible-commerce-v-lexington-fayette-urban-county/",
+   "courtlistener_id": 75161757,
+   "retrieved_at": "2026-11-27T07:38:49+00:00",
+   "source_id": "cl_search_kyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Johnson v. Darrat",
+   "court": "District Court, E.D. Kentucky",
+   "court_id": "kyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00463",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179702/johnson-v-darrat/",
+   "courtlistener_id": 75179702,
+   "retrieved_at": "2026-11-27T07:38:49+00:00",
+   "source_id": "cl_search_kyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mensah v. United States",
+   "court": "District Court, E.D. Kentucky",
+   "court_id": "kyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00462",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174748/mensah-v-united-states/",
+   "courtlistener_id": 75174748,
+   "retrieved_at": "2026-11-27T07:38:49+00:00",
+   "source_id": "cl_search_kyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Deters v. Guilfoyle",
+   "court": "District Court, E.D. Kentucky",
+   "court_id": "kyed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00497",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174192/deters-v-guilfoyle/",
+   "courtlistener_id": 75174192,
+   "retrieved_at": "2026-11-27T07:38:49+00:00",
+   "source_id": "cl_search_kyed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Marsillett",
+   "court": "District Court, E.D. Kentucky",
+   "court_id": "kyed",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "6:26-cr-00141",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75165719/united-states-v-marsillett/",
+   "courtlistener_id": 75165719,
+   "retrieved_at": "2026-11-27T07:38:49+00:00",
+   "source_id": "cl_search_kyed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=kyed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:38:49+00:00"
 }

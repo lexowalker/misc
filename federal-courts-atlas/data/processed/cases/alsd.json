@@ -29,17 +29,17 @@
   },
   {
    "item_type": "recap_docket",
-   "case_name": "Southern Natural Gas Company, L.L.C. v. 15.64 Acres in Perry County, Alabama",
+   "case_name": "Aplin v. Noe Garcia-Montelongo",
    "court": "District Court, S.D. Alabama",
    "court_id": "alsd",
    "date_filed": "2026-11-20",
    "date_terminated": null,
-   "docket_number": "2:26-cv-00550",
+   "docket_number": "1:26-cv-00548",
    "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75154198/southern-natural-gas-company-llc-v-1564-acres-in-perry-county/",
-   "courtlistener_id": 75154198,
+   "nature_of_suit": "350 Motor Vehicle",
+   "cause": "28:1332 Diversity Action",
+   "url": "https://www.courtlistener.com/docket/75150917/aplin-v-noe-garcia-montelongo/",
+   "courtlistener_id": 75150917,
    "retrieved_at": "2026-11-27T06:38:52+00:00",
    "source_id": "cl_search_alsd_recap"
   },
@@ -98,6 +98,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=alsd&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:38:55+00:00"
 }

@@ -78,3 +78,48 @@ def reject_reason(case_name: str | None, docket_number: str | None = None, natur
         if t not in KEEP_TYPES:
             return f"docket case type {t!r} not civil/criminal"
     return None
+
+
+_YY_RE = re.compile(r"\d:(\d{2})-?(?:cv|cr)\b", re.I)
+
+
+def date_problem(date_filed: str | None, docket_number: str | None, retrieved_on: str) -> str | None:
+    """Reject items whose CourtListener dates are evidently wrong (source data errors).
+
+    * a filing date after the retrieval date;
+    * a RECAP docket number whose two-digit year ("1:83-cv-00594") disagrees with the filing year.
+    """
+    if not date_filed:
+        return "no filing date"
+    if date_filed[:10] > retrieved_on[:10]:
+        return "filing date after retrieval date (source data error)"
+    m = _YY_RE.search(docket_number or "")
+    if m and m.group(1) != date_filed[2:4]:
+        return "docket-number year disagrees with filing date (source data error)"
+    return None
+
+
+def defendant(case_name: str | None) -> str | None:
+    """Normalised text after the last ' v. ' in a caption ('Kholiqov v. Swearingen' -> 'swearingen')."""
+    parts = re.split(r"\s+v\.?\s+", case_name or "", flags=re.I)
+    if len(parts) < 2:
+        return None
+    d = re.sub(r"[^a-z0-9 ]+", " ", parts[-1].lower())
+    d = re.sub(r"\s+", " ", d).strip()
+    return d or None
+
+
+def detention_defendants(results: list[dict]) -> set[str]:
+    """Defendants named in immigration-detention habeas petitions (NOS 463 / cause 8:1105) in the results.
+
+    New RECAP dockets often have no nature of suit yet; a civil docket with no nature of suit whose defendant
+    also appears in such a petition is skipped as probably the same kind of petition.
+    """
+    out = set()
+    for x in results:
+        nos = (x.get("suitNature") or "").strip()
+        if nos.startswith("463") or SKIP_CAUSE.search((x.get("cause") or "").strip()):
+            d = defendant(x.get("caseName"))
+            if d:
+                out.add(d)
+    return out

@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "The Matter of the Estate of Sharon Faye Newman v. Compu-Link Corporation",
+   "court": "District Court, D. Montana",
+   "court_id": "mtd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-00085",
+   "docket_type": "cv",
+   "nature_of_suit": "Real Property: Foreclosure",
+   "cause": "28:1331 Fed. Question",
+   "url": "https://www.courtlistener.com/docket/75167085/the-matter-of-the-estate-of-sharon-faye-newman-v-compu-link-corporation/",
+   "courtlistener_id": 75167085,
+   "retrieved_at": "2026-11-27T07:42:05+00:00",
+   "source_id": "cl_search_mtd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Frankforter v. United States",
+   "court": "District Court, D. Montana",
+   "court_id": "mtd",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-00083",
+   "docket_type": "cv",
+   "nature_of_suit": "530 Habeas Corpus (General)",
+   "cause": "28:1651 Petition for Writ of Habeas Corpus",
+   "url": "https://www.courtlistener.com/docket/75154001/frankforter-v-united-states/",
+   "courtlistener_id": 75154001,
+   "retrieved_at": "2026-11-27T07:42:05+00:00",
+   "source_id": "cl_search_mtd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Moline v. Ercanbrack",
+   "court": "District Court, D. Montana",
+   "court_id": "mtd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "9:26-cv-00186",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178626/moline-v-ercanbrack/",
+   "courtlistener_id": 75178626,
+   "retrieved_at": "2026-11-27T07:42:05+00:00",
+   "source_id": "cl_search_mtd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Gardner",
+   "court": "District Court, D. Montana",
+   "court_id": "mtd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00122",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75147244/united-states-v-gardner/",
+   "courtlistener_id": 75147244,
+   "retrieved_at": "2026-11-27T07:42:05+00:00",
+   "source_id": "cl_search_mtd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Martelon",
+   "court": "District Court, D. Montana",
+   "court_id": "mtd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "9:26-cr-00056",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75143565/united-states-v-martelon/",
+   "courtlistener_id": 75143565,
+   "retrieved_at": "2026-11-27T07:42:05+00:00",
+   "source_id": "cl_search_mtd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=mtd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:42:05+00:00"
 }

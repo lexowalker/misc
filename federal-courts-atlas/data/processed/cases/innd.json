@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hadley v. Linde Gas & Equipment Inc.",
+   "court": "District Court, N.D. Indiana",
+   "court_id": "innd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00623",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179275/hadley-v-linde-gas-equipment-inc/",
+   "courtlistener_id": 75179275,
+   "retrieved_at": "2026-11-27T07:37:50+00:00",
+   "source_id": "cl_search_innd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Pelaez v. Good Brands Enterprises, Inc.",
+   "court": "District Court, N.D. Indiana",
+   "court_id": "innd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00586",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179274/pelaez-v-good-brands-enterprises-inc/",
+   "courtlistener_id": 75179274,
+   "retrieved_at": "2026-11-27T07:37:50+00:00",
+   "source_id": "cl_search_innd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Shively v. Smith",
+   "court": "District Court, N.D. Indiana",
+   "court_id": "innd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01735",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178911/shively-v-smith/",
+   "courtlistener_id": 75178911,
+   "retrieved_at": "2026-11-27T07:37:50+00:00",
+   "source_id": "cl_search_innd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Eternity Commerce Limited v. The Partnerships and Unincorporated Associations Identified On Schedule A",
+   "court": "District Court, N.D. Indiana",
+   "court_id": "innd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00585",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178301/eternity-commerce-limited-v-the-partnerships-and-unincorporated/",
+   "courtlistener_id": 75178301,
+   "retrieved_at": "2026-11-27T07:37:50+00:00",
+   "source_id": "cl_search_innd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Rodman",
+   "court": "District Court, N.D. Indiana",
+   "court_id": "innd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00125",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75166352/united-states-v-rodman/",
+   "courtlistener_id": 75166352,
+   "retrieved_at": "2026-11-27T07:37:50+00:00",
+   "source_id": "cl_search_innd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=innd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:37:50+00:00"
 }

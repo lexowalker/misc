@@ -1,4 +1,42 @@
 {
+ "casemix_letter_i_relabel:fcms_civil_type_copyright_patent_trademark": {
+  "lane": "fcms",
+  "description": "Civil case-mix letter I is printed as 'Intellectual Property Rights' in FY2021-FY2025, so fcms_civil_type_copyright_patent_trademark ('Copyright, Patent, and Trademark') has no value in those years; see fcms_civil_type_intellectual_property_rights. The AO relabelled letter I in FY2021 without stating the two categories are identical, so they are kept apart, not spliced.",
+  "variables": [
+   "fcms_civil_type_copyright_patent_trademark"
+  ],
+  "districts": "all",
+  "periods": [
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "reason": "category relabelled (by design)"
+ },
+ "casemix_letter_i_relabel:fcms_civil_type_intellectual_property_rights": {
+  "lane": "fcms",
+  "description": "Civil case-mix letter I is printed as 'Copyright, Patent, and Trademark' in FY2010-FY2020, so fcms_civil_type_intellectual_property_rights ('Intellectual Property Rights') has no value in those years; see fcms_civil_type_copyright_patent_trademark. The AO relabelled letter I in FY2021 without stating the two categories are identical, so they are kept apart, not spliced.",
+  "variables": [
+   "fcms_civil_type_intellectual_property_rights"
+  ],
+  "districts": "all",
+  "periods": [
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020
+  ],
+  "reason": "category relabelled (by design)"
+ },
  "cells:fcms_filings_per_judgeship_supervised_release_hearings:printed_supervised_release_hearings": {
   "lane": "fcms",
   "description": "285 values of fcms_filings_per_judgeship_supervised_release_hearings not published (akd: 1999,2000,2001; almd: 1999,2000,2001; alnd: 1999,2000,2001; alsd: 1999,2000,2001; ared: 1999,2000,2001; arwd: 1999,2000,2001; azd: 1999,2000,2001; cacd: 1999,2000,2001; caed: 1999,2000,2001; cand: 1999,2000,2001; casd: 1999,2000,2001; cod: 1999,2000,2001; ctd: 1999,2000,2001; dcd: 1999,2000,2001; ded: 1999,2000,2001; flmd: 1999,2000,2001; flnd: 1999,2000,2001; flsd: 1999,2000,2001; gamd: 1999,2000,2001; gand: 1999,2000,2001; gasd: 1999,2000,2001; gud: 1999,2000,2001; hid: 1999,2000,2001; iand: 1999,2000,2001; iasd: 1999,2000,2001; idd: 1999,2000,2001; ilcd: 1999,2000,2001; ilnd: 1999,2000,2001; ilsd: 1999,2000,2001; innd: 1999,2000,2001; insd: 1999,2000,2001; ksd: 1999,2000,2001; kyed: 1999,2000,2001; kywd: 1999,2000,2001; laed: 1999,2000,2001; lamd: 1999,2000,2001; lawd: 1999,2000,2001; mad: 1999,2000,2001; mdd: 1999,2000,2001; med: 1999,2000,2001; mied: 1999,2000,2001; miwd: 1999,2000,2001; mnd: 1999,2000,2001; moed: 1999,2000,2001; mowd: 1999,2000,2001; msnd: 1999,2000,2001; mssd: 1999,2000,2001; mtd: 1999,2000,2001; national: 1999,2000,2001; nced: 1999,2000,2001; ncmd: 1999,2000,2001; ncwd: 1999,2000,2001; ndd: 1999,2000,2001; ned: 1999,2000,2001; nhd: 1999,2000,2001; njd: 1999,2000,2001; nmd: 1999,2000,2001; nmid: 1999,2000,2001; nvd: 1999,2000,2001; nyed: 1999,2000,2001; nynd: 1999,2000,2001; nysd: 1999,2000,2001; nywd: 1999,2000,2001; ohnd: 1999,2000,2001; ohsd: 1999,2000,2001; oked: 1999,2000,2001; oknd: 1999,2000,2001; okwd: 1999,2000,2001; ord: 1999,2000,2001; paed: 1999,2000,2001; pamd: 1999,2000,2001; pawd: 1999,2000,2001; prd: 1999,2000,2001; rid: 1999,2000,2001; scd: 1999,2000,2001; sdd: 1999,2000,2001; tned: 1999,2000,2001; tnmd: 1999,2000,2001; tnwd: 1999,2000,2001; txed: 1999,2000,2001; txnd: 1999,2000,2001; txsd: 1999,2000,2001; txwd: 1999,2000,2001; utd: 1999,2000,2001; vaed: 1999,2000,2001; vawd: 1999,2000,2001; vid: 1999,2000,2001; vtd: 1999,2000,2001; waed: 1999,2000,2001; wawd: 1999,2000,2001; wied: 1999,2000,2001; wiwd: 1999,2000,2001; wvnd: 1999,2000,2001; wvsd: 1999,2000,2001; wyd: 1999,2000,2001).",
@@ -108,6 +146,34 @@
    2001
   ],
   "reason": "printed '-': supervised release hearings were added to the profiles beginning with FY2002 (Explanation of Selected Terms)"
+ },
+ "cells:fcms_jurors_avg_present:printed_but_no_jury_selection_was_he": {
+  "lane": "fcms",
+  "description": "1 values of fcms_jurors_avg_present not published (nmid: 2024).",
+  "variables": [
+   "fcms_jurors_avg_present"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   2024
+  ],
+  "reason": "printed '0' but no jury selection was held (0 jurors present); not a measured value"
+ },
+ "cells:fcms_jurors_pct_not_selected:printed_but_no_jury_selection_was_he": {
+  "lane": "fcms",
+  "description": "1 values of fcms_jurors_pct_not_selected not published (nmid: 2024).",
+  "variables": [
+   "fcms_jurors_pct_not_selected"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   2024
+  ],
+  "reason": "printed '0' but no jury selection was held (0 jurors present); not a measured value"
  },
  "cells:fcms_median_months_civil_filing_to_trial:printed_the_ao_does_not_compute_a_m": {
   "lane": "fcms",
@@ -878,6 +944,20 @@
   ],
   "reason": "not applicable: the D.C. Circuit has a single district, so no within-circuit standing is printed"
  },
+ "cells:fcms_rank_circuit_trials_completed_per_judgeship:rank_cell_blank_in_source_no_standing_p": {
+  "lane": "fcms",
+  "description": "1 values of fcms_rank_circuit_trials_completed_per_judgeship not published (nmid: 2024).",
+  "variables": [
+   "fcms_rank_circuit_trials_completed_per_judgeship"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   2024
+  ],
+  "reason": "rank cell blank in source (no standing printed; the value cell is blank too)"
+ },
  "cells:fcms_rank_circuit_weighted_filings_per_judgeship:not_applicable_the_d_c_circuit_has_a_s": {
   "lane": "fcms",
   "description": "22 values of fcms_rank_circuit_weighted_filings_per_judgeship not published (dcd: 2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025).",
@@ -1070,6 +1150,20 @@
   ],
   "reason": "rank printed as '-' (not ranked)"
  },
+ "cells:fcms_rank_us_trials_completed_per_judgeship:rank_cell_blank_in_source_no_standing_p": {
+  "lane": "fcms",
+  "description": "1 values of fcms_rank_us_trials_completed_per_judgeship not published (nmid: 2024).",
+  "variables": [
+   "fcms_rank_us_trials_completed_per_judgeship"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   2024
+  ],
+  "reason": "rank cell blank in source (no standing printed; the value cell is blank too)"
+ },
  "cells:fcms_rank_us_weighted_filings_per_judgeship:rank_printed_as_not_ranked": {
   "lane": "fcms",
   "description": "66 values of fcms_rank_us_weighted_filings_per_judgeship not published (gud: 2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025; nmid: 2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025; vid: 2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025).",
@@ -1201,6 +1295,58 @@
    2003
   ],
   "reason": "only printed for the profile's own year"
+ },
+ "rank_5yr_change_not_printed:circuit": {
+  "lane": "fcms",
+  "description": "The 'Over Earlier Years' numerical standing (rank of the 5-year % change in filings) is printed only in the FY2004-09 and FY2011 layouts. The regenerated FY2010 file and the FY2012+ layouts print one standing for the percent-change row, which ranks the 1-year change (fcms_rank_circuit_pct_change_filings_1yr). The 5-year change itself is still emitted (fcms_pct_change_filings_5yr).",
+  "variables": [
+   "fcms_rank_circuit_pct_change_filings_5yr"
+  ],
+  "districts": "all",
+  "periods": [
+   2010,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "reason": "not printed in this layout (by design)"
+ },
+ "rank_5yr_change_not_printed:us": {
+  "lane": "fcms",
+  "description": "The 'Over Earlier Years' numerical standing (rank of the 5-year % change in filings) is printed only in the FY2004-09 and FY2011 layouts. The regenerated FY2010 file and the FY2012+ layouts print one standing for the percent-change row, which ranks the 1-year change (fcms_rank_us_pct_change_filings_1yr). The 5-year change itself is still emitted (fcms_pct_change_filings_5yr).",
+  "variables": [
+   "fcms_rank_us_pct_change_filings_5yr"
+  ],
+  "districts": "all",
+  "periods": [
+   2010,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "reason": "not printed in this layout (by design)"
  },
  "scanned_profiles": {
   "lane": "fcms",

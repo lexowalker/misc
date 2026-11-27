@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lloyd v. Kimmel",
+   "court": "District Court, S.D. Iowa",
+   "court_id": "iasd",
+   "date_filed": "2026-11-16",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00503",
+   "docket_type": "cv",
+   "nature_of_suit": "550 Prisoner: Civil Rights",
+   "cause": "42:1983 Prisoner Civil Rights",
+   "url": "https://www.courtlistener.com/docket/75125595/lloyd-v-kimmel/",
+   "courtlistener_id": 75125595,
+   "retrieved_at": "2026-11-27T07:38:45+00:00",
+   "source_id": "cl_search_iasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Schlote v. Pherigo",
+   "court": "District Court, S.D. Iowa",
+   "court_id": "iasd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00513",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174917/schlote-v-pherigo/",
+   "courtlistener_id": 75174917,
+   "retrieved_at": "2026-11-27T07:38:45+00:00",
+   "source_id": "cl_search_iasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Green v. Iowa Health System",
+   "court": "District Court, S.D. Iowa",
+   "court_id": "iasd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00510",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75169095/green-v-iowa-health-system/",
+   "courtlistener_id": 75169095,
+   "retrieved_at": "2026-11-27T07:38:45+00:00",
+   "source_id": "cl_search_iasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Easton v. Wapello County District Court",
+   "court": "District Court, S.D. Iowa",
+   "court_id": "iasd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00511",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75169090/easton-v-wapello-county-district-court/",
+   "courtlistener_id": 75169090,
+   "retrieved_at": "2026-11-27T07:38:45+00:00",
+   "source_id": "cl_search_iasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Davis",
+   "court": "District Court, S.D. Iowa",
+   "court_id": "iasd",
+   "date_filed": "2026-11-19",
+   "date_terminated": "2026-11-19",
+   "docket_number": "4:26-cr-00135",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75160930/united-states-v-davis/",
+   "courtlistener_id": 75160930,
+   "retrieved_at": "2026-11-27T07:38:45+00:00",
+   "source_id": "cl_search_iasd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=iasd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:38:45+00:00"
 }

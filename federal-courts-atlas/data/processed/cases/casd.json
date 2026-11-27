@@ -13,22 +13,6 @@
  "items": [
   {
    "item_type": "recap_docket",
-   "case_name": "Kight v. United Airlines, Inc.",
-   "court": "District Court, S.D. California",
-   "court_id": "casd",
-   "date_filed": "2026-11-25",
-   "date_terminated": null,
-   "docket_number": "3:26-cv-06736",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75179620/kight-v-united-airlines-inc/",
-   "courtlistener_id": 75179620,
-   "retrieved_at": "2026-11-27T06:43:09+00:00",
-   "source_id": "cl_search_casd_recap"
-  },
-  {
-   "item_type": "recap_docket",
    "case_name": "Silva v. JPMorgan Chase Bank, N.A.",
    "court": "District Court, S.D. California",
    "court_id": "casd",
@@ -40,6 +24,22 @@
    "cause": "47:227 Restrictions of Use of Telephone Equipment",
    "url": "https://www.courtlistener.com/docket/75179581/silva-v-jpmorgan-chase-bank-na/",
    "courtlistener_id": 75179581,
+   "retrieved_at": "2026-11-27T06:43:09+00:00",
+   "source_id": "cl_search_casd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Ivey v. AngioDynamics, Inc.",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-06731",
+   "docket_type": "cv",
+   "nature_of_suit": "367 Personal Injury: Health Care/Pharmaceutical Personal Injury Product Liability",
+   "cause": "28:1332 Diversity Action",
+   "url": "https://www.courtlistener.com/docket/75179497/ivey-v-angiodynamics-inc/",
+   "courtlistener_id": 75179497,
    "retrieved_at": "2026-11-27T06:43:09+00:00",
    "source_id": "cl_search_casd_recap"
   },
@@ -98,6 +98,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=casd&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:43:47+00:00"
 }

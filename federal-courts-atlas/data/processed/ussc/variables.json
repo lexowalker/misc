@@ -7,7 +7,8 @@
   "description": "Number of individual offenders sentenced in the district in the fiscal year and reported to the U.S. Sentencing Commission (records in the USSC Individual Offender datafile; before FY2018 the USSC called these 'guideline cases'). Organizational defendants, resentencings and appeals are not included.",
   "caveats": [
    "Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; see ussc_cases_total and the n_basis column before comparing percentages.",
-   "FY1995-FY2001 values are the district totals printed in the USSC Statistical Information Packet (Table 1 note); FY2002+ are counts of datafile records, which reproduce the packet totals exactly."
+   "FY1995-FY2001 values are the district totals printed in the USSC Statistical Information Packet (Table 1 note); FY2002+ are counts of datafile records, which reproduce the packet totals exactly.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more individuals sentenced",
   "first_period": 1995,
@@ -818,7 +819,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_cases_range_known",
@@ -996,6 +999,13 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005
+  ],
+  "derived_formula_by_basis": {
+   "pooled_published_halves": "N_first_half + N_second_half (FY2004 pre/post-Blakely, FY2005 pre/post-Booker half-year tables)"
   }
  },
  {
@@ -1184,6 +1194,13 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005
+  ],
+  "derived_formula_by_basis": {
+   "pooled_published_halves": "100 * (n_first_half + n_second_half) / (N_first_half + N_second_half): the full fiscal year pooled from the two half-year tables the USSC printed (FY2004 pre/post-Blakely, FY2005 pre/post-Booker)"
   }
  },
  {
@@ -1362,6 +1379,13 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005
+  ],
+  "derived_formula_by_basis": {
+   "pooled_published_halves": "100 * (n_first_half + n_second_half) / (N_first_half + N_second_half): the full fiscal year pooled from the two half-year tables the USSC printed (FY2004 pre/post-Blakely, FY2005 pre/post-Booker)"
   }
  },
  {
@@ -1485,7 +1509,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_above_range",
@@ -1569,7 +1595,9 @@
    "2017": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_govt_sponsored_below_range",
@@ -1653,7 +1681,9 @@
    "2017": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_non_govt_sponsored_below_range",
@@ -1737,7 +1767,9 @@
    "2017": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_above_range_2018scheme",
@@ -1822,6 +1854,24 @@
    "2025": [
     "sum_of_published_components"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * (Upward Departure + Upward Variance (SENTRNGE 1, 6)) / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years",
+   "sum_of_published_components": "100 * (Upward Departure + Upward Variance (SENTRNGE 1, 6)) / cases with SENTRNGE non-missing (sum of USSC-published SENTRNGE components)"
   }
  },
  {
@@ -1907,6 +1957,24 @@
    "2025": [
     "sum_of_published_components"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * (\u00a75K1.1 + \u00a75K3.1 + Other Government Motion departure + Government Motion downward variance (SENTRNGE 2, 3, 4, 7)) / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years",
+   "sum_of_published_components": "100 * (\u00a75K1.1 + \u00a75K3.1 + Other Government Motion departure + Government Motion downward variance (SENTRNGE 2, 3, 4, 7)) / cases with SENTRNGE non-missing (sum of USSC-published SENTRNGE components)"
   }
  },
  {
@@ -1992,6 +2060,24 @@
    "2025": [
     "sum_of_published_components"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * (Non-Government Departure + Non-Government downward Variance (SENTRNGE 5, 8)) / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years",
+   "sum_of_published_components": "100 * (Non-Government Departure + Non-Government downward Variance (SENTRNGE 5, 8)) / cases with SENTRNGE non-missing (sum of USSC-published SENTRNGE components)"
   }
  },
  {
@@ -2076,6 +2162,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * upward_departure / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2160,6 +2255,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * other_govt_motion_departure / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2244,6 +2348,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * non_govt_downward_departure / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2328,6 +2441,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * upward_variance / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2412,6 +2534,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * govt_motion_downward_variance / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2496,6 +2627,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * non_govt_downward_variance / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2580,6 +2720,15 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_supplemental": "100 * variance / cases with SENTRNGE non-missing, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main datafile for DISTRICT; the USSC did not publish district tables on this basis for these years"
   }
  },
  {
@@ -2723,6 +2872,27 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "100 * (prison_only + prison_with_alternatives) / cases_with_sentence_type, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -2733,12 +2903,13 @@
   "description": "Mean sentence length in months under the USSC's FY2018+ convention: imprisonment plus months of alternative confinement, probation-only and fine-only sentences counted as 0 months, terms over 470 months set to 470 (life = 470). Variable SENSPCAP (FY2018+); for FY2002-FY2017 the identical rule applied to SENSPLT0.",
   "caveats": [
    "FY2018-FY2025 reproduce packet Table 7 'Sentence length'. FY2002-FY2017 are computed by this lane with the same rule; the USSC's own packets for those years published only the length of imprisonment (see ussc_mean_prison_months).",
+   "Cases with no sentence-length value (SENSPLT0/SENSPCAP missing: 746 records nationally in FY2002, falling to 0-2 a year from FY2017) are left out of the mean, the median and N (n_basis), as the USSC leaves out a missing SENSPCAP. Before 2026-11-27 this lane wrongly counted them as 469.99 months in FY2002-FY2017 (statistics audit, blocker 1); corrected.",
    "Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; see ussc_cases_total and the n_basis column before comparing percentages."
   ],
   "higher_means": "longer sentences",
   "first_period": 2002,
   "last_period": 2025,
-  "formula": "mean(min(SENSPCAP or SENSPLT0, 470))",
+  "formula": "mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value",
   "derived": false,
   "breaks": [],
   "source_ids": [
@@ -2866,6 +3037,27 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -2881,7 +3073,7 @@
   "higher_means": "longer sentences",
   "first_period": 2002,
   "last_period": 2025,
-  "formula": "median(min(SENSPCAP or SENSPLT0, 470))",
+  "formula": "median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value",
   "derived": false,
   "breaks": [],
   "source_ids": [
@@ -3009,6 +3201,27 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -3828,6 +4041,21 @@
    "2025": [
     "computed_ussc_definition"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "mean(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -4647,6 +4875,21 @@
    "2025": [
     "computed_ussc_definition"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "median(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -4656,7 +4899,8 @@
   "period_type": "FY_SEP30",
   "description": "Number of individuals in the denominator of ussc_mean_prison_months (prison term > 0 months, known primary offense).",
   "caveats": [
-   "Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; see ussc_cases_total and the n_basis column before comparing percentages."
+   "Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; see ussc_cases_total and the n_basis column before comparing percentages.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more prison sentences",
   "first_period": 1995,
@@ -5465,6 +5709,21 @@
    "2025": [
     "computed_ussc_definition"
    ]
+  },
+  "derived_years": [
+   2004,
+   2005,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "derived_formula_by_basis": {
+   "computed_ussc_definition": "count(SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -5474,7 +5733,8 @@
   "period_type": "FY_SEP30",
   "description": "Denominator of the offense-mix shares: individuals with a known primary offense type.",
   "caveats": [
-   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography."
+   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more cases",
   "first_period": 1995,
@@ -5822,7 +6082,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -6167,7 +6426,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -6290,7 +6549,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_drug_trafficking",
@@ -6658,7 +6919,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -7003,7 +7263,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -7126,7 +7386,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_drug_trafficking",
@@ -7136,7 +7398,8 @@
   "description": "Number of individuals whose primary offense type is drug trafficking.",
   "caveats": [
    "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
-   "'Drugs - Trafficking, Manufacturing, and Importing' (code 10) before FY2018; 'Drug Trafficking' (OFFGUIDE 10) after. Drug communication-facility and simple-possession cases are not included."
+   "'Drugs - Trafficking, Manufacturing, and Importing' (code 10) before FY2018; 'Drug Trafficking' (OFFGUIDE 10) after. Drug communication-facility and simple-possession cases are not included.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more drug trafficking cases",
   "first_period": 1995,
@@ -7484,7 +7747,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -7829,7 +8091,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -7952,7 +8214,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_immigration",
@@ -8319,7 +8583,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -8664,7 +8927,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -8787,7 +9050,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_immigration",
@@ -8796,7 +9061,8 @@
   "period_type": "FY_SEP30",
   "description": "Number of individuals whose primary offense type is immigration.",
   "caveats": [
-   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography."
+   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more immigration cases",
   "first_period": 1995,
@@ -9144,7 +9410,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -9489,7 +9754,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -9612,7 +9877,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_firearms",
@@ -9979,7 +10246,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -10324,7 +10590,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -10447,7 +10713,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_firearms",
@@ -10456,7 +10724,8 @@
   "period_type": "FY_SEP30",
   "description": "Number of individuals whose primary offense type is firearms.",
   "caveats": [
-   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography."
+   "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more firearms cases",
   "first_period": 1995,
@@ -10804,7 +11073,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -11149,7 +11417,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -11272,7 +11540,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_fraud",
@@ -11632,7 +11902,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -11977,7 +12246,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -12068,7 +12337,9 @@
    "2017": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_fraud",
@@ -12078,7 +12349,8 @@
   "description": "Number of individuals whose primary offense type is fraud.",
   "caveats": [
    "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
-   "USSC category 'Fraud' (OFFTYPE2/OFFTYPSB code 18), which excludes embezzlement, larceny and forgery/counterfeiting. From FY2018 the USSC merged fraud, theft and embezzlement into one guideline-based category: see ussc_pct_offense_fraud_theft_embezzlement."
+   "USSC category 'Fraud' (OFFTYPE2/OFFTYPSB code 18), which excludes embezzlement, larceny and forgery/counterfeiting. From FY2018 the USSC merged fraud, theft and embezzlement into one guideline-based category: see ussc_pct_offense_fraud_theft_embezzlement.",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more fraud cases",
   "first_period": 1995,
@@ -12418,7 +12690,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -12763,7 +13034,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -12854,7 +13125,9 @@
    "2017": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_fraud_theft_embezzlement",
@@ -12927,7 +13200,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_fraud_theft_embezzlement",
@@ -12990,7 +13265,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_child_pornography",
@@ -13103,7 +13380,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_count_offense_child_pornography",
@@ -13206,7 +13485,9 @@
    "2025": [
     "reproduces_published"
    ]
-  }
+  },
+  "derived_years": [],
+  "derived_formula_by_basis": {}
  },
  {
   "id": "ussc_pct_offense_other",
@@ -13574,7 +13855,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -13919,7 +14199,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -14042,6 +14322,18 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001
+  ],
+  "derived_formula_by_basis": {
+   "derived_from_published_counts": "100 * (packet Table 1 TOTAL - (drug trafficking + immigration + firearms + fraud rows)) / Table 1 TOTAL"
   }
  },
  {
@@ -14052,7 +14344,8 @@
   "description": "Number of individuals whose primary offense type is all other offense types.",
   "caveats": [
    "Primary offense type is the variable the USSC used in that year's own Sourcebook and packets: OFFTYPE2 (FY1995-FY2009) and OFFTYPSB (FY2010-FY2017), both assigned from the count of conviction with the highest statutory maximum; OFFGUIDE (FY2018+), assigned mainly from the primary sentencing guideline the court applied. The FY2018 change of basis is a definitional break for every offense category; the USSC uses the same category names on both sides of it for drug trafficking, immigration, firearms and child pornography.",
-   "Everything not in the named categories, so its composition changes at each break (FY2010: child pornography leaves 'other'; FY2018: theft and embezzlement leave 'other')."
+   "Everything not in the named categories, so its composition changes at each break (FY2010: child pornography leaves 'other'; FY2018: theft and embezzlement leave 'other').",
+   "FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by 57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly."
   ],
   "higher_means": "more all other offense types cases",
   "first_period": 1995,
@@ -14400,7 +14693,6 @@
    "ussc_packet_fy1998_kyw",
    "ussc_packet_fy1998_lae",
    "ussc_packet_fy1998_lam",
-   "ussc_packet_fy1998_law",
    "ussc_packet_fy1998_ma",
    "ussc_packet_fy1998_md",
    "ussc_packet_fy1998_me",
@@ -14745,7 +15037,7 @@
    "1995": 93,
    "1996": 93,
    "1997": 93,
-   "1998": 94,
+   "1998": 93,
    "1999": 94,
    "2000": 94,
    "2001": 94,
@@ -14868,6 +15160,18 @@
    "2025": [
     "reproduces_published"
    ]
+  },
+  "derived_years": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001
+  ],
+  "derived_formula_by_basis": {
+   "derived_from_published_counts": "packet Table 1 TOTAL - (drug trafficking + immigration + firearms + fraud rows)"
   }
  }
 ]

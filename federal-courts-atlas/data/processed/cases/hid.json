@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Rana v. Sysco",
+   "court": "District Court, D. Hawaii",
+   "court_id": "hid",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00595",
+   "docket_type": "cv",
+   "nature_of_suit": "442 Civil Rights: Jobs",
+   "cause": "28:1331 Fed. Question: Employment Discrimination",
+   "url": "https://www.courtlistener.com/docket/75156112/rana-v-sysco/",
+   "courtlistener_id": 75156112,
+   "retrieved_at": "2026-11-27T07:36:42+00:00",
+   "source_id": "cl_search_hid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Finafinau v. Marine Minerals Administration",
+   "court": "District Court, D. Hawaii",
+   "court_id": "hid",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00592",
+   "docket_type": "cv",
+   "nature_of_suit": "899 Other Statutes: Administrative Procedures Act/Review or Appeal of Agency Decision",
+   "cause": "05:702 Administrative Procedure Act",
+   "url": "https://www.courtlistener.com/docket/75136944/finafinau-v-marine-minerals-administration/",
+   "courtlistener_id": 75136944,
+   "retrieved_at": "2026-11-27T07:36:42+00:00",
+   "source_id": "cl_search_hid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Farias v. Kalshi, Inc.",
+   "court": "District Court, D. Hawaii",
+   "court_id": "hid",
+   "date_filed": "2026-11-17",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00591",
+   "docket_type": "cv",
+   "nature_of_suit": "890 Other Statutory Actions",
+   "cause": "28:1441 Petition for Removal",
+   "url": "https://www.courtlistener.com/docket/75135109/farias-v-kalshi-inc/",
+   "courtlistener_id": 75135109,
+   "retrieved_at": "2026-11-27T07:36:42+00:00",
+   "source_id": "cl_search_hid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Corpuz",
+   "court": "District Court, D. Hawaii",
+   "court_id": "hid",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00142",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75172295/united-states-v-corpuz/",
+   "courtlistener_id": 75172295,
+   "retrieved_at": "2026-11-27T07:36:42+00:00",
+   "source_id": "cl_search_hid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Acklin",
+   "court": "District Court, D. Hawaii",
+   "court_id": "hid",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00141",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75170285/united-states-v-acklin/",
+   "courtlistener_id": 75170285,
+   "retrieved_at": "2026-11-27T07:36:42+00:00",
+   "source_id": "cl_search_hid_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=hid&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:36:42+00:00"
 }

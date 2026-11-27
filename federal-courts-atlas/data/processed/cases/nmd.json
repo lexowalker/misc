@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "O'Keefe v. Wexford Health Services Inc.",
+   "court": "District Court, D. New Mexico",
+   "court_id": "nmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04015",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179264/okeefe-v-wexford-health-services-inc/",
+   "courtlistener_id": 75179264,
+   "retrieved_at": "2026-11-27T07:43:02+00:00",
+   "source_id": "cl_search_nmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "New Mexico Department of Homeland Security and Emergency Management v. Hamilton",
+   "court": "District Court, D. New Mexico",
+   "court_id": "nmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04007",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176953/new-mexico-department-of-homeland-security-and-emergency-management-v/",
+   "courtlistener_id": 75176953,
+   "retrieved_at": "2026-11-27T07:43:02+00:00",
+   "source_id": "cl_search_nmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Murphy v. United States",
+   "court": "District Court, D. New Mexico",
+   "court_id": "nmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04009",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176945/murphy-v-united-states/",
+   "courtlistener_id": 75176945,
+   "retrieved_at": "2026-11-27T07:43:02+00:00",
+   "source_id": "cl_search_nmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Ramirez-Mendez",
+   "court": "District Court, D. New Mexico",
+   "court_id": "nmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cr-06264",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175497/united-states-v-ramirez-mendez/",
+   "courtlistener_id": 75175497,
+   "retrieved_at": "2026-11-27T07:43:02+00:00",
+   "source_id": "cl_search_nmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Hernandez-Perez",
+   "court": "District Court, D. New Mexico",
+   "court_id": "nmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cr-06263",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175493/united-states-v-hernandez-perez/",
+   "courtlistener_id": 75175493,
+   "retrieved_at": "2026-11-27T07:43:02+00:00",
+   "source_id": "cl_search_nmd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nmd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:43:02+00:00"
 }

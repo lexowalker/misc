@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "CASTRO TISTA v. WILSON",
+   "court": "District Court, D. New Jersey",
+   "court_id": "njd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-15238",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180995/castro-tista-v-wilson/",
+   "courtlistener_id": 75180995,
+   "retrieved_at": "2026-11-27T07:42:59+00:00",
+   "source_id": "cl_search_njd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "v. DELANEY HALL",
+   "court": "District Court, D. New Jersey",
+   "court_id": "njd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-15236",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180980/v-delaney-hall/",
+   "courtlistener_id": 75180980,
+   "retrieved_at": "2026-11-27T07:42:59+00:00",
+   "source_id": "cl_search_njd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "REMBERTO OSORIO v. WARDEN DELANEY HALL DETENTION FACILITY",
+   "court": "District Court, D. New Jersey",
+   "court_id": "njd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-15234",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180918/remberto-osorio-v-warden-delaney-hall-detention-facility/",
+   "courtlistener_id": 75180918,
+   "retrieved_at": "2026-11-27T07:42:59+00:00",
+   "source_id": "cl_search_njd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "FLITSANOV v. CJMK INC.",
+   "court": "District Court, D. New Jersey",
+   "court_id": "njd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-15225",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179524/flitsanov-v-cjmk-inc/",
+   "courtlistener_id": 75179524,
+   "retrieved_at": "2026-11-27T07:42:59+00:00",
+   "source_id": "cl_search_njd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=njd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:42:59+00:00"
 }

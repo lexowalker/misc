@@ -13,22 +13,6 @@
  "items": [
   {
    "item_type": "recap_docket",
-   "case_name": "Coleman v. Williams (INMATE 1)",
-   "court": "District Court, M.D. Alabama",
-   "court_id": "almd",
-   "date_filed": "2026-11-25",
-   "date_terminated": null,
-   "docket_number": "2:26-cv-00984",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75177019/coleman-v-williams-inmate-1/",
-   "courtlistener_id": 75177019,
-   "retrieved_at": "2026-11-27T06:38:43+00:00",
-   "source_id": "cl_search_almd_recap"
-  },
-  {
-   "item_type": "recap_docket",
    "case_name": "Harris v. Hanon Systems Alabama Corporation",
    "court": "District Court, M.D. Alabama",
    "court_id": "almd",
@@ -40,6 +24,22 @@
    "cause": "42:12101 Americans with Disabilities Act",
    "url": "https://www.courtlistener.com/docket/75176941/harris-v-hanon-systems-alabama-corporation/",
    "courtlistener_id": 75176941,
+   "retrieved_at": "2026-11-27T06:38:43+00:00",
+   "source_id": "cl_search_almd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Valley National Bank v. Drastic Air Montgomery, LLC",
+   "court": "District Court, M.D. Alabama",
+   "court_id": "almd",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00979",
+   "docket_type": "cv",
+   "nature_of_suit": "190 Contract: Other",
+   "cause": "28:1332 Diversity",
+   "url": "https://www.courtlistener.com/docket/75164439/valley-national-bank-v-drastic-air-montgomery-llc/",
+   "courtlistener_id": 75164439,
    "retrieved_at": "2026-11-27T06:38:43+00:00",
    "source_id": "cl_search_almd_recap"
   },
@@ -99,6 +99,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=almd&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:38:48+00:00"
 }

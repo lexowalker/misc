@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Castino v. United States",
+   "court": "District Court, N.D. Iowa",
+   "court_id": "iand",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-03056",
+   "docket_type": "cv",
+   "nature_of_suit": "Habeas Corpus (General)",
+   "cause": "28:2241 Petition for Writ of Habeas Corpus (Federal)",
+   "url": "https://www.courtlistener.com/docket/75162028/castino-v-united-states/",
+   "courtlistener_id": 75162028,
+   "retrieved_at": "2026-11-27T07:37:54+00:00",
+   "source_id": "cl_search_iand_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Morales Morales v. Agri-Zone, Inc",
+   "court": "District Court, N.D. Iowa",
+   "court_id": "iand",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-03055",
+   "docket_type": "cv",
+   "nature_of_suit": "790 Labor: Other",
+   "cause": "05:704 Labor Litigation",
+   "url": "https://www.courtlistener.com/docket/75139072/morales-morales-v-agri-zone-inc/",
+   "courtlistener_id": 75139072,
+   "retrieved_at": "2026-11-27T07:37:54+00:00",
+   "source_id": "cl_search_iand_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Langdeaux v. Skinner",
+   "court": "District Court, N.D. Iowa",
+   "court_id": "iand",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00244",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75167568/langdeaux-v-skinner/",
+   "courtlistener_id": 75167568,
+   "retrieved_at": "2026-11-27T07:37:54+00:00",
+   "source_id": "cl_search_iand_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Lopez Almendares",
+   "court": "District Court, N.D. Iowa",
+   "court_id": "iand",
+   "date_filed": "2026-11-16",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00089",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75125854/united-states-v-lopez-almendares/",
+   "courtlistener_id": 75125854,
+   "retrieved_at": "2026-11-27T07:37:54+00:00",
+   "source_id": "cl_search_iand_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Davenport",
+   "court": "District Court, N.D. Iowa",
+   "court_id": "iand",
+   "date_filed": "2026-11-10",
+   "date_terminated": "2026-11-10",
+   "docket_number": "1:26-cr-00088",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75097570/united-states-v-davenport/",
+   "courtlistener_id": 75097570,
+   "retrieved_at": "2026-11-27T07:37:54+00:00",
+   "source_id": "cl_search_iand_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=iand&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:37:54+00:00"
 }

@@ -11,7 +11,13 @@ USSC's published district packets for the variables they print. That is 31 years
 (~770 MB of datafile zips plus 829 packet PDFs; all cached by `pipeline.common.http.fetch`). A warm rebuild
 (everything cached) takes about 1 minute. All outputs and the `data/sources/ussc.json` and `data/gaps/ussc.json`
 fragments are rewritten from scratch on every run.
-**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_ussc*.py` (184 tests).
+**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_ussc*.py` (230 tests, including the
+statistics-audit regressions in `test_ussc_regressions.py`).
+
+**Audit fixes (2026-11-27).** The statistics audit (`docs/audits/stats_audit.md`) found two real errors, both
+now fixed: FY2002–FY2017 sentence length counted a missing `SENSPLT0` as 469.99 months (§3), and the FY1998
+W.D. La. offense mix was M.D. La.'s (§2). Lane-computed rows are now flagged `derived` per row (§3), and the
+FY1995–FY1999 packet sums are written out and logged (§2, §7).
 
 **Validation in one line:** the lane compared **60,030** published USSC numbers against its own
 computations from the datafiles. They include every district's row in the two all-district packet tables
@@ -87,21 +93,43 @@ The table lists every district. Cases total, Table 1 offense rows and the Table 
 district's own packet.
 
 These old packets contain copy-and-paste slips; for example, the FY1995 N.D. Ala. packet's Table 7 note
-describes "the District of Alaska". The lane therefore applies these checks:
+describes "the District of Alaska", and the whole FY1998 W.D. La. packet (`LAW98.pdf`) is M.D. La.'s packet: its
+cover says "Louisiana, West" but every table's district column is headed "Middle Louisiana". The lane therefore
+applies these checks:
+- A table is used only if its district column header ("National | <district>") names this district
+  (`fallback.header_problem`, `crosswalk.district_from_header`). The header labels the column the values come
+  from, so it is authoritative. Across all 2,626 FY1995–FY2001 packet tables with such a header, only these name another
+  court or only a state: FY1995 N.D. Ala. T6–7 ("Alaska"), E.D. Cal. T6–7 ("California, Central"), D. Colo. T6–7
+  ("Connecticut"), D.S.C. T3; FY1996 E.D. Ark. T3 ("Arkansas"); FY1997 C.D. Cal. T3 ("State of California");
+  FY1998 M.D. Ga. T7 ("Georgia"); FY1998 W.D. La. T1, T3, T6, T7 ("Middle Louisiana"). Of the tables the lane
+  reads (1 and 7), this check newly rejects only W.D. La. FY1998 Table 1. Before the audit that table was kept,
+  because its note names no district, and W.D. La. FY1998 carried M.D. La.'s 11 offense-mix values.
 - A table whose notes name a *different* district is not used for that district.
 - The cases total is taken only from notes naming the district itself, and only if all such notes agree.
 - A Table 7 TOTAL row that is broken in the text layer is skipped.
 - Counts may not exceed the cases total.
 
-Everything skipped is logged as a gap with its reason: 12 items in 10 district-years. For FY2000–FY2001 the
-district values sum exactly to the national totals, and the range denominators sum to the national figure
-in every fallback year (tested).
+Everything skipped is logged as a gap with its reason: 13 items in 10 district-years. A test asserts that no
+two districts share an identical offense-mix vector in any year (the W.D. La./M.D. La. FY1998 copy was the only
+one).
+
+**Packet sums vs national (`packet_reconciliation.csv`).** For FY2000–FY2001 the district values sum exactly to
+the national totals, and the range denominators (one all-district table) sum to the national figure in every
+fallback year (tested). FY1995–FY1999 do not always add up. With all 94 districts present, the only mismatch
+is FY1999 `ussc_cases_prison_term`: districts 45,436 vs national 45,379 (+57), a source inconsistency (the
+audit's independent re-read reproduces every district value; the N-weighted mean of district means equals the
+national mean, 56.9). In 29 other FY1995–FY1999 variable-years a shortfall remains where district-years are
+missing; it cannot be told apart from the missing districts' own counts and is **not** used to fill them.
+(The audit's FY1998 drug-trafficking example, 19,533 vs 19,615, included W.D. La.'s wrong value 32; with that
+cell removed, the FY1998 shortfalls in the offense counts sum exactly to the shortfall in offense-known cases,
+289.) Do not present FY1995–FY1999 district counts as summing to the nation; the count variables carry this
+caveat in `variables.json`, and the gap log has `ussc_fy1995_1999_packets_do_not_sum_to_national`.
 
 ## 3. Variable definitions
 
 All values are as the USSC computes them. Percentages run 0–100 and are rounded to 1 decimal, the USSC's
 own precision. Means and medians are in months, rounded to 1 decimal; from FY2011 the USSC prints them as
-integers. The observations table carries three extra columns: `basis`, `numerator` and `n_basis` (the
+integers. The observations table carries four extra columns: `basis`, `derived`, `numerator` and `n_basis` (the
 denominator, or the N behind a mean or median), so that small denominators can be flagged.
 
 `basis` values:
@@ -114,6 +142,16 @@ denominator, or the N behind a mean or median), so that small denominators can b
   statistic.
 - `sum_of_published_components`: FY2018+ four-way grouping.
 - `computed_ussc_supplemental`: FY2014–FY2017 values from the supplemental files.
+
+**`derived` (per row; DATA_CONTRACT rule 3).** `derived = true` for every basis except `reproduces_published`
+and `published_packet`, i.e. whenever the value is this lane's computation rather than a figure the USSC
+printed. A variable can be published in some years and derived in others, so `variables.json` adds
+`derived_years` (the years with derived rows) and `derived_formula_by_basis` (the formula to show on hover for
+each derived basis). The variable-level `derived` flag stays true only where every row is derived (the three
+`*_2018scheme` ids). Derived years: `ussc_pct_prison` and the probation-as-zero sentence measures FY2002–FY2017;
+`ussc_mean/median_prison_months` and `ussc_cases_prison_term` FY2004–FY2005 and FY2018–FY2025; the range shares
+and their denominator FY2004–FY2005 (pooled halves); offense "other" FY1995–FY2001; the SENTRNGE components
+FY2014–FY2017. `national.csv` carries the same column.
 
 **Guideline range.** The denominator is `ussc_cases_range_known`: cases whose sentence the USSC could compare
 with the range. Each scheme below lists its datafile variable and codes.
@@ -150,9 +188,19 @@ the FY2018+ packet Table 5 convention, applied to every year.
   Table 7 "Sentence length" convention. The quantity is months of imprisonment plus months of alternative
   confinement, with probation-only and fine-only cases counted as **0**. Terms over 470 months count as
   469.99 and life as 470; the packets say "470 months or greater (including life) … as 470 months". The
-  variable is `SENSPCAP` for FY2018+. For earlier years the same rule is applied to `SENSPLT0`. In FY2018,
-  FY2021 and FY2025 that rule applied to SENSPLT0 equals SENSPCAP record-for-record, except for one FY2021
-  record where SENSPCAP is missing. N = all cases with the value.
+  variable is `SENSPCAP` for FY2018+. For earlier years the same rule is applied to `SENSPLT0`
+  (`s.mask(s > 470, 469.99)`). A missing value stays missing and is left out of the mean, the median and N
+  (`n_basis` = cases with a non-missing value), as the USSC leaves out a missing SENSPCAP. In FY2018, FY2021 and
+  FY2025 the rule applied to SENSPLT0 equals SENSPCAP record-for-record, missing values included (tested; the
+  one FY2021 record with SENSPCAP missing has SENSPLT0 missing too).
+
+  **Corrected 2026-11-27 (statistics audit, blocker 1).** The code used `s.where(s <= 470, 469.99)`, which also
+  replaced every missing SENSPLT0 with 469.99 months, because `NaN <= 470` is False. That inflated FY2002–FY2017
+  means and medians and counted the missing records in N: 2,457 records (746 in FY2002, falling to 2 in FY2017).
+  The rebuild changed 414 mean and 116 median district cells and 416 district-year Ns. Examples (before → after):
+  E.D. La. FY2002 mean 91.3 → 51.3, median 37.0 → 33.0, N 408 → 369; D.P.R. FY2004 mean 96.3 → 62.1; C.D. Cal.
+  FY2007 mean 64.8 → 45.9; national FY2002/2003/2004 mean 51.5/50.2/50.9 → 46.6/47.2/48.4. FY2018+ was not
+  affected. Each value now matches the audit's independent recompute (pinned in `test_ussc_regressions.py`).
 - `ussc_mean_prison_months` / `ussc_median_prison_months` (FY1995–FY2025) follow the packet Table 7
   "(Average) length of imprisonment" convention used FY1995–FY2017. The variable is `SENTTOT`
   (imprisonment only; alternative confinement excluded) for cases with a term > 0 and a known primary
@@ -191,7 +239,7 @@ datafile record count; organizations, resentencings and appeals are excluded). T
 |---|---|---|---|---|---|
 | `ussc_cases_total` | 1995 | 2025 | 91–94 | 31 | 26 |
 | `ussc_cases_range_known` | 1995 | 2025 | 94–94 | 31 | 31 |
-| `ussc_cases_offense_known` | 1995 | 2025 | 93–94 | 31 | 28 |
+| `ussc_cases_offense_known` | 1995 | 2025 | 93–94 | 31 | 27 |
 | `ussc_cases_prison_term` | 1995 | 2025 | 90–94 | 31 | 27 |
 | `ussc_pct_within_range` | 1995 | 2025 | 94–94 | 31 | 31 |
 | `ussc_pct_substantial_assistance_5k1` | 1995 | 2025 | 94–94 | 31 | 31 |
@@ -214,16 +262,17 @@ datafile record count; organizations, resentencings and appeals are excluded). T
 | `ussc_median_sentence_months` | 2002 | 2025 | 94–94 | 24 | 24 |
 | `ussc_mean_prison_months` | 1995 | 2025 | 90–94 | 31 | 27 |
 | `ussc_median_prison_months` | 1995 | 2025 | 90–94 | 31 | 27 |
-| `ussc_pct_offense_drug_trafficking` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 28 |
-| `ussc_pct_offense_immigration` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 28 |
-| `ussc_pct_offense_firearms` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 28 |
-| `ussc_pct_offense_fraud` / `ussc_count_…` | 1995 | 2017 | 93–94 | 23 | 20 |
+| `ussc_pct_offense_drug_trafficking` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 27 |
+| `ussc_pct_offense_immigration` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 27 |
+| `ussc_pct_offense_firearms` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 27 |
+| `ussc_pct_offense_fraud` / `ussc_count_…` | 1995 | 2017 | 93–94 | 23 | 19 |
 | `ussc_pct_offense_fraud_theft_embezzlement` / `ussc_count_…` | 2018 | 2025 | 94–94 | 8 | 8 |
 | `ussc_pct_offense_child_pornography` / `ussc_count_…` | 2010 | 2025 | 94–94 | 16 | 16 |
-| `ussc_pct_offense_other` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 28 |
+| `ussc_pct_offense_other` / `ussc_count_…` | 1995 | 2025 | 93–94 | 31 | 27 |
 
 Every FY2002–FY2025 cell is filled for all 94 districts. All missing cells are in FY1995–FY1999 (packet
-fallback; listed in `data/gaps/ussc.json`).
+fallback; listed in `data/gaps/ussc.json`). The offense-mix rows lost one full year (FY1998) when W.D. La.'s
+copied values were removed.
 
 ## 5. Validation against published USSC tables
 
@@ -299,7 +348,8 @@ Each break below is also recorded in `variables.json` (`caveats`, `breaks`, `bas
    the packets exactly, but its pre-FY2018 percentages are a little lower than the printed ones where
    fine-only cases are common (e.g. 9.6% of E.D. Va. cases in FY2018 were fine-only).
 7. **Two sentence-length conventions.** `ussc_mean/median_sentence_months` counts probation as 0. It
-   reproduces the packets from FY2018 and is computed with the same rule for FY2002–FY2017.
+   reproduces the packets from FY2018 and is computed with the same rule for FY2002–FY2017 (missing values
+   excluded; see §3 for the 2026-11-27 correction).
    `ussc_mean/median_prison_months` covers prison cases only. It reproduces the packets for FY1995–FY2017
    and is computed for FY2018+. Do not mix the two.
 8. **Small denominators.** D.N. Mar. I., D. Guam and D.V.I. sentence tens of people a year; a few small
@@ -318,22 +368,27 @@ Each break below is also recorded in `variables.json` (`caveats`, `breaks`, `bas
   before FY2018; SENTRNGE components before FY2014.
 - D.N. Mar. I. FY1995–FY1997: no district packet posted. Range shares exist from the all-district table, but
   there are no totals, offense mix or imprisonment length.
-- 12 packet items in 10 FY1995–FY1999 district-years where a packet failed a safety check, each with its
+- 13 packet items in 10 FY1995–FY1999 district-years where a packet failed a safety check, each with its
   reason:
-  - a Table 7 note names another district: N.D. Ala., E.D. Cal. and D. Colo. FY1995; W.D. La. FY1998;
-  - Table 7 N exceeds the district's cases total: M.D. Ga. FY1998;
+  - a table's district column header names another court or only a state: Table 7 of N.D. Ala. ("Alaska"),
+    E.D. Cal. ("California, Central") and D. Colo. ("Connecticut") FY1995, M.D. Ga. FY1998 ("Georgia"; its N
+    also exceeds the district's cases total); Tables 1 and 7 of W.D. La. FY1998 ("Middle Louisiana"), so W.D.
+    La. FY1998 has no offense mix;
   - notes disagree on the cases total: D. Mass. FY1996 (416 vs 461); S.D. Cal. FY1997 (1,130 vs 3,130);
     N.D. Miss. FY1999 (163 vs 164);
   - the text layer is broken or missing: N.D. Cal. FY1996 Table 7; M.D.N.C. FY1996 Table 7;
   - no note names the district's total: M.D.N.C. FY1996, W.D. La. FY1998.
+- `ussc_fy1995_1999_packets_do_not_sum_to_national`: not missing data but a source caveat (§2): FY1995–FY1999
+  district counts do not always add up to the national packet figures.
 
 ## 8. Outputs (`data/processed/ussc/`)
 
 | file | content |
 |---|---|
-| `observations.parquet/.csv` | district × FY × variable (contract columns + `basis`, `numerator`, `n_basis`); 39 variables, ~78.7k rows |
+| `observations.parquet/.csv` | district × FY × variable (contract columns + `basis`, `derived`, `numerator`, `n_basis`); 39 variables, 78,690 rows |
 | `national.csv` | the same variables for the nation (district_id `US`) |
-| `variables.json` | one entry per variable: contract fields + `formula`, `derived`, `breaks`, `first_period`, `last_period`, `n_districts_by_year`, `basis_by_year` |
+| `variables.json` | one entry per variable: contract fields + `formula`, `derived`, `breaks`, `first_period`, `last_period`, `n_districts_by_year`, `basis_by_year`, `derived_years`, `derived_formula_by_basis` |
+| `packet_reconciliation.csv` | FY1995–FY2001: sum of district packet values vs the national packet figure, per count variable (§2) |
 | `components.parquet` | every count behind every value: fy, district_id (+US), period (full or half-year), scheme, component, value. Includes the 12 BOOKERCD categories, 9 SENTRNGE categories, sentence-type counts, means/medians under both conventions, Table 2 totals and supplemental join counts. Use it to audit or to build other groupings. |
 | `validation.csv`, `validation_summary.json` | every published-vs-computed comparison (§5) |
 

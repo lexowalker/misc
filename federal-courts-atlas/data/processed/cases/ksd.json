@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hasan v. Sergent",
+   "court": "District Court, D. Kansas",
+   "court_id": "ksd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-03460",
+   "docket_type": "cv",
+   "nature_of_suit": "535 Death Penalty - Habeas Corpus",
+   "cause": "28:2241 Petition for Writ of Habeas Corpus (federa",
+   "url": "https://www.courtlistener.com/docket/75170891/hasan-v-sergent/",
+   "courtlistener_id": 75170891,
+   "retrieved_at": "2026-11-27T07:38:47+00:00",
+   "source_id": "cl_search_ksd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Fann-Holechek v. Cambridge Blue Valley Senior Living LLC d/b/a Cambridge Place Senior Living and d/b/a Blue Valley Health and Rehabilitation Center",
+   "court": "District Court, D. Kansas",
+   "court_id": "ksd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02746",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179466/fann-holechek-v-cambridge-blue-valley-senior-living-llc-dba-cambridge/",
+   "courtlistener_id": 75179466,
+   "retrieved_at": "2026-11-27T07:38:47+00:00",
+   "source_id": "cl_search_ksd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Blatnick v. Soave Automotive Group, Inc.",
+   "court": "District Court, D. Kansas",
+   "court_id": "ksd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02745",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177711/blatnick-v-soave-automotive-group-inc/",
+   "courtlistener_id": 75177711,
+   "retrieved_at": "2026-11-27T07:38:47+00:00",
+   "source_id": "cl_search_ksd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Rogers v. Northfield Insurance Company",
+   "court": "District Court, D. Kansas",
+   "court_id": "ksd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-01427",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176277/rogers-v-northfield-insurance-company/",
+   "courtlistener_id": 75176277,
+   "retrieved_at": "2026-11-27T07:38:47+00:00",
+   "source_id": "cl_search_ksd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ksd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:38:47+00:00"
 }

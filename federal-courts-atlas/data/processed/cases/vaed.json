@@ -13,22 +13,6 @@
  "items": [
   {
    "item_type": "recap_docket",
-   "case_name": "Servin Chaparro v. Blanche",
-   "court": "District Court, E.D. Virginia",
-   "court_id": "vaed",
-   "date_filed": "2026-11-26",
-   "date_terminated": null,
-   "docket_number": "1:26-cv-03917",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75181077/servin-chaparro-v-blanche/",
-   "courtlistener_id": 75181077,
-   "retrieved_at": "2026-11-27T06:34:10+00:00",
-   "source_id": "cl_search_vaed_recap"
-  },
-  {
-   "item_type": "recap_docket",
    "case_name": "PayMore Group, LLC v. Fransmart, LLC",
    "court": "District Court, E.D. Virginia",
    "court_id": "vaed",
@@ -56,6 +40,22 @@
    "cause": null,
    "url": "https://www.courtlistener.com/docket/75179525/plymale-v-macys-retail-holdings-llc/",
    "courtlistener_id": 75179525,
+   "retrieved_at": "2026-11-27T06:34:10+00:00",
+   "source_id": "cl_search_vaed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Seay v. Rappahannock Regional Jail Authority",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03915",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179267/seay-v-rappahannock-regional-jail-authority/",
+   "courtlistener_id": 75179267,
    "retrieved_at": "2026-11-27T06:34:10+00:00",
    "source_id": "cl_search_vaed_recap"
   },
@@ -100,6 +100,6 @@
  "queries_not_fetched": [
   "recap_cr"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:34:10+00:00"
 }

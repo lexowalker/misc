@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "HARDING v. DUKE UNIVERSITY HEALTH SYSTEM, INC.",
+   "court": "District Court, M.D. North Carolina",
+   "court_id": "ncmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01400",
+   "docket_type": "cv",
+   "nature_of_suit": "442 Civil Rights: Jobs",
+   "cause": "42:12112 Americans with Disabilities Act",
+   "url": "https://www.courtlistener.com/docket/75174785/harding-v-duke-university-health-system-inc/",
+   "courtlistener_id": 75174785,
+   "retrieved_at": "2026-11-27T07:44:10+00:00",
+   "source_id": "cl_search_ncmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lippard",
+   "court": "District Court, M.D. North Carolina",
+   "court_id": "ncmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01404",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178698/lippard/",
+   "courtlistener_id": 75178698,
+   "retrieved_at": "2026-11-27T07:44:10+00:00",
+   "source_id": "cl_search_ncmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "KENT v. SIERRA STRUCTURES, INC.",
+   "court": "District Court, M.D. North Carolina",
+   "court_id": "ncmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01402",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176556/kent-v-sierra-structures-inc/",
+   "courtlistener_id": 75176556,
+   "retrieved_at": "2026-11-27T07:44:10+00:00",
+   "source_id": "cl_search_ncmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "BRAILSFORD v. PAYCHEX NORTH AMERICA, INC.",
+   "court": "District Court, M.D. North Carolina",
+   "court_id": "ncmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01401",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176072/brailsford-v-paychex-north-america-inc/",
+   "courtlistener_id": 75176072,
+   "retrieved_at": "2026-11-27T07:44:10+00:00",
+   "source_id": "cl_search_ncmd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ncmd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:44:10+00:00"
 }

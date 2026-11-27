@@ -34,7 +34,8 @@ from .fallback import all_district_values, district_values
 from .packets import GEO_PAGE, discover_packets, packet_text
 from .validate import (SOURCEBOOK_FIG9_URL, Comps, validate_all_district_tables, validate_district_tables,
                        validate_supplemental_national)
-from .variables import DATAFILE_FIRST, LAST, PACKET_FIRST, observations_from_components, variable_specs
+from .variables import (DATAFILE_FIRST, LAST, PACKET_FIRST, derived_formula, is_derived,
+                        observations_from_components, variable_specs)
 
 INDEX_URL = "https://www.ussc.gov/research/datafiles/commission-datafiles"
 SUP_CODEBOOK_URL = "https://www.ussc.gov/sites/default/files/zip/USSC_Supplemental_Codebook_FY14_FY17.pdf"
@@ -174,6 +175,9 @@ def main() -> int:
         log(f"FY{fy}: packets parsed for {len(pk)} districts")
     fb = pd.DataFrame(fb_rows)
     allobs = pd.concat([obs, fb], ignore_index=True)
+    # DATA_CONTRACT rule 3: every row this lane computed (rather than a figure the USSC printed) is
+    # flagged derived; the formula for each basis is in variables.json (derived_formula_by_basis).
+    allobs["derived"] = allobs["basis"].map(is_derived).astype(bool)
 
     # 4. validation ------------------------------------------------------------------------------
     vrows: list[dict] = []
@@ -219,6 +223,8 @@ def main() -> int:
     nat = allobs[allobs["district_id"] == "US"].copy()
     nat.sort_values(["variable", "period"]).to_csv(OUT / "national.csv", index=False)
     dist = allobs[allobs["district_id"] != "US"].copy()
+    recon = packet_reconciliation(dist, nat)
+    recon.to_csv(OUT / "packet_reconciliation.csv", index=False)
     dist["numerator"] = pd.to_numeric(dist["numerator"], errors="coerce")
     dist["n_basis"] = pd.to_numeric(dist["n_basis"], errors="coerce")
     write_observations(LANE, dist)
@@ -237,15 +243,49 @@ def main() -> int:
         s["last_period"] = int(sub["period"].max())
         s["n_districts_by_year"] = {int(k): int(v) for k, v in sub.groupby("period")["district_id"].nunique().items()}
         s["basis_by_year"] = {int(k): sorted(v.unique().tolist()) for k, v in sub.groupby("period")["basis"]}
+        der = sub[sub["derived"]]
+        if s["derived"] and not sub["derived"].all():
+            raise RuntimeError(f"{s['id']} is marked derived but has rows with a published basis")
+        # years in which (some) values are this lane's computations, not USSC-printed figures
+        s["derived_years"] = sorted(int(x) for x in der["period"].unique())
+        s["derived_formula_by_basis"] = {b: derived_formula(s, b) for b in sorted(der["basis"].unique())}
         vj.append(s)
     (OUT / "variables.json").write_text(json.dumps(vj, indent=1))
     missing_specs = emitted - {s["id"] for s in specs}
     if missing_specs:
         raise RuntimeError(f"variables emitted without spec: {missing_specs}")
 
-    record_gaps(dist, missing_packets, fb_problems)
+    record_gaps(dist, missing_packets, fb_problems, recon)
     log(f"wrote {len(dist):,} observations for {dist['variable'].nunique()} variables")
     return 0
+
+
+RECON_VARS = ["ussc_cases_total", "ussc_cases_range_known", "ussc_cases_offense_known",
+              "ussc_count_offense_drug_trafficking", "ussc_count_offense_immigration", "ussc_count_offense_firearms",
+              "ussc_count_offense_fraud", "ussc_count_offense_other", "ussc_cases_prison_term"]
+
+
+def packet_reconciliation(dist: pd.DataFrame, nat: pd.DataFrame) -> pd.DataFrame:
+    """FY1995-FY2001 (packet years): sum of the district values vs the national packet figure, per count
+    variable. The district packets and the national columns are separate USSC prints; in FY1995-FY1999
+    they do not reconcile even when all 94 districts are present (a source inconsistency, reproduced by an
+    independent re-read in the statistics audit). FY2002+ values come from one datafile and add up exactly
+    (tested)."""
+    rows = []
+    for fy in range(PACKET_FIRST, DATAFILE_FIRST):
+        for var in RECON_VARS:
+            d = dist[(dist["period"] == fy) & (dist["variable"] == var)]
+            n = nat[(nat["period"] == fy) & (nat["variable"] == var)]["value"]
+            if d.empty or n.empty:
+                continue
+            missing = sorted(set(IDS) - set(d["district_id"]))
+            tot, natv = float(d["value"].sum()), float(n.iloc[0])
+            rows.append({"fy": fy, "variable": var, "n_districts": int(d["district_id"].nunique()),
+                         "districts_missing": " ".join(missing), "district_sum": tot, "national": natv,
+                         "difference": tot - natv, "reconciles": tot == natv,
+                         "national_source_locator": nat[(nat["period"] == fy) & (nat["variable"] == var)]
+                         ["source_locator"].iloc[0]})
+    return pd.DataFrame(rows)
 
 
 ITEM_VARS = {
@@ -256,8 +296,32 @@ ITEM_VARS = {
 }
 
 
-def record_gaps(dist: pd.DataFrame, missing_packets: dict[int, list[str]], fb_problems: list[tuple]) -> None:
+def record_gaps(dist: pd.DataFrame, missing_packets: dict[int, list[str]], fb_problems: list[tuple],
+                recon: pd.DataFrame | None = None) -> None:
     pre = list(range(PACKET_FIRST, DATAFILE_FIRST))
+    if recon is not None and not recon.empty:
+        bad = recon[~recon["reconciles"]]
+        full = bad[bad["n_districts"] == len(IDS)]
+        part = bad[bad["n_districts"] < len(IDS)]
+        if not bad.empty:
+            record_gap(LANE, "ussc_fy1995_1999_packets_do_not_sum_to_national",
+                       description="FY1995-FY1999 district packet counts do not always add up to the national "
+                       "packet figures. With all 94 districts present: "
+                       + ("; ".join(f"FY{r.fy} {r.variable} districts {r.district_sum:,.0f} vs national "
+                                    f"{r.national:,.0f} ({r.difference:+,.0f})" for r in full.itertuples())
+                          or "none")
+                       + f". In {len(part)} other variable-years a shortfall remains where district-years are "
+                       "missing (packet not posted or failing a safety check); there it cannot be told apart from "
+                       "the missing districts' own counts, and the missing values are NOT filled from the "
+                       "residual. Each district value is as printed in its own packet; the national value is the "
+                       "packet's national column. Do not present FY1995-FY1999 district counts as summing to the "
+                       "nation. FY2000-FY2001 reconcile exactly; FY2002+ come from one datafile and add up exactly. "
+                       "Full table: data/processed/ussc/packet_reconciliation.csv.",
+                       variables=sorted(bad["variable"].unique().tolist()), districts="all",
+                       periods=sorted(int(x) for x in bad["fy"].unique()),
+                       reason="separately printed USSC district packets vs their national columns (source "
+                       "inconsistency where all districts are present; not a parse error: the statistics audit's "
+                       "independent re-read reproduces every district value)")
     record_gap(LANE, "ussc_before_fy1995",
                description="No USSC district statistics before FY1995 in this atlas: the USSC posts district "
                "Statistical Information Packets from FY1995 and Individual Offender datafiles from FY2002 only.",

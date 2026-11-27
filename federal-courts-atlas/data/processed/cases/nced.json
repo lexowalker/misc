@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Ingram",
+   "court": "District Court, E.D. North Carolina",
+   "court_id": "nced",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00470",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181044/ingram/",
+   "courtlistener_id": 75181044,
+   "retrieved_at": "2026-11-27T07:44:09+00:00",
+   "source_id": "cl_search_nced_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Giovanni v. Amazon.com Services, LLC",
+   "court": "District Court, E.D. North Carolina",
+   "court_id": "nced",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00959",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178311/giovanni-v-amazoncom-services-llc/",
+   "courtlistener_id": 75178311,
+   "retrieved_at": "2026-11-27T07:44:09+00:00",
+   "source_id": "cl_search_nced_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Teel v. Broad River Retail, LLC",
+   "court": "District Court, E.D. North Carolina",
+   "court_id": "nced",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00958",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177296/teel-v-broad-river-retail-llc/",
+   "courtlistener_id": 75177296,
+   "retrieved_at": "2026-11-27T07:44:09+00:00",
+   "source_id": "cl_search_nced_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Billy v. UNITED STATES",
+   "court": "District Court, E.D. North Carolina",
+   "court_id": "nced",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00468",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177193/billy-v-united-states/",
+   "courtlistener_id": 75177193,
+   "retrieved_at": "2026-11-27T07:44:09+00:00",
+   "source_id": "cl_search_nced_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nced&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:44:09+00:00"
 }

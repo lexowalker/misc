@@ -31,6 +31,11 @@ ERA_OFFENSE = (
 SMALL_N = ("Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; "
            "see ussc_cases_total and the n_basis column before comparing percentages.")
 
+PACKET_SUM = ("FY1995-FY1999 values are as printed in each district's own packet; summed over districts they do "
+              "not always equal the national packet figure (FY1999 imprisonment N: districts exceed the nation by "
+              "57 with all 94 present; other years have missing district-years). Do not present FY1995-FY1999 "
+              "district counts as adding up to the nation; see packet_reconciliation.csv. FY2000+ add up exactly.")
+
 RANGE_DEF = (
     "Denominator: individuals whose sentence could be compared with the guideline range (USSC excludes "
     "cases with missing or indeterminable guideline information and offenses with no applicable "
@@ -54,7 +59,7 @@ def variable_specs() -> list[dict]:
                 "are not included.",
                 [SMALL_N, "FY1995-FY2001 values are the district totals printed in the USSC Statistical "
                  "Information Packet (Table 1 note); FY2002+ are counts of datafile records, which reproduce "
-                 "the packet totals exactly."],
+                 "the packet totals exactly.", PACKET_SUM],
                 "more individuals sentenced", PACKET_FIRST, LAST, formula="count of datafile records with DISTRICT = d"))
     V.append(_v("ussc_cases_range_known", "Cases with guideline range comparison", "cases",
                 "Denominator of the guideline-range percentages: individuals whose sentence the USSC could compare "
@@ -184,13 +189,19 @@ def variable_specs() -> list[dict]:
                 "rule applied to SENSPLT0.",
                 ["FY2018-FY2025 reproduce packet Table 7 'Sentence length'. FY2002-FY2017 are computed by this lane "
                  "with the same rule; the USSC's own packets for those years published only the "
-                 "length of imprisonment (see ussc_mean_prison_months).", SMALL_N],
-                "longer sentences", DATAFILE_FIRST, LAST, formula="mean(min(SENSPCAP or SENSPLT0, 470))"))
+                 "length of imprisonment (see ussc_mean_prison_months).",
+                 "Cases with no sentence-length value (SENSPLT0/SENSPCAP missing: 746 records nationally in FY2002, "
+                 "falling to 0-2 a year from FY2017) are left out of the mean, the median and N (n_basis), as the "
+                 "USSC leaves out a missing SENSPCAP. Before 2026-11-27 this lane wrongly counted them as 469.99 "
+                 "months in FY2002-FY2017 (statistics audit, blocker 1); corrected.", SMALL_N],
+                "longer sentences", DATAFILE_FIRST, LAST,
+                formula="mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value"))
     V.append(_v("ussc_median_sentence_months", "Median sentence (months)", "months",
                 "Median of the same quantity as ussc_mean_sentence_months (probation = 0; cap 470).",
                 ["As for ussc_mean_sentence_months. The median is 0 where more than half the individuals received "
                  "no confinement.", SMALL_N],
-                "longer sentences", DATAFILE_FIRST, LAST, formula="median(min(SENSPCAP or SENSPLT0, 470))"))
+                "longer sentences", DATAFILE_FIRST, LAST,
+                formula="median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value"))
     V.append(_v("ussc_mean_prison_months", "Average prison term (months, prison cases only)", "months",
                 "Mean length of imprisonment in months among individuals sentenced to prison (USSC pre-FY2018 "
                 "'Length of imprisonment' convention, packet Table 7 FY1995-FY2017): variable SENTTOT, cases with "
@@ -206,11 +217,12 @@ def variable_specs() -> list[dict]:
                 "longer prison terms", PACKET_FIRST, LAST, formula="median(SENTTOT | SENTTOT > 0)"))
     V.append(_v("ussc_cases_prison_term", "Individuals with a prison term", "cases",
                 "Number of individuals in the denominator of ussc_mean_prison_months (prison term > 0 months, "
-                "known primary offense).", [SMALL_N], "more prison sentences", PACKET_FIRST, LAST,
+                "known primary offense).", [SMALL_N, PACKET_SUM], "more prison sentences", PACKET_FIRST, LAST,
                 formula="count(SENTTOT > 0)"))
     V.append(_v("ussc_cases_offense_known", "Cases with a primary offense type", "cases",
                 "Denominator of the offense-mix shares: individuals with a known primary offense type.",
-                [ERA_OFFENSE], "more cases", PACKET_FIRST, LAST, formula="count(offense type non-missing)"))
+                [ERA_OFFENSE, PACKET_SUM], "more cases", PACKET_FIRST, LAST,
+                formula="count(offense type non-missing)"))
     for cat in ["drug_trafficking", "immigration", "firearms", "fraud", "fraud_theft_embezzlement",
                 "child_pornography", "other"]:
         first, last = PACKET_FIRST, LAST
@@ -244,9 +256,49 @@ def variable_specs() -> list[dict]:
                             {"period": 2018, "note": "statute-based -> guideline-based (OFFGUIDE)"}]))
         V.append(_v(f"ussc_count_offense_{cat}", f"Offense mix: {OFF_LABEL[cat]} (count)", "cases",
                     f"Number of individuals whose primary offense type is {OFF_LABEL[cat]}.",
-                    [ERA_OFFENSE] + extra, f"more {OFF_LABEL[cat]} cases", first, last,
+                    [ERA_OFFENSE] + extra + ([PACKET_SUM] if first < 2000 else []), f"more {OFF_LABEL[cat]} cases",
+                    first, last,
                     formula=f"count(primary offense = {cat})", kind="count"))
     return V
+
+
+# ------------------------------------------------------------- derived flag per row ----------
+# A row is a USSC-published figure only when its basis is one of these; every other basis is a value
+# this lane computed (DATA_CONTRACT rule 3: labelled derived, with a formula).
+PUBLISHED_BASES = {"reproduces_published", "published_packet"}
+DERIVED_BASES = {"computed_ussc_definition", "derived_from_published_counts", "pooled_published_halves",
+                 "sum_of_published_components", "computed_ussc_supplemental"}
+
+
+def is_derived(basis: str) -> bool:
+    if basis in PUBLISHED_BASES:
+        return False
+    if basis in DERIVED_BASES:
+        return True
+    raise ValueError(f"unknown basis {basis!r}")
+
+
+def derived_formula(spec: dict, basis: str) -> str:
+    """Formula shown for a derived row of variable ``spec`` with this ``basis``."""
+    f = spec["formula"]
+    pct = spec["unit"] == "percent"
+    if basis == "computed_ussc_definition":
+        return (f"{f}, computed by this lane from the USSC Individual Offender datafile with the USSC's own "
+                "definition, in a year when the USSC did not print this statistic")
+    if basis == "derived_from_published_counts":
+        diff = "packet Table 1 TOTAL - (drug trafficking + immigration + firearms + fraud rows)"
+        return f"100 * ({diff}) / Table 1 TOTAL" if pct else diff
+    if basis == "pooled_published_halves":
+        return ("100 * (n_first_half + n_second_half) / (N_first_half + N_second_half): the full fiscal year "
+                "pooled from the two half-year tables the USSC printed (FY2004 pre/post-Blakely, FY2005 "
+                "pre/post-Booker)" if pct else "N_first_half + N_second_half (FY2004 pre/post-Blakely, FY2005 "
+                "pre/post-Booker half-year tables)")
+    if basis == "sum_of_published_components":
+        return f"{f} (sum of USSC-published SENTRNGE components)"
+    if basis == "computed_ussc_supplemental":
+        return (f"{f}, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main "
+                "datafile for DISTRICT; the USSC did not publish district tables on this basis for these years")
+    raise ValueError(f"no derived formula for basis {basis!r}")
 
 
 # ---------------------------------------------------------------- observations ----------
@@ -355,7 +407,7 @@ def observations_from_components(comps: pd.DataFrame, source_for_fy: dict[int, s
             n18 = g("full", "sent2018", "n", 0)
             if n18:
                 b = "reproduces_published" if fy >= 2018 else "computed_ussc_definition"
-                v = "SENSPCAP" if fy >= 2018 else "SENSPLT0 (>470 -> 469.99)"
+                v = "SENSPCAP" if fy >= 2018 else "SENSPLT0 (>470 -> 469.99; missing excluded)"
                 add("ussc_mean_sentence_months", _r1(g("full", "sent2018", "mean")), "months",
                     f"mean of {v}, probation = 0 (N={int(n18)})", b, None, n18)
                 add("ussc_median_sentence_months", _r1(g("full", "sent2018", "median")), "months",

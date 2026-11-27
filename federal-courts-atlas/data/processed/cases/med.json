@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "DRAGIJA V. USAA GENERAL",
+   "court": "District Court, D. Maine",
+   "court_id": "med",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00585",
+   "docket_type": "cv",
+   "nature_of_suit": "110 Insurance",
+   "cause": "28:1332 Diversity-Insurance Contract",
+   "url": "https://www.courtlistener.com/docket/75165359/dragija-v-usaa-general/",
+   "courtlistener_id": 75165359,
+   "retrieved_at": "2026-11-27T07:39:57+00:00",
+   "source_id": "cl_search_med_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "ROSS RUPPERT LLC v. MONTGOMERY",
+   "court": "District Court, D. Maine",
+   "court_id": "med",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00584",
+   "docket_type": "cv",
+   "nature_of_suit": "120 Contract: Marine",
+   "cause": "28:1332 Diversity-Breach of Contract",
+   "url": "https://www.courtlistener.com/docket/75161302/ross-ruppert-llc-v-montgomery/",
+   "courtlistener_id": 75161302,
+   "retrieved_at": "2026-11-27T07:39:57+00:00",
+   "source_id": "cl_search_med_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "YATAKALINDA v. MULLIN",
+   "court": "District Court, D. Maine",
+   "court_id": "med",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00581",
+   "docket_type": "cv",
+   "nature_of_suit": "899 Other Statutes: Administrative Procedures Act/Review or Appeal of Agency Decision",
+   "cause": "28:1361 Petition for Writ of Mandamus",
+   "url": "https://www.courtlistener.com/docket/75153816/yatakalinda-v-mullin/",
+   "courtlistener_id": 75153816,
+   "retrieved_at": "2026-11-27T07:39:57+00:00",
+   "source_id": "cl_search_med_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. CHITTENDEN",
+   "court": "District Court, D. Maine",
+   "court_id": "med",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "2:26-cr-00127",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75143132/united-states-v-chittenden/",
+   "courtlistener_id": 75143132,
+   "retrieved_at": "2026-11-27T07:39:57+00:00",
+   "source_id": "cl_search_med_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. PEREZ-HERRERA",
+   "court": "District Court, D. Maine",
+   "court_id": "med",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "2:26-cr-00124",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75143129/united-states-v-perez-herrera/",
+   "courtlistener_id": 75143129,
+   "retrieved_at": "2026-11-27T07:39:57+00:00",
+   "source_id": "cl_search_med_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=med&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:39:57+00:00"
 }

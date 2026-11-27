@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Beasley v. Maximus Inc.",
+   "court": "District Court, N.D. New York",
+   "court_id": "nynd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-02440",
+   "docket_type": "cv",
+   "nature_of_suit": "442 Civil Rights: Jobs",
+   "cause": "42:12101 American Disabilities Act",
+   "url": "https://www.courtlistener.com/docket/75177190/beasley-v-maximus-inc/",
+   "courtlistener_id": 75177190,
+   "retrieved_at": "2026-11-27T07:43:06+00:00",
+   "source_id": "cl_search_nynd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Culligan v. Granville Central School District",
+   "court": "District Court, N.D. New York",
+   "court_id": "nynd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-02437",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176955/culligan-v-granville-central-school-district/",
+   "courtlistener_id": 75176955,
+   "retrieved_at": "2026-11-27T07:43:06+00:00",
+   "source_id": "cl_search_nynd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Panek v. UnBeylievable Enterprises Corp.",
+   "court": "District Court, N.D. New York",
+   "court_id": "nynd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-02439",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176944/panek-v-unbeylievable-enterprises-corp/",
+   "courtlistener_id": 75176944,
+   "retrieved_at": "2026-11-27T07:43:06+00:00",
+   "source_id": "cl_search_nynd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Suvorov",
+   "court": "District Court, N.D. New York",
+   "court_id": "nynd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00352",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75172018/united-states-v-suvorov/",
+   "courtlistener_id": 75172018,
+   "retrieved_at": "2026-11-27T07:43:06+00:00",
+   "source_id": "cl_search_nynd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Murtaugh",
+   "court": "District Court, N.D. New York",
+   "court_id": "nynd",
+   "date_filed": "2026-11-24",
+   "date_terminated": "2026-11-24",
+   "docket_number": "5:26-cr-00356",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75166089/united-states-v-murtaugh/",
+   "courtlistener_id": 75166089,
+   "retrieved_at": "2026-11-27T07:43:06+00:00",
+   "source_id": "cl_search_nynd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nynd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:43:06+00:00"
 }

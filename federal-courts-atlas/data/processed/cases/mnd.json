@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Jelen v. Coborns, Inc.",
+   "court": "District Court, D. Minnesota",
+   "court_id": "mnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "0:26-cv-05014",
+   "docket_type": "cv",
+   "nature_of_suit": "360 P.I.: Other",
+   "cause": "28:1332 Diversity-(Citizenship)",
+   "url": "https://www.courtlistener.com/docket/75176629/jelen-v-coborns-inc/",
+   "courtlistener_id": 75176629,
+   "retrieved_at": "2026-11-27T07:41:01+00:00",
+   "source_id": "cl_search_mnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Ambrose",
+   "court": "District Court, D. Minnesota",
+   "court_id": "mnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "0:26-cv-05025",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179146/ambrose/",
+   "courtlistener_id": 75179146,
+   "retrieved_at": "2026-11-27T07:41:01+00:00",
+   "source_id": "cl_search_mnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Witherspoon v. Arrowhead Regional Corrections (ARC)",
+   "court": "District Court, D. Minnesota",
+   "court_id": "mnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "0:26-cv-05022",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178919/witherspoon-v-arrowhead-regional-corrections-arc/",
+   "courtlistener_id": 75178919,
+   "retrieved_at": "2026-11-27T07:41:01+00:00",
+   "source_id": "cl_search_mnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Williams v. Hertz Car Rental",
+   "court": "District Court, D. Minnesota",
+   "court_id": "mnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "0:26-cv-05020",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178511/williams-v-hertz-car-rental/",
+   "courtlistener_id": 75178511,
+   "retrieved_at": "2026-11-27T07:41:01+00:00",
+   "source_id": "cl_search_mnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Frison",
+   "court": "District Court, D. Minnesota",
+   "court_id": "mnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": "2026-11-25",
+   "docket_number": "0:26-cr-00210",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176291/united-states-v-frison/",
+   "courtlistener_id": 75176291,
+   "retrieved_at": "2026-11-27T07:41:01+00:00",
+   "source_id": "cl_search_mnd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=mnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:41:01+00:00"
 }

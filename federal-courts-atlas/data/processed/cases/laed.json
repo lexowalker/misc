@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Johnson v. Dauzat",
+   "court": "District Court, E.D. Louisiana",
+   "court_id": "laed",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02706",
+   "docket_type": "cv",
+   "nature_of_suit": "Habeas Corpus (General)",
+   "cause": "28:2254 Petition for Writ of Habeas Corpus (State)",
+   "url": "https://www.courtlistener.com/docket/75170458/johnson-v-dauzat/",
+   "courtlistener_id": 75170458,
+   "retrieved_at": "2026-11-27T07:38:54+00:00",
+   "source_id": "cl_search_laed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Payton v. DK Crown Holdings, Inc.",
+   "court": "District Court, E.D. Louisiana",
+   "court_id": "laed",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02704",
+   "docket_type": "cv",
+   "nature_of_suit": "890 Other Statutory Actions",
+   "cause": "28:1332 Diversity-(Citizenship)",
+   "url": "https://www.courtlistener.com/docket/75169571/payton-v-dk-crown-holdings-inc/",
+   "courtlistener_id": 75169571,
+   "retrieved_at": "2026-11-27T07:38:54+00:00",
+   "source_id": "cl_search_laed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Frerene, Jr. v. USAA General Indemnity Company",
+   "court": "District Court, E.D. Louisiana",
+   "court_id": "laed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02716",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176933/frerene-jr-v-usaa-general-indemnity-company/",
+   "courtlistener_id": 75176933,
+   "retrieved_at": "2026-11-27T07:38:54+00:00",
+   "source_id": "cl_search_laed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Champange v. Crescent Louisiana Midstream LLC",
+   "court": "District Court, E.D. Louisiana",
+   "court_id": "laed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02715",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176367/champange-v-crescent-louisiana-midstream-llc/",
+   "courtlistener_id": 75176367,
+   "retrieved_at": "2026-11-27T07:38:54+00:00",
+   "source_id": "cl_search_laed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Baldwin",
+   "court": "District Court, E.D. Louisiana",
+   "court_id": "laed",
+   "date_filed": "2026-11-24",
+   "date_terminated": "2026-11-24",
+   "docket_number": "2:26-cr-00294",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174544/united-states-v-baldwin/",
+   "courtlistener_id": 75174544,
+   "retrieved_at": "2026-11-27T07:38:54+00:00",
+   "source_id": "cl_search_laed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=laed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:38:54+00:00"
 }

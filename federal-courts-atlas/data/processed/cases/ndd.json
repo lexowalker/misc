@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Houle v. Geresak",
+   "court": "District Court, D. North Dakota",
+   "court_id": "ndd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00410",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75172555/houle-v-geresak/",
+   "courtlistener_id": 75172555,
+   "retrieved_at": "2026-11-27T07:44:54+00:00",
+   "source_id": "cl_search_ndd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Davis v. North Dakota Department of Corrections",
+   "court": "District Court, D. North Dakota",
+   "court_id": "ndd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00409",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75166653/davis-v-north-dakota-department-of-corrections/",
+   "courtlistener_id": 75166653,
+   "retrieved_at": "2026-11-27T07:44:54+00:00",
+   "source_id": "cl_search_ndd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Erondu v. Brennan's Garage, LLC",
+   "court": "District Court, D. North Dakota",
+   "court_id": "ndd",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00408",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75162693/erondu-v-brennans-garage-llc/",
+   "courtlistener_id": 75162693,
+   "retrieved_at": "2026-11-27T07:44:54+00:00",
+   "source_id": "cl_search_ndd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Pineda-Mendez",
+   "court": "District Court, D. North Dakota",
+   "court_id": "ndd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00198",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75144204/united-states-v-pineda-mendez/",
+   "courtlistener_id": 75144204,
+   "retrieved_at": "2026-11-27T07:44:54+00:00",
+   "source_id": "cl_search_ndd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Bowens",
+   "court": "District Court, D. North Dakota",
+   "court_id": "ndd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00190",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75143419/united-states-v-bowens/",
+   "courtlistener_id": 75143419,
+   "retrieved_at": "2026-11-27T07:44:54+00:00",
+   "source_id": "cl_search_ndd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ndd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:44:54+00:00"
 }

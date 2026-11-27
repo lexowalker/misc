@@ -321,6 +321,11 @@ def main() -> None:
     df = pd.DataFrame(obs, columns=cols)
     df["period_type"] = PERIOD_TYPE
     df["source_id"] = df["profile_year"].map(source_id)
+    # cell-level caveats on faithfully transcribed but implausible-looking cells (statistics audit, item 6)
+    df, caveat_rows, special_reason = apply_cell_caveats(df, vint)
+    for did, y, var, raw in special_reason:
+        gaps_cells.append((did, y, var, raw))
+    pd.DataFrame(caveat_rows, columns=CAVEAT_COLS).to_csv(OUT / "cell_caveats.csv", index=False)
     district = df[df["district_id"] != NATIONAL].copy()
     national = df[df["district_id"] == NATIONAL].drop(columns=["district_id"]).copy()
     # three tables (core / published ranks / case-mix categories) so each CSV stays well under 20 MB
@@ -394,18 +399,42 @@ def main() -> None:
     # ---- 7. reconciliation -------------------------------------------------------------------------
     rec = []
     terr = set(TERRITORIAL)
+    # integer counts must add up exactly; vacant judgeship months are printed to one decimal per district, so
+    # the sum of 94 rounded values may differ from the rounded national value by up to 94 x 0.05 = 4.7
     for var in ["fcms_filings_total", "fcms_terminations_total", "fcms_pending_total", "fcms_judgeships",
-                "fcms_civil_over_3yrs_count", "fcms_filings_civil", "fcms_filings_criminal_felony"]:
+                "fcms_civil_over_3yrs_count", "fcms_filings_civil", "fcms_filings_criminal_felony",
+                "fcms_vacant_judgeship_months"]:
         d = district[district["variable"] == var]
         n = national[national["variable"] == var].set_index("period")["value"]
+        half_unit = 0.05 if var == "fcms_vacant_judgeship_months" else 0.0
         for y, g in d.groupby("period"):
             if y not in n.index:
                 continue
+            tot = round(float(g["value"].sum()), 1)
+            diff = round(tot - float(n[y]), 1)
+            bound = round(len(g) * half_unit, 2)
             rec.append({"variable": var, "period": int(y), "national": n[y], "n_districts": len(g),
-                        "sum_districts": g["value"].sum(),
-                        "sum_article_iii": g[~g["district_id"].isin(terr)]["value"].sum(),
-                        "diff_sum_minus_national": g["value"].sum() - n[y]})
+                        "sum_districts": tot,
+                        "sum_article_iii": round(float(g[~g["district_id"].isin(terr)]["value"].sum()), 1),
+                        "diff_sum_minus_national": diff, "rounding_bound": bound,
+                        "within_rounding": abs(diff) <= bound + 1e-9})
     rec = pd.DataFrame(rec)
+    # for a year outside rounding, show the same comparison in every profile vintage that prints that year
+    row_of = {v: r for r, (v, _, _) in ROW_VARS.items()}
+    notes = []
+    for r in rec.itertuples():
+        if r.within_rounding or r.variable not in row_of:
+            notes.append("")
+            continue
+        vv = vint[(vint["row"] == row_of[r.variable]) & (vint["data_year"] == r.period)]
+        parts = []
+        for P, g in vv.groupby("profile_year"):
+            n_ = g[g["district_id"] == NATIONAL]["value"]
+            d_ = g[g["district_id"] != NATIONAL]["value"]
+            if len(n_) and d_.notna().all():
+                parts.append(f"FY{P} profile: districts {round(float(d_.sum()), 1):g} vs national {float(n_.iloc[0]):g}")
+        notes.append("outside rounding; as printed in each vintage: " + "; ".join(parts))
+    rec["note"] = notes
     rec.to_csv(OUT / "reconciliation.csv", index=False)
 
     # ---- 8. validation (identities) -----------------------------------------------------------------
@@ -478,17 +507,35 @@ def main() -> None:
         "fcms_filings_supervised_release_hearings is not emitted (it is not derived from rounded per-judgeship values)."),
         variables=["fcms_filings_supervised_release_hearings"], districts="all", periods="all",
         reason="not published in the profile")
+    record_by_design_gaps(district)
+    # any district-year still missing in a year the variable is published for (e.g. a rank whose value cell is
+    # blank prints no standing at all) is logged as a blank cell
+    logged = {(d, int(y), v) for d, y, v, _ in gaps_cells}
+    have = set(zip(district["district_id"], district["period"].astype(int), district["variable"]))
+    for var, g in district.groupby("variable"):
+        for y in sorted(g["period"].unique()):
+            for did in IDS:
+                if int(y) in page_index and did not in page_index[int(y)]:
+                    continue   # court absent that year: covered by its court_absent record
+                if (did, int(y), var) not in have and (did, int(y), var) not in logged:
+                    gaps_cells.append((did, int(y), var, None))
     # cell-level gaps, grouped by (variable, reason, district)
     filings = vint[vint["row"] == "filings_total"].set_index(["profile_year", "district_id", "data_year"])["value"]
+    blank_value_cells = {(d, int(y), v) for d, y, v, r in gaps_cells if not v.startswith("fcms_rank_") and
+                         (r is None or (isinstance(r, float) and pd.isna(r)) or (isinstance(r, str) and not r.strip()))}
     grouped = defaultdict(list)
     for did, y, var, raw in gaps_cells:
         if did == NATIONAL and var.startswith("fcms_rank_"):
             continue   # the national page has no standings
         key_d = "national" if did == NATIONAL else did
-        if var.startswith("fcms_rank_circuit") and did == "dcd":
+        if (did, y, var, raw) in special_reason:
+            reason = special_reason[(did, y, var, raw)]
+        elif var.startswith("fcms_rank_circuit") and did == "dcd":
             reason = "not applicable: the D.C. Circuit has a single district, so no within-circuit standing is printed"
         elif var.startswith("fcms_rank_"):
-            reason = "rank printed as '-' (not ranked)" if raw else "rank cell blank in source"
+            reason = ("rank printed as '-' (not ranked)" if raw else
+                      "rank cell blank in source (no standing printed; the value cell is blank too)"
+                      if (did, int(y), rank_base(var)) in blank_value_cells else "rank cell blank in source")
         elif var.startswith("fcms_median"):
             reason = ("printed '-': the AO does not compute a median when the district had fewer than 10 "
                       "terminations (disposition medians) or fewer than 10 civil trials (trial median)")
@@ -532,12 +579,138 @@ def main() -> None:
           f"current-method rows {len(cdf_d)}; revisions {len(rev)}; validation exceptions {len(val)}")
 
 
+# ------------------------------------------------------------------ cell caveats ----------
+CAVEAT_COLS = ["district_id", "period", "variable", "value", "us_value", "code", "caveat", "action",
+               "source_id", "source_locator"]
+DISPOSITION_MEDIANS = ["fcms_median_months_civil_filing_to_disposition",
+                       "fcms_median_months_criminal_felony_filing_to_disposition",
+                       "fcms_median_months_civil_filing_to_trial"]
+LOW_MEDIAN_RATIO = 1 / 8     # flag a median below one eighth of the U.S. median for the same year
+
+
+def rank_base(var: str) -> str:
+    """'fcms_rank_us_median_months_civil_...' -> 'fcms_median_months_civil_...'."""
+    return "fcms_" + var.split("_", 3)[3]
+
+
+def apply_cell_caveats(df: pd.DataFrame, vint: pd.DataFrame) -> tuple[pd.DataFrame, list[dict], dict]:
+    """Flag faithfully transcribed source cells that would mislead on a map, without changing any value.
+
+    * A disposition/trial median printed as 0.0, or below one eighth of the same year's U.S. median, gets a
+      ``caveat`` (S.D. Fla. FY2023 civil 0.0; E.D. Pa. FY2004-06 civil 1.0; ...). Its published ranks get the
+      same caveat.
+    * Jurors 'Avg. Present for Jury Selection' printed as 0 means no jury selection was held (an average over
+      selections that took place cannot be 0); the paired 'Percent Not Selected or Challenged' is then 0 of 0.
+      Both cells are not measurements, so they are left out of the observations and logged as gaps with the
+      printed value (D.N.M.I. FY2024, where the same page leaves Trials Completed blank).
+
+    Returns (df with a ``caveat`` column, caveat rows for cell_caveats.csv, {(did, y, var, raw): gap reason}).
+    """
+    df = df.copy()
+    df["caveat"] = ""
+    rows: list[dict] = []
+    special: dict[tuple, str] = {}
+    us = df[df["district_id"] == NATIONAL].set_index(["period", "variable"])["value"]
+    dist = df["district_id"] != NATIONAL
+    flagged: dict[tuple, str] = {}
+    for i in df.index[dist & df["variable"].isin(DISPOSITION_MEDIANS)]:
+        r = df.loc[i]
+        u = us.get((r["period"], r["variable"]))
+        if u is None or pd.isna(u) or u <= 0:
+            continue
+        if r["value"] == 0:
+            code = "printed_zero_median"
+            text = (f"Printed as 0.0 months (U.S. median {u:g} that year). Taken literally, half of the cases were "
+                    "disposed of within about 1.5 days of filing. Transcribed exactly as printed; the profile gives "
+                    "no explanation. Treat with caution on maps and in rankings.")
+        elif r["value"] < LOW_MEDIAN_RATIO * u:
+            code = "extreme_low_median"
+            text = (f"Printed {r['value']:.1f} months, less than one eighth of the U.S. median ({u:g}) that year. "
+                    "Transcribed exactly as printed; the profile gives no explanation. Treat with caution on maps "
+                    "and in rankings.")
+        else:
+            continue
+        df.at[i, "caveat"] = text
+        flagged[(r["district_id"], r["period"], r["variable"])] = text
+        rows.append({"district_id": r["district_id"], "period": int(r["period"]), "variable": r["variable"],
+                     "value": r["value"], "us_value": u, "code": code, "caveat": text, "action": "kept, flagged",
+                     "source_id": r["source_id"], "source_locator": r["source_locator"]})
+    is_rank = dist & df["variable"].str.startswith("fcms_rank_")
+    for i in df.index[is_rank]:
+        r = df.loc[i]
+        t = flagged.get((r["district_id"], r["period"], rank_base(r["variable"])))
+        if t:
+            df.at[i, "caveat"] = f"Published rank of a flagged value ({rank_base(r['variable'])}): {t}"
+    # jurors: 0 present = no jury selection held
+    jur = ["fcms_jurors_avg_present", "fcms_jurors_pct_not_selected"]
+    row_of = {v: r for r, (v, _, _) in ROW_VARS.items()}
+    zero = df[dist & (df["variable"] == "fcms_jurors_avg_present") & (df["value"] == 0)]
+    drop = []
+    for _, z in zero.iterrows():
+        for var in jur:
+            m = dist & (df["district_id"] == z["district_id"]) & (df["period"] == z["period"]) & (df["variable"] == var)
+            for i in df.index[m]:
+                r = df.loc[i]
+                rv = vint[(vint["profile_year"] == r["profile_year"]) & (vint["district_id"] == r["district_id"])
+                          & (vint["data_year"] == r["period"]) & (vint["row"] == row_of[var])]["raw"]
+                raw = str(rv.iloc[0]) if len(rv) else f"{r['value']:g}"
+                text = (f"Printed as '{raw}'. No jury selection was held that year (an average over selections that "
+                        "took place cannot be 0 jurors present; the percent not selected is then 0 of 0), so this is "
+                        "not a measured zero. Left out of the observations; shown as 'no jury selections'.")
+                rows.append({"district_id": r["district_id"], "period": int(r["period"]), "variable": var,
+                             "value": r["value"], "us_value": us.get((r["period"], var)), "code": "no_jury_selections",
+                             "caveat": text, "action": "omitted from observations, logged as gap",
+                             "source_id": r["source_id"], "source_locator": r["source_locator"]})
+                special[(r["district_id"], int(r["period"]), var, raw)] = (
+                    "printed '0' but no jury selection was held (0 jurors present); not a measured value")
+                drop.append(i)
+    df = df.drop(index=drop)
+    return df, rows, special
+
+
+def record_by_design_gaps(district: pd.DataFrame) -> None:
+    """Gap records for cells that are empty by design (statistics audit, item 7)."""
+    years_of = district.groupby("variable")["period"].agg(lambda s: set(int(x) for x in s))
+    cm_years = set().union(*(years_of[v] for v in years_of.index if v.startswith("fcms_civil_type_")))
+    cpt, ipr = "fcms_civil_type_copyright_patent_trademark", "fcms_civil_type_intellectual_property_rights"
+    for var, other, label_here, label_other in [
+            (cpt, ipr, "Copyright, Patent, and Trademark", "Intellectual Property Rights"),
+            (ipr, cpt, "Intellectual Property Rights", "Copyright, Patent, and Trademark")]:
+        if var not in years_of:
+            continue
+        missing = sorted(cm_years - years_of[var])
+        if missing:
+            record_gap(LANE, f"casemix_letter_i_relabel:{var}", description=(
+                f"Civil case-mix letter I is printed as '{label_other}' in FY{min(missing)}-FY{max(missing)}, so "
+                f"{var} ('{label_here}') has no value in those years; see {other}. The AO relabelled letter I in "
+                "FY2021 without stating the two categories are identical, so they are kept apart, not spliced."),
+                variables=[var], districts="all", periods=missing, reason="category relabelled (by design)")
+    rank_years = set().union(*(years_of[v] for v in years_of.index if v.startswith("fcms_rank_us_")))
+    for scope in ("us", "circuit"):
+        var = rank_variable(scope, PCT_VAR.format(k=5))
+        if var not in years_of:
+            continue
+        missing = sorted(rank_years - years_of[var])
+        if missing:
+            record_gap(LANE, f"rank_5yr_change_not_printed:{scope}", description=(
+                "The 'Over Earlier Years' numerical standing (rank of the 5-year % change in filings) is printed "
+                "only in the FY2004-09 and FY2011 layouts. The regenerated FY2010 file and the FY2012+ layouts "
+                "print one standing for the percent-change row, which ranks the 1-year change "
+                f"({rank_variable(scope, PCT_VAR.format(k=1))}). The 5-year change itself is still emitted "
+                f"({PCT_VAR.format(k=5)})."),
+                variables=[var], districts="all", periods=missing, reason="not printed in this layout (by design)")
+
+
 def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
     label_of = {v: lab for _, (v, _, lab) in ROW_VARS.items()}
     unit_of = district.groupby("variable")["unit"].agg(lambda s: sorted(set(s)))
     legend = pd.read_csv(OUT / "nos_legend.csv")
     nos_label = {r.variable: r.label for r in legend.itertuples()}
     revd = rev_summary.set_index("variable").to_dict("index")
+    cm = pd.read_parquet(OUT / "observations_current_method.parquet")
+    cm_first = cm.groupby("variable")["period"].min().to_dict()
+    cav = pd.read_csv(OUT / "cell_caveats.csv")
+    cav_n = cav.groupby("variable").size().to_dict()
     out = []
     for var, g in district.groupby("variable"):
         years = sorted(g["period"].unique())
@@ -557,6 +730,10 @@ def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
             caveats += ("SERIES BREAK: FY2015+ profiles use the current case weights (approved for use after December "
                         "2015, prior years revised); FY1999-2014 values use earlier weights. See column `method` and "
                         "observations_current_method (FY2010+ on current weights). Territorial courts are blank in FY2025. ")
+        if cav_n.get(var):
+            caveats += (f"{cav_n[var]} cell(s) carry a cell-level caveat (column `caveat`; cell_caveats.csv), e.g. a "
+                        "median printed as 0.0 or far below the U.S. median, or jurors printed 0 where no jury "
+                        "selection was held. ")
         if var in revd and revd[var]["differing"]:
             r = revd[var]
             caveats += (f"Other profile vintages print a different value for {r['differing']} of {r['compared']} "
@@ -617,6 +794,12 @@ def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
             "n_districts": int(g["district_id"].nunique()),
             "method_values": sorted(x for x in g["method"].unique() if x),
             "table": table_of(var),
+            # statistics audit item 8: the default table holds each year's own published figure, so method-
+            # sensitive variables change counting unit by year; time series should read this table instead
+            "method_sensitive": len(set(g["method"]) - {""}) > 1,
+            "time_series_table": "observations_current_method" if var in cm_first else table_of(var),
+            "current_method_first_period": int(cm_first[var]) if var in cm_first else None,
+            "n_cell_caveats": int(cav_n.get(var, 0)),
         })
     (OUT / "variables.json").write_text(json.dumps(out, indent=1))
 

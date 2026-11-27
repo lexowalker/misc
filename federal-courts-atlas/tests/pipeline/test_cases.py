@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -59,6 +58,24 @@ def test_reject_by_nature_of_suit():
     assert reject_reason("Harris v. Hanon Systems", "3:26-cv-00985", "442 Civil Rights: Jobs") is None
 
 
+def test_date_problem():
+    from pipeline.cases.filters import date_problem
+    assert date_problem("2027-09-29", "1:83-cv-00594", "2026-11-27T07:42:53+00:00") is not None
+    assert date_problem("2026-09-29", "1:83-cv-00594", "2026-11-27T07:42:53+00:00") is not None
+    assert date_problem("2026-11-25", "1:26-cv-03916", "2026-11-27T07:42:53+00:00") is None
+    assert date_problem("2019-06-07", "Case No. 3:04cr100", "2026-11-27") is None  # opinion in an old case
+
+
+def test_detention_defendants():
+    from pipeline.cases.filters import defendant, detention_defendants
+    assert defendant("Servin Chaparro v. Blanche") == "blanche"
+    assert defendant("CHATMAN") is None
+    res = [{"caseName": "Melendez Lazo v. Blanche", "suitNature": "463 Habeas Corpus - Alien Detainee"},
+           {"caseName": "Alvarez Rivera v. Crawford", "suitNature": "", "cause": "8:1105(a) Aliens: Habeas Corpus"},
+           {"caseName": "Acme v. Beta", "suitNature": "190 Contract: Other"}]
+    assert detention_defendants(res) == {"blanche", "crawford"}
+
+
 def test_docket_type():
     from pipeline.cases.filters import docket_type
     assert docket_type("1:26-cv-03917") == "cv"
@@ -86,7 +103,7 @@ def test_items_have_url_and_date(files):
             assert it["url"].startswith("https://www.courtlistener.com/"), it["url"]
             assert re.match(r"^https://www\.courtlistener\.com/(docket|opinion)/\d+/", it["url"])
             assert ISO.match(it["date_filed"]), it
-            assert date.fromisoformat(it["date_filed"]) <= date(2026, 12, 31)
+            assert it["date_filed"] <= it["retrieved_at"][:10], it  # no future-dated (erroneous) items
             assert it["court_id"] == d
             assert it["case_name"]
             assert it["retrieved_at"]
@@ -102,6 +119,8 @@ def test_items_pass_filters_and_are_unique(files):
         assert len(keys) == len(set(keys)), d
         for it in rec["items"]:
             if it["item_type"] == "recap_docket":
+                from pipeline.cases.filters import date_problem
+                assert date_problem(it["date_filed"], it["docket_number"], it["retrieved_at"]) is None
                 assert it["docket_type"] in {"cv", "cr"}
                 assert reject_reason(it["case_name"], it["docket_number"], it["nature_of_suit"], it["cause"]) is None
             else:

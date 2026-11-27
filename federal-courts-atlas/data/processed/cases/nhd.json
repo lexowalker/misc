@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Foster v. Sig Sauer Inc.",
+   "court": "District Court, D. New Hampshire",
+   "court_id": "nhd",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00995",
+   "docket_type": "cv",
+   "nature_of_suit": "410 Anti-Trust",
+   "cause": "15:1 Antitrust Litigation",
+   "url": "https://www.courtlistener.com/docket/75164007/foster-v-sig-sauer-inc/",
+   "courtlistener_id": 75164007,
+   "retrieved_at": "2026-11-27T07:42:53+00:00",
+   "source_id": "cl_search_nhd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Aguilar v. US Citizenship and Immigration Services",
+   "court": "District Court, D. New Hampshire",
+   "court_id": "nhd",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00988",
+   "docket_type": "cv",
+   "nature_of_suit": "465 Other Immigration Actions",
+   "cause": "28:1651 Petition for Writ of Mandamus",
+   "url": "https://www.courtlistener.com/docket/75149689/aguilar-v-us-citizenship-and-immigration-services/",
+   "courtlistener_id": 75149689,
+   "retrieved_at": "2026-11-27T07:42:53+00:00",
+   "source_id": "cl_search_nhd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Pelletier v. NH Department of Corrections",
+   "court": "District Court, D. New Hampshire",
+   "court_id": "nhd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01002",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177403/pelletier-v-nh-department-of-corrections/",
+   "courtlistener_id": 75177403,
+   "retrieved_at": "2026-11-27T07:42:53+00:00",
+   "source_id": "cl_search_nhd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Pichardo-Mendez",
+   "court": "District Court, D. New Hampshire",
+   "court_id": "nhd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00093",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75143416/united-states-v-pichardo-mendez/",
+   "courtlistener_id": 75143416,
+   "retrieved_at": "2026-11-27T07:42:53+00:00",
+   "source_id": "cl_search_nhd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Lozano",
+   "court": "District Court, D. New Hampshire",
+   "court_id": "nhd",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00092",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75140141/united-states-v-lozano/",
+   "courtlistener_id": 75140141,
+   "retrieved_at": "2026-11-27T07:42:53+00:00",
+   "source_id": "cl_search_nhd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nhd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:42:53+00:00"
 }

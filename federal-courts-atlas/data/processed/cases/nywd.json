@@ -10,13 +10,63 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Cela Mayancela v. Sukmanowski",
+   "court": "District Court, W.D. New York",
+   "court_id": "nywd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-02781",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181006/cela-mayancela-v-sukmanowski/",
+   "courtlistener_id": 75181006,
+   "retrieved_at": "2026-11-27T07:43:58+00:00",
+   "source_id": "cl_search_nywd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Dickens v. Rochester Emergency Veterinary Services, Inc.",
+   "court": "District Court, W.D. New York",
+   "court_id": "nywd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-07286",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178784/dickens-v-rochester-emergency-veterinary-services-inc/",
+   "courtlistener_id": 75178784,
+   "retrieved_at": "2026-11-27T07:43:58+00:00",
+   "source_id": "cl_search_nywd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Henry v. Rochester Psychiatric Center",
+   "court": "District Court, W.D. New York",
+   "court_id": "nywd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-07279",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176705/henry-v-rochester-psychiatric-center/",
+   "courtlistener_id": 75176705,
+   "retrieved_at": "2026-11-27T07:43:58+00:00",
+   "source_id": "cl_search_nywd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nywd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:43:58+00:00"
 }

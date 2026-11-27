@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Junco v. TDS Telecom Service, LLC",
+   "court": "District Court, S.D. Georgia",
+   "court_id": "gasd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00138",
+   "docket_type": "cv",
+   "nature_of_suit": "Civil Rights: Jobs",
+   "cause": "42:1983 Civil Rights (Employment Discrimination)",
+   "url": "https://www.courtlistener.com/docket/75177028/junco-v-tds-telecom-service-llc/",
+   "courtlistener_id": 75177028,
+   "retrieved_at": "2026-11-27T07:36:41+00:00",
+   "source_id": "cl_search_gasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Nails v. Navy Federal Credit Union",
+   "court": "District Court, S.D. Georgia",
+   "court_id": "gasd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00348",
+   "docket_type": "cv",
+   "nature_of_suit": "Contract: Other",
+   "cause": "28:1446 Notice of Removal",
+   "url": "https://www.courtlistener.com/docket/75167331/nails-v-navy-federal-credit-union/",
+   "courtlistener_id": 75167331,
+   "retrieved_at": "2026-11-27T07:36:41+00:00",
+   "source_id": "cl_search_gasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Broadcast Music, Inc. v. Big Show Holding LLC",
+   "court": "District Court, S.D. Georgia",
+   "court_id": "gasd",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00295",
+   "docket_type": "cv",
+   "nature_of_suit": "820 Copyright",
+   "cause": "17:101 Copyright Infringement",
+   "url": "https://www.courtlistener.com/docket/75162426/broadcast-music-inc-v-big-show-holding-llc/",
+   "courtlistener_id": 75162426,
+   "retrieved_at": "2026-11-27T07:36:41+00:00",
+   "source_id": "cl_search_gasd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gonzalez-Torrijos v. United States",
+   "court": "District Court, S.D. Georgia",
+   "court_id": "gasd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-00076",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178693/gonzalez-torrijos-v-united-states/",
+   "courtlistener_id": 75178693,
+   "retrieved_at": "2026-11-27T07:36:41+00:00",
+   "source_id": "cl_search_gasd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=gasd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:36:41+00:00"
 }

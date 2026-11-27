@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Scottsdale Insurance Company v. All Source, LLC Series B d/b/a Exit 210 Saloon d/b/a Double Down Saloon",
+   "court": "District Court, C.D. Illinois",
+   "court_id": "ilcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02385",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178862/scottsdale-insurance-company-v-all-source-llc-series-b-dba-exit-210/",
+   "courtlistener_id": 75178862,
+   "retrieved_at": "2026-11-27T07:37:43+00:00",
+   "source_id": "cl_search_ilcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hernandez v. Ramos",
+   "court": "District Court, C.D. Illinois",
+   "court_id": "ilcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01512",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178505/hernandez-v-ramos/",
+   "courtlistener_id": 75178505,
+   "retrieved_at": "2026-11-27T07:37:43+00:00",
+   "source_id": "cl_search_ilcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Sanders v. Vandersvelte",
+   "court": "District Court, C.D. Illinois",
+   "court_id": "ilcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-04288",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177513/sanders-v-vandersvelte/",
+   "courtlistener_id": 75177513,
+   "retrieved_at": "2026-11-27T07:37:43+00:00",
+   "source_id": "cl_search_ilcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Brehm v. Excel Interior Door LLC",
+   "court": "District Court, C.D. Illinois",
+   "court_id": "ilcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02384",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175943/brehm-v-excel-interior-door-llc/",
+   "courtlistener_id": 75175943,
+   "retrieved_at": "2026-11-27T07:37:43+00:00",
+   "source_id": "cl_search_ilcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Green",
+   "court": "District Court, C.D. Illinois",
+   "court_id": "ilcd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-10055",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174189/united-states-v-green/",
+   "courtlistener_id": 75174189,
+   "retrieved_at": "2026-11-27T07:37:43+00:00",
+   "source_id": "cl_search_ilcd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ilcd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:37:43+00:00"
 }

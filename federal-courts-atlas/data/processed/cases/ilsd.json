@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Dominguez v. Mellendorf",
+   "court": "District Court, S.D. Illinois",
+   "court_id": "ilsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01604",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175311/dominguez-v-mellendorf/",
+   "courtlistener_id": 75175311,
+   "retrieved_at": "2026-11-27T07:37:46+00:00",
+   "source_id": "cl_search_ilsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Guichard v. City of O'Fallon, Illinois",
+   "court": "District Court, S.D. Illinois",
+   "court_id": "ilsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01603",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75173929/guichard-v-city-of-ofallon-illinois/",
+   "courtlistener_id": 75173929,
+   "retrieved_at": "2026-11-27T07:37:46+00:00",
+   "source_id": "cl_search_ilsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Jackson v. Rudolph",
+   "court": "District Court, S.D. Illinois",
+   "court_id": "ilsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01597",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75173861/jackson-v-rudolph/",
+   "courtlistener_id": 75173861,
+   "retrieved_at": "2026-11-27T07:37:46+00:00",
+   "source_id": "cl_search_ilsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Green v. Pritzer",
+   "court": "District Court, S.D. Illinois",
+   "court_id": "ilsd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01598",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174074/green-v-pritzer/",
+   "courtlistener_id": 75174074,
+   "retrieved_at": "2026-11-27T07:37:46+00:00",
+   "source_id": "cl_search_ilsd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ilsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:37:46+00:00"
 }

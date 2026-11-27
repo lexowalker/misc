@@ -13,6 +13,22 @@
  "items": [
   {
    "item_type": "recap_docket",
+   "case_name": "TopDecked Limited v. Eminence Gaming LLC",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01529",
+   "docket_type": "cv",
+   "nature_of_suit": "840 Trademark",
+   "cause": "15:1114 Trademark Infringement",
+   "url": "https://www.courtlistener.com/docket/75166899/topdecked-limited-v-eminence-gaming-llc/",
+   "courtlistener_id": 75166899,
+   "retrieved_at": "2026-11-27T06:44:58+00:00",
+   "source_id": "cl_search_ded_recap"
+  },
+  {
+   "item_type": "recap_docket",
    "case_name": "Blatt v. Goldner",
    "court": "District Court, D. Delaware",
    "court_id": "ded",
@@ -24,22 +40,6 @@
    "cause": null,
    "url": "https://www.courtlistener.com/docket/75178137/blatt-v-goldner/",
    "courtlistener_id": 75178137,
-   "retrieved_at": "2026-11-27T06:44:58+00:00",
-   "source_id": "cl_search_ded_recap"
-  },
-  {
-   "item_type": "recap_docket",
-   "case_name": "Baker v. Plumbers & Pipefitters Local Union 74",
-   "court": "District Court, D. Delaware",
-   "court_id": "ded",
-   "date_filed": "2026-11-25",
-   "date_terminated": null,
-   "docket_number": "1:26-cv-01540",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75177270/baker-v-plumbers-pipefitters-local-union-74/",
-   "courtlistener_id": 75177270,
    "retrieved_at": "2026-11-27T06:44:58+00:00",
    "source_id": "cl_search_ded_recap"
   },
@@ -98,6 +98,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=ded&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:45:03+00:00"
 }

@@ -13,22 +13,6 @@
  "items": [
   {
    "item_type": "recap_docket",
-   "case_name": "Peck v. Moss Hoods, Inc.",
-   "court": "District Court, D. Colorado",
-   "court_id": "cod",
-   "date_filed": "2026-11-26",
-   "date_terminated": null,
-   "docket_number": "1:26-cv-06579",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75180911/peck-v-moss-hoods-inc/",
-   "courtlistener_id": 75180911,
-   "retrieved_at": "2026-11-27T06:43:52+00:00",
-   "source_id": "cl_search_cod_recap"
-  },
-  {
-   "item_type": "recap_docket",
    "case_name": "Lopez v. Muller",
    "court": "District Court, D. Colorado",
    "court_id": "cod",
@@ -40,6 +24,22 @@
    "cause": "28:1332 Diversity-Auto Negligence",
    "url": "https://www.courtlistener.com/docket/75179698/lopez-v-muller/",
    "courtlistener_id": 75179698,
+   "retrieved_at": "2026-11-27T06:43:52+00:00",
+   "source_id": "cl_search_cod_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Medina v. Dillon Companies, LLC d/b/a King Soopers",
+   "court": "District Court, D. Colorado",
+   "court_id": "cod",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-06567",
+   "docket_type": "cv",
+   "nature_of_suit": "360 P.I.: Other",
+   "cause": "28:1332 Diversity",
+   "url": "https://www.courtlistener.com/docket/75178688/medina-v-dillon-companies-llc-dba-king-soopers/",
+   "courtlistener_id": 75178688,
    "retrieved_at": "2026-11-27T06:43:52+00:00",
    "source_id": "cl_search_cod_recap"
   },
@@ -99,6 +99,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=cod&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:44:02+00:00"
 }

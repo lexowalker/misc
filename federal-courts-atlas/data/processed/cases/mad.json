@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Rodrigues Pinto v. Edlow",
+   "court": "District Court, D. Massachusetts",
+   "court_id": "mad",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-15265",
+   "docket_type": "cv",
+   "nature_of_suit": "465 Other Immigration Actions",
+   "cause": "28:1361 Petition for Writ of Mandamus",
+   "url": "https://www.courtlistener.com/docket/75178305/rodrigues-pinto-v-edlow/",
+   "courtlistener_id": 75178305,
+   "retrieved_at": "2026-11-27T07:40:02+00:00",
+   "source_id": "cl_search_mad_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mohamed v. HireRight, LLC",
+   "court": "District Court, D. Massachusetts",
+   "court_id": "mad",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-15264",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178146/mohamed-v-hireright-llc/",
+   "courtlistener_id": 75178146,
+   "retrieved_at": "2026-11-27T07:40:02+00:00",
+   "source_id": "cl_search_mad_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gonzalez v. Sompo America Insurance Company",
+   "court": "District Court, D. Massachusetts",
+   "court_id": "mad",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-15260",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176664/gonzalez-v-sompo-america-insurance-company/",
+   "courtlistener_id": 75176664,
+   "retrieved_at": "2026-11-27T07:40:02+00:00",
+   "source_id": "cl_search_mad_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Damasceno's Landscapes & Construction MA, LLC v. Capital Rock Drilling and Blasting LLC",
+   "court": "District Court, D. Massachusetts",
+   "court_id": "mad",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-30196",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175968/damascenos-landscapes-construction-ma-llc-v-capital-rock-drilling-and/",
+   "courtlistener_id": 75175968,
+   "retrieved_at": "2026-11-27T07:40:02+00:00",
+   "source_id": "cl_search_mad_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Guarino",
+   "court": "District Court, D. Massachusetts",
+   "court_id": "mad",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-10321",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75173932/united-states-v-guarino/",
+   "courtlistener_id": 75173932,
+   "retrieved_at": "2026-11-27T07:40:02+00:00",
+   "source_id": "cl_search_mad_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=mad&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:40:02+00:00"
 }

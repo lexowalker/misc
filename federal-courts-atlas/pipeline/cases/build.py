@@ -39,7 +39,7 @@ from pipeline.common.http import FetchError, _cache_paths, _full_url, fetch
 from pipeline.common.manifest import DATA, record_gap, register_source
 
 from . import LANE
-from .filters import docket_type, reject_reason
+from .filters import date_problem, defendant, detention_defendants, docket_type, reject_reason
 
 API = "https://www.courtlistener.com/api/rest/v4"
 SITE = "https://www.courtlistener.com"
@@ -55,6 +55,7 @@ RUN_BUDGET = int(os.environ.get("CASES_RUN_BUDGET", "45"))
 
 _requests_made = 0
 _offline = False
+_DETENTION_DEFENDANTS: set[str] = set()   # filled in main() from every cached RECAP page
 
 
 class NotFetched(Exception):
@@ -177,14 +178,21 @@ def select_recap(did: str, results: list[dict], r, sid: str, want_type: str, lim
     for x in results:
         if x.get("court_id") != did:
             continue
+        dt = docket_type(x.get("docketNumber"))
+        # Each item is judged (and its rejection counted) in exactly one pass: its own type's, or the civil
+        # pass for other docket types.
+        if dt != want_type and (dt in ("cv", "cr") or want_type != "cv"):
+            continue
         if not x.get("docket_absolute_url") or not x.get("dateFiled"):
             rejected["no url or date"] += 1
             continue
-        why = reject_reason(x.get("caseName"), x.get("docketNumber"), x.get("suitNature"), x.get("cause"))
+        why = (reject_reason(x.get("caseName"), x.get("docketNumber"), x.get("suitNature"), x.get("cause"))
+               or date_problem(x.get("dateFiled"), x.get("docketNumber"), r.meta["retrieved_at"]))
+        if (not why and want_type == "cv" and not (x.get("suitNature") or "").strip()
+                and defendant(x.get("caseName")) in _DETENTION_DEFENDANTS):
+            why = "no nature of suit; defendant also named in immigration-detention petitions"
         if why:
             rejected[why] += 1
-            continue
-        if docket_type(x.get("docketNumber")) != want_type:
             continue
         # The same case can appear as several CourtListener dockets (e.g. one per defendant, same number).
         key = ((x.get("docketNumber") or "").strip().lower(), (x.get("caseName") or "").strip().lower())
@@ -192,22 +200,28 @@ def select_recap(did: str, results: list[dict], r, sid: str, want_type: str, lim
             continue
         seen_nos.add(key)
         pool.append(x)
-    if want_type == "cv":   # prefer distinct natures of suit, newest first (pool is already newest first)
+    if want_type == "cv":
+        # Newest first, but dockets that already carry a nature of suit (distinct ones) before those that do not
+        # (a brand-new docket without one cannot be screened by nature of suit), then distinct defendants.
         used_nos: set = set()
         for x in pool:
-            nos = x.get("suitNature") or ""
-            if nos and nos in used_nos:
-                continue
-            picks.append(x)
-            used_nos.add(nos)
-            if len(picks) == limit:
+            nos = (x.get("suitNature") or "").strip()
+            if nos and nos not in used_nos:
+                picks.append(x)
+                used_nos.add(nos)
+                if len(picks) == limit:
+                    break
+        for x in pool:  # then dockets without one, preferring distinct defendants (mass-tort waves repeat one)
+            if len(picks) >= limit:
                 break
-        if len(picks) < limit:
-            for x in pool:
-                if x not in picks:
-                    picks.append(x)
-                    if len(picks) == limit:
-                        break
+            if (x not in picks and not (x.get("suitNature") or "").strip()
+                    and defendant(x.get("caseName")) not in {defendant(y.get("caseName")) for y in picks}):
+                picks.append(x)
+        for x in pool:
+            if len(picks) >= limit:
+                break
+            if x not in picks:
+                picks.append(x)
     else:
         picks = pool[:limit]
     for x in picks:
@@ -253,8 +267,9 @@ def build_district(did: str, court: dict | None, fetched: dict) -> tuple[dict, C
         for x in ro.json().get("results", []):
             if x.get("court_id") != did or not x.get("absolute_url") or not x.get("dateFiled"):
                 continue
-            why = reject_reason(x.get("caseName"), x.get("docketNumber"), x.get("suitNature"), None,
-                                require_type=False)
+            why = (reject_reason(x.get("caseName"), x.get("docketNumber"), x.get("suitNature"), None,
+                                 require_type=False)
+                   or date_problem(x.get("dateFiled"), None, ro.meta["retrieved_at"]))
             if why:
                 rejected[why] += 1
                 continue
@@ -277,7 +292,8 @@ def build_district(did: str, court: dict | None, fetched: dict) -> tuple[dict, C
         "queries": queries,
         "queries_not_fetched": missing,
         "selection": ("Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets "
-                      "(newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, "
+                      "(newest filed first; dockets with a recorded nature of suit, distinct natures of suit and "
+                      "distinct defendants preferred) up to 5 items in all; sealed, "
                       "minor-party, pseudonymous, initials-only, Social Security and immigration-detention items "
                       "skipped. Metadata only; not a sample of the court's docket."),
         "retrieved_at": max((i["retrieved_at"] for i in items), default=None),
@@ -312,6 +328,9 @@ def main() -> None:
             r2, sid2 = _try(d.id, "recap_cr")
             if r2 is not None:
                 fetched[(d.id, "recap_cr")] = (r2, sid2)
+    for (did, kind), (r, _) in fetched.items():
+        if kind.startswith("recap"):
+            _DETENTION_DEFENDANTS.update(detention_defendants(r.json().get("results", [])))
     rows, rej_total = [], Counter()
     gap_d, unfetched = [], []
     for d in DISTRICTS:

@@ -139,8 +139,10 @@ def test_recent_years_full_core_set(obs):
             continue
         g = rec[rec.variable == v].groupby("period").district_id.nunique()
         expect = 91 if v == "fcms_weighted_filings_per_judgeship" else 94
-        if v == "fcms_trials_completed_per_judgeship":
-            assert (g >= 93).all() and g.drop(2024).eq(94).all(), g   # D.N.M.I. FY2024 cell blank
+        if v in ("fcms_trials_completed_per_judgeship", "fcms_jurors_avg_present", "fcms_jurors_pct_not_selected"):
+            # D.N.M.I. FY2024: trials cell blank; jurors printed 0 with no jury selection held (not a measured
+            # value: omitted and logged, statistics audit item 6)
+            assert (g >= 93).all() and g.drop(2024).eq(94).all(), g
         else:
             assert (g == expect).all(), (v, g[g != expect])
     assert set(rec[rec.variable == "fcms_weighted_filings_per_judgeship"].district_id) == set(IDS) - TERRITORIAL
@@ -150,11 +152,18 @@ def test_reconciliation_with_national_totals():
     rec = pd.read_csv(OUT / "reconciliation.csv")
     assert set(rec.period) == set(range(1999, 2026)) or set(rec.period) >= set(range(2004, 2026))
     assert (rec.n_districts == 94).all()
-    bad = rec[rec.diff_sum_minus_national != 0]
+    counts = rec[rec.variable != "fcms_vacant_judgeship_months"]
+    bad = counts[counts.diff_sum_minus_national != 0]
     # the only exception: FY2011 profile prints 40,435 nationally but its districts sum to 40,434
     # (the FY2012 profile revises both to 40,439)
     assert [(r.variable, r.period, r.diff_sum_minus_national) for r in bad.itertuples()] == [
         ("fcms_civil_over_3yrs_count", 2011, -1.0)]
+    # vacant months are one-decimal values: the district sum may differ by rounding (<= 94 x 0.05), except
+    # FY2003, where every vintage prints districts 453.8 vs national 444.8 (statistics audit item 5)
+    vac = rec[rec.variable == "fcms_vacant_judgeship_months"].set_index("period")
+    assert set(vac.index) == set(range(1999, 2026))
+    assert list(vac[~vac.within_rounding].index) == [2003]
+    assert vac.loc[2003, "sum_districts"] == 453.8 and vac.loc[2003, "national"] == 444.8
     j = rec[rec.variable == "fcms_judgeships"].set_index("period")
     assert j.loc[2025, "national"] == 677 and j.loc[2025, "sum_article_iii"] == 673   # 4 territorial judgeships
 

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Boubakri v. Edlow",
+   "court": "District Court, D. Nevada",
+   "court_id": "nvd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-03992",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179966/boubakri-v-edlow/",
+   "courtlistener_id": 75179966,
+   "retrieved_at": "2026-11-27T07:42:10+00:00",
+   "source_id": "cl_search_nvd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Sabaugh v. Stoker",
+   "court": "District Court, D. Nevada",
+   "court_id": "nvd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-03991",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179262/sabaugh-v-stoker/",
+   "courtlistener_id": 75179262,
+   "retrieved_at": "2026-11-27T07:42:10+00:00",
+   "source_id": "cl_search_nvd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Fritz v. Unum Life Insurance Company of America",
+   "court": "District Court, D. Nevada",
+   "court_id": "nvd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-03990",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179018/fritz-v-unum-life-insurance-company-of-america/",
+   "courtlistener_id": 75179018,
+   "retrieved_at": "2026-11-27T07:42:10+00:00",
+   "source_id": "cl_search_nvd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "v. Thompson",
+   "court": "District Court, D. Nevada",
+   "court_id": "nvd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-03988",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178307/v-thompson/",
+   "courtlistener_id": 75178307,
+   "retrieved_at": "2026-11-27T07:42:10+00:00",
+   "source_id": "cl_search_nvd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=nvd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:42:10+00:00"
 }

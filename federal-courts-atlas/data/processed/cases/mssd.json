@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gooden v. Jackson Municipal Airport Authority",
+   "court": "District Court, S.D. Mississippi",
+   "court_id": "mssd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01014",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178625/gooden-v-jackson-municipal-airport-authority/",
+   "courtlistener_id": 75178625,
+   "retrieved_at": "2026-11-27T07:41:08+00:00",
+   "source_id": "cl_search_mssd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Estate of Carl Leon Helton, Jr. v. State Farm Fire and Casualty Company",
+   "court": "District Court, S.D. Mississippi",
+   "court_id": "mssd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00208",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177930/estate-of-carl-leon-helton-jr-v-state-farm-fire-and-casualty-company/",
+   "courtlistener_id": 75177930,
+   "retrieved_at": "2026-11-27T07:41:08+00:00",
+   "source_id": "cl_search_mssd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Ledesma v. CF Industries Holdings, Inc.",
+   "court": "District Court, S.D. Mississippi",
+   "court_id": "mssd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01013",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177058/ledesma-v-cf-industries-holdings-inc/",
+   "courtlistener_id": 75177058,
+   "retrieved_at": "2026-11-27T07:41:08+00:00",
+   "source_id": "cl_search_mssd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Esteves v. Morris Network of Mississippi, Inc.",
+   "court": "District Court, S.D. Mississippi",
+   "court_id": "mssd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00364",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175009/esteves-v-morris-network-of-mississippi-inc/",
+   "courtlistener_id": 75175009,
+   "retrieved_at": "2026-11-27T07:41:08+00:00",
+   "source_id": "cl_search_mssd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=mssd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T07:41:08+00:00"
 }

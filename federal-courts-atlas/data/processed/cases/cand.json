@@ -13,22 +13,6 @@
  "items": [
   {
    "item_type": "recap_docket",
-   "case_name": "Sparta Community Unit School District No. 140 v. Meta Platforms, Inc",
-   "court": "District Court, N.D. California",
-   "court_id": "cand",
-   "date_filed": "2026-11-26",
-   "date_terminated": null,
-   "docket_number": "4:26-cv-14930",
-   "docket_type": "cv",
-   "nature_of_suit": null,
-   "cause": null,
-   "url": "https://www.courtlistener.com/docket/75180973/sparta-community-unit-school-district-no-140-v-meta-platforms-inc/",
-   "courtlistener_id": 75180973,
-   "retrieved_at": "2026-11-27T06:41:48+00:00",
-   "source_id": "cl_search_cand_recap"
-  },
-  {
-   "item_type": "recap_docket",
    "case_name": "Knoware Inc. v. Space Exploration Technologies Corp.",
    "court": "District Court, N.D. California",
    "court_id": "cand",
@@ -40,6 +24,22 @@
    "cause": "15:44 Trademark Infringement",
    "url": "https://www.courtlistener.com/docket/75180923/knoware-inc-v-space-exploration-technologies-corp/",
    "courtlistener_id": 75180923,
+   "retrieved_at": "2026-11-27T06:41:48+00:00",
+   "source_id": "cl_search_cand_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Sparta Community Unit School District No. 140 v. Meta Platforms, Inc",
+   "court": "District Court, N.D. California",
+   "court_id": "cand",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-14930",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180973/sparta-community-unit-school-district-no-140-v-meta-platforms-inc/",
+   "courtlistener_id": 75180973,
    "retrieved_at": "2026-11-27T06:41:48+00:00",
    "source_id": "cl_search_cand_recap"
   },
@@ -99,6 +99,6 @@
   "https://www.courtlistener.com/api/rest/v4/search/?court=cand&order_by=dateFiled+desc&type=o"
  ],
  "queries_not_fetched": [],
- "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
  "retrieved_at": "2026-11-27T06:41:57+00:00"
 }
