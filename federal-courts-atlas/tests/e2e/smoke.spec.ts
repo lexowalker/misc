@@ -13,7 +13,8 @@ const ROUTES: Array<[string, string, RegExp]> = [
   ['learn', '#/learn', /How federal courts work/],
   ['search', '#/search?q=texas', /Find your federal court/],
   ['sources', '#/sources', /Sources and methodology/],
-  ['table', '#/table/median_time_civil', /median_time_civil|Median/i],
+  ['table', '#/table/civil_disposition_months', /Median time to resolve a civil case/],
+  ['table-unknown', '#/table/no_such_measure', /No measure by that name/],
   ['not-found', '#/no-such-page', /There is no page at this address/],
 ];
 

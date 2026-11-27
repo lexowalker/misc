@@ -143,7 +143,10 @@ class StoryView {
   /** The active step is the last one whose top has passed the trigger line. */
   private pick(): void {
     const narrow = window.matchMedia('(max-width: 59.99rem)').matches;
-    const line = window.innerHeight * (narrow ? 0.78 : 0.55);
+    // Narrow screens: the text is read in the band below the sticky graphic, so the trigger line sits
+    // halfway down that band. Wide screens: just below the middle of the viewport.
+    const gb = narrow ? (this.frame.closest('.scrolly__graphic')?.getBoundingClientRect().bottom ?? 0) : 0;
+    const line = narrow ? Math.max(gb, 0) + (window.innerHeight - Math.max(gb, 0)) * 0.45 : window.innerHeight * 0.55;
     let idx = 0;
     this.steps.forEach((el, i) => {
       if (el.getBoundingClientRect().top < line) idx = i;

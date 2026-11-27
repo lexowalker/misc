@@ -804,7 +804,29 @@ export class AtlasMap {
       const full = r.label.toUpperCase();
       const short = ({ ak: 'AK', hi: 'HI', gu: 'GU', mp: 'MP', prvi: 'PR · VI' } as Record<string, string>)[r.id] ?? full;
       const fits = (txt: string) => measureText(txt, insetFont) * 1.1 + 8 <= frameW;
-      const text = fits(full) ? full : fits(short) ? short : '';
+      // On a phone the label is taller than the row the projection reserves above the shapes, so it can land on
+      // the land itself (P.R. & V.I. at 375 px). Sample the label's box against the region's own district shapes
+      // and treat a hit like a label that does not fit.
+      const fx = t.applyX(x0) * sc;
+      const fy = t.applyY(y0) * sc;
+      const regionPaths = this.geometry.districts
+        .filter((d) => d.region === r.id)
+        .map((d) => this.paths.get(d.id))
+        .filter((p): p is SVGPathElement => !!p);
+      const onLand = (txt: string) => {
+        const w = measureText(txt, insetFont) * 1.1;
+        for (let i = 0; i <= 6; i++) {
+          for (let j = 0; j <= 2; j++) {
+            const px = fx + 4 + (w * i) / 6;
+            const py = fy + 3 + (insetPx * j) / 2;
+            const pt = new DOMPoint((px / sc - t.x) / t.k, (py / sc - t.y) / t.k);
+            if (regionPaths.some((p) => p.isPointInFill(pt))) return true;
+          }
+        }
+        return false;
+      };
+      const ok = (txt: string) => fits(txt) && !onLand(txt);
+      const text = ok(full) ? full : ok(short) ? short : '';
       if (!text) continue;
       const node = s('text', {
         class: 'inset-label',

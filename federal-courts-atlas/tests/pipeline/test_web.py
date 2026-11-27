@@ -368,6 +368,8 @@ BANNED_WORDS = re.compile(r"\b(because|due to|lenient|harsh|biased|bias|activist
 
 def _fmt(v: float, fmt: str) -> str:
     d = int(re.search(r"\.(\d+)", fmt).group(1))
+    if d == 0 and v != int(v):
+        d = 1  # a published fraction (half judgeships) is printed, never rounded away
     return f"{v:,.{d}f}"
 
 

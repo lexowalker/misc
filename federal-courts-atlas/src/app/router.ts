@@ -49,6 +49,18 @@ export const ROUTES: Route[] = [
   route('table', '/table/:variable', () => import('../pages/table.ts')),
 ];
 
+/** Old or shorthand addresses that redirect to a canonical route (the address bar is rewritten, not pushed). */
+const ALIASES: Array<[RegExp, (m: RegExpExecArray) => string]> = [[/^\/story\/([^/]+)$/, (m) => `/stories/${m[1]}`]];
+
+/** The canonical path for an alias such as "/story/rocket-docket", or null when the path is already canonical. */
+export function canonicalPath(path: string): string | null {
+  for (const [re, to] of ALIASES) {
+    const m = re.exec(path);
+    if (m) return to(m);
+  }
+  return null;
+}
+
 export interface ParsedHash {
   path: string;
   query: URLSearchParams;

@@ -54,7 +54,10 @@ export function formatValue(
   opts: { unit?: boolean } = {},
 ): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return 'No data';
-  const d = decimalsFor(variable, value);
+  let d = decimalsFor(variable, value);
+  // A published fraction is never rounded away: the AO prints shared judgeships as halves (3.5), and a
+  // '.0f' format must not turn that into 4. Whole numbers are unaffected.
+  if (d === 0 && !Number.isInteger(value)) d = 1;
   const n = formatNumber(value, d);
   const unit = variable?.unit ?? '';
   if (unit === 'percent') return `${n}%`;

@@ -73,8 +73,12 @@ test('a shared judgeship is shown as published, not rounded', async ({ page }) =
   test.skip(Number.isInteger(oknd.judgeships.value), 'oknd judgeships are whole in this build');
   await open(page, 'oknd');
   await expect(page.locator('.glance .tile', { hasText: 'Authorized judgeships' }).locator('.tile__value')).toHaveText(String(oknd.judgeships.value));
-  // The template's context sentence rounds the half judgeship; the page must not show it.
+  // The context sentence must print the half judgeship as published (the pipeline once rounded it), never rounded.
   await expect(page.locator('#sec-standout')).not.toContainText(`had ${Math.round(oknd.judgeships.value)} authorized`);
+  const prof = readJson('profiles/oknd.json') as { distinctive: { paragraph: string } };
+  if (prof.distinctive.paragraph.includes('authorized judgeship')) {
+    await expect(page.locator('#sec-standout')).toContainText(`had ${oknd.judgeships.value} authorized`);
+  }
 });
 
 test('key statistics: value, explicit rank, national figure, sparkline, source, derived formula', async ({ page }) => {

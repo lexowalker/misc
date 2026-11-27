@@ -7,7 +7,7 @@
 PY ?= .venv/bin/python
 export PYTHONPATH := $(CURDIR)
 
-.PHONY: setup data test docs boundaries population fcms ussc idb judges courthouses cases web clean-processed
+.PHONY: setup data test docs boundaries population fcms ussc idb judges courthouses cases web stories clean-processed
 
 setup:
 	python3 -m venv .venv
@@ -15,7 +15,8 @@ setup:
 	npm install
 
 # Order matters only where a lane reads another lane's output (noted per target).
-data: boundaries population fcms ussc idb judges courthouses cases web docs
+# stories runs before web: web's manifest.json hashes every file under public/data, including public/data/stories/.
+data: boundaries population fcms ussc idb judges courthouses cases stories web docs
 
 boundaries:            ## county->district assignment + district/state/county topology
 	$(PY) -m pipeline.boundaries.build
@@ -41,8 +42,11 @@ courthouses:           ## places of holding court + geocoding (needs boundaries)
 cases:                 ## CourtListener recent cases per district
 	$(PY) -m pipeline.cases.build
 
-web:                   ## assemble public/data/ for the site (needs all of the above)
+web:                   ## assemble public/data/ for the site (needs all of the above); rerun after stories
 	$(PY) -m pipeline.web.build
+
+stories:               ## scrollytelling story numbers -> public/data/stories/ (reads data/processed only; run web after it)
+	$(PY) -m pipeline.stories.build
 
 docs:                  ## SOURCES.md + DATA_GAPS.md from per-lane fragments
 	$(PY) -m pipeline.build_docs

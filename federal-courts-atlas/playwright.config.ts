@@ -27,7 +27,8 @@ export default defineConfig({
   ],
   webServer: {
     // Each port builds into its own folder, so two lanes can run the suite at once without clobbering dist/.
-    command: `npx vite build --outDir .e2e-dist/${PORT} --emptyOutDir && npx vite preview --outDir .e2e-dist/${PORT} --port ${PORT} --strictPort --host 127.0.0.1`,
+    // --bypass-lock: Vite 8 otherwise refuses a second `vite preview` while another lane's server is running.
+    command: `npx vite build --outDir .e2e-dist/${PORT} --emptyOutDir && npx vite preview --outDir .e2e-dist/${PORT} --port ${PORT} --strictPort --host 127.0.0.1 --bypass-lock`,
     url: `http://127.0.0.1:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -143,8 +143,15 @@ test('two districts: aligned rows with value, rank, leader and national figure f
       const x = val(f, id, yy);
       if (x !== null) pool.push(x);
     }
-    for (const yy of v.years) if (typeof f.national?.[String(yy)] === 'number') pool.push(f.national[String(yy)]!);
+    // A national figure above every district in every year is a total for all districts; it stays off the
+    // district scale (judgeships, vacant judgeship months, patent cases).
+    const natYears = v.years.filter((yy) => typeof f.national?.[String(yy)] === 'number');
+    const natIsTotal =
+      natYears.length > 0 &&
+      natYears.every((yy) => Object.values(f.values).every((ys) => ys[String(yy)] === undefined || f.national![String(yy)]! > ys[String(yy)]!));
+    if (!natIsTotal) for (const yy of natYears) pool.push(f.national![String(yy)]!);
     if (pool.length) await expect(row).toHaveAttribute('data-domain', `${Math.min(...pool)},${Math.max(...pool)}`);
+    if (natIsTotal && typeof f.national?.[String(y)] === 'number') await expect(row.locator('.cmp-measure__nat-total')).toBeVisible();
   }
 
   // Layout: columns on desktop, stacked on a phone; never a horizontal page scroll.

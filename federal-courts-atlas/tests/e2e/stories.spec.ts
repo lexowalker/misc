@@ -25,8 +25,12 @@ async function toStep(page: Page, i: number): Promise<void> {
   await page.evaluate((k) => {
     const el = document.querySelectorAll<HTMLElement>('.story-step')[k]!;
     const narrow = window.matchMedia('(max-width: 59.99rem)').matches;
-    const line = window.innerHeight * (narrow ? 0.78 : 0.55);
-    const y = el.getBoundingClientRect().top + window.scrollY - line + 40;
+    // Mirror the page's trigger line (src/pages/story.ts pick()); the sticky graphic's bottom once stuck.
+    const g = document.querySelector('.scrolly__graphic') as HTMLElement;
+    const top = parseFloat(getComputedStyle(g).top) || 0;
+    const gb = narrow ? top + g.offsetHeight : 0;
+    const line = narrow ? gb + (window.innerHeight - gb) * 0.45 : window.innerHeight * 0.55;
+    const y = el.getBoundingClientRect().top + window.scrollY - line + 24;
     window.scrollTo(0, Math.max(0, y));
   }, i);
   await expect(page.locator('.story-step').nth(i)).toHaveClass(/is-active/, { timeout: 5_000 });
@@ -97,7 +101,7 @@ for (const slug of SLUGS) {
     // No placeholders left, no em-dash anywhere.
     const body = await page.locator('main').innerText();
     expect(body).not.toMatch(/\{[a-z0-9_]+(:[a-zA-Z]+)?\}/);
-    expect(body.includes('—'), 'em-dash in page').toBe(false);
+    expect(body.includes(String.fromCharCode(0x2014)), 'em-dash in page').toBe(false);
 
     // Walk every step: it becomes active and the graphic has a description.
     for (let i = 0; i < n; i++) {

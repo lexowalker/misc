@@ -324,34 +324,50 @@ button.story-num:focus-visible {
     --story-top: 3.5rem;
   }
 
+  /* The graphic stays on top: text scrolls up beneath it, so it is never covered. */
   .scrolly__graphic {
-    height: 56vh;
-    height: 56svh;
-    min-height: 19rem;
-    max-height: 34rem;
+    z-index: 3;
+    height: 52vh;
+    height: 52svh;
+    min-height: 18rem;
+    max-height: 32rem;
     margin: 0 calc(-1 * var(--gutter));
-    padding: var(--space-2) var(--gutter) 0;
+    padding: var(--space-2) var(--gutter) var(--space-1);
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-rule);
+    box-shadow: 0 6px 12px -10px rgb(0 0 0 / 0.35);
   }
 
   .scrolly__steps {
-    padding: var(--space-5) 0 30vh;
+    position: relative;
+    z-index: 1;
+    padding: var(--space-4) 0 40vh;
   }
 
   .story-step {
-    min-height: 72vh;
+    z-index: 1;
+    min-height: 62vh;
     align-items: flex-start;
     justify-content: center;
   }
 
-  .story-step + .story-step {
-    padding-top: 6vh;
-  }
-
   .story-step__card {
     width: 100%;
-    padding: var(--space-4);
+    padding: var(--space-4) var(--space-4) var(--space-5);
+    box-shadow: none;
+  }
+
+  .story-step.is-active .story-step__card {
+    box-shadow: none;
+  }
+
+  .story-step__text {
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .story-map__legend .legend__note {
+    display: none;
   }
 }
 
@@ -1072,6 +1088,26 @@ button.story-num:focus-visible {
   color: var(--color-text);
 }
 
+.story-data summary::-webkit-details-marker {
+  display: none;
+}
+
+.story-data summary::before {
+  content: '';
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin: 0 4px 0 2px;
+  border-right: 1.5px solid var(--color-text-2);
+  border-bottom: 1.5px solid var(--color-text-2);
+  transform: rotate(-45deg);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.story-data[open] summary::before {
+  transform: rotate(45deg);
+}
+
 .story-data summary:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
@@ -1242,16 +1278,16 @@ button.story-num:focus-visible {
 }
 
 .story-tile__media {
-  aspect-ratio: 975 / 610;
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  padding: var(--space-2);
   position: relative;
 }
 
 .story-tile__map {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 975 / 610;
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
 }
 
 .story-tile__focus {
@@ -1263,14 +1299,11 @@ button.story-num:focus-visible {
 }
 
 .story-tile__map-label {
-  position: absolute;
-  left: var(--space-3);
-  bottom: var(--space-2);
-  max-width: calc(100% - 2 * var(--space-3));
-  font-size: 10.5px;
+  margin-top: var(--space-2);
+  font-size: var(--fs-2xs);
   font-weight: var(--fw-semibold);
   color: var(--color-text-3);
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .story-tile__body {
@@ -1354,4 +1387,26 @@ button.story-num:focus-visible {
 
 .ch-hit-row:hover {
   fill: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+/* Placeholder while the thumbnail loads, so the cards do not jump. */
+.story-tile__media:empty {
+  aspect-ratio: 975 / 610;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+/* Story map legend: room for percent break labels at phone width. */
+.story-map__legend .legend__track {
+  width: clamp(13rem, 56vw, 17rem);
+}
+
+@media (max-width: 40rem) {
+  .story-map__legend .legend {
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .story-map__legend .legend__tick {
+    font-size: 10px;
+  }
 }

@@ -50,20 +50,54 @@ export async function render(ctx: PageContext): Promise<void> {
     listSlot.append(errorState(r.error, r.url));
     return;
   }
-  type Row = SourceRecord & { id: string };
+  type Row = SourceRecord & { id: string; lane?: string };
   const rows: Row[] = Object.entries(r.data).map(([id, s]) => ({ id, ...s }));
-  const table = new DataTable<Row>({
-    caption: `${rows.length} source files`,
-    rowKey: (row) => row.id,
-    rowHeader: 'dataset',
-    sortKey: 'publisher',
-    columns: [
-      { key: 'dataset', label: 'Dataset', value: (row) => row.dataset, render: (row) => (row.url ? h('a', { href: row.url, target: '_blank', rel: 'noopener' }, row.dataset) : row.dataset) },
-      { key: 'publisher', label: 'Publisher', value: (row) => row.publisher ?? '', optional: true },
-      { key: 'vintage', label: 'Vintage', value: (row) => row.vintage ?? '' },
-      { key: 'retrieved', label: 'Retrieved', value: (row) => row.retrieved_at ?? '', render: (row) => formatDate(row.retrieved_at), optional: true },
-    ],
-    rows,
-  });
-  listSlot.append(table.el);
+  // One section per kind of data, so the reader can find a family without scrolling 900 rows.
+  // The keys are the pipeline's source groups; the labels are written for readers.
+  const GROUPS: Array<{ key: string; label: string; note: string }> = [
+    { key: 'fcms', label: 'Court caseload statistics', note: 'Federal Court Management Statistics from the Administrative Office of the U.S. Courts: one district profile file per year.' },
+    { key: 'idb', label: 'Case-level court records', note: 'The Federal Judicial Center Integrated Database of civil cases and criminal defendants.' },
+    { key: 'ussc', label: 'Sentencing', note: 'U.S. Sentencing Commission individual offender datafiles and statistical information packets, several files per year.' },
+    { key: 'judges', label: 'Judges', note: 'The Federal Judicial Center Biographical Directory of Article III judges.' },
+    { key: 'population', label: 'Population', note: 'Census Bureau county population counts and yearly estimates.' },
+    { key: 'boundaries', label: 'District boundaries', note: 'The statutes that define each district, from the Office of the Law Revision Counsel.' },
+    { key: 'courthouses', label: 'Courthouses and places', note: 'Court locations and the Census map files used to place them.' },
+    { key: 'cases', label: 'Recent cases', note: 'CourtListener search results, one file per district.' },
+    { key: 'web', label: 'Series built from the files above', note: 'Records that describe a multi-year series assembled from the yearly files listed in the other groups.' },
+  ];
+  const known = new Set(GROUPS.map((g) => g.key));
+  const groups = [...GROUPS, { key: '', label: 'Other sources', note: '' }]
+    .map((g) => ({ ...g, rows: rows.filter((row) => (g.key ? row.lane === g.key : !known.has(row.lane ?? ''))) }))
+    .filter((g) => g.rows.length);
+  const columns = [
+    { key: 'dataset', label: 'Dataset', value: (row: Row) => row.dataset, render: (row: Row) => (row.url ? h('a', { href: row.url, target: '_blank', rel: 'noopener' }, row.dataset) : row.dataset) },
+    { key: 'publisher', label: 'Publisher', value: (row: Row) => row.publisher ?? '', optional: true },
+    { key: 'vintage', label: 'Vintage', value: (row: Row) => row.vintage ?? '' },
+    { key: 'retrieved', label: 'Retrieved', value: (row: Row) => row.retrieved_at ?? '', render: (row: Row) => formatDate(row.retrieved_at), optional: true },
+  ];
+  listSlot.append(
+    h('p', { class: 'src-groups__lead' }, `${rows.length.toLocaleString('en-US')} source files in ${groups.length} groups. Open a group to see its files.`),
+    ...groups.map((g) => {
+      const table = new DataTable<Row>({
+        caption: `${g.label}: ${g.rows.length} source ${g.rows.length === 1 ? 'file' : 'files'}`,
+        rowKey: (row) => row.id,
+        rowHeader: 'dataset',
+        sortKey: 'vintage',
+        columns,
+        rows: g.rows,
+      });
+      return h(
+        'details',
+        { class: 'src-group', open: g.rows.length <= 30 ? '' : null },
+        h(
+          'summary',
+          { class: 'src-group__summary' },
+          h('span', { class: 'src-group__label' }, g.label),
+          h('span', { class: 'src-group__count' }, `${g.rows.length.toLocaleString('en-US')} ${g.rows.length === 1 ? 'file' : 'files'}`),
+        ),
+        g.note ? h('p', { class: 'src-group__note' }, g.note) : null,
+        table.el,
+      );
+    }),
+  );
 }

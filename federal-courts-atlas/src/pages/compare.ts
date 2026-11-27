@@ -743,7 +743,18 @@ export async function render(ctx: PageContext): Promise<() => void> {
     const spark = sparkSize();
 
     // One y-domain for every sparkline in the row: all chosen districts, every year, plus the national figure.
-    const nationalSeries: Array<[number, number | null]> = years.map((y) => [y, getNational(file, y)]);
+    // A national figure above every district in every published year is a total for all districts combined
+    // (judgeships, vacant judgeship months, patent cases). It is not on a district's scale, so it is neither drawn
+    // as the reference line nor allowed to stretch the shared domain.
+    const nationalAll: Array<[number, number | null]> = years.map((y) => [y, getNational(file, y)]);
+    const withNat = nationalAll.filter((e): e is [number, number] => e[1] !== null);
+    const nationalIsTotal =
+      withNat.length > 0 &&
+      withNat.every(([y, nv]) => Object.keys(file.values).every((d) => {
+        const dv = getValue(file, d, y);
+        return dv === null || nv > dv;
+      }));
+    const nationalSeries: Array<[number, number | null]> = nationalIsTotal ? [] : nationalAll;
     const pool: number[] = [];
     for (const id of ids) for (const y of years) {
       const val = getValue(file, id, y);
@@ -789,6 +800,9 @@ export async function render(ctx: PageContext): Promise<() => void> {
           ? h('span', { class: 'cmp-measure__nat-val num', title: file.national_note ?? '' }, fmtValue(nat, v))
           : h('span', { class: 'cmp-measure__muted' }, year === null ? 'No data' : 'None published'),
         natDerived ? h('span', { class: 'cmp-measure__nat-derived' }, ' (derived)') : null,
+        nationalIsTotal && nat !== null
+          ? h('span', { class: 'cmp-measure__muted cmp-measure__nat-total' }, ' All districts combined, so it is not drawn on the trend lines.')
+          : null,
       ),
       v.higher_means ? h('p', { class: 'cmp-measure__hint' }, `Higher means ${v.higher_means}.`) : null,
       h(

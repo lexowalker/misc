@@ -9,7 +9,7 @@ import { replaceQuery } from '../app/router.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
 import { getRank, getValue, loadValues, loadVariables, rankedCount, caveatList } from '../data/loaders.ts';
 import { DataTable } from '../components/data-table.ts';
-import { dataNotBuilt, errorState, noData } from '../components/states.ts';
+import { dataNotBuilt, emptyState, errorState, noData } from '../components/states.ts';
 import { sourceChipForVariable } from '../components/source-chip.ts';
 import { pageHead } from './_page.ts';
 
@@ -23,6 +23,19 @@ export async function render(ctx: PageContext): Promise<void> {
   ctx.root.append(page);
   const [vr, values] = await Promise.all([loadVariables(), loadValues(id)]);
   const v = vr.status === 'ok' ? vr.data.find((x) => x.id === id) : undefined;
+  if (vr.status === 'ok' && !v) {
+    // The catalog is published but has no such measure: say so, rather than "not yet built".
+    page.append(
+      pageHead({ kicker: 'Data table', title: 'No measure by that name' }),
+      emptyState({
+        title: `The atlas has no measure called "${id}"`,
+        body: 'Every published measure is listed on the map, grouped by family. Each one has its own table.',
+        icon: 'map',
+        action: h('a', { class: 'btn btn--primary', href: '#/' }, 'Choose a measure on the map'),
+      }),
+    );
+    return;
+  }
   page.append(pageHead({ kicker: 'Data table', title: v?.label ?? id, dek: v?.explainer }));
   if (values.status !== 'ok') {
     page.append(values.status === 'missing' ? dataNotBuilt(`values/${id}.json`, 'This table') : errorState(values.error, values.url));

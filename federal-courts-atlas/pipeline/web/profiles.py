@@ -332,7 +332,7 @@ def sentencing_composition(d: str, VFS: dict[str, dict]) -> dict:
     return {
         "series": series,
         "note": ("The USSC changed its sentence categories in FY 2018. The two series are kept apart. Where they "
-                 "overlap (FY 2014 to 2017) the USSC lane found the four shares identical for every district. "
+                 "overlap (FY 2014 to 2017) the four shares are identical for every district under both schemes. "
                  "Shares may not add to exactly 100 because each is rounded to one decimal."),
     }
 

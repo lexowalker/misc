@@ -136,6 +136,10 @@ def decimals(fmt: str | None) -> int:
 
 def fmt_number(value: float, fmt: str | None) -> str:
     d = decimals(fmt)
+    # Never round away a published fraction (shared judgeships are halves: 3.5 must not print as 4).
+    # Matches src/lib/format.ts formatValue.
+    if d == 0 and value != int(value):
+        d = 1
     return f"{value:,.{d}f}"
 
 

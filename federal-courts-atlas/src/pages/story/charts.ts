@@ -85,6 +85,20 @@ function roleClass(role: string): string {
   }
 }
 
+/** Greedy word wrap to at most `max` characters per line. */
+function wrapWords(text: string, max: number): string[] {
+  const out: string[] = [];
+  let cur = '';
+  for (const w of text.split(' ')) {
+    if (cur && (cur + ' ' + w).length > max) {
+      out.push(cur);
+      cur = w;
+    } else cur = cur ? `${cur} ${w}` : w;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+
 /** Spread label y positions so none are closer than `gap` (simple relaxation). */
 function spread(items: Array<{ y: number }>, gap: number, lo: number, hi: number): void {
   items.sort((a, b) => a.y - b.y);
@@ -217,7 +231,7 @@ class LineChart extends BaseChart<LineChartSpec> {
     const narrow = this.w < 520;
     const series = this.visible();
     const labelled = series.length <= 4;
-    const m = { t: 22, r: labelled ? (narrow ? 64 : 116) : 16, b: 26, l: narrow ? 34 : 44 };
+    const m = { t: 22, r: labelled ? (narrow ? 78 : 124) : 16, b: 26, l: narrow ? 34 : 44 };
     const iw = this.w - m.l - m.r;
     const ih = this.hgt - m.t - m.b;
     const xs = sp.x.map((_, i) => i);
@@ -302,18 +316,16 @@ class LineChart extends BaseChart<LineChartSpec> {
       }
     }
     if (labelled) {
-      spread(labels, 13, m.t, m.t + ih);
       const lx = m.l + iw + 8;
-      const maxW = m.r - 10;
-      for (const lb of labels) {
+      // Wrap each label to the right margin (about 6.3px per character at 12px).
+      const budget = Math.max(8, Math.floor((m.r - 12) / 6.3));
+      const wrapped = labels.map((lb) => ({ ...lb, lines: wrapWords(lb.text, budget) }));
+      spread(wrapped, 13 * Math.max(...wrapped.map((w) => w.lines.length)), m.t, m.t + ih);
+      for (const lb of wrapped) {
         const t = s('text', { class: `ch-direct${lb.muted ? ' is-muted' : ''}`, x: lx, y: lb.y, dy: '0.32em' });
-        const words = lb.text.split(' ');
-        // Wrap to two lines on narrow screens.
-        if (narrow && lb.text.length > 10) {
-          const mid = Math.ceil(words.length / 2);
-          t.append(s('tspan', { x: lx, dy: '-0.2em' }, words.slice(0, mid).join(' ')), s('tspan', { x: lx, dy: '1.1em' }, words.slice(mid).join(' ')));
-        } else t.textContent = lb.text;
-        t.setAttribute('data-maxw', String(maxW));
+        const k = lb.lines.length;
+        lb.lines.forEach((line, i) => t.append(s('tspan', { x: lx, dy: i === 0 ? `${0.32 - ((k - 1) * 1.1) / 2}em` : '1.1em' }, line)));
+        t.removeAttribute('dy');
         svg.append(s('line', { class: `ch-leader ${lb.cls}`, x1: m.l + iw + 2, x2: lx - 2, y1: lb.y0, y2: lb.y }), t);
       }
     }
@@ -767,7 +779,7 @@ class Dots extends BaseChart<DotsSpec> {
       svg.append(
         s('line', { class: 'ch-ref', x1: X(sp.reference.x), x2: X(sp.reference.x), y1: m.t, y2: m.t + ih }),
         s('line', { class: 'ch-ref', x1: m.l, x2: m.l + iw, y1: Y(sp.reference.y), y2: Y(sp.reference.y) }),
-        s('text', { class: 'ch-ref-label', x: X(sp.reference.x) + 5, y: Y(sp.reference.y) + 13 }, sp.reference.label),
+        s('text', { class: 'ch-ref-label', x: X(sp.reference.x) + 5, y: m.t + ih - 6 }, `${sp.reference.label} (dashed lines)`),
       );
     }
     const items = [...sp.items].sort((a, b) => (a.role === 'focus' ? 1 : 0) - (b.role === 'focus' ? 1 : 0));

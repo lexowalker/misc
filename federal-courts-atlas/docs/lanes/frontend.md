@@ -1,9 +1,9 @@
 # Lane report: front-end foundation
 
-Status: **foundation complete**. The map home, design system, data layer, shared components, Learn page and
-Search UI work against the real boundaries already published. Pages whose data or design belongs to later lanes
-(district profile body, compare statistics, stories, courtroom) render polished "in production" placeholders that
-show only real, sourced or statutory facts. No statistic appears anywhere in `src/` or `public/`.
+Status: **foundation complete; every page now built on it**. The design system, data layer, map and shared
+components were built first, before any statistics existed. The page lanes then built each page on them against the
+real data (see [Pages](#pages)), and an integration pass checked that they work together. No statistic is
+hard-coded in `src/`: every number is read from `public/data/` at runtime.
 
 ## Run it
 
@@ -47,10 +47,13 @@ src/map/labels.ts              greedy collision-avoided label placement; canvas 
 src/components/                tooltip, legend (+ No-data hatch), data-table, sparkline, year-slider, glossary, source-chip, states
 src/content/glossary.ts        47 plain-English, cited definitions (all 31 required terms + procedure terms used on Learn)
 src/content/events.ts          Booker, TC Heartland, First Step Act, COVID-19 with exact dates + periodYear() mapping
-src/content/stories.ts         planned story titles/deks (no claims)
-src/pages/                     home, district, compare, stories, story, courtroom, learn (+ learn-diagrams), search, sources, table, not-found
-src/styles/                    tokens.css, base.css, shell.css, components.css, map.css (eager); home/pages/learn.css (per chunk)
-tests/e2e/                     smoke, map, choropleth, perf specs; __screenshots__/{desktop,mobile}/*.jpg
+src/content/stories.ts         story prose with {key} placeholders, filled at runtime from public/data/stories/ (stories lane)
+src/pages/                     home (+ home-switcher), district (+ district/), compare, stories, story (+ story/), courtroom,
+                               learn (+ learn-diagrams), search, sources, table, not-found
+src/courtroom/                 three.js scene, seats, floor plan, panel (courtroom lane; loaded only on #/courtroom)
+src/styles/                    tokens.css, base.css, shell.css, components.css, map.css (eager); one CSS file per page chunk
+tests/e2e/                     one spec per page lane, plus smoke, map, choropleth, perf, web-data and integration;
+                               __screenshots__/{desktop,mobile}/*.jpg
 ```
 
 ## Design system (`src/styles/tokens.css`)
@@ -142,7 +145,12 @@ Every color, size, radius, shadow, z-index and duration is a custom property; co
   with `non-scaling-stroke`, so they stay a constant size at any zoom with no per-frame work). Labels appear from
   1.7× in priority order with greedy collision avoidance: right, left, above, then below the dot. Caps are 18, 60
   and 200 labels by zoom band. Labels are laid out in screen space at the end of each zoom and translated with the
-  map during it. **Not yet exercised with real data**: the courthouses lane has not published yet.
+  map during it. Runs on the real `geo/courthouses.json`; the home lane draws two dot kinds (a place of holding court
+  named by statute, and a city with only a courthouse building on the FJC list).
+- **Inset labels** use the full name, then a short form, then none, whichever fits the frame without sitting on the
+  region's own land (checked against the district shapes with `isPointInFill`). At 375 px the Guam, Northern
+  Mariana Islands and Puerto Rico + Virgin Islands frames are too small for a clear label and go without one; every
+  district still has its tooltip, aria-label and table row.
 - **Colors** are classes (`.q0`–`.q4`, `.nodata`, `.base`), so a theme switch recolors without re-rendering.
 - **Classification** (`scale.ts`): quantile breaks with ties de-duplicated, so heavily tied data gets fewer classes
   spread across the ramp rather than empty ones. `ChoroplethView` defaults to `scaleScope: 'all'`: breaks pooled
@@ -171,35 +179,41 @@ Loaders normalize shape variations in one place:
 - `loadSearchIndex` tries `search/index.json`, `search/search-index.json`, `search/{places,cities,counties,zips,zcta,
   courthouses}.json` and the contract's `search-index.json`. It normalizes lists, `{entries|items|records}`,
   bundles (`{zips, cities, counties, courthouses}`) and plain `key → district id(s)` maps. Courthouses double as
-  search entries. **Re-check once the courthouses lane publishes `docs/lanes/courthouses.md`.**
+  search entries. The published `search/` files feed the `PlaceSearch` combobox (`src/components/place-search.ts`,
+  home lane) on the home page and `#/search`.
 
-## How future pages plug in
+## How pages plug in
 
 All pages are lazy modules exporting `title` and `render(ctx) → cleanup?`. Add the route in `src/app/router.ts`.
+Shorthand addresses go in `ALIASES` there and are rewritten in the address bar (today `#/story/<slug>` becomes
+`#/stories/<slug>`). Rules that keep the pages working together:
 
-- **District profile** (`src/pages/district.ts`; keep the hero): `renderLocator({geometry, districtId, points})` for
-  the hero. Key stats use `loadValues` + `getValue/getRank/rankedCount` + `formatValue/rankText`, with
-  `renderSparkline({points, variable, periodType})` per row and `sourceChip({sourceIds, formula, derived})` per number.
-  Bench timeline: `loadJudges()[id]`, colored with `--color-party-d/r/other`, initials only (no photos). Cases:
-  `loadCases(id)`. Wrap legal terms with `term(id)` or write `rich('... [[senior-status]] ...')`.
-  "Distinctive" paragraph: build it from outlier ranks only.
-- **Compare** (`compare.ts`): the picker, URL sync (`?d=a,b,c`) and locator cards are done. Add rows of aligned
-  stats under each card, using the same accessors and one shared sparkline y-domain per row.
-- **Time machine**: done on the home map. `YearSlider({years, periodType, onChange})` with the event markers,
-  `ChoroplethView.setYear(y)`, and `?y=` in the URL. Reuse it anywhere. `periodYear(date, periodType)` places
-  events in the right fiscal year (the First Step Act, signed Dec. 21, 2018, is FY 2019).
-- **Variable switcher strip**: for each variable in a family, call `loadValues`, then
-  `scaleForValues(file, 'all', year)`, then `renderThumbnail({geometry, classOf: id => scale.classOf(getValue(file,id,year)), title})`.
-  Geometry comes from `loadAtlasGeometry()`. Thumbnails share decimated, per-class merged paths, so 20 are cheap.
-  Put them in buttons with `aria-pressed` and call `homeView.setData(...)` on click. The home page currently uses
-  an accessible `<select>` grouped by family.
-- **Stories** (scrollytelling): mount a `ChoroplethView` or `AtlasMap` in a sticky container and drive it from
-  scroll steps with `map.setData`, `map.zoomToDistrict(id)`, `map.highlightStep(step)` and `map.reset()`.
-  Copy goes through `rich()` for glossary terms.
-- **Courtroom**: `src/pages/courtroom.ts` is its own chunk. Do `const THREE = await import('three')` inside it,
-  never at module top level elsewhere, so three.js (installed, 0.187.0) never loads with the map. The perf test
-  asserts this.
-- **Tables**: `#/table/:variable` works as soon as `values/<variable>.json` exists. `DataTable` is generic.
+- **three.js loads only on `#/courtroom`**, through `await import('three')` inside the courtroom chunk. The perf and
+  integration specs assert that the home page never requests it.
+- **Shared modules change additively** (new options with defaults, new exports). Page-specific styling stays scoped
+  to the page's root class (`.district-page`, `.cmp-page`, `.cr-panel`, ...).
+- **Numbers print as published.** `formatValue()` never rounds away a published fraction: a `.0f` format still
+  prints shared judgeships as halves (3.5). The web pipeline's `fmt_number()` follows the same rule.
+- **Derived values** use `sourceChip({derived, formula})`. The formula popover opens on hover, on keyboard focus and
+  on a tap. A page that manages the popover itself sets `aria-expanded` on the button, and the shared `:focus` rule
+  then steps aside so a second tap can close it. A closed popover is `display: none`, so it cannot widen a phone page.
+- Reusable pieces: `ChoroplethView` / `AtlasMap`, `renderLocator`, `renderThumbnail`, `YearSlider`,
+  `renderSparkline` (shared domains and a dashed national reference line are options), `DataTable`, `PlaceSearch`,
+  `term()` / `rich()` for glossary terms, and the designed empty states in `src/components/states.ts`.
+
+## Pages
+
+Each page has its own lane report.
+
+| Page | Route | Report |
+|---|---|---|
+| Home map, variable switcher, time machine, place search | `#/`, `#/search` | [home.md](home.md) |
+| District profile | `#/district/:id` | [district.md](district.md) |
+| Compare mode | `#/compare?d=…` | [compare.md](compare.md) |
+| Guided stories | `#/stories`, `#/stories/:slug` | [stories.md](stories.md) |
+| The Courtroom | `#/courtroom` | [courtroom.md](courtroom.md) |
+| Data files behind every page | `public/data/` | [web.md](web.md) |
+| Learn, sources, table, not found | `#/learn`, `#/sources`, `#/table/:variable` | this report |
 
 ## Testing
 
@@ -239,21 +253,19 @@ computed once and routed to regions; state outlines are lazy.
 
 ## Known gaps and open issues
 
-1. **Courthouses and search not yet published.** Dots, labels and place search are built and defensive but untested
-   with real files. When `geo/courthouses.json` and `public/data/search/*` land, re-run the suite and check
-   `docs/lanes/courthouses.md` against `normalizeSearch()`.
-2. **Hi-res build is a one-off main-thread task of about 350 ms** (2.8 MB, 3,230 counties), now triggered one zoom
-   step early. A Web Worker build would remove the hitch.
-3. **Contract notes for the web lane** (not deviations; the loaders accept either form): please emit `ranks` as
-   `{district_id: {year: rank}}` with rank 1 = highest value, add `ranked_of: {year: n}`, and keep `caveats` as a
-   list. `format` is read as a d3-style spec for decimals only (`.1f`); units come from `unit`
-   (`months`, `percent` as 0–100, `per_judgeship`, `cases`, `count`, `persons`). `higher_means` is shown verbatim
-   ("Higher means …").
-4. **Glossary review.** Every definition is written from well-established law. Two items deserve a look in the copy
+1. **Hi-res build is a one-off main-thread task of about 350 ms** (2.8 MB, 3,230 counties), triggered one zoom step
+   early. A Web Worker build would remove the hitch. Not re-measured in the integration pass.
+2. **Glossary review.** Every definition is written from well-established law. Two items deserve a look in the copy
    audit: the `departure` entry says amendments effective Nov. 1, 2025 removed most departure provisions while keeping
    §5K1.1 and §5K3.1, and the `5k3-1` entry says fast-track programs have been used mainly for immigration offenses.
-   I am confident of both, but they come from memory, not from a source file.
-5. **Stories, courtroom, profile body and compare statistics** are placeholders by design and belong to later lanes.
-6. The **Alaska inset** shows the whole Aleutian chain, which keeps mainland Alaska fairly small. Newspapers often
+   Both come from memory, not from a source file.
+3. The **Alaska inset** shows the whole Aleutian chain, which keeps mainland Alaska fairly small. Newspapers often
    crop the far Aleutians; that is a design call for the client.
-7. `npm run dev` passes `--open`; on a headless machine Vite just prints the URL.
+4. **Small insets on phones.** At 375 px the Guam, Northern Mariana Islands and Puerto Rico + Virgin Islands insets
+   carry no label (there is no clear space inside their frames). Their districts keep tooltips, aria-labels and
+   table rows.
+5. `npm run dev` passes `--open`; on a headless machine Vite just prints the URL.
+
+Closed since the foundation report: the courthouse and search files are published and in use; the web lane emits
+`ranks` as `{district: {year: rank}}`, `ranked_of` and list-form `caveats`; the profile body, compare statistics,
+stories and courtroom are built (see [Pages](#pages)); the `#/sources` page groups its files by kind of data.

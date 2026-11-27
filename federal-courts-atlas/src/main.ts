@@ -8,7 +8,7 @@ import './styles/map.css';
 
 import { initTheme } from './app/theme.ts';
 import { buildShell } from './app/shell.ts';
-import { match, parseHash, type Cleanup, type PageContext } from './app/router.ts';
+import { canonicalPath, match, parseHash, type Cleanup, type PageContext } from './app/router.ts';
 import { loadAtlasGeometry } from './map/geo.ts';
 import { hidePopover } from './components/glossary.ts';
 import { h } from './lib/dom.ts';
@@ -27,7 +27,13 @@ let first = true;
 
 async function render(): Promise<void> {
   const seq = ++navSeq;
-  const { path, query } = parseHash();
+  let { path, query } = parseHash();
+  const canon = canonicalPath(path);
+  if (canon !== null) {
+    const qs = query.toString();
+    history.replaceState(history.state, '', `#${canon}${qs ? `?${qs}` : ''}`);
+    path = canon;
+  }
   const m = match(path);
   shell.setActive(path);
   hidePopover();

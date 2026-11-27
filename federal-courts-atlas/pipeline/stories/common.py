@@ -28,7 +28,7 @@ PUB = ROOT / "public" / "data"
 OUT = PUB / "stories"
 
 LANE = "stories"
-EM_DASH = "—"
+EM_DASH = chr(0x2014)
 NATIONAL = "_national"
 
 
