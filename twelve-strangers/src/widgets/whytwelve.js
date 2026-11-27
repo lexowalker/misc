@@ -17,9 +17,9 @@
         id: 'apostles', name: 'The twelve apostles', emblem: 'arc',
         text: 'Jesus told the twelve apostles they would sit on twelve thrones, judging the twelve tribes of Israel (Matthew 19:28). Twelve who judge, twelve jurors.',
         quote: 'If the twelve apostles on their twelve thrones must try us in our eternal state, good reason hath the law to appoint the number of twelve to try our temporal.',
-        quoteBy: 'Giles Duncombe, *Trials per Pais* (1665)',
+        quoteBy: 'Giles Duncombe, *Tryals per Pais* (1665)',
         tag: 'A later gloss',
-        record: 'No medieval source ties the jury to the apostles. Writers reached for them centuries after twelve was fixed.'
+        record: 'No known medieval source ties the jury to the apostles. Writers reached for them centuries after twelve was fixed.'
       },
       {
         id: 'tribes', name: 'The twelve tribes', emblem: 'breastplate',
@@ -64,7 +64,7 @@
       willPre2: 'Its conclusion: the precise number is',
       willQ2: 'wholly without significance ‘except to mystics.’',
       kian: 'In June 2026 the Court agreed to look again, in *Kian v. Florida*. The accident is back on the docket.',
-      willCite: '*Williams v. Florida*, 399 U.S. 78 (1970), opinion of Justice White. “Except to mystics” is Justice Harlan’s phrase, from *Duncan v. Louisiana* (1968).',
+      willCite: '*Williams v. Florida*, 399 U.S. 78 (1970), opinion of Justice White. “Except to mystics” is Justice Harlan’s phrase, from his dissent in *Duncan v. Louisiana* (1968).',
       benchTitle: 'Your bench against the record',
       you: 'You',
       record: 'Record',

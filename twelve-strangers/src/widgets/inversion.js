@@ -55,7 +55,7 @@
       {
         id: 'land', icon: 'field', short: 'a juror with no land',
         quote: 'I don’t own any land.',
-        then: { seat: false, why: 'Not qualified. Jurors were meant to be free and lawful men, and a statute of 1285 kept men with less than 20 shillings a year in land off most juries.' },
+        then: { seat: false, why: 'Not qualified. Jurors were meant to be free and lawful men, and a statute of 1285 kept men with less than 20 shillings a year in land off most juries. A statute of 1293 raised the bar to 40 shillings.' },
         now: { seat: true, why: 'No property needed. Federal law forbids excluding anyone from a jury because of economic status (28 U.S.C. 1862).' }
       },
       {

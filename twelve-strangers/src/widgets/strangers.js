@@ -7,9 +7,9 @@
 
   /* ---- facts and settings (edit here) ---- */
   var DATA = {
-    knowDefault: 600,   // about 600 people known by name: McCormick, Salganik and Zheng (2010)
+    knowDefault: 600,   // about 600 people known: mean 611, median 472 (McCormick, Salganik and Zheng 2010)
     knowMin: 50,
-    knowMax: 1500,      // Dunbar's outer layer: about 1,500 faces you can put a name to
+    knowMax: 1500,      // Dunbar's 1,500 layer: faces you can put a name to
     maxDots: 9000,
     modes: [
       { id: 'band', chip: 'Band', size: '40 people', N: 40, rule: 'neighbors', layout: 'ring', dotPx: 11,
@@ -21,7 +21,7 @@
       { id: 'town', chip: 'Market town', size: '5,000 people', N: 5000, rule: 'random', layout: 'town', dotPx: 3.2,
         place: 'A market town',
         note: 'In a town of 5,000 you might know one person in eight. A random jury would usually still seat someone who knows you.' },
-      { id: 'city', chip: 'Manhattan, 2026', size: '1.2 million adults', N: 1200000, rule: 'random', layout: 'island', dotPx: 2.2,
+      { id: 'city', chip: 'Manhattan, 2026', size: '1.2 million adult citizens', N: 1200000, rule: 'random', layout: 'island', dotPx: 2.2,
         place: 'Manhattan today',
         note: 'In Manhattan a random jury almost never seats anyone who knows you. Courts now count that as a feature: knowing the accused is a reason to send a juror home.' }
     ]

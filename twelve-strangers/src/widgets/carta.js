@@ -118,7 +118,7 @@
         items: [
           ['1225', 'Henry III reissues the charter. Clauses 39 and 40 merge into chapter 29.'],
           ['1297', 'Edward I confirms it. Chapter 29 of this text is still law in England and Wales.'],
-          ['1354', 'A statute says “no man of what estate or condition that he be” and uses the words “due process of the law.”'],
+          ['1354', 'A statute says “no man of what estate or condition that he be” and speaks of “due process of the law.” Both phrases are the standard English translation. The statute itself is in law French.'],
           ['1642', 'Sir Edward Coke’s *Second Institute* reads judgment of peers as trial by jury and the law of the land as due process of law.'],
           ['1791', 'The Fifth Amendment promises due process of law. The Sixth promises an impartial jury.'],
           ['1856', 'The Supreme Court says “due process of law” means the same as “by the law of the land” in Magna Carta.']

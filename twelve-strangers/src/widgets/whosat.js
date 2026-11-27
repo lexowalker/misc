@@ -31,7 +31,7 @@
         ] },
       { id: 'black', name: 'Black men', one: 'Black man', many: 'Black men', tag: 'Black man', share: 0.05,
         segs: [
-          { from: 1791, to: 1865, s: 'barred', note: 'Barred' },
+          { from: 1791, to: 1865, s: 'barred', note: 'Mostly barred' },
           { from: 1865, to: 1880, s: 'shift', a: 'barred', b: 'practice', notes: ['Mostly barred', 'Varies', 'Mostly kept off'] },
           { from: 1880, to: 1965, s: 'practice' },
           { from: 1965, to: 1986, s: 'shift', a: 'practice', b: 'allowed', notes: ['Mostly kept off', 'Varies', 'Mostly allowed'] },
@@ -60,7 +60,7 @@
       { year: 1860, when: '1860', title: 'Worcester, Massachusetts', lanes: ['black'],
         text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere and questions the 1860 date.' },
       { year: 1870, when: '1870', title: 'Laramie, Wyoming Territory', lanes: ['women'],
-        text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women who claimed to be pregnant. The experiment was short-lived.' },
+        text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women\'s bodies, usually for signs of pregnancy. The experiment was short-lived.' },
       { year: 1875, when: '1875', title: 'Civil Rights Act of 1875', lanes: ['black'],
         text: 'Congress makes it a crime for an official to exclude anyone from a jury because of race, color or previous condition of servitude. The Supreme Court struck down the act\'s public accommodations sections in 1883. The jury section survived. It is still federal law.' },
       { year: 1880, when: '1880', title: '<i>Strauder v. West Virginia</i>', lanes: ['black'],

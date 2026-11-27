@@ -20,7 +20,7 @@
       { id: 'grudge', lean: 's', text: 'No grudges, feuds or favors.',
         note: 'A neighbor brings his history into the box. Today every panel is asked whether anyone knows the parties, the lawyers or the witnesses.' },
       { id: 'conscience', lean: 'either', text: 'Carries the community’s conscience.',
-        note: 'Both sides claim this one. In Duncan v. Louisiana (1968) the Supreme Court called a jury of one’s peers \u201Can inestimable safeguard against the corrupt or overzealous prosecutor and against the compliant, biased, or eccentric judge.\u201D Neighbors and strangers can both be that.' },
+        note: 'Both sides claim this one. In Duncan v. Louisiana (1968) the Supreme Court called the right to a jury of one’s peers \u201Can inestimable safeguard against the corrupt or overzealous prosecutor and against the compliant, biased, or eccentric judge.\u201D Neighbors and strangers can both be that.' },
       { id: 'lord', lean: 's', text: 'Can’t be leaned on by local powers.',
         note: 'Medieval England had a word for bribing or bullying a jury: embracery. Powerful men did it often enough to need one.' },
       { id: 'life', lean: 'n', text: 'Weighs a lifetime of character.',
@@ -32,7 +32,7 @@
       { id: 'outsider', lean: 's', text: 'Protects outsiders from local prejudice.',
         note: 'In 1955 an all-white, all-male jury in Sumner, Mississippi, acquitted Emmett Till’s killers in about an hour. Strangers from the same county would not have changed it: no Black residents were on the voter rolls jurors were drawn from.' },
       { id: 'cross', lean: 's', text: 'Fits the modern meaning of peers: a fair cross section.',
-        note: 'The idea came before the rule. In 1946 the Supreme Court said the American jury \u201Cnecessarily contemplates an impartial jury drawn from a cross-section of the community\u201D (Thiel v. Southern Pacific Co.). In 1975, Taylor v. Louisiana made it part of the Sixth Amendment.' }
+        note: 'The idea came before the rule. In 1946 the Supreme Court said the American tradition of trial by jury \u201Cnecessarily contemplates an impartial jury drawn from a cross-section of the community\u201D (Thiel v. Southern Pacific Co.). In 1975, Taylor v. Louisiana made it part of the Sixth Amendment.' }
     ],
     contrarian: 'A contrarian ruling, and the court allows it.',
     either: 'This one honestly cuts both ways.',

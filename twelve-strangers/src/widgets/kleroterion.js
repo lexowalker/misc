@@ -40,7 +40,7 @@
     need: function (white) {
       return 'Today the courts need ' + (white * 5) + ' jurors from this machine. In go ' + white + ' white cubes and ' + (10 - white) + ' black. Each cube decides a whole row.';
     },
-    pouring: 'The archon pours the cubes into the bronze tube. They come out one at a time: the first for row 1, the next for row 2.',
+    pouring: 'The archon pours the cubes into the tube. They come out one at a time: the first for row 1, the next for row 2.',
     served: function (row) { return 'Row ' + row + ': white. Everyone in row ' + row + ' judges today, and that includes you.'; },
     servedNext: 'Draw an acorn from the urn to learn your court.',
     home: function (row) { return 'Row ' + row + ': black. Row ' + row + ' goes home. No court for you today, and no pay.'; },
@@ -53,7 +53,7 @@
     stats: function (s) { return 'Days at the courts: ' + s.days + ' · Days judging: ' + s.served + ' · Obols earned: ' + s.obols; },
     tiles: [
       ['6,000', 'citizens over 30 swore the jurors\' oath each year'],
-      ['501', 'jurors for most public cases, an odd number to avoid ties. Big cases got 1,001 or 1,501.'],
+      ['501', 'jurors for most public cases, an odd number, probably to avoid ties. Big cases got 1,001 or 1,501.'],
       ['3 obols', 'a day in pay, after Cleon raised it around 425 BCE']
     ],
     whyTitle: 'Why go to all this trouble?',
@@ -61,10 +61,10 @@
       'Nobody knew who would judge until the cubes fell that morning.',
       'Nobody knew which court a juror would sit in until he drew his acorn.',
       'Even the man who slotted the tickets was picked by lot.',
-      'Aristotle says the aim was simple: no one could pick the jurors he wanted.'
+      'The aim was simple: no one could pick the jurors he wanted.'
     ],
     bribe: 'You can bribe a juror. It is much harder to bribe a cube.',
-    srMachine: 'A stone allotment machine with five columns of ticket slots, lettered Alpha to Epsilon, ten rows deep, with a bronze tube for the dice down its right side.'
+    srMachine: 'A stone allotment machine with five columns of ticket slots, lettered Alpha to Epsilon, ten rows deep, with a tube for the dice down its right side.'
   };
 
   var NS = 'http://www.w3.org/2000/svg';
