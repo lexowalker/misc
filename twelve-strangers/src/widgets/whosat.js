@@ -58,7 +58,7 @@
       { year: 1830, when: '1800 to 1860', title: 'Property tests fade', lanes: ['noprop'],
         text: 'State by state, property tests for voting fall away, and jury lists widen with them. By the 1850s most white men could vote without owning property. Some states kept property or householder rules for jurors longer.' },
       { year: 1860, when: '1860', title: 'Worcester, Massachusetts', lanes: ['black'],
-        text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere and questions the 1860 date.' },
+        text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere, as far back as 1820.' },
       { year: 1870, when: '1870', title: 'Laramie, Wyoming Territory', lanes: ['women'],
         text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women\'s bodies, usually for signs of pregnancy. The experiment was short-lived.' },
       { year: 1875, when: '1875', title: 'Civil Rights Act of 1875', lanes: ['black'],
