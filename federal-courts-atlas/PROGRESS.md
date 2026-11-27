@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 16:15 UTC. Pipeline, website and verification done; final polish running._
+_Last updated: 2026-11-27 15:45 UTC. Pipeline, website and verification done; final polish running._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -38,7 +38,7 @@ _Last updated: 2026-11-27 16:15 UTC. Pipeline, website and verification done; fi
   - Now 43 map variables (two juror measures added for the courtroom jury box).
   - Tests: 1,228 pipeline, 321 e2e passed (9 skipped by design), typecheck clean, first map paint 0.40 s.
 
-- **Gap closing** (workflow 4, finished 16:10 UTC): profiles now show "how cases end" (IDB dispositions) and
+- **Gap closing** (workflow 4, finished 15:35 UTC): profiles now show "how cases end" (IDB dispositions) and
   "offenses of people sentenced" (USSC); mass-tort MDL context notes for 8 districts (docket names verified from
   GovInfo); IDB FY 2026 labeled preliminary on profiles; glossary tooltips on measure labels (53 terms); dated
   time-machine events; vertical map controls; README test instructions; 16 visual regression baselines.
