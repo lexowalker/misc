@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 17:06 UTC. Pipeline, website and verification done; last small fixes running._
+_Last updated: 2026-11-27 19:28 UTC. Done for now: Lexo is happy with the site and closed the session here._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -52,18 +52,31 @@ _Last updated: 2026-11-27 17:06 UTC. Pipeline, website and verification done; la
   label. Tests: 1,252 pipeline, 361 e2e passed (11 skipped by design) in 4 of 5 full runs; one run had a single
   a11y scan timeout that did not recur in 10 isolated reruns. First map paint 0.29 s (0.80 s at 4x CPU).
 
-## In progress
-- Last small fixes (workflow 6): a stale gap note from the stories lane, plainer wording for the earlier-years MDL
-  line, glossary popovers stay open when clicked after hover, another try at naming 13 MDL dockets from GovInfo,
-  the social preview image title, and a fail-fast guard in the a11y scan helper. An independent recheck follows.
+- **Final touches** (workflow 6, finished 18:15 UTC): a stale gap note corrected, plainer wording for the
+  earlier-years MDL line, glossary popovers stay open when clicked after hovering (and Escape returns focus to the
+  term), 46 more GovInfo lookups for the 13 number-only MDL dockets (none found), the preview image title without an
+  em-dash, and a fail-fast guard in the accessibility scan's scroll step. An independent recheck fixed a popover that
+  reopened after a quick closing click and a racy courtroom test. Tests: 1,254 pipeline; last full browser run 363
+  passed, 1 failed (see the stall below), 14 skipped by design.
+- **Private preview** for Lexo's phone: https://claude.ai/artifact/MX4rYo47VEid9sFPmKHWKP (built from commit 0cafb2b;
+  only Lexo can open it).
 
-## Next
-- Retry CourtListener for the 7 districts with no cases after the daily quota resets, then run `make data` end to end
-  and record it in `VERIFICATION.md` (scheduled for 04:25 UTC Nov 28).
+## In progress
+- Nothing. An investigation of the scroll stall below was stopped at Lexo's request.
+
+## Next (only if Lexo asks)
+- Retry CourtListener for the 7 districts with no cases (the daily quota has reset by now), then run `make data` end
+  to end and record it in `VERIFICATION.md`. The scheduled retry was paused, not deleted.
+- Find the cause of the intermittent accessibility-scan stall.
+- Open a pull request into Master `main` for the project file, and decide on free hosting if wanted.
 
 ## Blocked / notes
 - **CourtListener quota**: the free tier returned HTTP 429 with a daily Retry-After after about 124 requests.
   wied, wiwd, wyd, prd, vid, gud and nmid have no recent cases yet (logged in `DATA_GAPS.md`).
+- **Accessibility-scan stall**: three times in roughly 15 full browser runs today, one page stopped answering for more than 5 s
+  while the scan scrolled it (two- and four-district Compare, and once another page). It has never happened when
+  the test runs alone, so it may be load on the test machine rather than the page. The scroll step now fails in
+  5 s with a clear message instead of hanging. Cause not found.
 - **uscourts.gov court finder** pages return HTTP 403, so courthouses have no street addresses (logged).
 - **Repository size**: FCMS CSV mirrors of the parquet tables are git-ignored (`make fcms` regenerates them). One
   earlier commit on this branch contains a 41 MB CSV; removing it from history needs a force-push, which was not

@@ -308,7 +308,9 @@ on the site changed and no docket was newly named, so no data-audit row was adde
   the popover cleared the term first. Escape now returns focus to the term without reopening the popover;
   `glossary-popover.spec.ts` checks it, and that check fails on the previous `glossary.ts`.)
 - The cause of the earlier one-off 1.6-minute stall in the scroll step is still unknown; it did not recur in any of
-  this lane's four full runs.
+  this lane's four full runs. A later full run by the orchestrator (after the glossary Escape fix, port 4803) had
+  363 passed, 1 failed, 14 skipped: the same stall, now caught by the 5 s guard on desktop two-district compare
+  (scroll step 5, 2,560 px). An investigation was started and then stopped at the user's request, with no changes.
 
 ## Boundary audit
 
