@@ -35,6 +35,18 @@ def band(df, years: list[int]) -> dict:
     return {"lo": lo, "hi": hi, "n": n}
 
 
+def _fy_span(years: list[int]) -> str:
+    """'FY 2010 and FY 2012 to 2025' for a sorted list of fiscal years."""
+    runs: list[list[int]] = []
+    for y in years:
+        if runs and y == runs[-1][1] + 1:
+            runs[-1][1] = y
+        else:
+            runs.append([y, y])
+    parts = [f"FY {a}" if a == b else f"FY {a} to {b}" for a, b in runs]
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
+
+
 def build() -> Story:
     s = Story(SLUG)
 
@@ -231,14 +243,23 @@ def build() -> Story:
     if len(cbelow) != len(cyears):
         raise ValueError("the text says E.D. Va. was below the national felony median in every year")
     rc = obs("fcms", R + "median_months_criminal_felony_filing_to_disposition", "observations_ranks")
-    rcv = rc[(rc.district_id == D) & (rc.period.isin(cyears))].set_index("period")["value"]
-    rcsrc = ids_of(rc[(rc.district_id == D) & (rc.period.isin(cyears))])
+    # Only standings that rank the same defendant-based median as the series shown. The own-year FY 2005 to
+    # 2009 and FY 2011 profiles rank the older case-based median (data audit 2026-11-27, auditor B).
+    rsel = rc[(rc.district_id == D) & (rc.period.isin(cyears)) & (rc["method"] == "crim_defendants")]
+    rcv = rsel.set_index("period")["value"]
+    rcsrc = ids_of(rsel)
+    ryears = sorted(int(y) for y in rcv.index)
+    left_out = [y for y in cyears if y not in ryears]
+    rhow = (f"Published U.S. standings, {_fy_span(ryears)}: the years whose profile ranks the defendant-based "
+            "median shown here.")
+    if left_out:
+        rhow += f" The profiles for {_fy_span(left_out)} rank an older case-based median, so they are left out."
     s.num("crim_rank_best", rcv.min(), "rank", source_ids=rcsrc, derived=True,
-          formula="best published U.S. standing of E.D. Va. over the years shown",
-          how=f"Published standings, FY {cyears[0]} to FY {cyears[-1]}.")
+          formula="best published U.S. standing of E.D. Va. in the years ranked on the defendant-based median",
+          how=rhow)
     s.num("crim_rank_worst", rcv.max(), "rank", source_ids=rcsrc, derived=True,
-          formula="lowest published U.S. standing of E.D. Va. over the years shown",
-          how=f"Published standings, FY {cyears[0]} to FY {cyears[-1]}.")
+          formula="lowest published U.S. standing of E.D. Va. in the years ranked on the defendant-based median",
+          how=rhow)
     cc = cell(cr, D, latest)
     s.num("vaed_crim_latest", cc.value, "months", source_ids=[cc.source_id], year=latest,
           how=f"Median months, felony filing to disposition, E.D. Va., FY {latest}.")

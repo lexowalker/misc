@@ -230,9 +230,9 @@ Every file is fetched through `pipeline.common.http.fetch` and registered in `da
 |---|---|---|
 | CT 09001–09015 | ctd | 1.0 |
 | AK 02201, 02231, 02232, 02261, 02270, 02280 | akd | ≥ 0.96 (generalization differences) |
-| Dade 12025 | flsd | — |
-| Shannon 46113 | sdd | — |
-| Bedford city 51515, Clifton Forge 51560, South Boston 51780 | vawd | — |
+| Dade 12025 | flsd | not computed |
+| Shannon 46113 | sdd | not computed |
+| Bedford city 51515, Clifton Forge 51560, South Boston 51780 | vawd | not computed |
 | **30113 "Yellowstone National Park" (MT, 1990 file)** | **wyd** | 0.989 |
 
 - The Census change notes are cited per row where one mentions the code.

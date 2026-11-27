@@ -1560,16 +1560,16 @@
   },
   "basis_by_year": {
    "2006": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2007": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2008": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2009": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2010": [
     "reproduces_published"
@@ -1596,8 +1596,15 @@
     "reproduces_published"
    ]
   },
-  "derived_years": [],
-  "derived_formula_by_basis": {}
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
+  "derived_formula_by_basis": {
+   "exact_share_of_published_counts": "100 * above_range / ussc_cases_range_known: the exact share from the group count and denominator the USSC printed. The FY2006-FY2009 packets print the group's percentage as the sum of its rounded sub-category percentages, which can differ from this value by 0.1"
+  }
  },
  {
   "id": "ussc_pct_govt_sponsored_below_range",
@@ -1646,16 +1653,16 @@
   },
   "basis_by_year": {
    "2006": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2007": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2008": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2009": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2010": [
     "reproduces_published"
@@ -1682,8 +1689,15 @@
     "reproduces_published"
    ]
   },
-  "derived_years": [],
-  "derived_formula_by_basis": {}
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
+  "derived_formula_by_basis": {
+   "exact_share_of_published_counts": "100 * govt_sponsored_below_range / ussc_cases_range_known: the exact share from the group count and denominator the USSC printed. The FY2006-FY2009 packets print the group's percentage as the sum of its rounded sub-category percentages, which can differ from this value by 0.1"
+  }
  },
  {
   "id": "ussc_pct_non_govt_sponsored_below_range",
@@ -1732,16 +1746,16 @@
   },
   "basis_by_year": {
    "2006": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2007": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2008": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2009": [
-    "reproduces_published"
+    "exact_share_of_published_counts"
    ],
    "2010": [
     "reproduces_published"
@@ -1768,8 +1782,15 @@
     "reproduces_published"
    ]
   },
-  "derived_years": [],
-  "derived_formula_by_basis": {}
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
+  "derived_formula_by_basis": {
+   "exact_share_of_published_counts": "100 * non_govt_sponsored_below_range / ussc_cases_range_known: the exact share from the group count and denominator the USSC printed. The FY2006-FY2009 packets print the group's percentage as the sum of its rounded sub-category percentages, which can differ from this value by 0.1"
+  }
  },
  {
   "id": "ussc_pct_above_range_2018scheme",
@@ -3014,28 +3035,28 @@
     "computed_ussc_definition"
    ],
    "2018": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2019": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2020": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2021": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2022": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2023": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2024": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2025": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ]
   },
   "derived_years": [
@@ -3054,10 +3075,19 @@
    2014,
    2015,
    2016,
-   2017
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic",
+   "unrounded_published_statistic": "mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile and kept to one decimal; the USSC prints this statistic rounded to whole months from FY2011"
   }
  },
  {
@@ -3178,28 +3208,28 @@
     "computed_ussc_definition"
    ],
    "2018": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2019": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2020": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2021": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2022": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2023": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2024": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2025": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ]
   },
   "derived_years": [
@@ -3218,10 +3248,19 @@
    2014,
    2015,
    2016,
-   2017
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic",
+   "unrounded_published_statistic": "median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile and kept to one decimal; the USSC prints this statistic rounded to whole months from FY2011"
   }
  },
  {
@@ -3997,25 +4036,25 @@
     "reproduces_published"
    ],
    "2011": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2012": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2013": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2014": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2015": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2016": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2017": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2018": [
     "computed_ussc_definition"
@@ -4045,6 +4084,13 @@
   "derived_years": [
    2004,
    2005,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
    2018,
    2019,
    2020,
@@ -4055,7 +4101,8 @@
    2025
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "mean(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "mean(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic",
+   "unrounded_published_statistic": "mean(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile and kept to one decimal; the USSC prints this statistic rounded to whole months from FY2011"
   }
  },
  {
@@ -4831,25 +4878,25 @@
     "reproduces_published"
    ],
    "2011": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2012": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2013": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2014": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2015": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2016": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2017": [
-    "reproduces_published"
+    "unrounded_published_statistic"
    ],
    "2018": [
     "computed_ussc_definition"
@@ -4879,6 +4926,13 @@
   "derived_years": [
    2004,
    2005,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
    2018,
    2019,
    2020,
@@ -4889,7 +4943,8 @@
    2025
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "median(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "median(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic",
+   "unrounded_published_statistic": "median(SENTTOT | SENTTOT > 0), computed by this lane from the USSC Individual Offender datafile and kept to one decimal; the USSC prints this statistic rounded to whole months from FY2011"
   }
  },
  {

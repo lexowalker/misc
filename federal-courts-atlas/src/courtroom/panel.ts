@@ -7,7 +7,7 @@
 // whose formula shows on hover or focus. Ranks are derived by the atlas and say so.
 
 import { h, uniqueId } from '../lib/dom.ts';
-import { decimalsFor, formatDate, formatNumber, formatValue, ordinal, periodLabel } from '../lib/format.ts';
+import { decimalsFor, formatDate, formatNumber, formatValue, ordinal, periodLabel, periodLabelFor } from '../lib/format.ts';
 import { rich } from '../components/glossary.ts';
 import { sourceChip } from '../components/source-chip.ts';
 import { renderSparkline } from '../components/sparkline.ts';
@@ -18,6 +18,7 @@ import {
   getCellSources,
   getNational,
   getRank,
+  rankTies,
   getValue,
   isDerivedCell,
   loadDistricts,
@@ -49,8 +50,17 @@ function valueParts(value: number, v: Fmt): { num: string; unit: string } {
   return { num, unit: full.startsWith(num) ? full.slice(num.length).trim() : '' };
 }
 
-/** "Highest of 94", "12th highest of 94", "Lowest of 51". Rank 1 is always the highest value. */
-function rankPhrase(rank: number, of: number): string {
+/**
+ * "Highest of 94", "12th highest of 94", "Lowest of 51". Rank 1 is always the highest value. When other
+ * districts share the rank: "Tied for 85th highest of 94", "Tied for lowest of 94 (66 districts)".
+ */
+function rankPhrase(rank: number, of: number, ties = 1): string {
+  if (ties > 1) {
+    const who = ties > 2 ? ` (${ties} districts)` : '';
+    if (rank === 1) return `Tied for highest of ${of}${who}`;
+    if (rank + ties - 1 === of) return `Tied for lowest of ${of}${who}`;
+    return `Tied for ${ordinal(rank)} highest of ${of}${who}`;
+  }
   if (rank === 1) return `Highest of ${of}`;
   if (rank === of) return `Lowest of ${of}`;
   return `${ordinal(rank)} highest of ${of}`;
@@ -266,7 +276,7 @@ function statRow(st: SeatStat, v: Variable | undefined, r: Loaded<ValuesFile>, d
   let derived = false;
   let note: string | null = null;
   const meta: Array<Node | string> = [];
-  if (year !== null) meta.push(h('span', { class: 'cr-stat__period' }, periodLabel(year, periodType)));
+  if (year !== null) meta.push(h('span', { class: 'cr-stat__period' }, periodLabelFor(v, year, periodType)));
 
   if (district) {
     value = getValue(file, district, year);
@@ -276,7 +286,7 @@ function statRow(st: SeatStat, v: Variable | undefined, r: Loaded<ValuesFile>, d
       note = getCellNote(file, district, year);
       const rank = getRank(file, district, year);
       const of = rankedCount(file, year);
-      if (rank && of) meta.push(h('span', { class: 'cr-stat__rank' }, rankPhrase(rank, of), fxHint(RANK_FORMULA, 'Derived by the atlas', 'How this rank is computed')));
+      if (rank && of) meta.push(h('span', { class: 'cr-stat__rank' }, rankPhrase(rank, of, rankTies(file, year, rank)), fxHint(RANK_FORMULA, 'Derived by the atlas', 'How this rank is computed')));
       const nat = getNational(file, year);
       if (nat !== null) meta.push(h('span', { class: 'cr-stat__nat' }, `National: ${fmtValue(nat, fmt)}`));
     } else {

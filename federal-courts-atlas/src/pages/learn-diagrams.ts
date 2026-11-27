@@ -265,7 +265,7 @@ const OUTCOMES = [
   { title: 'Trial', sub: 'Jury or bench; an acquittal ends the case' },
 ];
 
-const SENTENCING_STEPS = ['Calculate the guideline range', 'Consider any departures', 'Weigh the § 3553(a) factors; a variance may follow'];
+const SENTENCING_STEPS = ['Calculate the guideline range', 'Weigh the § 3553(a) factors; a variance may follow'];
 
 const LC_DESC = `${STEPS.map((st) => `${st.n}. ${st.title}${st.sub ? `: ${st.sub}` : ''}`).join('. ')}. Step 7 ends in a guilty plea or a trial. At sentencing the judge: ${SENTENCING_STEPS.join('; ')}.`;
 
@@ -335,7 +335,7 @@ function arrowDefs(): SVGDefsElement {
 function sentencingCallout(svg: SVGSVGElement, x: number, y: number, w: number, columns: boolean): number {
   const font = F.body();
   if (columns) {
-    const colW = (w - 28 - 2 * 14) / 3;
+    const colW = (w - 28 - (SENTENCING_STEPS.length - 1) * 14) / SENTENCING_STEPS.length;
     const lines = SENTENCING_STEPS.map((t) => wrap(t, font, colW - 18));
     const h = 46 + Math.max(...lines.map((l) => l.length)) * LH + 10;
     svg.append(s('rect', { x, y, width: w, height: h, rx: 6, class: 'dg-callout' }), s('text', { x: x + 14, y: y + 22, class: 'dg-tier' }, 'AT SENTENCING, THE JUDGE'));

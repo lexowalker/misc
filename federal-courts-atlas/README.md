@@ -15,8 +15,8 @@ npm run build     # static site in dist/
 
 ## Where things are
 
-- `pipeline/` — Python data pipeline, one package per source lane. See `docs/DATA_CONTRACT.md`.
-- `data/processed/` — tidy outputs (committed). `data/raw/` — download cache (not committed).
-- `public/data/` — web-ready JSON consumed by the site.
-- `src/` — the Vite + TypeScript site.
-- `SOURCES.md`, `DATA_GAPS.md`, `VERIFICATION.md`, `PROGRESS.md`, `SPEND.md` — provenance and status.
+- `pipeline/`: Python data pipeline, one package per source lane. See `docs/DATA_CONTRACT.md`.
+- `data/processed/`: tidy outputs (committed). `data/raw/`: download cache (not committed).
+- `public/data/`: web-ready JSON consumed by the site.
+- `src/`: the Vite + TypeScript site.
+- `SOURCES.md`, `DATA_GAPS.md`, `VERIFICATION.md`, `PROGRESS.md`, `SPEND.md`: provenance and status.

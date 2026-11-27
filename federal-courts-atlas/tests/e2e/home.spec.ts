@@ -39,9 +39,11 @@ function expectedRank(f: Vals, id: string, year: number): string {
   const v = f.values[id]![y]!;
   const r = f.ranks[id]![y]!;
   const n = f.ranked_of[y]!;
-  const all = Object.values(f.values).map((row) => row[y]).filter((w): w is number => typeof w === 'number');
-  const lower = all.filter((w) => w < v).length;
-  const tied = all.filter((w) => w === v).length > 1;
+  // Counted from the ranks, which the web lane computes at display precision (data audit 2026-11-27).
+  void v;
+  const all = Object.keys(f.values).filter((d) => typeof f.values[d]![y] === 'number').map((d) => f.ranks[d]![y]!);
+  const lower = all.filter((w) => w > r).length;
+  const tied = all.filter((w) => w === r).length > 1;
   const pre = tied ? 'Tied for ' : '';
   const fromBottom = lower + 1;
   if (r === 1) return `${pre}${tied ? 'highest' : 'Highest'} of ${n}`;
@@ -211,7 +213,7 @@ test('home: tooltip shows value, unit, explicit rank direction and period', asyn
   await shot(page, testInfo, 'home-tooltip', false);
   // The accessible name keeps the "Nth of N, FY YYYY" pattern and names the direction.
   const id0 = ids[0]!;
-  await expect(page.locator(`path.district[data-id="${id0}"]`)).toHaveAttribute('aria-label', new RegExp(`: [^,]+, 1st of ${f.ranked_of[String(latest)]}, FY ${latest}$`));
+  await expect(page.locator(`path.district[data-id="${id0}"]`)).toHaveAttribute('aria-label', new RegExp(`: [^,]+, 1st of ${f.ranked_of[String(latest)]}( \\(tied\\))?, FY ${latest}$`));
   const help = await page.locator('.atlas-map__svg').getAttribute('aria-describedby');
   await expect(page.locator(`#${help}`)).toContainText('count from the highest');
   // The tooltip also gives the conventional derived rank with its rule.

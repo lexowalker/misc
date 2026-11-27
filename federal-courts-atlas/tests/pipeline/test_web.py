@@ -181,9 +181,11 @@ def test_per_capita_values_recompute(vid):
 @pytest.mark.parametrize("vid", list(VALUES))
 def test_ranks_consistent_with_values(vid):
     vf = VALUES[vid]
+    fmt = VAR_BY_ID[vid]["format"]
     for y in vf["years"]:
         ys = str(y)
-        vals = {d: row[ys] for d, row in vf["values"].items() if ys in row}
+        # ranks compare values as the site displays them (data audit 2026-11-27)
+        vals = {d: _shown(row[ys], fmt) for d, row in vf["values"].items() if ys in row}
         assert vf["ranked_of"][ys] == len(vals)
         for d, val in vals.items():
             expected = 1 + sum(1 for x in vals.values() if x > val)
@@ -366,11 +368,20 @@ BANNED_WORDS = re.compile(r"\b(because|due to|lenient|harsh|biased|bias|activist
                           r"inefficien\w*|lazy|better|worse|best|worst|unfair)\b", re.I)
 
 
+def _shown(v: float, fmt: str) -> float:
+    """A value as the site displays it: Intl.NumberFormat rounds the exact binary value half away from zero."""
+    from decimal import ROUND_HALF_UP, Decimal
+    d = int(re.search(r"\.(\d+)", fmt).group(1))
+    if d == 0 and v != int(v):
+        d = 1
+    return float(Decimal(float(v)).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP))
+
+
 def _fmt(v: float, fmt: str) -> str:
     d = int(re.search(r"\.(\d+)", fmt).group(1))
     if d == 0 and v != int(v):
         d = 1  # a published fraction (half judgeships) is printed, never rounded away
-    return f"{v:,.{d}f}"
+    return f"{_shown(v, fmt):,.{d}f}"
 
 
 def test_profiles_exist_for_all_districts():
@@ -402,20 +413,22 @@ def test_every_profile_claim_reverifies():
                 assert sorted(c["source_ids"]) == sorted(cell_sources(vf, d, ys))
                 txt = _fmt(c["value"], v["format"])
                 assert txt in s["text"] and txt in para, (d, txt, s["text"])
-                vals = {x: row[ys] for x, row in vf["values"].items() if ys in row}
+                # positions and ties are judged on the value as displayed (data audit 2026-11-27)
+                vals = {x: _shown(row[ys], v["format"]) for x, row in vf["values"].items() if ys in row}
+                cv = _shown(c["value"], v["format"])
                 if c["scope"] == "national":
                     assert c["year"] == vf["years"][-1]
-                    pos = (1 + sum(1 for x in vals.values() if x > c["value"]) if c["direction"] == "high"
-                           else 1 + sum(1 for x in vals.values() if x < c["value"]))
+                    pos = (1 + sum(1 for x in vals.values() if x > cv) if c["direction"] == "high"
+                           else 1 + sum(1 for x in vals.values() if x < cv))
                     assert pos == c["position"] <= 3
-                    tie = sum(1 for x in vals.values() if x == c["value"])
+                    tie = sum(1 for x in vals.values() if x == cv)
                     assert c["tied"] == (tie > 1) and tie <= 2
                     assert ("tied for" in s["text"]) == c["tied"]
                     assert f"of {c['ranked_of']} districts" in s["text"] or f"of the {c['ranked_of']} districts" in s["text"]
                 elif c["scope"] == "circuit":
                     peers = [vals[x] for x in vals if BY_ID[x].circuit == BY_ID[d].circuit]
                     target = max(peers) if c["direction"] == "high" else min(peers)
-                    assert c["value"] == target and peers.count(target) == 1
+                    assert cv == target and peers.count(target) == 1
                     assert f"{CIRCUITS[BY_ID[d].circuit]} Circuit" in s["text"]
                 else:
                     assert c["scope"] == "size"

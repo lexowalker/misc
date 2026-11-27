@@ -9,7 +9,7 @@ import 'd3-transition';
 import { h, s, durationMs, rafThrottle, debounce, html } from '../lib/dom.ts';
 import { formatValue, periodLabel, rankText } from '../lib/format.ts';
 import type { Courthouse, ValuesFile, Variable } from '../data/types.ts';
-import { getRank, getValue, loadCourthouses, rankedCount } from '../data/loaders.ts';
+import { getRank, getValue, loadCourthouses, rankedCount, rankTies } from '../data/loaders.ts';
 import { Tooltip } from '../components/tooltip.ts';
 import { hatchPattern } from '../components/legend.ts';
 import { emptyState } from '../components/states.ts';
@@ -228,7 +228,7 @@ export class AtlasMap {
         r.status === 'missing'
           ? emptyState({
               title: 'District boundaries not yet built',
-              body: 'The map appears once the boundaries pipeline publishes the 94 district shapes.',
+              body: 'The map appears once the 94 district shapes are published.',
               file: 'public/data/geo/districts-lo.topo.json',
               icon: 'map',
             })
@@ -362,7 +362,8 @@ export class AtlasMap {
     if (!variable || !values) return d?.circuit ? `${name}, ${circuitLabel(d.circuit)}` : name;
     const v = getValue(values, id, year);
     const parts = [`${name}, ${variable.label}: ${formatValue(v, variable)}`];
-    const rt = rankText(getRank(values, id, year), rankedCount(values, year));
+    const rk = getRank(values, id, year);
+    const rt = rankText(rk, rankedCount(values, year), rankTies(values, year, rk));
     if (v !== null && rt) parts.push(rt);
     if (year !== null) parts.push(periodLabel(year, values.period_type));
     return parts.join(', ');
@@ -397,7 +398,8 @@ export class AtlasMap {
       }
       box.append(h('p', { class: 'map-tip__label' }, variable.short_label ?? variable.label), valueEl);
       const meta: string[] = [];
-      const rt = v !== null ? rankText(getRank(values, id, year), rankedCount(values, year)) : null;
+      const rk = getRank(values, id, year);
+      const rt = v !== null ? rankText(rk, rankedCount(values, year), rankTies(values, year, rk)) : null;
       if (rt) meta.push(rt);
       if (year !== null) meta.push(periodLabel(year, values.period_type));
       if (meta.length) box.append(h('p', { class: 'map-tip__meta' }, meta.join(' · ')));

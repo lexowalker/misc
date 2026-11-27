@@ -37,7 +37,7 @@ series dashed), a source chip, any cell note (small base, approximate population
 | Courtroom deputy | `filings_per_judgeship`, `terminations_per_judgeship`, `pending_per_judgeship` |
 | Court reporter | No statistics, said plainly. Instead, "The record": the source records behind every figure in the courtroom (publisher, dataset, vintage, number of source files, retrieval date) and the data build date and version. |
 | Witness stand | `trials_per_judgeship`, `civil_trial_months` |
-| Jury box | `civil_trial_rate_pct`, `criminal_trial_rate_pct`; `jurors_avg_present` and `jurors_pct_not_selected` if the web lane publishes them (see Issues). Until then, a plain note. |
+| Jury box | `civil_trial_rate_pct`, `criminal_trial_rate_pct`, `jurors_avg_present` and `jurors_pct_not_selected` (the two FCMS juror measures, published by the web lane since the 2026-11-27 data fix; D.N.M.I. FY 2024 shows No data because no jury selection was held). The "not part of the atlas yet" note now appears only if the catalog drops them. |
 | Prosecution table | `felony_defendants_per_100k`, `guilty_plea_pct`, `substantial_assistance_pct`; most common charges: `crim_drugs_pct`, `crim_immigration_pct`, `crim_firearms_pct` |
 | Defense table | A plain statement that the atlas has no data on defense lawyers. Then `prison_pct`, `median_sentence_months`, `within_range_pct` (people sentenced) and `pro_se_pct` (civil). |
 | Lectern | `civil_disposition_months`, `criminal_disposition_months`, `civil_over_3yrs_pct` |
@@ -148,8 +148,6 @@ because a full-page capture paints the fixed sheet and sticky header mid-page. A
 
 ## Gaps (`data/gaps/courtroom.json`)
 
-- `courtroom_juror_measures_not_published`: the FCMS juror measures exist in the FCMS lane tables but not
-  in `public/data/values`.
 - `courtroom_defense_counsel_not_in_data`: no measure of defense representation in any lane.
 - `courtroom_reporter_not_in_data`: no data on court reporting.
 
@@ -161,6 +159,7 @@ because a full-page capture paints the fixed sheet and sticky header mid-page. A
 - Screen readers were not run; ARIA was checked by test and by reading the markup.
 - The role copy for each seat is written from well-established federal practice (Fed. R. Crim. P. 23 and
   53, Fed. R. Civ. P. 48, 28 U.S.C. § 753, the Criminal Justice Act, the Jury Selection and Service Act), not
-  from a source file in the atlas. It should go through the copy audit. "In many courtrooms the party with
-  the burden of proof sits nearest the jury" describes a custom that varies by courtroom.
+  from a source file in the atlas. The copy audit (`docs/audits/copy_audit.md`) checked it against the rule and
+  statute texts: the jury line now says "normally 12", and an unsupported line about the party with the burden of
+  proof sitting nearest the jury was replaced.
 - `make docs` was not run, so `DATA_GAPS.md` does not yet list this lane's gaps.

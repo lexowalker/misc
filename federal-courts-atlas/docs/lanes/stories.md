@@ -146,11 +146,17 @@ statistic it is templated from the data file.
   and named in the text.
 - "Four of the five had the four highest guilty-plea shares" is computed against districts with 500 or more
   terminated defendants (S.D. Cal. is the exception, below the national share).
-- D.D.C. is the top of the FY 2025 criminal trial-rate range; the step reports, without comment, that 41.4% of its
-  defendants' cases ended in dismissal that year against 4.9% the year before (research lane caution).
+- D.D.C. is the top of the FY 2025 criminal trial-rate range; the step reports that 41.4% of its defendants' cases
+  ended in dismissal that year against 4.9% the year before. After the copy audit it adds that dismissed cases count
+  in the base of the trial rate and that the data does not record why the cases were dismissed.
 - The e2e run used a manually started preview server: Vite 8's command lock refused a second `vite preview` while
   another lane's server was up, so I built into `.e2e-dist/4203`, started
   `vite preview --port 4203 --bypass-lock` and ran `E2E_PORT=4203 npx playwright test tests/e2e/stories.spec.ts
   --trace off` without `CI=1` (so Playwright reused that server).
+- Copy audit (`docs/audits/copy_audit.md`): the step text, deks, method notes and "how" texts were revised (for
+  example "civil cases as a whole" for the AO's filing-to-disposition median, "part-year tables" for the FY 2004 and
+  FY 2005 USSC splits, no pipeline vocabulary in popovers). Counts of years, the post-Booker low, E.D. Va.'s lowest
+  standing and the count of districts with data are now marked derived with a formula. The FY 2004 to 2005 formula
+  is in the "how" text of the within-range map layer.
 - Not checked: screen-reader output with a real reader (only the accessible names and roles), Safari/Firefox
   rendering, and the hover popover on touch for published numbers (touch users get sources in "How we did this").

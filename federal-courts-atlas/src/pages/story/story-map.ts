@@ -60,11 +60,25 @@ export class StoryMap {
     this.outlineG = s('g', { class: 'story-map__outlines' });
     this.labelG = s('g', { class: 'story-map__labels' });
     const frames = s('g', { class: 'story-map__frames' });
+    // Inset names sit in the label row the projection keeps free at the top of each frame (the full name, or a
+    // short form where it does not fit, as on the home map). Hidden on phones, where they would be too small to read.
+    const SHORT: Record<string, string> = { ak: 'AK', hi: 'HI', gu: 'GU', mp: 'MP', prvi: 'PR · VI' };
+    const insetNames = s('g', { class: 'story-map__inset-labels' });
     for (const r of atlasProjection().regions) {
       if (!r.box) continue;
       const [[x0, y0], [x1, y1]] = r.box;
       frames.append(s('rect', { class: 'inset-frame', x: x0, y: y0, width: x1 - x0, height: y1 - y0, rx: 3 }));
+      const full = r.label.toUpperCase();
+      const room = x1 - x0 - 8;
+      const width = (t: string) => t.length * 10.5 * 0.68; // about 0.68 em per capital at this size, tracking included
+      const text = width(full) <= room ? full : width(SHORT[r.id] ?? full) <= room ? (SHORT[r.id] ?? full) : '';
+      if (text) {
+        const label = s('text', { class: 'story-map__inset-label', x: x0 + 4, y: y0 + 11.5 });
+        label.textContent = text;
+        insetNames.append(label);
+      }
     }
+    frames.append(insetNames);
     this.zoomG.append(frames, this.districtG);
     this.svg.append(this.zoomG, this.outlineG, this.labelG);
     this.el.append(this.legendSlot, h('div', { class: 'story-map__canvas' }, this.svg));

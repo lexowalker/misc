@@ -50,7 +50,7 @@ function statRow(row: KeyStatRow, v: Variable): HTMLLIElement {
   const rank = h('div', { class: 'stat__rank' }, h('span', { class: 'visually-hidden' }, 'Rank among districts: '));
   if (row.value !== null && row.rank !== null && row.ranked_of) {
     rank.append(
-      h('span', { class: 'stat__rank-text' }, rankPhrase(row.rank, row.ranked_of), formulaHint(RANK_FORMULA)),
+      h('span', { class: 'stat__rank-text' }, rankPhrase(row.rank, row.ranked_of, row.rank_ties ?? 1), formulaHint(RANK_FORMULA)),
       rankStrip(row.rank, row.ranked_of),
     );
   } else {
@@ -117,7 +117,7 @@ export function renderKeyStats(host: HTMLElement, profile: DistrictProfile, vari
     h(
       'p',
       { class: 'dsec__note' },
-      'Latest year for each measure. Ranks run from 1 (highest value) among districts with data that year; for the speed measures a high rank means a slower court. ',
+      'Latest year for each measure. Ranks run from 1 (highest value) among districts with data that year; for the speed measures, rank 1 is the slowest court. ',
       h('span', { class: 'dsec__note-key' }, h('span', { class: 'source-chip__label source-chip--derived-label' }, 'Derived'), 'marks values the atlas or its sources computed; the ƒ button shows the formula.'),
     ),
   );
@@ -224,7 +224,7 @@ export function renderStandout(host: HTMLElement, profile: DistrictProfile, vari
       h(
         'p',
         { class: 'standout__none' },
-        'No measure puts this district among the three highest or lowest in the country, or at the top or bottom of its circuit, in the latest year. The key statistics below show where it stands on each one.',
+        'No measure used for this summary puts this district among the three highest or lowest in the country, or alone at the top or bottom of its circuit, in the latest year. The summary leaves out zero values, values shared by more than two districts, cells with a data note and figures based on few cases. The key statistics below show where it stands on each one.',
       ),
     );
   }

@@ -87,7 +87,7 @@ test('key statistics: value, explicit rank, national figure, sparkline, source, 
   const row = page.locator('#stat-civil_disposition_months');
   const r = prof.key_stats.find((x) => x.variable === 'civil_disposition_months')!;
   await expect(row.locator('.stat__num')).toHaveText(r.value!.toFixed(1));
-  await expect(row.locator('.stat__rank-text')).toContainText(new RegExp(`(\\d+(st|nd|rd|th) highest|Highest|Lowest) of ${r.ranked_of}`));
+  await expect(row.locator('.stat__rank-text')).toContainText(new RegExp(`(\\d+(st|nd|rd|th) highest|Highest|Lowest|highest|lowest) of ${r.ranked_of}`));
   await expect(row.locator('.stat__nat')).toContainText(r.national!.toFixed(1));
   await expect(row.locator('.sparkline svg')).toHaveCount(1);
   await expect(row.locator('.source-chip')).toContainText(/Administrative Office/);

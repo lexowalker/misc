@@ -29,6 +29,7 @@ import {
   getCellSources,
   getNational,
   getRank,
+  rankTies,
   getValue,
   isDerivedCell,
   loadValues,
@@ -38,7 +39,7 @@ import {
 import type { Family, ValuesFile, Variable } from '../data/types.ts';
 import { renderSparkline } from '../components/sparkline.ts';
 import { ensureFormulaPopovers, sourceChip } from '../components/source-chip.ts';
-import { formatNumber, formatValue, periodLabel } from '../lib/format.ts';
+import { formatNumber, formatValue, periodLabel, periodLabelFor } from '../lib/format.ts';
 import { fmtNumberOnly, fmtValue, RANK_FORMULA, rankPhrase, valueParts } from './district/common.ts';
 import { pageHead } from './_page.ts';
 
@@ -133,7 +134,7 @@ function rowYear(v: Variable, file: ValuesFile, ids: string[], chosen: number | 
 function rowYearText(ry: RowYear, v: Variable, file: ValuesFile, n: number): string {
   const pt = v.period_type ?? file.period_type;
   if (ry.year === null) return 'No data for these districts in any year';
-  const p = periodLabel(ry.year, pt);
+  const p = periodLabelFor(v, ry.year, pt);
   if (ry.mode === 'outside') {
     const ys = seriesYears(v, file);
     return `Not published for ${p}. This series covers ${periodLabel(ys[0]!, pt)} to ${periodLabel(ys[ys.length - 1]!, pt)}.`;
@@ -401,7 +402,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
     pageHead({
       kicker: 'Compare',
       title: 'Compare districts side by side',
-      dek: 'Pick two to four district courts. Each row lines up one measure for every court, with its rank among all 94 districts, its trend and the national figure.',
+      dek: 'Pick two to four district courts. Each row lines up one measure for every court, with its rank among the districts with data, its trend and the national figure.',
       className: 'cmp-head',
     }),
     picker.el,
@@ -643,7 +644,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
           { class: `cmp-gap__side cmp-gap__side--${which}` },
           h('span', { class: 'cmp-gap__who' }, h('abbr', { title: d.name }, d.short)),
           h('span', { class: 'cmp-gap__val num' }, p.num, p.unit ? h('span', { class: 'cmp-gap__unit' }, ` ${p.unit}`) : ''),
-          h('span', { class: 'cmp-gap__rank' }, rankPhrase(c[2], g.of)),
+          h('span', { class: 'cmp-gap__rank' }, rankPhrase(c[2], g.of, rankTies(g.file, g.year, c[2]))),
         );
       };
       // Computed from the values as printed on the page, so a reader's own subtraction matches.
@@ -675,7 +676,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
         h(
           'li',
           { class: 'cmp-gap' },
-          h('p', { class: 'cmp-gap__label' }, h('span', { class: 'cmp-gap__measure' }, g.v.label), h('span', { class: 'cmp-gap__year' }, periodLabel(g.year, pt))),
+          h('p', { class: 'cmp-gap__label' }, h('span', { class: 'cmp-gap__measure' }, g.v.label), h('span', { class: 'cmp-gap__year' }, periodLabelFor(g.v, g.year, pt))),
           h('div', { class: 'cmp-gap__pair' }, side(g.hi, 'hi'), side(g.lo, 'lo')),
           standingStrip(g.hi[2], g.lo[2], g.of),
           h(
@@ -848,7 +849,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
         h(
           'p',
           { class: 'cmp-td__rank' },
-          val === null ? '' : rank !== null && of ? rankPhrase(rank, of) : h('span', { class: 'cmp-measure__muted' }, 'Not ranked'),
+          val === null ? '' : rank !== null && of ? rankPhrase(rank, of, rankTies(file, year, rank)) : h('span', { class: 'cmp-measure__muted' }, 'Not ranked'),
         ),
       );
       const hasSeries = years.some((y) => getValue(file, id, y) !== null);

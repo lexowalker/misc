@@ -35,8 +35,17 @@ export function valueParts(value: number, v: Fmt): { num: string; unit: string }
   return { num, unit: full.startsWith(num) ? full.slice(num.length).trim() : '' };
 }
 
-/** "Highest of 94", "12th highest of 94", "Lowest of 51". Rank 1 is always the highest value. */
-export function rankPhrase(rank: number, of: number): string {
+/**
+ * "Highest of 94", "12th highest of 94", "Lowest of 51". Rank 1 is always the highest value. When other
+ * districts share the rank (`ties` > 1): "Tied for 85th highest of 94", "Tied for lowest of 94 (66 districts)".
+ */
+export function rankPhrase(rank: number, of: number, ties = 1): string {
+  if (ties > 1) {
+    const who = ties > 2 ? ` (${ties} districts)` : '';
+    if (rank === 1) return `Tied for highest of ${of}${who}`;
+    if (rank + ties - 1 === of) return `Tied for lowest of ${of}${who}`;
+    return `Tied for ${ordinal(rank)} highest of ${of}${who}`;
+  }
   if (rank === 1) return `Highest of ${of}`;
   if (rank === of) return `Lowest of ${of}`;
   return `${ordinal(rank)} highest of ${of}`;

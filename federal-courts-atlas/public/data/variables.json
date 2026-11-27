@@ -67,14 +67,14 @@
   "breaks": [],
   "caveats": [
    "Since March 2012 the AO counts criminal defendants rather than cases. This series uses the current method for every year from FY 2005, read from the earliest profile that prints each year that way. Earlier years are left out rather than mixed with the old method.",
-   "On the current method the clock starts at the defendant's first proceeding, not the filing date.",
+   "On the current method the clock starts at the defendant's proceeding date (for example, the date an indictment or information was filed), not the date the case was first filed.",
    "The AO does not compute the median for fewer than 10 defendants.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "asc",
   "derived": false,
   "districts_latest": 94,
-  "explainer": "How long the typical felony defendant's case takes to reach a disposition, such as a plea, a verdict or a dismissal. Half of defendants' cases finish faster than this.",
+  "explainer": "How long the typical felony defendant's case takes to end in a sentence, an acquittal or a dismissal. Half of defendants' cases finish faster than this.",
   "family": "speed",
   "featured": true,
   "first_year": 2005,
@@ -542,7 +542,7 @@
   "default_rank_direction": "desc",
   "derived": false,
   "districts_latest": 94,
-  "explainer": "Civil and criminal trials completed by district judges in the year, divided by the number of authorized judgeships. The AO counts hearings on emergency orders and preliminary injunctions as trials.",
+  "explainer": "Civil and criminal trials completed by district judges in the year, divided by the number of authorized judgeships. The AO counts evidentiary hearings on temporary restraining orders and preliminary injunctions as trials.",
   "family": "workload",
   "featured": false,
   "first_year": 1999,
@@ -804,7 +804,7 @@
   "default_rank_direction": "desc",
   "derived": true,
   "districts_latest": 91,
-  "explainer": "New felony defendants charged in the year for every 100,000 people living in the district. Border districts and districts with major ports of entry often rank high.",
+  "explainer": "New felony defendants charged in the year for every 100,000 people living in the district. Districts along the Mexican border often rank high.",
   "family": "workload",
   "featured": true,
   "first_year": 2000,
@@ -870,7 +870,7 @@
  {
   "breaks": [],
   "caveats": [
-   "Counted by the atlas's judges lane from the FJC Biographical Directory dates (judges in office on September 30). Judges assigned to two districts count in both. The three territorial courts are not in the directory of Article III judges, so they show No data.",
+   "Counted by the atlas from the FJC Biographical Directory dates (judges in office on September 30). Judges assigned to two districts count in both. The three territorial courts are not in the directory of Article III judges, so they show No data.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -982,7 +982,7 @@
  {
   "breaks": [],
   "caveats": [
-   "Counted by the atlas's judges lane from the FJC Biographical Directory dates (judges in office on September 30). Judges assigned to two districts count in both. The three territorial courts are not in the directory of Article III judges, so they show No data.",
+   "Counted by the atlas from the FJC Biographical Directory dates (judges in office on September 30). Judges assigned to two districts count in both. The three territorial courts are not in the directory of Article III judges, so they show No data.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
@@ -1092,6 +1092,133 @@
   ]
  },
  {
+  "breaks": [],
+  "caveats": [
+   "Values are exactly as printed in the AO's September district profiles. FY 1999 to 2003 come from the back columns of the FY 2004 profile, because the older files online are scanned images.",
+   "The AO printed this figure with two decimals for FY 1999 to 2009 and one decimal after that. The atlas keeps the printed value and shows one decimal.",
+   "The Northern Mariana Islands held no jury selection in FY 2024. The AO printed 0, which is not a measured figure, so the atlas shows No data for that year.",
+   "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
+  ],
+  "default_rank_direction": "desc",
+  "derived": false,
+  "districts_latest": 94,
+  "explainer": "The average number of people who came to court to be considered for a jury, counted on the days the court held jury selection.",
+  "family": "workload",
+  "featured": false,
+  "first_year": 1999,
+  "format": ".1f",
+  "formula": null,
+  "higher_means": "more people called in for each jury selection",
+  "id": "jurors_avg_present",
+  "in_profile_facts": false,
+  "label": "Average jurors present for jury selection",
+  "lane": "fcms",
+  "lane_table": "observations",
+  "lane_variable": "fcms_jurors_avg_present",
+  "last_year": 2025,
+  "n_years": 27,
+  "national_available": true,
+  "period_type": "FY_SEP30",
+  "short_label": "Jurors present, average",
+  "source_ids": [
+   "web_series_fcms"
+  ],
+  "unit": "persons",
+  "values_file": "values/jurors_avg_present.json",
+  "years": [
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ]
+ },
+ {
+  "breaks": [],
+  "caveats": [
+   "Values are exactly as printed in the AO's September district profiles. FY 1999 to 2003 come from the back columns of the FY 2004 profile, because the older files online are scanned images.",
+   "The Northern Mariana Islands held no jury selection in FY 2024. The AO printed 0, which is not a measured figure, so the atlas shows No data for that year.",
+   "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
+  ],
+  "default_rank_direction": "desc",
+  "derived": false,
+  "districts_latest": 94,
+  "explainer": "The share of people who came for jury selection but were neither chosen for a jury nor challenged by a lawyer.",
+  "family": "workload",
+  "featured": false,
+  "first_year": 1999,
+  "format": ".1f",
+  "formula": null,
+  "higher_means": "a larger share of the people called for jury selection were not used",
+  "id": "jurors_pct_not_selected",
+  "in_profile_facts": false,
+  "label": "Jurors not selected or challenged",
+  "lane": "fcms",
+  "lane_table": "observations",
+  "lane_variable": "fcms_jurors_pct_not_selected",
+  "last_year": 2025,
+  "n_years": 27,
+  "national_available": true,
+  "period_type": "FY_SEP30",
+  "short_label": "Jurors not selected",
+  "source_ids": [
+   "web_series_fcms"
+  ],
+  "unit": "percent",
+  "values_file": "values/jurors_pct_not_selected.json",
+  "years": [
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ]
+ },
+ {
   "breaks": [
    {
     "note": "Booker made the guidelines advisory (January 12, 2005).",
@@ -1099,7 +1226,7 @@
    }
   ],
   "caveats": [
-   "Before United States v. Booker (January 2005) the guidelines were mandatory, and \"within range\" means no departure was granted. FY 2004 and FY 2005 are pooled by the USSC lane from the two half-year tables the USSC printed, so those two years are marked derived.",
+   "Before United States v. Booker (January 2005) the guidelines were mandatory, and \"within range\" means no departure was granted. The atlas pools FY 2004 and FY 2005 from the two part-year tables the USSC printed, so those two years are marked derived.",
    "FY 1995 to 2001 come from the USSC's published district packets; FY 2002 on are reproduced from the USSC's case-level datafiles and match the published tables.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
@@ -1112,14 +1239,14 @@
    2005
   ],
   "districts_latest": 94,
-  "explainer": "The share of people sentenced whose prison term fell inside the range the federal sentencing guidelines recommend for their offense and criminal history.",
+  "explainer": "The share of people sentenced whose sentence fell inside the range the federal sentencing guidelines recommend for their offense and criminal history.",
   "family": "sentencing",
   "featured": true,
   "first_year": 1995,
   "format": ".1f",
   "formula": null,
   "formula_by_basis": {
-   "pooled_published_halves": "Derived: the full fiscal year pooled from the two half-year tables the USSC printed (100 × (count in first half + count in second half) ÷ (cases in first half + cases in second half))."
+   "pooled_published_halves": "Derived: the full fiscal year pooled from the two part-year tables the USSC printed (100 × (count in first part + count in second part) ÷ (cases in first part + cases in second part))."
   },
   "higher_means": "more sentences inside the guideline range",
   "id": "within_range_pct",
@@ -1175,7 +1302,7 @@
  {
   "breaks": [],
   "caveats": [
-   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the USSC lane found the shares identical for every district.",
+   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the atlas found the shares identical for every district.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -1191,7 +1318,7 @@
   "formula": "100 × (upward departures + upward variances) ÷ people whose sentence could be compared with the guideline range, in the USSC's FY 2018 categories",
   "formula_by_basis": {
    "computed_ussc_supplemental": "Derived: computed from the USSC's FY 2014 to 2017 supplemental datafile, which codes those years with the FY 2018 method.",
-   "sum_of_published_components": "Derived: the sum of components the USSC published for that year."
+   "sum_of_published_components": "Derived: computed from the counts the USSC publishes for each part of the group (100 × the parts' combined count ÷ people whose sentence could be compared with the guideline range). Adding the USSC's rounded percentages for the parts can give a figure 0.1 higher or lower."
   },
   "higher_means": "more sentences above the guideline range",
   "id": "above_range_pct",
@@ -1228,7 +1355,7 @@
  {
   "breaks": [],
   "caveats": [
-   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the USSC lane found the shares identical for every district.",
+   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the atlas found the shares identical for every district.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -1244,7 +1371,7 @@
   "formula": "100 × (§5K1.1 + §5K3.1 + other government-motion departures + government-motion downward variances) ÷ people whose sentence could be compared with the guideline range",
   "formula_by_basis": {
    "computed_ussc_supplemental": "Derived: computed from the USSC's FY 2014 to 2017 supplemental datafile, which codes those years with the FY 2018 method.",
-   "sum_of_published_components": "Derived: the sum of components the USSC published for that year."
+   "sum_of_published_components": "Derived: computed from the counts the USSC publishes for each part of the group (100 × the parts' combined count ÷ people whose sentence could be compared with the guideline range). Adding the USSC's rounded percentages for the parts can give a figure 0.1 higher or lower."
   },
   "higher_means": "more below-range sentences the government asked for",
   "id": "govt_below_range_pct",
@@ -1281,7 +1408,7 @@
  {
   "breaks": [],
   "caveats": [
-   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the USSC lane found the shares identical for every district.",
+   "In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped printing this four-way grouping. The atlas rebuilds the same grouping from the published components for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, the atlas found the shares identical for every district.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -1289,7 +1416,7 @@
   "default_rank_direction": "desc",
   "derived": true,
   "districts_latest": 94,
-  "explainer": "The share of people sentenced below the guideline range without a government motion, usually after a request by the defense.",
+  "explainer": "The share of people sentenced below the guideline range without a government motion.",
   "family": "sentencing",
   "featured": true,
   "first_year": 2014,
@@ -1297,7 +1424,7 @@
   "formula": "100 × (non-government downward departures + non-government downward variances) ÷ people whose sentence could be compared with the guideline range",
   "formula_by_basis": {
    "computed_ussc_supplemental": "Derived: computed from the USSC's FY 2014 to 2017 supplemental datafile, which codes those years with the FY 2018 method.",
-   "sum_of_published_components": "Derived: the sum of components the USSC published for that year."
+   "sum_of_published_components": "Derived: computed from the counts the USSC publishes for each part of the group (100 × the parts' combined count ÷ people whose sentence could be compared with the guideline range). Adding the USSC's rounded percentages for the parts can give a figure 0.1 higher or lower."
   },
   "higher_means": "more below-range sentences the government did not ask for",
   "id": "nongovt_below_range_pct",
@@ -1334,13 +1461,20 @@
  {
   "breaks": [],
   "caveats": [
-   "This is the grouping the USSC printed for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "This is the grouping the USSC used in its tables for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "For FY 2006 to 2009 the atlas shows the exact share from the counts the USSC printed, so those years are marked derived. The USSC's tables for those years add the rounded percentages of the group's parts, so they can show a share 0.1 higher or lower.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
   "derived": false,
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
   "districts_latest": 94,
   "explainer": "The share of people sentenced above the guideline range, as the USSC grouped sentences after Booker.",
   "family": "sentencing",
@@ -1348,6 +1482,9 @@
   "first_year": 2006,
   "format": ".1f",
   "formula": null,
+  "formula_by_basis": {
+   "exact_share_of_published_counts": "Derived: 100 × the group's count ÷ people whose sentence could be compared with the guideline range, both as the USSC printed them. For FY 2006 to 2009 the USSC's own tables add the rounded percentages of the group's parts instead, so its printed share can be 0.1 higher or lower."
+  },
   "higher_means": "more sentences above the guideline range",
   "id": "above_range_pct_2006",
   "in_profile_facts": false,
@@ -1383,13 +1520,20 @@
  {
   "breaks": [],
   "caveats": [
-   "This is the grouping the USSC printed for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "This is the grouping the USSC used in its tables for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "For FY 2006 to 2009 the atlas shows the exact share from the counts the USSC printed, so those years are marked derived. The USSC's tables for those years add the rounded percentages of the group's parts, so they can show a share 0.1 higher or lower.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
   "derived": false,
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
   "districts_latest": 94,
   "explainer": "The share of people sentenced below the guideline range on a government motion, as the USSC grouped sentences after Booker.",
   "family": "sentencing",
@@ -1397,6 +1541,9 @@
   "first_year": 2006,
   "format": ".1f",
   "formula": null,
+  "formula_by_basis": {
+   "exact_share_of_published_counts": "Derived: 100 × the group's count ÷ people whose sentence could be compared with the guideline range, both as the USSC printed them. For FY 2006 to 2009 the USSC's own tables add the rounded percentages of the group's parts instead, so its printed share can be 0.1 higher or lower."
+  },
   "higher_means": "more below-range sentences the government asked for",
   "id": "govt_below_range_pct_2006",
   "in_profile_facts": false,
@@ -1432,13 +1579,20 @@
  {
   "breaks": [],
   "caveats": [
-   "This is the grouping the USSC printed for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "This is the grouping the USSC used in its tables for FY 2006 to 2017. For FY 2014 to 2025 see the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.",
+   "For FY 2006 to 2009 the atlas shows the exact share from the counts the USSC printed, so those years are marked derived. The USSC's tables for those years add the rounded percentages of the group's parts, so they can show a share 0.1 higher or lower.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
   "derived": false,
+  "derived_years": [
+   2006,
+   2007,
+   2008,
+   2009
+  ],
   "districts_latest": 94,
   "explainer": "The share of people sentenced below the guideline range without a government motion, as the USSC grouped sentences after Booker.",
   "family": "sentencing",
@@ -1446,6 +1600,9 @@
   "first_year": 2006,
   "format": ".1f",
   "formula": null,
+  "formula_by_basis": {
+   "exact_share_of_published_counts": "Derived: 100 × the group's count ÷ people whose sentence could be compared with the guideline range, both as the USSC printed them. For FY 2006 to 2009 the USSC's own tables add the rounded percentages of the group's parts instead, so its printed share can be 0.1 higher or lower."
+  },
   "higher_means": "more below-range sentences the government did not ask for",
   "id": "nongovt_below_range_pct_2006",
   "in_profile_facts": false,
@@ -1482,7 +1639,7 @@
   "breaks": [],
   "caveats": [
    "FY 1995 to 2001 come from the USSC's published district packets; FY 2002 on are reproduced from the USSC's case-level datafiles and match the published tables.",
-   "FY 2004 and FY 2005 are pooled from two half-year tables and marked derived.",
+   "FY 2004 and FY 2005 are pooled from two part-year tables and marked derived.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -1501,7 +1658,7 @@
   "format": ".1f",
   "formula": null,
   "formula_by_basis": {
-   "pooled_published_halves": "Derived: the full fiscal year pooled from the two half-year tables the USSC printed (100 × (count in first half + count in second half) ÷ (cases in first half + cases in second half))."
+   "pooled_published_halves": "Derived: the full fiscal year pooled from the two part-year tables the USSC printed (100 × (count in first part + count in second part) ÷ (cases in first part + cases in second part))."
   },
   "higher_means": "more sentences reduced for cooperation",
   "id": "substantial_assistance_pct",
@@ -1614,42 +1771,25 @@
  {
   "breaks": [],
   "caveats": [
-   "Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the USSC lane with that rule, so they are marked derived; FY 2018 on reproduce the published figures.",
+   "Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
    "Terms of 470 months or more, including life, count as 470 months, as the USSC does.",
-   "From FY 2011 the USSC prints whole months.",
+   "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
-  "derived": false,
-  "derived_years": [
-   2002,
-   2003,
-   2004,
-   2005,
-   2006,
-   2007,
-   2008,
-   2009,
-   2010,
-   2011,
-   2012,
-   2013,
-   2014,
-   2015,
-   2016,
-   2017
-  ],
+  "derived": true,
   "districts_latest": 94,
   "explainer": "The average sentence in months, counting prison plus any alternative confinement. Probation and fine-only sentences count as zero months.",
   "family": "sentencing",
   "featured": true,
   "first_year": 2002,
   "format": ".1f",
-  "formula": null,
+  "formula": "Average of each person's months of prison plus alternative confinement, computed by the atlas from the USSC's case-level datafile (probation and fine-only sentences count as 0; 470 months or more, including life, count as 470). Shown to one decimal; from FY 2011 the USSC prints whole months.",
   "formula_by_basis": {
-   "computed_ussc_definition": "Derived: computed by the atlas's USSC lane from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure."
+   "computed_ussc_definition": "Derived: computed by the atlas from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure.",
+   "unrounded_published_statistic": "Derived: computed by the atlas from the USSC's case-level datafile with the USSC's own definition and shown to one decimal. The USSC prints this figure in whole months, so its tables can show a number up to half a month away."
   },
   "higher_means": "longer sentences on average",
   "id": "mean_sentence_months",
@@ -1698,41 +1838,24 @@
  {
   "breaks": [],
   "caveats": [
-   "Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the USSC lane with that rule, so they are marked derived.",
-   "From FY 2011 the USSC prints whole months.",
+   "Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
+   "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
-  "derived": false,
-  "derived_years": [
-   2002,
-   2003,
-   2004,
-   2005,
-   2006,
-   2007,
-   2008,
-   2009,
-   2010,
-   2011,
-   2012,
-   2013,
-   2014,
-   2015,
-   2016,
-   2017
-  ],
+  "derived": true,
   "districts_latest": 94,
   "explainer": "The middle sentence in months: half of people sentenced got less, half got more. Probation and fine-only sentences count as zero months.",
   "family": "sentencing",
   "featured": false,
   "first_year": 2002,
   "format": ".1f",
-  "formula": null,
+  "formula": "Middle value of each person's months of prison plus alternative confinement, computed by the atlas from the USSC's case-level datafile (probation and fine-only sentences count as 0; 470 months or more, including life, count as 470). Shown to one decimal; from FY 2011 the USSC prints whole months.",
   "formula_by_basis": {
-   "computed_ussc_definition": "Derived: computed by the atlas's USSC lane from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure."
+   "computed_ussc_definition": "Derived: computed by the atlas from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure.",
+   "unrounded_published_statistic": "Derived: computed by the atlas from the USSC's case-level datafile with the USSC's own definition and shown to one decimal. The USSC prints this figure in whole months, so its tables can show a number up to half a month away."
   },
   "higher_means": "longer sentences for the typical person",
   "id": "median_sentence_months",
@@ -1781,7 +1904,7 @@
  {
   "breaks": [],
   "caveats": [
-   "Fine-only cases stay in the denominator in every year, as in the USSC's tables since FY 2018. Before FY 2018 the USSC left them out, so its printed rates run slightly higher; those years are computed by the USSC lane and marked derived.",
+   "Fine-only cases stay in the denominator in every year, as in the USSC's tables since FY 2018. Before FY 2018 the USSC left them out, so its printed rates run slightly higher; those years are computed by the atlas and marked derived.",
    "USSC fiscal years run October 1 to September 30.",
    "Territorial courts and some small districts sentence few people a year, so their shares can swing widely. Cells based on fewer than 30 people carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -1814,7 +1937,7 @@
   "format": ".1f",
   "formula": null,
   "formula_by_basis": {
-   "computed_ussc_definition": "Derived: computed by the atlas's USSC lane from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure."
+   "computed_ussc_definition": "Derived: computed by the atlas from the USSC's case-level datafile, using the USSC's own definition, for a year in which the USSC did not print this figure."
   },
   "higher_means": "more people sentenced to prison",
   "id": "prison_pct",
@@ -1869,14 +1992,14 @@
   ],
   "caveats": [
    "Hatch-Waxman drug patent cases moved to a new code (835) in June 2017 and are not counted here.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
   "default_rank_direction": "desc",
   "derived": false,
   "districts_latest": 94,
-  "explainer": "New patent infringement and validity suits (nature of suit 830) filed in the year. Patent plaintiffs can choose among courts, so a few districts draw most of these cases.",
+  "explainer": "New patent infringement and validity suits (nature of suit 830) filed in the year. A few districts receive most of these cases.",
   "family": "casemix",
   "featured": true,
   "first_year": 1988,
@@ -1893,6 +2016,9 @@
   "n_years": 39,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Patent filings",
   "source_ids": [
    "idb_civil_cv88on"
@@ -1950,7 +2076,7 @@
   ],
   "caveats": [
    "Drug patent (ANDA) cases, code 835 since June 2017, are not counted.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
   ],
@@ -1974,6 +2100,9 @@
   "n_years": 39,
   "national_available": false,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Share of U.S. patent cases",
   "source_ids": [
    "idb_civil_cv88on"
@@ -2026,8 +2155,8 @@
   "breaks": [],
   "caveats": [
    "The pro se code has no AO quality control and is blank before FY 1999.",
-   "Mass-tort waves can carry pro se codes in bulk: N.D. Fla. held hundreds of thousands of such cases in FY 2020 to 2024.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Mass-tort waves can carry pro se codes in bulk: N.D. Fla. received hundreds of thousands of mass-tort filings in FY 2020 to 2024, many of them coded pro se.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2052,6 +2181,9 @@
   "n_years": 28,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Pro se civil cases",
   "source_ids": [
    "idb_civil_cv88on"
@@ -2093,7 +2225,8 @@
   "breaks": [],
   "caveats": [
    "Uses nature-of-suit codes 510 to 560. Habeas petitions by immigration detainees (code 463) are not included; they surged in FY 2026.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "The case-mix chart on each district page follows the civil cover sheet (JS 44), which counts immigration detention petitions (code 463) as prisoner petitions, so the two figures can differ.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2118,6 +2251,9 @@
   "n_years": 39,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Prisoner petitions",
   "source_ids": [
    "idb_civil_cv88on"
@@ -2169,8 +2305,8 @@
  {
   "breaks": [],
   "caveats": [
-   "In FY 2007 M.D. La. recorded thousands of related cases as jury verdicts, which lifts its rate that year.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "In FY 2007 M.D. La. recorded thousands of cases, almost all personal-injury suits closed in May 2007, as jury verdicts, which lifts its rate that year.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2184,7 +2320,7 @@
   "first_year": 1988,
   "format": ".1f",
   "formula": "100 × civil cases closed by jury verdict, directed verdict or court trial ÷ all civil cases closed",
-  "higher_means": "more civil cases end in a trial verdict",
+  "higher_means": "more civil cases are decided by a trial",
   "id": "civil_trial_rate_pct",
   "in_profile_facts": true,
   "label": "Civil cases decided by trial",
@@ -2195,6 +2331,9 @@
   "n_years": 39,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Civil trial rate",
   "source_ids": [
    "idb_civil_cv88on"
@@ -2247,7 +2386,7 @@
   "breaks": [],
   "caveats": [
    "Counts the disposition of the most serious charge.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2272,6 +2411,9 @@
   "n_years": 31,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Criminal trial rate",
   "source_ids": [
    "idb_criminal_cr96on"
@@ -2316,7 +2458,7 @@
   "breaks": [],
   "caveats": [
    "Counts the disposition of the most serious charge.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2341,6 +2483,9 @@
   "n_years": 31,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Guilty pleas",
   "source_ids": [
    "idb_criminal_cr96on"
@@ -2384,8 +2529,8 @@
  {
   "breaks": [],
   "caveats": [
-   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane; the mapping reproduces the AO's published immigration totals exactly.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas; the mapping reproduces the AO's published immigration totals exactly for FY 2005 to 2025; other years could not be checked.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2410,6 +2555,9 @@
   "n_years": 31,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Immigration defendants",
   "source_ids": [
    "idb_criminal_cr96on"
@@ -2453,8 +2601,8 @@
  {
   "breaks": [],
   "caveats": [
-   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2479,6 +2627,9 @@
   "n_years": 31,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Drug defendants",
   "source_ids": [
    "idb_criminal_cr96on"
@@ -2522,8 +2673,8 @@
  {
   "breaks": [],
   "caveats": [
-   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane; the mapping reproduces the AO's published firearms totals exactly.",
-   "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure.",
+   "Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas; the mapping reproduces the AO's published firearms totals exactly for FY 2005 to 2025; other years could not be checked.",
+   "Computed by the atlas from the FJC's case-level records; the courts do not print this figure.",
    "FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 tables, so they have no published cross-check.",
    "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note.",
    "Ranks are derived by the atlas: 1 is the highest value among the districts with data that year, and tied districts share a rank."
@@ -2548,6 +2699,9 @@
   "n_years": 31,
   "national_available": true,
   "period_type": "FY_SEP30",
+  "preliminary_years": [
+   2026
+  ],
   "short_label": "Firearms defendants",
   "source_ids": [
    "idb_criminal_cr96on"

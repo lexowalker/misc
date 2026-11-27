@@ -65,7 +65,7 @@ test('choropleth: classes, legend, tooltip, table and year slider', async ({ pag
   await expect(page.locator('.legend__end--lo')).toHaveText('Lowest');
   await expect(page.locator('.legend__end--hi')).toHaveText('Highest');
   await expect(page.locator('.legend__nd')).toContainText('No data');
-  await expect(page.locator('path.district[data-id="txnd"]')).toHaveAttribute('aria-label', /Counties per district: \d+, \d+(st|nd|rd|th) of 94, 2025$/);
+  await expect(page.locator('path.district[data-id="txnd"]')).toHaveAttribute('aria-label', /Counties per district: \d+, \d+(st|nd|rd|th) of 94( \(tied\))?, 2025$/);
   await settle(page);
   await shot(page, testInfo, 'choropleth-fixture');
 

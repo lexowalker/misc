@@ -7,14 +7,6 @@
     "periods": [],
     "reason": "No lane acquired a district-level series on defense counsel type. Nothing is estimated in its place."
   },
-  "courtroom_juror_measures_not_published": {
-    "lane": "courtroom",
-    "description": "The jury box would show the FCMS juror measures (average petit jurors present for jury selection; percent not selected or challenged). They are in the FCMS lane tables (fcms_jurors_avg_present, fcms_jurors_pct_not_selected) but not in public/data/values, so the page shows a note instead of numbers.",
-    "variables": ["fcms_jurors_avg_present", "fcms_jurors_pct_not_selected"],
-    "districts": [],
-    "periods": [],
-    "reason": "The web lane did not publish them. The page reads values/jurors_avg_present.json and values/jurors_pct_not_selected.json automatically once they are added to variables.json."
-  },
   "courtroom_reporter_not_in_data": {
     "lane": "courtroom",
     "description": "The court reporter's seat has no statistics (court reporting and transcripts are not in any atlas source). The panel lists the atlas's own sources instead.",

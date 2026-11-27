@@ -17,7 +17,7 @@ your lane report instead of silently diverging.
    (cached, throttled, backs off). Nominatim ≤ 1 req/s. CourtListener: free tier, cached.
 6. **Each lane writes only inside its own folders** (listed below) plus its own `requirements/<lane>.txt`,
    `tests/pipeline/test_<lane>*.py`, `docs/lanes/<lane>.md`, `data/sources/<lane>.json`, `data/gaps/<lane>.json`.
-   Do not edit shared files (`pipeline/common/*`, `Makefile`, `requirements.txt`, `package.json`) — report needed
+   Do not edit shared files (`pipeline/common/*`, `Makefile`, `requirements.txt`, `package.json`); report needed
    changes instead. Do not `git commit`; the orchestrator commits.
 
 ## Layout
@@ -48,7 +48,7 @@ did not exist in a year).
 |---|---|
 | `district_id` | registry id |
 | `period` | int year label |
-| `period_type` | `FY_SEP30` (12 months ending Sep 30 — FCMS, IDB fiscal-year tallies, USSC fiscal year), `CY`, `12M_JUN30`, `12M_MAR31`, `12M_DEC31`, `SNAPSHOT_SEP30`, `JUL1_EST`, `APR1_CENSUS` |
+| `period_type` | `FY_SEP30` (12 months ending Sep 30: FCMS, IDB fiscal-year tallies, USSC fiscal year), `CY`, `12M_JUN30`, `12M_MAR31`, `12M_DEC31`, `SNAPSHOT_SEP30`, `JUL1_EST`, `APR1_CENSUS` |
 | `variable` | snake_case id |
 | `value` | number as published (FCMS medians in months, percents as 0–100) |
 | `unit` | `months`, `cases`, `count`, `percent`, `per_judgeship`, `persons`, ... |
@@ -62,7 +62,7 @@ Each lane also writes `data/processed/<lane>/variables.json`: a list of
 
 ## Geography (boundaries lane)
 
-* `data/processed/boundaries/county_district.csv` — every county-equivalent in TIGER/Line (50 states, DC, PR,
+* `data/processed/boundaries/county_district.csv`: every county-equivalent in TIGER/Line (50 states, DC, PR,
   GU, VI, MP; plus AS flagged `district_id = ""` with reason) → exactly one `district_id`, with `statute_section`,
   `statute_division` (when the statute names one), `county_name`, `geoid`, `state`. Plus `vintage`.
 * Special cases handled explicitly and tested: Virginia independent cities; St. Louis city (MO); Connecticut
@@ -75,7 +75,7 @@ Each lane also writes `data/processed/<lane>/variables.json`: a list of
   such as `ncmd;nced` on the 8 statute-split counties only). Resolve a point to a district against `districts`,
   never against a county's `district_id`.
   The front end projects with a composite AlbersUSA + territories projection.
-* `public/data/geo/divisions.json` — statutory divisions per district (from the statute text) with member counties.
+* `public/data/geo/divisions.json`: statutory divisions per district (from the statute text) with member counties.
 
 ## Places of holding court (courthouses lane)
 
@@ -96,7 +96,8 @@ public/data/districts.json           {district_id: registry fields + population 
 public/data/variables.json           [{id, family: speed|workload|sentencing|casemix, label, short_label, unit, format,
                                        explainer, caveats: [..], source_ids, derived, formula|null, derived_years?,
                                        formula_by_basis?, higher_means, years, period_type, lane, lane_table,
-                                       lane_variable | lane_inputs, default_rank_direction, breaks, featured, ...}]
+                                       lane_variable | lane_inputs, default_rank_direction, breaks, featured,
+                                       preliminary_years?, ...}]
 public/data/values/<variable>.json   {variable, period_type, unit, years, values:{district_id:{year:value}},
                                        ranks:{district_id:{year:rank}} (1 = highest, ties share), ranked_of:{year:n},
                                        provenance:{source_id:{dataset, publisher, url, vintage, retrieved_at}},

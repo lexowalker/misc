@@ -84,10 +84,10 @@ export function ordinal(n: number): string {
   return n + (s[(v - 20) % 10] || s[v] || s[0]!);
 }
 
-/** "12th of 94" */
-export function rankText(rank: number | null | undefined, of: number | null | undefined): string | null {
+/** "12th of 94", or "12th of 94 (tied)" when other districts share the rank. */
+export function rankText(rank: number | null | undefined, of: number | null | undefined, ties = 1): string | null {
   if (!rank || !of) return null;
-  return `${ordinal(rank)} of ${of}`;
+  return `${ordinal(rank)} of ${of}${ties > 1 ? ' (tied)' : ''}`;
 }
 
 const PERIOD_LABEL: Record<string, (y: number) => string> = {
@@ -106,6 +106,17 @@ export function periodLabel(year: number | string, periodType?: string | null): 
   const y = typeof year === 'string' ? parseInt(year, 10) : year;
   const f = periodType ? PERIOD_LABEL[periodType] : undefined;
   return f ? f(y) : String(year);
+}
+
+/** periodLabel plus " (preliminary)" for a year the variable lists in `preliminary_years` (IDB FY 2026). */
+export function periodLabelFor(
+  variable: Pick<Variable, 'preliminary_years'> | null | undefined,
+  year: number | string,
+  periodType?: string | null,
+): string {
+  const y = typeof year === 'string' ? parseInt(year, 10) : year;
+  const base = periodLabel(y, periodType);
+  return variable?.preliminary_years?.includes(y) ? `${base} (preliminary)` : base;
 }
 
 /** Compact year tick label, e.g. "’05" for dense axes. */

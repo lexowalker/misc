@@ -993,6 +993,7 @@
   padding: 3px 0;
   line-height: 1.2;
   overflow-wrap: anywhere;
+  hyphens: auto;
 }
 
 .bench__name-short {
@@ -1103,7 +1104,7 @@
 
 @media (max-width: 40rem) {
   .district-page {
-    --who-w: 7.5rem;
+    --who-w: 8.25rem; /* room for a long surname such as "Subramanian" on one line */
     --bench-gap: var(--space-2);
   }
 

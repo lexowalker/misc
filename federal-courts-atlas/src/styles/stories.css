@@ -593,6 +593,21 @@ button.story-num:focus-visible {
   }
 }
 
+.story-map__inset-label {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  fill: var(--map-inset-label);
+  pointer-events: none;
+}
+
+@media (max-width: 40rem) {
+  .story-map__inset-labels {
+    display: none;
+  }
+}
+
 .story-map__leader {
   fill: none;
   stroke: var(--map-hover-stroke);

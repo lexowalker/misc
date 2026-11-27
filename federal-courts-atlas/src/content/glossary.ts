@@ -36,8 +36,8 @@ export const GLOSSARY: GlossaryEntry[] = [
     id: '5k3-1',
     term: '§5K3.1 early disposition',
     definition:
-      'A Guidelines policy statement that allows a reduction of up to four offense levels, on the government’s motion, under an early disposition (“fast-track”) program authorized by the Attorney General and the district’s U.S. Attorney. Defendants in these programs generally agree to plead guilty promptly and to waive certain procedural rights. Such programs have been used mainly for immigration offenses.',
-    cite: 'U.S.S.G. § 5K3.1',
+      'A Guidelines policy statement that allowed a departure of up to four offense levels, on the government’s motion, under an early disposition (“fast-track”) program authorized by the Attorney General and the district’s U.S. Attorney. Since November 1, 2025 the same reduction appears in §3F1.1 as a decrease in offense level rather than a departure. Defendants in these programs generally agree to plead guilty promptly and to waive certain procedural rights. Such programs have been used mainly for immigration offenses.',
+    cite: 'U.S.S.G. § 5K3.1 (through October 2025); § 3F1.1 (from November 1, 2025)',
     see: ['departure', 'plea-agreement'],
   },
   {
@@ -52,7 +52,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     id: 'departure',
     term: 'departure',
     definition:
-      'A sentence outside the guideline range for a reason that the Guidelines Manual itself recognizes, such as substantial assistance (§5K1.1) or an early disposition program (§5K3.1). Amendments effective November 1, 2025 removed most other departure provisions from the Manual; historical data continue to distinguish departures from variances.',
+      'A sentence outside the guideline range for a reason that the Guidelines Manual itself recognizes, such as substantial assistance (§5K1.1). Amendments effective November 1, 2025 removed most departure provisions from the Manual, kept §5K1.1, and turned the early disposition departure (§5K3.1) into a reduction in offense level (§3F1.1). Sentencing data through FY 2025 still distinguish departures from variances.',
     cite: 'U.S.S.G. ch. 5, pt. K',
     see: ['variance', '5k1-1', '5k3-1'],
   },
@@ -205,7 +205,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     id: 'prisoner-petition',
     term: 'prisoner petition',
     definition:
-      'A civil case filed by a person in custody. In federal court statistics the category includes habeas corpus petitions challenging a conviction or sentence, motions to vacate a federal sentence, and civil rights suits about conditions of confinement.',
+      'A civil case filed by a person in custody. In federal court statistics the category includes habeas corpus petitions challenging a conviction or sentence, motions to vacate a federal sentence, and civil rights suits about conditions of confinement. The civil cover sheet also lists habeas petitions by immigration detainees (code 463) as prisoner petitions. The atlas’s prisoner-petition share leaves those out (codes 510 to 560 only), while its case-mix charts include them.',
     cite: '28 U.S.C. §§ 2241, 2254, 2255; 42 U.S.C. § 1983',
   },
   {

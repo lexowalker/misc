@@ -6,7 +6,7 @@ import { h, uniqueId } from '../lib/dom.ts';
 import { formatValue, periodLabel, rankText } from '../lib/format.ts';
 import type { ValuesFile, Variable } from '../data/types.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
-import { getRank, getValue, rankedCount } from '../data/loaders.ts';
+import { getCellNote, getRank, getValue, isDerivedCell, rankedCount, rankTies } from '../data/loaders.ts';
 import { renderLegend } from '../components/legend.ts';
 import { DataTable, type Column } from '../components/data-table.ts';
 import { sourceChipForVariable } from '../components/source-chip.ts';
@@ -174,7 +174,26 @@ export class ChoroplethView {
         render: (r) => (r.value === null ? noData() : formatValue(r.value, v)),
       });
       if (this.values.ranks) {
-        cols.push({ key: 'rank', label: this.o.rankLabel ?? 'Rank', numeric: true, value: (r) => r.rank, render: (r) => (r.value === null ? '' : rankText(r.rank, of) ?? '') });
+        cols.push({ key: 'rank', label: this.o.rankLabel ?? 'Rank', numeric: true, value: (r) => r.rank, render: (r) => (r.value === null ? '' : rankText(r.rank, of, rankTies(this.values, this.year, r.rank)) ?? '') });
+      }
+      // Cell flags, as on the tooltip: derived cells and cell notes (data audit 2026-11-27).
+      const file = this.values;
+      const year = this.year;
+      const derivedAt = (id: string) => getValue(file, id, year) !== null && isDerivedCell(file, id, year);
+      const noteAt = (id: string) => (getValue(file, id, year) !== null ? getCellNote(file, id, year) : null);
+      if (DISTRICTS.some((d) => derivedAt(d.id) || !!noteAt(d.id))) {
+        cols.push({
+          key: 'notes',
+          label: 'Notes',
+          value: (r) => [derivedAt(r.id) ? 'Derived' : '', noteAt(r.id) ?? ''].filter(Boolean).join(' '),
+          render: (r) => {
+            const parts: Array<Node | string> = [];
+            if (derivedAt(r.id)) parts.push(h('span', { class: 'source-chip source-chip--derived' }, h('span', { class: 'source-chip__label' }, 'Derived')));
+            const note = noteAt(r.id);
+            if (note) parts.push(h('span', { class: 'table-note' }, `${parts.length ? ' ' : ''}${note}`));
+            return parts.length ? h('span', null, ...parts) : '';
+          },
+        });
       }
     }
     const caption = v && this.values && this.year !== null ? `${v.label}, ${periodLabel(this.year, this.values.period_type)}, by district` : 'The 94 federal judicial districts';

@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from decimal import ROUND_HALF_UP, Decimal
 from functools import lru_cache
 from pathlib import Path
 
@@ -134,13 +135,27 @@ def decimals(fmt: str | None) -> int:
     return int(m.group(1)) if m else 0
 
 
-def fmt_number(value: float, fmt: str | None) -> str:
+def display_decimals(value: float, fmt: str | None) -> int:
     d = decimals(fmt)
     # Never round away a published fraction (shared judgeships are halves: 3.5 must not print as 4).
     # Matches src/lib/format.ts formatValue.
     if d == 0 and value != int(value):
         d = 1
-    return f"{value:,.{d}f}"
+    return d
+
+
+def display_round(value: float, fmt: str | None) -> float:
+    """The value as the site displays it. src/lib/format.ts uses Intl.NumberFormat, which rounds the exact binary
+    value half away from zero ("halfExpand"); Python's own formatting would round an exact tie such as 12.25 to
+    even. Ranks and ties are taken at this precision (data audit 2026-11-27), so districts that show the same
+    number share a rank."""
+    d = display_decimals(value, fmt)
+    return float(Decimal(float(value)).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP))
+
+
+def fmt_number(value: float, fmt: str | None) -> str:
+    d = display_decimals(value, fmt)
+    return f"{display_round(value, fmt):,.{d}f}"
 
 
 UNIT_WORDS = {

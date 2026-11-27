@@ -8,10 +8,10 @@ import '../styles/home.css';
 import { h, s, uniqueId } from '../lib/dom.ts';
 import type { PageContext } from '../app/router.ts';
 import { replaceQuery } from '../app/router.ts';
-import { caveatList, getCellNote, getNational, getRank, getValue, isDerivedCell, loadValues, loadVariables, rankedCount } from '../data/loaders.ts';
+import { caveatList, getCellNote, getNational, getRank, getValue, isDerivedCell, loadValues, loadVariables, rankedCount, rankTies } from '../data/loaders.ts';
 import type { ValuesFile, Variable } from '../data/types.ts';
 import { registryDistrict } from '../data/districts.ts';
-import { formatValue, ordinal, periodLabel } from '../lib/format.ts';
+import { formatValue, ordinal, periodLabel, periodLabelFor } from '../lib/format.ts';
 import { ChoroplethView } from '../map/view.ts';
 import type { MapData } from '../map/atlas-map.ts';
 import { YearSlider } from '../components/year-slider.ts';
@@ -82,13 +82,15 @@ export function rankPhrase(file: ValuesFile, id: string, year: number | null): s
   const r = getRank(file, id, year);
   const n = rankedCount(file, year);
   if (v === null || !r || !n || year === null) return null;
+  // Counted from the ranks, which the web lane computes on the values as displayed, so districts that
+  // show the same number count as tied (data audit 2026-11-27).
   let lower = 0;
   let equal = 0;
   for (const d of Object.keys(file.values)) {
-    const w = getValue(file, d, year);
-    if (w === null) continue;
-    if (w < v) lower += 1;
-    else if (w === v) equal += 1;
+    const w = getRank(file, d, year);
+    if (w === null || getValue(file, d, year) === null) continue;
+    if (w > r) lower += 1;
+    else if (w === r) equal += 1;
   }
   const tied = equal > 1;
   const fromBottom = lower + 1;
@@ -121,10 +123,10 @@ function tooltipBody(id: string, data: MapData): Node | null {
   const rank = v !== null ? rankPhrase(values, id, year) : null;
   if (rank) frag.append(h('p', { class: 'map-tip__rank' }, rank, h('span', { class: 'map-tip__fine' }, ' districts')));
   const meta: string[] = [];
-  if (year !== null) meta.push(periodLabel(year, values.period_type));
+  if (year !== null) meta.push(periodLabelFor(variable, year, values.period_type));
   const r = getRank(values, id, year);
   const n = rankedCount(values, year);
-  if (rank && r && n) meta.push(`derived rank ${ordinal(r)} of ${n} (1 = highest)`);
+  if (rank && r && n) meta.push(`derived rank ${rankTies(values, year, r) > 1 ? 'tied for ' : ''}${ordinal(r)} of ${n} (1 = highest)`);
   if (meta.length) box(frag, 'map-tip__meta', meta.join(' · '));
   const note = getCellNote(values, id, year);
   if (note) box(frag, 'map-tip__note', note);
@@ -148,8 +150,8 @@ function ariaLabelFor(id: string, data: MapData): string | null {
   const parts = [`${name}, ${variable.label}: ${formatValue(v, variable)}`];
   const r = getRank(values, id, year);
   const n = rankedCount(values, year);
-  if (v !== null && r && n) parts.push(`${ordinal(r)} of ${n}`);
-  if (year !== null) parts.push(periodLabel(year, values.period_type));
+  if (v !== null && r && n) parts.push(`${ordinal(r)} of ${n}${rankTies(values, year, r) > 1 ? ' (tied)' : ''}`);
+  if (year !== null) parts.push(periodLabelFor(variable, year, values.period_type));
   const note = getCellNote(values, id, year);
   return parts.join(', ') + (note ? `. Note: ${note}` : '');
 }
@@ -425,7 +427,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
           h('strong', null, 'Statistics not yet built. '),
           vr.status === 'error'
             ? `The list of measures could not be loaded (${vr.error}).`
-            : 'The map shows the 94 district boundaries. Measures appear here once the data pipeline publishes them. Nothing is estimated in the meantime.',
+            : 'The map shows the 94 district boundaries. Measures appear here once they are published. Nothing is estimated in the meantime.',
         ),
       ),
     );

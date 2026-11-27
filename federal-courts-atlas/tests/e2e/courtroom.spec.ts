@@ -36,7 +36,18 @@ const ordinal = (n: number) => {
   const v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]!);
 };
-const rankPhrase = (r: number, of: number) => (r === 1 ? `Highest of ${of}` : r === of ? `Lowest of ${of}` : `${ordinal(r)} highest of ${of}`);
+/** Same wording as src/pages/district/common.ts rankPhrase, including ties (ranks are shared at display precision). */
+const rankPhrase = (r: number, of: number, ties = 1) => {
+  if (ties > 1) {
+    const who = ties > 2 ? ` (${ties} districts)` : '';
+    if (r === 1) return `Tied for highest of ${of}${who}`;
+    if (r + ties - 1 === of) return `Tied for lowest of ${of}${who}`;
+    return `Tied for ${ordinal(r)} highest of ${of}${who}`;
+  }
+  return r === 1 ? `Highest of ${of}` : r === of ? `Lowest of ${of}` : `${ordinal(r)} highest of ${of}`;
+};
+const tiesOf = (f: { ranks: Record<string, Record<string, number>> }, y: number, r: number) =>
+  Object.values(f.ranks).filter((row) => row[String(y)] === r).length;
 
 /**
  * Capture for review. On narrow screens with the bottom sheet open, a full-page capture paints the
@@ -118,7 +129,10 @@ test.describe('The Courtroom', () => {
     await expect(page.locator('.cr-stage')).toHaveAttribute('data-arrived', 'jury', { timeout: 10_000 });
     await expect(page.locator('.cr-stage')).toHaveAttribute('data-mode', 'pov');
     await expect(page.locator('#cr-panel-title')).toHaveText('The jury box');
-    for (const id of ['civil_trial_rate_pct', 'criminal_trial_rate_pct']) {
+    // The two FCMS juror measures are in the catalog (data fix lane, 2026-11-27); the panel reads variables.json first.
+    const jurorIds = ['jurors_avg_present', 'jurors_pct_not_selected'];
+    for (const id of jurorIds) expect(byId.has(id), `${id} should be in variables.json`).toBe(true);
+    for (const id of ['civil_trial_rate_pct', 'criminal_trial_rate_pct', ...jurorIds]) {
       const f = vals(id);
       const y = latest(f);
       const nat = f.national?.[String(y)];
@@ -133,8 +147,8 @@ test.describe('The Courtroom', () => {
         await expect(row.locator('.cr-stat__value')).toContainText('No national figure');
       }
     }
-    // Juror counts: shown if the web lane publishes them, otherwise a plain note and no request.
-    if (!byId.has('jurors_avg_present')) await expect(page.locator('.cr-group__missing')).toContainText('not part of the atlas yet');
+    // Juror counts are published, so the "not part of the atlas yet" note is gone.
+    await expect(page.locator('.cr-group__missing')).toHaveCount(0);
     await page.waitForTimeout(300);
     expect(await paintedPixels(page)).toBeGreaterThan(1000);
     await settle(page);
@@ -162,7 +176,7 @@ test.describe('The Courtroom', () => {
       await expect(row.locator('.cr-stat__num')).toHaveText(num(byId.get(id)!, x));
       const r = f.ranks[d]?.[String(y)];
       const of = f.ranked_of[String(y)];
-      if (r && of) await expect(row.locator('.cr-stat__rank')).toContainText(rankPhrase(r, of));
+      if (r && of) await expect(row.locator('.cr-stat__rank')).toContainText(rankPhrase(r, of, tiesOf(f, y, r)));
       if (byId.get(id)!.derived) await expect(row.locator('.source-chip--derived')).toBeVisible();
     }
     // No statistics about individual judges, said plainly.

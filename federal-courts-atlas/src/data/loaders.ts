@@ -17,8 +17,6 @@ import type {
   DivisionsFile,
   Judge,
   Loaded,
-  SearchEntry,
-  SearchIndex,
   SourceRecord,
   SourcesFile,
   ValuesFile,
@@ -195,7 +193,7 @@ export const loadCourthouses = (): Promise<Loaded<Courthouse[]>> =>
       .filter((c) => Number.isFinite(c.lat) && Number.isFinite(c.lon) && !!c.district_id),
   );
 
-/* ---- search index (courthouses lane; format defined there) -------------- */
+/* ---- search text folding (used by src/data/place-index.ts) --------------- */
 
 export function foldKey(s: string): string {
   return s
@@ -204,125 +202,6 @@ export function foldKey(s: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
-}
-
-/**
- * Normalize any reasonable search-file shape into SearchEntry[]. Supported:
- *  - [{label|name|city|county|zip, kind|type, district_id|district|district_ids, state}]
- *  - {entries|items|records: [...]}
- *  - {"22314": "vaed"} or {"22314": ["vaed", ...]} maps (kind inferred from the file name)
- *  - {zips: {...}, cities: [...], counties: [...], courthouses: [...]} bundles
- */
-export function normalizeSearch(raw: unknown, file: string): SearchEntry[] {
-  const inferredKind = /zip/i.test(file) ? 'zip' : /count/i.test(file) ? 'county' : /cit|place/i.test(file) ? 'city' : /court/i.test(file) ? 'courthouse' : '';
-  const out: SearchEntry[] = [];
-  const push = (rec: Json, kindHint: string) => {
-    const ids = (Array.isArray(rec.district_ids) ? rec.district_ids : Array.isArray(rec.districts) ? rec.districts : [rec.district_id ?? rec.district])
-      .filter(Boolean)
-      .map(String);
-    if (!ids.length) return;
-    const kind = String(rec.kind ?? rec.type ?? kindHint ?? '') || 'place';
-    const base = String(rec.label ?? rec.name ?? rec.display ?? rec.city ?? rec.county ?? rec.zip ?? rec.zcta ?? rec.q ?? '');
-    if (!base) return;
-    const state = rec.state ? String(rec.state) : undefined;
-    const label = state && !base.includes(',') && kind !== 'zip' ? `${base}, ${state}` : base;
-    out.push({
-      label,
-      kind,
-      district_id: ids[0]!,
-      district_ids: ids.length > 1 ? ids : undefined,
-      state,
-      detail: rec.detail ? String(rec.detail) : rec.address ? String(rec.address) : undefined,
-      lat: typeof rec.lat === 'number' ? rec.lat : undefined,
-      lon: typeof rec.lon === 'number' ? rec.lon : typeof rec.lng === 'number' ? rec.lng : undefined,
-      key: foldKey(`${label} ${rec.aliases ?? ''} ${rec.city ?? ''} ${rec.county ?? ''}`),
-    });
-  };
-  const walk = (v: unknown, kindHint: string) => {
-    if (Array.isArray(v)) {
-      for (const r of v) if (isObj(r)) push(r, kindHint);
-      return;
-    }
-    if (!isObj(v)) return;
-    for (const k of ['entries', 'items', 'records', 'results']) {
-      if (Array.isArray(v[k])) return walk(v[k], kindHint);
-    }
-    const bundleKeys = Object.keys(v).filter((k) => /^(zips?|zctas?|cit(y|ies)|places?|count(y|ies)|courthouses?)$/i.test(k));
-    if (bundleKeys.length) {
-      for (const k of bundleKeys) {
-        const hint = /zip|zcta/i.test(k) ? 'zip' : /count/i.test(k) ? 'county' : /court/i.test(k) ? 'courthouse' : 'city';
-        walk(v[k], hint);
-      }
-      return;
-    }
-    // Plain lookup map: key -> district id(s) or record.
-    for (const [key, val] of Object.entries(v)) {
-      if (typeof val === 'string' || Array.isArray(val)) {
-        const ids = (Array.isArray(val) ? val : [val]).map(String);
-        push({ label: key, district_ids: ids }, kindHint || (/^\d{5}$/.test(key) ? 'zip' : 'place'));
-      } else if (isObj(val)) {
-        push({ label: key, ...val }, kindHint);
-      }
-    }
-  };
-  walk(raw, inferredKind);
-  return out;
-}
-
-const SEARCH_CANDIDATES = [
-  'search/index.json',
-  'search/search-index.json',
-  'search/places.json',
-  'search/cities.json',
-  'search/counties.json',
-  'search/zips.json',
-  'search/zcta.json',
-  'search/courthouses.json',
-  'search-index.json',
-];
-
-let searchPromise: Promise<Loaded<SearchIndex>> | null = null;
-
-/** Loads whichever search files exist and merges them into one index. */
-export function loadSearchIndex(): Promise<Loaded<SearchIndex>> {
-  if (searchPromise) return searchPromise;
-  searchPromise = (async () => {
-    const results = await Promise.all(SEARCH_CANDIDATES.map((p) => loadJson<unknown>(p).then((r) => [p, r] as const)));
-    const entries: SearchEntry[] = [];
-    const files: string[] = [];
-    let firstUrl = '';
-    for (const [path, r] of results) {
-      if (r.status !== 'ok') continue;
-      firstUrl ||= r.url;
-      files.push(path);
-      try {
-        entries.push(...normalizeSearch(r.data, path));
-      } catch {
-        /* skip malformed file; others may still work */
-      }
-    }
-    // Courthouses double as search entries even before a dedicated index exists.
-    const ch = await loadCourthouses();
-    if (ch.status === 'ok') {
-      files.push('geo/courthouses.json');
-      for (const c of ch.data) {
-        const label = c.name ? c.name : `${c.city}, ${c.state}`;
-        entries.push({
-          label,
-          kind: 'courthouse',
-          district_id: c.district_id,
-          state: c.state,
-          detail: c.name ? `${c.city}, ${c.state}` : c.kind.replace(/_/g, ' '),
-          lat: c.lat,
-          lon: c.lon,
-          key: foldKey(`${label} ${c.city} ${c.state} ${c.address ?? ''}`),
-        });
-      }
-    }
-    if (!files.length) return { status: 'missing', url: SEARCH_CANDIDATES[0]! } as const;
-    return { status: 'ok', url: firstUrl, data: { entries, files } } as const;
-  })();
-  return searchPromise;
 }
 
 /* ---- accessors ---------------------------------------------------------- */
@@ -340,6 +219,17 @@ export function getRank(file: ValuesFile | null | undefined, districtId: string,
   if (typeof a === 'number') return a;
   const b = file.ranks[String(year)]?.[districtId];
   return typeof b === 'number' ? b : null;
+}
+
+/**
+ * How many districts share this rank in a year (1 = untied). The web lane ranks values as the site displays
+ * them, so districts that show the same number share a rank.
+ */
+export function rankTies(file: ValuesFile | null | undefined, year: number | null | undefined, rank: number | null | undefined): number {
+  if (!file || year === null || year === undefined || !rank) return 1;
+  let n = 0;
+  for (const id of Object.keys(file.values)) if (getRank(file, id, year) === rank) n += 1;
+  return Math.max(1, n);
 }
 
 /** Number of districts with a value in a year (the "of N" in "12th of 94"). */

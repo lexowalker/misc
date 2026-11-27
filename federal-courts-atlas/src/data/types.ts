@@ -38,6 +38,8 @@ export interface Variable {
   /* ---- fields emitted by the web lane (pipeline/web); all optional for backwards compatibility ---- */
   /** "asc" when the natural reading order is lowest first (e.g. speed: shortest time first), else "desc". */
   default_rank_direction?: 'asc' | 'desc';
+  /** Years with no published cross-check yet (IDB FY 2026); pages label them "preliminary". */
+  preliminary_years?: number[];
   /** Producing lane ("fcms", "ussc", "idb", "judges") or "web" for rates computed by the web lane. */
   lane?: string;
   lane_table?: string;
@@ -255,28 +257,6 @@ export interface Courthouse {
   division?: string | null;
 }
 
-/** One normalized search hit, whatever file it came from. */
-export interface SearchEntry {
-  /** What the reader typed against: "Alexandria, VA", "Fairfax County, VA", "22314", "Albert V. Bryan U.S. Courthouse". */
-  label: string;
-  kind: 'city' | 'county' | 'zip' | 'courthouse' | 'district' | (string & {});
-  district_id: string;
-  /** Some ZIPs and cities straddle districts; all candidate districts are kept. */
-  district_ids?: string[];
-  state?: string;
-  detail?: string;
-  lat?: number;
-  lon?: number;
-  /** Lower-cased, accent-folded search key. */
-  key: string;
-}
-
-export interface SearchIndex {
-  entries: SearchEntry[];
-  /** Raw files that were found, for diagnostics. */
-  files: string[];
-}
-
 /** public/data/sources.json: merged source manifest keyed by source_id. */
 export interface SourceRecord {
   lane?: string;
@@ -341,6 +321,8 @@ export interface KeyStatRow {
   value: number | null;
   rank: number | null;
   ranked_of: number | null;
+  /** Districts sharing this rank that year (1 = untied); null when there is no value. */
+  rank_ties?: number | null;
   national: number | null;
   /** year (string) -> value, every year the district has data. */
   series: Record<string, number>;

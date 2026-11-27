@@ -3,15 +3,25 @@
 
 import '../styles/pages.css';
 import { h } from '../lib/dom.ts';
-import { formatValue, periodLabel, rankText } from '../lib/format.ts';
+import { formatValue, periodLabel, periodLabelFor, rankText } from '../lib/format.ts';
 import type { PageContext } from '../app/router.ts';
 import { replaceQuery } from '../app/router.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
-import { getRank, getValue, loadValues, loadVariables, rankedCount, caveatList } from '../data/loaders.ts';
+import { getCellNote, getRank, getValue, isDerivedCell, loadValues, loadVariables, rankedCount, rankTies, caveatList } from '../data/loaders.ts';
+import type { ValuesFile, Variable } from '../data/types.ts';
 import { DataTable } from '../components/data-table.ts';
 import { dataNotBuilt, emptyState, errorState, noData } from '../components/states.ts';
 import { sourceChipForVariable } from '../components/source-chip.ts';
 import { pageHead } from './_page.ts';
+
+/** Formula behind the derived cells of one year: the variable's own, else that year's derived basis (USSC). */
+function yearFormula(v: Variable | undefined, file: ValuesFile, year: number): string | null {
+  if (file.derived) return file.formula ?? v?.formula ?? null;
+  const fb = file.formula_by_basis ?? v?.formula_by_basis ?? {};
+  const lines = (file.basis_by_year?.[String(year)] ?? []).map((b) => fb[b]).filter((x): x is string => !!x);
+  if (lines.length) return lines.map((t) => t.replace(/^\s*derived:\s*/i, '')).join(' ');
+  return file.formula ?? v?.formula ?? null;
+}
 
 export function title(ctx: PageContext): string {
   return `Table: ${ctx.params.variable ?? ''}`;
@@ -61,8 +71,15 @@ export async function render(ctx: PageContext): Promise<void> {
   type Row = { id: string; name: string; state: string; circuit: string };
   const draw = () => {
     const of = rankedCount(file, year);
+    // Cell flags, as on the map tooltip: derived cells and cell notes (small bases, approximate population,
+    // printed caveats). Data audit 2026-11-27: the table view showed neither.
+    const has = (id: string) => getValue(file, id, year) !== null;
+    const derivedHere = (id: string) => has(id) && isDerivedCell(file, id, year);
+    const noteHere = (id: string) => (has(id) ? getCellNote(file, id, year) : null);
+    const anyFlag = DISTRICTS.some((d) => derivedHere(d.id) || !!noteHere(d.id));
+    const formula = DISTRICTS.some((d) => derivedHere(d.id)) ? yearFormula(v, file, year) : null;
     const t = new DataTable<Row>({
-      caption: `${v?.label ?? id}, ${periodLabel(year, file.period_type)}`,
+      caption: `${v?.label ?? id}, ${periodLabelFor(v, year, file.period_type)}`,
       rowKey: (r) => r.id,
       rowHeader: 'name',
       sortKey: 'value',
@@ -83,9 +100,24 @@ export async function render(ctx: PageContext): Promise<void> {
           },
         },
         ...(file.ranks
-          ? [{ key: 'rank', label: 'Rank', numeric: true, value: (r: Row) => getRank(file, r.id, year), render: (r: Row) => rankText(getRank(file, r.id, year), of) ?? '' }]
+          ? [{ key: 'rank', label: 'Rank', numeric: true, value: (r: Row) => getRank(file, r.id, year), render: (r: Row) => rankText(getRank(file, r.id, year), of, rankTies(file, year, getRank(file, r.id, year))) ?? '' }]
+          : []),
+        ...(anyFlag
+          ? [{
+              key: 'notes',
+              label: 'Notes',
+              value: (r: Row) => [derivedHere(r.id) ? 'Derived' : '', noteHere(r.id) ?? ''].filter(Boolean).join(' '),
+              render: (r: Row) => {
+                const parts: Array<Node | string> = [];
+                if (derivedHere(r.id)) parts.push(h('span', { class: 'source-chip source-chip--derived' }, h('span', { class: 'source-chip__label' }, 'Derived')));
+                const note = noteHere(r.id);
+                if (note) parts.push(h('span', { class: 'table-note' }, `${parts.length ? ' ' : ''}${note}`));
+                return parts.length ? h('span', null, ...parts) : '';
+              },
+            }]
           : []),
       ],
+      footnote: formula ? `Derived values: ${formula}` : undefined,
     });
     slot.replaceChildren(t.el);
   };

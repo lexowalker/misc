@@ -13,21 +13,31 @@ import pandas as pd
 
 from pipeline.common.districts import BY_ID, IDS
 
-from .common import (APPROX_POP_DISTRICTS, APPROX_POP_NOTE, SMALL_BASE, clean_text, lane_sources,
+from .common import (APPROX_POP_DISTRICTS, APPROX_POP_NOTE, SMALL_BASE, clean_text, display_round, lane_sources,
                      lane_variables, num, provenance_record, table)
 
 # Plain-English labels for the USSC lane's per-row `basis` codes.
 USSC_BASIS_LABEL = {
     "reproduces_published": "Reproduces the figure the USSC published for that year.",
     "published_packet": "Printed in the USSC's statistical information packet for that year.",
-    "pooled_published_halves": ("Derived: the full fiscal year pooled from the two half-year tables the USSC printed "
-                                "(100 × (count in first half + count in second half) ÷ (cases in first half + cases in second half))."),
-    "computed_ussc_definition": ("Derived: computed by the atlas's USSC lane from the USSC's case-level datafile, using the "
+    "pooled_published_halves": ("Derived: the full fiscal year pooled from the two part-year tables the USSC printed "
+                                "(100 × (count in first part + count in second part) ÷ (cases in first part + cases in second part))."),
+    "computed_ussc_definition": ("Derived: computed by the atlas from the USSC's case-level datafile, using the "
                                  "USSC's own definition, for a year in which the USSC did not print this figure."),
-    "sum_of_published_components": "Derived: the sum of components the USSC published for that year.",
+    "sum_of_published_components": ("Derived: computed from the counts the USSC publishes for each part of the group "
+                                    "(100 × the parts' combined count ÷ people whose sentence could be compared with "
+                                    "the guideline range). Adding the USSC's rounded percentages for the parts can "
+                                    "give a figure 0.1 higher or lower."),
     "computed_ussc_supplemental": ("Derived: computed from the USSC's FY 2014 to 2017 supplemental datafile, which codes "
                                    "those years with the FY 2018 method."),
     "derived_from_published_counts": "Derived: the published total minus the published named categories.",
+    "exact_share_of_published_counts": ("Derived: 100 × the group's count ÷ people whose sentence could be compared "
+                                        "with the guideline range, both as the USSC printed them. For FY 2006 to "
+                                        "2009 the USSC's own tables add the rounded percentages of the group's "
+                                        "parts instead, so its printed share can be 0.1 higher or lower."),
+    "unrounded_published_statistic": ("Derived: computed by the atlas from the USSC's case-level datafile with the "
+                                      "USSC's own definition and shown to one decimal. The USSC prints this figure "
+                                      "in whole months, so its tables can show a number up to half a month away."),
 }
 
 NATIONAL_TABLE = {
@@ -38,8 +48,9 @@ NATIONAL_TABLE = {
 }
 NATIONAL_NOTE = {
     "fcms": "National figure as printed on the AO's \"all district courts\" profile page.",
-    "ussc": "National figure from the USSC (all districts), as reproduced by the atlas's USSC lane.",
-    "idb": "All districts combined, computed by the atlas's IDB lane from the same FJC case-level file as the district values.",
+    "ussc": ("National figure for all districts from the USSC: printed in its statistical packets through FY 2001 "
+             "and reproduced by the atlas from its case-level datafiles from FY 2002."),
+    "idb": "All districts combined, computed by the atlas from the same FJC case-level file as the district values.",
 }
 NO_NATIONAL = {"idb_patent_share_of_national"}  # the national share is 100 by definition
 
@@ -141,13 +152,17 @@ def per100k_cells(spec: dict) -> dict[tuple[str, int], Cell]:
     return out
 
 
-def rank_cells(cells: dict[tuple[str, int], Cell]) -> tuple[dict, dict]:
-    """Competition ranks per year: 1 = highest value; tied values share the lowest rank number."""
+def rank_cells(cells: dict[tuple[str, int], Cell], fmt: str | None = None) -> tuple[dict, dict]:
+    """Competition ranks per year: 1 = highest value; tied values share the lowest rank number.
+
+    Values are compared as the site displays them (``display_round`` with the variable's format), so two
+    districts that show the same number share a rank. IDB shares are stored at full precision; ranking them
+    unrounded gave districts showing the same share different ranks (data audit 2026-11-27)."""
     ranks: dict[str, dict[str, int]] = {}
     ranked_of: dict[str, int] = {}
     by_year: dict[int, list[tuple[str, float]]] = {}
     for (d, y), c in cells.items():
-        by_year.setdefault(y, []).append((d, float(c.value)))
+        by_year.setdefault(y, []).append((d, display_round(float(c.value), fmt)))
     for y, items in by_year.items():
         s = pd.Series({d: v for d, v in items})
         r = s.rank(method="min", ascending=False).astype(int)
@@ -189,7 +204,7 @@ def build_values_file(spec: dict) -> tuple[dict, dict[tuple[str, int], Cell]]:
         row = {str(y): cells[(d, y)].value for y in years if (d, y) in cells}
         if row:
             values[d] = row
-    ranks, ranked_of = rank_cells(cells)
+    ranks, ranked_of = rank_cells(cells, spec.get("format"))
 
     # Sources: a default source tuple per year (the most common one) plus per-cell exceptions.
     source_by_year: dict[str, list[str]] = {}
@@ -240,7 +255,7 @@ def build_values_file(spec: dict) -> tuple[dict, dict[tuple[str, int], Cell]]:
         "values": values,
         "ranks": ranks,
         "ranked_of": ranked_of,
-        "rank_method": "Derived by the atlas: 1 = highest value among districts with data that year; tied values share the lowest rank number (1, 2, 2, 4).",
+        "rank_method": "Derived by the atlas: 1 = highest value among districts with data that year, compared as shown on the site; tied values share the lowest rank number (1, 2, 2, 4).",
         "provenance": provenance,
         "source_by_year": source_by_year,
         "derived": derived_all,

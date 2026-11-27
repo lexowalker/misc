@@ -136,12 +136,21 @@ denominator, or the N behind a mean or median), so that small denominators can b
 - `reproduces_published`: a USSC-published district statistic for that FY, reproduced from the datafile.
 - `published_packet`: taken from a packet table (FY1995–FY2001).
 - `derived_from_published_counts`: "other" offense = packet TOTAL minus the four named rows (FY1995–FY2001).
-- `pooled_published_halves`: FY2004/FY2005 range shares; the USSC published only the two half-years, and
-  each half was validated.
+- `pooled_published_halves`: FY2004/FY2005 range shares; the USSC published only the two part-year tables (FY2004
+  split at Blakely, June 24, 2004; FY2005 at Booker, January 12, 2005), and each part was validated.
 - `computed_ussc_definition`: a USSC definition applied in a year when the USSC did not print that exact
   statistic.
 - `sum_of_published_components`: FY2018+ four-way grouping.
 - `computed_ussc_supplemental`: FY2014–FY2017 values from the supplemental files.
+- `exact_share_of_published_counts` (added 2026-11-27, data audit A #8): the three BOOKERCD range groups in
+  FY2006–FY2009. The lane emits the exact count share; those packets print the sum of the rounded sub-category
+  percentages (§5, fact 4), so the printed figure can differ by 0.1 (S.D. Fla. FY2008 government-sponsored: 217 /
+  2,162 = 10.0, printed 10.1). FY2010–FY2017 packets print the exact share and stay `reproduces_published`.
+- `unrounded_published_statistic` (added 2026-11-27, data audit B #134/#135): means and medians in years the USSC
+  prints them as whole months (FY2011 on). The lane keeps one decimal (C.D. Cal. FY2025 median 29.5, printed 30;
+  W.D. Tex. 6.6, printed 7; national mean 47.5, printed 47 because the exact mean is 47.499). Applies to
+  `ussc_mean/median_sentence_months` FY2018–FY2025 and `ussc_mean/median_prison_months` FY2011–FY2017.
+  Values did not change.
 
 **`derived` (per row; DATA_CONTRACT rule 3).** `derived = true` for every basis except `reproduces_published`
 and `published_packet`, i.e. whenever the value is this lane's computation rather than a figure the USSC
@@ -151,7 +160,9 @@ each derived basis). The variable-level `derived` flag stays true only where eve
 `*_2018scheme` ids). Derived years: `ussc_pct_prison` and the probation-as-zero sentence measures FY2002–FY2017;
 `ussc_mean/median_prison_months` and `ussc_cases_prison_term` FY2004–FY2005 and FY2018–FY2025; the range shares
 and their denominator FY2004–FY2005 (pooled halves); offense "other" FY1995–FY2001; the SENTRNGE components
-FY2014–FY2017. `national.csv` carries the same column.
+FY2014–FY2017. Since 2026-11-27 also: the three BOOKERCD group shares FY2006–FY2009; the probation-as-zero mean and
+median FY2018–FY2025 (so every year of those two is derived); the prison-only mean and median FY2011–FY2017.
+`national.csv` carries the same column.
 
 **Guideline range.** The denominator is `ussc_cases_range_known`: cases whose sentence the USSC could compare
 with the range. Each scheme below lists its datafile variable and codes.
@@ -169,7 +180,8 @@ The range variables are defined as follows:
 - `ussc_pct_substantial_assistance_5k1` (FY1995–FY2025) = §5K1.1 / denominator.
 - `ussc_pct_early_disposition_5k3` (FY2006–FY2025) = §5K3.1 / denominator.
 - `ussc_pct_above_range`, `ussc_pct_govt_sponsored_below_range` and `ussc_pct_non_govt_sponsored_below_range`
-  cover FY2006–FY2017 only. These are the BOOKERCD groups exactly as the USSC printed them in packet Table 8.
+  cover FY2006–FY2017 only. These are the BOOKERCD groups of packet Table 8 (counts as printed; for FY2006–FY2009
+  the share is the exact count share, which can differ by 0.1 from the printed sum of rounded parts).
 - `*_2018scheme` (FY2014–FY2025, `derived: true`) are the same four-way partition rebuilt from SENTRNGE:
   - above = 1 + 6;
   - government-sponsored = 2 + 3 + 4 + 7;
@@ -219,8 +231,8 @@ is the one the USSC used in that year's own publications:
 | `drug_trafficking` | 10 "Drugs – trafficking, manufacturing, importing" | 10 "Drug Trafficking" |
 | `immigration` | 27 | 17 |
 | `firearms` | 13 | 13 |
-| `fraud` (to FY2017 only) | 18 "Fraud" | — |
-| `fraud_theft_embezzlement` (FY2018+ only) | — | 16 "Fraud/Theft/Embezzlement" |
+| `fraud` (to FY2017 only) | 18 "Fraud" | none |
+| `fraud_theft_embezzlement` (FY2018+ only) | none | 16 "Fraud/Theft/Embezzlement" |
 | `child_pornography` (FY2010+) | OFFTYPSB 28 (OFFTYPE2 has no separate code) | 7 |
 | `other` | all remaining codes | all remaining codes |
 
@@ -304,7 +316,8 @@ Matching established four facts about USSC conventions, now encoded in the code:
 4. FY2006–FY2009 packets print a range group's percentage as the sum of its rounded sub-category percentages.
    For example, the national non-government share 12.0 = 2.7 + 2.0 + 6.0 + 1.3, while 8,507 / 70,187 = 12.1%.
    The counts match exactly. These 46 comparisons are accepted with a note, and the emitted value is the
-   exact count/denominator.
+   exact count/denominator, so those rows are flagged derived (`exact_share_of_published_counts`, since
+   2026-11-27). All 88 district-table comparisons for FY2010–FY2017 match the exact share.
 
 Hand-checked fixtures in `tests/pipeline/test_ussc_outputs.py` cover 58 values in 23 district-years, from
 FY1995 to FY2025. Each was read off the packet PDFs, and several were checked against rendered page images:

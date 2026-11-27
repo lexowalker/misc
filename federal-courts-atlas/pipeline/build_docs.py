@@ -7,6 +7,11 @@ from datetime import date
 from pipeline.common.http import PROJECT_ROOT
 
 DATA = PROJECT_ROOT / "data"
+EM_DASH = chr(0x2014)  # the client asks for no em-dashes; fragment text (e.g. a publisher's title) may carry one
+
+
+def _no_em_dash(text: str) -> str:
+    return text.replace(f" {EM_DASH} ", ": ").replace(EM_DASH, "-")
 
 
 def _frags(sub: str) -> dict[str, dict]:
@@ -58,8 +63,8 @@ def build_gaps() -> str:
 
 
 def main() -> None:
-    (PROJECT_ROOT / "SOURCES.md").write_text(build_sources())
-    (PROJECT_ROOT / "DATA_GAPS.md").write_text(build_gaps())
+    (PROJECT_ROOT / "SOURCES.md").write_text(_no_em_dash(build_sources()))
+    (PROJECT_ROOT / "DATA_GAPS.md").write_text(_no_em_dash(build_gaps()))
     print("wrote SOURCES.md and DATA_GAPS.md")
 
 

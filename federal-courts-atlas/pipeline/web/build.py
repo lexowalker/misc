@@ -28,7 +28,7 @@ from pipeline.common.manifest import record_gap
 from .catalog import BY_ID as CAT, CATALOG
 from .common import (APPROX_POP_DISTRICTS, APPROX_POP_NOTE, GAPS, LANE, PUB, ROOT, SRC, clean_text, lane_sources,
                      num, read_json, table, write_json)
-from .profiles import all_profiles
+from .profiles import IDB_PRELIM_FROM, all_profiles
 from .values import build_values_file
 
 BUILD_ONLY_KEYS = {"input", "fact", "base"}
@@ -107,6 +107,12 @@ def variable_entry(spec: dict, vf: dict) -> dict:
         e["derived_years"] = vf["derived_years"]
     if vf.get("formula_by_basis"):
         e["formula_by_basis"] = vf["formula_by_basis"]
+    if e["lane"] == "idb":
+        # IDB years with no published AO cross-check yet; pages label them "preliminary" (data audit 2026-11-27,
+        # auditor B: profile sentences and compare gaps showed FY 2026 without the label).
+        prelim = [y for y in vf["years"] if y >= IDB_PRELIM_FROM]
+        if prelim:
+            e["preliminary_years"] = prelim
     e["national_available"] = bool(vf.get("national"))
     e["values_file"] = f"values/{spec['id']}.json"
     e["featured"] = bool(spec.get("featured"))
@@ -281,8 +287,8 @@ def build_cases() -> dict[str, dict]:
             "publisher": "Free Law Project (CourtListener)",
         }
         if not items:
-            rec["note"] = ("No recent cases yet. The CourtListener free-tier daily quota ran out before this district "
-                           "was fetched; the gap is logged and the next pipeline run fills it.")
+            rec["note"] = ("No recent cases yet. CourtListener’s free daily limit ran out before this district’s cases "
+                           "were requested. The atlas will try again in a later update.")
         elif len(items) < 3:
             rec["note"] = "Fewer than three recent cases passed the screening rules."
         out[d] = rec

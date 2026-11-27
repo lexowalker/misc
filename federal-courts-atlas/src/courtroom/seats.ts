@@ -161,7 +161,7 @@ export const SEATS: readonly SeatDef[] = [
     name: 'The jury box',
     short: 'Jury',
     role:
-      'A federal criminal [[jury-trial|jury]] has 12 members, and its verdict must be unanimous. A civil jury has 6 to 12 members. Jurors are drawn at random from lists of citizens who live in the district, such as voter rolls. In a [[bench-trial|bench trial]] there is no jury, and the judge decides the facts.',
+      'A federal criminal [[jury-trial|jury]] normally has 12 members, and its verdict must be unanimous. A civil jury has 6 to 12 members. Jurors are drawn at random from lists of citizens who live in the district, such as voter rolls. In a [[bench-trial|bench trial]] there is no jury, and the judge decides the facts.',
     groups: [
       {
         stats: [
@@ -187,7 +187,7 @@ export const SEATS: readonly SeatDef[] = [
     name: 'The prosecution table',
     short: 'Prosecution',
     role:
-      'In a criminal case, the government sits here. An Assistant [[us-attorney|U.S. Attorney]] represents the United States, and federal prosecutors decide which cases to bring. Only the government can ask for a [[5k1-1|§5K1.1]] sentence reduction for a defendant’s substantial assistance. In many courtrooms the party with the burden of proof sits nearest the jury, so in a civil case the plaintiff may sit here.',
+      'In a criminal case, the government sits here. An Assistant [[us-attorney|U.S. Attorney]] represents the United States, and federal prosecutors decide which cases to bring. Only the government can ask for a [[5k1-1|§5K1.1]] sentence reduction for a defendant’s substantial assistance. In a civil case, the party bringing the suit sits at a counsel table like this one.',
     groups: [
       {
         title: 'Criminal cases',

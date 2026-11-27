@@ -36,7 +36,7 @@ test('home map colors with real data and shows ranks', async ({ page, isMobile }
   expect(used).toBeGreaterThanOrEqual(4);
   const y = String(vals.years[vals.years.length - 1]);
   const rank = vals.ranks['cod']![y]!;
-  await expect(page.locator('path.district[data-id="cod"]')).toHaveAttribute('aria-label', new RegExp(`${rank}(st|nd|rd|th) of ${vals.ranked_of[y]}, FY ${y}$`));
+  await expect(page.locator('path.district[data-id="cod"]')).toHaveAttribute('aria-label', new RegExp(`${rank}(st|nd|rd|th) of ${vals.ranked_of[y]}( \\(tied\\))?, FY ${y}$`));
   const co = page.locator('path.district[data-id="cod"]');
   if (isMobile) await co.tap();
   else await co.hover();
@@ -87,6 +87,23 @@ test('table view of a real variable', async ({ page }, testInfo) => {
   await expect(page.locator('table tbody tr').first()).toBeVisible();
   await settle(page);
   await shot(page, testInfo, 'web-table');
+  expect(errors, errors.join('\n')).toEqual([]);
+});
+
+test('table view shows cell notes, derived tags and the year formula (data audit 2026-11-27)', async ({ page }) => {
+  const errors = watchErrors(page);
+  type VF = Vals & { cell_notes?: Record<string, Record<string, string>>; derived_years?: number[] };
+  const f: VF = read('values/within_range_pct.json');
+  // A derived year with a small-base cell note, both read from the published file.
+  const y = (f.derived_years ?? []).find((yy) => Object.values(f.cell_notes ?? {}).some((row) => String(yy) in row));
+  test.skip(y === undefined, 'no derived year with a cell note');
+  const id = Object.keys(f.cell_notes!).find((d) => String(y) in f.cell_notes![d]!)!;
+  const name = read('districts.json')[id].name as string;
+  await page.goto(`./#/table/within_range_pct?y=${y}`);
+  const row = page.locator('table tbody tr', { hasText: name });
+  await expect(row).toContainText(f.cell_notes![id]![String(y)]!);
+  await expect(row.locator('.source-chip--derived')).toHaveText('Derived');
+  await expect(page.locator('.data-table__foot')).toContainText('Derived values:');
   expect(errors, errors.join('\n')).toEqual([]);
 });
 

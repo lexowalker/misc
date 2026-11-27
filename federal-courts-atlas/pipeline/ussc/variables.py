@@ -267,7 +267,20 @@ def variable_specs() -> list[dict]:
 # this lane computed (DATA_CONTRACT rule 3: labelled derived, with a formula).
 PUBLISHED_BASES = {"reproduces_published", "published_packet"}
 DERIVED_BASES = {"computed_ussc_definition", "derived_from_published_counts", "pooled_published_halves",
-                 "sum_of_published_components", "computed_ussc_supplemental"}
+                 "sum_of_published_components", "computed_ussc_supplemental",
+                 # Data audit 2026-11-27 (auditor A #8): FY2006-FY2009 packets print a range group's percentage as
+                 # the sum of its rounded sub-category percentages; this lane emits the exact count share, which
+                 # can differ from the printed figure by 0.1, so it is not the printed number.
+                 "exact_share_of_published_counts",
+                 # Data audit 2026-11-27 (auditor B #134/#135): from FY2011 the USSC prints means and medians as
+                 # whole months; this lane keeps one decimal, a precision the USSC does not print.
+                 "unrounded_published_statistic"}
+
+# Years in which the USSC printed a BOOKERCD range group's percentage as the sum of rounded sub-category
+# percentages (validated in validate.py; FY2010-FY2017 packets print the exact share).
+GROUP_SUM_OF_ROUNDED_YEARS = range(2006, 2010)
+# First fiscal year in which the USSC prints sentence means and medians as whole months.
+WHOLE_MONTHS_FROM = 2011
 
 
 def is_derived(basis: str) -> bool:
@@ -298,6 +311,13 @@ def derived_formula(spec: dict, basis: str) -> str:
     if basis == "computed_ussc_supplemental":
         return (f"{f}, SENTRNGE from the USSC FY2014-FY2017 supplemental datafile joined on USSCIDN to the main "
                 "datafile for DISTRICT; the USSC did not publish district tables on this basis for these years")
+    if basis == "exact_share_of_published_counts":
+        return (f"{f}: the exact share from the group count and denominator the USSC printed. The FY2006-FY2009 "
+                "packets print the group's percentage as the sum of its rounded sub-category percentages, which "
+                "can differ from this value by 0.1")
+    if basis == "unrounded_published_statistic":
+        return (f"{f}, computed by this lane from the USSC Individual Offender datafile and kept to one decimal; "
+                "the USSC prints this statistic rounded to whole months from FY2011")
     raise ValueError(f"no derived formula for basis {basis!r}")
 
 
@@ -357,12 +377,13 @@ def observations_from_components(comps: pd.DataFrame, source_for_fy: dict[int, s
                 pct("ussc_pct_early_disposition_5k3", g("full", rscheme, "grp_edp_5k3", 0), rk,
                     f"{rvar} = §5K3.1 early disposition", "reproduces_published")
             if 2006 <= fy <= 2017:
-                pct("ussc_pct_above_range", g("full", rscheme, "grp_above", 0), rk, "BOOKERCD in 1-4",
-                    "reproduces_published")
+                gbasis = ("exact_share_of_published_counts" if fy in GROUP_SUM_OF_ROUNDED_YEARS
+                          else "reproduces_published")
+                pct("ussc_pct_above_range", g("full", rscheme, "grp_above", 0), rk, "BOOKERCD in 1-4", gbasis)
                 pct("ussc_pct_govt_sponsored_below_range", g("full", rscheme, "grp_govt_below", 0), rk,
-                    "BOOKERCD in 5-7", "reproduces_published")
+                    "BOOKERCD in 5-7", gbasis)
                 pct("ussc_pct_non_govt_sponsored_below_range", g("full", rscheme, "grp_non_govt_below", 0), rk,
-                    "BOOKERCD in 8-11", "reproduces_published")
+                    "BOOKERCD in 8-11", gbasis)
             if fy >= 2018:
                 pct("ussc_pct_above_range_2018scheme", g("full", rscheme, "grp_above", 0), rk, "SENTRNGE in {1,6}",
                     "sum_of_published_components")
@@ -406,7 +427,8 @@ def observations_from_components(comps: pd.DataFrame, source_for_fy: dict[int, s
             # sentence length
             n18 = g("full", "sent2018", "n", 0)
             if n18:
-                b = "reproduces_published" if fy >= 2018 else "computed_ussc_definition"
+                # FY2018+ reproduce the published Table 7 statistic, but the USSC prints it in whole months.
+                b = "unrounded_published_statistic" if fy >= 2018 else "computed_ussc_definition"
                 v = "SENSPCAP" if fy >= 2018 else "SENSPLT0 (>470 -> 469.99; missing excluded)"
                 add("ussc_mean_sentence_months", _r1(g("full", "sent2018", "mean")), "months",
                     f"mean of {v}, probation = 0 (N={int(n18)})", b, None, n18)
@@ -416,7 +438,8 @@ def observations_from_components(comps: pd.DataFrame, source_for_fy: dict[int, s
             add("ussc_cases_prison_term", npt, "cases", f"SENTTOT > 0 and {ovar} non-missing",
                 "computed_ussc_definition" if (fy >= 2018 or pooled) else "reproduces_published", npt, None)
             if npt:
-                b = "computed_ussc_definition" if (fy >= 2018 or pooled) else "reproduces_published"
+                b = "computed_ussc_definition" if (fy >= 2018 or pooled) else (
+                    "unrounded_published_statistic" if fy >= WHOLE_MONTHS_FROM else "reproduces_published")
                 add("ussc_mean_prison_months", _r1(g("full", "prison_pre2018", "mean")), "months",
                     f"mean of SENTTOT where SENTTOT > 0 and {ovar} non-missing (N={int(npt)})", b, None, npt)
                 add("ussc_median_prison_months", _r1(g("full", "prison_pre2018", "median")), "months",

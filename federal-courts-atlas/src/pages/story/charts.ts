@@ -230,7 +230,11 @@ class LineChart extends BaseChart<LineChartSpec> {
     const svg = this.svg();
     const narrow = this.w < 520;
     const series = this.visible();
-    const labelled = series.length <= 4;
+    // Up to four lines carry a direct label. With more, only the highlighted lines and the national line do, so
+    // the line the text talks about is always named on the chart (the rest stay as unlabelled context).
+    const hl = this.state.highlight ?? [];
+    const toLabel = series.length <= 4 ? series : series.filter((sr) => (hl.length ? hl.includes(sr.id) : sr.role === 'focus') || sr.role === 'national');
+    const labelled = toLabel.length > 0 && toLabel.length <= 4;
     const m = { t: 22, r: labelled ? (narrow ? 78 : 124) : 16, b: 26, l: narrow ? 34 : 44 };
     const iw = this.w - m.l - m.r;
     const ih = this.hgt - m.t - m.b;
@@ -274,7 +278,7 @@ class LineChart extends BaseChart<LineChartSpec> {
     const firstTick = sp.x.findIndex(isTick);
     sp.x.forEach((x, i) => {
       // The first period is labelled too unless a regular tick sits right next to it.
-      const lab = isTick(x) || (i === 0 && !isQ && (firstTick < 0 || firstTick >= Math.max(3, every / 2)));
+      const lab = isTick(x) || (i === 0 && !isQ && (firstTick < 0 || (firstTick >= Math.max(3, every / 2) && X(firstTick) - X(0) >= 44)));
       if (!lab) return;
       xt.append(s('line', { x1: X(i), x2: X(i), y1: m.t + ih, y2: m.t + ih + 4 }));
       xt.append(s('text', { x: X(i), y: m.t + ih + 16, 'text-anchor': 'middle', class: 'ch-tick' }, isQ ? String(x).slice(0, 4) : String(x)));
@@ -312,7 +316,7 @@ class LineChart extends BaseChart<LineChartSpec> {
       while (li >= 0 && sr.values[li] === null) li--;
       if (li >= 0) {
         svg.append(s('circle', { class: `ch-end ${roleClass(sr.role)}${muted ? ' is-muted' : ''}`, cx: X(li), cy: ys[li]!, r: 3 }));
-        if (labelled) labels.push({ y: ys[li]!, y0: ys[li]!, text: `${sr.label}`, cls: roleClass(sr.role), muted });
+        if (labelled && toLabel.includes(sr)) labels.push({ y: ys[li]!, y0: ys[li]!, text: `${sr.label}`, cls: roleClass(sr.role), muted });
       }
     }
     if (labelled) {

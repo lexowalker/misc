@@ -32,7 +32,7 @@ src/main.ts                    entry: styles, theme, shell, router; starts the d
 src/app/router.ts              hash router + route table (lazy page modules), replaceQuery(), href()
 src/app/shell.ts               skip link, header (wordmark, nav, theme toggle, mobile menu), footer (build date from manifest)
 src/app/theme.ts               light/dark: follows prefers-color-scheme until chosen; persisted (try/catch) in localStorage
-src/data/types.ts              Variable, ValuesFile, District, Judge, Case, Courthouse, SearchIndex, DivisionsFile, ...
+src/data/types.ts              Variable, ValuesFile, District, Judge, Case, Courthouse, DivisionsFile, ...
 src/data/fetch.ts              loadJson(): base-relative, cached, never throws; 404/HTML fallback -> {status:'missing'}
 src/data/loaders.ts            one typed loader per contract file + accessors (getValue, getRank, rankedCount, latestYear)
 src/data/districts.ts          registry helpers (names, circuits, FIPS) on top of the generated registry.ts
@@ -149,8 +149,10 @@ Every color, size, radius, shadow, z-index and duration is a custom property; co
   named by statute, and a city with only a courthouse building on the FJC list).
 - **Inset labels** use the full name, then a short form, then none, whichever fits the frame without sitting on the
   region's own land (checked against the district shapes with `isPointInFill`). At 375 px the Guam, Northern
-  Mariana Islands and Puerto Rico + Virgin Islands frames are too small for a clear label and go without one; every
-  district still has its tooltip, aria-label and table row.
+  Mariana Islands and Puerto Rico + Virgin Islands frames are too small for a label inside, so at national view their
+  full names sit in a row in the free strip under the inset cluster, left of the zoom buttons, each joined to its
+  frame by a leader line (`AtlasMap.layoutInsetKey`, UI audit). Every district also keeps its tooltip, aria-label and
+  table row. Story maps label their insets on wider screens only.
 - **Colors** are classes (`.q0`–`.q4`, `.nodata`, `.base`), so a theme switch recolors without re-rendering.
 - **Classification** (`scale.ts`): quantile breaks with ties de-duplicated, so heavily tied data gets fewer classes
   spread across the ramp rather than empty ones. `ChoroplethView` defaults to `scaleScope: 'all'`: breaks pooled
@@ -176,11 +178,10 @@ Loaders normalize shape variations in one place:
 - `loadDivisions` matches the boundaries lane's actual shape: `{source, source_ids, districts: {id: {statute_sections,
   has_statutory_divisions, divisions[], counties[], places_of_holding_court[], notes}}}`. Older guessed shapes are
   still accepted.
-- `loadSearchIndex` tries `search/index.json`, `search/search-index.json`, `search/{places,cities,counties,zips,zcta,
-  courthouses}.json` and the contract's `search-index.json`. It normalizes lists, `{entries|items|records}`,
-  bundles (`{zips, cities, counties, courthouses}`) and plain `key → district id(s)` maps. Courthouses double as
-  search entries. The published `search/` files feed the `PlaceSearch` combobox (`src/components/place-search.ts`,
-  home lane) on the home page and `#/search`.
+- Place search reads the courthouses lane's `search/` files through `src/data/place-index.ts`, which feeds the
+  `PlaceSearch` combobox (`src/components/place-search.ts`) on the home page and `#/search`. The earlier generic
+  `loadSearchIndex` / `normalizeSearch` loader misread those files and was unused, so it was removed (data audit
+  follow-up, 2026-11-27); `foldKey` stays in `loaders.ts` for the place index.
 
 ## How pages plug in
 
@@ -194,9 +195,12 @@ Shorthand addresses go in `ALIASES` there and are rewritten in the address bar (
   to the page's root class (`.district-page`, `.cmp-page`, `.cr-panel`, ...).
 - **Numbers print as published.** `formatValue()` never rounds away a published fraction: a `.0f` format still
   prints shared judgeships as halves (3.5). The web pipeline's `fmt_number()` follows the same rule.
-- **Derived values** use `sourceChip({derived, formula})`. The formula popover opens on hover, on keyboard focus and
-  on a tap. A page that manages the popover itself sets `aria-expanded` on the button, and the shared `:focus` rule
-  then steps aside so a second tap can close it. A closed popover is `display: none`, so it cannot widen a phone page.
+- **Derived values** use `sourceChip({derived, formula})`. The formula popover opens on hover (devices that hover),
+  on keyboard focus, and on a click or tap: `ensureFormulaPopovers()` in `source-chip.ts` is one document-level
+  handler for every `.source-chip__formula` button on every page (iOS Safari does not focus a tapped button, so a
+  focus-only popover never opened there). It toggles `aria-expanded` on the button and `data-open` on the popover;
+  Escape or an outside click closes it. Pages that build their own ƒ buttons call it too (district, compare,
+  courtroom). A closed popover is `display: none`, so it cannot widen a phone page. Buttons are 24 px (WCAG 2.2).
 - Reusable pieces: `ChoroplethView` / `AtlasMap`, `renderLocator`, `renderThumbnail`, `YearSlider`,
   `renderSparkline` (shared domains and a dashed national reference line are options), `DataTable`, `PlaceSearch`,
   `term()` / `rich()` for glossary terms, and the designed empty states in `src/components/states.ts`.
@@ -231,6 +235,13 @@ errors, the page's scroll width, and any visible element that crosses the viewpo
 clipping parent. It also checks that the home page never loads three.js and stays within a JavaScript budget, and it
 covers the cross-lane fixes (story address shorthand, unknown measure, fractional judgeships, tap-to-open formulas,
 inset labels clear of land, grouped sources). It saves the final review set as `final-<page>-<theme>.jpg`.
+
+`a11y.spec.ts` (UI audit) injects `axe-core` (devDependency, `node_modules/axe-core/axe.min.js`) and scans every route
+in light and dark at both widths with the WCAG 2.0, 2.1 and 2.2 A/AA rules, plus four interactive states (an open
+formula popover, the open place-search list, the open mobile menu, the rank chart while it dims first-place
+years). Serious or critical violations fail. One narrow exclusion: inline glossary terms are left out of
+`target-size`, because WCAG 2.5.8 exempts targets inside a sentence. The UI audit's review captures are
+`__screenshots__/{desktop,mobile,tablet}/ui-*.jpg`.
 
 Last full run (integration pass, `CI=1 E2E_PORT=4210 npx playwright test --trace off`): 279 passed, 9 skipped by
 design (touch-only tests on desktop, mouse-only and desktop-only measurements on mobile), 0 failed.
@@ -276,10 +287,35 @@ computed once and routed to regions; state outlines are lazy.
    Both come from memory, not from a source file.
 3. The **Alaska inset** shows the whole Aleutian chain, which keeps mainland Alaska fairly small. Newspapers often
    crop the far Aleutians; that is a design call for the client.
-4. **Small insets on phones.** At 375 px the Guam, Northern Mariana Islands and Puerto Rico + Virgin Islands insets
-   carry no label (there is no clear space inside their frames). Their districts keep tooltips, aria-labels and
-   table rows.
-5. `npm run dev` passes `--open`; on a headless machine Vite just prints the URL.
+4. `npm run dev` passes `--open`; on a headless machine Vite just prints the URL.
+5. **Not checked by the UI audit** (headless Chromium only): real iOS Safari and Android, Firefox, WebKit, screen
+   readers (NVDA, JAWS, VoiceOver), Windows high-contrast mode, and real GPUs for the courtroom (the headless run uses
+   software WebGL). The iOS tap fix for formula popovers was checked with a synthetic click that does not focus the
+   button, not on a device.
+6. **Story maps on phones** carry no inset names (too small to read inside the sticky graphic); the districts there
+   are named in the step text and the method tables. Story charts' pale context lines (for example the other border
+   districts) are below 3:1 against the page by design; the highlighted line and the national line are labelled.
+7. The dark courtroom is an evening room by design. The UI audit raised its light about 25% (mean stage luminance
+   25 to 31 of 255 in a headless capture); labels and the panel meet AA. Judge it on a real phone screen.
+
+Fixed by the UI audit (Nov 27): story sticky-graphic source lines no longer cut off with an ellipsis on phones (and
+the formula opens as a small panel over the chart); dimmed rank-strip squares use a tint with 5.2:1 to 5.4:1 number
+contrast instead of 35% opacity; inactive story step text meets 4.5:1 (was 4.06:1); phone inset names under the
+inset cluster; year-slider events on phones are labelled buttons under the slider (32 px tall, named by their
+visible text) with plain diamonds on the track, and colliding year labels are thinned to the decades; raised event
+markers on desktop no longer overlap their neighbours' targets; formula popovers open on click or tap everywhere;
+the district page's current-section underline is computed from positions (never stale, none above the first
+section, the last section at the bottom of the page) and scrolls into view in the phone nav; long judge names wrap
+instead of an ellipsis; tables fit three columns at 375 px; the place-search empty list is a valid listbox; island
+districts get a halo on locator maps; many-series story charts name the highlighted and national lines.
+
+Data audit follow-up (Nov 27, data fix lane): both table views (`#/table/<variable>` and the map's "View as table")
+now show a Notes column with the Derived tag and the cell note (small bases, approximate population, printed caveats)
+and, under the table, the formula behind that year's derived cells. Rank wording says when districts share a rank:
+`rankText` adds "(tied)", the profile, compare and courtroom phrases read "Tied for 85th highest of 94" or "Tied for
+lowest of 94 (66 districts)", and the home tooltip's derived rank reads "tied for" (`rankTies` in `loaders.ts`;
+the web lane ranks values at display precision). `periodLabelFor` adds "(preliminary)" to IDB FY 2026 on the home
+tooltip and accessible name, the table caption, compare rows and gaps, and the courtroom panel.
 
 Closed since the foundation report: the courthouse and search files are published and in use; the web lane emits
 `ranks` as `{district: {year: rank}}`, `ranked_of` and list-form `caveats`; the profile body, compare statistics,

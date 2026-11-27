@@ -218,11 +218,12 @@ def test_derived_years_in_variables_json(obs):
         if v["derived"]:
             assert sub["derived"].all(), vid
     assert vj["ussc_pct_prison"]["derived_years"] == list(range(2002, 2018))
-    assert vj["ussc_mean_sentence_months"]["derived_years"] == list(range(2002, 2018))
-    assert vj["ussc_median_sentence_months"]["derived_years"] == list(range(2002, 2018))
+    # FY2018+ too since the 2026-11-27 data audit: the USSC prints whole months, the lane keeps one decimal
+    assert vj["ussc_mean_sentence_months"]["derived_years"] == list(range(2002, 2026))
+    assert vj["ussc_median_sentence_months"]["derived_years"] == list(range(2002, 2026))
     assert vj["ussc_count_offense_other"]["derived_years"] == list(range(1995, 2002))
     assert vj["ussc_pct_offense_other"]["derived_years"] == list(range(1995, 2002))
-    assert vj["ussc_mean_prison_months"]["derived_years"] == [2004, 2005] + list(range(2018, 2026))
+    assert vj["ussc_mean_prison_months"]["derived_years"] == [2004, 2005] + list(range(2011, 2026))
     assert vj["ussc_pct_within_range"]["derived_years"] == [2004, 2005]
     assert vj["ussc_pct_upward_variance"]["derived_years"] == list(range(2014, 2018))
     assert vj["ussc_cases_total"]["derived_years"] == []

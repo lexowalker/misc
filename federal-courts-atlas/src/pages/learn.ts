@@ -143,9 +143,9 @@ export async function render(ctx: PageContext): Promise<() => void> {
         h('li', null, rich('**Detention hearing.** When the government seeks it, a [[detention-hearing|detention hearing]] decides whether the defendant is released before trial, and on what conditions.')),
         h('li', null, rich('**Arraignment.** At the [[arraignment]] the defendant is formally told the charges and enters a plea.')),
         h('li', null, rich('**Discovery and plea talks.** The parties exchange evidence in [[discovery]], argue motions, and often negotiate a [[plea-agreement|plea agreement]].')),
-        h('li', null, rich('**Plea or trial.** Most federal criminal cases end in a guilty plea. A defendant who goes to trial is entitled to a [[jury-trial|jury trial]], in which 12 jurors must agree unanimously, and may instead have a [[bench-trial|bench trial]] if the government and the court agree. An acquittal ends the case.')),
+        h('li', null, rich('**Plea or trial.** Most federal criminal cases end in a guilty plea. A defendant who goes to trial is entitled to a [[jury-trial|jury trial]], in which the jurors, normally 12, must agree unanimously, and may instead have a [[bench-trial|bench trial]] if the government and the court agree. An acquittal ends the case.')),
         h('li', null, rich('**Presentence report.** After a conviction, a probation officer prepares a [[presentence-report|presentence investigation report]], including a calculation of the [[guideline-range|guideline range]].')),
-        h('li', null, rich('**Sentencing.** The judge resolves disputes over the report, calculates the guideline range, considers any [[departure|departures]], and weighs the [[sentencing-factors|§ 3553(a) factors]], which can support a [[variance]]. A sentence can include prison, probation, fines, restitution and [[supervised-release|supervised release]], within the limits set by statute.')),
+        h('li', null, rich('**Sentencing.** The judge resolves disputes over the report and calculates the guideline range, then weighs the [[sentencing-factors|§ 3553(a) factors]], which can support a [[variance]]. A government motion under [[5k1-1|§5K1.1]] can also support a sentence below the range. Until November 2025 the Guidelines described a separate step for other [[departure|departures]]. A sentence can include prison, probation, fines, restitution and [[supervised-release|supervised release]], within the limits set by statute.')),
         h('li', null, rich('**Appeal.** The defendant can appeal the conviction or the sentence to the [[court-of-appeals|court of appeals]]; the government can appeal some rulings and sentences, but not an acquittal. Many plea agreements include a waiver of some appeal rights.')),
       ),
     ),
@@ -158,7 +158,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
       p(
         'Sentencing Commission data sort each sentence by where it falls relative to the range: within it, above it, or below it. Below-range sentences are further divided by whether the government asked for them, for example under [[5k1-1|§5K1.1]] for substantial assistance or [[5k3-1|§5K3.1]] for an early disposition program, or whether the judge imposed them without such a request. These categories describe outcomes; they do not by themselves explain why a sentence was chosen.',
       ),
-      p('Congress has also changed sentencing law directly, most recently in the [[first-step-act|First Step Act]] of 2018.'),
+      p('Congress has also changed sentencing law directly, for example in the [[first-step-act|First Step Act]] of 2018.'),
     ),
     section(
       'civil',

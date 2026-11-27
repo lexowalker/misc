@@ -5,8 +5,9 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 `public/data/geo/divisions.json` and `geo/courthouses.json`). It never fetches anything and never calls a model.
 
 - **Rebuild:** `make web` (= `PYTHONPATH=. .venv/bin/python -m pipeline.web.build`, about 6 seconds).
-- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (139 tests). The whole
-  pipeline suite passes (817 tests). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
+- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (145 tests) and
+  `tests/pipeline/test_data_audit_fixes.py` (16 tests, data audit of 2026-11-27). The whole pipeline suite passes
+  (1,228 tests on 2026-11-27). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
   plus the existing suite (50 passed, 4 skipped by design).
 - **Deterministic:** two runs on the same inputs give byte-identical files (tested by hashing every file before and
   after a rebuild). Dictionaries are written with sorted keys; `manifest.json` uses the newest source retrieval date
@@ -17,7 +18,7 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 
 | file | content | size |
 |---|---|---|
-| `variables.json` | The catalog: 41 map variables in four families, with copy, caveats, years and citations (below). | 78 KB |
+| `variables.json` | The catalog: 43 map variables in four families, with copy, caveats, years and citations (below). | 78 KB |
 | `values/<variable>.json` | `{variable, period_type, unit, years, values: {district: {year: value}}, ranks, ranked_of, rank_method, provenance, source_by_year, cell_sources?, cell_notes?, n_basis?, national?, national_source_by_year?, national_note?, national_derived_years?, derived, formula?, derived_years?, derived_cells?, basis_by_year?, formula_by_basis?}` | 38 to 390 KB each |
 | `districts.json` | Keyed by id: registry fields, latest population (value, year, source, derived, formula; `population_approximate` and a note for mtd, idd, wyd, ncmd, nced; No data for the territories) and the 2020 Census count, counties `{geoid, name}`, statutory divisions `{name, ordinal, statute_section, counties: [geoid], places}`, places of holding court, statute sections, partial (carve-out) counties, courthouse ids, latest authorized judgeships, latest active and senior judges, `prev` / `next` (registry order, wrapping). | 306 KB |
 | `judges.json` | `{_meta, <district>: [records]}`: every FJC service record on a current district court, oldest first. Public fields only: name, sort name, initials, appointing president and party exactly as FJC gives them, `party_of_appointing_president` (resolved for statutory reassignments, with `reassignment: true`, `party_note` and `president_of_record`), appointment kind, commission, recess appointment and service start dates, senior status date (and the effective date when it differs), service end date and reason, active service end, seat id. No photos, no performance statistics. Biography link template `https://www.fjc.gov/node/{nid}` in `_meta`. | 1.5 MB |
@@ -65,17 +66,19 @@ simply absent, so the UI shows No data. Every variable has at least 12 years.
 | `felony_defendants_per_100k` | workload | Felony defendants charged per 100,000 residents | web: `idb_crim_felony_defendants_filed` and `population_estimate` | 2000 to 2025 (26) | 91 | yes |
 | `active_judges` | workload | Active judges in office | judges `judges_active` | 1950 to 2026 (77) | 91 | yes (judges lane) |
 | `senior_judges` | workload | Senior judges in office | judges `judges_senior` | 1950 to 2026 (77) | 91 | yes (judges lane) |
+| `jurors_avg_present` | workload | Average jurors present for jury selection | fcms `fcms_jurors_avg_present` | 1999 to 2025 (27) | 94 (93 in FY 2024) | no |
+| `jurors_pct_not_selected` | workload | Jurors not selected or challenged | fcms `fcms_jurors_pct_not_selected` | 1999 to 2025 (27) | 94 (93 in FY 2024) | no |
 | `within_range_pct` | sentencing | Sentenced within the guideline range | ussc `ussc_pct_within_range` | 1995 to 2025 (31) | 94 | FY 2004 to 2005 |
 | `above_range_pct` | sentencing | Sentenced above the guideline range | ussc `ussc_pct_above_range_2018scheme` | 2014 to 2025 (12) | 94 | yes |
 | `govt_below_range_pct` | sentencing | Below range, sponsored by the government | ussc `ussc_pct_govt_sponsored_below_range_2018scheme` | 2014 to 2025 (12) | 94 | yes |
 | `nongovt_below_range_pct` | sentencing | Below range, not sponsored by the government | ussc `ussc_pct_non_govt_sponsored_below_range_2018scheme` | 2014 to 2025 (12) | 94 | yes |
-| `above_range_pct_2006` | sentencing | Above range (FY 2006 to 2017 method) | ussc `ussc_pct_above_range` | 2006 to 2017 (12) | 94 | no |
-| `govt_below_range_pct_2006` | sentencing | Below range, government (FY 2006 to 2017 method) | ussc `ussc_pct_govt_sponsored_below_range` | 2006 to 2017 (12) | 94 | no |
-| `nongovt_below_range_pct_2006` | sentencing | Below range, other (FY 2006 to 2017 method) | ussc `ussc_pct_non_govt_sponsored_below_range` | 2006 to 2017 (12) | 94 | no |
+| `above_range_pct_2006` | sentencing | Above range (FY 2006 to 2017 method) | ussc `ussc_pct_above_range` | 2006 to 2017 (12) | 94 | FY 2006 to 2009 |
+| `govt_below_range_pct_2006` | sentencing | Below range, government (FY 2006 to 2017 method) | ussc `ussc_pct_govt_sponsored_below_range` | 2006 to 2017 (12) | 94 | FY 2006 to 2009 |
+| `nongovt_below_range_pct_2006` | sentencing | Below range, other (FY 2006 to 2017 method) | ussc `ussc_pct_non_govt_sponsored_below_range` | 2006 to 2017 (12) | 94 | FY 2006 to 2009 |
 | `substantial_assistance_pct` | sentencing | Substantial-assistance departures (§5K1.1) | ussc `ussc_pct_substantial_assistance_5k1` | 1995 to 2025 (31) | 94 | FY 2004 to 2005 |
 | `early_disposition_pct` | sentencing | Early-disposition (fast-track) departures (§5K3.1) | ussc `ussc_pct_early_disposition_5k3` | 2006 to 2025 (20) | 94 | no |
-| `mean_sentence_months` | sentencing | Average sentence | ussc `ussc_mean_sentence_months` | 2002 to 2025 (24) | 94 | FY 2002 to 2017 |
-| `median_sentence_months` | sentencing | Median sentence | ussc `ussc_median_sentence_months` | 2002 to 2025 (24) | 94 | FY 2002 to 2017 |
+| `mean_sentence_months` | sentencing | Average sentence | ussc `ussc_mean_sentence_months` | 2002 to 2025 (24) | 94 | yes (every year) |
+| `median_sentence_months` | sentencing | Median sentence | ussc `ussc_median_sentence_months` | 2002 to 2025 (24) | 94 | yes (every year) |
 | `prison_pct` | sentencing | Sentenced to prison | ussc `ussc_pct_prison` | 2002 to 2025 (24) | 94 | FY 2002 to 2017 |
 | `patent_filings` | casemix | Patent cases filed | idb `idb_patent_filed` | 1988 to 2026 (39) | 94 | no |
 | `patent_share_pct` | casemix | Share of the nation's patent cases | idb `idb_patent_share_of_national` | 1988 to 2026 (39) | 94 | yes |
@@ -94,7 +97,8 @@ simply absent, so the UI shows No data. Every variable has at least 12 years.
 Choices, in brief:
 
 - **Order and default.** `variables.json` is in family order (speed, workload, sentencing, casemix); the home page
-  shows the first, the civil median. `featured: true` marks 15 variables for the profile's main stats block.
+  shows the first, the civil median. `featured: true` marks 15 variables for the profile's main stats block and the
+  compare page's summary. Every catalog variable, featured or not, appears on the home variable switcher.
 - **FCMS method breaks.** For the 10 variables the FCMS lane marks `method_sensitive` with `time_series_table =
   observations_current_method`, the web series read that table: FY 2005 to 2025 on the current (defendant) method,
   FY 2010 to 2025 for weighted filings on the revised case weights. The own-year FY 1999 to 2004 values on the old
@@ -116,14 +120,45 @@ Choices, in brief:
   case-mix variables. The three USSC offense shares are included as the brief asks, with the FY 2018 classification
   break in `breaks` and caveats; they are excluded from profile facts.
 - **Not chosen.** USSC prison-only sentence length (a second convention, easy to confuse with the average sentence),
-  IDB class-action share and acquittal share, FCMS jurors measures and percent changes. All remain in the lane tables.
+  IDB class-action share and acquittal share, and FCMS percent changes. All remain in the lane tables. (The two FCMS
+  juror measures were added on 2026-11-27; see below.)
 - **National figures** are copied from the lanes' national tables: FCMS "all district courts" pages, USSC national
   rows (with `national_derived_years` where the USSC lane computed them), IDB all-district totals (computed by the IDB
   lane from the same file; the values file says so). None is shown for per-capita rates, judge counts or the patent
   share (always 100).
 - **Ranks** are computed here (1 = highest value, competition ranking, ties share the lowest number) over districts
-  with data that year; `ranked_of` gives the count. Every variable's caveats say ranks are derived. The AO's
+  with data that year; `ranked_of` gives the count. Values are compared as the site displays them (the variable's
+  `format`, rounded half away from zero like `Intl.NumberFormat`), so districts that show the same number share a
+  rank. Until 2026-11-27 IDB shares were ranked at full precision, which gave districts showing the same share
+  different ranks (4,143 district-year groups). Every variable's caveats say ranks are derived. The AO's
   published FCMS standings use the opposite direction for times and are not copied.
+
+## Data audit fixes (2026-11-27)
+
+Two independent data audits traced 70 displayed numbers to the raw files. Fixes made here and in the USSC lane:
+
+- **USSC FY 2006 to 2009 range groups** (`above_range_pct_2006`, `govt_below_range_pct_2006`,
+  `nongovt_below_range_pct_2006`). The atlas shows the exact share from the counts (S.D. Fla. FY 2008: 217 / 2,162 =
+  10.0%); the USSC's packets for those years print the sum of the rounded sub-category percentages (10.1%). Those
+  four years are now `derived_years` with basis `exact_share_of_published_counts` and a formula that says so, and the
+  caveat no longer calls the series "the grouping the USSC printed". FY 2010 to 2017 packets print the exact share,
+  so those years stay published. Values did not change.
+- **USSC average and median sentence.** From FY 2011 the USSC prints whole months; the atlas computes one decimal
+  from the datafiles (C.D. Cal. FY 2025 median 29.5, printed 30). FY 2018 to 2025 now carry basis
+  `unrounded_published_statistic`, so both variables are derived in every year, with a catalog `formula`. National
+  figures follow (`national_derived_years`). Values did not change.
+- **Formula text** for `sum_of_published_components` now says the share is computed from the published counts and
+  that adding the USSC's rounded component percentages can differ by 0.1.
+- **Ranks at display precision** (above), and the profile engine judges ties and positions the same way. Six profile
+  paragraphs changed as a result (ded, ncmd, nysd, nywd, vaed, wawd: a "tied for" added, or a fact that is a 3-way tie
+  on the displayed value dropped). `key_stats` rows carry `rank_ties` (districts sharing the rank) so the profile can
+  say "Tied for".
+- **`preliminary_years`** on IDB catalog entries (FY 2026), so pages can label those years "(preliminary)".
+- **Juror measures** `jurors_avg_present` and `jurors_pct_not_selected` (FCMS, workload family, not featured; values
+  copied exactly; ranks; FCMS provenance). They show on the home switcher like every catalog variable and in the
+  courtroom's jury box. The D.N.M.I. FY 2024 printed zeros (no jury selection held) stay absent, so that cell reads
+  No data; the FCMS lane logs the gap (`data/gaps/fcms.json`) and a caveat explains it. FY 1999 to 2009 jurors-present
+  values carry the AO's two decimals; the site shows one.
 
 ## Notes on cells
 

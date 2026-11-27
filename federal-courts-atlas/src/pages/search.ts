@@ -30,7 +30,7 @@ function locationNote(hit: PlaceHit): string {
     case 'county':
       return hit.splitCounty
         ? 'The statute splits this county between districts. Your district depends on the exact location.'
-        : 'Federal law assigns every county to one district.';
+        : 'Federal law assigns this whole county to one district.';
     case 'zip':
       return 'ZIP codes are matched through Census ZIP Code Tabulation Areas (2020), which approximate them. Shares are of land area.';
     case 'courthouse':
@@ -52,7 +52,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
     pageHead({
       kicker: 'Search',
       title: 'Find your federal court',
-      dek: 'Every place in the United States falls within exactly one federal judicial district. Search by city, county, ZIP code or courthouse, or by state or district name.',
+      dek: 'Every place in the 50 states, the District of Columbia and the four territories with a federal court falls within exactly one federal judicial district. Search by city, county, ZIP code or courthouse, or by state or district name.',
     }),
     h('div', { class: 'find__layout' }, h('div', { class: 'find__col' }, searchSlot, help, examples), detail),
   );

@@ -177,6 +177,7 @@ export const STORY_CONTENT: StoryContent[] = [
       notes: [
         'Since June 2017, drug patent cases brought under the abbreviated new drug application process have their own code, 835. The before-and-after comparison around TC Heartland counts codes 830 and 835 together, so both periods measure the same kinds of cases. Yearly figures use code 830, the atlas’s standard patent measure.',
         'The decision quarter, April to June 2017, is left out of both comparison periods.',
+        'The FJC file sometimes lists one case more than once, with different closing dates. The atlas keeps one record per case (same district, office, docket number, origin and filing date), the most recent. Shares can differ slightly from a count that keeps every record.',
         'FY 2026 figures have no published AO table to check them against yet and are marked preliminary.',
         'IDB filing counts were checked against the AO’s published totals of civil filings, but not against a published table of patent cases.',
         'Shares, sums and the leading district in each year are derived by the atlas. Hover over or select a number to see its formula.',

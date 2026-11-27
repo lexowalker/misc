@@ -25,25 +25,30 @@ FCMS_CURRENT = ("Since March 2012 the AO counts criminal defendants rather than 
                 "Earlier years are left out rather than mixed with the old method.")
 FCMS_WEIGHTS = ("Case weights were revised for use after December 2015, and the AO reprinted FY 2010 to 2014 with the "
                 "new weights. This series uses the revised weights for every year shown, so it starts in FY 2010.")
-FCMS_TERRITORIES_WEIGHTED = "The AO prints no weighted filings for the three territorial courts (Guam, Northern Mariana Islands, Virgin Islands)."
+FCMS_NO_JURY_SELECTION = ("The Northern Mariana Islands held no jury selection in FY 2024. The AO printed 0, which is "
+                          "not a measured figure, so the atlas shows No data for that year.")
+FCMS_TERRITORIES_WEIGHTED ="The AO prints no weighted filings for the three territorial courts (Guam, Northern Mariana Islands, Virgin Islands)."
 USSC_BASE = ("Territorial courts and some small districts sentence few people a year, so their shares can swing "
              "widely. Cells based on fewer than 30 people carry a note.")
 USSC_FY = "USSC fiscal years run October 1 to September 30."
 USSC_BOOKER = ("Before United States v. Booker (January 2005) the guidelines were mandatory, and \"within range\" "
-               "means no departure was granted. FY 2004 and FY 2005 are pooled by the USSC lane from the two "
-               "half-year tables the USSC printed, so those two years are marked derived.")
+               "means no departure was granted. The atlas pools FY 2004 and FY 2005 from the two part-year "
+               "tables the USSC printed, so those two years are marked derived.")
 USSC_2018 = ("In FY 2018 the USSC changed how it classifies sentences (departures versus variances) and stopped "
              "printing this four-way grouping. The atlas rebuilds the same grouping from the published components "
              "for FY 2014 to 2025, so every year is marked derived. In FY 2014 to 2017, where both methods exist, "
-             "the USSC lane found the shares identical for every district.")
-USSC_OLD_SCHEME = ("This is the grouping the USSC printed for FY 2006 to 2017. For FY 2014 to 2025 see the "
-                   "matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.")
+             "the atlas found the shares identical for every district.")
+USSC_OLD_SCHEME = ("This is the grouping the USSC used in its tables for FY 2006 to 2017. For FY 2014 to 2025 see "
+                   "the matching measure built on the USSC's FY 2018 method; the two agree exactly where they overlap.")
+USSC_OLD_SCHEME_ROUNDING = ("For FY 2006 to 2009 the atlas shows the exact share from the counts the USSC printed, so "
+                            "those years are marked derived. The USSC's tables for those years add the rounded "
+                            "percentages of the group's parts, so they can show a share 0.1 higher or lower.")
 USSC_OFFENSE_2018 = ("In FY 2018 the USSC began classifying offenses by the main guideline applied instead of the "
                      "statute of conviction. The category name is unchanged, but values before and after FY 2018 "
                      "are not strictly comparable.")
 USSC_PACKETS = ("FY 1995 to 2001 come from the USSC's published district packets; FY 2002 on are reproduced from "
                 "the USSC's case-level datafiles and match the published tables.")
-IDB_COMPUTED = "Computed by the atlas's IDB lane from the FJC's case-level records; the courts do not print this figure."
+IDB_COMPUTED = "Computed by the atlas from the FJC's case-level records; the courts do not print this figure."
 IDB_2026 = ("FY 2026 values come from FJC files posted in November 2026. The AO has not yet published its FY 2026 "
             "tables, so they have no published cross-check.")
 IDB_BASE = "Small districts rest on small numbers of cases. Cells based on fewer than 30 cases carry a note."
@@ -53,7 +58,7 @@ PER_CAPITA = ("Population is the Census Bureau's July 1 estimate for the distric
 SPLIT_COUNTIES = ("For Montana, Idaho, Wyoming and the Eastern and Middle Districts of North Carolina the population "
                   "is approximate: a few counties are split by statute (Yellowstone, Fort Bragg, Butner), and the "
                   "whole county is counted in one district.")
-JUDGES_COUNT = ("Counted by the atlas's judges lane from the FJC Biographical Directory dates (judges in office on "
+JUDGES_COUNT = ("Counted by the atlas from the FJC Biographical Directory dates (judges in office on "
                 "September 30). Judges assigned to two districts count in both. The three territorial courts are not "
                 "in the directory of Article III judges, so they show No data.")
 
@@ -79,10 +84,10 @@ CATALOG: list[dict] = [
         "label": "Median time to resolve a felony case", "short_label": "Felony case, median months",
         "unit": "months", "format": ".1f", "higher_means": "slower: felony cases take longer to resolve",
         "default_rank_direction": "asc",
-        "explainer": ("How long the typical felony defendant's case takes to reach a disposition, such as a plea, "
-                      "a verdict or a dismissal. Half of defendants' cases finish faster than this."),
+        "explainer": ("How long the typical felony defendant's case takes to end in a sentence, an acquittal or a "
+                      "dismissal. Half of defendants' cases finish faster than this."),
         "caveats": [FCMS_CURRENT,
-                    "On the current method the clock starts at the defendant's first proceeding, not the filing date.",
+                    "On the current method the clock starts at the defendant's proceeding date (for example, the date an indictment or information was filed), not the date the case was first filed.",
                     "The AO does not compute the median for fewer than 10 defendants.",
                     RANK],
         "input": {"lane": "fcms", "table": "observations_current_method", "variable": "fcms_median_months_criminal_felony_filing_to_disposition"},
@@ -180,7 +185,7 @@ CATALOG: list[dict] = [
         "unit": "per_judgeship", "format": ".0f", "higher_means": "more trials per judgeship",
         "default_rank_direction": "desc",
         "explainer": ("Civil and criminal trials completed by district judges in the year, divided by the number of "
-                      "authorized judgeships. The AO counts hearings on emergency orders and preliminary injunctions as trials."),
+                      "authorized judgeships. The AO counts evidentiary hearings on temporary restraining orders and preliminary injunctions as trials."),
         "caveats": [FCMS_PRINTED, RANK],
         "input": {"lane": "fcms", "table": "observations", "variable": "fcms_trials_completed_per_judgeship"},
         "fact": {"text": "the court completed {number} trials per judgeship", "high": "most", "low": "fewest"},
@@ -230,7 +235,7 @@ CATALOG: list[dict] = [
         "unit": "per_100k", "format": ".1f", "higher_means": "more felony prosecutions relative to population",
         "default_rank_direction": "desc",
         "explainer": ("New felony defendants charged in the year for every 100,000 people living in the district. "
-                      "Border districts and districts with major ports of entry often rank high."),
+                      "Districts along the Mexican border often rank high."),
         "caveats": ["Derived by the atlas from two series: FJC felony defendants filed and Census population.",
                     ("The numerator is the FJC Integrated Database count of felony defendants, which matches the AO's "
                      "own felony filings exactly in every year the AO counts defendants. It is used because the AO's "
@@ -268,13 +273,39 @@ CATALOG: list[dict] = [
         "formula": "Count of distinct judges in service on September 30 whose senior status date was on or before that day",
         "fact": None,
     },
+    {
+        "id": "jurors_avg_present", "family": "workload",
+        "label": "Average jurors present for jury selection", "short_label": "Jurors present, average",
+        "unit": "persons", "format": ".1f", "higher_means": "more people called in for each jury selection",
+        "default_rank_direction": "desc",
+        "explainer": ("The average number of people who came to court to be considered for a jury, counted on "
+                      "the days the court held jury selection."),
+        "caveats": [FCMS_PRINTED,
+                    "The AO printed this figure with two decimals for FY 1999 to 2009 and one decimal after that. "
+                    "The atlas keeps the printed value and shows one decimal.",
+                    FCMS_NO_JURY_SELECTION, RANK],
+        "input": {"lane": "fcms", "table": "observations", "variable": "fcms_jurors_avg_present"},
+        "fact": None,
+    },
+    {
+        "id": "jurors_pct_not_selected", "family": "workload",
+        "label": "Jurors not selected or challenged", "short_label": "Jurors not selected",
+        "unit": "percent", "format": ".1f",
+        "higher_means": "a larger share of the people called for jury selection were not used",
+        "default_rank_direction": "desc",
+        "explainer": ("The share of people who came for jury selection but were neither chosen for a jury nor "
+                      "challenged by a lawyer."),
+        "caveats": [FCMS_PRINTED, FCMS_NO_JURY_SELECTION, RANK],
+        "input": {"lane": "fcms", "table": "observations", "variable": "fcms_jurors_pct_not_selected"},
+        "fact": None,
+    },
     # ------------------------------------------------------------------ SENTENCING
     {
         "id": "within_range_pct", "family": "sentencing",
         "label": "Sentenced within the guideline range", "short_label": "Within range",
         "unit": "percent", "format": ".1f", "higher_means": "more sentences inside the guideline range",
         "default_rank_direction": "desc",
-        "explainer": ("The share of people sentenced whose prison term fell inside the range the federal sentencing "
+        "explainer": ("The share of people sentenced whose sentence fell inside the range the federal sentencing "
                       "guidelines recommend for their offense and criminal history."),
         "caveats": [USSC_BOOKER, USSC_PACKETS, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_within_range"},
@@ -314,8 +345,7 @@ CATALOG: list[dict] = [
         "label": "Below range, not sponsored by the government", "short_label": "Below range (other)",
         "unit": "percent", "format": ".1f", "higher_means": "more below-range sentences the government did not ask for",
         "default_rank_direction": "desc",
-        "explainer": ("The share of people sentenced below the guideline range without a government motion, usually "
-                      "after a request by the defense."),
+        "explainer": "The share of people sentenced below the guideline range without a government motion.",
         "caveats": [USSC_2018, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_non_govt_sponsored_below_range_2018scheme"},
         "base": "n_basis",
@@ -329,7 +359,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more sentences above the guideline range",
         "default_rank_direction": "desc",
         "explainer": "The share of people sentenced above the guideline range, as the USSC grouped sentences after Booker.",
-        "caveats": [USSC_OLD_SCHEME, USSC_FY, USSC_BASE, RANK],
+        "caveats": [USSC_OLD_SCHEME, USSC_OLD_SCHEME_ROUNDING, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_above_range"},
         "base": "n_basis",
         "fact": None,
@@ -340,7 +370,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more below-range sentences the government asked for",
         "default_rank_direction": "desc",
         "explainer": "The share of people sentenced below the guideline range on a government motion, as the USSC grouped sentences after Booker.",
-        "caveats": [USSC_OLD_SCHEME, USSC_FY, USSC_BASE, RANK],
+        "caveats": [USSC_OLD_SCHEME, USSC_OLD_SCHEME_ROUNDING, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_govt_sponsored_below_range"},
         "base": "n_basis",
         "fact": None,
@@ -351,7 +381,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more below-range sentences the government did not ask for",
         "default_rank_direction": "desc",
         "explainer": "The share of people sentenced below the guideline range without a government motion, as the USSC grouped sentences after Booker.",
-        "caveats": [USSC_OLD_SCHEME, USSC_FY, USSC_BASE, RANK],
+        "caveats": [USSC_OLD_SCHEME, USSC_OLD_SCHEME_ROUNDING, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_non_govt_sponsored_below_range"},
         "base": "n_basis",
         "fact": None,
@@ -363,7 +393,7 @@ CATALOG: list[dict] = [
         "default_rank_direction": "desc",
         "explainer": ("The share of people sentenced below the range because the government told the court they "
                       "gave substantial help in investigating or prosecuting someone else."),
-        "caveats": [USSC_PACKETS, "FY 2004 and FY 2005 are pooled from two half-year tables and marked derived.", USSC_FY, USSC_BASE, RANK],
+        "caveats": [USSC_PACKETS, "FY 2004 and FY 2005 are pooled from two part-year tables and marked derived.", USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_substantial_assistance_5k1"},
         "base": "n_basis",
         "fact": {"text": "{value} of sentences included a substantial-assistance departure", "high": "highest share", "low": "lowest share"},
@@ -388,11 +418,16 @@ CATALOG: list[dict] = [
         "default_rank_direction": "desc",
         "explainer": ("The average sentence in months, counting prison plus any alternative confinement. Probation "
                       "and fine-only sentences count as zero months."),
-        "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the USSC lane with that rule, so they are marked derived; FY 2018 on reproduce the published figures.",
+        "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
                     "Terms of 470 months or more, including life, count as 470 months, as the USSC does.",
-                    "From FY 2011 the USSC prints whole months.", USSC_FY, USSC_BASE, RANK],
+                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
+                    USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_mean_sentence_months"},
         "base": "n_basis",
+        "formula": ("Average of each person's months of prison plus alternative confinement, computed by the atlas "
+                    "from the USSC's case-level datafile (probation and fine-only sentences count as 0; 470 months "
+                    "or more, including life, count as 470). Shown to one decimal; from FY 2011 the USSC prints "
+                    "whole months."),
         "fact": {"text": "the average sentence was {value}", "high": "longest", "low": "shortest"},
         "featured": True,
     },
@@ -403,10 +438,15 @@ CATALOG: list[dict] = [
         "default_rank_direction": "desc",
         "explainer": ("The middle sentence in months: half of people sentenced got less, half got more. Probation "
                       "and fine-only sentences count as zero months."),
-        "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the USSC lane with that rule, so they are marked derived.",
-                    "From FY 2011 the USSC prints whole months.", USSC_FY, USSC_BASE, RANK],
+        "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
+                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
+                    USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_median_sentence_months"},
         "base": "n_basis",
+        "formula": ("Middle value of each person's months of prison plus alternative confinement, computed by the "
+                    "atlas from the USSC's case-level datafile (probation and fine-only sentences count as 0; 470 "
+                    "months or more, including life, count as 470). Shown to one decimal; from FY 2011 the USSC "
+                    "prints whole months."),
         "fact": {"text": "the median sentence was {value}", "high": "longest", "low": "shortest"},
     },
     {
@@ -415,7 +455,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more people sentenced to prison",
         "default_rank_direction": "desc",
         "explainer": "The share of people sentenced who received a prison term, alone or combined with another sanction.",
-        "caveats": ["Fine-only cases stay in the denominator in every year, as in the USSC's tables since FY 2018. Before FY 2018 the USSC left them out, so its printed rates run slightly higher; those years are computed by the USSC lane and marked derived.",
+        "caveats": ["Fine-only cases stay in the denominator in every year, as in the USSC's tables since FY 2018. Before FY 2018 the USSC left them out, so its printed rates run slightly higher; those years are computed by the atlas and marked derived.",
                     USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_prison"},
         "base": "n_basis",
@@ -427,8 +467,8 @@ CATALOG: list[dict] = [
         "label": "Patent cases filed", "short_label": "Patent filings",
         "unit": "cases", "format": ",.0f", "higher_means": "more patent suits filed",
         "default_rank_direction": "desc",
-        "explainer": ("New patent infringement and validity suits (nature of suit 830) filed in the year. Patent "
-                      "plaintiffs can choose among courts, so a few districts draw most of these cases."),
+        "explainer": ("New patent infringement and validity suits (nature of suit 830) filed in the year. A few "
+                      "districts receive most of these cases."),
         "caveats": ["Hatch-Waxman drug patent cases moved to a new code (835) in June 2017 and are not counted here.",
                     IDB_COMPUTED, IDB_2026, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_patent_filed"},
@@ -457,7 +497,7 @@ CATALOG: list[dict] = [
         "explainer": ("The share of new civil cases in which at least one side, plaintiff or defendant, has no lawyer "
                       "and represents itself (\"pro se\")."),
         "caveats": ["The pro se code has no AO quality control and is blank before FY 1999.",
-                    "Mass-tort waves can carry pro se codes in bulk: N.D. Fla. held hundreds of thousands of such cases in FY 2020 to 2024.",
+                    "Mass-tort waves can carry pro se codes in bulk: N.D. Fla. received hundreds of thousands of mass-tort filings in FY 2020 to 2024, many of them coded pro se.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_civil_pct_pro_se"},
         "derived": True,
@@ -473,27 +513,28 @@ CATALOG: list[dict] = [
         "explainer": ("The share of new civil cases brought by prisoners: habeas corpus petitions, motions to vacate "
                       "a sentence, and suits over prison conditions or civil rights."),
         "caveats": ["Uses nature-of-suit codes 510 to 560. Habeas petitions by immigration detainees (code 463) are not included; they surged in FY 2026.",
+                    "The case-mix chart on each district page follows the civil cover sheet (JS 44), which counts immigration detention petitions (code 463) as prisoner petitions, so the two figures can differ.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_civil_pct_prisoner_petitions"},
         "derived": True,
         "formula": "100 × civil cases filed with nature of suit 510 to 560 ÷ all civil cases filed",
         "base": "denominator",
-        "fact": {"text": "prisoner petitions made up {value} of new civil cases", "high": "highest share", "low": "lowest share"},
+        "fact": {"text": "prisoner petitions (not counting immigration detention cases) made up {value} of new civil cases", "high": "highest share", "low": "lowest share"},
     },
     {
         "id": "civil_trial_rate_pct", "family": "casemix",
         "label": "Civil cases decided by trial", "short_label": "Civil trial rate",
-        "unit": "percent", "format": ".1f", "higher_means": "more civil cases end in a trial verdict",
+        "unit": "percent", "format": ".1f", "higher_means": "more civil cases are decided by a trial",
         "default_rank_direction": "desc",
         "explainer": ("The share of civil cases closed during the year that ended in a jury verdict, a directed "
                       "verdict or a judge's decision after trial. Most civil cases settle or are dismissed."),
-        "caveats": ["In FY 2007 M.D. La. recorded thousands of related cases as jury verdicts, which lifts its rate that year.",
+        "caveats": ["In FY 2007 M.D. La. recorded thousands of cases, almost all personal-injury suits closed in May 2007, as jury verdicts, which lifts its rate that year.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_civil_trial_rate"},
         "derived": True,
         "formula": "100 × civil cases closed by jury verdict, directed verdict or court trial ÷ all civil cases closed",
         "base": "denominator",
-        "fact": {"text": "{value} of civil cases closed ended in a trial verdict", "high": "highest share", "low": "lowest share"},
+        "fact": {"text": "{value} of civil cases closed were decided by a trial", "high": "highest share", "low": "lowest share"},
     },
     {
         "id": "criminal_trial_rate_pct", "family": "casemix",
@@ -531,7 +572,7 @@ CATALOG: list[dict] = [
         "default_rank_direction": "desc",
         "explainer": ("The share of new criminal defendants whose most serious charge was an immigration offense, "
                       "such as illegal reentry after deportation."),
-        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane; the mapping reproduces the AO's published immigration totals exactly.",
+        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas; the mapping reproduces the AO's published immigration totals exactly for FY 2005 to 2025; other years could not be checked.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_crim_pct_immigration"},
         "derived": True,
@@ -546,7 +587,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more of the criminal docket is drug cases",
         "default_rank_direction": "desc",
         "explainer": "The share of new criminal defendants whose most serious charge was a drug offense.",
-        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane.",
+        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_crim_pct_drugs"},
         "derived": True,
@@ -560,7 +601,7 @@ CATALOG: list[dict] = [
         "unit": "percent", "format": ".1f", "higher_means": "more of the criminal docket is firearms cases",
         "default_rank_direction": "desc",
         "explainer": "The share of new criminal defendants whose most serious charge was a firearms or explosives offense.",
-        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the IDB lane; the mapping reproduces the AO's published firearms totals exactly.",
+        "caveats": ["Offense categories follow the AO's top-level headings, mapped from FJC offense codes by the atlas; the mapping reproduces the AO's published firearms totals exactly for FY 2005 to 2025; other years could not be checked.",
                     IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
         "input": {"lane": "idb", "table": "observations", "variable": "idb_crim_pct_firearms_explosives"},
         "derived": True,

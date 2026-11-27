@@ -80,7 +80,7 @@ def render(lo_topo: Path, hi_topo: Path, out_png: Path, specials: dict | None = 
     main = fig.add_axes([0.0, 0.30, 0.74, 0.66])
     conus = [-125, 24.3, -66.5, 49.6]
     _draw(main, d, s, colours, 5070, conus, fontsize=6.5)
-    main.set_title(f"The 94 federal judicial districts — {len(d)} district polygons (low-res topology); "
+    main.set_title(f"The 94 federal judicial districts: {len(d)} district polygons (low-res topology); "
                    "insets from the same file; zooms from the high-res topology", fontsize=11, color=TEXT,
                    loc="left")
 

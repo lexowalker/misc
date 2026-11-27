@@ -88,15 +88,21 @@ def build() -> Story:
         "kind": "stack", "unit": "percent", "format": ".1f", "x": split_years, "y_max": 100, "mark_x": SCHEME_YEAR,
         "title": "How federal sentences compare with the guideline range, all districts",
         "layers": layers, "source_ids": nsrc + ids_all, "derived": True,
-        "formula": "FY 2018 on: above = USSC sentence-range codes 1 + 6; government sponsored = 2 + 3 + 4 + 7; not government sponsored = 5 + 8 (each as a share of range-known cases)",
+        "formula": "FY 2018 on: above = USSC sentence-range codes 1 + 6; government sponsored = 2 + 3 + 4 + 7; not government sponsored = 5 + 8 (each as a share of range-known cases). FY 2006 to 2009: each group's exact share from the counts the USSC printed (its tables add the rounded percentages of the parts, so they can differ by 0.1)",
         "how": "USSC four-way grouping as printed for FY 2006 to 2017, then rebuilt from the FY 2018 method's components. The two agree exactly in FY 2014 to 2017.",
     })
     for y in (POST_FIRST, LATEST):
         for old, key in zip(SPLIT_OLD, ("above", "govt", "nongovt")):
-            src = ids_of(national("ussc", old if y < SCHEME_YEAR else old + "_2018scheme").query("period == @y"))
-            deriv = y >= SCHEME_YEAR
+            row = national("ussc", old if y < SCHEME_YEAR else old + "_2018scheme").query("period == @y")
+            src = ids_of(row)
+            # Derived when the USSC lane flags the row (FY 2018 on: rebuilt grouping; FY 2006 to 2009: exact
+            # share, while the USSC printed the sum of rounded parts; data audit 2026-11-27).
+            deriv = y >= SCHEME_YEAR or bool(row["derived"].astype(bool).any())
             s.num(f"{key}_{y}", parts[old][y], "percent", source_ids=src, year=y, derived=deriv,
-                  formula=("sum of the USSC's FY 2018-method components as a share of range-known cases" if deriv else None),
+                  formula=("sum of the USSC's FY 2018-method components as a share of range-known cases"
+                           if y >= SCHEME_YEAR else
+                           "exact share: group count / range-known cases x 100 (the USSC's FY 2006 to 2009 tables add the rounded percentages of the group's parts, so they can differ by 0.1)"
+                           if deriv else None),
                   how=f"National share, FY {y}.")
     ng = parts["ussc_pct_non_govt_sponsored_below_range"]
     gv = parts["ussc_pct_govt_sponsored_below_range"]
@@ -107,8 +113,10 @@ def build() -> Story:
     if not all(ab[y] < ng[y] and ab[y] < gv[y] for y in split_years):
         raise ValueError("the text calls above-range sentences the least common of the three groups every year")
     pk = int(ng.idxmax())
-    s.num("nongovt_peak", ng[pk], "percent", source_ids=ids_all, year=pk, derived=pk >= SCHEME_YEAR,
-          formula=("sum of the USSC's FY 2018-method components" if pk >= SCHEME_YEAR else None),
+    pk_exact = 2006 <= pk <= 2009   # USSC lane: exact share, not the printed sum of rounded parts
+    s.num("nongovt_peak", ng[pk], "percent", source_ids=ids_all, year=pk, derived=pk >= SCHEME_YEAR or pk_exact,
+          formula=("sum of the USSC's FY 2018-method components" if pk >= SCHEME_YEAR else
+                   "exact share: group count / range-known cases x 100" if pk_exact else None),
           how="Highest national share of below-range sentences without a government motion.")
     s.year("nongovt_peak_year", pk, source_ids=ids_all, how="Year of that peak.")
 

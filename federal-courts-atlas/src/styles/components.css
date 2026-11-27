@@ -446,6 +446,26 @@ th[aria-sort='descending'] {
   .data-table .is-optional {
     display: none;
   }
+
+  /* Phones: a long column heading wraps instead of widening its column, so the rank column fits on screen
+     rather than sitting half cut off at the edge of the scroll area. */
+  .data-table thead th {
+    white-space: normal;
+    vertical-align: bottom;
+  }
+
+  .data-table__sort {
+    line-height: 1.3;
+    padding: var(--space-1) 0;
+  }
+
+  .data-table .is-num {
+    padding-left: var(--space-2);
+  }
+
+  .data-table td.is-num {
+    white-space: nowrap;
+  }
 }
 
 /* ---- Sparkline ------------------------------------------------------- */

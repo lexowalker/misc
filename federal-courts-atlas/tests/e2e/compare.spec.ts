@@ -71,7 +71,18 @@ const ordinal = (n: number) => {
   const m = n % 100;
   return n + (s[(m - 20) % 10] || s[m] || s[0]!);
 };
-const rankPhrase = (r: number, of: number) => (r === 1 ? `Highest of ${of}` : r === of ? `Lowest of ${of}` : `${ordinal(r)} highest of ${of}`);
+/** Same wording as src/pages/district/common.ts rankPhrase, including ties (ranks are shared at display precision). */
+const rankPhrase = (r: number, of: number, ties = 1) => {
+  if (ties > 1) {
+    const who = ties > 2 ? ` (${ties} districts)` : '';
+    if (r === 1) return `Tied for highest of ${of}${who}`;
+    if (r + ties - 1 === of) return `Tied for lowest of ${of}${who}`;
+    return `Tied for ${ordinal(r)} highest of ${of}${who}`;
+  }
+  return r === 1 ? `Highest of ${of}` : r === of ? `Lowest of ${of}` : `${ordinal(r)} highest of ${of}`;
+};
+const tiesOf = (f: { ranks: Record<string, Record<string, number>> }, y: number, r: number) =>
+  Object.values(f.ranks).filter((row) => row[String(y)] === r).length;
 
 async function open(page: Page, hash: string): Promise<void> {
   await page.goto(`./${hash}`);
@@ -122,7 +133,7 @@ test('two districts: aligned rows with value, rank, leader and national figure f
       }
       await expect(cell.locator('.cmp-td__num')).toContainText(num(x, v));
       const r = f.ranks[id]?.[String(y)];
-      if (r) await expect(cell.locator('.cmp-td__rank')).toHaveText(rankPhrase(r, f.ranked_of[String(y)]!));
+      if (r) await expect(cell.locator('.cmp-td__rank')).toHaveText(rankPhrase(r, f.ranked_of[String(y)]!, tiesOf(f, y, r)));
     }
     const nat = f.national?.[String(y)];
     if (typeof nat === 'number') await expect(row.locator('.cmp-measure__nat-val')).toContainText(num(nat, v));

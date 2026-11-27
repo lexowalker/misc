@@ -35,7 +35,7 @@ export function emptyState(o: EmptyStateOptions): HTMLElement {
 export function dataNotBuilt(file: string, what = 'This view', compact = false): HTMLElement {
   return emptyState({
     title: 'Data not yet built',
-    body: `${what} appears once the atlas's data pipeline publishes it. Nothing is estimated in the meantime.`,
+    body: `${what} appears once the atlas publishes it. Nothing is estimated in the meantime.`,
     file: `public/data/${file}`,
     icon: 'data',
     compact,
