@@ -47,9 +47,9 @@ CI=1 E2E_PORT=4502 npx playwright test tests/e2e/visual.spec.ts --update-snapsho
 npm run check:palette    # color-blind and contrast check of the map color ramps
 ```
 
-Last full run (polish pass, Nov 27, 2026): `make test` 1,252 passed; `npm run typecheck` clean; Playwright
-(`CI=1 E2E_PORT=4601 npx playwright test --trace off`) 361 passed, 11 skipped by design (touch-only tests on desktop,
-desktop-only measurements on mobile), 0 failed, including the visual baselines.
+Last full run (fix pass, Nov 27, 2026): `make test` 1,254 passed; `npm run typecheck` clean; Playwright
+(`CI=1 E2E_PORT=4701 npx playwright test --trace off`) 364 passed, 14 skipped by design (touch-only tests on desktop,
+desktop-only measurements and mouse or keyboard tests on mobile), 0 failed, including the visual baselines.
 
 - Playwright is pinned to exactly **1.63.0** to match the Chromium build in `/opt/pw-browsers`. **Never run
   `playwright install`**; it would download a different browser and break the pin.

@@ -46,19 +46,56 @@ const ROUTES: Route[] = [
 
 type Violation = { id: string; impact: string | null; help: string; nodes: Array<{ target: string[]; failureSummary?: string }> };
 
-async function scrollThrough(page: Page): Promise<void> {
-  // Bounded (recheck lane, 2026-11-27): one full-suite run timed out here once on the stories index (mobile) and
-  // passed on every rerun. The loop now stops after 400 steps or 20 s, so a page that keeps growing, or a slow
-  // machine, cannot hold the test until its 90 s timeout; lazy sections far down still get rendered first.
-  await page.evaluate(async () => {
-    const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
-    const t0 = performance.now();
-    for (let i = 0, y = 0; y < document.documentElement.scrollHeight && i < 400 && performance.now() - t0 < 20_000; i++, y += step) {
-      window.scrollTo(0, y);
-      await new Promise((r) => setTimeout(r, 30));
-    }
-    window.scrollTo(0, 0);
+// Wall-clock budgets for scrollThrough, measured in the test runner (Node), not in the page. The pass used to run
+// as one page.evaluate with a 20 s check inside the page's own loop; twice across lanes a full run stalled there
+// for about 1.6 minutes (phone, four-district compare) and never in isolation. A check that runs on the page's
+// main thread cannot fire while that thread is blocked, so each step is now its own short evaluate raced against a
+// Node timer, and the pass fails at once, saying where it stopped, instead of hanging until the test timeout.
+// The scan itself is unchanged: every page is still scrolled to the bottom (now required, where the old loop could
+// stop part-way without saying so) before axe runs.
+const SCROLL_STEP_BUDGET_MS = 5_000; // one step: scroll, a 30 ms pause for lazy sections, read the page height
+const SCROLL_TOTAL_BUDGET_MS = 30_000; // the whole pass, top to bottom
+const SCROLL_MAX_STEPS = 400; // a page still growing after this many steps is reported, not scanned part-way
+
+async function withBudget<T>(work: Promise<T>, ms: number, message: () => string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const late = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(message())), ms);
   });
+  try {
+    return await Promise.race([work, late]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function scrollThrough(page: Page): Promise<void> {
+  const url = page.url();
+  const t0 = Date.now();
+  const stuck = (what: string) => () =>
+    `scrollThrough: ${what} on ${url} did not finish within ${SCROLL_STEP_BUDGET_MS} ms (${Date.now() - t0} ms into the ` +
+    'pass); the page is not responding, so the accessibility scan cannot see every section';
+  const step = await withBudget(page.evaluate(() => Math.max(200, Math.floor(window.innerHeight * 0.8))), SCROLL_STEP_BUDGET_MS, stuck('reading the window height'));
+  for (let i = 0, y = 0; ; i++, y += step) {
+    const height = await withBudget(
+      page.evaluate(async (top) => {
+        window.scrollTo(0, top);
+        await new Promise((r) => setTimeout(r, 30));
+        return document.documentElement.scrollHeight;
+      }, y),
+      SCROLL_STEP_BUDGET_MS,
+      stuck(`scroll step ${i + 1} (to ${y}px)`),
+    );
+    if (y + step >= height) break;
+    const elapsed = Date.now() - t0;
+    if (i + 1 >= SCROLL_MAX_STEPS) {
+      throw new Error(`scrollThrough: ${url} was still growing after ${SCROLL_MAX_STEPS} scroll steps (${height}px tall, ${elapsed} ms)`);
+    }
+    if (elapsed > SCROLL_TOTAL_BUDGET_MS) {
+      throw new Error(`scrollThrough: ${url} took more than ${SCROLL_TOTAL_BUDGET_MS} ms to scroll through (reached ${y}px of ${height}px after ${i + 1} steps)`);
+    }
+  }
+  await withBudget(page.evaluate(() => window.scrollTo(0, 0)), SCROLL_STEP_BUDGET_MS, stuck('scrolling back to the top'));
   await page.waitForTimeout(250);
 }
 

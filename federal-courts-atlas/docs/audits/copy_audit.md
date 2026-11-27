@@ -103,7 +103,7 @@ Learn page, and checked the rendered pages in Chromium.
 | F51 | Search, dek | nit | American Samoa has no federal district court | Applied |
 | F52 | Cases note (7 districts) | fix | "free-tier quota", "pipeline run", "gap is logged" | Applied |
 | F53 | Empty states | nit | "pipeline" in reader-facing text | Applied in all four |
-| F54 | README, DATA_CONTRACT, two lane reports, preview.py | fix | Em-dashes | Applied. `data/processed/boundaries/preview.png` still carries the old title until the next `make boundaries`. |
+| F54 | README, DATA_CONTRACT, two lane reports, preview.py | fix | Em-dashes | Applied. `data/processed/boundaries/preview.png` kept the old title until the fix pass (Nov 27) re-rendered it from the committed TopoJSON (see `docs/lanes/boundaries.md`). |
 | F55 | District key stats note | nit | "a high rank means a slower court" is ambiguous | Applied: "rank 1 is the slowest court" |
 | F56 | Compare, dek | nit | "rank among all 94 districts" | Applied |
 | F57 | Patent Capital, note 5 | nit | Touch users cannot hover | Applied: "Hover over or select a number" |
@@ -166,7 +166,8 @@ the size sentence for those three districts as well.
   division notes. The lane reports were only searched for em-dashes, not read for facts.
 - **Not reviewed in this audit:** `src/courtroom/panel.ts`, `events.ts` beyond dates, `sources.ts` and `table.ts`
   strings from other lanes.
-- **Not regenerated:** `data/processed/boundaries/preview.png` (only its title string was fixed).
+- **Not regenerated:** `data/processed/boundaries/preview.png` (only its title string was fixed). Re-rendered in the
+  fix pass (Nov 27); only the title changed.
 - **Lane-internal files.** `data/processed/{idb,ussc}/variables.json` and `pipeline/ussc/variables.py` still say
   "lane" and "half-year" in places. They do not reach the site.
 - **Screen readers and other browsers.** No screen reader was run. Only Chromium was used.

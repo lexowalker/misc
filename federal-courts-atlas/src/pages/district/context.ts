@@ -45,10 +45,16 @@ function docketHead(d: MdlDocket): HTMLElement {
   );
 }
 
-/** "MDL 2179 (FY 2013) and MDL 1657 (FY 2010)" for the compact note's line about older dockets. */
+/** The compact note's sentence about the other dockets, with the fiscal years each was above a quarter (the same
+ * test as the web lane's rule: more than 25% of the court's civil cases filed, or closed, in that year). One docket:
+ * "MDL 2433 also made up more than a quarter of this court’s civil cases filed or closed in FY 2015 and FY 2019."
+ * Several: "MDL 2592 (FY 2015 to 2023) and MDL 2179 (FY 2013) each also made up ... in the years given." */
 function earlierLine(list: MdlDocket[]): string {
-  const parts = list.map((d) => `${docketLabel(d)} (${d.years_text ?? d.sentences.map((s) => `FY ${s.year}`).join(', ')})`);
-  return parts.length === 1 ? parts[0]! : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+  const years = (d: MdlDocket) => d.years_text ?? d.sentences.map((s) => `FY ${s.year}`).join(', ');
+  const share = 'more than a quarter of this court’s civil cases filed or closed';
+  if (list.length === 1) return `${docketLabel(list[0]!)} also made up ${share} in ${years(list[0]!)}.`;
+  const parts = list.map((d) => `${docketLabel(d)} (${years(d)})`);
+  return `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]} each also made up ${share} in the years given.`;
 }
 
 /** The MDL note, or null when the profile has none (or none for the requested years). */
@@ -64,8 +70,9 @@ export function mdlCallout(ctx: MdlContext | undefined, o: MdlCalloutOptions = {
     h('p', { class: 'mdl-note__kicker' }, 'Context: ', o.compact ? term('mdl', 'multidistrict litigation', { label: true }) : 'multidistrict litigation'),
   );
   if (o.compact) {
-    // Dockets above a quarter in the years the page headlines get their sentences; older ones share one line
-    // (their sentences and history are in the full note). With no current docket, the most recent one is shown.
+    // Dockets above a quarter in the years the page headlines get their sentences; the others share one sentence
+    // that lists the years each was above a quarter (their sentences and history are in the full note). With no
+    // current docket, the most recent one gets the sentences.
     const current = dockets.filter((d) => d.current ?? true);
     const lead = current.length ? current : dockets.slice(0, 1);
     const rest = dockets.filter((d) => !lead.includes(d));
@@ -73,7 +80,7 @@ export function mdlCallout(ctx: MdlContext | undefined, o: MdlCalloutOptions = {
       box.append(h('div', { class: 'mdl-note__item' }, docketHead(d), h('p', { class: 'mdl-note__text' }, d.sentences.map((s) => s.text).join(' '))));
     }
     if (rest.length) {
-      box.append(h('p', { class: 'mdl-note__earlier' }, `${current.length ? 'Also above a quarter in earlier years' : 'Also above a quarter'}: ${earlierLine(rest)}.`));
+      box.append(h('p', { class: 'mdl-note__earlier' }, earlierLine(rest)));
     }
     box.append(sourceChip({ sourceIds: ctx.source_ids, derived: ctx.derived, formula: ctx.formula, compact: true }));
     if (o.moreHref) {

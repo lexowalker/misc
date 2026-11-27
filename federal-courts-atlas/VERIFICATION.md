@@ -231,6 +231,83 @@ sideways scroll, page errors, the popover staying on screen and the menu label f
 - Test only: the compare tests' wait helper could pass before the page had drawn any row, so one run read the year
   menu before it existed. It now waits for the menu and the first row.
 
+**Third recheck (after the fix pass, Nov 27).** The fix pass replaced a stale gap record that said MDL docket counts
+were not processed, rewrote the brief MDL note's line about other dockets as one sentence, made a click pin the
+glossary popover open, tried 46 more GovInfo package ids for the 13 MDL dockets shown by number only, re-rendered the
+boundary preview image without an em-dash in its title, and made the accessibility scan's scroll step fail fast. A
+third recheck lane, which did not build any of it, checked each claim with its own code and captures. No value shown
+on the site changed and no docket was newly named, so no data-audit row was added.
+
+- **Rebuild.** `make stories web docs` ran three times. All 563 files under `public/data/`, `data/processed/`,
+  `data/gaps/`, `data/sources/`, plus `SOURCES.md` and `DATA_GAPS.md`, were byte-identical after every run and equal
+  to the files the fix pass left.
+- **Tests.** Pipeline tests: 1,254 passed, twice. Typecheck clean; `vite build` succeeds. Four full end-to-end runs
+  (`CI=1 E2E_PORT=4710 npx playwright test --trace off`, both projects, 378 tests). Run 1, on the fix pass's code,
+  and run 2, after the glossary fix: 364 passed, 14 skipped by design, 0 failed. Run 3: 363 passed, 1 failed. The
+  phone courtroom test read the bottom sheet's position 167 ms into its 420 ms slide-in, 8.76 px short of the
+  bottom; a frame-by-frame sample of the same slide-in reads 8.76 px at 167 ms and 0.01 px at 485 ms. Alone, the
+  test passed 30 of 30 times. It now waits for the slide-in to end (below). Run 4, on the final code: RUN4_RESULT.
+  The 16 visual baselines passed in every run and were not rewritten.
+- **Gap record.** The new record `mass_tort_story_not_written` is true: 5 stories ship, the docket table
+  `data/processed/idb/civil_mdl_dockets` exists, `civil_mdl_meta.json` gives FY 2010, and the MDL 2885 caveats are on
+  the affected measures. The two stories describe N.D. Fla.'s closings without naming the docket; those closings were
+  139,357 of 141,214 (FY 2024) and 147,231 of 149,260 (FY 2025) MDL 2885 cases (rows 217 and 219). No text in
+  `DATA_GAPS.md`, `docs/lanes/stories.md` or the README still says the counts are unprocessed.
+- **MDL note sentence.** The recheck recomputed, from the processed docket table, the years each docket was above 25%
+  of a district's civil cases filed or closed from FY 2010: 39 of 39 year lists equal the profiles' `years_text`, on
+  the same 22 districts. It compared the rendered sentence with text written out by hand for flnd, ohsd, wvsd, laed,
+  ilnd (two dockets, neither current, both shown by number) and ksd (one docket, so no such sentence), at 1280 and
+  375 px in light and dark: 24 captures and 96 checks (text, old fragment gone, no em-dash, no sideways scroll), all
+  passing. Eight of the captures were read by eye; the sentence is plain, grammatical and readable in both themes.
+- **Glossary popover.** A script drove it by mouse, keyboard (Tab, Enter, Space, Escape) and touch on the Learn page,
+  N.D. Fla.'s MDL note and key statistics, and the measure labels on the home map and compare page, in light and
+  dark: 185 checks. Clicking or tapping inside a pinned popover keeps it open. One defect was found and fixed (below).
+- **GovInfo names.** Of 89 cached `www.govinfo.gov` responses, 47 were fetched by the fix pass (17:09 to 17:10 UTC):
+  exactly the 46 ids it added to `NAME_CANDIDATES` and one check of a real record (case 2:09-md-02047, E.D. La.),
+  which no source record uses. All 46 are the same 44,172-byte "Page Not Found" page with no MODS record in it. All
+  85 candidate ids are cached, and rerunning `make idb-mdl` left the cache at 4,295 files and its outputs unchanged.
+  The gap record lists exactly the 13 unnamed dockets and their 9 transferee courts. The 26 named dockets still
+  verify (file sha256 equal to the manifest, an md, mn or ml case number ending in the docket, the transferee court).
+- **Preview image.** Only pixel rows 13 to 30 of `preview.png` changed: the title's em-dash became a colon. Nothing else
+  in the image or the boundary files changed.
+- **Accessibility scan.** Only `scrollThrough` changed: the same 19 routes, the same axe tags, the same target-size
+  exclusion and the same serious-or-critical filter. A verbatim copy of the helper, run on four-district compare at
+  375 px with the page's main thread blocked, failed after 5,006 ms with "scrollThrough: reading the window height
+  on .../#/compare?d=vaed,txed,nysd,gud did not finish within 5000 ms ..."; unblocked, it reached the bottom in 887 ms.
+- **Global.** No file over 20 MB; no secrets by pattern; `data/raw/` holds only the 8 allowed hosts, and the last
+  CourtListener response was fetched at 08:46 UTC, before the fix pass. Literal em-dashes were found in five pipeline
+  files (present since the project skeleton) and were removed (below). Two boundary files keep them on purpose:
+  `data/processed/boundaries/statute_parsed.json` and `statute_crosscheck.csv` quote 28 U.S.C. word for word, and the
+  Code's subsection headings use them (after "(b) Middle District." in 28 U.S.C. § 113, for example). Neither reaches
+  the site.
+
+**Fixed by the third recheck** (no value changed):
+
+- Glossary popover: a click that closed a pinned popover less than 120 ms after the pointer reached the term (so the
+  hover delay was still running) closed it and then reopened it 120 ms later. It happened at 0, 40 and 80 ms, not
+  at 200 or 400 ms. The spec checked the closed state at once and missed it. A press on a term now cancels a pending
+  hover-open, and the spec checks that the popover is still closed 400 ms later (that check fails without the fix).
+- Code only: the five pipeline files with literal em-dashes (`boundaries/statute.py`, `common/manifest.py`,
+  `fcms/parse.py`, `idb/jb.py`, `ussc/packets.py`) now write the character as `\u2014` where a parser must match it,
+  and two docstrings were reworded. Their syntax trees are identical to before apart from the two docstrings.
+- Test only: the phone courtroom test measured the bottom sheet before its 420 ms slide-in ended. It now waits for
+  the sheet's own animation to finish, then checks the same 2 px bound; it passed 20 of 20 times alone.
+- Docs: `docs/lanes/idb.md` said two to four more ids were tried per docket; it was three or four.
+
+**Not checked by the third recheck:**
+
+- The MDL counts were not traced to the raw FJC file again (the second recheck did that, rows 232 to 251); the year
+  lists were recomputed from the processed docket table only. GovInfo was not searched again; this lane made no
+  network request and read the 46 not-found pages from the cache.
+- The glossary popover was driven only in headless Chromium with a simulated mouse, keyboard and touch: no screen
+  reader, no real touch screen, no pen. The story number popovers and the formula popovers were not driven.
+- Seen but left as is: hovering a second term while one is pinned shows the second term's popover, which closes when
+  the pointer leaves it. After a click inside a pinned popover, focus is on the page itself, and Escape closes the
+  popover without moving focus back to the term; the Escape handler's focus return never runs, because closing the
+  popover clears the term first. That code predates the fix pass.
+- The cause of the earlier one-off 1.6-minute stall in the scroll step is still unknown; it did not recur in any of
+  this lane's four full runs.
+
 ## Boundary audit
 
 Full report: `docs/audits/boundary_audit.md`.
@@ -313,7 +390,9 @@ Home page JavaScript before first paint: 79 KB transferred; the three.js courtro
   depend on how each clerk's office codes cases. The criminal groups match AO Table D-4 nationally for FY 2005 to
   2025; D-4 has no district rows.
 - **13 MDL dockets are shown by number only** (1507, 2197, 2299, 2325, 2326, 2327, 2391, 2502, 2545, 2753, 2782,
-  2873, 3060); no GovInfo record that names them was found. MDL notes start in FY 2010, because the FJC records
+  2873, 3060); no GovInfo record that names them was found, including in a second search of 46 more package ids
+  (fix pass; four or five ids per docket in all, listed in the gap record). GovInfo's sitemaps and API were not
+  tried. MDL notes start in FY 2010, because the FJC records
   almost never carry a docket number before then, so a docket that dominated a court only before FY 2010 gets no note.
 - **Not re-checked by the final recheck:** the new glossary statement that drug-patent (Hatch-Waxman) cases carry
   nature-of-suit code 835 since 2017 (it rests on the IDB lane's first 835 filing, June 2017); the other new

@@ -249,6 +249,13 @@ cases from FY1988 on, or 0.16% of filings.
   record has a civil case number, 4:03-cv-01507), 2197, 2299, 2325, 2326, 2327, 2391, 2502, 2545 and 3060 (N.D. Ill.
   records with civil case numbers), 2753, 2782, 2873. MDL 875 (the FJC's "0875", above 25% of N.D. Ohio's FY2015
   filings) is named from its E.D. Pa. transferee record.
+* **Second name search (fix pass, Nov 27).** `NAME_CANDIDATES` now holds an ordered list of package ids per docket
+  and the build takes the first that verifies. For each of the 13 dockets above, three or four more ids were tried
+  (filing year implied by the MDL number, other divisions of the transferee court, and the case number with and
+  without zero-padding): 46 fetches through `pipeline.common.http.fetch`, each a GovInfo "Page Not Found", so none
+  verifies and all 13 stay number-only. The verification rule was not changed. The gap record
+  `civil_mdl_docket_names_unverified` lists every id tried for each docket (four or five per docket). GovInfo answers
+  a missing package with an HTTP 200 error page, so every attempt is cached and a rebuild fetches nothing again.
 
 ## 5. Coverage
 

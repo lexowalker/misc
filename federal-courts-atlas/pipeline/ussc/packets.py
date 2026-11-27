@@ -55,7 +55,7 @@ def packet_text(path: Path) -> str:
 
 
 def num(tok: str) -> float | None:
-    if tok in ("--", "-", "—"):
+    if tok in ("--", "-", "\u2014"):
         return None
     return float(tok.replace(",", ""))
 

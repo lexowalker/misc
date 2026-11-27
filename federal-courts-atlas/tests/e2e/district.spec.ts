@@ -324,6 +324,16 @@ test('bench notes that duty stations are not in the FJC export', async ({ page }
 type MdlDocketJson = { docket: string; label?: string; name?: string; court_short?: string; current?: boolean; years_text?: string; sentences: Array<{ text: string; year: number }>; history: Array<{ text: string }> };
 type MdlJson = { intro: string; rule: string; years: number[]; dockets: MdlDocketJson[] };
 
+/** The compact note's sentence about the dockets that get no sentences of their own, built from the profile file:
+ * one docket reads "MDL 2433 also made up more than a quarter of this court’s civil cases filed or closed in FY 2015
+ * and FY 2019."; several list their years in parentheses and end "each also made up ... in the years given." */
+function earlierText(rest: MdlDocketJson[]): string {
+  const share = 'more than a quarter of this court’s civil cases filed or closed';
+  if (rest.length === 1) return `${rest[0]!.label} also made up ${share} in ${rest[0]!.years_text}.`;
+  const parts = rest.map((d) => `${d.label} (${d.years_text})`);
+  return `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]} each also made up ${share} in the years given.`;
+}
+
 test('multidistrict litigation note on N.D. Fla., near the statistics it bears on', async ({ page }, testInfo) => {
   const prof = readJson('profiles/flnd.json') as { mdl_context?: MdlJson };
   const mdl = prof.mdl_context!;
@@ -334,10 +344,9 @@ test('multidistrict litigation note on N.D. Fla., near the statistics it bears o
   const brief = page.locator('#sec-standout .mdl-note--compact');
   await expect(brief).toBeVisible();
   for (const d of mdl.dockets.filter((x) => x.current)) for (const s of d.sentences) await expect(brief).toContainText(s.text);
-  for (const d of mdl.dockets.filter((x) => !x.current)) {
-    await expect(brief.locator('.mdl-note__earlier')).toContainText(`${d.label} (${d.years_text})`);
-    for (const s of d.sentences) await expect(brief).not.toContainText(s.text);
-  }
+  const older = mdl.dockets.filter((x) => !x.current);
+  if (older.length) await expect(brief.locator('.mdl-note__earlier')).toHaveText(earlierText(older));
+  for (const d of older) for (const s of d.sentences) await expect(brief).not.toContainText(s.text);
   // The kicker's "multidistrict litigation" opens the glossary definition (28 U.S.C. § 1407(a)).
   await brief.locator('.mdl-note__kicker .term').click();
   await expect(page.locator('.gloss-pop')).toHaveAttribute('data-open', 'true');
@@ -382,10 +391,11 @@ test('MDL notes for earlier years: S.D. Ohio, S.D. W. Va., E.D. La.', async ({ p
     const lead = current.length ? current : mdl.dockets.slice(0, 1);
     for (const d of lead) for (const s of d.sentences) await expect(brief).toContainText(s.text);
     const rest = mdl.dockets.filter((d) => !lead.includes(d));
-    if (rest.length) {
-      await expect(brief.locator('.mdl-note__earlier')).toContainText(current.length ? 'Also above a quarter in earlier years:' : 'Also above a quarter:');
-      for (const d of rest) await expect(brief.locator('.mdl-note__earlier')).toContainText(`${d.label} (${d.years_text})`);
-    }
+    // One plain sentence for the other dockets, with the years each was above a quarter (S.D. Ohio: one docket and
+    // no current one; S.D. W. Va.: two and no current one; E.D. La.: three beside a current one).
+    await expect(brief.locator('.mdl-note__earlier')).toHaveCount(rest.length ? 1 : 0);
+    if (rest.length) await expect(brief.locator('.mdl-note__earlier')).toHaveText(earlierText(rest));
+    await expect(brief).not.toContainText('Also above a quarter');
     const full = page.locator('#mdl-note');
     for (const d of mdl.dockets) {
       await expect(full.locator('.mdl-note__docket', { hasText: d.label! }).first()).toBeVisible();

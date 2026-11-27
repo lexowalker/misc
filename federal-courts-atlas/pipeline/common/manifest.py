@@ -1,9 +1,9 @@
 """Source manifest, data-gap log, and the shared observations table writer.
 
 Each lane writes ONLY its own fragments:
-  data/sources/<lane>.json   — every source file it used (URL, dataset, vintage, retrieval date, sha256)
-  data/gaps/<lane>.json      — every value it could not source (shown as "No data" in the UI)
-  data/processed/<lane>/observations.{parquet,csv} — tidy district-period-variable values
+  data/sources/<lane>.json:   every source file it used (URL, dataset, vintage, retrieval date, sha256)
+  data/gaps/<lane>.json:      every value it could not source (shown as "No data" in the UI)
+  data/processed/<lane>/observations.{parquet,csv}: tidy district-period-variable values
 
 ``python -m pipeline.build_docs`` assembles SOURCES.md and DATA_GAPS.md from the fragments.
 """

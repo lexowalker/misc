@@ -3,6 +3,8 @@
 //  - Screen readers get the definition via aria-describedby (a visually hidden span),
 //    so it is announced on focus without opening anything.
 //  - Sighted readers get a popover on hover, focus or tap; Escape closes it.
+//  - A mouse click (or tap) pins the popover open, even when hovering had already opened it; the next click on the
+//    term, Escape or a click elsewhere closes it. Enter and Space toggle it, as before.
 // rich() turns authored strings into nodes: [[id]] or [[id|shown text]] for terms,
 // **text** for bold, *text* for italics (case names).
 
@@ -13,12 +15,16 @@ import { PHRASE_TERMS, termsForVariable, type TermRef } from '../content/variabl
 let pop: HTMLDivElement | null = null;
 let current: HTMLElement | null = null;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
+/** The open popover was pinned by a click on its term: leaving the term with the pointer does not close it. */
+let pinned = false;
 
 function popover(): HTMLDivElement {
   if (pop) return pop;
   pop = h('div', { class: 'gloss-pop', role: 'tooltip', 'aria-hidden': 'true', 'data-open': 'false' });
   pop.addEventListener('pointerenter', () => clearTimeout(hideTimer));
-  pop.addEventListener('pointerleave', () => scheduleHide());
+  pop.addEventListener('pointerleave', () => {
+    if (!pinned) scheduleHide();
+  });
   document.body.append(pop);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && pop?.dataset.open === 'true') {
@@ -61,6 +67,7 @@ export function hidePopover(): void {
   pop.dataset.open = 'false';
   current?.setAttribute('aria-expanded', 'false');
   current = null;
+  pinned = false;
 }
 
 function showPopover(btn: HTMLElement, id: string): void {
@@ -68,6 +75,7 @@ function showPopover(btn: HTMLElement, id: string): void {
   if (!entry) return;
   clearTimeout(hideTimer);
   const p = popover();
+  if (current !== btn) pinned = false;
   current?.setAttribute('aria-expanded', 'false');
   current = btn;
   btn.setAttribute('aria-expanded', 'true');
@@ -153,21 +161,41 @@ export function term(id: string, text?: string, opts: TermOptions = {}): HTMLEle
   btn.addEventListener('pointerleave', (e) => {
     if (e.pointerType === 'touch') return;
     clearTimeout(hoverTimer);
-    scheduleHide();
+    if (!(pinned && current === btn)) scheduleHide();
   });
   btn.addEventListener('focus', () => showPopover(btn, id));
-  btn.addEventListener('blur', () => scheduleHide());
+  btn.addEventListener('blur', () => {
+    // A press inside a pinned popover (to select its text) takes focus off the term; keep it open then.
+    if (pinned && current === btn && pop?.matches(':hover')) return;
+    scheduleHide();
+  });
   // A press focuses the button in Chrome (desktop and Android), and focus opens the popover, so the click that
-  // follows must toggle from the state before the press; otherwise a tap opened and then closed it at once.
+  // follows must act on the state before the press; otherwise a tap opened and then closed it at once.
   let openBeforePress = false;
+  let pinnedBeforePress = false;
   btn.addEventListener('pointerdown', () => {
+    // A press settles the state itself: a hover-open still pending (the pointer entered under 120 ms ago) must not
+    // fire after the click and reopen a popover the click just closed.
+    clearTimeout(hoverTimer);
     openBeforePress = current === btn && pop?.dataset.open === 'true';
+    pinnedBeforePress = openBeforePress && pinned;
   });
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    const open = e.detail > 0 ? openBeforePress : current === btn && pop?.dataset.open === 'true';
-    if (open) hidePopover();
-    else showPopover(btn, id);
+    if (e.detail === 0) {
+      // Keyboard (Enter or Space): toggle.
+      if (current === btn && pop?.dataset.open === 'true') hidePopover();
+      else showPopover(btn, id);
+      return;
+    }
+    // Pointer: a click pins the popover, including one hovering had already opened (a mouse user who hovers and
+    // then clicks to read must not see it close); a click on a pinned term closes it.
+    if (openBeforePress && pinnedBeforePress) {
+      hidePopover();
+      return;
+    }
+    showPopover(btn, id);
+    pinned = true;
   });
   return h('span', { class: 'term-wrap' }, btn, desc);
 }

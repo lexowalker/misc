@@ -5,7 +5,8 @@ Reads only data/processed/* (and data/sources/*.json for citations) and writes, 
   public/data/stories/<slug>.json   numbers (value, display text, sources, how computed, formula when derived),
                                     chart series, map layers and source records for one story
   public/data/stories/index.json    the headline numbers each story's dek uses, plus thumbnail map data
-  data/gaps/stories.json            values a candidate story needed that are not in the processed tables
+  data/gaps/stories.json            candidate stories not written, and any value a story needed that is not in
+                                    the processed tables (rewritten each run)
 
 The prose lives in src/content/stories.ts and refers to numbers by key ({key}); the page fills them in at
 runtime from these files. tests/pipeline/test_stories.py recomputes every number independently.
@@ -13,7 +14,9 @@ Running it twice on the same inputs gives byte-identical files.
 """
 from __future__ import annotations
 
-from pipeline.common.manifest import record_gap
+import json
+
+from pipeline.common.manifest import DATA, record_gap
 
 from . import after_booker, border_districts, patent_capital, rocket_docket, where_trials_went
 from .common import LANE, OUT, write_json
@@ -53,14 +56,21 @@ def main() -> None:
     for p in OUT.glob("*.json"):
         if p.name not in keep:
             p.unlink()
+    first_fy = json.loads((DATA / "processed" / "idb" / "civil_mdl_meta.json").read_text())["first_coded_fy"]
+    gaps = DATA / "gaps" / f"{LANE}.json"
+    gaps.unlink(missing_ok=True)  # rewritten from scratch each run, so a gap that no longer applies does not linger
     record_gap(
-        LANE, "mass_tort_mdl_counts_not_processed",
-        description=("A candidate story on N.D. Fla.'s mass-tort docket needs counts of cases in one multidistrict "
-                     "litigation (MDL docket 2885) by fiscal year. The IDB lane does not publish MDL docket counts in "
-                     "data/processed, so the story was not built; its national effects are noted as caveats in the "
-                     "Rocket Docket and Where Trials Went stories."),
-        variables=["idb MDLDOCK counts"], districts=["flnd"], periods="FY 2019 to FY 2025",
-        reason="Not in a processed lane table; the stories lane reads data/processed only.",
+        LANE, "mass_tort_story_not_written",
+        description=("A candidate story on N.D. Fla.'s mass-tort docket (multidistrict litigation docket 2885) was "
+                     "not written; the atlas has five stories. No data is missing for it: the IDB lane publishes "
+                     "civil case counts by MDL docket, district and fiscal year (data/processed/idb/"
+                     "civil_mdl_dockets), and the district profiles show them instead, in a note on each district "
+                     "where one docket made up more than a quarter of its civil cases filed or closed in a fiscal "
+                     f"year from FY {first_fy} on (MDL 2885 on N.D. Fla.'s page). The docket's national effects are "
+                     "noted as caveats in the Rocket Docket and Where Trials Went stories and on the measures it "
+                     "affects."),
+        variables=["idb civil_mdl_dockets"], districts=["flnd"],
+        reason="Story not written; the counts it would use are shown on district profiles.",
     )
     n = sum(len(s.numbers) for s in stories.values())
     print(f"stories: wrote {len(stories)} stories ({n} numbers) to {OUT.relative_to(OUT.parents[2])}")

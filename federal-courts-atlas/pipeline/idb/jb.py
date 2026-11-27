@@ -98,8 +98,8 @@ _FOOTNOTE_AFTER_LABEL = re.compile(r"^(\s*(?:[A-Z]{2,5}(?:,[A-Z])?))\s[1-9](?=\s
 
 
 def _tok(t: str):
-    t = t.strip().rstrip("¹²³⁴⁵*").replace("‐", "-").replace("–", "-").replace("—", "-")
-    if t in {"-", "--", "—", "–"}:
+    t = t.strip().rstrip("¹²³⁴⁵*").replace("‐", "-").replace("–", "-").replace("\u2014", "-")
+    if t in {"-", "--", "\u2014", "–"}:
         return 0
     if _NUM.match(t):
         t = t.replace(",", "").strip("()")

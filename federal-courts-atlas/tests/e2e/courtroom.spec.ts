@@ -361,6 +361,9 @@ test.describe('The Courtroom', () => {
     await shot(page, testInfo, 'courtroom-room-full');
     await page.locator('.cr-seat[data-seat="witness"]').click();
     await expect(panel).toHaveAttribute('data-sheet', 'open');
+    // The sheet slides up 24 px as it opens (cr-sheet-in, 420 ms); measure where it settles, not part-way. One full
+    // run read it 167 ms in, 8.76 px short of the bottom (third recheck, Nov 27).
+    await panel.evaluate((el) => Promise.all(el.getAnimations().map((a) => a.finished)));
     const box = (await panel.boundingBox())!;
     const vh = page.viewportSize()!.height;
     expect(Math.abs(box.y + box.height - vh)).toBeLessThan(2);

@@ -28,9 +28,13 @@ number, chart series and map layer comes from a data file the stories pipeline w
 
 All five are the research lane's "strong" stories. The two "usable" ones were not built:
 
-- *The Mass-Tort Wave* needs counts of cases in MDL docket 2885, which exist only in the raw IDB extract, not in
-  `data/processed`. Logged as `mass_tort_mdl_counts_not_processed` in `data/gaps/stories.json`. Its national effects
-  appear as caveats (Rocket Docket, Where Trials Went) using the processed N.D. Fla. termination counts.
+- *The Mass-Tort Wave* (N.D. Fla. and MDL docket 2885) was not written. The counts it would use are processed: the
+  IDB lane publishes civil cases by MDL docket, district and fiscal year (`data/processed/idb/civil_mdl_dockets`,
+  `docs/lanes/idb.md` section 4a), and the district profiles show them instead, in a note on each district where one
+  docket made up more than a quarter of its civil cases filed or closed in a year from FY 2010. Logged as
+  `mass_tort_story_not_written` in `data/gaps/stories.json` (no data is missing). Its national effects appear as
+  caveats in Rocket Docket and Where Trials Went (using the processed N.D. Fla. termination counts) and on the
+  measures it affects.
 - *The Pandemic Years* would be buildable from processed data (FCMS current-method medians, trials per judgeship,
   IDB trial counts) but was left out for time; the pipeline structure makes it a one-module addition.
 
@@ -74,7 +78,7 @@ pipeline/stories/common.py           table readers, Story registry, formatting, 
 pipeline/stories/{rocket_docket,patent_capital,border_districts,after_booker,where_trials_went}.py
 public/data/stories/<slug>.json      {slug, build_date, numbers, charts, layers, sources}
 public/data/stories/index.json       {order, stories: {slug: {build_date, numbers (headline only), thumb}}}
-data/gaps/stories.json               mass_tort_mdl_counts_not_processed
+data/gaps/stories.json               mass_tort_story_not_written (rewritten from scratch on every run)
 src/content/stories.ts               titles, deks, steps (text + graphic state), chart captions, method notes
 src/pages/stories.ts                 index: cards with thumbnail maps and filled deks
 src/pages/story.ts                   the scrollytelling page

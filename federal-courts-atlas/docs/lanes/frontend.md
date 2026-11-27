@@ -260,9 +260,15 @@ in light and dark at both widths with the WCAG 2.0, 2.1 and 2.2 A/AA rules, plus
 formula popover, the open place-search list, the open mobile menu, the rank chart while it dims first-place
 years). Serious or critical violations fail. One narrow exclusion: inline glossary terms are left out of
 `target-size`, because WCAG 2.5.8 exempts targets inside a sentence. The UI audit's review captures are
-`__screenshots__/{desktop,mobile,tablet}/ui-*.jpg`.
+`__screenshots__/{desktop,mobile,tablet}/ui-*.jpg`. Before each scan the page is scrolled to the bottom so lazy
+sections render (`scrollThrough`, fix pass Nov 27): each scroll step is its own short `page.evaluate` raced
+against a timer in the test runner (5 s a step, 30 s for the pass, at most 400 steps). A step that does not answer,
+a pass that runs long or a page that keeps growing fails at once with a message naming the page and the step,
+instead of stalling until the 90 s test timeout as it did twice in full runs (phone, four-district compare). The
+old check ran inside the page's own loop, so it could not fire while the page's main thread was blocked. The
+Playwright config has `retries: 0`; nothing is retried.
 
-Latest full run: see the polish pass at the end of this report (361 passed, 11 skipped). Integration pass
+Latest full run: see the fix pass at the end of this report (364 passed, 14 skipped). Integration pass
 (`CI=1 E2E_PORT=4210 npx playwright test --trace off`): 279 passed, 9 skipped by
 design (touch-only tests on desktop, mouse-only and desktop-only measurements on mobile), 0 failed.
 
@@ -415,3 +421,28 @@ Polish pass (Nov 27):
   `periodLabelFor` uses. Other years keep the plain label.
 - **Full suite** (`CI=1 E2E_PORT=4601 npx playwright test --trace off`): 361 passed, 11 skipped by design, 0 failed,
   including `visual.spec.ts` (baselines unchanged) and `a11y.spec.ts`. Pipeline: 1,252 passed. Typecheck clean.
+
+Fix pass (Nov 27):
+
+- **Glossary popover, click after hover.** On desktop, hovering a term for 120 ms opened its popover and the click
+  that usually follows closed it again. A pointer click now pins the popover (`pinned` in `glossary.ts`), including
+  one hovering had already opened; a pinned popover stays open when the pointer leaves the term or rests on the
+  popover, and closes on a second click on the term, Escape, a click elsewhere, or once the term scrolls out of
+  view. Enter and Space still toggle it, focus still opens it, Escape still closes it with focus left on the term,
+  and a tap still opens it (a second tap closes it). `glossary-popover.spec.ts` checks hover then click (open,
+  still open after leaving), a second click, Escape, a click elsewhere, hover alone, the keyboard and taps; its
+  first test fails on the previous `glossary.ts`.
+  Third recheck (Nov 27): a click that closed a pinned popover less than 120 ms after the pointer entered the
+  term (so the hover-open delay was still pending) closed it and then reopened it, unpinned, 120 ms later. The
+  spec checked the closed state at once and missed it. A press on a term now cancels a pending hover-open, and the
+  spec checks that the popover is still closed 400 ms after the second click (that check fails without the fix).
+- **MDL note in "What stands out".** The line about the other dockets was a fragment ("Also above a quarter in
+  earlier years: ..."). It is now one sentence: "MDL 2433 also made up more than a quarter of this court’s civil
+  cases filed or closed in FY 2015 and FY 2019." or, for several, "MDL 2592 (FY 2015 to 2023), MDL 2179 (FY 2013)
+  and MDL 1657 (FY 2010) each also made up more than a quarter of this court’s civil cases filed or closed in the
+  years given." It reads the same with or without a current docket; see `docs/lanes/district.md`. Checked on
+  ohsd, wvsd and laed at 1280 and 375 px, light and dark.
+- **Accessibility scan.** `scrollThrough` in `a11y.spec.ts` now fails fast with a clear message (see Testing).
+- **Full suite** (`CI=1 E2E_PORT=4701 npx playwright test --trace off`): 378 tests, 364 passed, 14 skipped by
+  design, 0 failed, including `visual.spec.ts` (baselines unchanged, not updated) and `a11y.spec.ts`. Pipeline:
+  1,254 passed. Typecheck clean. Glossary: 54 entries (unchanged).

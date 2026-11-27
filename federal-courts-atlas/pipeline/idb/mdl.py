@@ -20,8 +20,9 @@ Docket names: ``civil_mdl_docket_names.csv``, for every docket that is above 25%
 or closed in any year from ``FIRST_CODED_FY``. A name is used only when a GovInfo "United States Courts Opinions"
 (USCOURTS) record for the transferee court is found whose MODS metadata gives a case number ending in the docket
 number with a multidistrict case type (``md-0NNNN``, ``mn-0NNNN`` in D.S.C. or ``ml-0NNNN`` in S.D. Ind.) and whose
-author is that district court. The package ids tried are listed in ``NAME_CANDIDATES`` (typed in; each is verified
-against the record, never trusted on its own). A docket without a verified record is shown by number only.
+author is that district court. The package ids tried are listed in ``NAME_CANDIDATES`` (typed in, several per docket
+where the first did not verify; each is verified against the record, never trusted on its own). A docket without a
+verified record is shown by number only, and the gap record lists every id tried for it.
 
 Coverage: ``civil_mdl_coverage.csv`` counts, for every termination fiscal year, the civil termination records and
 those carrying a 4-digit docket number. Almost no record closed before FY 2010 carries one, so docket counts are
@@ -55,50 +56,68 @@ NAME_SHARE = 25.0      # dockets above this share of a district's civil cases in
 CODED_MIN = 1000       # a termination year counts as coded when at least this many records carry a docket number
 CASE_TYPES = "md|mn|ml"  # multidistrict case types in the transferee court's case number
 
-# docket -> (transferee district, GovInfo USCOURTS package id to try). Verified against the record before use; a
-# candidate that does not verify (no such page, or a case number without a multidistrict case type) is listed so the
-# attempt is on record, and its docket is shown by number only.
-NAME_CANDIDATES: dict[str, tuple[str, str]] = {
-    "2885": ("flnd", "USCOURTS-flnd-3_19-md-02885"),
-    "3140": ("flnd", "USCOURTS-flnd-3_25-md-03140"),
-    "3081": ("azd", "USCOURTS-azd-2_23-md-03081"),
-    "2738": ("njd", "USCOURTS-njd-3_16-md-02738"),
-    "2666": ("mnd", "USCOURTS-mnd-0_15-md-02666"),
-    "2873": ("scd", "USCOURTS-scd-2_18-mn-02873"),
-    "3092": ("ohnd", "USCOURTS-ohnd-1_24-md-03092"),
-    "2740": ("laed", "USCOURTS-laed-2_16-md-02740"),
-    "2753": ("nhd", "USCOURTS-nhd-1_16-md-02753"),
+# docket -> (transferee district, GovInfo USCOURTS package ids to try, in order). Each id is verified against the
+# record before use and the first that verifies names the docket. Ids that do not verify (GovInfo answers "Page Not
+# Found", or the case number has no multidistrict case type) stay listed so the attempts are on record; a docket with
+# none that verifies is shown by number only, and the gap record lists every id tried. GovInfo answers a missing
+# package with an HTTP 200 error page, so every attempt is in the HTTP cache and a rebuild fetches nothing again.
+# Fix pass (2026-11-27): for the 13 unnamed dockets, up to four more ids each were tried (filing year from the MDL
+# number range, division number, zero-padding); 46 fetches, none found.
+NAME_CANDIDATES: dict[str, tuple[str, tuple[str, ...]]] = {
+    "2885": ("flnd", ("USCOURTS-flnd-3_19-md-02885",)),
+    "3140": ("flnd", ("USCOURTS-flnd-3_25-md-03140",)),
+    "3081": ("azd", ("USCOURTS-azd-2_23-md-03081",)),
+    "2738": ("njd", ("USCOURTS-njd-3_16-md-02738",)),
+    "2666": ("mnd", ("USCOURTS-mnd-0_15-md-02666",)),
+    "2873": ("scd", ("USCOURTS-scd-2_18-mn-02873", "USCOURTS-scd-2_18-md-02873", "USCOURTS-scd-2_19-mn-02873",
+                     "USCOURTS-scd-2_18-mn-2873", "USCOURTS-scd-2_19-md-02873")),
+    "3092": ("ohnd", ("USCOURTS-ohnd-1_24-md-03092",)),
+    "2740": ("laed", ("USCOURTS-laed-2_16-md-02740",)),
+    "2753": ("nhd", ("USCOURTS-nhd-1_16-md-02753", "USCOURTS-nhd-1_16-md-2753", "USCOURTS-nhd-1_17-md-02753",
+                     "USCOURTS-nhd-1_17-md-2753", "USCOURTS-nhd-1_18-md-02753")),
     # Added for the earlier-year notes (polish pass, 2026-11-27).
-    "0875": ("paed", "USCOURTS-paed-2_01-md-00875"),
-    "1507": ("ared", "USCOURTS-ared-4_03-cv-01507"),    # civil (cv) case number: does not verify
-    "1657": ("laed", "USCOURTS-laed-2_05-md-01657"),
-    "1842": ("rid", "USCOURTS-rid-1_07-md-01842"),
-    "1943": ("mnd", "USCOURTS-mnd-0_08-md-01943"),
-    "1964": ("moed", "USCOURTS-moed-4_08-md-01964"),
-    "2179": ("laed", "USCOURTS-laed-2_10-md-02179"),
-    "2197": ("ohnd", "USCOURTS-ohnd-1_10-md-02197"),
-    "2244": ("txnd", "USCOURTS-txnd-3_11-md-02244"),
-    "2299": ("lawd", "USCOURTS-lawd-6_11-md-02299"),
-    "2325": ("wvsd", "USCOURTS-wvsd-2_12-md-02325"),
-    "2326": ("wvsd", "USCOURTS-wvsd-2_12-md-02326"),
-    "2327": ("wvsd", "USCOURTS-wvsd-2_12-md-02327"),
-    "2391": ("innd", "USCOURTS-innd-3_12-md-02391"),
-    "2428": ("mad", "USCOURTS-mad-1_13-md-02428"),
-    "2433": ("ohsd", "USCOURTS-ohsd-2_13-md-02433"),
-    "2441": ("mnd", "USCOURTS-mnd-0_13-md-02441"),
-    "2502": ("scd", "USCOURTS-scd-2_14-mn-02502"),
-    "2545": ("ilnd", "USCOURTS-ilnd-1_14-cv-01748"),    # civil (cv) case number: does not verify
-    "2570": ("insd", "USCOURTS-insd-1_14-ml-02570"),
-    "2591": ("ksd", "USCOURTS-ksd-2_14-md-02591"),
-    "2592": ("laed", "USCOURTS-laed-2_14-md-02592"),
-    "2641": ("azd", "USCOURTS-azd-2_15-md-02641"),
-    "2734": ("flnd", "USCOURTS-flnd-3_16-md-02734"),
-    "2782": ("gand", "USCOURTS-gand-1_17-md-02782"),
-    "2789": ("njd", "USCOURTS-njd-2_17-md-02789"),
-    "2804": ("ohnd", "USCOURTS-ohnd-1_17-md-02804"),
-    "2846": ("ohsd", "USCOURTS-ohsd-2_18-md-02846"),
-    "2924": ("flsd", "USCOURTS-flsd-9_20-md-02924"),
-    "3060": ("ilnd", "USCOURTS-ilnd-1_23-cv-00818"),    # civil (cv) case number: does not verify
+    "0875": ("paed", ("USCOURTS-paed-2_01-md-00875",)),
+    "1507": ("ared", ("USCOURTS-ared-4_03-cv-01507",    # civil (cv) case number: does not verify
+                      "USCOURTS-ared-4_03-md-01507", "USCOURTS-ared-4_03-md-1507", "USCOURTS-ared-4_02-md-01507",
+                      "USCOURTS-ared-4_04-md-01507")),
+    "1657": ("laed", ("USCOURTS-laed-2_05-md-01657",)),
+    "1842": ("rid", ("USCOURTS-rid-1_07-md-01842",)),
+    "1943": ("mnd", ("USCOURTS-mnd-0_08-md-01943",)),
+    "1964": ("moed", ("USCOURTS-moed-4_08-md-01964",)),
+    "2179": ("laed", ("USCOURTS-laed-2_10-md-02179",)),
+    "2197": ("ohnd", ("USCOURTS-ohnd-1_10-md-02197", "USCOURTS-ohnd-3_10-md-02197", "USCOURTS-ohnd-1_10-md-2197",
+                      "USCOURTS-ohnd-3_10-md-2197", "USCOURTS-ohnd-5_10-md-02197")),
+    "2244": ("txnd", ("USCOURTS-txnd-3_11-md-02244",)),
+    "2299": ("lawd", ("USCOURTS-lawd-6_11-md-02299", "USCOURTS-lawd-6_11-md-2299", "USCOURTS-lawd-6_12-md-02299",
+                      "USCOURTS-lawd-6_12-md-2299", "USCOURTS-lawd-2_11-md-02299")),
+    "2325": ("wvsd", ("USCOURTS-wvsd-2_12-md-02325", "USCOURTS-wvsd-2_12-md-2325", "USCOURTS-wvsd-2_11-md-02325",
+                      "USCOURTS-wvsd-3_12-md-02325")),
+    "2326": ("wvsd", ("USCOURTS-wvsd-2_12-md-02326", "USCOURTS-wvsd-2_12-md-2326", "USCOURTS-wvsd-2_11-md-02326",
+                      "USCOURTS-wvsd-3_12-md-02326")),
+    "2327": ("wvsd", ("USCOURTS-wvsd-2_12-md-02327", "USCOURTS-wvsd-2_12-md-2327", "USCOURTS-wvsd-2_11-md-02327",
+                      "USCOURTS-wvsd-3_12-md-02327")),
+    "2391": ("innd", ("USCOURTS-innd-3_12-md-02391", "USCOURTS-innd-3_12-md-2391", "USCOURTS-innd-3_13-md-02391",
+                      "USCOURTS-innd-1_12-md-02391", "USCOURTS-innd-2_12-md-02391")),
+    "2428": ("mad", ("USCOURTS-mad-1_13-md-02428",)),
+    "2433": ("ohsd", ("USCOURTS-ohsd-2_13-md-02433",)),
+    "2441": ("mnd", ("USCOURTS-mnd-0_13-md-02441",)),
+    "2502": ("scd", ("USCOURTS-scd-2_14-mn-02502", "USCOURTS-scd-2_14-md-02502", "USCOURTS-scd-2_13-mn-02502",
+                     "USCOURTS-scd-2_14-mn-2502", "USCOURTS-scd-3_14-mn-02502")),
+    "2545": ("ilnd", ("USCOURTS-ilnd-1_14-cv-01748",    # civil (cv) case number: does not verify
+                      "USCOURTS-ilnd-1_14-md-02545", "USCOURTS-ilnd-1_14-md-2545", "USCOURTS-ilnd-1_15-md-02545")),
+    "2570": ("insd", ("USCOURTS-insd-1_14-ml-02570",)),
+    "2591": ("ksd", ("USCOURTS-ksd-2_14-md-02591",)),
+    "2592": ("laed", ("USCOURTS-laed-2_14-md-02592",)),
+    "2641": ("azd", ("USCOURTS-azd-2_15-md-02641",)),
+    "2734": ("flnd", ("USCOURTS-flnd-3_16-md-02734",)),
+    "2782": ("gand", ("USCOURTS-gand-1_17-md-02782", "USCOURTS-gand-1_17-md-2782", "USCOURTS-gand-1_18-md-02782",
+                      "USCOURTS-gand-1_16-md-02782")),
+    "2789": ("njd", ("USCOURTS-njd-2_17-md-02789",)),
+    "2804": ("ohnd", ("USCOURTS-ohnd-1_17-md-02804",)),
+    "2846": ("ohsd", ("USCOURTS-ohsd-2_18-md-02846",)),
+    "2924": ("flsd", ("USCOURTS-flsd-9_20-md-02924",)),
+    "3060": ("ilnd", ("USCOURTS-ilnd-1_23-cv-00818",    # civil (cv) case number: does not verify
+                      "USCOURTS-ilnd-1_23-md-03060", "USCOURTS-ilnd-1_23-md-3060", "USCOURTS-ilnd-1_22-md-03060")),
 }
 GOVINFO_MODS = "https://www.govinfo.gov/metadata/pkg/{pkg}/mods.xml"
 GOVINFO_DETAILS = "https://www.govinfo.gov/app/details/{pkg}"
@@ -215,18 +234,28 @@ def verify_name(docket: str, district_id: str, pkg: str) -> dict | None:
 
 
 def names(dockets: set[str]) -> pd.DataFrame:
-    rows, missing = [], []
+    rows, missing = [], {}
     for dk in sorted(dockets):
-        cand = NAME_CANDIDATES.get(dk)
-        got = verify_name(dk, *cand) if cand else None
+        did, pkgs = NAME_CANDIDATES.get(dk, ("", ()))
+        got = None
+        for pkg in pkgs:
+            got = verify_name(dk, did, pkg)
+            if got:
+                break
         if got:
             rows.append(got)
         else:
-            missing.append(dk)
+            missing[dk] = (did, pkgs)
     if missing:
+        tried = "; ".join(f"MDL {dk} ({BY_ID[did].short if did else 'no transferee court'}): "
+                          + (", ".join(pkgs) if pkgs else "none")
+                          for dk, (did, pkgs) in missing.items())
         record_gap(LANE, "civil_mdl_docket_names_unverified",
                    description="No GovInfo court record could be matched to these MDL docket numbers, so the atlas "
-                               "names them by number only: " + ", ".join(f"MDL {d}" for d in missing) + ".",
+                               "names them by number only: " + ", ".join(f"MDL {d}" for d in missing) + ". "
+                               "GovInfo USCOURTS package ids tried for each (none is a record of the transferee "
+                               "court with a multidistrict case number for the docket): " + tried + ".",
+                   districts=sorted({did for did, _ in missing.values() if did}),
                    reason="litigation name not verified from an allowed source")
     cols = ["mdl_docket", "district_id", "case_number", "title_as_printed", "title", "source_id", "govinfo_package"]
     return pd.DataFrame(rows, columns=cols)

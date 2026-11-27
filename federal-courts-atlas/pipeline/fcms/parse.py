@@ -1,4 +1,4 @@
-"""Parsers for the AO's FCMS "U.S. District Court — Judicial Caseload Profile" PDFs.
+"""Parsers for the AO's FCMS Judicial Caseload Profile PDFs (the "U.S. District Court" profiles).
 
 Each September file has 95 pages: one national page ("all district courts") and one page per
 district. Every page reports six 12-month periods ending September 30 (the profile year and the
@@ -30,7 +30,7 @@ import pdfplumber
 
 # ---------------------------------------------------------------------------- tokens
 
-_DASH_CHARS = "­‐‑‒–—−"
+_DASH_CHARS = "­‐‑‒–\u2014−"
 _TR = str.maketrans({**{c: "-" for c in _DASH_CHARS}, " ": " "})
 _NUM_RE = re.compile(r"^-?(?:\d{1,3}(?:,\d{3})+|\d+)?(?:\.\d+)?$")
 NA_TOKENS = {"-", "--", "*", "**", "***", "N/A", "NA", "n/a"}

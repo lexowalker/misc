@@ -158,6 +158,35 @@ def test_every_dominant_docket_has_a_name_or_a_gap_record(mdl):
         assert dk in unnamed
 
 
+def test_unnamed_dockets_list_every_package_id_tried():
+    """The gap record lists, for every docket shown by number only, exactly the GovInfo package ids typed in for it, in
+    order; each was fetched (it is in the HTTP cache) and none satisfies the verification rule. A named docket's
+    package is one of its candidates."""
+    from pipeline.common.districts import BY_ID
+    from pipeline.common.http import _cache_paths
+    from pipeline.idb.mdl import GOVINFO_MODS, NAME_CANDIDATES
+    desc = json.loads((ROOT / "data" / "gaps" / "idb.json").read_text())["civil_mdl_docket_names_unverified"][
+        "description"]
+    named = pd.read_csv(NAMES, dtype=str).set_index("mdl_docket")
+    unnamed = sorted(set(re.findall(r"MDL (\d{4})", desc)))
+    assert unnamed, "expected some dockets shown by number only"
+    for dk in unnamed:
+        did, pkgs = NAME_CANDIDATES[dk]
+        assert f"MDL {dk} ({BY_ID[did].short}): " + ", ".join(pkgs) + (";" if dk != unnamed[-1] else ".") in desc
+        assert 1 <= len(pkgs) <= 6
+        for pkg in pkgs:
+            body, meta = _cache_paths(GOVINFO_MODS.format(pkg=pkg))
+            if not body.exists():
+                pytest.skip("GovInfo responses not in the local HTTP cache")
+            text = body.read_text(errors="replace")
+            numbers = re.findall(r"<caseNumber>([^<]*)</caseNumber>", text)
+            court_ok = f"United States District Court {BY_ID[did].name}</namePart>" in text
+            assert not (court_ok and any(re.search(rf"-(md|mn|ml)-0?{dk}$", n) for n in numbers)), pkg
+    for dk, r in named.iterrows():
+        assert r["govinfo_package"] in NAME_CANDIDATES[dk][1]
+        assert r["district_id"] == NAME_CANDIDATES[dk][0]
+
+
 def test_coverage_table_and_first_coded_year():
     """MDLDOCK is almost never filled in before FY 2010 closings; from FY 2010 every year has at least 1,000 records
     with a docket. Totals equal the lane's civil terminations."""

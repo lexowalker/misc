@@ -71,9 +71,19 @@
  },
  "civil_mdl_docket_names_unverified": {
   "lane": "idb",
-  "description": "No GovInfo court record could be matched to these MDL docket numbers, so the atlas names them by number only: MDL 1507, MDL 2197, MDL 2299, MDL 2325, MDL 2326, MDL 2327, MDL 2391, MDL 2502, MDL 2545, MDL 2753, MDL 2782, MDL 2873, MDL 3060.",
+  "description": "No GovInfo court record could be matched to these MDL docket numbers, so the atlas names them by number only: MDL 1507, MDL 2197, MDL 2299, MDL 2325, MDL 2326, MDL 2327, MDL 2391, MDL 2502, MDL 2545, MDL 2753, MDL 2782, MDL 2873, MDL 3060. GovInfo USCOURTS package ids tried for each (none is a record of the transferee court with a multidistrict case number for the docket): MDL 1507 (E.D. Ark.): USCOURTS-ared-4_03-cv-01507, USCOURTS-ared-4_03-md-01507, USCOURTS-ared-4_03-md-1507, USCOURTS-ared-4_02-md-01507, USCOURTS-ared-4_04-md-01507; MDL 2197 (N.D. Ohio): USCOURTS-ohnd-1_10-md-02197, USCOURTS-ohnd-3_10-md-02197, USCOURTS-ohnd-1_10-md-2197, USCOURTS-ohnd-3_10-md-2197, USCOURTS-ohnd-5_10-md-02197; MDL 2299 (W.D. La.): USCOURTS-lawd-6_11-md-02299, USCOURTS-lawd-6_11-md-2299, USCOURTS-lawd-6_12-md-02299, USCOURTS-lawd-6_12-md-2299, USCOURTS-lawd-2_11-md-02299; MDL 2325 (S.D. W. Va.): USCOURTS-wvsd-2_12-md-02325, USCOURTS-wvsd-2_12-md-2325, USCOURTS-wvsd-2_11-md-02325, USCOURTS-wvsd-3_12-md-02325; MDL 2326 (S.D. W. Va.): USCOURTS-wvsd-2_12-md-02326, USCOURTS-wvsd-2_12-md-2326, USCOURTS-wvsd-2_11-md-02326, USCOURTS-wvsd-3_12-md-02326; MDL 2327 (S.D. W. Va.): USCOURTS-wvsd-2_12-md-02327, USCOURTS-wvsd-2_12-md-2327, USCOURTS-wvsd-2_11-md-02327, USCOURTS-wvsd-3_12-md-02327; MDL 2391 (N.D. Ind.): USCOURTS-innd-3_12-md-02391, USCOURTS-innd-3_12-md-2391, USCOURTS-innd-3_13-md-02391, USCOURTS-innd-1_12-md-02391, USCOURTS-innd-2_12-md-02391; MDL 2502 (D. S.C.): USCOURTS-scd-2_14-mn-02502, USCOURTS-scd-2_14-md-02502, USCOURTS-scd-2_13-mn-02502, USCOURTS-scd-2_14-mn-2502, USCOURTS-scd-3_14-mn-02502; MDL 2545 (N.D. Ill.): USCOURTS-ilnd-1_14-cv-01748, USCOURTS-ilnd-1_14-md-02545, USCOURTS-ilnd-1_14-md-2545, USCOURTS-ilnd-1_15-md-02545; MDL 2753 (D. N.H.): USCOURTS-nhd-1_16-md-02753, USCOURTS-nhd-1_16-md-2753, USCOURTS-nhd-1_17-md-02753, USCOURTS-nhd-1_17-md-2753, USCOURTS-nhd-1_18-md-02753; MDL 2782 (N.D. Ga.): USCOURTS-gand-1_17-md-02782, USCOURTS-gand-1_17-md-2782, USCOURTS-gand-1_18-md-02782, USCOURTS-gand-1_16-md-02782; MDL 2873 (D. S.C.): USCOURTS-scd-2_18-mn-02873, USCOURTS-scd-2_18-md-02873, USCOURTS-scd-2_19-mn-02873, USCOURTS-scd-2_18-mn-2873, USCOURTS-scd-2_19-md-02873; MDL 3060 (N.D. Ill.): USCOURTS-ilnd-1_23-cv-00818, USCOURTS-ilnd-1_23-md-03060, USCOURTS-ilnd-1_23-md-3060, USCOURTS-ilnd-1_22-md-03060.",
   "variables": [],
-  "districts": [],
+  "districts": [
+   "ared",
+   "gand",
+   "ilnd",
+   "innd",
+   "lawd",
+   "nhd",
+   "ohnd",
+   "scd",
+   "wvsd"
+  ],
   "periods": [],
   "reason": "litigation name not verified from an allowed source"
  },

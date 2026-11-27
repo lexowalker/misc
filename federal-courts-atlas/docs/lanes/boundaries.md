@@ -21,7 +21,7 @@ Node/npx for `npx -y mapshaper@0.6`). Tests: `PYTHONPATH=. .venv/bin/python -m p
 | `data/processed/boundaries/state_outline_check.csv` | Dissolved counties compared with the Census state outlines: 0 km² difference for all 55. |
 | `data/processed/boundaries/districts.parquet` | GeoParquet (EPSG:4326) of the 94 district polygons at 1:500k, carve-outs applied. Columns: `district_id, name, short, state, circuit, article, area_km2`. |
 | `data/processed/boundaries/observations.{parquet,csv}`, `variables.json` | 3 small statute and geography variables (below). |
-| `data/processed/boundaries/preview.png` | Verification render: national map, insets, and zooms on the carve-outs, New York City and Hampton Roads. |
+| `data/processed/boundaries/preview.png` | Verification render: national map, insets, and zooms on the carve-outs, New York City and Hampton Roads. Re-rendered on its own in the fix pass (Nov 27) to replace a title that still had an em-dash: `preview.render` on the committed `public/data/geo/districts-{lo,hi}.topo.json`, with the carve-out outlines from `geometry.special_areas` on the cached TIGER files (`sources.get(..., register=False)`; no download, no manifest change, no boundary file rewritten). Every pixel outside the title line is identical to the previous render. |
 | `public/data/geo/districts-lo.topo.json` | 350 KB. Objects `districts` (94) and `states` (55). |
 | `public/data/geo/districts-hi.topo.json` | 2.8 MB. Objects `districts`, `states` and `counties` (3,230; American Samoa is not drawn). |
 | `public/data/geo/divisions.json` | Per district: statutory divisions with member counties (GEOID and name) and places, all member counties, partial counties included, and notes. |

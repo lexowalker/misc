@@ -57,9 +57,14 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    FY 2010, so also ohsd, wvsd, ared, rid and others whose dockets ended earlier), a compact "Context: multidistrict
    litigation" note follows the sentences ("multidistrict litigation" is the glossary term, 28 U.S.C. § 1407(a)):
    the dockets above 25% in FY 2025 or FY 2026 with their sentences (or, when none is, the most recent docket with
-   its latest-year sentence), then one line for the rest ("Also above a quarter in earlier years: MDL 2592 (FY 2015
-   to 2023), MDL 2179 (FY 2013) and MDL 1657 (FY 2010)."), a derived source chip, and a link that scrolls to the full
-   note. Dockets are named only when GovInfo verifies them; otherwise by number.
+   its latest-year sentence), then one sentence for the rest that gives the years each was above a quarter (fix
+   pass, Nov 27; it replaced the fragment "Also above a quarter in earlier years: ..."). One docket: "MDL 2433 also
+   made up more than a quarter of this court’s civil cases filed or closed in FY 2015 and FY 2019." Several: "MDL
+   2592 (FY 2015 to 2023), MDL 2179 (FY 2013) and MDL 1657 (FY 2010) each also made up more than a quarter of this
+   court’s civil cases filed or closed in the years given." The years are the profile's `years_text`, the years the
+   web lane's rule (more than 25% of the court's civil cases filed, or closed, in a fiscal year from FY 2010) held.
+   Then a derived source chip, and a link that scrolls to the full note. Dockets are named only when GovInfo
+   verifies them; otherwise by number.
 4. **Key statistics.** Grouped as Speed, Workload, Sentencing, Case mix. The 15 featured measures show first;
    "Show N more … measures" reveals the rest (45 in all). Each row: label and period; value with unit (or
    "No data", plus "Last reported for FY …" when older data exist); rank phrased with an explicit direction

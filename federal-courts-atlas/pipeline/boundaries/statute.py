@@ -203,7 +203,7 @@ def _amendment_notes(sec) -> list[dict]:
             continue
         for p in note.findall("u:p", NS):
             txt = " ".join("".join(p.itertext()).split())
-            m = re.match(r"^(\d{4})—", txt)
+            m = re.match(r"^(\d{4})" "\u2014", txt)
             if m:
                 year = int(m.group(1))
             out.append({"year": year, "text": txt})
@@ -388,7 +388,7 @@ def parse_places(rest: str, section: str) -> list[Place]:
 # ---------------------------------------------------------------------------------------------------------
 # section -> units
 
-_RE_DIST_LIST = re.compile(r"^\((?P<letter>[a-z])\)\s*(?:(?:\w+) District\.—)?The (?P<word>\w+) [Dd]istrict "
+_RE_DIST_LIST = re.compile(r"^\((?P<letter>[a-z])\)\s*(?:(?:\w+) District\." "\u2014" r")?The (?P<word>\w+) [Dd]istrict "
                            r"comprises (?P<rest>.+)$")
 _RE_DIV_LIST = re.compile(r"^\((?P<num>\d+)\)\s*The (?P<div>[\w\- ]+? [Dd]ivision) comprises (?P<rest>.+)$")
 _RE_COURT = re.compile(r"^Court (?:for (?:the )?(?P<unit>[\w\- ]+? (?:Division|District)) )?"
@@ -613,7 +613,7 @@ def lii_text(html_path) -> str:
 
 
 def norm_for_compare(s: str) -> str:
-    s = s.replace("’", "'").replace("“", '"').replace("”", '"').replace("—", "-")
+    s = s.replace("’", "'").replace("“", '"').replace("”", '"').replace("\u2014", "-")
     s = re.sub(r"\s+", " ", s)
     s = re.sub(r"\s+([,.;:)])", r"\1", s)
     s = re.sub(r"\(\s+", "(", s)

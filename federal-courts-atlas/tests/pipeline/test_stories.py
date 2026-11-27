@@ -770,3 +770,21 @@ def test_build_is_deterministic_and_published_files_are_current():
     main()
     assert digest() == after_one
     assert before == after_one, "public/data/stories is stale: run python -m pipeline.stories.build"
+
+
+def test_gap_record_is_current():
+    """data/gaps/stories.json is rewritten on every run. The mass-tort story was not written, but the MDL docket counts
+    it would use are processed (idb civil_mdl_dockets) and shown on district profiles, so no record may say they are
+    missing from the processed tables."""
+    from pipeline.stories.build import main
+    main()
+    gaps = json.loads((ROOT / "data" / "gaps" / "stories.json").read_text())
+    assert set(gaps) == {"mass_tort_story_not_written"}
+    assert (PROC / "idb" / "civil_mdl_dockets.parquet").exists()
+    g = gaps["mass_tort_story_not_written"]
+    assert "was not written" in g["description"] and "district profiles show them" in g["description"]
+    first = json.loads((PROC / "idb" / "civil_mdl_meta.json").read_text())["first_coded_fy"]
+    assert f"from FY {first} on" in g["description"]
+    assert len(json.loads((OUT / "index.json").read_text())["order"]) == 5 and "five stories" in g["description"]
+    text = json.dumps(gaps)
+    assert "not_processed" not in text and "does not publish" not in text and EM_DASH not in text
