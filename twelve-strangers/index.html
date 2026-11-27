@@ -172,7 +172,7 @@ em, i { font-style: italic; }
 .btn-ghost:hover { background: var(--wash); color: var(--accent); }
 .btn-seal { background: var(--seal); border-color: var(--seal); color: var(--sheet); }
 .btn-seal:hover { background: var(--seal); filter: brightness(1.08); border-color: var(--seal); }
-.btn-small { min-height: 2.25rem; padding: .35rem .75rem; font-size: .78rem; }
+.btn-small { min-height: 2.5rem; padding: .4rem .8rem; font-size: .8rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: .6rem; }
 
 .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
@@ -196,10 +196,10 @@ em, i { font-style: italic; }
 .ticker-track::-webkit-scrollbar { display: none; }
 .tick {
   flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; padding: 0 .8rem; color: inherit; text-decoration: none;
-  border-right: 1px solid rgba(238, 241, 234, .14); opacity: .62; transition: opacity .2s, background .2s; white-space: nowrap;
+  border-right: 1px solid rgba(238, 241, 234, .14); opacity: .8; transition: opacity .2s, background .2s; white-space: nowrap;
 }
 .tick:hover { opacity: .9; }
-.tick-date { font-family: var(--f-type); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
+.tick-date { font-family: var(--f-type); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
 .tick-name { font-family: var(--f-body); font-size: .86rem; line-height: 1.25; }
 .tick.is-active { opacity: 1; background: rgba(255, 255, 255, .08); }
 .tick.is-active .tick-date { color: var(--brass-soft); }
@@ -272,7 +272,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 }
 .exhibit-sticker {
   position: absolute; top: -.85rem; left: .9rem; background: var(--sticker); color: var(--on-sticker); transform: rotate(-2.5deg);
-  font-family: var(--f-type); font-weight: 700; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
+  font-family: var(--f-type); font-weight: 700; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
   padding: .5rem .65rem .45rem; border-radius: 2px; box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .35);
 }
 .exhibit-sticker b { font-size: .95rem; letter-spacing: .06em; margin-left: .15rem; }
@@ -291,8 +291,6 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
   cursor: pointer; font-family: var(--f-type); font-size: .78rem; letter-spacing: .06em; transition: transform .2s;
 }
 .seal-box[hidden] { display: none !important; }
-.seal-box { transition: transform .28s ease, opacity .28s ease; }
-.seal-box.is-tucked { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
 .seal-box.is-bump { animation: bump .6s ease-out; }
 @keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.12); } 100% { transform: scale(1); } }
 .seal-grid { display: grid; grid-template-columns: repeat(6, 9px); grid-template-rows: repeat(2, 9px); gap: 3px; }
@@ -312,8 +310,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .seal-item a { display: flex; gap: .5rem; align-items: center; text-decoration: none; color: var(--ink-2); font-size: .82rem; line-height: 1.2; padding: .3rem; border-radius: 4px; }
 .seal-item a:hover { background: var(--wash); }
 .seal-medal {
-  flex: 0 0 auto; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900;
-  font-size: .95rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+  flex: 0 0 auto; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-body); font-weight: 700;
+  font-size: .72rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
 }
 .seal-item.is-on .seal-medal { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
 .seal-item.is-on a { color: var(--ink); }
@@ -339,6 +337,22 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .deeper { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
 .deeper li { padding-left: 1rem; border-left: 2px solid var(--brass); font-size: .95rem; color: var(--ink-2); line-height: 1.5; }
 .deeper li b { color: var(--ink); font-weight: 600; }
+
+/* the jury box lives at the right end of the sticky ticker, so it never covers a button */
+.ticker-row { display: flex; align-items: stretch; }
+.ticker-row .ticker-track { flex: 1 1 auto; min-width: 0; }
+.seal-slot { flex: 0 0 auto; display: flex; padding-right: env(safe-area-inset-right, 0px); }
+.seal-box.in-ticker {
+  position: static; inset: auto; border: 0; border-left: 1px solid rgba(238, 241, 234, .18); border-radius: 0; box-shadow: none;
+  background: var(--band); padding: 0 .8rem; min-height: var(--ticker-h); gap: .5rem;
+}
+.seal-box.in-ticker:hover { background: rgba(255, 255, 255, .06); }
+.seal-box.in-ticker[aria-expanded="true"] { background: rgba(255, 255, 255, .1); }
+@media (max-width: 40rem) { .seal-word { display: none; } .seal-box.in-ticker { padding: 0 .6rem; } }
+.seal-panel { top: calc(env(safe-area-inset-top, 0px) + var(--ticker-h) + 12px); bottom: auto; right: max(12px, env(safe-area-inset-right, 0px)); }
+.toast { top: calc(env(safe-area-inset-top, 0px) + var(--ticker-h) + 14px); bottom: auto; transform: translate(-50%, -12px); }
+.toast.is-on { transform: translate(-50%, 0); }
+main.wrap { overflow-x: clip; }
 
 /* ===== widget: bushel ===== */
 /* Exhibit: The Old Bailey, September 1670. A court calendar, a meter for nights and hunger, an engraved scene,
@@ -2171,8 +2185,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .w-ver-cert-line { font-size: .92rem; color: var(--ink-2); max-width: 30rem; margin-inline: auto; }
 .w-ver-cert-box { display: grid; grid-template-columns: repeat(6, 2.1rem); gap: .35rem; justify-content: center; margin-top: .3rem; }
 .w-ver-cert-seat {
-  width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900;
-  font-size: .72rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+  width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-body); font-weight: 700;
+  font-size: .68rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
 }
 .w-ver-cert-seat.is-on { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
 .w-ver-cert-seals { font-size: .78rem; color: var(--ink-3); }
@@ -2626,7 +2640,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 </header>
 
 <nav class="ticker" aria-label="Chapters by era">
-  <div class="ticker-track" id="tickerTrack"></div>
+  <div class="ticker-row"><div class="ticker-track" id="tickerTrack"></div><div class="seal-slot" id="sealSlot"></div></div>
   <div class="ticker-progress" aria-hidden="true"><span id="tickerBar"></span></div>
 </nav>
 
@@ -2703,7 +2717,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     <p class="lede">Across northern Europe, free men met in open-air assemblies called <span class="term">things</span>. The Roman historian Tacitus, writing in 98 CE, described Germanic assemblies that heard capital charges and showed approval by brandishing their spears. In Iceland, the Althing, founded around 930, ran a whole country with no king. Its Lawspeaker recited the law from memory, one third of it each summer. In the Viking-settled parts of England, a district was a <span class="term">wapentake</span>, from the Old Norse for &ldquo;weapon-taking,&rdquo; the clash of arms that signaled yes.</p>
     <h3>Your word, and your neighbors' word</h3>
     <p>One way to clear yourself was <span class="term">compurgation</span>. You swore you were innocent, then brought oath-helpers who swore that your oath was clean. They were not witnesses. They were character references with their souls on the line. A well-known local could clear himself with ease. A stranger with nobody to swear for him was in trouble.</p>
-    <p>Around 997 King &AElig;thelred II ordered that in each wapentake the twelve leading thegns, with the reeve, should swear on holy relics to accuse no innocent man and shield no guilty one. If they split, the view of eight of them stood, and each outvoted thegn paid a fine. Historians still argue whether these twelve are the jury's true ancestor. They are certainly England's first famous twelve.</p>
+    <p>Around 997 King &AElig;thelred II ordered that in each wapentake the twelve leading thegns, with the reeve, should swear on holy relics to accuse no innocent man and shield no guilty one. If they split, the view of eight of them stood, and each outvoted thegn paid a fine. Historians still argue whether these twelve are the jury's true ancestor. They are England's most famous early twelve, though not the first: in King Alfred's day, a king's thegn accused of killing could clear himself with the oaths of twelve other king's thegns.</p>
     <p>The Normans brought another tool from France: the <span class="term">inquest</span>. A royal official summoned local men, put them on oath and made them tell the truth about the king's lands and rights. In 1086 William the Conqueror's commissioners used sworn local juries, hundred by hundred, to compile Domesday Book: who held each place before the Conquest, who held it now, and what it was worth.</p>
     <h3>When the neighbors could not decide</h3>
     <p>Then came the ordeal, a church ritual. In the ordeal of hot iron you carried a blessed red-hot iron nine of your own feet. Your hand was bound and sealed, and three days later a clean wound meant innocence and a festering one meant guilt. In the ordeal of cold water you were lowered on a rope into blessed water. If you sank, the water had accepted you. You were innocent, and they pulled you out. The Normans added trial by battle: God would give victory to the side in the right.</p>
@@ -3046,7 +3060,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     sealBox.setAttribute('aria-controls', 'sealPanel');
     sealBox.innerHTML = '<span class="seal-grid" aria-hidden="true">' +
       SEALS.map(function () { return '<span class="seal-dot"></span>'; }).join('') +
-      '</span><span class="seal-count"><b class="tnum">0</b>/12 seals</span>';
+      '</span><span class="seal-count"><b class="tnum">0</b>/12<span class="seal-word"> seals</span></span>';
     sealPanel = document.createElement('div');
     sealPanel.className = 'seal-panel';
     sealPanel.id = 'sealPanel';
@@ -3056,9 +3070,14 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
         return '<li class="seal-item" data-seal="' + s.id + '"><a href="#' + s.ch + '"><span class="seal-medal">' + s.num + '</span><span>' + s.label + '</span></a></li>';
       }).join('') + '</ul>';
     document.body.appendChild(sealPanel);
-    document.body.appendChild(sealBox);
+    var slot = document.getElementById('sealSlot');
+    if (slot) { sealBox.classList.add('in-ticker'); slot.appendChild(sealBox); }
+    else document.body.appendChild(sealBox);
     sealBox.addEventListener('click', function () {
       var open = sealPanel.hidden;
+      if (open && sealBox.classList.contains('in-ticker')) {
+        sealPanel.style.top = Math.round(sealBox.getBoundingClientRect().bottom + 8) + 'px';
+      }
       sealPanel.hidden = !open;
       sealBox.setAttribute('aria-expanded', String(open));
     });
@@ -3074,18 +3093,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       }
     });
     renderSeals(false);
-    // Tuck the badge away while the reader scrolls down, bring it back on any scroll up.
-    var lastY = window.scrollY, tuckTimer;
-    window.addEventListener('scroll', function () {
-      var y = window.scrollY, dy = y - lastY;
-      if (Math.abs(dy) < 6) return;
-      lastY = y;
-      if (!sealPanel.hidden) return;
-      sealBox.classList.toggle('is-tucked', dy > 0);
-      clearTimeout(tuckTimer);
-      tuckTimer = setTimeout(function () { sealBox.classList.remove('is-tucked'); }, 1800);
-    }, { passive: true });
-    // Keep the jury box out of the way while the summons is on screen.
+    if (slot) return;
+    // Fallback (no ticker slot): a floating badge kept out of the way while the summons is on screen.
     var hero = document.querySelector('.hero');
     if (hero && 'IntersectionObserver' in window) {
       sealBox.hidden = true;
@@ -3103,7 +3112,6 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     sealBox.querySelector('.seal-count b').textContent = earnedCount();
     sealBox.setAttribute('aria-label', earnedCount() + ' of 12 seals earned. Open your jury box.');
     sealPanel.querySelectorAll('.seal-item').forEach(function (li) { li.classList.toggle('is-on', !!earned[li.dataset.seal]); });
-    if (bump) sealBox.classList.remove('is-tucked');
     if (bump && !reduced) {
       sealBox.classList.remove('is-bump');
       void sealBox.offsetWidth;
@@ -3130,8 +3138,11 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       mark();
       store.set('answered', true);
       var target = document.querySelector('.chapter');
+      var ticker = document.querySelector('.ticker');
       setTimeout(function () {
-        if (target) target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+        if (!target) return;
+        var top = target.getBoundingClientRect().top + window.scrollY - (ticker ? ticker.offsetHeight : 0);
+        window.scrollTo({ top: Math.max(0, top), behavior: reduced ? 'auto' : 'smooth' });
       }, first && !reduced ? 650 : 0);
     });
   }
@@ -8891,7 +8902,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       { year: 1830, when: '1800 to 1860', title: 'Property tests fade', lanes: ['noprop'],
         text: 'State by state, property tests for voting fall away, and jury lists widen with them. By the 1850s most white men could vote without owning property. Some states kept property or householder rules for jurors longer.' },
       { year: 1860, when: '1860', title: 'Worcester, Massachusetts', lanes: ['black'],
-        text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere and questions the 1860 date.' },
+        text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere, as far back as 1820.' },
       { year: 1870, when: '1870', title: 'Laramie, Wyoming Territory', lanes: ['women'],
         text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women\'s bodies, usually for signs of pregnancy. The experiment was short-lived.' },
       { year: 1875, when: '1875', title: 'Civil Rights Act of 1875', lanes: ['black'],

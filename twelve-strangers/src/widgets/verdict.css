@@ -46,8 +46,8 @@
 .w-ver-cert-line { font-size: .92rem; color: var(--ink-2); max-width: 30rem; margin-inline: auto; }
 .w-ver-cert-box { display: grid; grid-template-columns: repeat(6, 2.1rem); gap: .35rem; justify-content: center; margin-top: .3rem; }
 .w-ver-cert-seat {
-  width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900;
-  font-size: .72rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+  width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-body); font-weight: 700;
+  font-size: .68rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
 }
 .w-ver-cert-seat.is-on { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
 .w-ver-cert-seals { font-size: .78rem; color: var(--ink-3); }

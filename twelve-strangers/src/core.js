@@ -87,7 +87,7 @@
     sealBox.setAttribute('aria-controls', 'sealPanel');
     sealBox.innerHTML = '<span class="seal-grid" aria-hidden="true">' +
       SEALS.map(function () { return '<span class="seal-dot"></span>'; }).join('') +
-      '</span><span class="seal-count"><b class="tnum">0</b>/12 seals</span>';
+      '</span><span class="seal-count"><b class="tnum">0</b>/12<span class="seal-word"> seals</span></span>';
     sealPanel = document.createElement('div');
     sealPanel.className = 'seal-panel';
     sealPanel.id = 'sealPanel';
@@ -97,9 +97,14 @@
         return '<li class="seal-item" data-seal="' + s.id + '"><a href="#' + s.ch + '"><span class="seal-medal">' + s.num + '</span><span>' + s.label + '</span></a></li>';
       }).join('') + '</ul>';
     document.body.appendChild(sealPanel);
-    document.body.appendChild(sealBox);
+    var slot = document.getElementById('sealSlot');
+    if (slot) { sealBox.classList.add('in-ticker'); slot.appendChild(sealBox); }
+    else document.body.appendChild(sealBox);
     sealBox.addEventListener('click', function () {
       var open = sealPanel.hidden;
+      if (open && sealBox.classList.contains('in-ticker')) {
+        sealPanel.style.top = Math.round(sealBox.getBoundingClientRect().bottom + 8) + 'px';
+      }
       sealPanel.hidden = !open;
       sealBox.setAttribute('aria-expanded', String(open));
     });
@@ -115,18 +120,8 @@
       }
     });
     renderSeals(false);
-    // Tuck the badge away while the reader scrolls down, bring it back on any scroll up.
-    var lastY = window.scrollY, tuckTimer;
-    window.addEventListener('scroll', function () {
-      var y = window.scrollY, dy = y - lastY;
-      if (Math.abs(dy) < 6) return;
-      lastY = y;
-      if (!sealPanel.hidden) return;
-      sealBox.classList.toggle('is-tucked', dy > 0);
-      clearTimeout(tuckTimer);
-      tuckTimer = setTimeout(function () { sealBox.classList.remove('is-tucked'); }, 1800);
-    }, { passive: true });
-    // Keep the jury box out of the way while the summons is on screen.
+    if (slot) return;
+    // Fallback (no ticker slot): a floating badge kept out of the way while the summons is on screen.
     var hero = document.querySelector('.hero');
     if (hero && 'IntersectionObserver' in window) {
       sealBox.hidden = true;
@@ -144,7 +139,6 @@
     sealBox.querySelector('.seal-count b').textContent = earnedCount();
     sealBox.setAttribute('aria-label', earnedCount() + ' of 12 seals earned. Open your jury box.');
     sealPanel.querySelectorAll('.seal-item').forEach(function (li) { li.classList.toggle('is-on', !!earned[li.dataset.seal]); });
-    if (bump) sealBox.classList.remove('is-tucked');
     if (bump && !reduced) {
       sealBox.classList.remove('is-bump');
       void sealBox.offsetWidth;
@@ -171,8 +165,11 @@
       mark();
       store.set('answered', true);
       var target = document.querySelector('.chapter');
+      var ticker = document.querySelector('.ticker');
       setTimeout(function () {
-        if (target) target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+        if (!target) return;
+        var top = target.getBoundingClientRect().top + window.scrollY - (ticker ? ticker.offsetHeight : 0);
+        window.scrollTo({ top: Math.max(0, top), behavior: reduced ? 'auto' : 'smooth' });
       }, first && !reduced ? 650 : 0);
     });
   }
