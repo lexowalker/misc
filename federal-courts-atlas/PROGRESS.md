@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 15:45 UTC. Pipeline, website and verification done; final polish running._
+_Last updated: 2026-11-27 17:06 UTC. Pipeline, website and verification done; last small fixes running._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -44,14 +44,22 @@ _Last updated: 2026-11-27 15:45 UTC. Pipeline, website and verification done; fi
   time-machine events; vertical map controls; README test instructions; 16 visual regression baselines.
   45 map variables. Recheck traced 31 new numbers to raw files (all match). Tests: 1,248 pipeline, 357 e2e passed
   (11 skipped by design) in 3 full runs; first map paint 0.28 s (0.91 s at 4x CPU).
+- **Polish** (workflow 5, finished 17:04 UTC): MDL notes now cover every year from FY 2010 (the first year the FJC
+  records carry a docket number) for 22 districts, with 26 docket names verified from GovInfo; a neutral MDL 2885
+  caveat on the 11 national measures it distorts; compare year menu reads "FY 2026 (preliminary for IDB measures)";
+  glossary entry for multidistrict litigation (54 terms); data contract and Makefile `idb-mdl` target. Recheck
+  recounted all 150 MDL docket-years from the raw FJC file with its own code (all match) and fixed a clipped menu
+  label. Tests: 1,252 pipeline, 361 e2e passed (11 skipped by design) in 4 of 5 full runs; one run had a single
+  a11y scan timeout that did not recur in 10 isolated reruns. First map paint 0.29 s (0.80 s at 4x CPU).
 
 ## In progress
-- Small polish pass: MDL notes for districts whose dominant docket was earlier (ohsd, wvsd, laed), MDL caveat on
-  national FY 2025 civil-closing figures, preliminary label in the compare year menu, a glossary entry for MDL,
-  data contract and doc counts.
+- Last small fixes (workflow 6): a stale gap note from the stories lane, plainer wording for the earlier-years MDL
+  line, glossary popovers stay open when clicked after hover, another try at naming 13 MDL dockets from GovInfo,
+  the social preview image title, and a fail-fast guard in the a11y scan helper. An independent recheck follows.
 
 ## Next
-- Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
+- Retry CourtListener for the 7 districts with no cases after the daily quota resets, then run `make data` end to end
+  and record it in `VERIFICATION.md` (scheduled for 04:25 UTC Nov 28).
 
 ## Blocked / notes
 - **CourtListener quota**: the free tier returned HTTP 429 with a daily Retry-After after about 124 requests.
