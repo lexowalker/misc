@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 09:15 UTC (overnight build). Data pipeline complete; website build running._
+_Last updated: 2026-11-27 09:35 UTC (overnight build). Data pipeline complete; website build running._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -21,8 +21,9 @@ _Last updated: 2026-11-27 09:15 UTC (overnight build). Data pipeline complete; w
 - `SOURCES.md` (1,547 source files) and `DATA_GAPS.md` generated from the lane fragments.
 
 ## In progress
-- Workflow 2 (website): web data assembly (`public/data/`) and story research in parallel, then the home, district
-  profile, stories, compare and courtroom pages, then an integration pass.
+- Workflow 2 (website): the web data lane has published `public/data/` (41 map variables in four families, all with
+  10+ years; see `docs/lanes/web.md`). Story research, then the home, district profile, stories, compare and
+  courtroom pages, then an integration pass.
 
 ## Next
 - Workflow 3: verification lanes (data audit of 50+ numbers into `VERIFICATION.md`, copy audit, UI audit with
