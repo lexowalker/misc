@@ -1,0 +1,25 @@
+# Base pipeline dependencies. Lane-specific extras live in requirements/<lane>.txt.
+requests
+pandas
+pyarrow
+geopandas
+shapely
+pyogrio
+pyproj
+topojson
+pdfplumber
+pypdf
+pyreadstat
+openpyxl
+xlrd
+lxml
+beautifulsoup4
+pytest
+tqdm
+-r requirements/boundaries.txt
+-r requirements/fcms.txt
+-r requirements/idb.txt
+-r requirements/ussc.txt
+-r requirements/judges_population.txt
+-r requirements/courthouses_cases.txt
+-r requirements/web.txt

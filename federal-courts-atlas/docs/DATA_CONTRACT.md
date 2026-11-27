@@ -1,0 +1,95 @@
+# Data contract
+
+Every pipeline lane and every front-end module follows this document. If you need to change it, say so in
+your lane report instead of silently diverging.
+
+## Ground rules (non-negotiable)
+
+1. **Real data only.** Every number comes from a downloaded public file registered with
+   `pipeline.common.manifest.register_source` (URL, dataset, publisher, vintage, retrieval date, sha256).
+2. **Never invent, estimate, interpolate or fill in.** A value that cannot be sourced is omitted and logged with
+   `record_gap`; the UI shows "No data".
+3. **Derived values** (per-capita rates, shares computed from counts, ranks, changes) are computed only in the
+   `web` lane or clearly marked `derived: true` with a `formula` string.
+4. **Districts, not judges.** Statistics stay at district level. The judges lane lists judges' public
+   biographical facts only (no photos, no judge-level performance statistics).
+5. **No paid services, no LLM API calls, no accounts.** All HTTP goes through `pipeline.common.http.fetch`
+   (cached, throttled, backs off). Nominatim ≤ 1 req/s. CourtListener: free tier, cached.
+6. **Each lane writes only inside its own folders** (listed below) plus its own `requirements/<lane>.txt`,
+   `tests/pipeline/test_<lane>*.py`, `docs/lanes/<lane>.md`, `data/sources/<lane>.json`, `data/gaps/<lane>.json`.
+   Do not edit shared files (`pipeline/common/*`, `Makefile`, `requirements.txt`, `package.json`) — report needed
+   changes instead. Do not `git commit`; the orchestrator commits.
+
+## Layout
+
+```
+pipeline/<lane>/build.py      entry point: `python -m pipeline.<lane>.build` (idempotent; cached downloads)
+data/raw/                     download cache (git-ignored)
+data/processed/<lane>/        lane outputs (parquet + csv, committed; keep each file < 20 MB)
+data/sources/<lane>.json      source manifest fragment
+data/gaps/<lane>.json         data-gap fragment
+public/data/                  web-ready JSON (written ONLY by the `web` lane, except geo/ by boundaries)
+docs/lanes/<lane>.md          lane report: what was fetched, how it was parsed, coverage, caveats, gaps
+```
+
+## District ids
+
+Use `pipeline.common.districts` (94 districts, CourtListener-style ids: `vaed`, `txed`, `dcd`, `prd`, `vid`, `gud`, `nmid`).
+Each lane that reads a source with its own district coding (AO/FJC office codes, USSC codes, FCMS names) builds a
+crosswalk in its own package and has a unit test asserting all 94 ids map 1:1 (or logs the gap, e.g. a court that
+did not exist in a year).
+
+## Observations table (all statistical lanes)
+
+`write_observations(lane, df)` validates and writes `data/processed/<lane>/observations.{parquet,csv}` with columns:
+
+| column | meaning |
+|---|---|
+| `district_id` | registry id |
+| `period` | int year label |
+| `period_type` | `FY_SEP30` (12 months ending Sep 30 — FCMS, IDB fiscal-year tallies, USSC fiscal year), `CY`, `12M_JUN30`, `12M_MAR31`, `12M_DEC31`, `SNAPSHOT_SEP30`, `JUL1_EST`, `APR1_CENSUS` |
+| `variable` | snake_case id |
+| `value` | number as published (FCMS medians in months, percents as 0–100) |
+| `unit` | `months`, `cases`, `count`, `percent`, `per_judgeship`, `persons`, ... |
+| `source_id` | key in `data/sources/<lane>.json` |
+| `source_locator` | exact place in the source: file + table/page/sheet + row/column, or the filter used on a case-level file |
+
+Lanes may also write richer detail tables (e.g. `nos_mix.parquet`), each documented in the lane report.
+
+Each lane also writes `data/processed/<lane>/variables.json`: a list of
+`{id, label, unit, period_type, description, source_ids, caveats, higher_means}` for every variable it emits.
+
+## Geography (boundaries lane)
+
+* `data/processed/boundaries/county_district.csv` — every county-equivalent in TIGER/Line (50 states, DC, PR,
+  GU, VI, MP; plus AS flagged `district_id = ""` with reason) → exactly one `district_id`, with `statute_section`,
+  `statute_division` (when the statute names one), `county_name`, `geoid`, `state`. Plus `vintage`.
+* Special cases handled explicitly and tested: Virginia independent cities; St. Louis city (MO); Connecticut
+  planning regions (2022+) vs legacy counties (whole state is one district either way); Alaska boroughs/census
+  areas; Yellowstone NP portions in MT and ID → D. Wyo. (28 U.S.C. § 131); Kalawao County HI; etc.
+* `public/data/geo/districts-lo.topo.json` (national view) and `public/data/geo/districts-hi.topo.json` (zoomed),
+  unprojected lon/lat WGS84 TopoJSON with objects:
+  `districts` (id = district_id, props: name, short, state, circuit),
+  `states` (id = postal), `counties` (hi only; id = geoid, props: name, district_id).
+  The front end projects with a composite AlbersUSA + territories projection.
+* `public/data/geo/divisions.json` — statutory divisions per district (from the statute text) with member counties.
+
+## Places of holding court (courthouses lane)
+
+`public/data/geo/courthouses.json`: `[{id, district_id, city, state, name, address, lat, lon, kind:
+"place_of_holding_court"|"divisional_office"|"courthouse", statute_section, source_id, geocoder, geocode_match}]`.
+
+## Web data (`web` lane only)
+
+```
+public/data/manifest.json            data version, build date, file hashes
+public/data/districts.json           registry + population + counties/divisions/courthouse ids per district
+public/data/variables.json           [{id, family: speed|workload|sentencing|casemix, label, short_label, unit, format,
+                                       explainer, caveats, source_ids, derived, formula, higher_means, years}]
+public/data/values/<variable>.json   {variable, period_type, years:[...], values:{district_id:{year:value}},
+                                       provenance:{source_id: {...}}, ranks?:{...}}
+public/data/judges.json              per-district judge timeline records (public FJC fields only)
+public/data/cases/<district>.json    3–5 recent CourtListener items with URLs
+public/data/search-index.json        city/county/ZIP/courthouse → district_id
+public/data/sources.json             merged source manifest (for in-app citations)
+```
