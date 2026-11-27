@@ -26,7 +26,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run build && npx vite preview --port ${PORT} --strictPort --host 127.0.0.1`,
+    // Each port builds into its own folder, so two lanes can run the suite at once without clobbering dist/.
+    command: `npx vite build --outDir .e2e-dist/${PORT} --emptyOutDir && npx vite preview --outDir .e2e-dist/${PORT} --port ${PORT} --strictPort --host 127.0.0.1`,
     url: `http://127.0.0.1:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -11,3 +11,4 @@ playwright-report/
 tests/e2e/__screenshots__/
 # FCMS: CSV mirrors of the parquet tables are large; `make fcms` regenerates them.
 data/processed/fcms/observations*.csv
+.e2e-dist/
