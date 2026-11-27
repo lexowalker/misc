@@ -241,7 +241,7 @@ export const STORY_CONTENT: StoryContent[] = [
       notes: [
         'Immigration shares here count felony defendants only. Shares across all offense levels are lower where misdemeanor and petty filings are common.',
         'The IDB immigration category matches the AO’s published immigration totals for FY 2005 to FY 2025. Earlier years rely on offense codes the FJC added later, which could not be checked against an AO table.',
-        'FCMS counted felony cases in some years and defendants in others. Published rankings compare districts within one year only. Disposition times use the FCMS current-method table.',
+        'FCMS counted felony cases in some years and defendants in others. Published rankings compare districts within one year only. Disposition times use the AO’s current method, which counts defendants.',
         'The Sentencing Commission reports early-disposition (section 5K3.1) departures separately only from FY 2006.',
         'The trial and plea comparison is limited to districts with at least {plea_base} terminated defendants, because smaller districts swing widely from year to year.',
         'Districts handle different mixes of cases, which limits direct comparison of their sentence outcomes. The data does not show why practices differ, and none of these figures describes any individual judge.',
