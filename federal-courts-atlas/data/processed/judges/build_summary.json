@@ -1,0 +1,80 @@
+{
+ "built": "2026-11-27",
+ "fjc_export_last_modified": "2026-11-26 06:05:22",
+ "service_records_all_courts": 4782,
+ "district_court_records": 3523,
+ "records_on_current_districts": 3412,
+ "records_on_historical_courts": 111,
+ "judges_on_current_districts": 3263,
+ "records_without_service_start": [
+  {
+   "judge_name": "Coker, Courtney Leigh",
+   "district_id": "txnd"
+  }
+ ],
+ "party_resolved_records": 72,
+ "senior_before_reassignment_records": 4,
+ "snapshot_years": [
+  1950,
+  2026
+ ],
+ "series_start": {
+  "akd": 1960,
+  "caed": 1966,
+  "cacd": 1966,
+  "flmd": 1963,
+  "hid": 1961,
+  "ilcd": 1979,
+  "lamd": 1972,
+  "scd": 1966,
+  "prd": 1967
+ },
+ "leghist_checks": [
+  {
+   "district_id": "akd",
+   "fjc_page_date": "1959-01-03",
+   "first_service_start": "1960-02-19"
+  },
+  {
+   "district_id": "hid",
+   "fjc_page_date": "1959-08-21",
+   "first_service_start": "1960-10-13"
+  },
+  {
+   "district_id": "prd",
+   "fjc_page_date": "1966-09-12",
+   "first_service_start": "1967-06-12"
+  },
+  {
+   "district_id": "cacd",
+   "fjc_page_date": "1966-03-18",
+   "first_service_start": "1966-09-18"
+  },
+  {
+   "district_id": "caed",
+   "fjc_page_date": "1966-03-18",
+   "first_service_start": "1966-09-18"
+  },
+  {
+   "district_id": "flmd",
+   "fjc_page_date": "1962-07-30",
+   "first_service_start": "1962-10-29"
+  },
+  {
+   "district_id": "lamd",
+   "fjc_page_date": "1972-04-16",
+   "first_service_start": "1972-04-16"
+  },
+  {
+   "district_id": "ilcd",
+   "fjc_page_date": "1979-03-31",
+   "first_service_start": "1979-03-31"
+  },
+  {
+   "district_id": "scd",
+   "fjc_page_date": "1965-10-07",
+   "first_service_start": "1965-11-01"
+  }
+ ],
+ "observation_rows": 27428
+}

@@ -1,0 +1,535 @@
+{
+ "ussc_5k3_not_separate_pre2006": {
+  "lane": "ussc",
+  "description": "\u00a75K3.1 early-disposition departures were not published separately by district before FY2006 (folded into 'government initiated departure' FY2003-FY2005; program began April 2003).",
+  "variables": [
+   "ussc_pct_early_disposition_5k3"
+  ],
+  "districts": "all",
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005
+  ],
+  "reason": "not published separately"
+ },
+ "ussc_before_fy1995": {
+  "lane": "ussc",
+  "description": "No USSC district statistics before FY1995 in this atlas: the USSC posts district Statistical Information Packets from FY1995 and Individual Offender datafiles from FY2002 only.",
+  "variables": [
+   "ussc_*"
+  ],
+  "districts": "all",
+  "periods": "<=1994",
+  "reason": "Not published on ussc.gov (older datafiles are distributed elsewhere, e.g. ICPSR, outside this project's allowed sources)."
+ },
+ "ussc_child_pornography_pre2010": {
+  "lane": "ussc",
+  "description": "Child pornography was not a separate primary-offense category before FY2010 (USSC grouped it in 'Pornography/Prostitution', OFFTYPE2 code 28).",
+  "variables": [
+   "ussc_pct_offense_child_pornography",
+   "ussc_count_offense_child_pornography"
+  ],
+  "districts": "all",
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009
+  ],
+  "reason": "category not published"
+ },
+ "ussc_four_category_not_published_fy2018_on": {
+  "lane": "ussc",
+  "description": "From FY2018 the USSC reports sentences relative to the range as departures vs variances (SENTRNGE) and no longer publishes the four-way grouping. The FY2006-FY2017 ids are not continued; the same grouping rebuilt from the SENTRNGE components (published FY2018+; USSC supplemental files FY2014-FY2017) is provided under *_2018scheme ids, marked derived. In the FY2014-FY2017 overlap the two are identical for every district.",
+  "variables": [
+   "ussc_pct_above_range",
+   "ussc_pct_govt_sponsored_below_range",
+   "ussc_pct_non_govt_sponsored_below_range"
+  ],
+  "districts": "all",
+  "periods": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "reason": "definitional break (USSC FY2018 methodology)"
+ },
+ "ussc_four_category_not_published_pre2006": {
+  "lane": "ussc",
+  "description": "Within/above/government-sponsored-below/non-government-sponsored-below grouping not published by the USSC before FY2006 (pre-Booker departure categories; FY2005 split into pre-/post-Booker periods). Above/govt/non-govt shares are omitted for these years; within-range and \u00a75K1.1 are provided.",
+  "variables": [
+   "ussc_pct_above_range",
+   "ussc_pct_govt_sponsored_below_range",
+   "ussc_pct_non_govt_sponsored_below_range"
+  ],
+  "districts": "all",
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005
+  ],
+  "reason": "definitional break (Booker)"
+ },
+ "ussc_fraud_category_break_2018": {
+  "lane": "ussc",
+  "description": "'Fraud' (statute-based, FY1995-FY2017) and 'Fraud/Theft/Embezzlement' (guideline-based, FY2018+) are different categories; each id covers only its own years.",
+  "variables": [
+   "ussc_pct_offense_fraud",
+   "ussc_count_offense_fraud",
+   "ussc_pct_offense_fraud_theft_embezzlement",
+   "ussc_count_offense_fraud_theft_embezzlement"
+  ],
+  "districts": "all",
+  "periods": "fraud: 2018+; fraud_theft_embezzlement: <=2017",
+  "reason": "definitional break (OFFGUIDE)"
+ },
+ "ussc_fy1995_2001_datafile_only_measures": {
+  "lane": "ussc",
+  "description": "FY1995-FY2001 come from published packets, which do not print the inputs for these measures (fine-only counts; probation-as-zero sentence lengths; \u00a75K3.1; four-way range grouping; child pornography).",
+  "variables": [
+   "ussc_pct_prison",
+   "ussc_mean_sentence_months",
+   "ussc_median_sentence_months",
+   "ussc_pct_early_disposition_5k3"
+  ],
+  "districts": "all",
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001
+  ],
+  "reason": "Individual Offender datafiles for FY1995-FY2001 are not posted on ussc.gov."
+ },
+ "ussc_missing_cells_ussc_cases_offense_known": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_cases_offense_known"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_cases_prison_term": {
+  "lane": "ussc",
+  "description": "10 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_cases_prison_term"
+  ],
+  "districts": [
+   "alnd",
+   "caed",
+   "cand",
+   "cod",
+   "gamd",
+   "lawd",
+   "ncmd",
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998
+  ],
+  "reason": "alnd:1995; caed:1995; cod:1995; nmid:1995; cand:1996; ncmd:1996; nmid:1996; nmid:1997; gamd:1998; lawd:1998"
+ },
+ "ussc_missing_cells_ussc_cases_total": {
+  "lane": "ussc",
+  "description": "8 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_cases_total"
+  ],
+  "districts": [
+   "casd",
+   "lawd",
+   "mad",
+   "msnd",
+   "ncmd",
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999
+  ],
+  "reason": "nmid:1995; mad:1996; ncmd:1996; nmid:1996; casd:1997; nmid:1997; lawd:1998; msnd:1999"
+ },
+ "ussc_missing_cells_ussc_count_offense_drug_trafficking": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_count_offense_drug_trafficking"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_count_offense_firearms": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_count_offense_firearms"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_count_offense_fraud": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_count_offense_fraud"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_count_offense_immigration": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_count_offense_immigration"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_count_offense_other": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_count_offense_other"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_mean_prison_months": {
+  "lane": "ussc",
+  "description": "10 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_mean_prison_months"
+  ],
+  "districts": [
+   "alnd",
+   "caed",
+   "cand",
+   "cod",
+   "gamd",
+   "lawd",
+   "ncmd",
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998
+  ],
+  "reason": "alnd:1995; caed:1995; cod:1995; nmid:1995; cand:1996; ncmd:1996; nmid:1996; nmid:1997; gamd:1998; lawd:1998"
+ },
+ "ussc_missing_cells_ussc_median_prison_months": {
+  "lane": "ussc",
+  "description": "10 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_median_prison_months"
+  ],
+  "districts": [
+   "alnd",
+   "caed",
+   "cand",
+   "cod",
+   "gamd",
+   "lawd",
+   "ncmd",
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998
+  ],
+  "reason": "alnd:1995; caed:1995; cod:1995; nmid:1995; cand:1996; ncmd:1996; nmid:1996; nmid:1997; gamd:1998; lawd:1998"
+ },
+ "ussc_missing_cells_ussc_pct_offense_drug_trafficking": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_pct_offense_drug_trafficking"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_pct_offense_firearms": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_pct_offense_firearms"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_pct_offense_fraud": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_pct_offense_fraud"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_pct_offense_immigration": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_pct_offense_immigration"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_missing_cells_ussc_pct_offense_other": {
+  "lane": "ussc",
+  "description": "3 district-year cells without a value inside the variable's span (zero denominator, unpublished packet cell, or packet not posted).",
+  "variables": [
+   "ussc_pct_offense_other"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1997
+  ],
+  "reason": "nmid:1995; nmid:1996; nmid:1997"
+ },
+ "ussc_packet_fallback_skipped_imprisonment_length_table_7": {
+  "lane": "ussc",
+  "description": "FY1995-FY2001 packet values for imprisonment length (Table 7) not used for 7 district-years because a safety check failed (see reason).",
+  "variables": [
+   "ussc_mean_prison_months",
+   "ussc_median_prison_months",
+   "ussc_cases_prison_term"
+  ],
+  "districts": [
+   "alnd",
+   "caed",
+   "cand",
+   "cod",
+   "gamd",
+   "lawd",
+   "ncmd"
+  ],
+  "periods": [
+   1995,
+   1996,
+   1998
+  ],
+  "reason": "alnd FY1995: Table 7 note names another district: District of Alaska (akd); caed FY1995: Table 7 note names another district: District of California, Central (cacd); cod FY1995: Table 7 note names another district: District of Connecticut (ctd); cand FY1996: TOTAL row incomplete in the PDF text layer; ncmd FY1996: Table 7 heading not found in the PDF text layer; gamd FY1998: N 1044.0 exceeds cases total; lawd FY1998: Table 7 note names another district: Middle District of Louisiana (lamd)"
+ },
+ "ussc_packet_fallback_skipped_ussc_cases_total": {
+  "lane": "ussc",
+  "description": "FY1995-FY2001 packet values for ussc_cases_total not used for 5 district-years because a safety check failed (see reason).",
+  "variables": [
+   "ussc_cases_total"
+  ],
+  "districts": [
+   "casd",
+   "lawd",
+   "mad",
+   "msnd",
+   "ncmd"
+  ],
+  "periods": [
+   1996,
+   1997,
+   1998,
+   1999
+  ],
+  "reason": "mad FY1996: notes disagree: [416.0, 461.0]; ncmd FY1996: no note in the packet names this district's total; casd FY1997: notes disagree: [1130.0, 3130.0]; lawd FY1998: no note in the packet names this district's total; msnd FY1999: notes disagree: [163.0, 164.0]"
+ },
+ "ussc_packet_missing_fy1995": {
+  "lane": "ussc",
+  "description": "No FY1995 district packet linked on the USSC geography page for nmid; district-specific packet values (cases total, offense mix, imprisonment length) are absent. Within-range/\u00a75K1.1 shares still come from the all-district table.",
+  "variables": [
+   "ussc_cases_total",
+   "ussc_cases_offense_known",
+   "ussc_pct_offense_*",
+   "ussc_count_offense_*",
+   "ussc_mean_prison_months",
+   "ussc_median_prison_months",
+   "ussc_cases_prison_term"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1995
+  ],
+  "reason": "packet not published"
+ },
+ "ussc_packet_missing_fy1996": {
+  "lane": "ussc",
+  "description": "No FY1996 district packet linked on the USSC geography page for nmid; district-specific packet values (cases total, offense mix, imprisonment length) are absent. Within-range/\u00a75K1.1 shares still come from the all-district table.",
+  "variables": [
+   "ussc_cases_total",
+   "ussc_cases_offense_known",
+   "ussc_pct_offense_*",
+   "ussc_count_offense_*",
+   "ussc_mean_prison_months",
+   "ussc_median_prison_months",
+   "ussc_cases_prison_term"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1996
+  ],
+  "reason": "packet not published"
+ },
+ "ussc_packet_missing_fy1997": {
+  "lane": "ussc",
+  "description": "No FY1997 district packet linked on the USSC geography page for nmid; district-specific packet values (cases total, offense mix, imprisonment length) are absent. Within-range/\u00a75K1.1 shares still come from the all-district table.",
+  "variables": [
+   "ussc_cases_total",
+   "ussc_cases_offense_known",
+   "ussc_pct_offense_*",
+   "ussc_count_offense_*",
+   "ussc_mean_prison_months",
+   "ussc_median_prison_months",
+   "ussc_cases_prison_term"
+  ],
+  "districts": [
+   "nmid"
+  ],
+  "periods": [
+   1997
+  ],
+  "reason": "packet not published"
+ },
+ "ussc_sentrnge_components_pre2018": {
+  "lane": "ussc",
+  "description": "Departure/variance components (upward departure, government-motion variance, etc.) exist only in the USSC's SENTRNGE scheme: published from FY2018; FY2014-FY2017 available from the USSC supplemental datafiles; nothing earlier.",
+  "variables": [
+   "ussc_pct_upward_departure",
+   "ussc_pct_other_govt_motion_departure",
+   "ussc_pct_non_govt_downward_departure",
+   "ussc_pct_upward_variance",
+   "ussc_pct_govt_motion_downward_variance",
+   "ussc_pct_non_govt_downward_variance",
+   "ussc_pct_variance",
+   "ussc_pct_above_range_2018scheme",
+   "ussc_pct_govt_sponsored_below_range_2018scheme",
+   "ussc_pct_non_govt_sponsored_below_range_2018scheme"
+  ],
+  "districts": "all",
+  "periods": "<=2013",
+  "reason": "scheme introduced FY2018 (back-filled by USSC to FY2014)"
+ }
+}

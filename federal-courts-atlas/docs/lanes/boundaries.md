@@ -4,7 +4,7 @@ Builds the 94 federal judicial districts from the statute (28 U.S.C. §§ 81–1
 of title 48) and Census county geometry. Rebuild with
 `PYTHONPATH=. .venv/bin/python -m pipeline.boundaries.build` (about one minute from the download cache; it needs
 Node/npx for `npx -y mapshaper@0.6`). Tests: `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_boundaries*.py`
-(95 tests, all passing at the time of writing).
+(106 tests, all passing at the time of writing).
 
 ## Outputs
 
@@ -33,7 +33,13 @@ Properties of each object:
 - `districts`: `id` = district_id; `name`, `short`, `state`, `circuit`.
 - `states`: `id` = postal code; `name`, `fips`. The 55 states are the 50 states, DC, PR, GU, VI and MP.
 - `counties` (hi file only): `id` = GEOID; `name`, `district_id`, `state`. A split county carries the
-  `district_id` of its row in `county_district.csv`.
+  `district_id` of its row in `county_district.csv`, and also **`split_districts`** (only on the 8 split counties),
+  in the same format as the CSV column: the county row's district first, then the carved-to district, e.g.
+  `"ncmd;nced"` for Hoke or `"mtd;wyd"` for Park MT. The feature is drawn whole, so a point inside the carved part
+  (Fort Bragg, Camp MacKall, FCI Butner, the Yellowstone parts of MT and ID) must be resolved against the
+  `districts` object, never against the county's `district_id`. **Contract addition** (audit fix): the data
+  contract lists only `name, district_id` for counties; `state` and the optional `split_districts` are additions.
+  Nothing existing is renamed or removed.
 
 ## Sources
 
@@ -184,16 +190,32 @@ Every file is fetched through `pipeline.common.http.fetch` and registered in `da
   3. `-clean` the pieces;
   4. dissolve to districts, states and (hi only) counties;
   5. `-clean` those layers;
-  6. quantize: lo 1e6, hi 4e6.
+  6. quantize: lo 1e6, hi 4e6, with mapshaper's `fix-geometry` output flag (see validity below).
 - Islands kept, compared with the 1,531 polygon parts at full resolution: lo 1,527, hi 1,531.
 - District areas compared with full resolution: lo median 0.015% (max 0.9%, the Virgin Islands); hi median
   0.002% (max 0.12%).
-- Validity after decoding: every district and state polygon in both files is valid. One county polygon in the
-  hi file (Iberia Parish 22045) has a self-intersection of a few metres, created by quantization at a
-  near-duplicate vertex in the source. Repairing it changes the area by 59 m², and it does not affect the
-  districts or states objects.
+- Validity after decoding: **every feature in both files is valid** (lo: 94 districts and 55 states; hi: 94, 55
+  and 3,230 counties). The build records this per object in `build_summary.json`, and the tests require it.
+  - Before the audit fix, one county in the hi file was invalid: Iberia Parish 22045 self-intersected at
+    −91.25527, 29.97161, where the Iberia, Iberville, Assumption and St. Martin lines meet. Two arc endpoints there
+    are about 16 m apart in latitude. The hi grid is about 9 m in x (4e6 steps across the 359° longitude span), so
+    rounding pushed one vertex across the neighbouring edge.
+  - The fix is `fix-geometry` on the `-o` command (mapshaper 0.6.121). After rounding, mapshaper finds the
+    segments that now cross and puts back the unrounded position of only their vertices. It first checks that the
+    unrounded data has no intersections, which the `-clean` passes ensure. It changed 5 points (8 vertex slots,
+    because shared arc endpoints are duplicated), each by under 2 m, all at that corner. Area changes: lawd and
+    laed about 2,100 m² each; the counties 22007, 22045, 22099 and 22101 under 4,700 m² each; no state changed.
+    The lo file is byte-identical, because nothing needed fixing there.
+  - Side effect: those 11 restored values are non-integer quantized deltas, while the other values in the arcs
+    are integers. `topojson-client` `feature`/`mesh` and `d3-geo` decode them correctly; this was checked with the
+    project's own `node_modules`. A strict validator that requires integer quantized positions would flag them.
 - The Aleutian islands east of 180° keep positive longitudes, as in the Census file. A composite AlbersUSA
   projection handles them.
+- **Hawaii inset framing (for the web lane).** hid includes the Northwestern Hawaiian Islands out to about
+  178°W, because Census Honolulu County (15003) includes them. That is faithful to the source, so it is not
+  trimmed here. An inset fitted to hid's full bounding box shrinks the main islands to specks. Frame the inset on
+  the main islands instead (d3's `geoAlbersUsa` already clips its Hawaii inset that way). The § 91 outlying
+  islands are not drawn (gap above).
 
 ### 6. Legacy GEOIDs (`legacy_geoids.csv`)
 
@@ -287,3 +309,30 @@ amendment notes. Each quote is checked against the notes at build time and store
 - `legacy_files_unavailable`: co19_d00 (Iowa, 2000) was rejected by the Census CDN on every attempt; this was not
   worked around.
 - `cb2025_20m_lacks_island_areas`: a scope note on that file.
+- `split_counties_whole_in_county_tables` (added after the audit): each of the 8 split counties has one
+  `district_id` in `county_district.csv` and in the `counties` object, namely the district holding the rest of the
+  county. So any county→district sum (Census population denominators, `county_equivalents`) credits the carved
+  parts to mtd, idd and ncmd instead of wyd and nced. The largest share is Hoke: 362.3 of 1,014.3 km² (36%) is in
+  nced. Per-capita figures for mtd, idd, wyd, ncmd and nced that use a county-sum denominator are approximate;
+  allocating exactly would need block-level counts from the population lane. Area shares are not population
+  shares and are not used as such.
+
+## Audit fixes (boundary audit, 2026-11-27)
+
+The adversarial boundary audit found no blocker or major issue. It raised five minor issues; each is listed below
+with what was done. The auditor could not save its report to `docs/audits/boundary_audit.md` (a harness guard
+blocked the write), and that folder is outside this lane's write scope. So this section records the fixes, and the
+orchestrator holds the auditor's report text.
+
+| # | Issue | Resolution |
+|---|---|---|
+| 1 | The 8 split counties are drawn whole in the hi `counties` object with one `district_id` and no split marker, so county-based hover or search in Fort Bragg / Camp MacKall, Butner or the Yellowstone parts of MT and ID would report ncmd, mtd or idd. | **Fixed.** `geometry.split_districts()` derives `own;carved_to` from the county pieces. `_finish_topology` writes it as `split_districts` on those 8 features (e.g. 37093 `ncmd;nced`, 30067 `mtd;wyd`), matching `county_district.csv`. This is a contract addition, recorded above. The auditor's area shares were reproduced from `split_counties.csv` (Hoke 64.3% in ncmd, …; Park is 94.8%, not 94.9%). Tests: `test_hi_counties_carry_split_districts`, and `test_carve_out_points_resolve_in_hi_topology`, which checks all 9 carve-out test points against the hi `districts` object and the containing county's `split_districts`. **For the web and search lanes:** resolve a point to a district against `districts`, not a county's `district_id`. Today the web uses `counties` only to draw county lines. |
+| 2 | Iberia Parish 22045 is invalid in the hi `counties` object (a self-intersection caused by quantization). | **Fixed** with mapshaper's `-o … fix-geometry` (see "Validity after decoding"). Every feature in both files is now valid. 5 points moved by under 2 m; the lo file is unchanged. Tests: `test_topojson` now requires every county to be valid (it allowed up to 3 invalid before), plus `test_iberia_parish_valid_in_hi_counties`. Both new tests fail on the pre-fix file and pass on the rebuilt one. |
+| 3 | Split counties sit wholly in one district, so county-sum population and per-capita rates credit the carved parts to ncmd, mtd and idd. | **Documented; no data change.** The assignment is by design: one row per Census county, already flagged with `split_districts` and `split_note`, with areas in `split_counties.csv`. New gap `split_counties_whole_in_county_tables` in `data/gaps/boundaries.json` (it flows into DATA_GAPS.md through `pipeline.build_docs`). It names mtd, idd, wyd, ncmd and nced as having approximate county-sum per-capita denominators. Allocating by area would be an estimate, so it is not done. An exact split needs block-level counts, which is work for the population lane. |
+| 4 | hid's extent reaches about 178°W (NW Hawaiian Islands), so an inset fitted to its bounding box is too small; the § 91 islands, the § 123(c)(1) river strip and the § 112(b)–(c) waters are not drawn. | **No boundaries change** (the auditor agrees). This is faithful to Census Honolulu County. A framing note for the web lane is added under §5. The three undrawn items were already recorded as gaps. |
+| 5 | The audit report could not be written to `docs/audits/boundary_audit.md`. | **Not fixable in this lane** (outside its write scope; the same harness guard applies). Passed to the orchestrator: save the auditor's summary as that file, with this table as its "Fixes applied" section. |
+
+Rebuild after the fixes: `python -m pipeline.boundaries.build` (exit 0). Byte-identical to before: `county_district.csv`,
+`split_counties.csv`, `statute_*`, `name_matches.csv`, `legacy_geoids.csv`, `observations.*`, `variables.json`,
+`districts-lo.topo.json` and `divisions.json`. Changed: `districts-hi.topo.json` (2,793,059 → 2,793,589 bytes),
+`build_summary.json` and `data/gaps/boundaries.json` (one gap added). Tests: 106 passed.

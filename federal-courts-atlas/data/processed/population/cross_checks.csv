@@ -1,0 +1,5 @@
+check,a_source,b_source,a,b,n_units,units_differing,result
+GU 2010 Census count: 2020 table vs 2010 press table,census2020_ia_gu_phc01,census2010_ia_gu_cb11cn179,159358,159358,1,0,match
+VI 2010 Census count: 2020 table vs 2010 press table,census2020_ia_vi_phc01,census2010_ia_vi_cb11cn180,106405,106405,3,0,match
+MP 2010 Census count: 2020 table vs 2010 press table,census2020_ia_mp_phc01,census2010_ia_mp_cb11cn178,53883,53883,4,0,match
+2010 Census county counts: CENSUS2010POP in the 2000-2010 intercensal files vs the 2010 DP summary files,census_co_est00int_tot + census_prm_est00int_agesex_5yr,census2010_dp_<state>,312471327,312471327,3221,0,match

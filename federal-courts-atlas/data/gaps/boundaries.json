@@ -44,6 +44,20 @@
   "periods": [],
   "reason": "Concurrent, not exclusive, jurisdiction."
  },
+ "split_counties_whole_in_county_tables": {
+  "lane": "boundaries",
+  "description": "Eight counties are divided by a statutory carve-out: Park and Gallatin MT and Fremont ID (Yellowstone NP -> wyd, 28 U.S.C. \u00a7\u00a7 92, 106, 131); Hoke, Moore, Scotland and Richmond NC (Fort Bragg / Camp MacKall -> nced) and Durham NC (FCI Butner -> nced), \u00a7 113(a)-(b). The district polygons are cut, but each county's row in county_district.csv (and its feature in the hi TopoJSON `counties` object) carries one district_id: the district holding the rest of the county (mtd, idd or ncmd). Any county->district sum, such as a Census population denominator or the county_equivalents count, therefore credits the carved-out parts to mtd, idd and ncmd instead of wyd and nced. The largest share is Hoke County, NC: 362.3 of 1,014.3 km\u00b2 (36%) is in nced (split_counties.csv). These rows carry split_districts and split_note; no sub-county population split is produced by this lane, so per-capita rates for these five districts that use a county-sum denominator are approximate.",
+  "variables": [],
+  "districts": [
+   "mtd",
+   "idd",
+   "wyd",
+   "ncmd",
+   "nced"
+  ],
+  "periods": [],
+  "reason": "Census county rows are indivisible here; allocating the carved parts' population would need block-level counts (population lane), and area shares are not population shares."
+ },
  "statutory_places_not_named_gud_vid": {
   "lane": "boundaries",
   "description": "Title 48 names no place of holding court for the District Court of Guam or the District Court of the Virgin Islands; statute_places.csv has no rows for gud and vid.",

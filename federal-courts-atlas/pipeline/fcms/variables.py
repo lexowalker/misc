@@ -107,10 +107,6 @@ HIGHER_MEANS = {
     "fcms_filings_civil": "more civil cases filed", "fcms_filings_criminal_felony": "more criminal filings",
 }
 
-COMMON_CAVEATS = ("As published by the AO in the September Judicial Caseload Profile for the year. "
-                  "FY1999-2003 values come from the back-columns of the FY2004 profile (the FY1997-2003 "
-                  "profiles online are scanned images). ")
-
 
 def slug_for_label(label: str) -> str:
     s = label.lower()

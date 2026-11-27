@@ -1,0 +1,839 @@
+district_id,period,period_type,variable,value,unit,source_id,source_locator,basis,numerator,n_basis
+US,1995,FY_SEP30,ussc_cases_offense_known,38377.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1, row 'TOTAL'",published_packet,38377.0,
+US,1996,FY_SEP30,ussc_cases_offense_known,42362.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1, row 'TOTAL'",published_packet,42362.0,
+US,1997,FY_SEP30,ussc_cases_offense_known,48681.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1, row 'TOTAL'",published_packet,48681.0,
+US,1998,FY_SEP30,ussc_cases_offense_known,50605.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1, row 'TOTAL'",published_packet,50605.0,
+US,1999,FY_SEP30,ussc_cases_offense_known,55408.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1, row 'TOTAL'",published_packet,55408.0,
+US,2000,FY_SEP30,ussc_cases_offense_known,59589.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1, row 'TOTAL'",published_packet,59589.0,
+US,2001,FY_SEP30,ussc_cases_offense_known,59691.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1, row 'TOTAL'",published_packet,59691.0,
+US,2002,FY_SEP30,ussc_cases_offense_known,63973.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,63973.0,
+US,2003,FY_SEP30,ussc_cases_offense_known,69680.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,69680.0,
+US,2004,FY_SEP30,ussc_cases_offense_known,69932.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,69932.0,
+US,2005,FY_SEP30,ussc_cases_offense_known,72408.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,72408.0,
+US,2006,FY_SEP30,ussc_cases_offense_known,72518.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,72518.0,
+US,2007,FY_SEP30,ussc_cases_offense_known,72765.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,72765.0,
+US,2008,FY_SEP30,ussc_cases_offense_known,76428.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,76428.0,
+US,2009,FY_SEP30,ussc_cases_offense_known,81372.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 non-missing,reproduces_published,81372.0,
+US,2010,FY_SEP30,ussc_cases_offense_known,83946.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,83946.0,
+US,2011,FY_SEP30,ussc_cases_offense_known,86201.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,86201.0,
+US,2012,FY_SEP30,ussc_cases_offense_known,84173.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,84173.0,
+US,2013,FY_SEP30,ussc_cases_offense_known,80035.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,80035.0,
+US,2014,FY_SEP30,ussc_cases_offense_known,75836.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,75836.0,
+US,2015,FY_SEP30,ussc_cases_offense_known,71003.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,71003.0,
+US,2016,FY_SEP30,ussc_cases_offense_known,67742.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,67742.0,
+US,2017,FY_SEP30,ussc_cases_offense_known,66873.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB non-missing,reproduces_published,66873.0,
+US,2018,FY_SEP30,ussc_cases_offense_known,69425.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,69425.0,
+US,2019,FY_SEP30,ussc_cases_offense_known,76538.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,76538.0,
+US,2020,FY_SEP30,ussc_cases_offense_known,64565.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,64565.0,
+US,2021,FY_SEP30,ussc_cases_offense_known,57287.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,57287.0,
+US,2022,FY_SEP30,ussc_cases_offense_known,64142.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,64142.0,
+US,2023,FY_SEP30,ussc_cases_offense_known,64124.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,64124.0,
+US,2024,FY_SEP30,ussc_cases_offense_known,61678.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,61678.0,
+US,2025,FY_SEP30,ussc_cases_offense_known,66662.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE non-missing,reproduces_published,66662.0,
+US,1995,FY_SEP30,ussc_cases_prison_term,29912.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,29912.0,
+US,1996,FY_SEP30,ussc_cases_prison_term,33821.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,33821.0,
+US,1997,FY_SEP30,ussc_cases_prison_term,38229.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,38229.0,
+US,1998,FY_SEP30,ussc_cases_prison_term,41180.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,41180.0,
+US,1999,FY_SEP30,ussc_cases_prison_term,45379.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,45379.0,
+US,2000,FY_SEP30,ussc_cases_prison_term,49192.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,49192.0,
+US,2001,FY_SEP30,ussc_cases_prison_term,49613.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Number",published_packet,49613.0,
+US,2002,FY_SEP30,ussc_cases_prison_term,53886.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,53886.0,
+US,2003,FY_SEP30,ussc_cases_prison_term,58816.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,58816.0,
+US,2004,FY_SEP30,ussc_cases_prison_term,59291.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,computed_ussc_definition,59291.0,
+US,2005,FY_SEP30,ussc_cases_prison_term,62513.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,computed_ussc_definition,62513.0,
+US,2006,FY_SEP30,ussc_cases_prison_term,62963.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,62963.0,
+US,2007,FY_SEP30,ussc_cases_prison_term,62973.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,62973.0,
+US,2008,FY_SEP30,ussc_cases_prison_term,66104.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,66104.0,
+US,2009,FY_SEP30,ussc_cases_prison_term,70103.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPE2 non-missing,reproduces_published,70103.0,
+US,2010,FY_SEP30,ussc_cases_prison_term,72170.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,72170.0,
+US,2011,FY_SEP30,ussc_cases_prison_term,73891.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,73891.0,
+US,2012,FY_SEP30,ussc_cases_prison_term,72008.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,72008.0,
+US,2013,FY_SEP30,ussc_cases_prison_term,68721.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,68721.0,
+US,2014,FY_SEP30,ussc_cases_prison_term,65244.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,65244.0,
+US,2015,FY_SEP30,ussc_cases_prison_term,61130.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,61130.0,
+US,2016,FY_SEP30,ussc_cases_prison_term,58291.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,58291.0,
+US,2017,FY_SEP30,ussc_cases_prison_term,58091.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; SENTTOT > 0 and OFFTYPSB non-missing,reproduces_published,58091.0,
+US,2018,FY_SEP30,ussc_cases_prison_term,63065.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,63065.0,
+US,2019,FY_SEP30,ussc_cases_prison_term,70231.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,70231.0,
+US,2020,FY_SEP30,ussc_cases_prison_term,59300.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,59300.0,
+US,2021,FY_SEP30,ussc_cases_prison_term,52300.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,52300.0,
+US,2022,FY_SEP30,ussc_cases_prison_term,59068.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,59068.0,
+US,2023,FY_SEP30,ussc_cases_prison_term,59267.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,59267.0,
+US,2024,FY_SEP30,ussc_cases_prison_term,56417.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,56417.0,
+US,2025,FY_SEP30,ussc_cases_prison_term,61556.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTTOT > 0 and OFFGUIDE non-missing,computed_ussc_definition,61556.0,
+US,1995,FY_SEP30,ussc_cases_range_known,36975.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,36975.0,
+US,1996,FY_SEP30,ussc_cases_range_known,40879.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,40879.0,
+US,1997,FY_SEP30,ussc_cases_range_known,46017.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,46017.0,
+US,1998,FY_SEP30,ussc_cases_range_known,47896.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,47896.0,
+US,1999,FY_SEP30,ussc_cases_range_known,52425.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,52425.0,
+US,2000,FY_SEP30,ussc_cases_range_known,54617.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,54617.0,
+US,2001,FY_SEP30,ussc_cases_range_known,54851.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 8 'Guideline departure rate by circuit and district', row US, TOTAL",published_packet,54851.0,
+US,2002,FY_SEP30,ussc_cases_range_known,58684.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; DEPART non-missing,reproduces_published,58684.0,
+US,2003,FY_SEP30,ussc_cases_range_known,65171.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; DEPART_S/DEPART_D non-missing,reproduces_published,65171.0,
+US,2004,FY_SEP30,ussc_cases_range_known,65043.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; DEPART_A (BLAKPOST both halves) non-missing,pooled_published_halves,65043.0,
+US,2005,FY_SEP30,ussc_cases_range_known,68850.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; DEPART_A (BOOKPOST=0) + BOOKERCD (BOOKPOST=1) non-missing,pooled_published_halves,68850.0,
+US,2006,FY_SEP30,ussc_cases_range_known,70187.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,70187.0,
+US,2007,FY_SEP30,ussc_cases_range_known,69893.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,69893.0,
+US,2008,FY_SEP30,ussc_cases_range_known,74493.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,74493.0,
+US,2009,FY_SEP30,ussc_cases_range_known,79153.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,79153.0,
+US,2010,FY_SEP30,ussc_cases_range_known,81859.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,81859.0,
+US,2011,FY_SEP30,ussc_cases_range_known,84744.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,84744.0,
+US,2012,FY_SEP30,ussc_cases_range_known,82674.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,82674.0,
+US,2013,FY_SEP30,ussc_cases_range_known,78628.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,78628.0,
+US,2014,FY_SEP30,ussc_cases_range_known,74126.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,74126.0,
+US,2015,FY_SEP30,ussc_cases_range_known,68270.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,68270.0,
+US,2016,FY_SEP30,ussc_cases_range_known,66961.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,66961.0,
+US,2017,FY_SEP30,ussc_cases_range_known,66266.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD non-missing,reproduces_published,66266.0,
+US,2018,FY_SEP30,ussc_cases_range_known,68902.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,68902.0,
+US,2019,FY_SEP30,ussc_cases_range_known,76034.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,76034.0,
+US,2020,FY_SEP30,ussc_cases_range_known,64233.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,64233.0,
+US,2021,FY_SEP30,ussc_cases_range_known,57041.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,57041.0,
+US,2022,FY_SEP30,ussc_cases_range_known,63896.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,63896.0,
+US,2023,FY_SEP30,ussc_cases_range_known,63812.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,63812.0,
+US,2024,FY_SEP30,ussc_cases_range_known,61331.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,61331.0,
+US,2025,FY_SEP30,ussc_cases_range_known,66036.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE non-missing,reproduces_published,66036.0,
+US,1995,FY_SEP30,ussc_cases_total,38500.0,cases,ussc_packet_fy1995_vae,VAE95.pdf Table 1 note 'Of the N guideline cases',published_packet,38500.0,
+US,1996,FY_SEP30,ussc_cases_total,42436.0,cases,ussc_packet_fy1996_vae,VAE96.pdf Table 1 note 'Of the N guideline cases',published_packet,42436.0,
+US,1997,FY_SEP30,ussc_cases_total,48848.0,cases,ussc_packet_fy1997_vae,VAE97.pdf Table 1 note 'Of the N guideline cases',published_packet,48848.0,
+US,1998,FY_SEP30,ussc_cases_total,50754.0,cases,ussc_packet_fy1998_vae,VAE98.pdf Table 1 note 'Of the N guideline cases',published_packet,50754.0,
+US,1999,FY_SEP30,ussc_cases_total,55557.0,cases,ussc_packet_fy1999_vae,vae99.pdf Table 1 note 'Of the N guideline cases',published_packet,55557.0,
+US,2000,FY_SEP30,ussc_cases_total,59846.0,cases,ussc_packet_fy2000_vae,vae00.pdf Table 1 note 'Of the N guideline cases',published_packet,59846.0,
+US,2001,FY_SEP30,ussc_cases_total,59897.0,cases,ussc_packet_fy2001_vae,vae01.pdf Table 1 note 'Of the N guideline cases',published_packet,59897.0,
+US,2002,FY_SEP30,ussc_cases_total,64366.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; count of records,reproduces_published,64366.0,
+US,2003,FY_SEP30,ussc_cases_total,70258.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; count of records,reproduces_published,70258.0,
+US,2004,FY_SEP30,ussc_cases_total,70068.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; count of records,reproduces_published,70068.0,
+US,2005,FY_SEP30,ussc_cases_total,72462.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; count of records,reproduces_published,72462.0,
+US,2006,FY_SEP30,ussc_cases_total,72585.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; count of records,reproduces_published,72585.0,
+US,2007,FY_SEP30,ussc_cases_total,72865.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; count of records,reproduces_published,72865.0,
+US,2008,FY_SEP30,ussc_cases_total,76478.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; count of records,reproduces_published,76478.0,
+US,2009,FY_SEP30,ussc_cases_total,81372.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; count of records,reproduces_published,81372.0,
+US,2010,FY_SEP30,ussc_cases_total,83946.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; count of records,reproduces_published,83946.0,
+US,2011,FY_SEP30,ussc_cases_total,86201.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; count of records,reproduces_published,86201.0,
+US,2012,FY_SEP30,ussc_cases_total,84173.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; count of records,reproduces_published,84173.0,
+US,2013,FY_SEP30,ussc_cases_total,80035.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; count of records,reproduces_published,80035.0,
+US,2014,FY_SEP30,ussc_cases_total,75836.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; count of records,reproduces_published,75836.0,
+US,2015,FY_SEP30,ussc_cases_total,71003.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; count of records,reproduces_published,71003.0,
+US,2016,FY_SEP30,ussc_cases_total,67742.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; count of records,reproduces_published,67742.0,
+US,2017,FY_SEP30,ussc_cases_total,66873.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; count of records,reproduces_published,66873.0,
+US,2018,FY_SEP30,ussc_cases_total,69425.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; count of records,reproduces_published,69425.0,
+US,2019,FY_SEP30,ussc_cases_total,76538.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; count of records,reproduces_published,76538.0,
+US,2020,FY_SEP30,ussc_cases_total,64565.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; count of records,reproduces_published,64565.0,
+US,2021,FY_SEP30,ussc_cases_total,57287.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; count of records,reproduces_published,57287.0,
+US,2022,FY_SEP30,ussc_cases_total,64142.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; count of records,reproduces_published,64142.0,
+US,2023,FY_SEP30,ussc_cases_total,64124.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; count of records,reproduces_published,64124.0,
+US,2024,FY_SEP30,ussc_cases_total,61678.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; count of records,reproduces_published,61678.0,
+US,2025,FY_SEP30,ussc_cases_total,66662.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; count of records,reproduces_published,66662.0,
+US,2010,FY_SEP30,ussc_count_offense_child_pornography,1886.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1886.0,
+US,2011,FY_SEP30,ussc_count_offense_child_pornography,1855.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1855.0,
+US,2012,FY_SEP30,ussc_count_offense_child_pornography,2014.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,2014.0,
+US,2013,FY_SEP30,ussc_count_offense_child_pornography,1922.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1922.0,
+US,2014,FY_SEP30,ussc_count_offense_child_pornography,1925.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1925.0,
+US,2015,FY_SEP30,ussc_count_offense_child_pornography,1903.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1903.0,
+US,2016,FY_SEP30,ussc_count_offense_child_pornography,1937.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1937.0,
+US,2017,FY_SEP30,ussc_count_offense_child_pornography,1810.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {28},reproduces_published,1810.0,
+US,2018,FY_SEP30,ussc_count_offense_child_pornography,1416.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1416.0,
+US,2019,FY_SEP30,ussc_count_offense_child_pornography,1368.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1368.0,
+US,2020,FY_SEP30,ussc_count_offense_child_pornography,1023.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1023.0,
+US,2021,FY_SEP30,ussc_count_offense_child_pornography,1215.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1215.0,
+US,2022,FY_SEP30,ussc_count_offense_child_pornography,1435.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1435.0,
+US,2023,FY_SEP30,ussc_count_offense_child_pornography,1408.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1408.0,
+US,2024,FY_SEP30,ussc_count_offense_child_pornography,1375.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1375.0,
+US,2025,FY_SEP30,ussc_count_offense_child_pornography,1432.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {7},reproduces_published,1432.0,
+US,1995,FY_SEP30,ussc_count_offense_drug_trafficking,14183.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,14183.0,
+US,1996,FY_SEP30,ussc_count_offense_drug_trafficking,16251.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,16251.0,
+US,1997,FY_SEP30,ussc_count_offense_drug_trafficking,18060.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,18060.0,
+US,1998,FY_SEP30,ussc_count_offense_drug_trafficking,19615.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,19615.0,
+US,1999,FY_SEP30,ussc_count_offense_drug_trafficking,21995.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,21995.0,
+US,2000,FY_SEP30,ussc_count_offense_drug_trafficking,23229.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,23229.0,
+US,2001,FY_SEP30,ussc_count_offense_drug_trafficking,24031.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Number",published_packet,24031.0,
+US,2002,FY_SEP30,ussc_count_offense_drug_trafficking,25376.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,25376.0,
+US,2003,FY_SEP30,ussc_count_offense_drug_trafficking,24882.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,24882.0,
+US,2004,FY_SEP30,ussc_count_offense_drug_trafficking,23572.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,23572.0,
+US,2005,FY_SEP30,ussc_count_offense_drug_trafficking,24338.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,24338.0,
+US,2006,FY_SEP30,ussc_count_offense_drug_trafficking,25086.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,25086.0,
+US,2007,FY_SEP30,ussc_count_offense_drug_trafficking,24332.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,24332.0,
+US,2008,FY_SEP30,ussc_count_offense_drug_trafficking,24306.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,24306.0,
+US,2009,FY_SEP30,ussc_count_offense_drug_trafficking,23938.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {10},reproduces_published,23938.0,
+US,2010,FY_SEP30,ussc_count_offense_drug_trafficking,23506.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,23506.0,
+US,2011,FY_SEP30,ussc_count_offense_drug_trafficking,24442.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,24442.0,
+US,2012,FY_SEP30,ussc_count_offense_drug_trafficking,24736.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,24736.0,
+US,2013,FY_SEP30,ussc_count_offense_drug_trafficking,22254.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,22254.0,
+US,2014,FY_SEP30,ussc_count_offense_drug_trafficking,21323.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,21323.0,
+US,2015,FY_SEP30,ussc_count_offense_drug_trafficking,20038.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,20038.0,
+US,2016,FY_SEP30,ussc_count_offense_drug_trafficking,19232.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,19232.0,
+US,2017,FY_SEP30,ussc_count_offense_drug_trafficking,19043.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {10},reproduces_published,19043.0,
+US,2018,FY_SEP30,ussc_count_offense_drug_trafficking,18747.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,18747.0,
+US,2019,FY_SEP30,ussc_count_offense_drug_trafficking,19830.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,19830.0,
+US,2020,FY_SEP30,ussc_count_offense_drug_trafficking,16390.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,16390.0,
+US,2021,FY_SEP30,ussc_count_offense_drug_trafficking,17608.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,17608.0,
+US,2022,FY_SEP30,ussc_count_offense_drug_trafficking,19938.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,19938.0,
+US,2023,FY_SEP30,ussc_count_offense_drug_trafficking,19007.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,19007.0,
+US,2024,FY_SEP30,ussc_count_offense_drug_trafficking,18172.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,18172.0,
+US,2025,FY_SEP30,ussc_count_offense_drug_trafficking,16222.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {10},reproduces_published,16222.0,
+US,1995,FY_SEP30,ussc_count_offense_firearms,2573.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,2573.0,
+US,1996,FY_SEP30,ussc_count_offense_firearms,2546.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,2546.0,
+US,1997,FY_SEP30,ussc_count_offense_firearms,2322.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,2322.0,
+US,1998,FY_SEP30,ussc_count_offense_firearms,2496.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,2496.0,
+US,1999,FY_SEP30,ussc_count_offense_firearms,2679.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,2679.0,
+US,2000,FY_SEP30,ussc_count_offense_firearms,3524.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,3524.0,
+US,2001,FY_SEP30,ussc_count_offense_firearms,4489.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Number",published_packet,4489.0,
+US,2002,FY_SEP30,ussc_count_offense_firearms,5180.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,5180.0,
+US,2003,FY_SEP30,ussc_count_offense_firearms,6795.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,6795.0,
+US,2004,FY_SEP30,ussc_count_offense_firearms,8133.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8133.0,
+US,2005,FY_SEP30,ussc_count_offense_firearms,8648.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8648.0,
+US,2006,FY_SEP30,ussc_count_offense_firearms,8384.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8384.0,
+US,2007,FY_SEP30,ussc_count_offense_firearms,8359.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8359.0,
+US,2008,FY_SEP30,ussc_count_offense_firearms,8250.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8250.0,
+US,2009,FY_SEP30,ussc_count_offense_firearms,8243.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {13},reproduces_published,8243.0,
+US,2010,FY_SEP30,ussc_count_offense_firearms,7986.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,7986.0,
+US,2011,FY_SEP30,ussc_count_offense_firearms,7858.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,7858.0,
+US,2012,FY_SEP30,ussc_count_offense_firearms,8105.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,8105.0,
+US,2013,FY_SEP30,ussc_count_offense_firearms,8068.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,8068.0,
+US,2014,FY_SEP30,ussc_count_offense_firearms,7925.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,7925.0,
+US,2015,FY_SEP30,ussc_count_offense_firearms,7069.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,7069.0,
+US,2016,FY_SEP30,ussc_count_offense_firearms,7305.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,7305.0,
+US,2017,FY_SEP30,ussc_count_offense_firearms,8064.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {13},reproduces_published,8064.0,
+US,2018,FY_SEP30,ussc_count_offense_firearms,7512.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,7512.0,
+US,2019,FY_SEP30,ussc_count_offense_firearms,8481.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,8481.0,
+US,2020,FY_SEP30,ussc_count_offense_firearms,7539.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,7539.0,
+US,2021,FY_SEP30,ussc_count_offense_firearms,8151.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,8151.0,
+US,2022,FY_SEP30,ussc_count_offense_firearms,9318.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,9318.0,
+US,2023,FY_SEP30,ussc_count_offense_firearms,8832.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,8832.0,
+US,2024,FY_SEP30,ussc_count_offense_firearms,8131.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,8131.0,
+US,2025,FY_SEP30,ussc_count_offense_firearms,8041.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {13},reproduces_published,8041.0,
+US,1995,FY_SEP30,ussc_count_offense_fraud,5909.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,5909.0,
+US,1996,FY_SEP30,ussc_count_offense_fraud,6028.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6028.0,
+US,1997,FY_SEP30,ussc_count_offense_fraud,6929.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6929.0,
+US,1998,FY_SEP30,ussc_count_offense_fraud,6330.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6330.0,
+US,1999,FY_SEP30,ussc_count_offense_fraud,6199.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6199.0,
+US,2000,FY_SEP30,ussc_count_offense_fraud,6286.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6286.0,
+US,2001,FY_SEP30,ussc_count_offense_fraud,6691.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Number",published_packet,6691.0,
+US,2002,FY_SEP30,ussc_count_offense_fraud,7108.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7108.0,
+US,2003,FY_SEP30,ussc_count_offense_fraud,7468.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7468.0,
+US,2004,FY_SEP30,ussc_count_offense_fraud,7261.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7261.0,
+US,2005,FY_SEP30,ussc_count_offense_fraud,6809.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,6809.0,
+US,2006,FY_SEP30,ussc_count_offense_fraud,6958.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,6958.0,
+US,2007,FY_SEP30,ussc_count_offense_fraud,7767.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7767.0,
+US,2008,FY_SEP30,ussc_count_offense_fraud,7472.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7472.0,
+US,2009,FY_SEP30,ussc_count_offense_fraud,7618.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {18},reproduces_published,7618.0,
+US,2010,FY_SEP30,ussc_count_offense_fraud,8067.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,8067.0,
+US,2011,FY_SEP30,ussc_count_offense_fraud,8332.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,8332.0,
+US,2012,FY_SEP30,ussc_count_offense_fraud,8634.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,8634.0,
+US,2013,FY_SEP30,ussc_count_offense_fraud,7840.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,7840.0,
+US,2014,FY_SEP30,ussc_count_offense_fraud,7614.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,7614.0,
+US,2015,FY_SEP30,ussc_count_offense_fraud,7420.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,7420.0,
+US,2016,FY_SEP30,ussc_count_offense_fraud,6517.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,6517.0,
+US,2017,FY_SEP30,ussc_count_offense_fraud,6029.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {18},reproduces_published,6029.0,
+US,2018,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,6620.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,6620.0,
+US,2019,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,6390.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,6390.0,
+US,2020,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,4823.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,4823.0,
+US,2021,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,4571.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,4571.0,
+US,2022,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,5520.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,5520.0,
+US,2023,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,5205.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,5205.0,
+US,2024,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,5312.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,5312.0,
+US,2025,FY_SEP30,ussc_count_offense_fraud_theft_embezzlement,5080.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {16},reproduces_published,5080.0,
+US,1995,FY_SEP30,ussc_count_offense_immigration,3170.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,3170.0,
+US,1996,FY_SEP30,ussc_count_offense_immigration,4931.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,4931.0,
+US,1997,FY_SEP30,ussc_count_offense_immigration,6690.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,6690.0,
+US,1998,FY_SEP30,ussc_count_offense_immigration,8062.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,8062.0,
+US,1999,FY_SEP30,ussc_count_offense_immigration,9669.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,9669.0,
+US,2000,FY_SEP30,ussc_count_offense_immigration,11689.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,11689.0,
+US,2001,FY_SEP30,ussc_count_offense_immigration,10458.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Number",published_packet,10458.0,
+US,2002,FY_SEP30,ussc_count_offense_immigration,11736.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,11736.0,
+US,2003,FY_SEP30,ussc_count_offense_immigration,15081.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,15081.0,
+US,2004,FY_SEP30,ussc_count_offense_immigration,15717.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,15717.0,
+US,2005,FY_SEP30,ussc_count_offense_immigration,17717.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,17717.0,
+US,2006,FY_SEP30,ussc_count_offense_immigration,17574.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,17574.0,
+US,2007,FY_SEP30,ussc_count_offense_immigration,17592.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,17592.0,
+US,2008,FY_SEP30,ussc_count_offense_immigration,21429.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,21429.0,
+US,2009,FY_SEP30,ussc_count_offense_immigration,25927.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {27},reproduces_published,25927.0,
+US,2010,FY_SEP30,ussc_count_offense_immigration,28504.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,28504.0,
+US,2011,FY_SEP30,ussc_count_offense_immigration,29717.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,29717.0,
+US,2012,FY_SEP30,ussc_count_offense_immigration,26548.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,26548.0,
+US,2013,FY_SEP30,ussc_count_offense_immigration,24972.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,24972.0,
+US,2014,FY_SEP30,ussc_count_offense_immigration,22238.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,22238.0,
+US,2015,FY_SEP30,ussc_count_offense_immigration,20771.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,20771.0,
+US,2016,FY_SEP30,ussc_count_offense_immigration,20051.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,20051.0,
+US,2017,FY_SEP30,ussc_count_offense_immigration,20421.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {27},reproduces_published,20421.0,
+US,2018,FY_SEP30,ussc_count_offense_immigration,23883.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,23883.0,
+US,2019,FY_SEP30,ussc_count_offense_immigration,29354.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,29354.0,
+US,2020,FY_SEP30,ussc_count_offense_immigration,26561.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,26561.0,
+US,2021,FY_SEP30,ussc_count_offense_immigration,16937.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,16937.0,
+US,2022,FY_SEP30,ussc_count_offense_immigration,17652.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,17652.0,
+US,2023,FY_SEP30,ussc_count_offense_immigration,19226.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,19226.0,
+US,2024,FY_SEP30,ussc_count_offense_immigration,18492.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,18492.0,
+US,2025,FY_SEP30,ussc_count_offense_immigration,25119.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {17},reproduces_published,25119.0,
+US,1995,FY_SEP30,ussc_count_offense_other,12542.0,cases,ussc_packet_fy1995_vae,"VAE95.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,12542.0,
+US,1996,FY_SEP30,ussc_count_offense_other,12606.0,cases,ussc_packet_fy1996_vae,"VAE96.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,12606.0,
+US,1997,FY_SEP30,ussc_count_offense_other,14680.0,cases,ussc_packet_fy1997_vae,"VAE97.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,14680.0,
+US,1998,FY_SEP30,ussc_count_offense_other,14102.0,cases,ussc_packet_fy1998_vae,"VAE98.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,14102.0,
+US,1999,FY_SEP30,ussc_count_offense_other,14866.0,cases,ussc_packet_fy1999_vae,"vae99.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,14866.0,
+US,2000,FY_SEP30,ussc_count_offense_other,14861.0,cases,ussc_packet_fy2000_vae,"vae00.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,14861.0,
+US,2001,FY_SEP30,ussc_count_offense_other,14022.0,cases,ussc_packet_fy2001_vae,"vae01.pdf Table 1, row 'TOTAL' minus the drug-trafficking, immigration, firearms and fraud rows",derived_from_published_counts,14022.0,
+US,2002,FY_SEP30,ussc_count_offense_other,14573.0,cases,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,14573.0,
+US,2003,FY_SEP30,ussc_count_offense_other,15454.0,cases,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,15454.0,
+US,2004,FY_SEP30,ussc_count_offense_other,15249.0,cases,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,15249.0,
+US,2005,FY_SEP30,ussc_count_offense_other,14896.0,cases,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,14896.0,
+US,2006,FY_SEP30,ussc_count_offense_other,14516.0,cases,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,14516.0,
+US,2007,FY_SEP30,ussc_count_offense_other,14715.0,cases,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,14715.0,
+US,2008,FY_SEP30,ussc_count_offense_other,14971.0,cases,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,14971.0,
+US,2009,FY_SEP30,ussc_count_offense_other,15646.0,cases,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes},reproduces_published,15646.0,
+US,2010,FY_SEP30,ussc_count_offense_other,13997.0,cases,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,13997.0,
+US,2011,FY_SEP30,ussc_count_offense_other,13997.0,cases,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,13997.0,
+US,2012,FY_SEP30,ussc_count_offense_other,14136.0,cases,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,14136.0,
+US,2013,FY_SEP30,ussc_count_offense_other,14979.0,cases,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,14979.0,
+US,2014,FY_SEP30,ussc_count_offense_other,14811.0,cases,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,14811.0,
+US,2015,FY_SEP30,ussc_count_offense_other,13802.0,cases,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,13802.0,
+US,2016,FY_SEP30,ussc_count_offense_other,12700.0,cases,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,12700.0,
+US,2017,FY_SEP30,ussc_count_offense_other,11506.0,cases,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {all other codes},reproduces_published,11506.0,
+US,2018,FY_SEP30,ussc_count_offense_other,11247.0,cases,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,11247.0,
+US,2019,FY_SEP30,ussc_count_offense_other,11115.0,cases,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,11115.0,
+US,2020,FY_SEP30,ussc_count_offense_other,8229.0,cases,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,8229.0,
+US,2021,FY_SEP30,ussc_count_offense_other,8805.0,cases,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,8805.0,
+US,2022,FY_SEP30,ussc_count_offense_other,10279.0,cases,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,10279.0,
+US,2023,FY_SEP30,ussc_count_offense_other,10446.0,cases,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,10446.0,
+US,2024,FY_SEP30,ussc_count_offense_other,10196.0,cases,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,10196.0,
+US,2025,FY_SEP30,ussc_count_offense_other,10768.0,cases,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {all other codes},reproduces_published,10768.0,
+US,1995,FY_SEP30,ussc_mean_prison_months,63.1,months,ussc_packet_fy1995_vae,"VAE95.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,29912.0
+US,1996,FY_SEP30,ussc_mean_prison_months,62.3,months,ussc_packet_fy1996_vae,"VAE96.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,33821.0
+US,1997,FY_SEP30,ussc_mean_prison_months,59.0,months,ussc_packet_fy1997_vae,"VAE97.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,38229.0
+US,1998,FY_SEP30,ussc_mean_prison_months,57.7,months,ussc_packet_fy1998_vae,"VAE98.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,41180.0
+US,1999,FY_SEP30,ussc_mean_prison_months,56.9,months,ussc_packet_fy1999_vae,"vae99.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,45379.0
+US,2000,FY_SEP30,ussc_mean_prison_months,55.2,months,ussc_packet_fy2000_vae,"vae00.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,49192.0
+US,2001,FY_SEP30,ussc_mean_prison_months,54.9,months,ussc_packet_fy2001_vae,"vae01.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Mean Months",published_packet,,49613.0
+US,2002,FY_SEP30,ussc_mean_prison_months,54.7,months,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=53886),reproduces_published,,53886.0
+US,2003,FY_SEP30,ussc_mean_prison_months,56.0,months,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=58816),reproduces_published,,58816.0
+US,2004,FY_SEP30,ussc_mean_prison_months,56.9,months,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=59291),computed_ussc_definition,,59291.0
+US,2005,FY_SEP30,ussc_mean_prison_months,57.2,months,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62513),computed_ussc_definition,,62513.0
+US,2006,FY_SEP30,ussc_mean_prison_months,59.1,months,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62963),reproduces_published,,62963.0
+US,2007,FY_SEP30,ussc_mean_prison_months,59.3,months,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62973),reproduces_published,,62973.0
+US,2008,FY_SEP30,ussc_mean_prison_months,56.9,months,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=66104),reproduces_published,,66104.0
+US,2009,FY_SEP30,ussc_mean_prison_months,54.0,months,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=70103),reproduces_published,,70103.0
+US,2010,FY_SEP30,ussc_mean_prison_months,51.1,months,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=72170),reproduces_published,,72170.0
+US,2011,FY_SEP30,ussc_mean_prison_months,49.2,months,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=73891),reproduces_published,,73891.0
+US,2012,FY_SEP30,ussc_mean_prison_months,50.9,months,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=72008),reproduces_published,,72008.0
+US,2013,FY_SEP30,ussc_mean_prison_months,51.6,months,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=68721),reproduces_published,,68721.0
+US,2014,FY_SEP30,ussc_mean_prison_months,51.2,months,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=65244),reproduces_published,,65244.0
+US,2015,FY_SEP30,ussc_mean_prison_months,50.5,months,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=61130),reproduces_published,,61130.0
+US,2016,FY_SEP30,ussc_mean_prison_months,50.4,months,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=58291),reproduces_published,,58291.0
+US,2017,FY_SEP30,ussc_mean_prison_months,51.2,months,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=58091),reproduces_published,,58091.0
+US,2018,FY_SEP30,ussc_mean_prison_months,48.8,months,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=63065),computed_ussc_definition,,63065.0
+US,2019,FY_SEP30,ussc_mean_prison_months,46.5,months,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=70231),computed_ussc_definition,,70231.0
+US,2020,FY_SEP30,ussc_mean_prison_months,43.3,months,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59300),computed_ussc_definition,,59300.0
+US,2021,FY_SEP30,ussc_mean_prison_months,52.5,months,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=52300),computed_ussc_definition,,52300.0
+US,2022,FY_SEP30,ussc_mean_prison_months,56.1,months,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59068),computed_ussc_definition,,59068.0
+US,2023,FY_SEP30,ussc_mean_prison_months,56.9,months,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59267),computed_ussc_definition,,59267.0
+US,2024,FY_SEP30,ussc_mean_prison_months,57.7,months,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=56417),computed_ussc_definition,,56417.0
+US,2025,FY_SEP30,ussc_mean_prison_months,51.9,months,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; mean of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=61556),computed_ussc_definition,,61556.0
+US,2002,FY_SEP30,ussc_mean_sentence_months,51.5,months,ussc_opafy2002,"opafy02nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=64366)",computed_ussc_definition,,64366.0
+US,2003,FY_SEP30,ussc_mean_sentence_months,50.2,months,ussc_opafy2003,"opafy03nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=70258)",computed_ussc_definition,,70258.0
+US,2004,FY_SEP30,ussc_mean_sentence_months,50.9,months,ussc_opafy2004,"opafy04nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=70068)",computed_ussc_definition,,70068.0
+US,2005,FY_SEP30,ussc_mean_sentence_months,50.7,months,ussc_opafy2005,"opafy05nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72462)",computed_ussc_definition,,72462.0
+US,2006,FY_SEP30,ussc_mean_sentence_months,52.9,months,ussc_opafy2006,"opafy06nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72585)",computed_ussc_definition,,72585.0
+US,2007,FY_SEP30,ussc_mean_sentence_months,52.6,months,ussc_opafy2007,"opafy07nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72865)",computed_ussc_definition,,72865.0
+US,2008,FY_SEP30,ussc_mean_sentence_months,49.5,months,ussc_opafy2008,"opafy08nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=76478)",computed_ussc_definition,,76478.0
+US,2009,FY_SEP30,ussc_mean_sentence_months,46.2,months,ussc_opafy2009,"opafy09nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=81372)",computed_ussc_definition,,81372.0
+US,2010,FY_SEP30,ussc_mean_sentence_months,43.6,months,ussc_opafy2010,"opafy10nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=83946)",computed_ussc_definition,,83946.0
+US,2011,FY_SEP30,ussc_mean_sentence_months,42.2,months,ussc_opafy2011,"opafy11nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=86201)",computed_ussc_definition,,86201.0
+US,2012,FY_SEP30,ussc_mean_sentence_months,43.3,months,ussc_opafy2012,"opafy12nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=84173)",computed_ussc_definition,,84173.0
+US,2013,FY_SEP30,ussc_mean_sentence_months,44.1,months,ussc_opafy2013,"opafy13nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=80035)",computed_ussc_definition,,80035.0
+US,2014,FY_SEP30,ussc_mean_sentence_months,43.8,months,ussc_opafy2014,"opafy14nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=75836)",computed_ussc_definition,,75836.0
+US,2015,FY_SEP30,ussc_mean_sentence_months,42.9,months,ussc_opafy2015,"opafy15nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=71003)",computed_ussc_definition,,71003.0
+US,2016,FY_SEP30,ussc_mean_sentence_months,43.0,months,ussc_opafy2016,"opafy16nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=67742)",computed_ussc_definition,,67742.0
+US,2017,FY_SEP30,ussc_mean_sentence_months,44.2,months,ussc_opafy2017,"opafy17nid.dat: DISTRICT=US; mean of SENSPLT0 (>470 -> 469.99), probation = 0 (N=66873)",computed_ussc_definition,,66873.0
+US,2018,FY_SEP30,ussc_mean_sentence_months,44.0,months,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=69425)",reproduces_published,,69425.0
+US,2019,FY_SEP30,ussc_mean_sentence_months,42.4,months,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=76538)",reproduces_published,,76538.0
+US,2020,FY_SEP30,ussc_mean_sentence_months,39.7,months,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=64564)",reproduces_published,,64564.0
+US,2021,FY_SEP30,ussc_mean_sentence_months,47.6,months,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=57286)",reproduces_published,,57286.0
+US,2022,FY_SEP30,ussc_mean_sentence_months,51.5,months,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=64141)",reproduces_published,,64141.0
+US,2023,FY_SEP30,ussc_mean_sentence_months,52.3,months,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=64123)",reproduces_published,,64123.0
+US,2024,FY_SEP30,ussc_mean_sentence_months,52.5,months,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=61678)",reproduces_published,,61678.0
+US,2025,FY_SEP30,ussc_mean_sentence_months,47.5,months,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; mean of SENSPCAP, probation = 0 (N=66662)",reproduces_published,,66662.0
+US,1995,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_packet_fy1995_vae,"VAE95.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,29912.0
+US,1996,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_packet_fy1996_vae,"VAE96.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,33821.0
+US,1997,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_packet_fy1997_vae,"VAE97.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,38229.0
+US,1998,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_packet_fy1998_vae,"VAE98.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,41180.0
+US,1999,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_packet_fy1999_vae,"vae99.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,45379.0
+US,2000,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_packet_fy2000_vae,"vae00.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,49192.0
+US,2001,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_packet_fy2001_vae,"vae01.pdf Table 7 'Average length of imprisonment', row 'TOTAL', Median Months",published_packet,,49613.0
+US,2002,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=53886),reproduces_published,,53886.0
+US,2003,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=58816),reproduces_published,,58816.0
+US,2004,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=59291),computed_ussc_definition,,59291.0
+US,2005,FY_SEP30,ussc_median_prison_months,34.0,months,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62513),computed_ussc_definition,,62513.0
+US,2006,FY_SEP30,ussc_median_prison_months,36.0,months,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62963),reproduces_published,,62963.0
+US,2007,FY_SEP30,ussc_median_prison_months,36.0,months,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=62973),reproduces_published,,62973.0
+US,2008,FY_SEP30,ussc_median_prison_months,33.0,months,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=66104),reproduces_published,,66104.0
+US,2009,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPE2 non-missing (N=70103),reproduces_published,,70103.0
+US,2010,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=72170),reproduces_published,,72170.0
+US,2011,FY_SEP30,ussc_median_prison_months,27.0,months,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=73891),reproduces_published,,73891.0
+US,2012,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=72008),reproduces_published,,72008.0
+US,2013,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=68721),reproduces_published,,68721.0
+US,2014,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=65244),reproduces_published,,65244.0
+US,2015,FY_SEP30,ussc_median_prison_months,28.0,months,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=61130),reproduces_published,,61130.0
+US,2016,FY_SEP30,ussc_median_prison_months,27.0,months,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=58291),reproduces_published,,58291.0
+US,2017,FY_SEP30,ussc_median_prison_months,27.0,months,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFTYPSB non-missing (N=58091),reproduces_published,,58091.0
+US,2018,FY_SEP30,ussc_median_prison_months,24.0,months,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=63065),computed_ussc_definition,,63065.0
+US,2019,FY_SEP30,ussc_median_prison_months,21.0,months,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=70231),computed_ussc_definition,,70231.0
+US,2020,FY_SEP30,ussc_median_prison_months,18.0,months,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59300),computed_ussc_definition,,59300.0
+US,2021,FY_SEP30,ussc_median_prison_months,29.0,months,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=52300),computed_ussc_definition,,52300.0
+US,2022,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59068),computed_ussc_definition,,59068.0
+US,2023,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=59267),computed_ussc_definition,,59267.0
+US,2024,FY_SEP30,ussc_median_prison_months,30.0,months,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=56417),computed_ussc_definition,,56417.0
+US,2025,FY_SEP30,ussc_median_prison_months,24.0,months,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; median of SENTTOT where SENTTOT > 0 and OFFGUIDE non-missing (N=61556),computed_ussc_definition,,61556.0
+US,2002,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2002,"opafy02nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=64366)",computed_ussc_definition,,64366.0
+US,2003,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2003,"opafy03nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=70258)",computed_ussc_definition,,70258.0
+US,2004,FY_SEP30,ussc_median_sentence_months,27.0,months,ussc_opafy2004,"opafy04nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=70068)",computed_ussc_definition,,70068.0
+US,2005,FY_SEP30,ussc_median_sentence_months,27.0,months,ussc_opafy2005,"opafy05nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72462)",computed_ussc_definition,,72462.0
+US,2006,FY_SEP30,ussc_median_sentence_months,30.0,months,ussc_opafy2006,"opafy06nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72585)",computed_ussc_definition,,72585.0
+US,2007,FY_SEP30,ussc_median_sentence_months,28.0,months,ussc_opafy2007,"opafy07nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=72865)",computed_ussc_definition,,72865.0
+US,2008,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2008,"opafy08nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=76478)",computed_ussc_definition,,76478.0
+US,2009,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2009,"opafy09nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=81372)",computed_ussc_definition,,81372.0
+US,2010,FY_SEP30,ussc_median_sentence_months,21.0,months,ussc_opafy2010,"opafy10nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=83946)",computed_ussc_definition,,83946.0
+US,2011,FY_SEP30,ussc_median_sentence_months,21.0,months,ussc_opafy2011,"opafy11nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=86201)",computed_ussc_definition,,86201.0
+US,2012,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2012,"opafy12nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=84173)",computed_ussc_definition,,84173.0
+US,2013,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2013,"opafy13nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=80035)",computed_ussc_definition,,80035.0
+US,2014,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2014,"opafy14nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=75836)",computed_ussc_definition,,75836.0
+US,2015,FY_SEP30,ussc_median_sentence_months,21.0,months,ussc_opafy2015,"opafy15nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=71003)",computed_ussc_definition,,71003.0
+US,2016,FY_SEP30,ussc_median_sentence_months,21.0,months,ussc_opafy2016,"opafy16nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=67742)",computed_ussc_definition,,67742.0
+US,2017,FY_SEP30,ussc_median_sentence_months,21.0,months,ussc_opafy2017,"opafy17nid.dat: DISTRICT=US; median of SENSPLT0 (>470 -> 469.99), probation = 0 (N=66873)",computed_ussc_definition,,66873.0
+US,2018,FY_SEP30,ussc_median_sentence_months,20.0,months,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=69425)",reproduces_published,,69425.0
+US,2019,FY_SEP30,ussc_median_sentence_months,18.0,months,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=76538)",reproduces_published,,76538.0
+US,2020,FY_SEP30,ussc_median_sentence_months,14.0,months,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=64564)",reproduces_published,,64564.0
+US,2021,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=57286)",reproduces_published,,57286.0
+US,2022,FY_SEP30,ussc_median_sentence_months,26.3,months,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=64141)",reproduces_published,,64141.0
+US,2023,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=64123)",reproduces_published,,64123.0
+US,2024,FY_SEP30,ussc_median_sentence_months,24.0,months,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=61678)",reproduces_published,,61678.0
+US,2025,FY_SEP30,ussc_median_sentence_months,18.0,months,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; median of SENSPCAP, probation = 0 (N=66662)",reproduces_published,,66662.0
+US,2006,FY_SEP30,ussc_pct_above_range,1.6,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1129/70187),reproduces_published,1129.0,70187.0
+US,2007,FY_SEP30,ussc_pct_above_range,1.5,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1060/69893),reproduces_published,1060.0,69893.0
+US,2008,FY_SEP30,ussc_pct_above_range,1.6,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1195/74493),reproduces_published,1195.0,74493.0
+US,2009,FY_SEP30,ussc_pct_above_range,1.9,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1496/79153),reproduces_published,1496.0,79153.0
+US,2010,FY_SEP30,ussc_pct_above_range,1.8,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1512/81859),reproduces_published,1512.0,81859.0
+US,2011,FY_SEP30,ussc_pct_above_range,1.8,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1527/84744),reproduces_published,1527.0,84744.0
+US,2012,FY_SEP30,ussc_pct_above_range,2.0,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1631/82674),reproduces_published,1631.0,82674.0
+US,2013,FY_SEP30,ussc_pct_above_range,2.1,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1681/78628),reproduces_published,1681.0,78628.0
+US,2014,FY_SEP30,ussc_pct_above_range,2.2,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1645/74126),reproduces_published,1645.0,74126.0
+US,2015,FY_SEP30,ussc_pct_above_range,2.2,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1506/68270),reproduces_published,1506.0,68270.0
+US,2016,FY_SEP30,ussc_pct_above_range,2.4,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1617/66961),reproduces_published,1617.0,66961.0
+US,2017,FY_SEP30,ussc_pct_above_range,2.9,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD in 1-4 (n=1950/66266),reproduces_published,1950.0,66266.0
+US,2014,FY_SEP30,ussc_pct_above_range_2018scheme,2.2,percent,ussc_sup_fy2014,"ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1,6} (n=1645/74126)",computed_ussc_supplemental,1645.0,74126.0
+US,2015,FY_SEP30,ussc_pct_above_range_2018scheme,2.2,percent,ussc_sup_fy2015,"ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1,6} (n=1506/68270)",computed_ussc_supplemental,1506.0,68270.0
+US,2016,FY_SEP30,ussc_pct_above_range_2018scheme,2.4,percent,ussc_sup_fy2016,"ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1,6} (n=1617/66961)",computed_ussc_supplemental,1617.0,66961.0
+US,2017,FY_SEP30,ussc_pct_above_range_2018scheme,2.9,percent,ussc_sup_fy2017,"ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1,6} (n=1950/66266)",computed_ussc_supplemental,1950.0,66266.0
+US,2018,FY_SEP30,ussc_pct_above_range_2018scheme,2.6,percent,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=1800/68902)",sum_of_published_components,1800.0,68902.0
+US,2019,FY_SEP30,ussc_pct_above_range_2018scheme,2.4,percent,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=1795/76034)",sum_of_published_components,1795.0,76034.0
+US,2020,FY_SEP30,ussc_pct_above_range_2018scheme,2.2,percent,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=1443/64233)",sum_of_published_components,1443.0,64233.0
+US,2021,FY_SEP30,ussc_pct_above_range_2018scheme,2.6,percent,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=1499/57041)",sum_of_published_components,1499.0,57041.0
+US,2022,FY_SEP30,ussc_pct_above_range_2018scheme,2.9,percent,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=1838/63896)",sum_of_published_components,1838.0,63896.0
+US,2023,FY_SEP30,ussc_pct_above_range_2018scheme,3.5,percent,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=2210/63812)",sum_of_published_components,2210.0,63812.0
+US,2024,FY_SEP30,ussc_pct_above_range_2018scheme,4.0,percent,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=2434/61331)",sum_of_published_components,2434.0,61331.0
+US,2025,FY_SEP30,ussc_pct_above_range_2018scheme,4.8,percent,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; SENTRNGE in {1,6} (n=3139/66036)",sum_of_published_components,3139.0,66036.0
+US,2006,FY_SEP30,ussc_pct_early_disposition_5k3,7.4,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=5166/70187),reproduces_published,5166.0,70187.0
+US,2007,FY_SEP30,ussc_pct_early_disposition_5k3,7.5,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=5233/69893),reproduces_published,5233.0,69893.0
+US,2008,FY_SEP30,ussc_pct_early_disposition_5k3,7.9,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=5894/74493),reproduces_published,5894.0,74493.0
+US,2009,FY_SEP30,ussc_pct_early_disposition_5k3,9.1,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=7242/79153),reproduces_published,7242.0,79153.0
+US,2010,FY_SEP30,ussc_pct_early_disposition_5k3,9.9,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=8119/81859),reproduces_published,8119.0,81859.0
+US,2011,FY_SEP30,ussc_pct_early_disposition_5k3,10.7,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=9057/84744),reproduces_published,9057.0,84744.0
+US,2012,FY_SEP30,ussc_pct_early_disposition_5k3,11.2,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=9276/82674),reproduces_published,9276.0,82674.0
+US,2013,FY_SEP30,ussc_pct_early_disposition_5k3,10.6,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=8354/78628),reproduces_published,8354.0,78628.0
+US,2014,FY_SEP30,ussc_pct_early_disposition_5k3,9.4,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=6944/74126),reproduces_published,6944.0,74126.0
+US,2015,FY_SEP30,ussc_pct_early_disposition_5k3,9.2,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=6294/68270),reproduces_published,6294.0,68270.0
+US,2016,FY_SEP30,ussc_pct_early_disposition_5k3,8.9,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=5960/66961),reproduces_published,5960.0,66961.0
+US,2017,FY_SEP30,ussc_pct_early_disposition_5k3,8.8,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD = §5K3.1 early disposition (n=5828/66266),reproduces_published,5828.0,66266.0
+US,2018,FY_SEP30,ussc_pct_early_disposition_5k3,9.1,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=6259/68902),reproduces_published,6259.0,68902.0
+US,2019,FY_SEP30,ussc_pct_early_disposition_5k3,9.4,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=7119/76034),reproduces_published,7119.0,76034.0
+US,2020,FY_SEP30,ussc_pct_early_disposition_5k3,10.8,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=6918/64233),reproduces_published,6918.0,64233.0
+US,2021,FY_SEP30,ussc_pct_early_disposition_5k3,11.2,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=6387/57041),reproduces_published,6387.0,57041.0
+US,2022,FY_SEP30,ussc_pct_early_disposition_5k3,10.4,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=6623/63896),reproduces_published,6623.0,63896.0
+US,2023,FY_SEP30,ussc_pct_early_disposition_5k3,10.0,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=6363/63812),reproduces_published,6363.0,63812.0
+US,2024,FY_SEP30,ussc_pct_early_disposition_5k3,7.1,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=4374/61331),reproduces_published,4374.0,61331.0
+US,2025,FY_SEP30,ussc_pct_early_disposition_5k3,6.1,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE = §5K3.1 early disposition (n=4012/66036),reproduces_published,4012.0,66036.0
+US,2014,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.9,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {7} (n=4351/74126),computed_ussc_supplemental,4351.0,74126.0
+US,2015,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.3,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {7} (n=3616/68270),computed_ussc_supplemental,3616.0,68270.0
+US,2016,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.7,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {7} (n=3824/66961),computed_ussc_supplemental,3824.0,66961.0
+US,2017,FY_SEP30,ussc_pct_govt_motion_downward_variance,6.0,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {7} (n=3978/66266),computed_ussc_supplemental,3978.0,66266.0
+US,2018,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.5,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {7} (n=3795/68902),reproduces_published,3795.0,68902.0
+US,2019,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.4,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {7} (n=4083/76034),reproduces_published,4083.0,76034.0
+US,2020,FY_SEP30,ussc_pct_govt_motion_downward_variance,5.9,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {7} (n=3774/64233),reproduces_published,3774.0,64233.0
+US,2021,FY_SEP30,ussc_pct_govt_motion_downward_variance,8.4,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {7} (n=4804/57041),reproduces_published,4804.0,57041.0
+US,2022,FY_SEP30,ussc_pct_govt_motion_downward_variance,9.6,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {7} (n=6138/63896),reproduces_published,6138.0,63896.0
+US,2023,FY_SEP30,ussc_pct_govt_motion_downward_variance,10.0,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {7} (n=6384/63812),reproduces_published,6384.0,63812.0
+US,2024,FY_SEP30,ussc_pct_govt_motion_downward_variance,10.2,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {7} (n=6269/61331),reproduces_published,6269.0,61331.0
+US,2025,FY_SEP30,ussc_pct_govt_motion_downward_variance,9.6,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {7} (n=6338/66036),reproduces_published,6338.0,66036.0
+US,2006,FY_SEP30,ussc_pct_govt_sponsored_below_range,24.6,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=17244/70187),reproduces_published,17244.0,70187.0
+US,2007,FY_SEP30,ussc_pct_govt_sponsored_below_range,25.6,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=17896/69893),reproduces_published,17896.0,69893.0
+US,2008,FY_SEP30,ussc_pct_govt_sponsored_below_range,25.6,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=19063/74493),reproduces_published,19063.0,74493.0
+US,2009,FY_SEP30,ussc_pct_govt_sponsored_below_range,25.3,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=20011/79153),reproduces_published,20011.0,79153.0
+US,2010,FY_SEP30,ussc_pct_govt_sponsored_below_range,25.4,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=20754/81859),reproduces_published,20754.0,81859.0
+US,2011,FY_SEP30,ussc_pct_govt_sponsored_below_range,26.3,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=22295/84744),reproduces_published,22295.0,84744.0
+US,2012,FY_SEP30,ussc_pct_govt_sponsored_below_range,27.8,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=22987/82674),reproduces_published,22987.0,82674.0
+US,2013,FY_SEP30,ussc_pct_govt_sponsored_below_range,27.9,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=21974/78628),reproduces_published,21974.0,78628.0
+US,2014,FY_SEP30,ussc_pct_govt_sponsored_below_range,30.3,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=22494/74126),reproduces_published,22494.0,74126.0
+US,2015,FY_SEP30,ussc_pct_govt_sponsored_below_range,29.3,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=19988/68270),reproduces_published,19988.0,68270.0
+US,2016,FY_SEP30,ussc_pct_govt_sponsored_below_range,28.2,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=18882/66961),reproduces_published,18882.0,66961.0
+US,2017,FY_SEP30,ussc_pct_govt_sponsored_below_range,27.8,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD in 5-7 (n=18417/66266),reproduces_published,18417.0,66266.0
+US,2014,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,30.3,percent,ussc_sup_fy2014,"ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {2,3,4,7} (n=22494/74126)",computed_ussc_supplemental,22494.0,74126.0
+US,2015,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,29.3,percent,ussc_sup_fy2015,"ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {2,3,4,7} (n=19988/68270)",computed_ussc_supplemental,19988.0,68270.0
+US,2016,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,28.2,percent,ussc_sup_fy2016,"ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {2,3,4,7} (n=18882/66961)",computed_ussc_supplemental,18882.0,66961.0
+US,2017,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,27.8,percent,ussc_sup_fy2017,"ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {2,3,4,7} (n=18417/66266)",computed_ussc_supplemental,18417.0,66266.0
+US,2018,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,26.5,percent,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=18274/68902)",sum_of_published_components,18274.0,68902.0
+US,2019,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,26.2,percent,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=19884/76034)",sum_of_published_components,19884.0,76034.0
+US,2020,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,26.6,percent,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=17111/64233)",sum_of_published_components,17111.0,64233.0
+US,2021,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,31.5,percent,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=17978/57041)",sum_of_published_components,17978.0,57041.0
+US,2022,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,32.6,percent,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=20839/63896)",sum_of_published_components,20839.0,63896.0
+US,2023,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,32.2,percent,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=20556/63812)",sum_of_published_components,20556.0,63812.0
+US,2024,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,29.2,percent,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=17887/61331)",sum_of_published_components,17887.0,61331.0
+US,2025,FY_SEP30,ussc_pct_govt_sponsored_below_range_2018scheme,25.2,percent,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; SENTRNGE in {2,3,4,7} (n=16636/66036)",sum_of_published_components,16636.0,66036.0
+US,2014,FY_SEP30,ussc_pct_non_govt_downward_departure,3.5,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5} (n=2564/74126),computed_ussc_supplemental,2564.0,74126.0
+US,2015,FY_SEP30,ussc_pct_non_govt_downward_departure,3.1,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5} (n=2104/68270),computed_ussc_supplemental,2104.0,68270.0
+US,2016,FY_SEP30,ussc_pct_non_govt_downward_departure,2.8,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5} (n=1868/66961),computed_ussc_supplemental,1868.0,66961.0
+US,2017,FY_SEP30,ussc_pct_non_govt_downward_departure,2.4,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5} (n=1563/66266),computed_ussc_supplemental,1563.0,66266.0
+US,2018,FY_SEP30,ussc_pct_non_govt_downward_departure,2.5,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1700/68902),reproduces_published,1700.0,68902.0
+US,2019,FY_SEP30,ussc_pct_non_govt_downward_departure,2.3,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1752/76034),reproduces_published,1752.0,76034.0
+US,2020,FY_SEP30,ussc_pct_non_govt_downward_departure,2.2,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1385/64233),reproduces_published,1385.0,64233.0
+US,2021,FY_SEP30,ussc_pct_non_govt_downward_departure,2.6,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1468/57041),reproduces_published,1468.0,57041.0
+US,2022,FY_SEP30,ussc_pct_non_govt_downward_departure,2.4,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1504/63896),reproduces_published,1504.0,63896.0
+US,2023,FY_SEP30,ussc_pct_non_govt_downward_departure,1.7,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1111/63812),reproduces_published,1111.0,63812.0
+US,2024,FY_SEP30,ussc_pct_non_govt_downward_departure,1.8,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {5} (n=1094/61331),reproduces_published,1094.0,61331.0
+US,2025,FY_SEP30,ussc_pct_non_govt_downward_departure,1.4,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {5} (n=933/66036),reproduces_published,933.0,66036.0
+US,2014,FY_SEP30,ussc_pct_non_govt_downward_variance,18.0,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {8} (n=13306/74126),computed_ussc_supplemental,13306.0,74126.0
+US,2015,FY_SEP30,ussc_pct_non_govt_downward_variance,18.2,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {8} (n=12410/68270),computed_ussc_supplemental,12410.0,68270.0
+US,2016,FY_SEP30,ussc_pct_non_govt_downward_variance,18.0,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {8} (n=12075/66961),computed_ussc_supplemental,12075.0,66961.0
+US,2017,FY_SEP30,ussc_pct_non_govt_downward_variance,17.8,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {8} (n=11784/66266),computed_ussc_supplemental,11784.0,66266.0
+US,2018,FY_SEP30,ussc_pct_non_govt_downward_variance,17.4,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {8} (n=12001/68902),reproduces_published,12001.0,68902.0
+US,2019,FY_SEP30,ussc_pct_non_govt_downward_variance,17.8,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {8} (n=13525/76034),reproduces_published,13525.0,76034.0
+US,2020,FY_SEP30,ussc_pct_non_govt_downward_variance,18.6,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {8} (n=11936/64233),reproduces_published,11936.0,64233.0
+US,2021,FY_SEP30,ussc_pct_non_govt_downward_variance,20.4,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {8} (n=11662/57041),reproduces_published,11662.0,57041.0
+US,2022,FY_SEP30,ussc_pct_non_govt_downward_variance,20.2,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {8} (n=12930/63896),reproduces_published,12930.0,63896.0
+US,2023,FY_SEP30,ussc_pct_non_govt_downward_variance,20.1,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {8} (n=12848/63812),reproduces_published,12848.0,63812.0
+US,2024,FY_SEP30,ussc_pct_non_govt_downward_variance,19.4,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {8} (n=11878/61331),reproduces_published,11878.0,61331.0
+US,2025,FY_SEP30,ussc_pct_non_govt_downward_variance,17.2,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {8} (n=11349/66036),reproduces_published,11349.0,66036.0
+US,2006,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,12.1,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=8507/70187),reproduces_published,8507.0,70187.0
+US,2007,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,12.1,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=8433/69893),reproduces_published,8433.0,69893.0
+US,2008,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,13.4,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=9972/74493),reproduces_published,9972.0,74493.0
+US,2009,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,16.0,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=12655/79153),reproduces_published,12655.0,79153.0
+US,2010,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,17.8,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=14565/81859),reproduces_published,14565.0,81859.0
+US,2011,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,17.4,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=14762/84744),reproduces_published,14762.0,84744.0
+US,2012,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,17.8,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=14723/82674),reproduces_published,14723.0,82674.0
+US,2013,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,18.7,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=14740/78628),reproduces_published,14740.0,78628.0
+US,2014,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,21.4,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=15870/74126),reproduces_published,15870.0,74126.0
+US,2015,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,21.3,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=14514/68270),reproduces_published,14514.0,68270.0
+US,2016,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,20.8,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=13943/66961),reproduces_published,13943.0,66961.0
+US,2017,FY_SEP30,ussc_pct_non_govt_sponsored_below_range,20.1,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD in 8-11 (n=13347/66266),reproduces_published,13347.0,66266.0
+US,2014,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,21.4,percent,ussc_sup_fy2014,"ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5,8} (n=15870/74126)",computed_ussc_supplemental,15870.0,74126.0
+US,2015,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,21.3,percent,ussc_sup_fy2015,"ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5,8} (n=14514/68270)",computed_ussc_supplemental,14514.0,68270.0
+US,2016,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,20.8,percent,ussc_sup_fy2016,"ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5,8} (n=13943/66961)",computed_ussc_supplemental,13943.0,66961.0
+US,2017,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,20.1,percent,ussc_sup_fy2017,"ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {5,8} (n=13347/66266)",computed_ussc_supplemental,13347.0,66266.0
+US,2018,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,19.9,percent,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=13701/68902)",sum_of_published_components,13701.0,68902.0
+US,2019,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,20.1,percent,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=15277/76034)",sum_of_published_components,15277.0,76034.0
+US,2020,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,20.7,percent,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=13321/64233)",sum_of_published_components,13321.0,64233.0
+US,2021,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,23.0,percent,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=13130/57041)",sum_of_published_components,13130.0,57041.0
+US,2022,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,22.6,percent,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=14434/63896)",sum_of_published_components,14434.0,63896.0
+US,2023,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,21.9,percent,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=13959/63812)",sum_of_published_components,13959.0,63812.0
+US,2024,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,21.2,percent,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=12972/61331)",sum_of_published_components,12972.0,61331.0
+US,2025,FY_SEP30,ussc_pct_non_govt_sponsored_below_range_2018scheme,18.6,percent,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; SENTRNGE in {5,8} (n=12282/66036)",sum_of_published_components,12282.0,66036.0
+US,2010,FY_SEP30,ussc_pct_offense_child_pornography,2.2,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1886/83946),reproduces_published,1886.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_child_pornography,2.2,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1855/86201),reproduces_published,1855.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_child_pornography,2.4,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=2014/84173),reproduces_published,2014.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_child_pornography,2.4,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1922/80035),reproduces_published,1922.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_child_pornography,2.5,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1925/75836),reproduces_published,1925.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_child_pornography,2.7,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1903/71003),reproduces_published,1903.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_child_pornography,2.9,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1937/67742),reproduces_published,1937.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_child_pornography,2.7,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {28} (n=1810/66873),reproduces_published,1810.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_child_pornography,2.0,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1416/69425),reproduces_published,1416.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_child_pornography,1.8,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1368/76538),reproduces_published,1368.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_child_pornography,1.6,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1023/64565),reproduces_published,1023.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_child_pornography,2.1,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1215/57287),reproduces_published,1215.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_child_pornography,2.2,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1435/64142),reproduces_published,1435.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_child_pornography,2.2,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1408/64124),reproduces_published,1408.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_child_pornography,2.2,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1375/61678),reproduces_published,1375.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_child_pornography,2.1,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {7} (n=1432/66662),reproduces_published,1432.0,66662.0
+US,1995,FY_SEP30,ussc_pct_offense_drug_trafficking,37.0,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=14183/38377)",published_packet,14183.0,38377.0
+US,1996,FY_SEP30,ussc_pct_offense_drug_trafficking,38.4,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=16251/42362)",published_packet,16251.0,42362.0
+US,1997,FY_SEP30,ussc_pct_offense_drug_trafficking,37.1,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=18060/48681)",published_packet,18060.0,48681.0
+US,1998,FY_SEP30,ussc_pct_offense_drug_trafficking,38.8,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=19615/50605)",published_packet,19615.0,50605.0
+US,1999,FY_SEP30,ussc_pct_offense_drug_trafficking,39.7,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=21995/55408)",published_packet,21995.0,55408.0
+US,2000,FY_SEP30,ussc_pct_offense_drug_trafficking,39.0,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=23229/59589)",published_packet,23229.0,59589.0
+US,2001,FY_SEP30,ussc_pct_offense_drug_trafficking,40.3,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Drugs - Trafficking', Percent (n=24031/59691)",published_packet,24031.0,59691.0
+US,2002,FY_SEP30,ussc_pct_offense_drug_trafficking,39.7,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=25376/63973),reproduces_published,25376.0,63973.0
+US,2003,FY_SEP30,ussc_pct_offense_drug_trafficking,35.7,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=24882/69680),reproduces_published,24882.0,69680.0
+US,2004,FY_SEP30,ussc_pct_offense_drug_trafficking,33.7,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=23572/69932),reproduces_published,23572.0,69932.0
+US,2005,FY_SEP30,ussc_pct_offense_drug_trafficking,33.6,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=24338/72408),reproduces_published,24338.0,72408.0
+US,2006,FY_SEP30,ussc_pct_offense_drug_trafficking,34.6,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=25086/72518),reproduces_published,25086.0,72518.0
+US,2007,FY_SEP30,ussc_pct_offense_drug_trafficking,33.4,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=24332/72765),reproduces_published,24332.0,72765.0
+US,2008,FY_SEP30,ussc_pct_offense_drug_trafficking,31.8,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=24306/76428),reproduces_published,24306.0,76428.0
+US,2009,FY_SEP30,ussc_pct_offense_drug_trafficking,29.4,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {10} (n=23938/81372),reproduces_published,23938.0,81372.0
+US,2010,FY_SEP30,ussc_pct_offense_drug_trafficking,28.0,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=23506/83946),reproduces_published,23506.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_drug_trafficking,28.4,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=24442/86201),reproduces_published,24442.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_drug_trafficking,29.4,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=24736/84173),reproduces_published,24736.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_drug_trafficking,27.8,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=22254/80035),reproduces_published,22254.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_drug_trafficking,28.1,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=21323/75836),reproduces_published,21323.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_drug_trafficking,28.2,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=20038/71003),reproduces_published,20038.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_drug_trafficking,28.4,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=19232/67742),reproduces_published,19232.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_drug_trafficking,28.5,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {10} (n=19043/66873),reproduces_published,19043.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_drug_trafficking,27.0,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=18747/69425),reproduces_published,18747.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_drug_trafficking,25.9,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=19830/76538),reproduces_published,19830.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_drug_trafficking,25.4,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=16390/64565),reproduces_published,16390.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_drug_trafficking,30.7,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=17608/57287),reproduces_published,17608.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_drug_trafficking,31.1,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=19938/64142),reproduces_published,19938.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_drug_trafficking,29.6,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=19007/64124),reproduces_published,19007.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_drug_trafficking,29.5,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=18172/61678),reproduces_published,18172.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_drug_trafficking,24.3,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {10} (n=16222/66662),reproduces_published,16222.0,66662.0
+US,1995,FY_SEP30,ussc_pct_offense_firearms,6.7,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=2573/38377)",published_packet,2573.0,38377.0
+US,1996,FY_SEP30,ussc_pct_offense_firearms,6.0,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=2546/42362)",published_packet,2546.0,42362.0
+US,1997,FY_SEP30,ussc_pct_offense_firearms,4.8,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=2322/48681)",published_packet,2322.0,48681.0
+US,1998,FY_SEP30,ussc_pct_offense_firearms,4.9,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=2496/50605)",published_packet,2496.0,50605.0
+US,1999,FY_SEP30,ussc_pct_offense_firearms,4.8,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=2679/55408)",published_packet,2679.0,55408.0
+US,2000,FY_SEP30,ussc_pct_offense_firearms,5.9,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=3524/59589)",published_packet,3524.0,59589.0
+US,2001,FY_SEP30,ussc_pct_offense_firearms,7.5,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Firearms', Percent (n=4489/59691)",published_packet,4489.0,59691.0
+US,2002,FY_SEP30,ussc_pct_offense_firearms,8.1,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=5180/63973),reproduces_published,5180.0,63973.0
+US,2003,FY_SEP30,ussc_pct_offense_firearms,9.8,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=6795/69680),reproduces_published,6795.0,69680.0
+US,2004,FY_SEP30,ussc_pct_offense_firearms,11.6,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8133/69932),reproduces_published,8133.0,69932.0
+US,2005,FY_SEP30,ussc_pct_offense_firearms,11.9,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8648/72408),reproduces_published,8648.0,72408.0
+US,2006,FY_SEP30,ussc_pct_offense_firearms,11.6,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8384/72518),reproduces_published,8384.0,72518.0
+US,2007,FY_SEP30,ussc_pct_offense_firearms,11.5,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8359/72765),reproduces_published,8359.0,72765.0
+US,2008,FY_SEP30,ussc_pct_offense_firearms,10.8,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8250/76428),reproduces_published,8250.0,76428.0
+US,2009,FY_SEP30,ussc_pct_offense_firearms,10.1,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {13} (n=8243/81372),reproduces_published,8243.0,81372.0
+US,2010,FY_SEP30,ussc_pct_offense_firearms,9.5,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=7986/83946),reproduces_published,7986.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_firearms,9.1,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=7858/86201),reproduces_published,7858.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_firearms,9.6,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=8105/84173),reproduces_published,8105.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_firearms,10.1,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=8068/80035),reproduces_published,8068.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_firearms,10.5,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=7925/75836),reproduces_published,7925.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_firearms,10.0,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=7069/71003),reproduces_published,7069.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_firearms,10.8,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=7305/67742),reproduces_published,7305.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_firearms,12.1,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {13} (n=8064/66873),reproduces_published,8064.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_firearms,10.8,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=7512/69425),reproduces_published,7512.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_firearms,11.1,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=8481/76538),reproduces_published,8481.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_firearms,11.7,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=7539/64565),reproduces_published,7539.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_firearms,14.2,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=8151/57287),reproduces_published,8151.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_firearms,14.5,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=9318/64142),reproduces_published,9318.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_firearms,13.8,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=8832/64124),reproduces_published,8832.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_firearms,13.2,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=8131/61678),reproduces_published,8131.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_firearms,12.1,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {13} (n=8041/66662),reproduces_published,8041.0,66662.0
+US,1995,FY_SEP30,ussc_pct_offense_fraud,15.4,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=5909/38377)",published_packet,5909.0,38377.0
+US,1996,FY_SEP30,ussc_pct_offense_fraud,14.2,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6028/42362)",published_packet,6028.0,42362.0
+US,1997,FY_SEP30,ussc_pct_offense_fraud,14.2,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6929/48681)",published_packet,6929.0,48681.0
+US,1998,FY_SEP30,ussc_pct_offense_fraud,12.5,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6330/50605)",published_packet,6330.0,50605.0
+US,1999,FY_SEP30,ussc_pct_offense_fraud,11.2,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6199/55408)",published_packet,6199.0,55408.0
+US,2000,FY_SEP30,ussc_pct_offense_fraud,10.5,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6286/59589)",published_packet,6286.0,59589.0
+US,2001,FY_SEP30,ussc_pct_offense_fraud,11.2,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Fraud', Percent (n=6691/59691)",published_packet,6691.0,59691.0
+US,2002,FY_SEP30,ussc_pct_offense_fraud,11.1,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7108/63973),reproduces_published,7108.0,63973.0
+US,2003,FY_SEP30,ussc_pct_offense_fraud,10.7,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7468/69680),reproduces_published,7468.0,69680.0
+US,2004,FY_SEP30,ussc_pct_offense_fraud,10.4,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7261/69932),reproduces_published,7261.0,69932.0
+US,2005,FY_SEP30,ussc_pct_offense_fraud,9.4,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=6809/72408),reproduces_published,6809.0,72408.0
+US,2006,FY_SEP30,ussc_pct_offense_fraud,9.6,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=6958/72518),reproduces_published,6958.0,72518.0
+US,2007,FY_SEP30,ussc_pct_offense_fraud,10.7,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7767/72765),reproduces_published,7767.0,72765.0
+US,2008,FY_SEP30,ussc_pct_offense_fraud,9.8,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7472/76428),reproduces_published,7472.0,76428.0
+US,2009,FY_SEP30,ussc_pct_offense_fraud,9.4,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {18} (n=7618/81372),reproduces_published,7618.0,81372.0
+US,2010,FY_SEP30,ussc_pct_offense_fraud,9.6,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=8067/83946),reproduces_published,8067.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_fraud,9.7,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=8332/86201),reproduces_published,8332.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_fraud,10.3,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=8634/84173),reproduces_published,8634.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_fraud,9.8,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=7840/80035),reproduces_published,7840.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_fraud,10.0,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=7614/75836),reproduces_published,7614.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_fraud,10.5,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=7420/71003),reproduces_published,7420.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_fraud,9.6,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=6517/67742),reproduces_published,6517.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_fraud,9.0,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {18} (n=6029/66873),reproduces_published,6029.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,9.5,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=6620/69425),reproduces_published,6620.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,8.3,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=6390/76538),reproduces_published,6390.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,7.5,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=4823/64565),reproduces_published,4823.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,8.0,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=4571/57287),reproduces_published,4571.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,8.6,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=5520/64142),reproduces_published,5520.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,8.1,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=5205/64124),reproduces_published,5205.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,8.6,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=5312/61678),reproduces_published,5312.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_fraud_theft_embezzlement,7.6,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {16} (n=5080/66662),reproduces_published,5080.0,66662.0
+US,1995,FY_SEP30,ussc_pct_offense_immigration,8.3,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=3170/38377)",published_packet,3170.0,38377.0
+US,1996,FY_SEP30,ussc_pct_offense_immigration,11.6,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=4931/42362)",published_packet,4931.0,42362.0
+US,1997,FY_SEP30,ussc_pct_offense_immigration,13.7,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=6690/48681)",published_packet,6690.0,48681.0
+US,1998,FY_SEP30,ussc_pct_offense_immigration,15.9,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=8062/50605)",published_packet,8062.0,50605.0
+US,1999,FY_SEP30,ussc_pct_offense_immigration,17.5,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=9669/55408)",published_packet,9669.0,55408.0
+US,2000,FY_SEP30,ussc_pct_offense_immigration,19.6,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=11689/59589)",published_packet,11689.0,59589.0
+US,2001,FY_SEP30,ussc_pct_offense_immigration,17.5,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 1 'Distribution of guideline defendants by primary offense', row 'Immigration', Percent (n=10458/59691)",published_packet,10458.0,59691.0
+US,2002,FY_SEP30,ussc_pct_offense_immigration,18.3,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=11736/63973),reproduces_published,11736.0,63973.0
+US,2003,FY_SEP30,ussc_pct_offense_immigration,21.6,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=15081/69680),reproduces_published,15081.0,69680.0
+US,2004,FY_SEP30,ussc_pct_offense_immigration,22.5,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=15717/69932),reproduces_published,15717.0,69932.0
+US,2005,FY_SEP30,ussc_pct_offense_immigration,24.5,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=17717/72408),reproduces_published,17717.0,72408.0
+US,2006,FY_SEP30,ussc_pct_offense_immigration,24.2,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=17574/72518),reproduces_published,17574.0,72518.0
+US,2007,FY_SEP30,ussc_pct_offense_immigration,24.2,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=17592/72765),reproduces_published,17592.0,72765.0
+US,2008,FY_SEP30,ussc_pct_offense_immigration,28.0,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=21429/76428),reproduces_published,21429.0,76428.0
+US,2009,FY_SEP30,ussc_pct_offense_immigration,31.9,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {27} (n=25927/81372),reproduces_published,25927.0,81372.0
+US,2010,FY_SEP30,ussc_pct_offense_immigration,34.0,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=28504/83946),reproduces_published,28504.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_immigration,34.5,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=29717/86201),reproduces_published,29717.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_immigration,31.5,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=26548/84173),reproduces_published,26548.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_immigration,31.2,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=24972/80035),reproduces_published,24972.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_immigration,29.3,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=22238/75836),reproduces_published,22238.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_immigration,29.3,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=20771/71003),reproduces_published,20771.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_immigration,29.6,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=20051/67742),reproduces_published,20051.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_immigration,30.5,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {27} (n=20421/66873),reproduces_published,20421.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_immigration,34.4,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=23883/69425),reproduces_published,23883.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_immigration,38.4,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=29354/76538),reproduces_published,29354.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_immigration,41.1,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=26561/64565),reproduces_published,26561.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_immigration,29.6,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=16937/57287),reproduces_published,16937.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_immigration,27.5,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=17652/64142),reproduces_published,17652.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_immigration,30.0,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=19226/64124),reproduces_published,19226.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_immigration,30.0,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=18492/61678),reproduces_published,18492.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_immigration,37.7,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {17} (n=25119/66662),reproduces_published,25119.0,66662.0
+US,1995,FY_SEP30,ussc_pct_offense_other,32.7,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 1, row 'TOTAL' minus the four named rows (n=12542/38377)",derived_from_published_counts,12542.0,38377.0
+US,1996,FY_SEP30,ussc_pct_offense_other,29.8,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 1, row 'TOTAL' minus the four named rows (n=12606/42362)",derived_from_published_counts,12606.0,42362.0
+US,1997,FY_SEP30,ussc_pct_offense_other,30.2,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 1, row 'TOTAL' minus the four named rows (n=14680/48681)",derived_from_published_counts,14680.0,48681.0
+US,1998,FY_SEP30,ussc_pct_offense_other,27.9,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 1, row 'TOTAL' minus the four named rows (n=14102/50605)",derived_from_published_counts,14102.0,50605.0
+US,1999,FY_SEP30,ussc_pct_offense_other,26.8,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 1, row 'TOTAL' minus the four named rows (n=14866/55408)",derived_from_published_counts,14866.0,55408.0
+US,2000,FY_SEP30,ussc_pct_offense_other,24.9,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 1, row 'TOTAL' minus the four named rows (n=14861/59589)",derived_from_published_counts,14861.0,59589.0
+US,2001,FY_SEP30,ussc_pct_offense_other,23.5,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 1, row 'TOTAL' minus the four named rows (n=14022/59691)",derived_from_published_counts,14022.0,59691.0
+US,2002,FY_SEP30,ussc_pct_offense_other,22.8,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=14573/63973),reproduces_published,14573.0,63973.0
+US,2003,FY_SEP30,ussc_pct_offense_other,22.2,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=15454/69680),reproduces_published,15454.0,69680.0
+US,2004,FY_SEP30,ussc_pct_offense_other,21.8,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=15249/69932),reproduces_published,15249.0,69932.0
+US,2005,FY_SEP30,ussc_pct_offense_other,20.6,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=14896/72408),reproduces_published,14896.0,72408.0
+US,2006,FY_SEP30,ussc_pct_offense_other,20.0,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=14516/72518),reproduces_published,14516.0,72518.0
+US,2007,FY_SEP30,ussc_pct_offense_other,20.2,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=14715/72765),reproduces_published,14715.0,72765.0
+US,2008,FY_SEP30,ussc_pct_offense_other,19.6,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=14971/76428),reproduces_published,14971.0,76428.0
+US,2009,FY_SEP30,ussc_pct_offense_other,19.2,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; OFFTYPE2 in {all other codes} (n=15646/81372),reproduces_published,15646.0,81372.0
+US,2010,FY_SEP30,ussc_pct_offense_other,16.7,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=13997/83946),reproduces_published,13997.0,83946.0
+US,2011,FY_SEP30,ussc_pct_offense_other,16.2,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=13997/86201),reproduces_published,13997.0,86201.0
+US,2012,FY_SEP30,ussc_pct_offense_other,16.8,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=14136/84173),reproduces_published,14136.0,84173.0
+US,2013,FY_SEP30,ussc_pct_offense_other,18.7,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=14979/80035),reproduces_published,14979.0,80035.0
+US,2014,FY_SEP30,ussc_pct_offense_other,19.5,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=14811/75836),reproduces_published,14811.0,75836.0
+US,2015,FY_SEP30,ussc_pct_offense_other,19.4,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=13802/71003),reproduces_published,13802.0,71003.0
+US,2016,FY_SEP30,ussc_pct_offense_other,18.7,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=12700/67742),reproduces_published,12700.0,67742.0
+US,2017,FY_SEP30,ussc_pct_offense_other,17.2,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; OFFTYPSB in {all other codes} (n=11506/66873),reproduces_published,11506.0,66873.0
+US,2018,FY_SEP30,ussc_pct_offense_other,16.2,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=11247/69425),reproduces_published,11247.0,69425.0
+US,2019,FY_SEP30,ussc_pct_offense_other,14.5,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=11115/76538),reproduces_published,11115.0,76538.0
+US,2020,FY_SEP30,ussc_pct_offense_other,12.7,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=8229/64565),reproduces_published,8229.0,64565.0
+US,2021,FY_SEP30,ussc_pct_offense_other,15.4,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=8805/57287),reproduces_published,8805.0,57287.0
+US,2022,FY_SEP30,ussc_pct_offense_other,16.0,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=10279/64142),reproduces_published,10279.0,64142.0
+US,2023,FY_SEP30,ussc_pct_offense_other,16.3,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=10446/64124),reproduces_published,10446.0,64124.0
+US,2024,FY_SEP30,ussc_pct_offense_other,16.5,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=10196/61678),reproduces_published,10196.0,61678.0
+US,2025,FY_SEP30,ussc_pct_offense_other,16.2,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; OFFGUIDE in {all other codes} (n=10768/66662),reproduces_published,10768.0,66662.0
+US,2014,FY_SEP30,ussc_pct_other_govt_motion_departure,2.3,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {4} (n=1717/74126),computed_ussc_supplemental,1717.0,74126.0
+US,2015,FY_SEP30,ussc_pct_other_govt_motion_departure,2.4,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {4} (n=1608/68270),computed_ussc_supplemental,1608.0,68270.0
+US,2016,FY_SEP30,ussc_pct_other_govt_motion_departure,2.5,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {4} (n=1655/66961),computed_ussc_supplemental,1655.0,66961.0
+US,2017,FY_SEP30,ussc_pct_other_govt_motion_departure,2.2,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {4} (n=1483/66266),computed_ussc_supplemental,1483.0,66266.0
+US,2018,FY_SEP30,ussc_pct_other_govt_motion_departure,1.8,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1272/68902),reproduces_published,1272.0,68902.0
+US,2019,FY_SEP30,ussc_pct_other_govt_motion_departure,1.9,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1410/76034),reproduces_published,1410.0,76034.0
+US,2020,FY_SEP30,ussc_pct_other_govt_motion_departure,1.8,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1149/64233),reproduces_published,1149.0,64233.0
+US,2021,FY_SEP30,ussc_pct_other_govt_motion_departure,2.3,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1294/57041),reproduces_published,1294.0,57041.0
+US,2022,FY_SEP30,ussc_pct_other_govt_motion_departure,2.3,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1452/63896),reproduces_published,1452.0,63896.0
+US,2023,FY_SEP30,ussc_pct_other_govt_motion_departure,2.1,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1310/63812),reproduces_published,1310.0,63812.0
+US,2024,FY_SEP30,ussc_pct_other_govt_motion_departure,1.9,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {4} (n=1145/61331),reproduces_published,1145.0,61331.0
+US,2025,FY_SEP30,ussc_pct_other_govt_motion_departure,1.3,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {4} (n=863/66036),reproduces_published,863.0,66036.0
+US,2002,FY_SEP30,ussc_pct_prison,85.5,percent,ussc_opafy2002,"opafy02nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=54428/63659)",computed_ussc_definition,54428.0,63659.0
+US,2003,FY_SEP30,ussc_pct_prison,85.3,percent,ussc_opafy2003,"opafy03nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=59581/69831)",computed_ussc_definition,59581.0,69831.0
+US,2004,FY_SEP30,ussc_pct_prison,86.2,percent,ussc_opafy2004,"opafy04nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=60068/69724)",computed_ussc_definition,60068.0,69724.0
+US,2005,FY_SEP30,ussc_pct_prison,87.5,percent,ussc_opafy2005,"opafy05nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=63242/72289)",computed_ussc_definition,63242.0,72289.0
+US,2006,FY_SEP30,ussc_pct_prison,88.0,percent,ussc_opafy2006,"opafy06nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=63656/72374)",computed_ussc_definition,63656.0,72374.0
+US,2007,FY_SEP30,ussc_pct_prison,87.7,percent,ussc_opafy2007,"opafy07nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=63725/72701)",computed_ussc_definition,63725.0,72701.0
+US,2008,FY_SEP30,ussc_pct_prison,88.2,percent,ussc_opafy2008,"opafy08nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=67354/76376)",computed_ussc_definition,67354.0,76376.0
+US,2009,FY_SEP30,ussc_pct_prison,88.7,percent,ussc_opafy2009,"opafy09nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=72162/81348)",computed_ussc_definition,72162.0,81348.0
+US,2010,FY_SEP30,ussc_pct_prison,89.0,percent,ussc_opafy2010,"opafy10nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=74660/83934)",computed_ussc_definition,74660.0,83934.0
+US,2011,FY_SEP30,ussc_pct_prison,89.1,percent,ussc_opafy2011,"opafy11nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=76758/86196)",computed_ussc_definition,76758.0,86196.0
+US,2012,FY_SEP30,ussc_pct_prison,89.3,percent,ussc_opafy2012,"opafy12nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=75125/84161)",computed_ussc_definition,75125.0,84161.0
+US,2013,FY_SEP30,ussc_pct_prison,89.6,percent,ussc_opafy2013,"opafy13nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=71716/80028)",computed_ussc_definition,71716.0,80028.0
+US,2014,FY_SEP30,ussc_pct_prison,89.2,percent,ussc_opafy2014,"opafy14nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=67630/75835)",computed_ussc_definition,67630.0,75835.0
+US,2015,FY_SEP30,ussc_pct_prison,89.4,percent,ussc_opafy2015,"opafy15nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=63496/70997)",computed_ussc_definition,63496.0,70997.0
+US,2016,FY_SEP30,ussc_pct_prison,89.6,percent,ussc_opafy2016,"opafy16nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=60708/67741)",computed_ussc_definition,60708.0,67741.0
+US,2017,FY_SEP30,ussc_pct_prison,90.4,percent,ussc_opafy2017,"opafy17nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=60469/66873)",computed_ussc_definition,60469.0,66873.0
+US,2018,FY_SEP30,ussc_pct_prison,90.8,percent,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=63065/69425)",reproduces_published,63065.0,69425.0
+US,2019,FY_SEP30,ussc_pct_prison,91.8,percent,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=70231/76538)",reproduces_published,70231.0,76538.0
+US,2020,FY_SEP30,ussc_pct_prison,91.8,percent,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=59301/64565)",reproduces_published,59301.0,64565.0
+US,2021,FY_SEP30,ussc_pct_prison,91.3,percent,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=52301/57287)",reproduces_published,52301.0,57287.0
+US,2022,FY_SEP30,ussc_pct_prison,92.1,percent,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=59070/64142)",reproduces_published,59070.0,64142.0
+US,2023,FY_SEP30,ussc_pct_prison,92.4,percent,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=59268/64124)",reproduces_published,59268.0,64124.0
+US,2024,FY_SEP30,ussc_pct_prison,91.5,percent,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=56417/61678)",reproduces_published,56417.0,61678.0
+US,2025,FY_SEP30,ussc_pct_prison,92.3,percent,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; SENTIMP in {1,2} / SENTIMP non-missing (fine-only included) (n=61557/66662)",reproduces_published,61557.0,66662.0
+US,1995,FY_SEP30,ussc_pct_substantial_assistance_5k1,19.7,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=7271/36975)",published_packet,7271.0,36975.0
+US,1996,FY_SEP30,ussc_pct_substantial_assistance_5k1,19.2,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=7845/40879)",published_packet,7845.0,40879.0
+US,1997,FY_SEP30,ussc_pct_substantial_assistance_5k1,19.2,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=8823/46017)",published_packet,8823.0,46017.0
+US,1998,FY_SEP30,ussc_pct_substantial_assistance_5k1,19.3,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=9224/47896)",published_packet,9224.0,47896.0
+US,1999,FY_SEP30,ussc_pct_substantial_assistance_5k1,18.7,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=9788/52425)",published_packet,9788.0,52425.0
+US,2000,FY_SEP30,ussc_pct_substantial_assistance_5k1,17.9,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=9754/54617)",published_packet,9754.0,54617.0
+US,2001,FY_SEP30,ussc_pct_substantial_assistance_5k1,17.1,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Substantial assistance departure' % (n=9390/54851)",published_packet,9390.0,54851.0
+US,2002,FY_SEP30,ussc_pct_substantial_assistance_5k1,17.4,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; DEPART = §5K1.1 substantial assistance (n=10203/58684),reproduces_published,10203.0,58684.0
+US,2003,FY_SEP30,ussc_pct_substantial_assistance_5k1,15.9,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; DEPART_S/DEPART_D = §5K1.1 substantial assistance (n=10360/65171),reproduces_published,10360.0,65171.0
+US,2004,FY_SEP30,ussc_pct_substantial_assistance_5k1,15.2,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; DEPART_A (BLAKPOST both halves) = §5K1.1 substantial assistance (n=9909/65043),pooled_published_halves,9909.0,65043.0
+US,2005,FY_SEP30,ussc_pct_substantial_assistance_5k1,14.7,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; DEPART_A (BOOKPOST=0) + BOOKERCD (BOOKPOST=1) = §5K1.1 substantial assistance (n=10099/68850),pooled_published_halves,10099.0,68850.0
+US,2006,FY_SEP30,ussc_pct_substantial_assistance_5k1,14.4,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=10139/70187),reproduces_published,10139.0,70187.0
+US,2007,FY_SEP30,ussc_pct_substantial_assistance_5k1,14.4,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=10049/69893),reproduces_published,10049.0,69893.0
+US,2008,FY_SEP30,ussc_pct_substantial_assistance_5k1,13.5,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=10048/74493),reproduces_published,10048.0,74493.0
+US,2009,FY_SEP30,ussc_pct_substantial_assistance_5k1,12.5,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9855/79153),reproduces_published,9855.0,79153.0
+US,2010,FY_SEP30,ussc_pct_substantial_assistance_5k1,11.5,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9421/81859),reproduces_published,9421.0,81859.0
+US,2011,FY_SEP30,ussc_pct_substantial_assistance_5k1,11.2,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9522/84744),reproduces_published,9522.0,84744.0
+US,2012,FY_SEP30,ussc_pct_substantial_assistance_5k1,11.7,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9677/82674),reproduces_published,9677.0,82674.0
+US,2013,FY_SEP30,ussc_pct_substantial_assistance_5k1,12.1,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9528/78628),reproduces_published,9528.0,78628.0
+US,2014,FY_SEP30,ussc_pct_substantial_assistance_5k1,12.8,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=9482/74126),reproduces_published,9482.0,74126.0
+US,2015,FY_SEP30,ussc_pct_substantial_assistance_5k1,12.4,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=8470/68270),reproduces_published,8470.0,68270.0
+US,2016,FY_SEP30,ussc_pct_substantial_assistance_5k1,11.1,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=7443/66961),reproduces_published,7443.0,66961.0
+US,2017,FY_SEP30,ussc_pct_substantial_assistance_5k1,10.8,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD = §5K1.1 substantial assistance (n=7128/66266),reproduces_published,7128.0,66266.0
+US,2018,FY_SEP30,ussc_pct_substantial_assistance_5k1,10.1,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=6948/68902),reproduces_published,6948.0,68902.0
+US,2019,FY_SEP30,ussc_pct_substantial_assistance_5k1,9.6,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=7272/76034),reproduces_published,7272.0,76034.0
+US,2020,FY_SEP30,ussc_pct_substantial_assistance_5k1,8.2,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=5270/64233),reproduces_published,5270.0,64233.0
+US,2021,FY_SEP30,ussc_pct_substantial_assistance_5k1,9.6,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=5493/57041),reproduces_published,5493.0,57041.0
+US,2022,FY_SEP30,ussc_pct_substantial_assistance_5k1,10.4,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=6626/63896),reproduces_published,6626.0,63896.0
+US,2023,FY_SEP30,ussc_pct_substantial_assistance_5k1,10.2,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=6499/63812),reproduces_published,6499.0,63812.0
+US,2024,FY_SEP30,ussc_pct_substantial_assistance_5k1,9.9,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=6099/61331),reproduces_published,6099.0,61331.0
+US,2025,FY_SEP30,ussc_pct_substantial_assistance_5k1,8.2,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE = §5K1.1 substantial assistance (n=5423/66036),reproduces_published,5423.0,66036.0
+US,2014,FY_SEP30,ussc_pct_upward_departure,0.6,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1} (n=466/74126),computed_ussc_supplemental,466.0,74126.0
+US,2015,FY_SEP30,ussc_pct_upward_departure,0.7,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1} (n=444/68270),computed_ussc_supplemental,444.0,68270.0
+US,2016,FY_SEP30,ussc_pct_upward_departure,0.6,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1} (n=419/66961),computed_ussc_supplemental,419.0,66961.0
+US,2017,FY_SEP30,ussc_pct_upward_departure,0.7,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {1} (n=456/66266),computed_ussc_supplemental,456.0,66266.0
+US,2018,FY_SEP30,ussc_pct_upward_departure,0.6,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {1} (n=396/68902),reproduces_published,396.0,68902.0
+US,2019,FY_SEP30,ussc_pct_upward_departure,0.5,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {1} (n=364/76034),reproduces_published,364.0,76034.0
+US,2020,FY_SEP30,ussc_pct_upward_departure,0.4,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {1} (n=261/64233),reproduces_published,261.0,64233.0
+US,2021,FY_SEP30,ussc_pct_upward_departure,0.5,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {1} (n=296/57041),reproduces_published,296.0,57041.0
+US,2022,FY_SEP30,ussc_pct_upward_departure,0.6,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {1} (n=361/63896),reproduces_published,361.0,63896.0
+US,2023,FY_SEP30,ussc_pct_upward_departure,0.5,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {1} (n=314/63812),reproduces_published,314.0,63812.0
+US,2024,FY_SEP30,ussc_pct_upward_departure,0.5,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {1} (n=326/61331),reproduces_published,326.0,61331.0
+US,2025,FY_SEP30,ussc_pct_upward_departure,0.4,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {1} (n=249/66036),reproduces_published,249.0,66036.0
+US,2014,FY_SEP30,ussc_pct_upward_variance,1.6,percent,ussc_sup_fy2014,ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6} (n=1179/74126),computed_ussc_supplemental,1179.0,74126.0
+US,2015,FY_SEP30,ussc_pct_upward_variance,1.6,percent,ussc_sup_fy2015,ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6} (n=1062/68270),computed_ussc_supplemental,1062.0,68270.0
+US,2016,FY_SEP30,ussc_pct_upward_variance,1.8,percent,ussc_sup_fy2016,ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6} (n=1198/66961),computed_ussc_supplemental,1198.0,66961.0
+US,2017,FY_SEP30,ussc_pct_upward_variance,2.3,percent,ussc_sup_fy2017,ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6} (n=1494/66266),computed_ussc_supplemental,1494.0,66266.0
+US,2018,FY_SEP30,ussc_pct_upward_variance,2.0,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1404/68902),reproduces_published,1404.0,68902.0
+US,2019,FY_SEP30,ussc_pct_upward_variance,1.9,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1431/76034),reproduces_published,1431.0,76034.0
+US,2020,FY_SEP30,ussc_pct_upward_variance,1.8,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1182/64233),reproduces_published,1182.0,64233.0
+US,2021,FY_SEP30,ussc_pct_upward_variance,2.1,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1203/57041),reproduces_published,1203.0,57041.0
+US,2022,FY_SEP30,ussc_pct_upward_variance,2.3,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1477/63896),reproduces_published,1477.0,63896.0
+US,2023,FY_SEP30,ussc_pct_upward_variance,3.0,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE in {6} (n=1896/63812),reproduces_published,1896.0,63812.0
+US,2024,FY_SEP30,ussc_pct_upward_variance,3.4,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE in {6} (n=2108/61331),reproduces_published,2108.0,61331.0
+US,2025,FY_SEP30,ussc_pct_upward_variance,4.4,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE in {6} (n=2890/66036),reproduces_published,2890.0,66036.0
+US,2014,FY_SEP30,ussc_pct_variance,25.4,percent,ussc_sup_fy2014,"ussc_sup_fy14.dat joined on USSCIDN to opafy14nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6,7,8} (n=18836/74126)",computed_ussc_supplemental,18836.0,74126.0
+US,2015,FY_SEP30,ussc_pct_variance,25.0,percent,ussc_sup_fy2015,"ussc_sup_fy15.dat joined on USSCIDN to opafy15nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6,7,8} (n=17088/68270)",computed_ussc_supplemental,17088.0,68270.0
+US,2016,FY_SEP30,ussc_pct_variance,25.5,percent,ussc_sup_fy2016,"ussc_sup_fy16.dat joined on USSCIDN to opafy16nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6,7,8} (n=17097/66961)",computed_ussc_supplemental,17097.0,66961.0
+US,2017,FY_SEP30,ussc_pct_variance,26.0,percent,ussc_sup_fy2017,"ussc_sup_fy17.dat joined on USSCIDN to opafy17nid.dat (for DISTRICT): DISTRICT=US; supplemental SENTRNGE in {6,7,8} (n=17256/66266)",computed_ussc_supplemental,17256.0,66266.0
+US,2018,FY_SEP30,ussc_pct_variance,25.0,percent,ussc_opafy2018,"opafy18nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=17200/68902)",reproduces_published,17200.0,68902.0
+US,2019,FY_SEP30,ussc_pct_variance,25.0,percent,ussc_opafy2019,"opafy19nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=19039/76034)",reproduces_published,19039.0,76034.0
+US,2020,FY_SEP30,ussc_pct_variance,26.3,percent,ussc_opafy2020,"opafy20nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=16892/64233)",reproduces_published,16892.0,64233.0
+US,2021,FY_SEP30,ussc_pct_variance,31.0,percent,ussc_opafy2021,"opafy21nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=17669/57041)",reproduces_published,17669.0,57041.0
+US,2022,FY_SEP30,ussc_pct_variance,32.2,percent,ussc_opafy2022,"opafy22nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=20545/63896)",reproduces_published,20545.0,63896.0
+US,2023,FY_SEP30,ussc_pct_variance,33.1,percent,ussc_opafy2023,"opafy23nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=21128/63812)",reproduces_published,21128.0,63812.0
+US,2024,FY_SEP30,ussc_pct_variance,33.0,percent,ussc_opafy2024,"opafy24nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=20255/61331)",reproduces_published,20255.0,61331.0
+US,2025,FY_SEP30,ussc_pct_variance,31.2,percent,ussc_opafy2025,"opafy25nid.dat: DISTRICT=US; SENTRNGE in {6,7,8} (n=20577/66036)",reproduces_published,20577.0,66036.0
+US,1995,FY_SEP30,ussc_pct_within_range,71.0,percent,ussc_packet_fy1995_vae,"VAE95.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=26259/36975)",published_packet,26259.0,36975.0
+US,1996,FY_SEP30,ussc_pct_within_range,69.6,percent,ussc_packet_fy1996_vae,"VAE96.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=28445/40879)",published_packet,28445.0,40879.0
+US,1997,FY_SEP30,ussc_pct_within_range,67.9,percent,ussc_packet_fy1997_vae,"VAE97.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=31233/46017)",published_packet,31233.0,46017.0
+US,1998,FY_SEP30,ussc_pct_within_range,66.3,percent,ussc_packet_fy1998_vae,"VAE98.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=31772/47896)",published_packet,31772.0,47896.0
+US,1999,FY_SEP30,ussc_pct_within_range,64.9,percent,ussc_packet_fy1999_vae,"vae99.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=34020/52425)",published_packet,34020.0,52425.0
+US,2000,FY_SEP30,ussc_pct_within_range,64.5,percent,ussc_packet_fy2000_vae,"vae00.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=35219/54617)",published_packet,35219.0,54617.0
+US,2001,FY_SEP30,ussc_pct_within_range,64.0,percent,ussc_packet_fy2001_vae,"vae01.pdf Table 8 'Guideline departure rate by circuit and district', row US, 'Sentenced within guideline range' % (n=35128/54851)",published_packet,35128.0,54851.0
+US,2002,FY_SEP30,ussc_pct_within_range,65.0,percent,ussc_opafy2002,opafy02nid.dat: DISTRICT=US; DEPART = within range (n=38159/58684),reproduces_published,38159.0,58684.0
+US,2003,FY_SEP30,ussc_pct_within_range,69.4,percent,ussc_opafy2003,opafy03nid.dat: DISTRICT=US; DEPART_S/DEPART_D = within range (n=45253/65171),reproduces_published,45253.0,65171.0
+US,2004,FY_SEP30,ussc_pct_within_range,72.1,percent,ussc_opafy2004,opafy04nid.dat: DISTRICT=US; DEPART_A (BLAKPOST both halves) = within range (n=46874/65043),pooled_published_halves,46874.0,65043.0
+US,2005,FY_SEP30,ussc_pct_within_range,63.9,percent,ussc_opafy2005,opafy05nid.dat: DISTRICT=US; DEPART_A (BOOKPOST=0) + BOOKERCD (BOOKPOST=1) = within range (n=44029/68850),pooled_published_halves,44029.0,68850.0
+US,2006,FY_SEP30,ussc_pct_within_range,61.7,percent,ussc_opafy2006,opafy06nid.dat: DISTRICT=US; BOOKERCD = within range (n=43307/70187),reproduces_published,43307.0,70187.0
+US,2007,FY_SEP30,ussc_pct_within_range,60.8,percent,ussc_opafy2007,opafy07nid.dat: DISTRICT=US; BOOKERCD = within range (n=42504/69893),reproduces_published,42504.0,69893.0
+US,2008,FY_SEP30,ussc_pct_within_range,59.4,percent,ussc_opafy2008,opafy08nid.dat: DISTRICT=US; BOOKERCD = within range (n=44263/74493),reproduces_published,44263.0,74493.0
+US,2009,FY_SEP30,ussc_pct_within_range,56.8,percent,ussc_opafy2009,opafy09nid.dat: DISTRICT=US; BOOKERCD = within range (n=44991/79153),reproduces_published,44991.0,79153.0
+US,2010,FY_SEP30,ussc_pct_within_range,55.0,percent,ussc_opafy2010,opafy10nid.dat: DISTRICT=US; BOOKERCD = within range (n=45028/81859),reproduces_published,45028.0,81859.0
+US,2011,FY_SEP30,ussc_pct_within_range,54.5,percent,ussc_opafy2011,opafy11nid.dat: DISTRICT=US; BOOKERCD = within range (n=46160/84744),reproduces_published,46160.0,84744.0
+US,2012,FY_SEP30,ussc_pct_within_range,52.4,percent,ussc_opafy2012,opafy12nid.dat: DISTRICT=US; BOOKERCD = within range (n=43333/82674),reproduces_published,43333.0,82674.0
+US,2013,FY_SEP30,ussc_pct_within_range,51.2,percent,ussc_opafy2013,opafy13nid.dat: DISTRICT=US; BOOKERCD = within range (n=40233/78628),reproduces_published,40233.0,78628.0
+US,2014,FY_SEP30,ussc_pct_within_range,46.0,percent,ussc_opafy2014,opafy14nid.dat: DISTRICT=US; BOOKERCD = within range (n=34117/74126),reproduces_published,34117.0,74126.0
+US,2015,FY_SEP30,ussc_pct_within_range,47.3,percent,ussc_opafy2015,opafy15nid.dat: DISTRICT=US; BOOKERCD = within range (n=32262/68270),reproduces_published,32262.0,68270.0
+US,2016,FY_SEP30,ussc_pct_within_range,48.6,percent,ussc_opafy2016,opafy16nid.dat: DISTRICT=US; BOOKERCD = within range (n=32519/66961),reproduces_published,32519.0,66961.0
+US,2017,FY_SEP30,ussc_pct_within_range,49.1,percent,ussc_opafy2017,opafy17nid.dat: DISTRICT=US; BOOKERCD = within range (n=32552/66266),reproduces_published,32552.0,66266.0
+US,2018,FY_SEP30,ussc_pct_within_range,51.0,percent,ussc_opafy2018,opafy18nid.dat: DISTRICT=US; SENTRNGE = within range (n=35127/68902),reproduces_published,35127.0,68902.0
+US,2019,FY_SEP30,ussc_pct_within_range,51.4,percent,ussc_opafy2019,opafy19nid.dat: DISTRICT=US; SENTRNGE = within range (n=39078/76034),reproduces_published,39078.0,76034.0
+US,2020,FY_SEP30,ussc_pct_within_range,50.4,percent,ussc_opafy2020,opafy20nid.dat: DISTRICT=US; SENTRNGE = within range (n=32358/64233),reproduces_published,32358.0,64233.0
+US,2021,FY_SEP30,ussc_pct_within_range,42.8,percent,ussc_opafy2021,opafy21nid.dat: DISTRICT=US; SENTRNGE = within range (n=24434/57041),reproduces_published,24434.0,57041.0
+US,2022,FY_SEP30,ussc_pct_within_range,41.9,percent,ussc_opafy2022,opafy22nid.dat: DISTRICT=US; SENTRNGE = within range (n=26785/63896),reproduces_published,26785.0,63896.0
+US,2023,FY_SEP30,ussc_pct_within_range,42.4,percent,ussc_opafy2023,opafy23nid.dat: DISTRICT=US; SENTRNGE = within range (n=27087/63812),reproduces_published,27087.0,63812.0
+US,2024,FY_SEP30,ussc_pct_within_range,45.7,percent,ussc_opafy2024,opafy24nid.dat: DISTRICT=US; SENTRNGE = within range (n=28038/61331),reproduces_published,28038.0,61331.0
+US,2025,FY_SEP30,ussc_pct_within_range,51.5,percent,ussc_opafy2025,opafy25nid.dat: DISTRICT=US; SENTRNGE = within range (n=33979/66036),reproduces_published,33979.0,66036.0

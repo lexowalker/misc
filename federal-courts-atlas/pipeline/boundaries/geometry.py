@@ -226,15 +226,43 @@ def write_topojson(pieces: gpd.GeoDataFrame, out_path: Path, *, intervals: dict[
         targets.append("counties")
     # -clean on the derived layers repairs the few self-intersections that simplification leaves at pinch points
     # (e.g. where the Camp MacKall exclave narrows at the Moore/Richmond county line); arcs stay shared.
+    # fix-geometry: quantization can push a vertex across a neighbouring segment where two arc endpoints sit a few
+    # metres apart (the hi grid is ~9 m in x). mapshaper then puts back the unrounded position of only the vertices
+    # of segments that rounding made cross (Iberia Parish 22045 at the Iberville/Assumption/St. Martin corner).
     args += ["-clean", f"target={','.join(targets)}",
-             "-o", str(raw), "format=topojson", f"target={','.join(targets)}", f"quantization={quantization}"]
+             "-o", str(raw), "format=topojson", f"target={','.join(targets)}", f"quantization={quantization}",
+             "fix-geometry"]
     _run_mapshaper(args)
     topo = json.loads(raw.read_text())
-    return _finish_topology(topo, out_path, with_counties)
+    return _finish_topology(topo, out_path, with_counties, split_districts(pieces))
 
 
-def _finish_topology(topo: dict, out_path: Path, with_counties: bool) -> dict:
-    """Set ids/properties exactly as the data contract specifies and write compact JSON."""
+def split_districts(pieces: gpd.GeoDataFrame) -> dict[str, str]:
+    """geoid -> 'own;carved_to' for counties divided by a statutory carve-out (same format as county_district.csv).
+
+    `own` is the district holding the rest of the county (the county row's district_id); the carved-to district(s)
+    follow. Counties drawn whole are absent.
+    """
+    out = {}
+    for geoid, grp in pieces.groupby("geoid"):
+        if (grp.piece == "county").all():
+            continue
+        own = grp.county_district.iloc[0]
+        others = sorted(set(grp.district_id) - {own})
+        if others:
+            out[geoid] = ";".join([own, *others])
+    return out
+
+
+def _finish_topology(topo: dict, out_path: Path, with_counties: bool,
+                     splits: dict[str, str] | None = None) -> dict:
+    """Set ids/properties exactly as the data contract specifies and write compact JSON.
+
+    Counties divided by a carve-out also get `split_districts` ('ncmd;nced'): the feature is drawn whole and its
+    `district_id` is the district holding the rest of the county, so a point inside the carved part must be
+    resolved against the `districts` object, not the county's `district_id`.
+    """
+    splits = splits or {}
     objs = topo["objects"]
     for g in objs["districts"]["geometries"]:
         did = g["properties"]["district_id"]
@@ -251,6 +279,8 @@ def _finish_topology(topo: dict, out_path: Path, with_counties: bool) -> dict:
             p = g["properties"]
             g["id"] = p["geoid"]
             g["properties"] = {"name": p["county_name"], "district_id": p["county_district"], "state": p["state"]}
+            if g["id"] in splits:
+                g["properties"]["split_districts"] = splits[g["id"]]
     for name in list(objs):
         objs[name]["geometries"].sort(key=lambda x: x["id"])
     topo.pop("bbox", None)

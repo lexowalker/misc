@@ -211,7 +211,7 @@ def main() -> int:
     _write_observations(units, asg)
 
     # ---- 7. gaps ---------------------------------------------------------------------------------------
-    _record_gaps(specials, missing20, legacy_failures)
+    _record_gaps(specials, missing20, legacy_failures, splits)
 
     summary = {"units": len(units), "matches": len(matches), "county_rows": len(asg),
                "districts": int(districts.district_id.nunique()), "splits": len(splits), "legacy": len(legacy),
@@ -344,7 +344,7 @@ def _write_observations(units, asg) -> None:
     (OUT / "variables.json").write_text(json.dumps(variables, indent=1))
 
 
-def _record_gaps(specials, missing20, legacy_failures) -> None:
+def _record_gaps(specials, missing20, legacy_failures, splits) -> None:
     if legacy_failures:
         record_gap(LANE, "legacy_files_unavailable",
                    description="Historical county files that www2.census.gov answered with a 'Request Rejected' page "
@@ -369,6 +369,25 @@ def _record_gaps(specials, missing20, legacy_failures) -> None:
                            "Middle Districts. That strip is not drawn; the Census county lines are used as is.",
                districts=["tnwd", "tnmd"],
                reason="No allowed public source gives the historical low-water line of the (now impounded) river.")
+    big = max(splits, key=lambda s: s["carved_km2"] / (s["carved_km2"] + s["remainder_km2"]))
+    big_total = big["carved_km2"] + big["remainder_km2"]
+    record_gap(LANE, "split_counties_whole_in_county_tables",
+               description="Eight counties are divided by a statutory carve-out: Park and Gallatin MT and Fremont ID "
+                           "(Yellowstone NP -> wyd, 28 U.S.C. §§ 92, 106, 131); Hoke, Moore, Scotland and Richmond NC "
+                           "(Fort Bragg / Camp MacKall -> nced) and Durham NC (FCI Butner -> nced), § 113(a)-(b). "
+                           "The district polygons are cut, but each county's row in county_district.csv (and its "
+                           "feature in the hi TopoJSON `counties` object) carries one district_id: the district holding "
+                           "the rest of the county (mtd, idd or ncmd). Any county->district sum, such as a Census "
+                           "population denominator or the county_equivalents count, therefore credits the carved-out "
+                           "parts to mtd, idd and ncmd instead of wyd and nced. The largest share is "
+                           f"{big['county_name']}, {big['state']}: {big['carved_km2']:,.1f} of {big_total:,.1f} km² "
+                           f"({100 * big['carved_km2'] / big_total:.0f}%) is in {big['carved_to']} "
+                           "(split_counties.csv). These rows carry split_districts and "
+                           "split_note; no sub-county population split is produced by this lane, so per-capita rates "
+                           "for these five districts that use a county-sum denominator are approximate.",
+               districts=["mtd", "idd", "wyd", "ncmd", "nced"],
+               reason="Census county rows are indivisible here; allocating the carved parts' population would need "
+                      "block-level counts (population lane), and area shares are not population shares.")
     record_gap(LANE, "ny_concurrent_waters_not_drawn",
                description="28 U.S.C. § 112(b)-(c): S.D.N.Y. and E.D.N.Y. share jurisdiction over certain waters. "
                            "Shared jurisdiction is not drawable as territory; maps show the county lists only.",

@@ -1,0 +1,58 @@
+[
+ {
+  "id": "judges_active",
+  "label": "Active district judges",
+  "unit": "count",
+  "period_type": "SNAPSHOT_SEP30",
+  "description": "Number of Article III judges in active (not senior) service on the district court on September 30 of the year, counted from the FJC service records.",
+  "source_ids": [
+   "fjc_federal_judicial_service_csv"
+  ],
+  "caveats": "Derived count from public FJC dates, not an official AO statistic; it can differ from authorized judgeships (vacancies) and from AO judge counts. Counts are 'at the end of the day' on Sep 30: a judge whose service starts on Sep 30 is counted, one whose senior status or termination date is Sep 30 is not. Service starts at the commission date (or the recess appointment date if earlier); FJC has no oath dates. A judge appointed to more than one district (e.g. a roving judgeship) is counted in each, so district counts do not sum to a national head count. Judges reassigned by statute to a new district who were already senior are treated as senior there (FJC seat id ending 'SR'). The FJC export is updated nightly and its historical data are occasionally corrected. Series start at the first Sep 30 on or after the district's first Article III service record (1950 at the earliest). Article IV courts (D.V.I., D. Guam, D.N.M.I.) are not in the directory.",
+  "higher_means": "more active judges",
+  "derived": true,
+  "formula": "count of distinct FJC nid with a service record in the district where service_start <= Sep 30 < active_service_end; service_start = min(recess appointment date, commission date); active_service_end = earliest of effective senior status date and termination date"
+ },
+ {
+  "id": "judges_senior",
+  "label": "Senior district judges",
+  "unit": "count",
+  "period_type": "SNAPSHOT_SEP30",
+  "description": "Number of Article III judges in senior status on the district court on September 30 of the year (they have left active service but still hold office and may hear cases).",
+  "source_ids": [
+   "fjc_federal_judicial_service_csv"
+  ],
+  "caveats": "Derived count from public FJC dates, not an official AO statistic; it can differ from authorized judgeships (vacancies) and from AO judge counts. Counts are 'at the end of the day' on Sep 30: a judge whose service starts on Sep 30 is counted, one whose senior status or termination date is Sep 30 is not. Service starts at the commission date (or the recess appointment date if earlier); FJC has no oath dates. A judge appointed to more than one district (e.g. a roving judgeship) is counted in each, so district counts do not sum to a national head count. Judges reassigned by statute to a new district who were already senior are treated as senior there (FJC seat id ending 'SR'). The FJC export is updated nightly and its historical data are occasionally corrected. Series start at the first Sep 30 on or after the district's first Article III service record (1950 at the earliest). Article IV courts (D.V.I., D. Guam, D.N.M.I.) are not in the directory.",
+  "higher_means": "more senior judges",
+  "derived": true,
+  "formula": "count of distinct FJC nid with a service record in the district where service_start <= Sep 30, effective senior status date <= Sep 30 and (no termination date or termination date > Sep 30)"
+ },
+ {
+  "id": "judges_active_appointed_dem",
+  "label": "Active judges appointed by a Democratic president",
+  "unit": "count",
+  "period_type": "SNAPSHOT_SEP30",
+  "description": "Active district judges (as in judges_active) whose appointing president's party, as given by FJC, is Democratic.",
+  "source_ids": [
+   "fjc_federal_judicial_service_csv"
+  ],
+  "caveats": "Derived count from public FJC dates, not an official AO statistic; it can differ from authorized judgeships (vacancies) and from AO judge counts. Counts are 'at the end of the day' on Sep 30: a judge whose service starts on Sep 30 is counted, one whose senior status or termination date is Sep 30 is not. Service starts at the commission date (or the recess appointment date if earlier); FJC has no oath dates. A judge appointed to more than one district (e.g. a roving judgeship) is counted in each, so district counts do not sum to a national head count. Judges reassigned by statute to a new district who were already senior are treated as senior there (FJC seat id ending 'SR'). The FJC export is updated nightly and its historical data are occasionally corrected. Series start at the first Sep 30 on or after the district's first Article III service record (1950 at the earliest). Article IV courts (D.V.I., D. Guam, D.N.M.I.) are not in the directory.",
+  "higher_means": "more active judges appointed by Democratic presidents",
+  "derived": true,
+  "formula": "judges_active restricted to records whose resolved_appointing_party == 'Democratic' (for statutory reassignments FJC gives 'None (reassignment)'; the party is then taken from the judge's prior FJC service record that ended in that reassignment)"
+ },
+ {
+  "id": "judges_active_appointed_rep",
+  "label": "Active judges appointed by a Republican president",
+  "unit": "count",
+  "period_type": "SNAPSHOT_SEP30",
+  "description": "Active district judges (as in judges_active) whose appointing president's party, as given by FJC, is Republican.",
+  "source_ids": [
+   "fjc_federal_judicial_service_csv"
+  ],
+  "caveats": "Derived count from public FJC dates, not an official AO statistic; it can differ from authorized judgeships (vacancies) and from AO judge counts. Counts are 'at the end of the day' on Sep 30: a judge whose service starts on Sep 30 is counted, one whose senior status or termination date is Sep 30 is not. Service starts at the commission date (or the recess appointment date if earlier); FJC has no oath dates. A judge appointed to more than one district (e.g. a roving judgeship) is counted in each, so district counts do not sum to a national head count. Judges reassigned by statute to a new district who were already senior are treated as senior there (FJC seat id ending 'SR'). The FJC export is updated nightly and its historical data are occasionally corrected. Series start at the first Sep 30 on or after the district's first Article III service record (1950 at the earliest). Article IV courts (D.V.I., D. Guam, D.N.M.I.) are not in the directory.",
+  "higher_means": "more active judges appointed by Republican presidents",
+  "derived": true,
+  "formula": "judges_active restricted to records whose resolved_appointing_party == 'Republican' (reassignments resolved as for judges_active_appointed_dem)"
+ }
+]

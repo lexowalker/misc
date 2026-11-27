@@ -1,0 +1,60 @@
+{
+ "island_areas_no_annual_estimates": {
+  "lane": "population",
+  "description": "The Census Bureau publishes no annual (July 1) population estimates for Guam, the U.S. Virgin Islands or the Northern Mariana Islands; only decennial census counts (2000, 2010, 2020) are available for D. Guam, D.V.I. and D.N.M.I.",
+  "variables": [
+   "population_estimate"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "reason": "not produced by the Census Bureau's population estimates program"
+ },
+ "split_county_carveout_population": {
+  "lane": "population",
+  "description": "Eight counties are divided between two districts by statutory carve-outs (Fort Bragg / Camp MacKall and FCI Butner in Moore, Richmond, Scotland, Hoke and Durham counties NC -> E.D.N.C.; the Yellowstone National Park parts of Park and Gallatin MT and Fremont ID -> D. Wyo.). Census estimates and the county tables used here have no figures for those county parts, so each county's whole population is counted in the district holding the rest of it (M.D.N.C., D. Mont., D. Idaho). The carved-out residents are not separated. Counties: 16043 Fremont County, Idaho (idd;wyd); 30031 Gallatin County, Montana (mtd;wyd); 30067 Park County, Montana (mtd;wyd); 37063 Durham County, North Carolina (ncmd;nced); 37093 Hoke County, North Carolina (ncmd;nced); 37125 Moore County, North Carolina (ncmd;nced); 37153 Richmond County, North Carolina (ncmd;nced); 37165 Scotland County, North Carolina (ncmd;nced)",
+  "variables": [
+   "population_estimate",
+   "population_census"
+  ],
+  "districts": [
+   "ncmd",
+   "nced",
+   "mtd",
+   "idd",
+   "wyd"
+  ],
+  "periods": "all",
+  "reason": "no county-part population published (see boundaries gap split_counties_whole_in_county_tables). Magnitude, from 2020 Census blocks whose internal point lies in the carve-out (carveout_blocks_2020.csv, derived): Moore County 0 of 99,727; Richmond County 0 of 42,946; Scotland County 0 of 34,174; Hoke County 8 of 52,082; Durham County 2,477 of 324,833; Gallatin County 21 of 118,960; Park County 13 of 17,191; Fremont County 0 of 13,388. No such block split exists for the annual estimates or for 2000/2010 in this build."
+ }
+}

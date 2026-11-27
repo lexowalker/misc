@@ -1,0 +1,53 @@
+{
+ "comparisons": 60030,
+ "matches": 60030,
+ "mismatches": 0,
+ "district_years_checked_district_tables": 174,
+ "by_table": {
+  "Figure A note": {
+   "n": 116,
+   "mismatches": 0
+  },
+  "Sourcebook FY2025 Figure 9 (FY2018 methodology over time)": {
+   "n": 10,
+   "mismatches": 0
+  },
+  "Table 1 (offense mix)": {
+   "n": 3556,
+   "mismatches": 0
+  },
+  "Table 1 note": {
+   "n": 232,
+   "mismatches": 0
+  },
+  "Table 2 (pleas/trials by district): TOTAL": {
+   "n": 2470,
+   "mismatches": 0
+  },
+  "Table 4 (sentence type)": {
+   "n": 1822,
+   "mismatches": 0
+  },
+  "Table 5 (sentence type)": {
+   "n": 1822,
+   "mismatches": 0
+  },
+  "Table 7 (sentence length)": {
+   "n": 1176,
+   "mismatches": 0
+  },
+  "Table 8 (guideline range by district)": {
+   "n": 7410,
+   "mismatches": 0
+  },
+  "Table 8 (sentence relative to guideline range)": {
+   "n": 3036,
+   "mismatches": 0
+  },
+  "Table 9 (guideline range by district)": {
+   "n": 38380,
+   "mismatches": 0
+  }
+ },
+ "mismatch_rows": []
+}

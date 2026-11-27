@@ -39,7 +39,7 @@ from .crosswalk import NATIONAL, to_id
 from .discover import (EXPLANATION_2011_URL, EXPLANATION_CURRENT_URL, SELECTED_TERMS_2016_URL, INDEX_URL,
                        discover)
 from .parse import LETTERS, ROW_LABEL, parse_pdf, parse_value
-from .variables import (SRH_INCLUDED, COMMON_CAVEATS, CRIMINAL_METHOD_SENSITIVE, DESCENDING_RANK_ROWS, DESCRIPTIONS,
+from .variables import (SRH_INCLUDED, CRIMINAL_METHOD_SENSITIVE, DESCENDING_RANK_ROWS, DESCRIPTIONS,
                         HIGHER_MEANS, PCT_VAR, PERIOD_TYPE, RANKED_ROWS, ROW_VARS, WEIGHTS_SENSITIVE,
                         canonical_label, nos_variable, rank_variable)
 
@@ -207,7 +207,7 @@ def main() -> None:
         return s
 
     def method_of(var, P):
-        if var in CRIMINAL_METHOD_SENSITIVE:
+        if var in CRIMINAL_METHOD_SENSITIVE or var.startswith("fcms_criminal_type_"):
             return "crim_defendants" if basis_by_year[P] == "defendants" else "crim_cases"
         if var in WEIGHTS_SENSITIVE:
             return "weights_2015" if P >= CURRENT_WEIGHTS_FROM else "weights_old"
@@ -380,7 +380,16 @@ def main() -> None:
         for v, a, b in zip(rev["variable"], rev["profile_year_primary"], rev["profile_year_other"])]
     rev.to_csv(OUT / "revisions.csv", index=False)
     comp = m.assign(differs=(m["value_other"] - m["value_primary"]).abs() > 1e-9)
-    rev_summary = comp.groupby(["variable"]).agg(compared=("differs", "size"), differing=("differs", "sum")).reset_index()
+    comp["method_change"] = [
+        (v in CRIMINAL_METHOD_SENSITIVE and basis_by_year[a] != basis_by_year[b]) or
+        (v in WEIGHTS_SENSITIVE and (a >= CURRENT_WEIGHTS_FROM) != (b >= CURRENT_WEIGHTS_FROM))
+        for v, a, b in zip(comp["variable"], comp["profile_year_primary"], comp["profile_year_other"])]
+    comp["differs_method"] = comp["differs"] & comp["method_change"]
+    comp["differs_other"] = comp["differs"] & ~comp["method_change"]
+    rev_summary = comp.groupby(["variable"]).agg(compared=("differs", "size"), differing=("differs", "sum"),
+                                                 differing_method=("differs_method", "sum"),
+                                                 differing_other=("differs_other", "sum")).reset_index()
+    rev_summary.to_csv(OUT / "revisions_summary.csv", index=False)
 
     # ---- 7. reconciliation -------------------------------------------------------------------------
     rec = []
@@ -532,7 +541,10 @@ def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
     out = []
     for var, g in district.groupby("variable"):
         years = sorted(g["period"].unique())
-        caveats = COMMON_CAVEATS
+        caveats = "As published by the AO in the September Judicial Caseload Profile for the year. "
+        if years[0] < 2004:
+            caveats += ("FY1999-2003 values come from the back-columns of the FY2004 profile (the FY1997-2003 "
+                        "profiles online are scanned images). ")
         if var in CRIMINAL_METHOD_SENSITIVE:
             caveats += ("SERIES BREAK: values from the FY2004-09 and FY2011 profiles count criminal felony cases and "
                         "measure criminal medians from the filing date; the FY2010 file (regenerated) and FY2012+ "
@@ -546,8 +558,10 @@ def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
                         "2015, prior years revised); FY1999-2014 values use earlier weights. See column `method` and "
                         "observations_current_method (FY2010+ on current weights). Territorial courts are blank in FY2025. ")
         if var in revd and revd[var]["differing"]:
-            caveats += (f"Later profiles revised {revd[var]['differing']} of {revd[var]['compared']} overlapping values "
-                        f"(see revisions.csv). ")
+            r = revd[var]
+            caveats += (f"Other profile vintages print a different value for {r['differing']} of {r['compared']} "
+                        f"overlapping cells: {r['differing_method']} across the method change above, "
+                        f"{r['differing_other']} ordinary revisions (see revisions.csv). ")
         if var.startswith("fcms_rank_"):
             base = "fcms_" + var.split("_", 3)[3]
             scope = "U.S." if "_rank_us_" in var else "circuit"

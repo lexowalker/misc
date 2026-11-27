@@ -27,7 +27,7 @@
  },
  "hi": {
   "path": "public/data/geo/districts-hi.topo.json",
-  "bytes": 2793059,
+  "bytes": 2793589,
   "objects": {
    "districts": 94,
    "states": 55,
@@ -44,9 +44,7 @@
    },
    "counties": {
     "features": 3230,
-    "invalid": [
-     "22045"
-    ]
+    "invalid": []
    }
   }
  }

@@ -1,1 +1,2 @@
 # extra deps for the fcms lane
+# None: the lane uses only base requirements (requests, pandas, pyarrow, pdfplumber, beautifulsoup4, lxml).

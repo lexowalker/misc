@@ -357,7 +357,51 @@ def test_topojson(name, limit, objs, cd):
         for g in c:
             assert g["properties"]["district_id"] == m[g["id"]] and g["properties"]["name"]
         gdf = topo_to_gdf(path, "counties")
-        assert (~gdf.geometry.is_valid).sum() <= 3
+        # audit fix: was <= 3 (Iberia Parish 22045 self-intersected after quantization); -o fix-geometry repairs it
+        assert gdf.geometry.is_valid.all(), list(gdf[~gdf.geometry.is_valid].id)
+
+
+def test_hi_counties_carry_split_districts(cd):
+    """Audit fix: the 8 split counties are drawn whole, so their features say which districts they straddle."""
+    topo = json.loads((GEO / "districts-hi.topo.json").read_text())
+    feats = {g["id"]: g["properties"] for g in topo["objects"]["counties"]["geometries"]}
+    want = cd[cd.split_districts != ""].set_index("geoid").split_districts.to_dict()
+    assert len(want) == 8
+    got = {k: p["split_districts"] for k, p in feats.items() if "split_districts" in p}
+    assert got == want
+    for geoid, sd in want.items():
+        assert sd.split(";")[0] == feats[geoid]["district_id"], geoid   # first = district of the county row
+    assert feats["37093"]["split_districts"] == "ncmd;nced"
+    assert feats["30067"]["split_districts"] == "mtd;wyd"
+
+
+def test_iberia_parish_valid_in_hi_counties():
+    """Audit regression: 22045 self-intersected at -91.25527 29.97161 after quantization (fixed by fix-geometry)."""
+    gdf = topo_to_gdf(GEO / "districts-hi.topo.json", "counties").set_index("id")
+    assert gdf.loc["22045"].geometry.is_valid
+    assert gdf.loc["22045", "district_id"] == "lawd"
+
+
+@pytest.fixture(scope="module")
+def hi_layers() -> dict[str, gpd.GeoDataFrame]:
+    path = GEO / "districts-hi.topo.json"
+    return {o: topo_to_gdf(path, o) for o in ("districts", "counties")}
+
+
+@pytest.mark.parametrize("lat,lon,want,why", YNP_POINTS)
+def test_carve_out_points_resolve_in_hi_topology(hi_layers, lat, lon, want, why):
+    """Audit regression: a point in a carve-out resolves to the carved-to district through the `districts` object;
+    the whole-drawn county containing it lists that district in split_districts (or is assigned to it outright)."""
+    pt = Point(lon, lat)
+    d = hi_layers["districts"]
+    assert d[d.contains(pt)].id.tolist() == [want], why
+    c = hi_layers["counties"]
+    hit = c[c.contains(pt)]
+    assert len(hit) == 1, why
+    row = hit.iloc[0]
+    sd = row.get("split_districts")
+    listed = sd.split(";") if isinstance(sd, str) else [row.district_id]
+    assert want in listed, (why, row.id, row.district_id, sd)
 
 
 def test_topojson_keeps_small_islands():

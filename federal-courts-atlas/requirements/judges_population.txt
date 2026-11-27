@@ -1,1 +1,4 @@
-# extra deps for the judges_population lane
+# Extra dependencies for the judges and population lanes.
+# None: both lanes use only the base requirements (pandas, pyarrow, geopandas, shapely, pyogrio, xlrd,
+# beautifulsoup4, lxml, requests), plus the poppler `pdftotext` binary only for reading Census layout PDFs
+# by hand (the build itself does not call it).

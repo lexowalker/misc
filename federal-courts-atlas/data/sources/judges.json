@@ -1,0 +1,134 @@
+{
+ "fjc_demographics_csv": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/sites/default/files/history/demographics.csv",
+  "dataset": "Biographical Directory of Article III Federal Judges, 1789-present: database export: demographics.csv",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "nightly export; file Last-Modified Thu, 26 Nov 2026 06:05:20 GMT",
+  "retrieved_at": "2026-11-27T05:36:11+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/c33966f7af79e83062c0a889.csv",
+  "sha256": "d606e33ebf06a3ac1d0352259ccc579de9f2046e2b010c7c4ee830ad31184fff",
+  "notes": "Used only for name parts (Last/First/Middle Name, Suffix), joined on nid."
+ },
+ "fjc_export_page": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/judges/biographical-directory-article-iii-federal-judges-export",
+  "dataset": "Biographical Directory of Article III Federal Judges, 1789-present: database export (export landing page)",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:35:56+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/a9ce70450dd0d6d52ae803ad.bin",
+  "sha256": "1961cec403c595df4db73625503115121217726ebfe1c32d1f429c919e774900",
+  "notes": "Field definitions (nid, Seat ID, Appointment Title, Senior Status Date, termination date convention). Links to the CSV files below."
+ },
+ "fjc_federal_judicial_service_csv": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/sites/default/files/history/federal-judicial-service.csv",
+  "dataset": "Biographical Directory of Article III Federal Judges, 1789-present: database export: federal-judicial-service.csv",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "nightly export; file Last-Modified Thu, 26 Nov 2026 06:05:22 GMT",
+  "retrieved_at": "2026-11-27T05:36:10+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/239aa4b12723ed2a2b60c60c.csv",
+  "sha256": "6aaf36c18035ac029ee27fff187b898247d7340b4e4d85aa82a6e76ae8b016bb",
+  "notes": "One row per Article III service record (relational 'Federal Judicial Service' table). Primary source of this lane."
+ },
+ "fjc_judges_flat_csv": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/sites/default/files/history/judges.csv",
+  "dataset": "Biographical Directory of Article III Federal Judges, 1789-present: database export: judges.csv",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "nightly export; file Last-Modified Thu, 26 Nov 2026 06:05:19 GMT",
+  "retrieved_at": "2026-11-27T05:36:10+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/ad13cd474b6c06422bb03553.csv",
+  "sha256": "bc7a19fd4a355fa4e1faf282a2701c18d346c6bb91d58c8e9cea3f421b7e426e",
+  "notes": "Flat file (one row per judge); used only to cross-check court names and dates of every service record."
+ },
+ "fjc_leghist_alaska": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-court-district-alaska-legislative-history",
+  "dataset": "U.S. District Court for the District of Alaska: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:40:40+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/5a5638d2dc12f40c51f41bf4.bin",
+  "sha256": "9a5d80b3adb98ab39501809c8df2fbe41e3ceb3f06dd7739cd774b5ba634cd06",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_california": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-courts-districts-california-legislative-history",
+  "dataset": "U.S. District Courts for the Districts of California: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:38:20+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/27585a4efd637d2feb00a048.bin",
+  "sha256": "f47eb2ed95082141b7238cddb3f3c183efc8384145babfc029b6f2f0f210e99c",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_florida": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-courts-districts-florida-legislative-history",
+  "dataset": "U.S. District Courts for the Districts of Florida: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:40:56+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/76250ac5083a50e333503cbb.bin",
+  "sha256": "04d5593fa4242f683c5de68bb1f539de634c821ef401c765a664d7429243ef36",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_hawaii": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-court-district-hawaii-legislative-history",
+  "dataset": "U.S. District Court for the District of Hawaii: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:40:49+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/cf78033a142eae79eaeae083.bin",
+  "sha256": "c2627f49b7a31697e3cff436e9d238f2412a247b8ac26ef4420e6958634f09b8",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_illinois": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-courts-districts-illinois-legislative-history",
+  "dataset": "U.S. District Courts for the Districts of Illinois: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:41:11+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/d04d1b1fa8a0317e65d6394c.bin",
+  "sha256": "338e1789e5ec290b5d8320bd5b1daa11e3e1270b71fa29a7bd0e0291202b0d46",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_louisiana": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-courts-districts-louisiana-legislative-history",
+  "dataset": "U.S. District Courts for the Districts of Louisiana: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:41:06+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/b31a9899204fcc805fa81ca0.bin",
+  "sha256": "d0e43690ff6e01b55ea6b3b098863f6ee82680b9200330e8465cacbffcb9939c",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_puerto_rico": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-court-district-puerto-rico-legislative-history",
+  "dataset": "U.S. District Court for the District of Puerto Rico: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:40:51+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/8e08597cd9725353e1d1ded9.bin",
+  "sha256": "3c11b6250a4ee9776daaaf6f69cfa2e7ee2cb7056604e1ff42850b41a0acc987",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ },
+ "fjc_leghist_south_carolina": {
+  "lane": "judges",
+  "url": "https://www.fjc.gov/history/courts/us-district-courts-districts-south-carolina-legislative-history",
+  "dataset": "U.S. District Courts for the Districts of South Carolina: Legislative History",
+  "publisher": "Federal Judicial Center, History Office (fjc.gov)",
+  "vintage": "page retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T05:40:30+00:00",
+  "local_path": "data/raw/http/www.fjc.gov/175c48f75c34ac395af7e7d7.bin",
+  "sha256": "9986fae6892b442dfa1b42f1f1c377c150bfa159b7af2baf8504bf1d06fa669b",
+  "notes": "Used to document (and check) when the district's current court began; see docs/lanes/judges.md."
+ }
+}

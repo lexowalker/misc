@@ -1,0 +1,337 @@
+{
+ "duty_station_not_in_fjc_export": {
+  "lane": "judges",
+  "description": "Judges' duty stations (the courthouse/city where each judge sits) are not a field in the FJC Biographical Directory export; district_judges.duty_station is empty.",
+  "variables": [
+   "duty_station"
+  ],
+  "districts": "all",
+  "periods": "all",
+  "reason": "duty station not in FJC export (checked every column of judges.csv, federal-judicial-service.csv and demographics.csv)"
+ },
+ "judge_counts_before_1950": {
+  "lane": "judges",
+  "description": "Sep 30 judge counts are produced from 1950 on. Earlier years would need each court's pre-1950 splits, mergers and abolitions curated (e.g. Virginia 1864-1871, Louisiana 1866-1881, California 1866-1886); district_judges.csv still lists every service record back to 1789 for timelines.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": "all",
+  "periods": "1789-1949",
+  "reason": "scope: court-organization history before 1950 not curated"
+ },
+ "judge_counts_before_first_article3_judge_akd": {
+  "lane": "judges",
+  "description": "D. Alaska: no Sep 30 judge counts for 1950-1959. The court in its current form had no Article III judge in the FJC directory before 1960-02-19 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "akd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_cacd": {
+  "lane": "judges",
+  "description": "C.D. Cal.: no Sep 30 judge counts for 1950-1965. The court in its current form had no Article III judge in the FJC directory before 1966-09-18 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "cacd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_caed": {
+  "lane": "judges",
+  "description": "E.D. Cal.: no Sep 30 judge counts for 1950-1965. The court in its current form had no Article III judge in the FJC directory before 1966-09-18 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "caed"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_flmd": {
+  "lane": "judges",
+  "description": "M.D. Fla.: no Sep 30 judge counts for 1950-1962. The court in its current form had no Article III judge in the FJC directory before 1962-10-29 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "flmd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_hid": {
+  "lane": "judges",
+  "description": "D. Haw.: no Sep 30 judge counts for 1950-1960. The court in its current form had no Article III judge in the FJC directory before 1960-10-13 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "hid"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_ilcd": {
+  "lane": "judges",
+  "description": "C.D. Ill.: no Sep 30 judge counts for 1950-1978. The court in its current form had no Article III judge in the FJC directory before 1979-03-31 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "ilcd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965,
+   1966,
+   1967,
+   1968,
+   1969,
+   1970,
+   1971,
+   1972,
+   1973,
+   1974,
+   1975,
+   1976,
+   1977,
+   1978
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_lamd": {
+  "lane": "judges",
+  "description": "M.D. La.: no Sep 30 judge counts for 1950-1971. The court in its current form had no Article III judge in the FJC directory before 1972-04-16 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "lamd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965,
+   1966,
+   1967,
+   1968,
+   1969,
+   1970,
+   1971
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_prd": {
+  "lane": "judges",
+  "description": "D. P.R.: no Sep 30 judge counts for 1950-1966. The court in its current form had no Article III judge in the FJC directory before 1967-06-12 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "prd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965,
+   1966
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "judge_counts_before_first_article3_judge_scd": {
+  "lane": "judges",
+  "description": "D. S.C.: no Sep 30 judge counts for 1950-1965. The court in its current form had no Article III judge in the FJC directory before 1965-11-01 (court created, reorganized, or converted to Article III status later); counts are omitted rather than shown as zero.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep"
+  ],
+  "districts": [
+   "scd"
+  ],
+  "periods": [
+   1950,
+   1951,
+   1952,
+   1953,
+   1954,
+   1955,
+   1956,
+   1957,
+   1958,
+   1959,
+   1960,
+   1961,
+   1962,
+   1963,
+   1964,
+   1965
+  ],
+  "reason": "court in its current form did not yet have Article III judges"
+ },
+ "territorial_courts_not_in_article3_directory": {
+  "lane": "judges",
+  "description": "D.V.I., D. Guam and D.N.M.I. are Article IV courts whose judges serve fixed terms; they are not in the FJC Biographical Directory of Article III judges, so there are no judge records or judge counts for them.",
+  "variables": [
+   "judges_active",
+   "judges_senior",
+   "judges_active_appointed_dem",
+   "judges_active_appointed_rep",
+   "district_judges"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": "all",
+  "reason": "out of scope of the FJC Article III directory"
+ }
+}
