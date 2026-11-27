@@ -1,0 +1,103 @@
+{
+ "district_id": "alsd",
+ "district_name": "Southern District of Alabama",
+ "courtlistener_court": {
+  "id": "alsd",
+  "full_name": "District Court, S.D. Alabama",
+  "short_name": "S.D. Alabama",
+  "citation_string": "S.D. Ala.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lambert v. Soleo Health Inc.",
+   "court": "District Court, S.D. Alabama",
+   "court_id": "alsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00552",
+   "docket_type": "cv",
+   "nature_of_suit": "442 Civil Rights: Jobs",
+   "cause": "42:2000 Job Discrimination (Age)",
+   "url": "https://www.courtlistener.com/docket/75179635/lambert-v-soleo-health-inc/",
+   "courtlistener_id": 75179635,
+   "retrieved_at": "2026-11-27T06:38:52+00:00",
+   "source_id": "cl_search_alsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Southern Natural Gas Company, L.L.C. v. 15.64 Acres in Perry County, Alabama",
+   "court": "District Court, S.D. Alabama",
+   "court_id": "alsd",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00550",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75154198/southern-natural-gas-company-llc-v-1564-acres-in-perry-county/",
+   "courtlistener_id": 75154198,
+   "retrieved_at": "2026-11-27T06:38:52+00:00",
+   "source_id": "cl_search_alsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Pena-De La Rosa",
+   "court": "District Court, S.D. Alabama",
+   "court_id": "alsd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00223",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75171428/united-states-v-pena-de-la-rosa/",
+   "courtlistener_id": 75171428,
+   "retrieved_at": "2026-11-27T06:38:52+00:00",
+   "source_id": "cl_search_alsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Moya",
+   "court": "District Court, S.D. Alabama",
+   "court_id": "alsd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00222",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75171140/united-states-v-moya/",
+   "courtlistener_id": 75171140,
+   "retrieved_at": "2026-11-27T06:38:52+00:00",
+   "source_id": "cl_search_alsd_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "Wheat v. Rogers & Willard, Inc.",
+   "court": "District Court, S.D. Alabama",
+   "court_id": "alsd",
+   "date_filed": "2017-09-26",
+   "date_terminated": null,
+   "docket_number": "CIVIL ACTION 16-0282-WS-B",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7327087/wheat-v-rogers-willard-inc/",
+   "courtlistener_id": 7327087,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:38:55+00:00",
+   "source_id": "cl_search_alsd_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=alsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=alsd&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:38:55+00:00"
+}

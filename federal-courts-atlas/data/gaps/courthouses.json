@@ -1,0 +1,62 @@
+{
+ "american_samoa_search": {
+  "lane": "courthouses",
+  "description": "American Samoa (5 county-equivalents, ZCTA 96799) is not in the search index: it belongs to no federal judicial district.",
+  "variables": [],
+  "districts": [],
+  "periods": [],
+  "reason": "No district."
+ },
+ "court_finder_addresses_unavailable": {
+  "lane": "courthouses",
+  "description": "No courthouse street addresses or divisional-office records: the uscourts.gov Federal Court Finder result pages (/federal-court-finder/find) answer HTTP 403 (Akamai 'Access Denied') to this pipeline. Only its autocomplete name list was reachable (no addresses, cities or districts). Courthouse points are therefore city-level (Census internal points) and no 'divisional_office' records are produced.",
+  "variables": [
+   "courthouses.address",
+   "kind=divisional_office"
+  ],
+  "districts": "all",
+  "periods": [],
+  "reason": "Source blocked for automated clients; not worked around."
+ },
+ "fjc_courthouse_list_coverage": {
+  "lane": "courthouses",
+  "description": "Districts with no building in current district-court use in the FJC 'Historic Federal Courthouses' list: gud, nmid, vid. The FJC list covers buildings, mostly federally owned; leased court space and recent moves may be missing, so the courthouse layer is not a complete inventory of where each court sits.",
+  "variables": [],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [],
+  "reason": "Coverage of the FJC list."
+ },
+ "mdd_southern_division_described_site": {
+  "lane": "courthouses",
+  "description": "D. Md. Southern Division: the statute names no city ('a suitable site in Montgomery or Prince George's County not more than five miles from the boundary'), so this place of holding court gets no point. D. Md.'s FJC courthouse records are mapped.",
+  "variables": [],
+  "districts": [
+   "mdd"
+  ],
+  "periods": [],
+  "reason": "Described site, not a named place."
+ },
+ "no_place_named_gud_vid": {
+  "lane": "courthouses",
+  "description": "No point at all for D. Guam (gud) and D.V.I. (vid): title 48 names no place of holding court for either, and the FJC courthouse list has no entries for Guam, the Virgin Islands or the Northern Mariana Islands.",
+  "variables": [],
+  "districts": [
+   "gud",
+   "vid"
+  ],
+  "periods": [],
+  "reason": "No allowed source gives a location."
+ },
+ "zip_codes_not_zctas": {
+  "lane": "courthouses",
+  "description": "The ZIP search uses Census 2020 ZCTAs, which approximate USPS ZIP code delivery areas. PO-box-only and single-site ZIP codes have no ZCTA and are not searchable; ZCTA boundaries differ from current ZIP routes.",
+  "variables": [],
+  "districts": [],
+  "periods": [],
+  "reason": "Only ZCTAs are public."
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "district_id": "dcd",
+ "district_name": "District of Columbia",
+ "courtlistener_court": {
+  "id": "dcd",
+  "full_name": "District Court, District of Columbia",
+  "short_name": "District of Columbia",
+  "citation_string": "D.D.C.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Sorenson v. UNITED STATES DEPARTMENT OF THE AIR FORCE",
+   "court": "District Court, District of Columbia",
+   "court_id": "dcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04189",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179552/sorenson-v-united-states-department-of-the-air-force/",
+   "courtlistener_id": 75179552,
+   "retrieved_at": "2026-11-27T06:45:11+00:00",
+   "source_id": "cl_search_dcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "BRISTOL MYERS SQUIBB COMPANY v. UNITED STATES DEPARTMENT OF HEALTH AND HUMAN SERVICES",
+   "court": "District Court, District of Columbia",
+   "court_id": "dcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-04187",
+   "docket_type": "cv",
+   "nature_of_suit": "899 Administrative Procedure Act/Review or Appeal of Agency Decision",
+   "cause": "05:702 Administrative Procedure Act",
+   "url": "https://www.courtlistener.com/docket/75178593/bristol-myers-squibb-company-v-united-states-department-of-health-and/",
+   "courtlistener_id": 75178593,
+   "retrieved_at": "2026-11-27T06:45:11+00:00",
+   "source_id": "cl_search_dcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. DICKSON",
+   "court": "District Court, District of Columbia",
+   "court_id": "dcd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00289",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175824/united-states-v-dickson/",
+   "courtlistener_id": 75175824,
+   "retrieved_at": "2026-11-27T06:45:11+00:00",
+   "source_id": "cl_search_dcd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. HESS",
+   "court": "District Court, District of Columbia",
+   "court_id": "dcd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00288",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174893/united-states-v-hess/",
+   "courtlistener_id": 75174893,
+   "retrieved_at": "2026-11-27T06:45:11+00:00",
+   "source_id": "cl_search_dcd_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "American Broadcasting Companies, Inc. v. Federal Communications Commission",
+   "court": "District Court, District of Columbia",
+   "court_id": "dcd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "Civil Action No. 2026-2902",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/11072590/american-broadcasting-companies-inc-v-federal-communications-commission/",
+   "courtlistener_id": 11072590,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:45:48+00:00",
+   "source_id": "cl_search_dcd_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=dcd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=dcd&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:45:48+00:00"
+}

@@ -1,0 +1,22 @@
+{
+ "district_id": "tnmd",
+ "district_name": "Middle District of Tennessee",
+ "courtlistener_court": {
+  "id": "tnmd",
+  "full_name": "District Court, M.D. Tennessee",
+  "short_name": "M.D. Tennessee",
+  "citation_string": "M.D. Tenn.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [],
+ "queries": [],
+ "queries_not_fetched": [
+  "recap",
+  "recap_cr",
+  "opinions"
+ ],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": null
+}

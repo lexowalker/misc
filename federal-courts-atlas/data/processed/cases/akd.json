@@ -1,0 +1,103 @@
+{
+ "district_id": "akd",
+ "district_name": "District of Alaska",
+ "courtlistener_court": {
+  "id": "akd",
+  "full_name": "District Court, D. Alaska",
+  "short_name": "D. Alaska",
+  "citation_string": "D. Alaska",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Davis v. Metropolitan Life Insurance Company",
+   "court": "District Court, D. Alaska",
+   "court_id": "akd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00408",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179251/davis-v-metropolitan-life-insurance-company/",
+   "courtlistener_id": 75179251,
+   "retrieved_at": "2026-11-27T06:39:44+00:00",
+   "source_id": "cl_search_akd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Zurek v. Universal Protection Service, LLC",
+   "court": "District Court, D. Alaska",
+   "court_id": "akd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00021",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177251/zurek-v-universal-protection-service-llc/",
+   "courtlistener_id": 75177251,
+   "retrieved_at": "2026-11-27T06:39:44+00:00",
+   "source_id": "cl_search_akd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. McKinney",
+   "court": "District Court, D. Alaska",
+   "court_id": "akd",
+   "date_filed": "2026-11-19",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00097",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75169648/united-states-v-mckinney/",
+   "courtlistener_id": 75169648,
+   "retrieved_at": "2026-11-27T06:39:44+00:00",
+   "source_id": "cl_search_akd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Godfrey",
+   "court": "District Court, D. Alaska",
+   "court_id": "akd",
+   "date_filed": "2026-11-19",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00096",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75159540/united-states-v-godfrey/",
+   "courtlistener_id": 75159540,
+   "retrieved_at": "2026-11-27T06:39:44+00:00",
+   "source_id": "cl_search_akd_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "United States v. Rodriguez",
+   "court": "District Court, D. Alaska",
+   "court_id": "akd",
+   "date_filed": "2019-04-05",
+   "date_terminated": null,
+   "docket_number": "Case No. 3:17-cr-00031-TMB",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7336100/united-states-v-rodriguez/",
+   "courtlistener_id": 7336100,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:39:46+00:00",
+   "source_id": "cl_search_akd_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=akd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=akd&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:39:46+00:00"
+}

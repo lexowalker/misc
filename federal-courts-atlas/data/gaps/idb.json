@@ -1,0 +1,166 @@
+{
+ "ao_jb_c1_2026_unavailable": {
+  "lane": "idb",
+  "description": "AO Judicial Business Table C-1 for FY2026 could not be used for reconciliation: not online at retrieval (not yet published). IDB values for FY2026 are published without an AO cross-check.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   2026
+  ],
+  "reason": "not online at retrieval (not yet published)"
+ },
+ "ao_jb_c4_2026_unavailable": {
+  "lane": "idb",
+  "description": "AO Judicial Business Table C-4 for FY2026 could not be used for reconciliation: not online at retrieval (not yet published). IDB values for FY2026 are published without an AO cross-check.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   2026
+  ],
+  "reason": "not online at retrieval (not yet published)"
+ },
+ "ao_jb_d1_2026_unavailable": {
+  "lane": "idb",
+  "description": "AO Judicial Business Table D-1 for FY2026 could not be used for reconciliation: not online at retrieval (not yet published). IDB values for FY2026 are published without an AO cross-check.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   2026
+  ],
+  "reason": "not online at retrieval (not yet published)"
+ },
+ "ao_jb_d2_2026_unavailable": {
+  "lane": "idb",
+  "description": "AO Judicial Business Table D-2 for FY2026 could not be used for reconciliation: not online at retrieval (not yet published). IDB values for FY2026 are published without an AO cross-check.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   2026
+  ],
+  "reason": "not online at retrieval (not yet published)"
+ },
+ "ao_jb_d4_2026_unavailable": {
+  "lane": "idb",
+  "description": "AO Judicial Business Table D-4 for FY2026 could not be used for reconciliation: not online at retrieval (not yet published). IDB values for FY2026 are published without an AO cross-check.",
+  "variables": [],
+  "districts": [],
+  "periods": [
+   2026
+  ],
+  "reason": "not online at retrieval (not yet published)"
+ },
+ "civil_before_fy1988": {
+  "lane": "idb",
+  "description": "IDB civil variables before FY1988 are not produced: the SY1988-present file holds only cases terminated from July 1, 1987, so earlier fiscal years are incomplete. (The separate 1970-1987 civil file was not processed.)",
+  "variables": [
+   "idb_civil_filed",
+   "idb_civil_terminated",
+   "idb_patent_filed",
+   "idb_patent_incl_anda_filed",
+   "idb_patent_share_of_national",
+   "idb_civil_pct_pro_se",
+   "idb_civil_pct_pro_se_plaintiff",
+   "idb_civil_pct_prisoner_petitions",
+   "idb_civil_pct_class_action",
+   "idb_civil_trial_rate",
+   "idb_civil_pct_reached_trial"
+  ],
+  "districts": "all",
+  "periods": "<1988",
+  "reason": "incomplete cohort"
+ },
+ "criminal_before_fy1996": {
+  "lane": "idb",
+  "description": "IDB criminal variables before FY1996 are not produced: the FY1996-present NewSTATS file starts with FY1996; the 1970-FY1995 file uses different codes and was not processed.",
+  "variables": [
+   "idb_crim_defendants_filed",
+   "idb_crim_felony_defendants_filed",
+   "idb_crim_defendants_terminated",
+   "idb_crim_trial_rate",
+   "idb_crim_pct_guilty_plea",
+   "idb_crim_pct_dismissed",
+   "idb_crim_pct_acquitted",
+   "idb_crim_pct_immigration",
+   "idb_crim_pct_drugs",
+   "idb_crim_pct_firearms_explosives",
+   "idb_crim_pct_fraud",
+   "idb_crim_pct_violent",
+   "idb_crim_pct_sex"
+  ],
+  "districts": "all",
+  "periods": "<1996",
+  "reason": "out of file scope"
+ },
+ "idb_civil_pct_pro_se_before_fy1999": {
+  "lane": "idb",
+  "description": "idb_civil_pct_pro_se not produced for FY1988-1998: the PROSE field is blank on every record of IDB tape years 1988-1995 and 1998.",
+  "variables": [
+   "idb_civil_pct_pro_se"
+  ],
+  "districts": "all",
+  "periods": [
+   1988,
+   1989,
+   1990,
+   1991,
+   1992,
+   1993,
+   1994,
+   1995,
+   1996,
+   1997,
+   1998
+  ],
+  "reason": "field not reported"
+ },
+ "idb_civil_pct_pro_se_omitted_cells": {
+  "lane": "idb",
+  "description": "idb_civil_pct_pro_se: 1 district-year cells omitted (coverage): nvd FY1999",
+  "variables": [
+   "idb_civil_pct_pro_se"
+  ],
+  "districts": [
+   "nvd"
+  ],
+  "periods": [
+   1999
+  ],
+  "reason": "denominator below coverage threshold or zero"
+ },
+ "idb_civil_pct_pro_se_plaintiff_before_fy1999": {
+  "lane": "idb",
+  "description": "idb_civil_pct_pro_se_plaintiff not produced for FY1988-1998: the PROSE field is blank on every record of IDB tape years 1988-1995 and 1998.",
+  "variables": [
+   "idb_civil_pct_pro_se_plaintiff"
+  ],
+  "districts": "all",
+  "periods": [
+   1988,
+   1989,
+   1990,
+   1991,
+   1992,
+   1993,
+   1994,
+   1995,
+   1996,
+   1997,
+   1998
+  ],
+  "reason": "field not reported"
+ },
+ "idb_civil_pct_pro_se_plaintiff_omitted_cells": {
+  "lane": "idb",
+  "description": "idb_civil_pct_pro_se_plaintiff: 1 district-year cells omitted (coverage): nvd FY1999",
+  "variables": [
+   "idb_civil_pct_pro_se_plaintiff"
+  ],
+  "districts": [
+   "nvd"
+  ],
+  "periods": [
+   1999
+  ],
+  "reason": "denominator below coverage threshold or zero"
+ }
+}

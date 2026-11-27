@@ -1,0 +1,95 @@
+idb_district_code,codebook_label,district_id,district_name,circuit_code
+00,Maine,med,District of Maine,1
+01,Massachusetts,mad,District of Massachusetts,1
+02,New Hampshire,nhd,District of New Hampshire,1
+03,Rhode Island,rid,District of Rhode Island,1
+04,Puerto Rico,prd,District of Puerto Rico,1
+05,Connecticut,ctd,District of Connecticut,2
+06,New York - Northern,nynd,Northern District of New York,2
+07,New York - Eastern,nyed,Eastern District of New York,2
+08,New York - Southern,nysd,Southern District of New York,2
+09,New York - Western,nywd,Western District of New York,2
+10,Vermont,vtd,District of Vermont,2
+11,Delaware,ded,District of Delaware,3
+12,New Jersey,njd,District of New Jersey,3
+13,Pennsylvania - Eastern,paed,Eastern District of Pennsylvania,3
+14,Pennsylvania - Middle,pamd,Middle District of Pennsylvania,3
+15,Pennsylvania - Western,pawd,Western District of Pennsylvania,3
+16,Maryland,mdd,District of Maryland,4
+17,North Carolina - Eastern,nced,Eastern District of North Carolina,4
+18,North Carolina - Middle,ncmd,Middle District of North Carolina,4
+19,North Carolina - Western,ncwd,Western District of North Carolina,4
+20,South Carolina,scd,District of South Carolina,4
+22,Virginia - Eastern,vaed,Eastern District of Virginia,4
+23,Virginia - Western,vawd,Western District of Virginia,4
+24,West Virginia - Northern,wvnd,Northern District of West Virginia,4
+25,West Virginia - Southern,wvsd,Southern District of West Virginia,4
+26,Alabama - Northern,alnd,Northern District of Alabama,11
+27,Alabama - Middle,almd,Middle District of Alabama,11
+28,Alabama - Southern,alsd,Southern District of Alabama,11
+29,Florida - Northern,flnd,Northern District of Florida,11
+3A,Florida - Middle,flmd,Middle District of Florida,11
+3C,Florida - Southern,flsd,Southern District of Florida,11
+3E,Georgia - Northern,gand,Northern District of Georgia,11
+3G,Georgia - Middle,gamd,Middle District of Georgia,11
+3J,Georgia - Southern,gasd,Southern District of Georgia,11
+3L,Louisiana - Eastern,laed,Eastern District of Louisiana,5
+3N,Louisiana - Middle,lamd,Middle District of Louisiana,5
+36,Louisiana - Western,lawd,Western District of Louisiana,5
+37,Mississippi - Northern,msnd,Northern District of Mississippi,5
+38,Mississippi - Southern,mssd,Southern District of Mississippi,5
+39,Texas - Northern,txnd,Northern District of Texas,5
+40,Texas - Eastern,txed,Eastern District of Texas,5
+41,Texas - Southern,txsd,Southern District of Texas,5
+42,Texas - Western,txwd,Western District of Texas,5
+43,Kentucky - Eastern,kyed,Eastern District of Kentucky,6
+44,Kentucky - Western,kywd,Western District of Kentucky,6
+45,Michigan - Eastern,mied,Eastern District of Michigan,6
+46,Michigan - Western,miwd,Western District of Michigan,6
+47,Ohio - Northern,ohnd,Northern District of Ohio,6
+48,Ohio - Southern,ohsd,Southern District of Ohio,6
+49,Tennessee - Eastern,tned,Eastern District of Tennessee,6
+50,Tennessee - Middle,tnmd,Middle District of Tennessee,6
+51,Tennessee - Western,tnwd,Western District of Tennessee,6
+52,Illinois - Northern,ilnd,Northern District of Illinois,7
+53,Illinois - Central,ilcd,Central District of Illinois,7
+54,Illinois - Southern,ilsd,Southern District of Illinois,7
+55,Indiana - Northern,innd,Northern District of Indiana,7
+56,Indiana - Southern,insd,Southern District of Indiana,7
+57,Wisconsin - Eastern,wied,Eastern District of Wisconsin,7
+58,Wisconsin - Western,wiwd,Western District of Wisconsin,7
+60,Arkansas - Eastern,ared,Eastern District of Arkansas,8
+61,Arkansas - Western,arwd,Western District of Arkansas,8
+62,Iowa - Northern,iand,Northern District of Iowa,8
+63,Iowa - Southern,iasd,Southern District of Iowa,8
+64,Minnesota,mnd,District of Minnesota,8
+65,Missouri - Eastern,moed,Eastern District of Missouri,8
+66,Missouri - Western,mowd,Western District of Missouri,8
+67,Nebraska,ned,District of Nebraska,8
+68,North Dakota,ndd,District of North Dakota,8
+69,South Dakota,sdd,District of South Dakota,8
+7-,Alaska,akd,District of Alaska,9
+70,Arizona,azd,District of Arizona,9
+71,California - Northern,cand,Northern District of California,9
+72,California - Eastern,caed,Eastern District of California,9
+73,California - Central,cacd,Central District of California,9
+74,California - Southern,casd,Southern District of California,9
+75,Hawaii,hid,District of Hawaii,9
+76,Idaho,idd,District of Idaho,9
+77,Montana,mtd,District of Montana,9
+78,Nevada,nvd,District of Nevada,9
+79,Oregon,ord,District of Oregon,9
+80,Washington - Eastern,waed,Eastern District of Washington,9
+81,Washington - Western,wawd,Western District of Washington,9
+82,Colorado,cod,District of Colorado,10
+83,Kansas,ksd,District of Kansas,10
+84,New Mexico,nmd,District of New Mexico,10
+85,Oklahoma - Northern,oknd,Northern District of Oklahoma,10
+86,Oklahoma - Eastern,oked,Eastern District of Oklahoma,10
+87,Oklahoma - Western,okwd,Western District of Oklahoma,10
+88,Utah,utd,District of Utah,10
+89,Wyoming,wyd,District of Wyoming,10
+90,District of Columbia,dcd,District of Columbia,0
+91,Virgin Islands,vid,District of the Virgin Islands,3
+93,Guam,gud,District of Guam,9
+94,Northern Mariana Islands,nmid,District of the Northern Mariana Islands,9

@@ -1,0 +1,90 @@
+{
+ "statute_rows": 457,
+ "statute_points": 456,
+ "statute_unlocated": [
+  {
+   "district_id": "mdd",
+   "place": "Montgomery County or Prince George's County (site within five miles of their common boundary)"
+  }
+ ],
+ "statute_methods": {
+  "exact_name": 435,
+  "override:consolidated": 7,
+  "exact_name+land_point": 3,
+  "override:census_name": 3,
+  "override:described_site": 2,
+  "override:interpretation": 2,
+  "override:renamed": 1,
+  "override:borough": 1,
+  "override:spelling_variant": 1,
+  "override:ambiguous": 1,
+  "override:island_municipality": 1
+ },
+ "statute_in_district": 456,
+ "statute_in_division_false": [
+  {
+   "district_id": "utd",
+   "division": "Northern Division",
+   "place": "Salt Lake City"
+  }
+ ],
+ "fjc_entries": 754,
+ "fjc_current_district_buildings": 331,
+ "fjc_located": 331,
+ "fjc_outside_district": [],
+ "fjc_methods": {
+  "exact_name": 312,
+  "override:consolidated": 7,
+  "exact_name+land_point": 3,
+  "override:interpretation": 3,
+  "override:census_name": 3,
+  "override:borough": 2,
+  "override:spelling_variant": 1
+ },
+ "fjc_in_court_finder_names": 112,
+ "court_finder_suggestions": 970,
+ "court_finder_groups": {
+  "courthouse-buildings": 380,
+  "us-probation-and-pretrial-services": 190,
+  "all-courts-within-district": 103,
+  "us-bankruptcy-courts": 96,
+  "us-district-courts": 94,
+  "federal-defender-organizations": 81,
+  "us-courts-of-appeals": 26
+ },
+ "courthouses_json_records": 786,
+ "courthouses_json_bytes": 488502,
+ "courthouses_by_kind": {
+  "place_of_holding_court": 455,
+  "courthouse": 331
+ },
+ "districts_with_points": 92,
+ "search": {
+  "places_rows": 38204,
+  "place_types": {
+   "c": 19478,
+   "p": 12885,
+   "m": 5617,
+   "i": 224
+  },
+  "counties_rows": 3230,
+  "zcta_count": 33790,
+  "zcta_multi_district": 1006,
+  "zcta_split_county_method": 100,
+  "american_samoa_zcta_dropped": [
+   "96799"
+  ],
+  "courthouse_rows": 786,
+  "bytes": {
+   "places.json": 1819482,
+   "counties.json": 135494,
+   "zcta.json": 522064,
+   "courthouses.json": 64025,
+   "index.json": 895
+  },
+  "total_bytes": 2541960
+ },
+ "places_not_in_any_district": 0,
+ "cousubs_not_in_any_district": 77,
+ "places_nearest_assigned": 21
+}

@@ -1,0 +1,103 @@
+{
+ "district_id": "casd",
+ "district_name": "Southern District of California",
+ "courtlistener_court": {
+  "id": "casd",
+  "full_name": "District Court, S.D. California",
+  "short_name": "S.D. California",
+  "citation_string": "S.D. Cal.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Kight v. United Airlines, Inc.",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-06736",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179620/kight-v-united-airlines-inc/",
+   "courtlistener_id": 75179620,
+   "retrieved_at": "2026-11-27T06:43:09+00:00",
+   "source_id": "cl_search_casd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Silva v. JPMorgan Chase Bank, N.A.",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-06735",
+   "docket_type": "cv",
+   "nature_of_suit": "485 Telephone Consumer Protection Act (TCPA)",
+   "cause": "47:227 Restrictions of Use of Telephone Equipment",
+   "url": "https://www.courtlistener.com/docket/75179581/silva-v-jpmorgan-chase-bank-na/",
+   "courtlistener_id": 75179581,
+   "retrieved_at": "2026-11-27T06:43:09+00:00",
+   "source_id": "cl_search_casd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Garcia",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-10107",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179585/united-states-v-garcia/",
+   "courtlistener_id": 75179585,
+   "retrieved_at": "2026-11-27T06:43:09+00:00",
+   "source_id": "cl_search_casd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Ramos-Ramirez",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-04586",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179496/united-states-v-ramos-ramirez/",
+   "courtlistener_id": 75179496,
+   "retrieved_at": "2026-11-27T06:43:09+00:00",
+   "source_id": "cl_search_casd_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "Shirley v. Allstate Ins. Co.",
+   "court": "District Court, S.D. California",
+   "court_id": "casd",
+   "date_filed": "2019-08-12",
+   "date_terminated": null,
+   "docket_number": "Case No.: 3:18-cv-0994-AJB-BGS",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7337006/shirley-v-allstate-ins-co/",
+   "courtlistener_id": 7337006,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:43:47+00:00",
+   "source_id": "cl_search_casd_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=casd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=casd&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:43:47+00:00"
+}

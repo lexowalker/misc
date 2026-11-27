@@ -1,0 +1,105 @@
+{
+ "district_id": "vaed",
+ "district_name": "Eastern District of Virginia",
+ "courtlistener_court": {
+  "id": "vaed",
+  "full_name": "District Court, E.D. Virginia",
+  "short_name": "E.D. Virginia",
+  "citation_string": "E.D. Va.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Servin Chaparro v. Blanche",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03917",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181077/servin-chaparro-v-blanche/",
+   "courtlistener_id": 75181077,
+   "retrieved_at": "2026-11-27T06:34:10+00:00",
+   "source_id": "cl_search_vaed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "PayMore Group, LLC v. Fransmart, LLC",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03916",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179924/paymore-group-llc-v-fransmart-llc/",
+   "courtlistener_id": 75179924,
+   "retrieved_at": "2026-11-27T06:34:10+00:00",
+   "source_id": "cl_search_vaed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Plymale v. Macy's Retail Holdings, LLC",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00225",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179525/plymale-v-macys-retail-holdings-llc/",
+   "courtlistener_id": 75179525,
+   "retrieved_at": "2026-11-27T06:34:10+00:00",
+   "source_id": "cl_search_vaed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Tucker",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00113",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178808/united-states-v-tucker/",
+   "courtlistener_id": 75178808,
+   "retrieved_at": "2026-11-27T06:34:10+00:00",
+   "source_id": "cl_search_vaed_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "Elhady v. Kable",
+   "court": "District Court, E.D. Virginia",
+   "court_id": "vaed",
+   "date_filed": "2019-09-04",
+   "date_terminated": null,
+   "docket_number": "Civil Action No. 1:16-cv-375 (AJT/JFA)",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7336880/elhady-v-kable/",
+   "courtlistener_id": 7336880,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:33:32+00:00",
+   "source_id": "cl_search_vaed_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=vaed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=vaed&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [
+  "recap_cr"
+ ],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:34:10+00:00"
+}

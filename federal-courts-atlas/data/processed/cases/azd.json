@@ -1,0 +1,71 @@
+{
+ "district_id": "azd",
+ "district_name": "District of Arizona",
+ "courtlistener_court": {
+  "id": "azd",
+  "full_name": "District Court, D. Arizona",
+  "short_name": "D. Arizona",
+  "citation_string": "D. Ariz.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Aparicio-Sandoval",
+   "court": "District Court, D. Arizona",
+   "court_id": "azd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cr-06609",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179350/united-states-v-aparicio-sandoval/",
+   "courtlistener_id": 75179350,
+   "retrieved_at": "2026-11-27T06:39:49+00:00",
+   "source_id": "cl_search_azd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Vasquez-Puac",
+   "court": "District Court, D. Arizona",
+   "court_id": "azd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cr-06608",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179304/united-states-v-vasquez-puac/",
+   "courtlistener_id": 75179304,
+   "retrieved_at": "2026-11-27T06:39:49+00:00",
+   "source_id": "cl_search_azd_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "Greiff v. Life Ins. Co. of N. Am.",
+   "court": "District Court, D. Arizona",
+   "court_id": "azd",
+   "date_filed": "2019-07-03",
+   "date_terminated": null,
+   "docket_number": "No. CV-18-00496-TUC-RM",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7336472/greiff-v-life-ins-co-of-n-am/",
+   "courtlistener_id": 7336472,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:39:52+00:00",
+   "source_id": "cl_search_azd_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=azd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=azd&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:39:52+00:00"
+}

@@ -1,0 +1,22 @@
+{
+ "district_id": "mad",
+ "district_name": "District of Massachusetts",
+ "courtlistener_court": {
+  "id": "mad",
+  "full_name": "District Court, D. Massachusetts",
+  "short_name": "D. Massachusetts",
+  "citation_string": "D. Mass.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [],
+ "queries": [],
+ "queries_not_fetched": [
+  "recap",
+  "recap_cr",
+  "opinions"
+ ],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": null
+}

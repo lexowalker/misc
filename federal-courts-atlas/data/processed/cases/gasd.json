@@ -1,0 +1,22 @@
+{
+ "district_id": "gasd",
+ "district_name": "Southern District of Georgia",
+ "courtlistener_court": {
+  "id": "gasd",
+  "full_name": "District Court, S.D. Georgia",
+  "short_name": "S.D. Georgia",
+  "citation_string": "S.D. Ga.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [],
+ "queries": [],
+ "queries_not_fetched": [
+  "recap",
+  "recap_cr",
+  "opinions"
+ ],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": null
+}

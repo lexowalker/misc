@@ -1,0 +1,103 @@
+{
+ "district_id": "ded",
+ "district_name": "District of Delaware",
+ "courtlistener_court": {
+  "id": "ded",
+  "full_name": "District Court, D. Delaware",
+  "short_name": "D. Delaware",
+  "citation_string": "D. Del.",
+  "in_use": true,
+  "end_date": null
+ },
+ "court_confirmed": true,
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Blatt v. Goldner",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01542",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178137/blatt-v-goldner/",
+   "courtlistener_id": 75178137,
+   "retrieved_at": "2026-11-27T06:44:58+00:00",
+   "source_id": "cl_search_ded_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Baker v. Plumbers & Pipefitters Local Union 74",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01540",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177270/baker-v-plumbers-pipefitters-local-union-74/",
+   "courtlistener_id": 75177270,
+   "retrieved_at": "2026-11-27T06:44:58+00:00",
+   "source_id": "cl_search_ded_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Gosser",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00166",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177510/united-states-v-gosser/",
+   "courtlistener_id": 75177510,
+   "retrieved_at": "2026-11-27T06:44:58+00:00",
+   "source_id": "cl_search_ded_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Cunningham",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00164",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174370/united-states-v-cunningham/",
+   "courtlistener_id": 75174370,
+   "retrieved_at": "2026-11-27T06:44:58+00:00",
+   "source_id": "cl_search_ded_recap"
+  },
+  {
+   "item_type": "opinion",
+   "case_name": "Galderma Labs. L.P. v. Teva Pharm. United States, Inc.",
+   "court": "District Court, D. Delaware",
+   "court_id": "ded",
+   "date_filed": "2019-08-21",
+   "date_terminated": null,
+   "docket_number": "No. 17-cv-1783-RGA",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/opinion/7336794/galderma-labs-lp-v-teva-pharm-united-states-inc/",
+   "courtlistener_id": 7336794,
+   "opinion_status": "Published",
+   "retrieved_at": "2026-11-27T06:45:03+00:00",
+   "source_id": "cl_search_ded_opinions"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ded&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ded&order_by=dateFiled+desc&type=o"
+ ],
+ "queries_not_fetched": [],
+ "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first, distinct natures of suit preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
+ "retrieved_at": "2026-11-27T06:45:03+00:00"
+}

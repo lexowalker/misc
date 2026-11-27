@@ -1,1 +1,3 @@
-# extra deps for the courthouses_cases lane
+# extra deps for the courthouses and cases lanes: none.
+# Both use only the base requirements (requirements.txt): pandas, pyarrow, geopandas, shapely, pyogrio, pyproj,
+# beautifulsoup4, lxml, requests, pytest. No Node tooling is needed.

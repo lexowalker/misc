@@ -1,0 +1,94 @@
+nos,nos_group,nos_group_label
+110,contract,Contract
+120,contract,Contract
+130,contract,Contract
+140,contract,Contract
+150,contract,Contract
+151,contract,Contract
+152,contract,Contract
+153,contract,Contract
+160,contract,Contract
+190,contract,Contract
+195,contract,Contract
+196,contract,Contract
+210,real_property,Real property
+220,real_property,Real property
+230,real_property,Real property
+240,real_property,Real property
+245,real_property,Real property
+290,real_property,Real property
+310,torts_personal_injury,Torts: personal injury
+315,torts_personal_injury,Torts: personal injury
+320,torts_personal_injury,Torts: personal injury
+330,torts_personal_injury,Torts: personal injury
+340,torts_personal_injury,Torts: personal injury
+345,torts_personal_injury,Torts: personal injury
+350,torts_personal_injury,Torts: personal injury
+355,torts_personal_injury,Torts: personal injury
+360,torts_personal_injury,Torts: personal injury
+362,torts_personal_injury,Torts: personal injury
+365,torts_personal_injury,Torts: personal injury
+367,torts_personal_injury,Torts: personal injury
+368,torts_personal_injury,Torts: personal injury
+370,torts_personal_property,Torts: personal property
+371,torts_personal_property,Torts: personal property
+375,other_statutes,Other statutes
+376,other_statutes,Other statutes
+380,torts_personal_property,Torts: personal property
+385,torts_personal_property,Torts: personal property
+400,other_statutes,Other statutes
+410,other_statutes,Other statutes
+422,bankruptcy,Bankruptcy
+423,bankruptcy,Bankruptcy
+430,other_statutes,Other statutes
+440,civil_rights,Civil rights
+441,civil_rights,Civil rights
+442,civil_rights,Civil rights
+443,civil_rights,Civil rights
+445,civil_rights,Civil rights
+446,civil_rights,Civil rights
+448,civil_rights,Civil rights
+450,other_statutes,Other statutes
+460,other_statutes,Other statutes
+462,immigration,Immigration
+463,prisoner_petitions,Prisoner petitions
+465,immigration,Immigration
+470,other_statutes,Other statutes
+480,other_statutes,Other statutes
+485,other_statutes,Other statutes
+490,other_statutes,Other statutes
+510,prisoner_petitions,Prisoner petitions
+530,prisoner_petitions,Prisoner petitions
+535,prisoner_petitions,Prisoner petitions
+540,prisoner_petitions,Prisoner petitions
+550,prisoner_petitions,Prisoner petitions
+555,prisoner_petitions,Prisoner petitions
+560,prisoner_petitions,Prisoner petitions
+625,forfeiture_penalty,Forfeiture/penalty
+690,forfeiture_penalty,Forfeiture/penalty
+710,labor,Labor
+720,labor,Labor
+740,labor,Labor
+751,labor,Labor
+790,labor,Labor
+791,labor,Labor
+820,intellectual_property,Intellectual property rights
+830,intellectual_property,Intellectual property rights
+835,intellectual_property,Intellectual property rights
+840,intellectual_property,Intellectual property rights
+850,other_statutes,Other statutes
+861,social_security,Social Security
+862,social_security,Social Security
+863,social_security,Social Security
+864,social_security,Social Security
+865,social_security,Social Security
+870,federal_tax,Federal tax suits
+871,federal_tax,Federal tax suits
+880,intellectual_property,Intellectual property rights
+890,other_statutes,Other statutes
+891,other_statutes,Other statutes
+893,other_statutes,Other statutes
+895,other_statutes,Other statutes
+896,other_statutes,Other statutes
+899,other_statutes,Other statutes
+950,other_statutes,Other statutes

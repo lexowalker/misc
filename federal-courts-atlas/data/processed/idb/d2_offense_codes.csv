@@ -1,0 +1,285 @@
+d2_code,label,offense_category,defendants_filed_fy1996_on
+0100,"Murder, First Degree",violent,3483
+0101,"Murder, Government Officials",violent,4
+0200,"Murder, Second Degree",violent,886
+0201,"Murder, 2nd Degree, Government Officials",violent,6
+0300,Manslaughter,violent,929
+0301,Manslaughter,violent,2
+0310,Negligent Homicide,violent,12
+0311,"Negligent Homicide, Government Officials",violent,8
+1100,"Robbery, Bank",violent,28036
+1200,"Robbery, Postal",violent,735
+1400,"Robbery, Other",violent,766
+1500,Aggravated or Felonious,violent,23011
+1501,"Felony, on Government Official",violent,42
+1560,Fair Housing Law,violent,85
+1600,"Assault, Other",violent,6463
+1601,"Misdemeanor, on Government Official",violent,68
+1602,Obstruction of Justice-Interference,justice_system,0
+1700,"Racketeering, Violent Crime",violent,12230
+1800,Carjacking,violent,6319
+2100,"Burglary, Bank",property_other,9
+2200,"Burglary, Postal",property_other,358
+2300,Interstate Commerce,property_other,65
+2400,"Burglary, Other",property_other,1312
+3100,"Larceny & Theft, Bank",property_other,3149
+3200,"Larceny & Theft, Postal",property_other,10658
+3300,Interstate Commerce,property_other,1726
+3400,Theft of U.S. Property,property_other,49808
+3500,Theft within Special Maritime Jurisdiction,property_other,5542
+3600,Transportation of Stolen Property,property_other,6008
+3700,"Larceny & Theft, Felony Other",property_other,411
+3800,"Larceny & Theft, Misdemeanor Other",property_other,1694
+4100,Bank Embezzlement,property_other,7414
+4200,Postal Embezzlement,property_other,5907
+4310,Embezzles Public Moneys Or Property,property_other,450
+4320,"Lending, Credit, Insurance Institutions",property_other,905
+4330,By Officers Of A Carrier,property_other,8
+4340,World War Veterans Relief,property_other,86
+4350,Embezzlement: Officer or Employee of U.S. Govt.,property_other,226
+4390,"Embezzlement, Other",property_other,4776
+4510,"Income Tax, Evade or Defeat",fraud,6745
+4520,"Income Tax, Other Felony",fraud,6602
+4530,"Income Tax, Failure to File",fraud,2286
+4540,"Income Tax, Other Misdemeanor",fraud,44
+4600,"Lending, Credit Institutions",fraud,3893
+4601,Bank Fraud,fraud,19435
+4700,"Postal, Interstate Wire, Radio, etc.",fraud,33418
+4800,Veterans and Allotments,fraud,98
+4900,Bankruptcy,fraud,2204
+4910,Marketing Agreements & Commodity Credit,fraud,141
+4920,Securities & Exchange,fraud,3327
+4931,"Fraud, Excise Tax, Other",fraud,27
+4932,"Fraud, Wagering Tax, Other",fraud,2
+4933,"Fraud, Other Tax",fraud,420
+4940,Railroad Retirement & Unemployment,fraud,0
+4941,Fraud Food Stamp Program,fraud,1826
+4950,Social Security,fraud,14364
+4960,False Personation,fraud,932
+4970,Nationality Laws,fraud,5430
+4980,Passport Fraud,fraud,11465
+4991,False Claims & Statements,fraud,19493
+4992,"Fraud, Conspiracy to Defraud, Other",fraud,32642
+4993,"Fraud, Conspiracy (General), Other",fraud,275
+4994,"Fraud, False Entries, Other",fraud,131
+4995,Credit Card Fraud,fraud,22415
+4996,Computer Fraud,fraud,2569
+4997,Telemarketing Fraud,fraud,0
+4998,Health Care Fraud,fraud,11897
+4999,"Fraud, Other",fraud,1006
+5100,"Transport etc. Stolen Vehicles, Aircraft",property_other,1695
+5200,"Auto Theft, Other",property_other,418
+5500,"Transport, Forged Securities",property_other,5
+5600,"Forgery, Postal",property_other,2
+5710,"Forgery, Other U. S.",property_other,2035
+5720,"Forgery, Other",property_other,237
+5800,Counterfeiting,property_other,26839
+5900,Sexually Explicit Material,sex,38163
+6100,Sexual Abuse of Adult,sex,3644
+6110,Sexual Abuse of Children,sex,20299
+6120,Interstate Domestic Violence,violent,0
+6121,"Violent Offenses, Other",violent,2946
+6200,White Slave & Importing Aliens,sex,10
+6300,"Sex Offenses, Other",sex,284
+6301,Transportation for Illegal Sexual Activity,sex,6589
+6400,Failure to Register,sex,8125
+6500,Narc. Marijuana Tax Act (Terms/Reopens),drugs,0
+6501,"Marijuana-Sell, Distribute, or Dispense",drugs,102808
+6502,Marijuana-Importation/Exportation,drugs,29289
+6503,Marijuana-Manufacture,drugs,5497
+6504,Marijuana-Possession,drugs,33152
+6505,"Marijuana-Records, Rx's, Fraudulent Rx",drugs,0
+6600,Narc. Border Registration (Terms/Reopens),drugs,0
+6700,"Narcotics, Other (Terms/Reopens)",drugs,9
+6701,"Narcotics-Sell, Distribute, or Dispense",drugs,188245
+6702,Narcotics-Importation/Exportation,drugs,17474
+6703,Narcotics-Manufacture,drugs,2317
+6704,Narcotics-Possession,drugs,2159
+6705,"Narcotics-Records, Rx'S, Fraudulent Rx's",drugs,152
+6706,"Narcotics, Other (Terms/Reopens)",drugs,0
+6707,"Narcotics, Other (Terms/Reopens)",drugs,0
+6800,Continuing Criminal Enterprise,drugs,1931
+6801,"Controlled Substance-Sell, Distribute, or Dispense",drugs,380258
+6802,Controlled Substance-Importation/Exportation,drugs,29971
+6803,Controlled Substance-Manufacture,drugs,14603
+6804,Controlled Substance-Possession,drugs,10059
+6805,"Control Substance-Records, Rx's, Fraudulent Rx's",drugs,272
+6806,Drug Cultivation,drugs,3
+6807,Illicit Drug Profits,drugs,1
+6808,Controlled Substances Aboard Aircraft,drugs,0
+6809,Mail Order Drug Paraphernalia,drugs,141
+6810,Under Influence Alcohol/Drugs,drugs,28
+6900,Polluting Federal Lands-Controlled Substance,drugs,0
+6905,Other Drug Offenses,drugs,924
+6907,Illicit Drug Profits,drugs,0
+6909,Mail Order Drug Paraphernalia,drugs,150
+6911,Other DAPCA Offenses,drugs,377
+7100,Bribery,general,4587
+7130,Conflict of Interest-Mining,general,0
+7131,Conflict of Interest-Health/Welfare,general,0
+7210,"Traffic Offenses, Drunken Driving",traffic,37145
+7220,"Traffic Offenses, Other",traffic,70343
+7310,Escape,justice_system,8513
+7311,"Escape, Jumping Bail",justice_system,5040
+7312,"Escape, Bail Reform Act of 1966",justice_system,5
+7313,Escape from Custody,justice_system,253
+7314,Criminal Default,justice_system,0
+7320,"Escape, Aiding or Harboring",justice_system,5305
+7330,Prison Contraband,general,790
+7331,"Fraud, Other",fraud,0
+7400,"Extortion, Racketeering, & Threats",general,3467
+7401,Threats Against The President,general,644
+7410,"Racketeering, Arson",general,45
+7420,"Racketeering, Bribery",general,1
+7430,"Racketeering, Extortion",general,0
+7440,"Racketeering, Gambling",general,0
+7450,"Racketeering, Liquor",general,0
+7460,"Racketeering, Narcotics",drugs,0
+7470,"Racketeering, Prostitution",general,0
+7471,"Racketeering, Murder",general,1579
+7472,"Racketeering, Kidnap",violent,0
+7473,"Racketeering, Maim",violent,27
+7474,"Conspiracy, Murder, Kidnap",violent,0
+7475,"Attempt, Conspire/Maim, Assault",violent,0
+7477,Monetary Laundering,general,33590
+7478,"Murder, First Degree",violent,3
+7480,Racketeering,general,4482
+7481,"Racketeering, Robbery",violent,0
+7482,"Racketeering, Threats",general,2
+7490,"Racketeering, Extortion Credit Transaction",general,1075
+7500,Gambling & Lottery,general,2279
+7520,"Gambling & Lottery, Travel/Racketeering",general,15
+7530,"Gambling & Lottery, Transmit Wager Info.",general,80
+7600,"Kidnapping (18:1201,1202)",violent,3365
+7601,"Kidnapping, Govt Officials",violent,11
+7610,Kidnapping (18:13),violent,6
+7611,"Kidnap, Hostage",violent,1297
+7700,Perjury,justice_system,1715
+7800,Firearms & Weapons,firearms_explosives,7637
+7820,"Firearms, Unlawful Possession",firearms_explosives,145843
+7830,Firearms,firearms_explosives,48323
+7831,Furtherance of Violence,firearms_explosives,66909
+7910,Arson,general,337
+7920,Abortion,general,0
+7930,Bigamy,general,1
+7940,Malicious Destruction of Property,property_other,887
+7941,"Other, Property",property_other,323
+7950,Disorderly Conduct,general,574
+7961,Travel to Incite to Riot,general,1
+7962,Civil Disorder,general,160
+7990,"Misc. General Offenses, Other",general,13676
+7991,Juvenile Delinquency,general,877
+8100,Failure to Pay Child Support,general,2358
+8200,"False Claims and Services, Government",fraud,6896
+8201,Identification Documents and Information Fraud,fraud,33675
+8500,Mail Fraud,fraud,16555
+8600,"Wire, Radio, or Television Fraud",fraud,16808
+8710,"Immigration Laws, Illegal Entry",immigration,31300
+8720,"Immigration Laws, Illegal Re-Entry",immigration,483289
+8730,"Immigration Laws, Other",immigration,102886
+8731,Fraud And Misuse of Visa/Permits,immigration,19794
+8740,"Immigration Laws, Illegal Entry",immigration,1860
+8750,"Immigration Laws, Fraudulent Citizenship",immigration,18
+8900,"Liquor, Internal Revenue",regulatory,70
+8901,"Fraud, Other Tax",fraud,7
+9001,Hazardous Waste-Treatment/Disposal/Store,regulatory,1270
+9110,Agriculture Acts,regulatory,84
+9115,Agriculture Acts,regulatory,0
+9120,"Agriculture, Federal Seed Act",regulatory,0
+9130,Game Conservation Acts,regulatory,5695
+9140,"Agriculture, Insecticide Act",regulatory,178
+9150,National Park/Recreation Violations,regulatory,3119
+9160,"Agriculture, Packers & Stockyard Act",regulatory,2
+9170,"Agriculture, Plant Quarantine",regulatory,7
+9180,"Agriculture, Handling Animals, Research",regulatory,4
+9200,Antitrust Violations,regulatory,1002
+9300,Fair Labor Standards Act,regulatory,1965
+9400,Food & Drug Act,regulatory,1720
+9500,Migratory Bird Laws,regulatory,2374
+9600,Motor Carrier Act,regulatory,101
+9710,"National Defense, Selective Service Acts",regulatory,2
+9720,"National Defense, Illegal Use of Uniform",regulatory,39
+9730,"National Defense, Defense Production Act",regulatory,2
+9731,Economic Stabilization Act of 1970-Price,regulatory,0
+9732,Economic Stabilization Act of 1970-Rents,regulatory,0
+9733,Economic Stabilization Act of 1970-Wages,regulatory,0
+9740,Alien Registration,immigration,0
+9741,Energy Facility,regulatory,0
+9751,Treason,regulatory,9
+9752,Espionage,regulatory,183
+9753,Sabotage,regulatory,27
+9754,Sedition,regulatory,3
+9755,Smith Act,regulatory,0
+9760,"Curfew, Restricted Areas",general,1419
+9770,Exportation of War Materials,regulatory,27
+9771,Anti-Apartheid Program,regulatory,0
+9780,Trading with the Enemy Act,regulatory,31
+9790,"National Defense, Other",regulatory,733
+9791,Subversive Activities Control Act,regulatory,6539
+9792,Defense Contractors,regulatory,7
+9793,Armed Forces,regulatory,0
+9810,Obscene Mail,general,79
+9820,Obscene Matter in Interstate Commerce,general,219
+9901,Civil Rights,regulatory,2993
+9902,Election Law Violators,regulatory,125
+9903,Federal Statues-Public Officer/Employees,regulatory,0
+9904,Federal Statute-U.S. Emblems/Insignias,regulatory,0
+9905,Federal Statutes-Foreign Relations,regulatory,3
+9906,Federal Statutes-Bank and Banking,regulatory,8
+9907,Federal Statutes-Money and Finance,regulatory,6622
+9908,Federal Statutes-Public Health & Welfare,regulatory,1
+9909,Federal Statute-Census,regulatory,0
+9910,Communication Acts (Including Wire Tapping),regulatory,350
+9911,Wire Interception,regulatory,296
+9912,Federal Statutes-Copyright Laws,regulatory,1055
+9914,Federal Statutes-Coast Guard,regulatory,0
+9915,Federal Statutes-Commerce And Trade,regulatory,2
+9916,Federal Statutes-Consumer Credit Protection,regulatory,11
+9917,Federal Statutes-Consumer Product Safety,regulatory,1
+9918,Federal Statues-Toxic Substance Control,regulatory,67
+9919,Federal Statutes-Title 5,regulatory,0
+9920,Federal Statutes-Conservation Acts,regulatory,2
+9921,Contempt,justice_system,1709
+9922,"Contempt, Congressional",justice_system,4
+9923,Forfeiture - Criminal or Drug Related,general,36
+9926,Federal Statutes-Extort/Oppress under Law,general,0
+9928,Federal Statutes-Removal from State Court,regulatory,0
+9929,Federal Statutes-Labor Laws,regulatory,0
+9930,Federal Statutes-Minerals & Land Mining,regulatory,138
+9931,Customs Laws (Except Narcotics & Liquor),regulatory,6131
+9932,Customs Laws - Import Injurious Animals,regulatory,12
+9935,Patents and Trademarks,regulatory,0
+9936,Patriotic Societies And Observances,regulatory,0
+9938,Veterans Benefits,regulatory,15
+9940,Social Security,regulatory,17
+9941,Connally Act/Hot Oil Act,regulatory,0
+9942,Transport Convict-Made Goods Interstate,regulatory,2
+9943,Railroad & Transportation Acts,regulatory,0
+9944,"Destruction of Property, Interstate Commerce",property_other,11
+9947,Telephones Telegraphs & Radios,regulatory,0
+9949,Federal Statute-Transportation,regulatory,33
+9950,"War and National Defense, Other",regulatory,2
+9951,Transportation of Strikebreakers,regulatory,0
+9952,Taft Hartley Act,regulatory,5
+9953,Eight Hour Day on Public Works,regulatory,0
+9954,Peonage,regulatory,1404
+9956,"Federal Statute, Phw",regulatory,0
+9957,Terrorist Activity,violent,1253
+9960,Liquor (Except Internal Revenue),regulatory,320
+9971,Maritime & Shipping Laws,regulatory,2570
+9972,Stowaways,regulatory,102
+9973,Federal Boat Safety Act of 1971,regulatory,70
+9974,Federal Water Pollution Control Act,regulatory,0
+9981,"Postal, Non Mailable Material",regulatory,131
+9982,"Postal, Injury to Property",regulatory,96
+9983,"Postal, Obstructing the Mail",regulatory,486
+9984,"Postal, Violations By Postal Employees",regulatory,27
+9989,"Postal, Other",regulatory,2255
+9990,National Park/Recreation Violations,regulatory,0
+9991,Destroying Federal Property,property_other,2957
+9992,"Intimidation of Witnesses, Jurors, etc.",justice_system,8180
+9993,Aircraft Regulations,regulatory,2321
+9994,Explosives (Except on Vessels),firearms_explosives,6590
+9995,Gold Acts,regulatory,0
+9996,Train Wrecking,regulatory,0
+9999,"Federal Statutes, Other",regulatory,8114
