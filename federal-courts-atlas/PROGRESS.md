@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 06:30 UTC (overnight build, checkpoint 2)._
+_Last updated: 2026-11-27 07:30 UTC (overnight build, checkpoint 3)._
 
 ## Done
 - Project skeleton: 94-district registry, cached/throttled HTTP fetcher, source + gap manifests,
@@ -13,11 +13,12 @@ _Last updated: 2026-11-27 06:30 UTC (overnight build, checkpoint 2)._
 - Boundaries lane: statute parsed (28 U.S.C. 81-131, 48 U.S.C. territorial courts); every county-equivalent
   assigned to one district; Yellowstone (D. Wyo.) and the Fort Bragg / Butner carve-outs (E.D.N.C.) handled;
   TopoJSON for national and zoomed views. Boundary audit fixes applied. See `docs/lanes/boundaries.md`.
-- Lanes with first outputs (audits still pending): FCMS, USSC, judges (FJC Biographical Directory),
-  population (Census). Reports in `docs/lanes/`.
+- Lanes with first outputs (audits still pending): FCMS, USSC, IDB (FJC Integrated Database), judges
+  (FJC Biographical Directory), population (Census), courthouses (geocoded) and the search index
+  (`public/data/search/`). Reports in `docs/lanes/`.
 
 ## In progress
-- Workflow 1 (data): courthouses + CourtListener cases; IDB, then a statistics audit.
+- Workflow 1 (data): CourtListener cases lane finishing; statistics audit next.
 
 ## Blocked / notes
 - `data/processed/fcms/` is not tracked yet (git-ignored). Its CSV was 41 MB; now about 13 MB, so it can be tracked
