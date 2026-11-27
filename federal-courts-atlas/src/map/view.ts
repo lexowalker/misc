@@ -3,7 +3,7 @@
 // data, and the source chip. Pages call setData({variable, values, year}).
 
 import { h, uniqueId } from '../lib/dom.ts';
-import { formatValue, periodLabel, rankText } from '../lib/format.ts';
+import { formatValue, periodLabel, periodLabelFor, rankText } from '../lib/format.ts';
 import type { ValuesFile, Variable } from '../data/types.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
 import { getRank, getValue, rankedCount, rankTies } from '../data/loaders.ts';
@@ -135,7 +135,7 @@ export class ChoroplethView {
         'div',
         { class: 'choropleth__legend-head' },
         this.o.legendHead === 'year' ? null : h('span', { class: 'choropleth__legend-title' }, this.variable.label),
-        this.year !== null ? h('span', { class: 'choropleth__legend-year num' }, periodLabel(this.year, this.values.period_type)) : null,
+        this.year !== null ? h('span', { class: 'choropleth__legend-year num' }, periodLabelFor(this.variable, this.year, this.values.period_type)) : null,
       ),
       renderLegend({ scale: this.scale, variable: this.variable, onHighlight: (i) => this.map.highlightStep(i), note }),
     );
@@ -195,7 +195,7 @@ export class ChoroplethView {
         });
       }
     }
-    const caption = v && this.values && this.year !== null ? `${v.label}, ${periodLabel(this.year, this.values.period_type)}, by district` : 'The 94 federal judicial districts';
+    const caption = v && this.values && this.year !== null ? `${v.label}, ${periodLabelFor(v, this.year, this.values.period_type)}, by district` : 'The 94 federal judicial districts';
     if (this.table) {
       this.table.el.remove();
     }

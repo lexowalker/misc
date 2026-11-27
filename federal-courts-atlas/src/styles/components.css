@@ -587,7 +587,8 @@ th[aria-sort='descending'] {
 
 .year-slider__track {
   position: relative;
-  padding: 1.6rem 0 1.2rem;
+  /* Room above the track for one row of two-line event labels (name over date). */
+  padding: 2.4rem 0 1.2rem;
 }
 
 .year-slider__input {
@@ -683,7 +684,7 @@ th[aria-sort='descending'] {
 
 .year-slider__events {
   top: 0;
-  height: 1.6rem;
+  height: 2.4rem;
 }
 
 .year-slider__event {
@@ -716,23 +717,36 @@ th[aria-sort='descending'] {
   color: var(--color-text);
 }
 
+.year-slider__event-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.25;
+}
+
+.year-slider__event-date {
+  font-weight: var(--fw-regular);
+  letter-spacing: 0;
+  color: var(--color-text-3);
+}
+
 /* Labels that would collide sit on a second row with a longer leader line. The second row clears the first by
-   a full 24 px target height, so neighboring markers never overlap (WCAG 2.2 target size). */
+   a full label height (two lines, more than 24 px), so neighboring markers never overlap (WCAG 2.2 target size). */
 .year-slider__track.has-raised {
-  padding-top: 3.35rem;
+  padding-top: 4.65rem;
 }
 
 .year-slider__track.has-raised .year-slider__events {
-  height: 3.35rem;
+  height: 4.65rem;
 }
 
 .year-slider__event.is-raised {
-  bottom: calc(2px + 1.6rem);
+  bottom: calc(2px + 2.25rem);
 }
 
 .year-slider__event.is-raised::after {
-  height: calc(14px + 1.6rem);
-  bottom: calc(-10px - 1.6rem);
+  height: calc(14px + 2.25rem);
+  bottom: calc(-10px - 2.25rem);
 }
 
 .year-slider__value {
@@ -740,6 +754,25 @@ th[aria-sort='descending'] {
   font-size: var(--fs-md);
   font-weight: var(--fw-bold);
   text-align: right;
+}
+
+/* "Preliminary" under the year (IDB FY 2026 has no AO cross-check yet). */
+.year-slider__flag {
+  display: block;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+}
+
+/* Why an event sits where it does: the federal fiscal year runs October 1 to September 30. */
+.year-slider__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--color-text-3);
 }
 
 /* A year label that would touch its neighbor is left out; its tick mark stays. */
@@ -757,6 +790,10 @@ th[aria-sort='descending'] {
 @media (max-width: 34rem) {
   .year-slider__events {
     display: none;
+  }
+
+  .year-slider__track {
+    padding-top: 1.6rem;
   }
 
   .year-slider__pips {
@@ -801,9 +838,10 @@ th[aria-sort='descending'] {
   .year-slider__key {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    min-height: 32px;
-    padding: 0 var(--space-3);
+    gap: 8px;
+    min-height: 44px;
+    padding: 4px var(--space-3);
+    text-align: left;
     border: 1px solid var(--color-rule-strong);
     border-radius: 999px;
     background: var(--color-bg);
@@ -825,6 +863,18 @@ th[aria-sort='descending'] {
   }
 
   .year-slider__key-year {
+    font-weight: var(--fw-regular);
+    color: var(--color-text-3);
+  }
+
+  .year-slider__key-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .year-slider__key-date {
+    font-size: var(--fs-2xs);
     font-weight: var(--fw-regular);
     color: var(--color-text-3);
   }

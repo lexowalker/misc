@@ -294,7 +294,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
           ? h(
               'div',
               { class: 'home-measure__nat' },
-              h('p', { class: 'caps' }, `All district courts, ${periodLabel(year, values.period_type)}`),
+              h('p', { class: 'caps' }, `All district courts, ${periodLabelFor(v, year, values.period_type)}`),
               h(
                 'p',
                 { class: 'home-measure__nat-value num', title: values.national_note ?? null },
@@ -411,7 +411,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
     replaceQuery({ v: v.id, y: y !== null ? String(y) : null });
     renderMeasure();
     renderAbout();
-    live.textContent = `Map shows ${v.label}${y !== null ? `, ${periodLabel(y, values.period_type)}` : ''}.`;
+    live.textContent = `Map shows ${v.label}${y !== null ? `, ${periodLabelFor(v, y, values.period_type)}` : ''}.`;
   };
 
   const vr = await loadVariables();
