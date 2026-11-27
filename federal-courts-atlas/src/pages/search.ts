@@ -1,206 +1,208 @@
-// Search (#/search?q=): find "your federal court" by city, county, ZIP code or
-// courthouse (from the courthouses lane's search files), or by state or district
-// name (from the registry, always available).
+// Search (#/search?q=): find "your federal court" by city, county, ZIP code or courthouse
+// (the courthouses lane's search files) or by state or district name (the registry).
+// The combobox lists every district a place reaches into, primary first; the panel
+// beside it previews the highlighted match with locator maps. Enter or a click opens
+// the district.
 
 import '../styles/pages.css';
-import { h, debounce } from '../lib/dom.ts';
+import '../styles/search.css';
+import { h } from '../lib/dom.ts';
 import type { PageContext } from '../app/router.ts';
 import { replaceQuery } from '../app/router.ts';
-import { DISTRICTS, registryDistrict, circuitLabel } from '../data/districts.ts';
-import { foldKey, loadSearchIndex } from '../data/loaders.ts';
-import type { SearchEntry } from '../data/types.ts';
-import { loadAtlasGeometry } from '../map/geo.ts';
+import { registryDistrict, circuitLabel } from '../data/districts.ts';
+import type { PlaceHit, PlaceIndex } from '../data/place-index.ts';
+import { STATE_NAMES, loadPlaceIndex } from '../data/place-index.ts';
+import { loadAtlasGeometry, type GeometryResult } from '../map/geo.ts';
 import { renderLocator } from '../map/locator.ts';
 import { atlasProjection } from '../map/projection.ts';
+import { PlaceSearch, alsoText, hitTitle, kindLabel, sharePct } from '../components/place-search.ts';
 import { pageHead } from './_page.ts';
 
 export const title = 'Find your federal court';
 
-const KIND_LABEL: Record<string, string> = {
-  city: 'City',
-  place: 'Place',
-  county: 'County',
-  zip: 'ZIP code',
-  courthouse: 'Courthouse',
-  district: 'District',
-  state: 'State',
-};
+// Example queries (place names and ZIP codes only; no statistics).
+const EXAMPLES = ['Alexandria, VA', '22314', 'Cook County', 'Brooklyn', 'Dallas, TX', '28376'];
 
-function registryEntries(): SearchEntry[] {
-  const out: SearchEntry[] = [];
-  const states = new Map<string, string[]>();
-  for (const d of DISTRICTS) {
-    out.push({ label: d.name, kind: 'district', district_id: d.id, state: d.state, detail: d.short, key: foldKey(`${d.name} ${d.short} ${d.id}`) });
-    (states.get(d.stateName) ?? states.set(d.stateName, []).get(d.stateName)!).push(d.id);
+function locationNote(hit: PlaceHit): string {
+  switch (hit.kind) {
+    case 'city':
+      return 'Matched to the district that holds the Census internal point of this place.';
+    case 'county':
+      return hit.splitCounty
+        ? 'The statute splits this county between districts. Your district depends on the exact location.'
+        : 'Federal law assigns every county to one district.';
+    case 'zip':
+      return 'ZIP codes are matched through Census ZIP Code Tabulation Areas (2020), which approximate them. Shares are of land area.';
+    case 'courthouse':
+      return 'A federal courthouse building in current district-court use, from the Federal Judicial Center list. The dot marks its city.';
+    case 'state':
+      return 'Every place in the state falls in exactly one of these districts.';
+    default:
+      return '';
   }
-  for (const [name, ids] of states) {
-    out.push({ label: name, kind: 'state', district_id: ids[0]!, district_ids: ids.length > 1 ? ids : undefined, key: foldKey(name) });
-  }
-  return out;
 }
 
-function score(e: SearchEntry, q: string, words: string[]): number {
-  if (!q) return 0;
-  if (e.kind === 'zip') return e.key === q || e.key.startsWith(q) ? (e.key === q ? 100 : 40) : 0;
-  if (e.key === q) return 90;
-  if (e.key.startsWith(q)) return 70 - Math.min(20, e.key.length - q.length) / 2;
-  const keyWords = e.key.split(' ');
-  if (words.every((w) => keyWords.some((k) => k.startsWith(w)))) return 40;
-  if (e.key.includes(q)) return 15;
-  return 0;
-}
-
-export async function render(ctx: PageContext): Promise<void> {
-  const page = h('div', { class: 'page search-page' });
-  const input = h('input', {
-    id: 'search-q',
-    type: 'search',
-    class: 'search-input',
-    autocomplete: 'off',
-    spellcheck: 'false',
-    placeholder: 'City, county, ZIP code or courthouse',
-    'aria-describedby': 'search-help',
-    'aria-controls': 'search-results',
-  });
-  const form = h(
-    'form',
-    { class: 'search-form', role: 'search', onsubmit: ((e: Event) => e.preventDefault()) as EventListener },
-    h('label', { for: 'search-q', class: 'visually-hidden' }, 'Search for a place, ZIP code, courthouse, state or district'),
-    h('span', { class: 'search-form__icon', 'aria-hidden': 'true' }),
-    input,
-  );
-  const help = h('p', { id: 'search-help', class: 'search-help' });
-  const status = h('p', { class: 'visually-hidden', 'aria-live': 'polite' });
-  const results = h('ul', { id: 'search-results', class: 'search-results', 'aria-label': 'Search results' });
-  const detail = h('div', { class: 'search-detail', 'aria-live': 'polite' });
+export async function render(ctx: PageContext): Promise<() => void> {
+  const page = h('div', { class: 'page find-page' });
+  const searchSlot = h('div', { class: 'find__search' });
+  const help = h('p', { class: 'find__help', id: 'find-help' });
+  const examples = h('div', { class: 'find__examples' });
+  const detail = h('section', { class: 'find__detail', 'aria-label': 'Highlighted match', 'aria-live': 'polite' });
   page.append(
-    pageHead({ kicker: 'Search', title: 'Find your federal court', dek: 'Every place in the United States falls within exactly one federal judicial district. Search by city, county, ZIP code or courthouse, or by state or district name.' }),
-    h('div', { class: 'search-layout' }, h('div', { class: 'search-col' }, form, help, status, results), detail),
+    pageHead({
+      kicker: 'Search',
+      title: 'Find your federal court',
+      dek: 'Every place in the United States falls within exactly one federal judicial district. Search by city, county, ZIP code or courthouse, or by state or district name.',
+    }),
+    h('div', { class: 'find__layout' }, h('div', { class: 'find__col' }, searchSlot, help, examples), detail),
   );
   ctx.root.append(page);
 
-  const base = registryEntries();
-  let entries = base;
-  const idx = await loadSearchIndex();
-  if (idx.status === 'ok') {
-    entries = [...idx.data.entries, ...base];
-    help.textContent = `Searching ${idx.data.entries.length.toLocaleString('en-US')} places, ZIP codes and courthouses, plus every state and district.`;
-  } else {
-    help.append(
-      h('strong', null, 'City, county and ZIP search is not built yet. '),
-      'You can already search by state or district name. The place index appears once the courthouse and geography pipeline publishes it.',
-    );
-    help.classList.add('search-help--notice');
-  }
+  let geo: GeometryResult | null = null;
+  let index: PlaceIndex | null = null;
+  let destroyed = false;
 
-  const geo = await loadAtlasGeometry();
-
-  const showDetail = (e: SearchEntry) => {
-    const ids = e.district_ids ?? [e.district_id];
+  const renderDetail = (hit: PlaceHit | null, activeDistrict: string | null) => {
     detail.replaceChildren();
-    detail.classList.toggle('search-detail--multi', ids.length > 1);
-    if (ids.length > 1) {
+    detail.classList.remove('is-multi');
+    if (!hit) {
       detail.append(
-        h('p', { class: 'search-detail__note' }, e.kind === 'state' ? `${e.label} is divided into ${ids.length} districts:` : `${e.label} spans more than one district. Your district depends on the exact address:`),
+        h(
+          'div',
+          { class: 'find__empty' },
+          h('p', { class: 'find__empty-title' }, 'Your district appears here'),
+          h('p', null, 'Start typing a place. The map shows where the district lies, and the link opens its profile.'),
+        ),
       );
+      return;
     }
-    for (const id of ids) {
-      const d = registryDistrict(id);
-      if (!d) continue;
-      const card = h('article', { class: 'search-card' });
-      if (geo.status === 'ok') {
+    const ds = hit.districts;
+    const multi = ds.length > 1;
+    detail.classList.toggle('is-multi', multi);
+    const point = (() => {
+      if (hit.lat === undefined || hit.lon === undefined) {
+        if (hit.kind === 'courthouse' && hit.detail && hit.state) return index?.cityPoint(hit.detail, hit.state) ?? null;
+        return null;
+      }
+      return { lat: hit.lat, lon: hit.lon };
+    })();
+    const head = h(
+      'header',
+      { class: 'find__detail-head' },
+      h('p', { class: 'kicker' }, kindLabel(hit)),
+      h('h2', { class: 'find__detail-title' }, hitTitle(hit, true)),
+      hit.kind === 'courthouse' && hit.detail ? h('p', { class: 'find__detail-sub' }, `${hit.detail}, ${STATE_NAMES[hit.state ?? ''] ?? hit.state}`) : null,
+      multi
+        ? h(
+            'p',
+            { class: 'find__detail-sub' },
+            hit.kind === 'state'
+              ? `${hit.name} is divided into ${ds.length} districts.`
+              : `This ${hit.kind === 'zip' ? 'ZIP code' : hit.kind === 'county' ? 'county' : 'place'} reaches into ${ds.length} districts. Your district depends on the exact address.`,
+          )
+        : null,
+      hit.courtCity ? h('p', { class: 'find__court' }, h('span', { class: 'find__court-dot', 'aria-hidden': 'true' }), 'The law names this city as a place where the district court sits.') : null,
+    );
+    detail.append(head);
+    const cards = h('div', { class: 'find__cards' });
+    ds.forEach((d, i) => {
+      const reg = registryDistrict(d.id);
+      if (!reg) return;
+      const card = h('article', { class: `find-card${d.id === activeDistrict ? ' is-active' : ''}`, 'data-district': d.id });
+      if (geo?.status === 'ok') {
         const pts: Array<{ x: number; y: number }> = [];
-        if (e.lat !== undefined && e.lon !== undefined) {
-          const xy = atlasProjection().project(e.lon, e.lat, e.state ?? d.state);
+        if (point && (i === 0 || hit.kind !== 'city')) {
+          const xy = atlasProjection().project(point.lon, point.lat, hit.state ?? reg.state);
           if (xy) pts.push({ x: xy[0], y: xy[1] });
         }
-        const svg = renderLocator({ geometry: geo.geometry, districtId: id, points: pts, aspect: ids.length > 1 ? 1.2 : 1.4, keyMap: ids.length === 1 });
-        if (svg) card.append(h('div', { class: 'search-card__map' }, svg));
+        const svg = renderLocator({ geometry: geo.geometry, districtId: d.id, points: pts, aspect: multi ? 1.25 : 1.45, keyMap: !multi || ds.length <= 2 });
+        if (svg) {
+          svg.setAttribute('aria-hidden', 'true');
+          card.append(h('div', { class: 'find-card__map' }, svg));
+        }
       }
+      const role =
+        hit.kind === 'state' || hit.kind === 'district'
+          ? 'District court'
+          : !multi
+            ? 'Your federal district court'
+            : d.role === 'primary'
+              ? hit.kind === 'zip'
+                ? `Largest share: ${sharePct(d.share ?? 0)} of land area`
+                : 'Main district'
+              : alsoText(hit, d);
       card.append(
-        h('p', { class: 'kicker' }, e.kind === 'state' || e.kind === 'district' ? 'District' : ids.length > 1 ? 'Possible district' : 'Your federal court'),
-        h('h2', { class: 'search-card__name' }, d.name),
-        h('p', { class: 'search-card__meta' }, `${d.short} · ${circuitLabel(d.circuit)}`),
-        h('p', null, h('a', { class: 'btn btn--primary', href: `#/district/${id}` }, 'Open district profile')),
+        h('p', { class: 'find-card__role caps' }, role),
+        h('h3', { class: 'find-card__name' }, reg.name),
+        h('p', { class: 'find-card__meta' }, `${reg.short} · ${circuitLabel(reg.circuit)}`),
+        h('p', null, h('a', { class: 'btn btn--primary find-card__go', href: `#/district/${d.id}` }, 'Open district profile', h('span', { 'aria-hidden': 'true' }, ' →'))),
       );
-      detail.append(card);
-    }
-  };
-
-  const run = (raw: string) => {
-    const q = foldKey(raw);
-    const words = q.split(' ').filter(Boolean);
-    results.replaceChildren();
-    if (!q) {
-      status.textContent = '';
-      detail.replaceChildren();
-      return;
-    }
-    const scored = entries
-      .map((e) => [score(e, q, words), e] as const)
-      .filter(([sc]) => sc > 0)
-      .sort((a, b) => b[0] - a[0] || a[1].label.localeCompare(b[1].label));
-    const seen = new Set<string>();
-    const top: SearchEntry[] = [];
-    for (const [, e] of scored) {
-      const k = `${e.kind}|${e.label}|${e.district_id}`;
-      if (seen.has(k)) continue;
-      seen.add(k);
-      top.push(e);
-      if (top.length >= 12) break;
-    }
-    status.textContent = top.length ? `${top.length} result${top.length === 1 ? '' : 's'}` : 'No matches';
-    if (!top.length) {
-      results.append(h('li', { class: 'search-results__empty' }, idx.status === 'ok' ? 'No matching place. Try a city, county, ZIP code, state or district.' : 'No matching state or district.'));
-      detail.replaceChildren();
-      return;
-    }
-    top.forEach((e, i) => {
-      const ids = e.district_ids ?? [e.district_id];
-      const btn = h(
-        'button',
-        { type: 'button', class: 'search-result' },
-        h('span', { class: 'search-result__label' }, e.label),
-        h('span', { class: 'search-result__meta' }, `${KIND_LABEL[e.kind] ?? e.kind}${e.detail && e.kind !== 'district' ? ` · ${e.detail}` : ''}`),
-        h('span', { class: 'search-result__district' }, ids.length > 1 ? `${ids.length} districts` : registryDistrict(e.district_id)?.short ?? e.district_id),
-      );
-      btn.addEventListener('click', () => {
-        results.querySelectorAll('.search-result').forEach((b) => b.removeAttribute('aria-current'));
-        btn.setAttribute('aria-current', 'true');
-        showDetail(e);
-      });
-      results.append(h('li', null, btn));
-      if (i === 0) {
-        btn.setAttribute('aria-current', 'true');
-        showDetail(e);
-      }
+      cards.append(card);
     });
+    detail.append(cards);
+    const note = locationNote(hit);
+    if (note) detail.append(h('p', { class: 'find__note' }, note));
   };
 
-  const sync = debounce(() => {
-    replaceQuery({ q: input.value.trim() || null });
-    run(input.value);
-  }, 140);
-  input.addEventListener('input', sync);
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      results.querySelector<HTMLButtonElement>('.search-result')?.focus();
+  const updateHelp = (status: string) => {
+    help.classList.toggle('find__help--notice', status !== 'ok' && status !== 'loading' && status !== 'idle');
+    if (status === 'ok' && index) {
+      const c = index.counts;
+      help.textContent = `Searches ${c.places.toLocaleString('en-US')} places, ${c.counties.toLocaleString('en-US')} counties, ${c.zips.toLocaleString('en-US')} ZIP code areas and ${c.courthouses.toLocaleString('en-US')} court locations, plus every state and district.`;
+    } else if (status === 'loading' || status === 'idle') {
+      help.textContent = 'Loading the list of places...';
+    } else {
+      help.replaceChildren(
+        h('strong', null, 'City, county and ZIP search is unavailable. '),
+        'The place list could not be loaded. You can still search by state or district name.',
+      );
     }
+  };
+
+  const search = new PlaceSearch(searchSlot, {
+    mode: 'inline',
+    // Phones list fewer matches so the preview stays close.
+    limit: typeof matchMedia === 'function' && matchMedia('(max-width: 40rem)').matches ? 8 : 20,
+    label: 'Search for a place, ZIP code, courthouse, state or district',
+    labelHidden: true,
+    preload: true,
+    initialQuery: ctx.query.get('q') ?? '',
+    onQuery: (q) => replaceQuery({ q: q || null }),
+    onActive: (hit, d) => renderDetail(hit, d),
+    onResults: (hits, q) => {
+      examples.hidden = hits.length > 0 || !!q;
+    },
   });
-  results.addEventListener('keydown', (e) => {
-    const items = [...results.querySelectorAll<HTMLButtonElement>('.search-result')];
-    const i = items.indexOf(document.activeElement as HTMLButtonElement);
-    if (e.key === 'ArrowDown' && i < items.length - 1) {
-      e.preventDefault();
-      items[i + 1]!.focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      (i > 0 ? items[i - 1]! : input).focus();
-    }
+  updateHelp('loading');
+  void loadPlaceIndex().then((r) => {
+    if (destroyed) return;
+    if (r.status === 'ok') index = r.data;
+    updateHelp(r.status);
   });
-  const q0 = ctx.query.get('q') ?? '';
-  input.value = q0;
-  if (q0) run(q0);
-  else input.focus({ preventScroll: true });
+
+  examples.append(
+    h('p', { class: 'caps find__examples-label' }, 'Try'),
+    h(
+      'ul',
+      { class: 'find__examples-list' },
+      ...EXAMPLES.map((ex) => {
+        const b = h('button', { type: 'button', class: 'find__example' }, ex);
+        b.addEventListener('click', () => search.setQuery(ex));
+        return h('li', null, b);
+      }),
+    ),
+  );
+  examples.hidden = !!search.input.value.trim();
+
+  geo = await loadAtlasGeometry();
+  if (destroyed) return () => {};
+  // Re-render the preview with maps now that the geometry is here.
+  const first = search.results[0];
+  renderDetail(first ?? null, first?.districts[0]?.id ?? null);
+  if (!search.input.value) search.input.focus({ preventScroll: true });
+
+  return () => {
+    destroyed = true;
+    search.destroy();
+  };
 }

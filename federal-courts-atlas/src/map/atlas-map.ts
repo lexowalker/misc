@@ -29,6 +29,20 @@ export interface AtlasMapOptions {
   courthouses?: boolean;
   /** Maximum zoom factor (default 24). */
   maxZoom?: number;
+  /**
+   * Custom tooltip body (everything under the district name). Return null to fall
+   * back to the default body. The pinned "Open district profile" link is still added.
+   */
+  tooltipBody?: (id: string, data: MapData) => Node | null;
+  /** Custom accessible name for a district path. Return null to use the default. */
+  ariaLabelFor?: (id: string, data: MapData) => string | null;
+  /** Extra sentence for the map's screen-reader help text (e.g. how ranks are counted). */
+  ariaHelp?: string;
+  /**
+   * Draw cities with only a courthouse building (FJC list) as open rings, and places of
+   * holding court named by statute as solid dots (default false: all solid).
+   */
+  courthouseKinds?: boolean;
 }
 
 export interface MapData {
@@ -76,6 +90,7 @@ export class AtlasMap {
   private hoverLine: SVGPathElement;
   private dotRing: SVGPathElement;
   private dots: SVGPathElement;
+  private dotsOpen: SVGPathElement;
   private labelLayer: SVGGElement;
   private insetLabels: SVGGElement;
   private cityLabels: SVGGElement;
@@ -130,13 +145,14 @@ export class AtlasMap {
     this.hoverLine = s('path', { class: 'outline outline--line', 'aria-hidden': 'true' });
     this.dotRing = s('path', { class: 'dots dots--ring', 'aria-hidden': 'true' });
     this.dots = s('path', { class: 'dots dots--fill', 'aria-hidden': 'true' });
+    this.dotsOpen = s('path', { class: 'dots dots--open', 'aria-hidden': 'true' });
     const frames = s('g', { class: 'atlas-map__frames', 'aria-hidden': 'true' });
     for (const r of atlasProjection().regions) {
       if (!r.box) continue;
       const [[x0, y0], [x1, y1]] = r.box;
       frames.append(s('rect', { class: 'inset-frame', x: x0, y: y0, width: x1 - x0, height: y1 - y0, rx: 3 }));
     }
-    this.zoomLayer.append(frames, this.districtLayer, this.countyMesh, this.districtMesh, this.stateMesh, this.hoverHalo, this.hoverLine, this.dotRing, this.dots);
+    this.zoomLayer.append(frames, this.districtLayer, this.countyMesh, this.districtMesh, this.stateMesh, this.hoverHalo, this.hoverLine, this.dotRing, this.dots, this.dotsOpen);
     this.labelLayer = s('g', { class: 'atlas-map__labels', 'aria-hidden': 'true' });
     this.insetLabels = s('g', { class: 'inset-labels' });
     this.cityLabels = s('g', { class: 'city-labels' });
@@ -149,6 +165,7 @@ export class AtlasMap {
       'p',
       { id: `${this.uid}-help`, class: 'visually-hidden' },
       'Use Tab to move between districts and Enter to open one. Plus and minus keys zoom, arrow keys pan, and 0 resets the view.',
+      opts.ariaHelp ? ` ${opts.ariaHelp}` : '',
     );
     this.hint = h('div', { class: 'atlas-map__hint', 'aria-hidden': 'true' });
     const controls = h(
@@ -334,6 +351,8 @@ export class AtlasMap {
   }
 
   private ariaFor(id: string): string {
+    const custom = this.opts.ariaLabelFor?.(id, this.data);
+    if (custom) return custom;
     const d = this.shape(id);
     const name = d?.name ?? id;
     const { variable, values, year } = this.data;
@@ -360,7 +379,10 @@ export class AtlasMap {
     const { variable, values, year } = this.data;
     const box = h('div', { class: 'map-tip__inner' });
     box.append(h('p', { class: 'map-tip__name' }, d?.name ?? id));
-    if (variable && values) {
+    const custom = this.opts.tooltipBody?.(id, this.data) ?? null;
+    if (custom) {
+      box.append(custom);
+    } else if (variable && values) {
       const v = getValue(values, id, year);
       const valueEl = h('p', { class: `map-tip__value${v === null ? ' is-missing' : ''}` });
       if (v === null) valueEl.append('No data');
@@ -746,10 +768,18 @@ export class AtlasMap {
       p.kinds.add(c.kind);
       if (c.name) p.names.push(c.name);
     }
-    this.cities = [...byCity.values()].map((p) => ({ ...p, priority: p.priority + (p.kinds.has('courthouse') ? 2 : 0) }));
-    const d = this.cities.map((c) => `M${c.x.toFixed(1)} ${c.y.toFixed(1)}h0`).join('');
-    this.dotRing.setAttribute('d', d);
-    this.dots.setAttribute('d', d);
+    const all = [...byCity.values()];
+    this.cities = all.map((p) => ({ ...p, priority: p.priority + (p.kinds.has('courthouse') ? 2 : 0) }));
+    const dot = (c: { x: number; y: number }) => `M${c.x.toFixed(1)} ${c.y.toFixed(1)}h0`;
+    this.dotRing.setAttribute('d', all.map(dot).join(''));
+    this.dots.setAttribute('d', all.map(dot).join(''));
+    if (this.opts.courthouseKinds) {
+      // Solid: a place of holding court named by statute. Open ring (a background-colored
+      // center drawn over the dot): a city with only a courthouse building on the FJC list.
+      const open = all.filter((c) => !c.kinds.has('place_of_holding_court'));
+      this.dotsOpen.setAttribute('d', open.map(dot).join(''));
+      this.el.dataset.courthousesOpen = String(open.length);
+    }
     this.el.dataset.courthouses = String(this.cities.length);
     this.layoutLabels();
   }

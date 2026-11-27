@@ -154,6 +154,14 @@
 .atlas-map[data-zoomed='true'] .dots--ring { stroke-width: 7px; }
 .atlas-map[data-zoomed='true'] .dots--fill { stroke-width: 4.25px; }
 
+/* Open ring (AtlasMap courthouseKinds): background-colored center over the dot. */
+.dots--open {
+  stroke: var(--map-dot-ring);
+  stroke-width: 1.5px;
+}
+
+.atlas-map[data-zoomed='true'] .dots--open { stroke-width: 2.1px; }
+
 .atlas-map__labels text {
   pointer-events: none;
   paint-order: stroke;

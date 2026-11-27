@@ -28,6 +28,9 @@ export class YearSlider {
   private out: HTMLOutputElement;
   private timer: ReturnType<typeof setInterval> | undefined;
   private idx: number;
+  private track: HTMLDivElement;
+  private eventEls: HTMLButtonElement[] = [];
+  private resizeObs: ResizeObserver | null = null;
 
   constructor(o: YearSliderOptions) {
     this.o = o;
@@ -54,6 +57,7 @@ export class YearSlider {
     this.out = h('output', { class: 'year-slider__value num', for: id, 'aria-hidden': 'true' });
 
     const track = h('div', { class: 'year-slider__track' });
+    this.track = track;
     const markers = h('div', { class: 'year-slider__events' });
     const pos = (i: number) => (years.length > 1 ? (i / (years.length - 1)) * 100 : 50);
     if (o.events !== false) {
@@ -83,6 +87,7 @@ export class YearSlider {
           this.set(exact >= 0 ? exact : Math.round(i), true);
         });
         markers.append(m);
+        this.eventEls.push(m);
       }
     }
     const ticks = h('div', { class: 'year-slider__ticks', 'aria-hidden': 'true' });
@@ -96,6 +101,37 @@ export class YearSlider {
     track.append(markers, this.input, ticks);
     this.el = h('div', { class: 'year-slider', role: 'group', 'aria-label': o.label ?? 'Time machine' }, this.btn, track, this.out);
     this.set(this.idx, false);
+    // Event labels that would overlap (e.g. First Step Act, FY 2019, beside COVID-19, FY 2020)
+    // are lifted onto a second row once the slider has a width.
+    if (this.eventEls.length > 1 && typeof ResizeObserver === 'function') {
+      this.resizeObs = new ResizeObserver(() => this.layoutEvents());
+      this.resizeObs.observe(track);
+    }
+  }
+
+  private layoutEvents(): void {
+    const items = this.eventEls
+      .map((el) => {
+        el.classList.remove('is-raised');
+        const label = el.querySelector<HTMLElement>('.year-slider__event-label');
+        const w = label?.offsetWidth ?? 0;
+        return { el, w, x: el.offsetLeft };
+      })
+      .filter((it) => it.w > 0)
+      .sort((a, b) => a.x - b.x);
+    let lastRight = -Infinity;
+    let raised = false;
+    for (const it of items) {
+      const left = it.x - it.el.offsetWidth / 2;
+      if (left < lastRight + 6) {
+        it.el.classList.add('is-raised');
+        raised = true;
+        // A raised label does not block the next one on the base row.
+        continue;
+      }
+      lastRight = left + it.el.offsetWidth;
+    }
+    this.track.classList.toggle('has-raised', raised);
   }
 
   get year(): number {
@@ -141,6 +177,7 @@ export class YearSlider {
 
   destroy(): void {
     this.pause();
+    this.resizeObs?.disconnect();
     this.el.remove();
   }
 }

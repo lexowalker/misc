@@ -13,6 +13,18 @@ export interface SourceChipOptions {
   derived?: boolean;
   /** Prefix label, default "Source". */
   label?: string;
+  /**
+   * Short citation: publisher and dataset name only (text before the first colon, comma or
+   * parenthesis), with the full dataset, vintage and retrieval date in the link title.
+   * For dense lists such as profile stat rows. Default false (full citation).
+   */
+  compact?: boolean;
+}
+
+/** "Administrative Office of the U.S. Courts (Statistics Division), via uscourts.gov" -> "Administrative Office of the U.S. Courts". */
+function shortName(s: string | undefined): string {
+  if (!s) return '';
+  return s.split(/\s*(?:\(|,|:|\svia\s)/)[0]!.trim();
 }
 
 /** Renders immediately with ids, then fills in dataset names once sources.json loads. */
@@ -38,10 +50,17 @@ export function sourceChip(o: SourceChipOptions): HTMLElement {
     const recs = o.sourceIds.map((id) => [id, r.data[id]] as const).filter((x): x is readonly [string, SourceRecord] => !!x[1]);
     if (!recs.length) return;
     body.replaceChildren();
-    recs.forEach(([id, rec], i) => {
-      if (i) body.append('; ');
-      const text = [rec.publisher, rec.dataset].filter(Boolean).join(', ') + (rec.vintage ? ` (${rec.vintage})` : '');
-      const title = `${rec.dataset}${rec.retrieved_at ? ` · retrieved ${formatDate(rec.retrieved_at)}` : ''} · id ${id}`;
+    const seen = new Set<string>();
+    recs.forEach(([id, rec]) => {
+      const text = o.compact
+        ? [shortName(rec.publisher), shortName(rec.dataset)].filter(Boolean).join(', ')
+        : [rec.publisher, rec.dataset].filter(Boolean).join(', ') + (rec.vintage ? ` (${rec.vintage})` : '');
+      if (o.compact && seen.has(text)) return;
+      seen.add(text);
+      if (body.childNodes.length) body.append('; ');
+      const title = o.compact
+        ? `${rec.dataset}${rec.vintage ? ` (${rec.vintage})` : ''}${rec.retrieved_at ? ` · retrieved ${formatDate(rec.retrieved_at)}` : ''} · id ${id}`
+        : `${rec.dataset}${rec.retrieved_at ? ` · retrieved ${formatDate(rec.retrieved_at)}` : ''} · id ${id}`;
       body.append(rec.url ? h('a', { href: rec.url, target: '_blank', rel: 'noopener', title }, text) : h('span', { title }, text));
     });
   });

@@ -1,0 +1,14 @@
+{
+ "mass_tort_mdl_counts_not_processed": {
+  "lane": "stories",
+  "description": "A candidate story on N.D. Fla.'s mass-tort docket needs counts of cases in one multidistrict litigation (MDL docket 2885) by fiscal year. The IDB lane does not publish MDL docket counts in data/processed, so the story was not built; its national effects are noted as caveats in the Rocket Docket and Where Trials Went stories.",
+  "variables": [
+   "idb MDLDOCK counts"
+  ],
+  "districts": [
+   "flnd"
+  ],
+  "periods": "FY 2019 to FY 2025",
+  "reason": "Not in a processed lane table; the stories lane reads data/processed only."
+ }
+}

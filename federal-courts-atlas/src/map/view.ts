@@ -18,6 +18,12 @@ export interface ChoroplethViewOptions extends AtlasMapOptions {
   /** 'all' (default): breaks pooled over every year so colors compare across years. 'year': per-year breaks. */
   scaleScope?: 'year' | 'all';
   tableToggle?: boolean;
+  /** Replace the legend footnote (default: how the breaks were pooled). Return undefined for none. */
+  legendNote?: (values: ValuesFile, scope: 'year' | 'all') => string | undefined;
+  /** 'full' (default): variable label and period above the legend. 'year': the period only. */
+  legendHead?: 'full' | 'year';
+  /** Header of the table's rank column (default "Rank"). */
+  rankLabel?: string;
 }
 
 interface Row {
@@ -118,15 +124,16 @@ export class ChoroplethView {
     this.legendSlot.hidden = false;
     const scope = this.o.scaleScope ?? 'all';
     const years = this.values.years;
-    const note =
-      scope === 'all' && years.length > 1
+    const note = this.o.legendNote
+      ? this.o.legendNote(this.values, scope)
+      : scope === 'all' && years.length > 1
         ? `Quantile breaks pooled over ${periodLabel(years[0]!, this.values.period_type)}–${periodLabel(years[years.length - 1]!, this.values.period_type)}, so colors compare across years.`
         : undefined;
     this.legendSlot.replaceChildren(
       h(
         'div',
         { class: 'choropleth__legend-head' },
-        h('span', { class: 'choropleth__legend-title' }, this.variable.label),
+        this.o.legendHead === 'year' ? null : h('span', { class: 'choropleth__legend-title' }, this.variable.label),
         this.year !== null ? h('span', { class: 'choropleth__legend-year num' }, periodLabel(this.year, this.values.period_type)) : null,
       ),
       renderLegend({ scale: this.scale, variable: this.variable, onHighlight: (i) => this.map.highlightStep(i), note }),
@@ -167,7 +174,7 @@ export class ChoroplethView {
         render: (r) => (r.value === null ? noData() : formatValue(r.value, v)),
       });
       if (this.values.ranks) {
-        cols.push({ key: 'rank', label: 'Rank', numeric: true, value: (r) => r.rank, render: (r) => (r.value === null ? '' : rankText(r.rank, of) ?? '') });
+        cols.push({ key: 'rank', label: this.o.rankLabel ?? 'Rank', numeric: true, value: (r) => r.rank, render: (r) => (r.value === null ? '' : rankText(r.rank, of) ?? '') });
       }
     }
     const caption = v && this.values && this.year !== null ? `${v.label}, ${periodLabel(this.year, this.values.period_type)}, by district` : 'The 94 federal judicial districts';

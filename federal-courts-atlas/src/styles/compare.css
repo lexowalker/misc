@@ -1,0 +1,1225 @@
+/*
+ * Compare page (#/compare). Reads only tokens from tokens.css.
+ *
+ * Layout: the district cards and every row share one column grid,
+ *   [lead: year control / measure] [district 1] ... [district n]
+ * so each card sits directly above its column. When the columns would be narrower
+ * than a comfortable cell (phones, or four districts on a tablet), compare.ts adds
+ * .cmp--stacked: cards become a compact list and each row reflows into one line per
+ * district. There is never a horizontal page scroll.
+ */
+
+.cmp-page {
+  --cmp-lead: 15rem;
+  --cmp-gap: var(--space-5);
+}
+
+@media (min-width: 75rem) {
+  .cmp-page {
+    --cmp-lead: 16.5rem;
+  }
+}
+
+@media (max-width: 62.5rem) {
+  .cmp-page {
+    --cmp-lead: 11rem;
+    --cmp-gap: var(--space-4);
+  }
+}
+
+.cmp-head {
+  margin-bottom: var(--space-5);
+}
+
+/* ---- Picker ---------------------------------------------------------- */
+
+.cmp-picker {
+  max-width: 34rem;
+  margin-bottom: var(--space-6);
+}
+
+.cmp-picker__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-2);
+}
+
+.cmp-picker__box {
+  position: relative;
+}
+
+.cmp-picker__icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  margin-top: -8px;
+  border: 2px solid var(--color-text-3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cmp-picker__icon::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  bottom: -4px;
+  width: 6px;
+  height: 2px;
+  background: var(--color-text-3);
+  transform: rotate(45deg);
+}
+
+.cmp-picker__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-3) 0 2.6rem;
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+  font-size: var(--fs-base);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.cmp-picker__input::placeholder {
+  color: var(--color-text-3);
+}
+
+.cmp-picker__input:hover:not(:disabled) {
+  border-color: var(--color-text-3);
+}
+
+.cmp-picker__input:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 25%, transparent);
+}
+
+.cmp-picker__input:disabled {
+  background: var(--color-surface);
+  color: var(--color-text-3);
+  cursor: not-allowed;
+}
+
+.cmp-picker__list {
+  position: absolute;
+  z-index: var(--z-popover);
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: min(22rem, 60vh);
+  margin: 0;
+  padding: var(--space-1) 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--tooltip-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+}
+
+.cmp-picker__list[hidden] {
+  display: none;
+}
+
+.cmp-picker__opt {
+  display: grid;
+  gap: 1px;
+  min-height: var(--tap);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+}
+
+.cmp-picker__opt:hover {
+  background: var(--color-surface);
+}
+
+.cmp-picker__opt[aria-selected='true'] {
+  background: var(--color-accent-soft);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.cmp-picker__opt[aria-disabled='true'] {
+  cursor: default;
+  color: var(--color-text-3);
+}
+
+.cmp-picker__name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+}
+
+.cmp-picker__meta {
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+.cmp-picker__added {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-2);
+}
+
+.cmp-picker__none {
+  padding: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-3);
+}
+
+.cmp-picker__hint {
+  margin-top: var(--space-2);
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+/* ---- Top row: year control + cards ------------------------------------ */
+
+.cmp-top {
+  display: grid;
+  grid-template-columns: var(--cmp-lead) minmax(0, 1fr);
+  column-gap: var(--cmp-gap);
+  align-items: start;
+  margin-bottom: var(--space-7);
+}
+
+.cmp-top > .loading-state {
+  grid-column: 1 / -1;
+}
+
+.cmp-cards {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  column-gap: var(--cmp-gap);
+  row-gap: var(--space-4);
+}
+
+.cmp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--color-text);
+}
+
+.cmp-card__map {
+  margin-bottom: var(--space-3);
+}
+
+.cmp-card__map svg {
+  width: 100%;
+  height: auto;
+}
+
+.cmp-card__short {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+}
+
+.cmp-card__name {
+  margin-top: 2px;
+  font-size: var(--fs-lg);
+  line-height: 1.2;
+}
+
+.cmp-card__name a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.cmp-card__name a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.cmp-card__meta {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+.cmp-card__remove {
+  position: absolute;
+  top: calc(var(--space-3) + 2px);
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg-raised) 88%, transparent);
+  color: var(--color-text-2);
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.cmp-card__remove:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+
+/* One district: an "add one more" box sits in the second column. */
+.cmp-quick {
+  align-self: start;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px dashed var(--color-rule-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.cmp-quick__label {
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+.cmp-quick__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cmp-quick__btn {
+  min-height: var(--tap);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-raised);
+  color: var(--color-link);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.cmp-quick__btn:hover {
+  border-color: var(--color-link);
+  background: var(--color-accent-soft);
+}
+
+/* ---- Tools: year selector + key --------------------------------------- */
+
+.cmp-tools {
+  display: grid;
+  gap: var(--space-5);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--color-text);
+}
+
+.cmp-year {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.cmp-year__label {
+  color: var(--color-text-2);
+}
+
+.cmp-year__wrap {
+  flex: none;
+  max-width: none;
+}
+
+.cmp-year__select {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 2.5rem 0 var(--space-3);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cmp-year__note {
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--color-text-3);
+}
+
+.cmp-key {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-4) 0 0;
+  list-style: none;
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--color-text-2);
+}
+
+.cmp-key li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.cmp-key__mark {
+  font-size: 0.6875rem;
+  color: var(--color-text);
+}
+
+.cmp-key__swatch {
+  flex: none;
+  align-self: center;
+  width: 18px;
+}
+
+.cmp-key__swatch--ref {
+  height: 0;
+  border-top: 1.5px dashed var(--color-text-3);
+}
+
+.cmp-key__swatch--year {
+  width: 10px;
+  height: 10px;
+  margin: 0 4px;
+  border: 1.25px solid var(--color-text);
+  border-radius: 50%;
+}
+
+.cmp-fx {
+  position: relative;
+  display: inline-flex;
+  align-self: center;
+}
+
+/* Formula popovers on this page: shown on hover, keyboard focus, or a tap (data-open, set by compare.ts).
+   Hidden with display:none so a closed popover can never widen the page on a phone. */
+.cmp-page .source-chip__pop {
+  display: none;
+  max-width: min(22rem, calc(100vw - 2 * var(--gutter)));
+}
+
+.cmp-page .source-chip__formula:hover + .source-chip__pop,
+.cmp-page .source-chip__formula:focus-visible + .source-chip__pop,
+.cmp-page .source-chip__pop[data-open='true'] {
+  display: grid;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---- Suggestions (no district chosen) --------------------------------- */
+
+.cmp-suggest {
+  grid-column: 1 / -1;
+}
+
+.cmp-suggest__head {
+  font-size: var(--fs-xl);
+}
+
+.cmp-suggest__dek {
+  margin-top: var(--space-1);
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  color: var(--color-text-2);
+}
+
+.cmp-suggest__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-4);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cmp-suggest__btn {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-rule);
+  border-top: 2px solid var(--color-text);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--color-bg-raised);
+  text-align: left;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.cmp-suggest__btn:hover {
+  background: var(--color-surface);
+  border-color: var(--color-rule-strong);
+  border-top-color: var(--color-accent);
+}
+
+.cmp-suggest__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+}
+
+.cmp-suggest__ids {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-link);
+}
+
+.cmp-suggest__note {
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--color-text-2);
+}
+
+/* ---- Summary: where they differ most ---------------------------------- */
+
+.cmp-sum {
+  margin-bottom: var(--space-7);
+  padding: var(--space-5);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.cmp-sum__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+}
+
+.cmp-sum__title {
+  font-size: var(--fs-xl);
+}
+
+.cmp-sum__dek {
+  margin-top: var(--space-2);
+  max-width: var(--measure);
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--color-text-2);
+}
+
+.cmp-sum__loading {
+  padding: var(--space-5) 0 var(--space-2);
+}
+
+.cmp-sum__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-4);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cmp-gap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+}
+
+.cmp-gap__label {
+  display: grid;
+  gap: 2px;
+}
+
+.cmp-gap__measure {
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  line-height: 1.25;
+}
+
+.cmp-gap__year {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+}
+
+.cmp-gap__pair {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cmp-gap__side {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: var(--space-3);
+  align-items: baseline;
+}
+
+.cmp-gap__who {
+  grid-row: span 2;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.cmp-gap__who abbr,
+.cmp-th abbr {
+  text-decoration: none;
+}
+
+.cmp-gap__val {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
+}
+
+.cmp-gap__unit {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-2);
+}
+
+.cmp-gap__rank {
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+/* National standing strip: lowest at left, highest at right; filled = the higher district, ring = the lower. */
+.cmp-gap__strip {
+  position: relative;
+  height: 28px;
+  margin: 0 6px;
+}
+
+.cmp-gap__strip-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 7px;
+  height: 1px;
+  background: var(--color-rule-strong);
+}
+
+.cmp-gap__strip-span {
+  position: absolute;
+  top: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--map-q2);
+}
+
+.cmp-gap__strip-dot {
+  position: absolute;
+  top: 2px;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  border: 2px solid var(--map-q4);
+  background: var(--map-q4);
+}
+
+.cmp-gap__strip-dot--lo {
+  background: var(--color-bg-raised);
+}
+
+.cmp-gap__strip-end {
+  position: absolute;
+  bottom: 0;
+  font-size: var(--fs-2xs);
+  color: var(--color-text-3);
+  line-height: 1;
+}
+
+.cmp-gap__strip-end--lo { left: -6px; }
+.cmp-gap__strip-end--hi { right: -6px; }
+
+.cmp-gap__diff {
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--color-text-2);
+}
+
+.cmp-gap__go {
+  align-self: flex-start;
+  margin-top: auto;
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-link);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.cmp-gap__go:hover {
+  color: var(--color-link-hover);
+  text-decoration-color: currentColor;
+}
+
+/* ---- Family sections and rows ------------------------------------------ */
+
+.cmp-family {
+  margin-top: var(--space-7);
+}
+
+.cmp-family__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--color-text);
+}
+
+.cmp-family__title {
+  font-size: var(--fs-xl);
+}
+
+.cmp-family__dek {
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  color: var(--color-text-2);
+}
+
+.cmp-family__more {
+  margin-top: var(--space-4);
+}
+
+.cmp-tr {
+  display: grid;
+  grid-template-columns: var(--cmp-lead) repeat(var(--cols, 2), minmax(0, 1fr));
+  /* value / rank / trend / notes: cells share these rows (subgrid) so they line up across districts. */
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: var(--cmp-gap);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-rule);
+  scroll-margin-top: 7rem;
+}
+
+.cmp-tr:focus {
+  outline: none;
+}
+
+.cmp-tr:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.cmp-tr--flash {
+  animation: cmp-flash 1.8s var(--ease-out);
+}
+
+@keyframes cmp-flash {
+  0%, 30% { background: var(--color-accent-soft); }
+  100% { background: transparent; }
+}
+
+.cmp-tr--head {
+  position: sticky;
+  top: 3.5rem;
+  z-index: var(--z-sticky);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-rule-strong);
+  background: color-mix(in srgb, var(--color-bg) 94%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.cmp-th {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+  line-height: 1.3;
+}
+
+.cmp-th--district {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.cmp-measure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  grid-row: 1 / span 4;
+  min-width: 0;
+}
+
+.cmp-tr--head .cmp-th {
+  grid-row: 1;
+}
+
+.cmp-measure__label {
+  font-size: var(--fs-md);
+  line-height: 1.25;
+}
+
+.cmp-measure__period {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--color-text-3);
+}
+
+.cmp-measure__period--warn {
+  color: var(--color-warn-text);
+}
+
+.cmp-measure__nat {
+  margin-top: 2px;
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+.cmp-measure__nat-label {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+}
+
+.cmp-measure__nat-val {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+.cmp-measure__nat-derived,
+.cmp-measure__muted {
+  color: var(--color-text-3);
+}
+
+.cmp-measure__hint {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--color-text-3);
+}
+
+.cmp-measure__foot {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  margin-top: var(--space-1);
+}
+
+/* Source label and names run on as one line of text in the narrow lead column. */
+.cmp-measure .source-chip {
+  display: block;
+}
+
+.cmp-measure .source-chip__label {
+  margin-right: var(--space-1);
+}
+
+.cmp-measure .source-chip__formula {
+  margin-left: var(--space-1);
+  vertical-align: middle;
+}
+
+.cmp-about summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-link);
+  cursor: pointer;
+}
+
+.cmp-about[open] summary {
+  color: var(--color-text);
+}
+
+.cmp-about__body {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-1) 0 var(--space-2);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--color-text-2);
+}
+
+.cmp-about__caveats {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.cmp-td {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 3px;
+  align-content: start;
+  min-width: 0;
+}
+
+.cmp-td__extra:empty {
+  display: none;
+}
+
+.cmp-td__extra {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+}
+
+.cmp-td__who {
+  display: none;
+}
+
+.cmp-td__value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px var(--space-2);
+}
+
+.cmp-td__num {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.cmp-td--lead .cmp-td__num {
+  font-weight: var(--fw-heavy);
+}
+
+.cmp-td__unit {
+  font-size: var(--fs-xs);
+  color: var(--color-text-2);
+}
+
+.cmp-lead {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px 1px 6px;
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.cmp-lead__mark {
+  font-size: 0.5625rem;
+}
+
+.cmp-td__rank {
+  font-size: var(--fs-xs);
+  color: var(--color-text-2);
+}
+
+.cmp-td__flag {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-link);
+}
+
+.cmp-td__trend {
+  margin-top: var(--space-2);
+}
+
+.cmp-td__trend .sparkline {
+  display: flex;
+}
+
+.cmp-td__axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  padding: 0 1px;
+  font-size: var(--fs-2xs);
+  color: var(--color-text-3);
+  line-height: 1;
+}
+
+.cmp--stacked .cmp-td__axis {
+  display: none;
+}
+
+.cmp-td__trend .sparkline__svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Two districts on a wide screen: value and rank on the left of each cell, the trend on the right. */
+.cmp--wide .cmp-td {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    'value trend'
+    'rank trend'
+    'extra trend';
+  column-gap: var(--space-4);
+  row-gap: 3px;
+  align-items: start;
+}
+
+.cmp--wide .cmp-td__value { grid-area: value; }
+.cmp--wide .cmp-td__rank { grid-area: rank; }
+.cmp--wide .cmp-td__extra { grid-area: extra; }
+
+.cmp--wide .cmp-td__trend {
+  grid-area: trend;
+  margin-top: 0;
+}
+
+.cmp-note summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-warn-text);
+  cursor: pointer;
+}
+
+.cmp-note__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1.25px solid currentColor;
+  border-radius: 50%;
+  font-size: 9px;
+  line-height: 1;
+}
+
+.cmp-note p {
+  margin-top: 2px;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-warn-bg);
+  color: var(--color-text);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+}
+
+.cmp-skel {
+  display: block;
+  width: 70%;
+  height: 1.25rem;
+  border-radius: 3px;
+  background: var(--color-surface-2);
+  animation: cmp-pulse 1.2s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes cmp-pulse {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+
+/* ---- Stacked layout (phones; four districts on a tablet) ---------------- */
+
+.cmp--stacked .cmp-top {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.cmp--stacked .cmp-cards {
+  order: -1;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0;
+}
+
+.cmp--stacked .cmp-card {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.cmp--stacked .cmp-card:first-child {
+  border-top: 2px solid var(--color-text);
+}
+
+.cmp--stacked .cmp-card:last-of-type {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.cmp--stacked .cmp-card__map {
+  flex: none;
+  width: 5.5rem;
+  margin: 0;
+}
+
+.cmp--stacked .cmp-card__text {
+  flex: 1;
+  min-width: 0;
+  padding-right: calc(var(--tap) + var(--space-1));
+}
+
+.cmp--stacked .cmp-card__name {
+  font-size: var(--fs-md);
+}
+
+.cmp--stacked .cmp-card__remove {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cmp--stacked .cmp-quick {
+  margin-top: var(--space-3);
+}
+
+.cmp--stacked .cmp-tools {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cmp--stacked .cmp-sum {
+  padding: var(--space-4) var(--space-3);
+}
+
+.cmp--stacked .cmp-sum__list {
+  gap: var(--space-3);
+}
+
+.cmp--stacked .cmp-gap {
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-2);
+}
+
+.cmp--stacked .cmp-measure__foot {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cmp--stacked .cmp-tr {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: none;
+  row-gap: var(--space-3);
+}
+
+.cmp--stacked .cmp-measure {
+  grid-row: auto;
+}
+
+/* Column headers stay in the accessibility tree (they name each cell's district) but are not drawn. */
+.cmp--stacked .cmp-tr--head {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cmp--stacked .cmp-td {
+  grid-row: auto;
+  grid-template-columns: minmax(0, 1fr) 6.75rem;
+  grid-template-rows: none;
+  grid-template-areas:
+    'who trend'
+    'value trend'
+    'rank trend'
+    'extra extra';
+  column-gap: var(--space-4);
+  row-gap: 1px;
+  align-items: baseline;
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--color-rule);
+}
+
+.cmp--stacked .cmp-td__who {
+  display: block;
+  grid-area: who;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--color-text-2);
+}
+
+.cmp--stacked .cmp-td__value { grid-area: value; }
+.cmp--stacked .cmp-td__rank { grid-area: rank; }
+.cmp--stacked .cmp-td__extra { grid-area: extra; }
+
+.cmp--stacked .cmp-td__trend {
+  grid-area: trend;
+  align-self: center;
+  margin-top: 0;
+}
+
+.cmp--stacked .cmp-td__num {
+  font-size: var(--fs-md);
+}
+
+.cmp--stacked .cmp-td .cmp-skel {
+  grid-column: 1 / -1;
+}
+
+.cmp--stacked .cmp-about summary,
+.cmp--stacked .cmp-note summary {
+  min-height: var(--tap);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp-tr--flash {
+    animation: none;
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .cmp-skel {
+    animation: none;
+  }
+}
+
+/* The summary's two districts carry the strip's marks: filled for the higher, ring for the lower. */
+.cmp-gap__who::before {
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 6px;
+  border: 2px solid var(--map-q4);
+  border-radius: 50%;
+  background: var(--map-q4);
+  vertical-align: -1px;
+}
+
+.cmp-gap__side--lo .cmp-gap__who::before {
+  background: var(--color-bg-raised);
+}
