@@ -53,7 +53,7 @@
     stats: function (s) { return 'Days at the courts: ' + s.days + ' · Days judging: ' + s.served + ' · Obols earned: ' + s.obols; },
     tiles: [
       ['6,000', 'citizens over 30 swore the jurors\' oath each year'],
-      ['501', 'jurors for a typical public case. The biggest got 1,001 or 1,501.'],
+      ['501', 'jurors for most public cases, an odd number to avoid ties. Big cases got 1,001 or 1,501.'],
       ['3 obols', 'a day in pay, after Cleon raised it around 425 BCE']
     ],
     whyTitle: 'Why go to all this trouble?',
@@ -63,7 +63,7 @@
       'Even the man who slotted the tickets was picked by lot.',
       'Aristotle says the aim was simple: no one could pick the jurors he wanted.'
     ],
-    bribe: 'Bribery was a real fear. Aristotle names the first man to bribe an Athenian jury: Anytus, after Athens lost Pylos in 409 BCE. You can bribe a juror. It is much harder to bribe a cube. You will meet Anytus again in the next exhibit.',
+    bribe: 'You can bribe a juror. It is much harder to bribe a cube.',
     srMachine: 'A stone allotment machine with five columns of ticket slots, lettered Alpha to Epsilon, ten rows deep, with a bronze tube for the dice down its right side.'
   };
 
@@ -99,77 +99,77 @@
     var myRow = 0, whites = [], run = 0;
 
     el.innerHTML =
-      '<div class="w-kl">' +
-        '<p class="w-kl-intro">' + esc(DATA.intro) + '</p>' +
-        '<div class="w-kl-grid">' +
-          '<div class="w-kl-ticketwrap">' +
-            '<p class="label w-kl-tlabel">' + esc(DATA.ticketLabel) + '</p>' +
-            '<div class="w-kl-ticket">' +
-              '<span class="w-kl-sec" aria-hidden="true">' + secL[0] + '</span>' +
-              '<span class="w-kl-greek" aria-hidden="true"><span>' + me.name[1] + '</span><span>' + me.father[1] + '</span><span>' + me.deme[1] + '</span></span>' +
-              '<svg class="w-kl-owl" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13"/><path d="M9 21c0-6 2.6-10 6-10s6 4 6 10"/><circle class="e" cx="12.3" cy="14" r="2"/><circle class="e" cx="17.7" cy="14" r="2"/><path d="M9.5 10.5l2.5 1.5M20.5 10.5L18 12"/></svg>' +
-              '<span class="w-kl-used" aria-hidden="true">In the machine</span>' +
+      '<div class="w-kleroterion">' +
+        '<p class="w-kleroterion-intro">' + esc(DATA.intro) + '</p>' +
+        '<div class="w-kleroterion-grid">' +
+          '<div class="w-kleroterion-ticketwrap">' +
+            '<p class="label w-kleroterion-tlabel">' + esc(DATA.ticketLabel) + '</p>' +
+            '<div class="w-kleroterion-ticket">' +
+              '<span class="w-kleroterion-sec" aria-hidden="true">' + secL[0] + '</span>' +
+              '<span class="w-kleroterion-greek" aria-hidden="true"><span>' + me.name[1] + '</span><span>' + me.father[1] + '</span><span>' + me.deme[1] + '</span></span>' +
+              '<svg class="w-kleroterion-owl" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13"/><path d="M9 21c0-6 2.6-10 6-10s6 4 6 10"/><circle class="e" cx="12.3" cy="14" r="2"/><circle class="e" cx="17.7" cy="14" r="2"/><path d="M9.5 10.5l2.5 1.5M20.5 10.5L18 12"/></svg>' +
+              '<span class="w-kleroterion-used" aria-hidden="true">In the machine</span>' +
             '</div>' +
-            '<p class="w-kl-eng"><b>' + esc(me.name[0]) + '</b>, son of ' + esc(me.father[0]) + ', of ' + esc(me.deme[0]) + '. Section ' + esc(secL[1]) + '.</p>' +
-            '<p class="w-kl-tnote">' + esc(DATA.ticketNote) + '</p>' +
+            '<p class="w-kleroterion-eng"><b>' + esc(me.name[0]) + '</b>, son of ' + esc(me.father[0]) + ', of ' + esc(me.deme[0]) + '. Section ' + esc(secL[1]) + '.</p>' +
+            '<p class="w-kleroterion-tnote">' + esc(DATA.ticketNote) + '</p>' +
           '</div>' +
-          '<div class="w-kl-machine">' +
-            '<svg class="w-kl-svg" viewBox="0 0 320 344" role="img" aria-label="' + esc(DATA.srMachine) + '"></svg>' +
-            '<p class="w-kl-cap">' + esc(DATA.machineCap) + '</p>' +
+          '<div class="w-kleroterion-machine">' +
+            '<svg class="w-kleroterion-svg" viewBox="0 0 320 344" role="img" aria-label="' + esc(DATA.srMachine) + '"></svg>' +
+            '<p class="w-kleroterion-cap">' + esc(DATA.machineCap) + '</p>' +
           '</div>' +
-          '<div class="w-kl-ctrl">' +
-            '<button type="button" class="btn w-kl-go">' + esc(DATA.btn.insert) + '</button>' +
-            '<div class="w-kl-status" aria-live="polite"><p>' + esc(DATA.start) + '</p></div>' +
-            '<div class="w-kl-court" hidden></div>' +
-            '<p class="w-kl-stats tnum"></p>' +
+          '<div class="w-kleroterion-ctrl">' +
+            '<button type="button" class="btn w-kleroterion-go">' + esc(DATA.btn.insert) + '</button>' +
+            '<div class="w-kleroterion-status" aria-live="polite"><p>' + esc(DATA.start) + '</p></div>' +
+            '<div class="w-kleroterion-court" hidden></div>' +
+            '<p class="w-kleroterion-stats tnum"></p>' +
           '</div>' +
         '</div>' +
-        '<div class="w-kl-tiles">' + DATA.tiles.map(function (t) {
-          return '<div class="w-kl-tile"><b>' + esc(t[0]) + '</b><span>' + esc(t[1]) + '</span></div>';
+        '<div class="w-kleroterion-tiles">' + DATA.tiles.map(function (t) {
+          return '<div class="w-kleroterion-tile"><b>' + esc(t[0]) + '</b><span>' + esc(t[1]) + '</span></div>';
         }).join('') + '</div>' +
-        '<div class="w-kl-why"><p class="label">' + esc(DATA.whyTitle) + '</p><ul>' + DATA.why.map(function (w) {
+        '<div class="w-kleroterion-why"><p class="label">' + esc(DATA.whyTitle) + '</p><ul>' + DATA.why.map(function (w) {
           return '<li>' + esc(w) + '</li>';
-        }).join('') + '</ul><p class="w-kl-bribe">' + esc(DATA.bribe) + '</p></div>' +
+        }).join('') + '</ul><p class="w-kleroterion-bribe">' + esc(DATA.bribe) + '</p></div>' +
       '</div>';
 
-    var svg = el.querySelector('.w-kl-svg');
-    var goBtn = el.querySelector('.w-kl-go');
-    var statusEl = el.querySelector('.w-kl-status');
-    var courtEl = el.querySelector('.w-kl-court');
-    var statsEl = el.querySelector('.w-kl-stats');
-    var ticketEl = el.querySelector('.w-kl-ticket');
+    var svg = el.querySelector('.w-kleroterion-svg');
+    var goBtn = el.querySelector('.w-kleroterion-go');
+    var statusEl = el.querySelector('.w-kleroterion-status');
+    var courtEl = el.querySelector('.w-kleroterion-court');
+    var statsEl = el.querySelector('.w-kleroterion-stats');
+    var ticketEl = el.querySelector('.w-kleroterion-ticket');
 
     /* ---------- draw the machine ---------- */
-    svgEl('rect', { 'class': 'w-kl-slab', x: 6, y: 6, width: 262, height: 332, rx: 5 }, svg);
-    svgEl('path', { 'class': 'w-kl-grain', d: 'M14 120c40 6 90-4 140 2s80 4 106-2M14 236c50-5 96 6 150 0s70-6 96 1' }, svg);
+    svgEl('rect', { 'class': 'w-kleroterion-slab', x: 6, y: 6, width: 262, height: 332, rx: 5 }, svg);
+    svgEl('path', { 'class': 'w-kleroterion-grain', d: 'M14 120c40 6 90-4 140 2s80 4 106-2M14 236c50-5 96 6 150 0s70-6 96 1' }, svg);
     for (var c = 0; c < COLS; c++) {
-      var t = svgEl('text', { 'class': 'w-kl-colhead' + (c === me.sec ? ' is-mine' : ''), x: colX(c), y: 31, 'text-anchor': 'middle' }, svg);
+      var t = svgEl('text', { 'class': 'w-kleroterion-colhead' + (c === me.sec ? ' is-mine' : ''), x: colX(c), y: 31, 'text-anchor': 'middle' }, svg);
       t.textContent = DATA.sections[c][0];
     }
     var rowBg = [], slots = [], marks = [];
     for (var r = 0; r < ROWS; r++) {
-      rowBg.push(svgEl('rect', { 'class': 'w-kl-rowbg', x: 11, y: rowY(r) - 4, width: 252, height: 28, rx: 3 }, svg));
-      var n = svgEl('text', { 'class': 'w-kl-rownum', x: 21, y: rowY(r) + 14, 'text-anchor': 'middle' }, svg);
+      rowBg.push(svgEl('rect', { 'class': 'w-kleroterion-rowbg', x: 11, y: rowY(r) - 4, width: 252, height: 28, rx: 3 }, svg));
+      var n = svgEl('text', { 'class': 'w-kleroterion-rownum', x: 21, y: rowY(r) + 14, 'text-anchor': 'middle' }, svg);
       n.textContent = r + 1;
       slots.push([]);
       for (c = 0; c < COLS; c++) {
-        var g = svgEl('g', { 'class': 'w-kl-slot' }, svg);
-        svgEl('rect', { 'class': 'w-kl-hole', x: colX(c) - 17, y: rowY(r), width: 34, height: 20, rx: 2 }, g);
-        var tk = svgEl('g', { 'class': 'w-kl-tk' + (c === me.sec ? ' is-empty' : '') }, g);
+        var g = svgEl('g', { 'class': 'w-kleroterion-slot' }, svg);
+        svgEl('rect', { 'class': 'w-kleroterion-hole', x: colX(c) - 17, y: rowY(r), width: 34, height: 20, rx: 2 }, g);
+        var tk = svgEl('g', { 'class': 'w-kleroterion-tk' + (c === me.sec ? ' is-empty' : '') }, g);
         svgEl('rect', { x: colX(c) - 14, y: rowY(r) + 3, width: 28, height: 14, rx: 1.5 }, tk);
         svgEl('path', { d: 'M' + (colX(c) - 10) + ' ' + (rowY(r) + 8) + 'h16M' + (colX(c) - 10) + ' ' + (rowY(r) + 12) + 'h11' }, tk);
         slots[r].push(tk);
       }
-      marks.push(svgEl('rect', { 'class': 'w-kl-mark', x: MARK_X - 6, y: rowY(r) + 4, width: 12, height: 12, rx: 1.5 }, svg));
+      marks.push(svgEl('rect', { 'class': 'w-kleroterion-mark', x: MARK_X - 6, y: rowY(r) + 4, width: 12, height: 12, rx: 1.5 }, svg));
     }
     // tube, funnel, brackets
-    [70, 190, 300].forEach(function (y) { svgEl('rect', { 'class': 'w-kl-bracket', x: 266, y: y, width: 16, height: 8, rx: 1 }, svg); });
-    svgEl('rect', { 'class': 'w-kl-tube', x: 280, y: 24, width: 18, height: 300, rx: 4 }, svg);
-    svgEl('path', { 'class': 'w-kl-tube-hi', d: 'M285 30v288' }, svg);
-    svgEl('path', { 'class': 'w-kl-funnel', d: 'M270 4h38l-10 22h-18z' }, svg);
-    svgEl('path', { 'class': 'w-kl-tube', d: 'M282 322h14v10h-14z' }, svg);
-    var you = svgEl('g', { 'class': 'w-kl-youtag' }, svg);
-    var cubeLayer = svgEl('g', { 'class': 'w-kl-cubes' }, svg);
+    [70, 190, 300].forEach(function (y) { svgEl('rect', { 'class': 'w-kleroterion-bracket', x: 266, y: y, width: 16, height: 8, rx: 1 }, svg); });
+    svgEl('rect', { 'class': 'w-kleroterion-tube', x: 280, y: 24, width: 18, height: 300, rx: 4 }, svg);
+    svgEl('path', { 'class': 'w-kleroterion-tube-hi', d: 'M285 30v288' }, svg);
+    svgEl('path', { 'class': 'w-kleroterion-funnel', d: 'M270 4h38l-10 22h-18z' }, svg);
+    svgEl('path', { 'class': 'w-kleroterion-tube', d: 'M282 322h14v10h-14z' }, svg);
+    var you = svgEl('g', { 'class': 'w-kleroterion-youtag' }, svg);
+    var cubeLayer = svgEl('g', { 'class': 'w-kleroterion-cubes' }, svg);
 
     /* ---------- helpers ---------- */
     function say(lines) {
@@ -197,7 +197,7 @@
     function setYouTag(row) {
       while (you.firstChild) you.removeChild(you.firstChild);
       var x = colX(me.sec), y = rowY(row);
-      svgEl('rect', { 'class': 'w-kl-youring', x: x - 18.5, y: y - 1.5, width: 37, height: 23, rx: 3 }, you);
+      svgEl('rect', { 'class': 'w-kleroterion-youring', x: x - 18.5, y: y - 1.5, width: 37, height: 23, rx: 3 }, you);
     }
 
     /* ---------- steps ---------- */
@@ -245,7 +245,7 @@
       }
       // the cubes go into the funnel
       var falling = whites.map(function (w, k) {
-        var cube = svgEl('rect', { 'class': 'w-kl-cube ' + (w ? 'is-white' : 'is-black'), x: TUBE_X - 5.5, y: -14, width: 11, height: 11, rx: 1.5 }, cubeLayer);
+        var cube = svgEl('rect', { 'class': 'w-kleroterion-cube ' + (w ? 'is-white' : 'is-black'), x: TUBE_X - 5.5, y: -14, width: 11, height: 11, rx: 1.5 }, cubeLayer);
         return { el: cube, delay: k * 45 };
       });
       falling.forEach(function (f) {
@@ -260,7 +260,7 @@
 
       function release(r) {
         if (r >= ROWS) { finish(); return; }
-        var cube = svgEl('rect', { 'class': 'w-kl-cube ' + (whites[r] ? 'is-white' : 'is-black'), x: TUBE_X - 5.5, y: EXIT_Y - 5.5, width: 11, height: 11, rx: 1.5 }, cubeLayer);
+        var cube = svgEl('rect', { 'class': 'w-kleroterion-cube ' + (whites[r] ? 'is-white' : 'is-black'), x: TUBE_X - 5.5, y: EXIT_Y - 5.5, width: 11, height: 11, rx: 1.5 }, cubeLayer);
         var x0 = TUBE_X, y0 = EXIT_Y, x1 = MARK_X, y1 = rowY(r) + 10;
         tween(id, 230, function (p) {
           var e = easeOut(p);
@@ -275,8 +275,8 @@
     }
 
     function settleRow(r) {
-      marks[r].setAttribute('class', 'w-kl-mark is-set ' + (whites[r] ? 'is-white' : 'is-black'));
-      rowBg[r].setAttribute('class', 'w-kl-rowbg ' + (whites[r] ? 'is-white' : 'is-black'));
+      marks[r].setAttribute('class', 'w-kleroterion-mark is-set ' + (whites[r] ? 'is-white' : 'is-black'));
+      rowBg[r].setAttribute('class', 'w-kleroterion-rowbg ' + (whites[r] ? 'is-white' : 'is-black'));
       slots[r].forEach(function (tk) { tk.classList.add(whites[r] ? 'is-in' : 'is-out'); });
     }
 
@@ -286,7 +286,7 @@
       if (served) { stats.served++; stats.obols += 3; }
       ctx.store.set('stats', stats);
       renderStats();
-      you.setAttribute('class', 'w-kl-youtag ' + (served ? 'is-in' : 'is-out'));
+      you.setAttribute('class', 'w-kleroterion-youtag ' + (served ? 'is-in' : 'is-out'));
       if (served) {
         say([DATA.served(myRow + 1), DATA.servedNext]);
         state = 'served';
@@ -306,29 +306,29 @@
       var court = DATA.courts[ci];
       var tone = STAFF_TONES[Math.floor(ctx.rand() * STAFF_TONES.length)];
       courtEl.hidden = false;
-      courtEl.className = 'w-kl-court tone-' + tone + (ctx.reduced ? '' : ' is-anim');
+      courtEl.className = 'w-kleroterion-court tone-' + tone + (ctx.reduced ? '' : ' is-anim');
       courtEl.innerHTML =
-        '<svg class="w-kl-courtsvg" viewBox="0 0 300 138" role="img" aria-label="An acorn marked ' + esc(court[1]) + ', a painted staff, and the door of court ' + esc(court[1]) + ' with the same color over it.">' +
-          '<g class="w-kl-acorn">' +
+        '<svg class="w-kleroterion-courtsvg" viewBox="0 0 300 138" role="img" aria-label="An acorn marked ' + esc(court[1]) + ', a painted staff, and the door of court ' + esc(court[1]) + ' with the same color over it.">' +
+          '<g class="w-kleroterion-acorn">' +
             '<path class="nut" d="M22 52h44c0 26-9 46-22 52-13-6-22-26-22-52z"/>' +
             '<path class="cap" d="M18 54c0-14 11-24 26-24s26 10 26 24z"/>' +
             '<path class="hatch" d="M26 50l10-14M36 52l12-18M48 52l10-14M30 38l18 14M42 34l18 18"/>' +
             '<path class="stem" d="M44 30c0-6 2-10 6-12"/>' +
             '<text x="44" y="86" text-anchor="middle">' + court[0] + '</text>' +
           '</g>' +
-          '<g class="w-kl-staff"><rect x="107" y="12" width="8" height="104" rx="4"/><circle cx="111" cy="11" r="7"/><rect class="band" x="107" y="24" width="8" height="4"/><rect class="band" x="107" y="106" width="8" height="4"/></g>' +
-          '<g class="w-kl-door">' +
+          '<g class="w-kleroterion-staff"><rect x="107" y="12" width="8" height="104" rx="4"/><circle cx="111" cy="11" r="7"/><rect class="band" x="107" y="24" width="8" height="4"/><rect class="band" x="107" y="106" width="8" height="4"/></g>' +
+          '<g class="w-kleroterion-door">' +
             '<rect class="jamb" x="168" y="22" width="112" height="96" rx="2"/>' +
             '<rect class="opening" x="186" y="44" width="76" height="74"/>' +
             '<rect class="lintel" x="160" y="12" width="128" height="18" rx="2"/>' +
             '<rect class="plate" x="210" y="50" width="28" height="28" rx="2"/>' +
             '<text x="224" y="71" text-anchor="middle">' + court[0] + '</text>' +
           '</g>' +
-          '<g class="w-kl-figcap"><text x="44" y="134" text-anchor="middle">' + DATA.figs[0] + '</text><text x="111" y="134" text-anchor="middle">' + DATA.figs[1] + '</text><text x="224" y="134" text-anchor="middle">' + DATA.figs[2] + '</text></g>' +
+          '<g class="w-kleroterion-figcap"><text x="44" y="134" text-anchor="middle">' + DATA.figs[0] + '</text><text x="111" y="134" text-anchor="middle">' + DATA.figs[1] + '</text><text x="224" y="134" text-anchor="middle">' + DATA.figs[2] + '</text></g>' +
         '</svg>' +
         '<p>' + esc(DATA.courtWhy) + '</p>' +
         '<p>' + esc(DATA.staff(court)) + '</p>' +
-        '<p class="w-kl-note">' + esc(DATA.colorNote) + '</p>';
+        '<p class="w-kleroterion-note">' + esc(DATA.colorNote) + '</p>';
       say([DATA.court(court)]);
       state = 'acorn';
       goBtn.textContent = DATA.btn.again;
@@ -342,11 +342,11 @@
       courtEl.innerHTML = '';
       while (cubeLayer.firstChild) cubeLayer.removeChild(cubeLayer.firstChild);
       while (you.firstChild) you.removeChild(you.firstChild);
-      you.setAttribute('class', 'w-kl-youtag');
+      you.setAttribute('class', 'w-kleroterion-youtag');
       for (var r = 0; r < ROWS; r++) {
-        marks[r].setAttribute('class', 'w-kl-mark');
-        rowBg[r].setAttribute('class', 'w-kl-rowbg');
-        slots[r].forEach(function (tk, c) { tk.setAttribute('class', 'w-kl-tk' + (c === me.sec ? ' is-empty' : '')); });
+        marks[r].setAttribute('class', 'w-kleroterion-mark');
+        rowBg[r].setAttribute('class', 'w-kleroterion-rowbg');
+        slots[r].forEach(function (tk, c) { tk.setAttribute('class', 'w-kleroterion-tk' + (c === me.sec ? ' is-empty' : '')); });
       }
       goBtn.textContent = DATA.btn.insert;
       goBtn.disabled = false;

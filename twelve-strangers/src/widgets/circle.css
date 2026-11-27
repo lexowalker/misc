@@ -3,6 +3,11 @@
 .w-circle { display: grid; gap: 1rem; min-width: 0; }
 
 .w-circle-top { display: grid; gap: .35rem; }
+.w-circle-main, .w-circle-left, .w-circle-right { display: grid; gap: 1rem; min-width: 0; align-content: start; }
+@media (min-width: 46rem) {
+  .w-circle-main { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); column-gap: 1.5rem; align-items: start; }
+  .w-circle-right { position: sticky; top: calc(var(--ticker-h) + 1rem); }
+}
 .w-circle-recon {
   justify-self: start; font-family: var(--f-type); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   color: var(--seal); border: 1.5px dashed var(--seal); border-radius: 2px; padding: .2rem .5rem; line-height: 1.3;

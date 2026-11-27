@@ -1,0 +1,167 @@
+/* inversion: "Would you be seated?" A card-sorting game in the voir dire room. */
+[data-widget="inversion"] .w-inversion { display: grid; gap: .9rem; min-width: 0; }
+
+/* ---- header: count, tally of ten, score ---- */
+.w-inversion-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.w-inversion-head .label b { color: var(--ink); font-size: .85rem; }
+.w-inversion-tally { display: flex; gap: 4px; flex: 1 1 auto; justify-content: center; min-width: 0; order: 3; width: 100%; }
+@media (min-width: 30rem) { .w-inversion-tally { order: 0; width: auto; } }
+.w-inversion-mark {
+  display: block; width: 1.35rem; height: .55rem; border-radius: 1px; border: 1px solid var(--rule); background: transparent;
+  transition: background .2s, border-color .2s;
+}
+.w-inversion-mark.is-now { border-color: var(--ink-3); background: var(--sheet-2); }
+.w-inversion-mark.is-right { background: var(--accent); border-color: var(--accent); }
+.w-inversion-mark.is-wrong { background: var(--seal); border-color: var(--seal); }
+
+/* ---- the stage and the card ---- */
+.w-inversion-stage { position: relative; overflow: hidden; padding: 6px 4px 10px; margin: 0 -4px; }
+.w-inversion-stage[hidden] { display: none; }
+/* the era stamp that appears on the card while it is swiped */
+.w-inversion-drag {
+  position: absolute; z-index: 2; top: 2.6rem; font-family: var(--f-type); font-weight: 700; font-size: 1.6rem; letter-spacing: .06em;
+  color: var(--ink-3); border: 3px double currentColor; border-radius: 3px; padding: .05rem .5rem; background: var(--sheet);
+  opacity: 0; pointer-events: none; transition: color .15s, transform .15s;
+}
+.w-inversion-drag.is-then { right: .9rem; transform: rotate(8deg); }
+.w-inversion-drag.is-now { left: .9rem; transform: rotate(-8deg); }
+.w-inversion-drag.is-hot { color: var(--accent); }
+.w-inversion-drag.is-then.is-hot { transform: rotate(8deg) scale(1.08); }
+.w-inversion-drag.is-now.is-hot { transform: rotate(-8deg) scale(1.08); }
+
+.w-inversion-card {
+  position: relative; z-index: 1; border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--sheet-2); background: color-mix(in srgb, var(--brass-soft) 38%, var(--sheet));
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 10px 22px -16px rgba(0, 0, 0, .55);
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; outline: none; cursor: grab;
+  transform-origin: 50% 90%; will-change: transform;
+}
+.w-inversion-card:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+.w-inversion-card.is-dragging { cursor: grabbing; box-shadow: 0 18px 30px -18px rgba(0, 0, 0, .6); }
+.w-inversion-stage[hidden] + * { margin-top: 0; }
+
+.w-inversion-face { display: grid; gap: .8rem; padding: .85rem .95rem 1rem; }
+.w-inversion-cardhead {
+  display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; padding-bottom: .45rem;
+  border-bottom: 2px solid var(--seal); font-family: var(--f-type); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-2); min-width: 0;
+}
+.w-inversion-cardhead > span:first-child { white-space: nowrap; }
+.w-inversion-front { min-height: 13.5rem; grid-template-rows: auto 1fr auto; }
+.w-inversion-cardbody { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: .8rem; align-items: center; }
+.w-inversion-icon {
+  width: 3.2rem; height: 3.2rem; padding: .3rem; border: 1.5px solid var(--ink-3); border-radius: 50%; background: var(--sheet);
+  fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.w-inversion-icon .w-inversion-strike { stroke: var(--seal); stroke-width: 2.6; }
+.w-inversion-icon .w-inversion-ground { stroke: var(--ink-3); }
+.w-inversion-icon .w-inversion-dot { fill: var(--ink); }
+.w-inversion-quote { margin: 0; }
+.w-inversion-quote p { font-family: var(--f-body); font-style: italic; font-size: 1.22rem; line-height: 1.35; color: var(--ink); text-wrap: pretty; }
+@media (min-width: 40rem) {
+  .w-inversion-cardbody { grid-template-columns: 4rem minmax(0, 1fr); gap: 1.1rem; }
+  .w-inversion-icon { width: 4rem; height: 4rem; }
+  .w-inversion-quote p { font-size: 1.4rem; }
+}
+.w-inversion-ask {
+  font-family: var(--f-type); font-size: .78rem; letter-spacing: .06em; color: var(--ink-3); padding-top: .45rem; border-top: 1px dashed var(--rule);
+}
+
+/* ---- answers ---- */
+.w-inversion-controls { display: grid; gap: .6rem; min-width: 0; }
+.w-inversion-answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+@media (min-width: 40rem) { .w-inversion-answers { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.w-inversion-ans {
+  display: grid; gap: .1rem; justify-items: center; align-content: center; min-height: 3.6rem; padding: .45rem .4rem;
+  border: 1.5px solid var(--ink-2); border-radius: var(--radius); background: var(--sheet); color: var(--ink); cursor: pointer;
+  touch-action: manipulation; box-shadow: 0 2px 0 var(--rule); transition: transform .1s, background .15s, border-color .15s, box-shadow .1s, opacity .2s;
+}
+.w-inversion-ans:hover:not([disabled]) { background: var(--wash); border-color: var(--accent); }
+.w-inversion-ans:active:not([disabled]) { transform: translateY(2px); box-shadow: 0 0 0 var(--rule); }
+.w-inversion-ans-label { font-family: var(--f-type); font-weight: 700; font-size: 1.3rem; line-height: 1.1; letter-spacing: .03em; }
+.w-inversion-ans-sub { font-family: var(--f-type); font-size: .7rem; letter-spacing: .04em; color: var(--ink-3); }
+.w-inversion-ans[disabled] { cursor: default; opacity: .45; }
+.w-inversion-ans.is-picked-right { opacity: 1; background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.w-inversion-ans.is-picked-wrong { opacity: 1; background: var(--seal-soft); border-color: var(--seal); }
+.w-inversion-ans.is-picked-right .w-inversion-ans-sub { color: var(--on-accent); }
+.w-inversion-ans.is-answer { opacity: 1; border-color: var(--accent); border-style: dashed; }
+.w-inversion-swipe { display: none; font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); text-align: center; }
+@media (pointer: coarse) { .w-inversion-swipe { display: block; } }
+
+/* ---- the ruling side ---- */
+.w-inversion-mini { font-family: var(--f-body); font-style: italic; text-transform: none; letter-spacing: 0; color: var(--ink-3); font-size: .78rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+@media (max-width: 26rem) { .w-inversion-mini { display: none; } }
+.w-inversion-verdict { font-size: .98rem; line-height: 1.4; color: var(--ink-2); padding-left: .7rem; border-left: 3px solid var(--accent); }
+.w-inversion-verdict.is-wrong { border-left-color: var(--seal); }
+.w-inversion-verdict b { font-family: var(--f-type); text-transform: uppercase; letter-spacing: .08em; font-size: .86rem; color: var(--accent); }
+.w-inversion-verdict.is-wrong b { color: var(--seal); }
+.w-inversion-rulings { display: grid; gap: .75rem; }
+@media (min-width: 40rem) { .w-inversion-rulings { grid-template-columns: 1fr 1fr; gap: 1.2rem; } }
+.w-inversion-ruling { display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); gap: .75rem; align-items: start; align-content: start; }
+@media (min-width: 40rem) { .w-inversion-ruling { grid-template-columns: 1fr; gap: .45rem; } }
+.w-inversion-ruling p { font-size: .93rem; line-height: 1.5; color: var(--ink); }
+.w-inversion-era { display: grid; gap: .35rem; justify-items: start; }
+@media (min-width: 40rem) { .w-inversion-era { display: flex; align-items: center; gap: .8rem; } }
+.w-inversion-year { font-family: var(--f-type); font-weight: 700; font-size: 1.05rem; letter-spacing: .04em; color: var(--ink-2); }
+.w-inversion-stamp {
+  display: inline-block; font-family: var(--f-type); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase;
+  padding: .15rem .45rem .1rem; border: 3px double currentColor; border-radius: 3px; transform: rotate(-5deg); line-height: 1.3;
+  animation: w-inversion-thunk .42s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.w-inversion-ruling + .w-inversion-ruling .w-inversion-stamp { animation-delay: .14s; transform: rotate(3deg); animation-name: w-inversion-thunk-b; }
+.w-inversion-stamp.is-seated { color: var(--accent); }
+.w-inversion-stamp.is-excused { color: var(--seal); }
+.w-inversion-stamp.is-maybe { color: var(--brass); }
+@keyframes w-inversion-thunk {
+  0% { opacity: 0; transform: rotate(-9deg) scale(1.9); }
+  60% { opacity: 1; transform: rotate(-5deg) scale(.94); }
+  100% { opacity: 1; transform: rotate(-5deg) scale(1); }
+}
+@keyframes w-inversion-thunk-b {
+  0% { opacity: 0; transform: rotate(7deg) scale(1.9); }
+  60% { opacity: 1; transform: rotate(3deg) scale(.94); }
+  100% { opacity: 1; transform: rotate(3deg) scale(1); }
+}
+.w-inversion-note { display: grid; gap: .35rem; border: 1.5px dashed var(--ink-3); border-radius: var(--radius); padding: .7rem .8rem; background: var(--sheet); }
+.w-inversion-note .label { color: var(--brass); }
+.w-inversion-note p { font-size: .9rem; line-height: 1.5; color: var(--ink-2); }
+
+.w-inversion-next { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+.w-inversion-left { font-size: .78rem; color: var(--ink-3); }
+
+/* ---- the verdict on the inversion ---- */
+.w-inversion-end {
+  display: grid; gap: .85rem; padding: 1.2rem 1rem 1.1rem; border: 1px solid var(--rule);
+  background: var(--sheet-2); background: color-mix(in srgb, var(--brass-soft) 30%, var(--sheet));
+  outline: 1px solid var(--rule); outline-offset: -6px; border-radius: 2px; text-align: center;
+}
+.w-inversion-end.is-fresh { animation: w-inversion-end-in .5s cubic-bezier(.2, .9, .3, 1.05); }
+@keyframes w-inversion-end-in { from { opacity: 0; transform: translateY(12px) rotate(-.8deg); } to { opacity: 1; transform: none; } }
+.w-inversion-end-kicker { color: var(--ink-3); }
+.w-inversion-end-title { font-family: var(--f-display); font-weight: 900; font-size: clamp(2rem, 9vw, 2.8rem); line-height: .95; color: var(--ink); outline: none; }
+.w-inversion-end-score { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.w-inversion-big { font-family: var(--f-type); font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--ink); }
+.w-inversion-big small { font-size: 1.1rem; color: var(--ink-3); margin-left: .1rem; }
+.w-inversion-rank {
+  font-family: var(--f-type); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .82rem; color: var(--seal);
+  border: 3px double var(--seal); padding: .25rem .6rem; transform: rotate(-3deg); max-width: 13rem; line-height: 1.3;
+}
+.w-inversion-end-line { font-size: .95rem; color: var(--ink-2); max-width: 32rem; margin-inline: auto; }
+.w-inversion-ledger {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .1rem .9rem; text-align: left; border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule); padding: .75rem 0 .7rem; max-width: 34rem; width: 100%; margin-inline: auto;
+}
+.w-inversion-col h5 {
+  font-family: var(--f-type); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+  padding-bottom: .3rem; margin: 0 0 .35rem; border-bottom: 2px solid var(--ink);
+}
+.w-inversion-col h5 span { font-size: .95rem; color: var(--ink); letter-spacing: .04em; }
+.w-inversion-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .3rem; }
+.w-inversion-col li { font-size: .86rem; line-height: 1.3; color: var(--ink); padding-left: .85rem; position: relative; }
+.w-inversion-col li::before { content: ""; position: absolute; left: 0; top: .48em; width: .4rem; height: .4rem; border-radius: 50%; background: var(--accent); }
+.w-inversion-col li.is-both { font-weight: 700; }
+.w-inversion-col li.is-both::before { background: var(--brass); }
+.w-inversion-neither { grid-column: 1 / -1; margin-top: .55rem; padding-top: .5rem; border-top: 1px dashed var(--rule); font-size: .86rem; color: var(--ink-2); }
+.w-inversion-neither .label { color: var(--seal); margin-right: .35rem; }
+.w-inversion-sum { font-size: .98rem; line-height: 1.55; color: var(--ink); max-width: 34rem; margin-inline: auto; text-align: left; }
+.w-inversion-end .btn-row { justify-content: center; }

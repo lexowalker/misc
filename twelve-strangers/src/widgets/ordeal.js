@@ -54,7 +54,7 @@
           body: 'God has judged you innocent. Walter gets his cow back. You get your good name back.' },
         foul: { stamp: 'Convicted', tone: 'bad', title: 'The wound festers.',
           body: 'Guilty, in the eyes of God and the court. Theft of a cow was a felony, and felons could hang.' },
-        record: 'At Várad in Hungary, a church register kept from 1208 to 1235 records 208 people who carried the hot iron. 130 of them, nearly two in three, were cleared. The economist Peter Leeson offers a theory: a guilty person who believed in the ordeal would confess or settle first, so the people who dared to carry the iron were mostly innocent, and a priest who let the iron cool or read the wound kindly could let them pass.'
+        record: 'At Várad in Hungary, a church register kept from 1208 to 1235 records 208 people who actually carried the hot iron, by the economist Peter Leeson’s count. Of those, 130 were cleared: five in every eight. Leeson offers a theory. A guilty person who believed in the ordeal would confess or settle first, so the people who dared to carry the iron were mostly innocent, and a priest who let the iron cool or read the wound kindly could let them pass. Historians still argue over how far priests did this.'
       },
       water: {
         title: 'Ordeal of cold water',
@@ -64,7 +64,7 @@
           { title: 'The water is blessed',
             body: 'The priest blesses the pond and asks it to receive the innocent and reject the guilty. Your hands are bound. A rope around your waist will haul you out. How do you go in?',
             full: 'Fill my lungs', empty: 'Breathe out',
-            art: 'A pond below a wooden crane. You hang from a rope above the water, bound. A priest blesses the water from the bank. A dashed line under the surface marks how deep you must sink.' }
+            art: 'A pond with a wooden jetty. You stand bound at the end of the jetty with a rope tied around your waist. A man holds the other end. A priest blesses the water from the bank. A dashed line under the surface marks how deep you must sink.' }
         ],
         pSink: { full: 0.35, empty: 0.8 },
         physics: 'Physics note: lungs full of air make a body float. With empty lungs, most people sink.',
@@ -101,18 +101,18 @@
           body: 'Craven was the word of surrender, and saying it disgraced a man for life. You are cleared.' },
         lost: { stamp: 'Defeated', tone: 'bad', title: 'You cannot lift your staff.',
           body: 'Defeat means guilt. In a criminal appeal, the defeated accused was hanged.' },
-        record: 'Trial by battle came to England with the Normans. Fights could last all day: the accused won by holding out until the stars appeared. Battle needed no priest’s blessing, so it outlived the ordeal by six centuries. It was last claimed in 1818 and abolished by Parliament in 1819.'
+        record: 'Trial by battle came to England with the Normans. In a criminal appeal the two men fought in person, and an accused who held out until the stars appeared was cleared. Battle did not depend on a priest, so the ban of 1215 did not end it. It outlived the ordeal by six centuries: it was last claimed in 1818 and abolished by Parliament in 1819.'
       },
       oath: {
         title: 'Oath-helpers',
         line: 'Swear you are innocent, word perfect. Then find neighbors to swear your oath is clean.',
         tag: 'Fading in the king’s courts by 1200',
         need: 11,
-        neighbors: ['Alice', 'Hugh', 'Agnes', 'Roger', 'Edith', 'Ralph', 'Joan', 'Simon', 'Emma', 'Osbert', 'Maud', 'Gilbert', 'Cecily', 'Walter'],
+        neighbors: ['Alice', 'Hugh', 'Agnes', 'Roger', 'Edith', 'Ralph', 'Joan', 'Simon', 'Emma', 'Osbert', 'Maud', 'Giles', 'Cecily', 'Walter'],
         pSwear: { good: 0.95, mid: 0.82, bad: 0.4 },
         steps: [
           { title: 'Gather your oath-helpers',
-            body: 'This court will take your oath with the twelfth hand: you, plus eleven neighbors who swear your oath is true. They saw nothing. They swear to your character, so your reputation decides who comes.',
+            body: 'The local court will take your oath with the twelfth hand: you, plus eleven neighbors who swear your oath is true. They saw nothing. They swear to your character, so your reputation decides who comes.',
             act: 'Knock on doors' },
           { title: 'Swear the oath',
             body: 'One slip and the oath bursts. Learn it, then say it back in order.',
@@ -138,7 +138,7 @@
         tag: 'The future knocking',
         steps: [
           { title: 'Buy the writ',
-            body: 'For a fee, the king will sell you a writ called de odio et atia, “of hatred and spite.” It was mostly used against murder accusations. We have borrowed one for your cow.',
+            body: 'For a fee, the king will sell you a writ called <i>de odio et atia</i>, “of hatred and spite.” It was mostly used against murder accusations. We have borrowed one for your cow.',
             act: 'Pay the king', next: 'Summon the jury',
             art: 'A purse of coins, the king’s chest, and a sealed writ.' },
           { title: 'Twelve lawful neighbors',
@@ -160,7 +160,7 @@
         no: { stamp: 'Denied', tone: 'bad', title: '“No spite,” they say.',
           body: 'They know you too well. Walter’s appeal goes ahead, and you will have to answer it, perhaps with a staff in your hand.' },
         fight: 'Fight Walter',
-        record: 'Magna Carta (1215), clause 36, ordered that this writ be given free and never refused. Here the jury does its early job: neighbors on oath, telling a royal court what they know.'
+        record: 'Magna Carta (1215), clause 36, ordered that the writ of inquest of life or limbs be given free and never refused. Here the jury does its early job: neighbors on oath, telling a royal court what they know. Once the ordeal was gone, judges began asking juries like this one a bigger question: is he guilty?'
       }
     },
     ending: {
@@ -316,22 +316,30 @@
       '</svg>';
   }
 
+  // cold water geometry (SVG units): where the accused stands, enters, floats and sinks
+  var WATER = { x0: 200, y0: 54, xIn: 238, ySurf: 84, ySink: 130, ropeX: 161, ropeY: 62 };
   function artWater() {
+    var W = WATER;
     return '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false">' +
       '<path class="wo-bank" d="M0 96 L92 96 Q102 96 106 106 L118 180 L0 180 Z"/>' +
       '<rect class="wo-water" x="100" y="102" width="220" height="78"/>' +
-      '<line class="wo-depth" x1="146" y1="146" x2="314" y2="146"/><text class="wo-tlabel" x="312" y="140" text-anchor="end">sink past here</text>' +
-      '<rect class="wo-post" x="86" y="20" width="7" height="77"/><rect class="wo-post" x="86" y="18" width="112" height="7"/><line class="wo-rail" x1="93" y1="44" x2="118" y2="25"/>' +
-      '<line class="wo-rope" data-rope x1="190" y1="25" x2="190" y2="34"/>' +
-      '<g class="wo-bound" transform="translate(190 34)">' +
+      '<line class="wo-depth" x1="180" y1="126" x2="314" y2="126"/><text class="wo-tlabel" x="312" y="120" text-anchor="end">sink past here</text>' +
+      // the jetty
+      '<rect class="wo-pile" x="132" y="96" width="5" height="84"/><rect class="wo-pile" x="206" y="96" width="5" height="84"/>' +
+      '<rect class="wo-deck" x="86" y="92" width="130" height="5" rx="1"/>' +
+      // the man paying out the rope, leaning back
+      '<g transform="rotate(-8 150 92)">' + fig(150, 92, { tunic: 'brass', arm: 'fwd', hair: true }) + '</g>' +
+      '<line class="wo-rope" data-rope x1="' + W.ropeX + '" y1="' + W.ropeY + '" x2="' + W.x0 + '" y2="' + (W.y0 + 21) + '"/>' +
+      '<g class="wo-bound" transform="translate(' + W.x0 + ' ' + W.y0 + ')">' +
         '<ellipse class="wo-t-acc wo-ol" cx="0" cy="25" rx="11" ry="13"/><path class="wo-bind" d="M-10 21 h20 M-10 29 h20"/>' +
         '<circle class="wo-skin" cx="0" cy="6" r="7"/><path class="wo-hair" d="M-7 5 A7 7 0 0 1 7 5 Q0 2 -7 5 Z"/>' +
       '</g>' +
-      '<g class="wo-bubbles"><circle cx="184" cy="150" r="2.5"/><circle cx="196" cy="140" r="2"/><circle cx="188" cy="128" r="3"/></g>' +
+      '<g class="wo-bubbles"><circle cx="' + (W.xIn - 6) + '" cy="150" r="2.5"/><circle cx="' + (W.xIn + 6) + '" cy="140" r="2"/><circle cx="' + (W.xIn - 2) + '" cy="128" r="3"/></g>' +
       '<rect class="wo-water-front" x="100" y="102" width="220" height="78"/>' +
       '<path class="wo-surface" d="M100 102 q10 -4 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>' +
-      '<ellipse class="wo-ripple" cx="190" cy="103" rx="16" ry="3"/>' +
-      fig(42, 96, { tunic: 'ink', robe: true, arm: 'up', tonsure: true }) +
+      '<ellipse class="wo-ripple" cx="' + W.xIn + '" cy="103" rx="16" ry="3"/>' +
+      // the priest blesses the water from the bank
+      fig(46, 96, { tunic: 'ink', robe: true, arm: 'up', tonsure: true }) +
       '</svg>';
   }
 
@@ -768,26 +776,30 @@
     }
     function lower(breath) {
       var P = DATA.paths.water;
+      var W = WATER;
       var sinks = rnd() < P.pSink[breath];
       setActions([]);
       say(breath === 'full' ? 'You fill your lungs. They lower you in.' : 'You breathe out. They lower you in.');
       var s = svg();
       var body = s.querySelector('.wo-bound');
       var rope = s.querySelector('[data-rope]');
-      function at(y) {
-        body.setAttribute('transform', 'translate(190 ' + y.toFixed(1) + ')');
-        rope.setAttribute('y2', (y + 0.5).toFixed(1));
+      function at(x, y) {
+        body.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')');
+        rope.setAttribute('x2', x.toFixed(1));
+        rope.setAttribute('y2', (y + 21).toFixed(1));
       }
-      var y0 = 34, ySurf = 84, ySink = 128;
-      tween(560, function (k) { at(y0 + (ySurf - y0) * ease(k)); }, function () {
+      // off the end of the jetty: out fast, then down
+      tween(560, function (k) {
+        at(W.x0 + (W.xIn - W.x0) * (1 - Math.pow(1 - k, 2)), W.y0 + (W.ySurf - W.y0) * k * k);
+      }, function () {
         s.classList.add('is-splash');
         if (sinks) {
           s.classList.add('is-sinking');
-          tween(620, function (k) { at(ySurf + (ySink - ySurf) * ease(k)); }, function () {
+          tween(620, function (k) { at(W.xIn, W.ySurf + (W.ySink - W.ySurf) * ease(k)); }, function () {
             say('You sink past the mark.');
             later(function () {
               s.classList.remove('is-sinking');
-              tween(520, function (k) { at(ySink + (52 - ySink) * ease(k)); }, function () {
+              tween(560, function (k) { var e = ease(k); at(W.xIn + (W.x0 - W.xIn) * e, W.ySink + (W.y0 - W.ySink) * e); }, function () {
                 later(function () { outcome('water', state.rep === 'bad' ? P.sinkBad : P.sink); }, 250);
               });
             }, 420);
@@ -795,7 +807,7 @@
         } else {
           tween(900, function (k) {
             var dip = Math.sin(k * Math.PI * 2.5) * (1 - k) * 12;
-            at(ySurf + Math.max(-4, dip));
+            at(W.xIn, W.ySurf + Math.max(-4, dip));
           }, function () {
             say('You float.');
             later(function () { outcome('water', P.float); }, 500);
@@ -878,7 +890,7 @@
           '</svg><span class="w-ordeal-nb-name">' + name + '</span><span class="w-ordeal-nb-say" aria-hidden="true"></span></div>';
       }).join('');
       shell('oath', '<div class="w-ordeal-village">' + houses + '</div>', null);
-      hud('<span class="label">Oath-helpers</span><b class="tnum" data-n>0</b><span>of ' + P.need + ' needed</span>');
+      hud('<span class="label">Willing to swear</span><b class="tnum" data-n>0</b><span>You need ' + P.need + '.</span>');
       step({ kicker: kicker('oath', 1, 3), title: P.steps[0].title, body: P.steps[0].body,
         actions: [{ label: P.steps[0].act, act: 'knock', fn: function () { knock(); } }] });
     }

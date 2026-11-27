@@ -195,6 +195,8 @@
           '<p class="w-circle-kicker">' + esc(DATA.caseKicker) + '</p>' +
           '<p class="w-circle-case">' + esc(DATA.caseText) + '</p>' +
         '</div>' +
+        '<div class="w-circle-main">' +
+        '<div class="w-circle-left">' +
         '<div class="w-circle-stage" role="group" aria-label="Twenty villagers seated in two rings around a fire. Lines between them show kin, trade, friendship and grudges.">' +
           '<svg class="w-circle-web" viewBox="0 0 400 400" aria-hidden="true">' +
             '<defs><radialGradient id="w-circle-glow-grad"><stop offset="0" class="w-circle-glow-a"/><stop offset="1" class="w-circle-glow-b"/></radialGradient></defs>' +
@@ -214,11 +216,15 @@
           '<p class="w-circle-count" aria-hidden="true"><b class="tnum">0</b> heard</p>' +
         '</div>' +
         '<div class="w-circle-legend" aria-hidden="true"><div>' + legendTies + '</div><div>' + legendHouses + '</div></div>' +
+        '</div>' +
+        '<div class="w-circle-right">' +
         '<div class="w-circle-card" aria-live="polite"></div>' +
         '<div class="w-circle-ledger" aria-label="Testimony heard so far"></div>' +
         '<div class="w-circle-actions">' +
           '<button type="button" class="btn w-circle-decide" disabled>' + esc(DATA.decide) + '</button>' +
           '<span class="w-circle-need"></span>' +
+        '</div>' +
+        '</div>' +
         '</div>' +
         '<div class="w-circle-proposals" hidden>' +
           '<p class="w-circle-q">' + esc(DATA.question) + '</p>' +
@@ -329,10 +335,17 @@
     }
 
     /* ---------- interaction ---------- */
+    function keepCardInView() {
+      var r = card.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.top > vh - 80 || r.bottom < 60) card.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+    }
+
     function hear(id) {
       active = id;
       highlight(id);
       showCard(id);
+      keepCardInView();
       if (!heard[id]) {
         heard[id] = true;
         heardCount++;
