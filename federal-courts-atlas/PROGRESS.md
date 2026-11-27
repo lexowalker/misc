@@ -1,28 +1,38 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 08:32 UTC (overnight build, checkpoint 4)._
+_Last updated: 2026-11-27 09:15 UTC (overnight build). Data pipeline complete; website build running._
 
 ## Done
-- Project skeleton: 94-district registry, cached/throttled HTTP fetcher, source + gap manifests,
-  data contract (`docs/DATA_CONTRACT.md`), Makefile, SPEND ledger ($0).
-- Environment: network allowlist for all free data hosts; CourtListener token stored as a proxy-injected secret.
-- Front-end foundation (Vite + TypeScript): design system with light and dark themes, app shell and routes,
-  choropleth map with a custom composite projection (insets for AK, HI, PR + USVI, Guam, NMI), zoom controls,
-  tooltip, legend, table view, sparkline, year slider, glossary (47 entries), and the Learn primer with diagrams.
-  First map paint measured at 0.3-0.5 s (0.9-1.4 s with 4x CPU throttling). See `docs/lanes/frontend.md`.
-- Boundaries lane: statute parsed (28 U.S.C. 81-131, 48 U.S.C. territorial courts); every county-equivalent
-  assigned to one district; Yellowstone (D. Wyo.) and the Fort Bragg / Butner carve-outs (E.D.N.C.) handled;
-  TopoJSON for national and zoomed views. Boundary audit fixes applied. See `docs/lanes/boundaries.md`.
-- Statistics audit (`docs/audits/stats_audit.md`): 51 of 51 sampled cells matched the sources. It found 1 blocker
-  (USSC sentence lengths FY2002-17 counted missing values as 470 months), 1 major (W.D. La. FY1998 packet held
-  M.D. La. data) and 6 minor issues. All eight are fixed or documented; the pipeline test suite passes (677 tests).
-- Lanes with first outputs: FCMS, USSC, IDB (FJC Integrated Database), judges
-  (FJC Biographical Directory), population (Census), courthouses (geocoded) and the search index
-  (`public/data/search/`). Reports in `docs/lanes/`.
+- **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
+  (`docs/DATA_CONTRACT.md`), Makefile, SPEND ledger ($0).
+- **Environment**: network allowlist for the free data hosts; CourtListener token stored as a proxy-injected secret.
+- **Front-end foundation** (Vite + TypeScript): design tokens with light and dark themes, app shell and routes,
+  choropleth with a composite projection and insets, zoom controls, tooltip, legend, table view, sparkline, year
+  slider, glossary, Learn primer. First map paint 0.3-0.5 s. See `docs/lanes/frontend.md`.
+- **Data lanes** (workflow 1, finished 08:57 UTC). Reports in `docs/lanes/`:
+  - boundaries: statute-based county assignment for all 94 districts, carve-outs, TopoJSON (106 tests).
+  - FCMS FY1999-2025, USSC FY1995-2025, IDB FY1988-2026, FJC judges 1789-2026, Census population 2000-2025.
+  - courthouses: 455 places of holding court and 331 historic courthouses geocoded at city level; search index for
+    cities, counties, ZIPs (ZCTAs) and courthouses.
+  - CourtListener recent cases: 87 of 94 districts have 3-5 items.
+- **Audits**: `docs/audits/boundary_audit.md` (passed, 5 minor issues fixed or documented) and
+  `docs/audits/stats_audit.md` (51 of 51 sampled cells matched; 1 blocker, 1 major and 6 minor issues, all fixed or
+  documented, then rechecked against the raw sources). 678 pipeline tests pass.
+- `SOURCES.md` (1,547 source files) and `DATA_GAPS.md` generated from the lane fragments.
 
 ## In progress
-- Workflow 1 (data): CourtListener cases lane and the final recheck finishing.
+- Workflow 2 (website): web data assembly (`public/data/`) and story research in parallel, then the home, district
+  profile, stories, compare and courtroom pages, then an integration pass.
+
+## Next
+- Workflow 3: verification lanes (data audit of 50+ numbers into `VERIFICATION.md`, copy audit, UI audit with
+  screenshots at desktop and mobile), then fixes.
+- Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
 
 ## Blocked / notes
-- `data/processed/fcms/` is not tracked yet (git-ignored). Its CSV was 41 MB; now about 13 MB, so it can be tracked
-  once the lane settles. One earlier commit on this branch contains the 41 MB version; removing it from history needs a force-push, which was not allowed, so it stays.
+- **CourtListener quota**: the free tier returned HTTP 429 with a daily Retry-After after about 124 requests.
+  wied, wiwd, wyd, prd, vid, gud and nmid have no recent cases yet (logged in `DATA_GAPS.md`).
+- **uscourts.gov court finder** pages return HTTP 403, so courthouses have no street addresses (logged).
+- **Repository size**: FCMS CSV mirrors of the parquet tables are git-ignored (`make fcms` regenerates them). One
+  earlier commit on this branch contains a 41 MB CSV; removing it from history needs a force-push, which was not
+  allowed, so it stays.
