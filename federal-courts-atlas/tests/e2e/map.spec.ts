@@ -97,6 +97,11 @@ test('view as table shows the same districts, sortable', async ({ page }) => {
   await expect(table).toBeVisible();
   await expect(table.locator('tbody tr')).toHaveCount(94);
   const th = table.locator('thead th').first();
+  // With a variable loaded the table opens sorted by its value column; with none, by district name.
+  if ((await th.getAttribute('aria-sort')) !== 'ascending') {
+    await expect(table.locator('thead th[aria-sort="descending"]')).toHaveCount(1);
+    await th.getByRole('button').click();
+  }
   await expect(th).toHaveAttribute('aria-sort', 'ascending');
   await th.getByRole('button').click();
   await expect(th).toHaveAttribute('aria-sort', 'descending');

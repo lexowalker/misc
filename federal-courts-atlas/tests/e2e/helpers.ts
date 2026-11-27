@@ -9,7 +9,22 @@ export const SHOTS = path.join('tests', 'e2e', '__screenshots__');
  * for the UI audit, not pixel-diff baselines (the data changes as lanes publish).
  */
 export async function shot(page: Page, testInfo: TestInfo, name: string, fullPage = true): Promise<void> {
-  await page.screenshot({ path: path.join(SHOTS, testInfo.project.name, `${name}.jpg`), type: 'jpeg', quality: 80, fullPage, animations: 'disabled' });
+  const file = path.join(SHOTS, testInfo.project.name, `${name}.jpg`);
+  if (fullPage) {
+    // Chromium cannot encode captures taller than about 16,384 device pixels (long tables on mobile);
+    // such pages are captured from the top down to that limit.
+    const { h, w, dpr } = await page.evaluate(() => ({
+      h: document.documentElement.scrollHeight,
+      w: document.documentElement.clientWidth,
+      dpr: window.devicePixelRatio || 1,
+    }));
+    const maxCss = Math.floor(16000 / dpr);
+    if (h > maxCss) {
+      await page.screenshot({ path: file, type: 'jpeg', quality: 80, fullPage: true, animations: 'disabled', clip: { x: 0, y: 0, width: w, height: maxCss } });
+      return;
+    }
+  }
+  await page.screenshot({ path: file, type: 'jpeg', quality: 80, fullPage, animations: 'disabled' });
 }
 
 /** Collect console errors, ignoring expected 404s for data files not yet built. */

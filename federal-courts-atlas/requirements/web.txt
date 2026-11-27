@@ -1,1 +1,2 @@
 # extra deps for the web lane
+# None: pipeline.web uses only base requirements (pandas, pyarrow) and the standard library.

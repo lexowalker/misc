@@ -11,6 +11,8 @@ import type {
   DataManifest,
   District,
   DistrictGeography,
+  DistrictJudgesFile,
+  DistrictProfile,
   DivisionRecord,
   DivisionsFile,
   Judge,
@@ -91,6 +93,22 @@ export const loadCases = (districtId: string): Promise<Loaded<CasesFile>> =>
     const r = raw as Json;
     const items = asArray<Case>(r, 'items', 'cases', 'results');
     return { ...(r as object), district_id: (r.district_id as string) ?? districtId, items } as CasesFile;
+  });
+
+/** judges/<district>.json: one district's FJC records (smaller than judges.json; same records). */
+export const loadDistrictJudges = (districtId: string): Promise<Loaded<DistrictJudgesFile>> =>
+  mapLoaded(loadJson<unknown>(`judges/${encodeURIComponent(districtId)}.json`), (raw) => {
+    if (Array.isArray(raw)) return { district_id: districtId, source_ids: [], judges: raw as Judge[] };
+    const r = raw as Json;
+    const judges = asArray<Judge>(r, 'judges').map((j) => ({ ...j, district_id: j.district_id ?? districtId }));
+    return { ...(r as object), district_id: (r.district_id as string) ?? districtId, source_ids: (r.source_ids as string[]) ?? [], judges } as DistrictJudgesFile;
+  });
+
+/** profiles/<district>.json: distinctive paragraph (with claims), key stats and case mix. */
+export const loadProfile = (districtId: string): Promise<Loaded<DistrictProfile>> =>
+  mapLoaded(loadJson<DistrictProfile>(`profiles/${encodeURIComponent(districtId)}.json`), (raw) => {
+    if (!isObj(raw) || !isObj((raw as unknown as Json).distinctive)) throw new Error('profile has no "distinctive" block');
+    return { ...raw, key_stats: Array.isArray(raw.key_stats) ? raw.key_stats : [] };
   });
 
 export const loadSources = (): Promise<Loaded<SourcesFile>> =>
@@ -337,6 +355,33 @@ export function rankedCount(file: ValuesFile | null | undefined, year: number | 
 export function latestYear(file: ValuesFile | null | undefined): number | null {
   if (!file?.years?.length) return null;
   return file.years[file.years.length - 1]!;
+}
+
+/** Published national figure for a year, or null. */
+export function getNational(file: ValuesFile | null | undefined, year: number | null | undefined): number | null {
+  if (!file?.national || year === null || year === undefined) return null;
+  const v = file.national[String(year)];
+  return typeof v === 'number' && Number.isFinite(v) ? v : null;
+}
+
+/** Caveat text attached to one district-year cell (source caveat, small base, approximate population). */
+export function getCellNote(file: ValuesFile | null | undefined, districtId: string, year: number | null | undefined): string | null {
+  if (!file?.cell_notes || year === null || year === undefined) return null;
+  return file.cell_notes[districtId]?.[String(year)] ?? null;
+}
+
+/** Source ids behind one cell: its own entry in cell_sources, else the year's default. */
+export function getCellSources(file: ValuesFile | null | undefined, districtId: string, year: number | null | undefined): string[] {
+  if (!file || year === null || year === undefined) return [];
+  return file.cell_sources?.[districtId]?.[String(year)] ?? file.source_by_year?.[String(year)] ?? [];
+}
+
+/** Whether one cell is derived (whole variable derived, a derived year, or a listed derived cell). */
+export function isDerivedCell(file: ValuesFile | null | undefined, districtId: string, year: number | null | undefined): boolean {
+  if (!file || year === null || year === undefined) return false;
+  if (file.derived) return true;
+  if (file.derived_years?.includes(year)) return true;
+  return !!file.derived_cells?.[districtId]?.includes(String(year));
 }
 
 export function caveatList(v: Variable | null | undefined): string[] {

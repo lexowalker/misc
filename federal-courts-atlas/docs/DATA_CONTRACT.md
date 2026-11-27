@@ -84,15 +84,36 @@ Each lane also writes `data/processed/<lane>/variables.json`: a list of
 
 ## Web data (`web` lane only)
 
+Built by `make web` (`python -m pipeline.web.build`); details and field lists in `docs/lanes/web.md`.
+
 ```
-public/data/manifest.json            data version, build date, file hashes
-public/data/districts.json           registry + population + counties/divisions/courthouse ids per district
+public/data/manifest.json            {version, build_date, files: {path: {sha256, bytes}}, ...}
+public/data/districts.json           {district_id: registry fields + population (value, year, source, derived,
+                                       approximate flag/note) + population_census_2020 + counties [{geoid, name}]
+                                       + divisions [{name, ordinal, statute_section, counties: [geoid], places}]
+                                       + places_of_holding_court + courthouse_ids + judgeships / judges_active /
+                                       judges_senior (latest, with source) + prev / next}
 public/data/variables.json           [{id, family: speed|workload|sentencing|casemix, label, short_label, unit, format,
-                                       explainer, caveats, source_ids, derived, formula, higher_means, years}]
-public/data/values/<variable>.json   {variable, period_type, years:[...], values:{district_id:{year:value}},
-                                       provenance:{source_id: {...}}, ranks?:{...}}
-public/data/judges.json              per-district judge timeline records (public FJC fields only)
-public/data/cases/<district>.json    3–5 recent CourtListener items with URLs
-public/data/search-index.json        city/county/ZIP/courthouse → district_id
-public/data/sources.json             merged source manifest (for in-app citations)
+                                       explainer, caveats: [..], source_ids, derived, formula|null, derived_years?,
+                                       formula_by_basis?, higher_means, years, period_type, lane, lane_table,
+                                       lane_variable | lane_inputs, default_rank_direction, breaks, featured, ...}]
+public/data/values/<variable>.json   {variable, period_type, unit, years, values:{district_id:{year:value}},
+                                       ranks:{district_id:{year:rank}} (1 = highest, ties share), ranked_of:{year:n},
+                                       provenance:{source_id:{dataset, publisher, url, vintage, retrieved_at}},
+                                       source_by_year:{year:[ids]}, cell_sources?, cell_notes?, n_basis?,
+                                       national?, national_source_by_year?, national_note?, derived, formula?,
+                                       derived_years?, derived_cells?, basis_by_year?, formula_by_basis?}
+public/data/judges.json              {_meta, district_id: [FJC service records, public fields only]}
+public/data/judges/<district>.json   {district_id, source_ids, note, judges: [...]} (same records, one district)
+public/data/cases/<district>.json    {district_id, retrieved_at, selection, source_ids, items: [0-5 CourtListener items], note?}
+public/data/profiles/<district>.json {distinctive: {paragraph, sentences: [{text, claims}], context, method},
+                                       key_stats: [...], case_mix: {civil_nature_of_suit, criminal_offense,
+                                       sentencing_composition}}
+public/data/sources.json             {source_id: {lane, url, dataset, publisher, vintage, retrieved_at, kind?, members?}}
+                                       for every id referenced by a public file, plus "series" citation records
+public/data/search/                  search index (courthouses lane; see docs/lanes/courthouses.md)
 ```
+
+Values are copied exactly from the lane observation tables. The web lane computes only per-capita rates (marked
+`derived`, formula given), ranks, shares in the profile case mix, and the profile sentences (each with re-verifiable
+claims).

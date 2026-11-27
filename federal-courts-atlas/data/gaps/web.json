@@ -1,0 +1,256 @@
+{
+ "cases_none_published": {
+  "lane": "web",
+  "description": "These districts' public/data/cases files have no items (the profile shows a note). The cases lane logs the cause.",
+  "variables": [],
+  "districts": [
+   "gud",
+   "nmid",
+   "prd",
+   "vid",
+   "wied",
+   "wiwd",
+   "wyd"
+  ],
+  "periods": [],
+  "reason": "See data/gaps/cases.json (CourtListener free-tier quota)."
+ },
+ "fcms_method_sensitive_years_before_current_method": {
+  "lane": "web",
+  "description": "For FCMS measures affected by the March 2012 change from counting criminal cases to counting defendants, the web series start in FY 2005 (FY 2010 for weighted filings, current case weights). Earlier own-year values exist in the FCMS lane on the old method but are not mixed into these series.",
+  "variables": [
+   "criminal_disposition_months",
+   "weighted_filings_per_judgeship",
+   "filings_per_judgeship",
+   "pending_per_judgeship",
+   "terminations_per_judgeship"
+  ],
+  "districts": [],
+  "periods": [
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004
+  ],
+  "reason": "Avoids splicing two counting methods into one series."
+ },
+ "judges_counts_national_not_summed": {
+  "lane": "web",
+  "description": "No national figure is shown for active or senior judges: judges assigned to two districts are counted in each, so district counts do not add up to a national head count.",
+  "variables": [
+   "active_judges",
+   "senior_judges"
+  ],
+  "districts": [],
+  "periods": "all",
+  "reason": "Avoids double counting."
+ },
+ "no_value_latest_year:active_judges": {
+  "lane": "web",
+  "description": "Active judges in office: No data in FY/period 2026 for 3 district(s). The producing lane logs the reason.",
+  "variables": [
+   "active_judges"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2026
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "no_value_latest_year:civil_filings_per_100k": {
+  "lane": "web",
+  "description": "Civil filings per 100,000 residents: No data in FY/period 2025 for 3 district(s). The producing lane logs the reason.",
+  "variables": [
+   "civil_filings_per_100k"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2025
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "no_value_latest_year:civil_trial_months": {
+  "lane": "web",
+  "description": "Median time from filing to civil trial: No data in FY/period 2025 for 43 district(s). The producing lane logs the reason.",
+  "variables": [
+   "civil_trial_months"
+  ],
+  "districts": [
+   "akd",
+   "almd",
+   "alsd",
+   "arwd",
+   "dcd",
+   "gasd",
+   "gud",
+   "hid",
+   "iand",
+   "iasd",
+   "idd",
+   "ilsd",
+   "innd",
+   "kyed",
+   "kywd",
+   "lamd",
+   "med",
+   "miwd",
+   "msnd",
+   "mtd",
+   "nced",
+   "ncwd",
+   "ndd",
+   "ned",
+   "nhd",
+   "nmd",
+   "nmid",
+   "nywd",
+   "oked",
+   "oknd",
+   "okwd",
+   "pawd",
+   "rid",
+   "sdd",
+   "tned",
+   "utd",
+   "vid",
+   "vtd",
+   "waed",
+   "wied",
+   "wvnd",
+   "wvsd",
+   "wyd"
+  ],
+  "periods": [
+   2025
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "no_value_latest_year:felony_defendants_per_100k": {
+  "lane": "web",
+  "description": "Felony defendants charged per 100,000 residents: No data in FY/period 2025 for 3 district(s). The producing lane logs the reason.",
+  "variables": [
+   "felony_defendants_per_100k"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2025
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "no_value_latest_year:senior_judges": {
+  "lane": "web",
+  "description": "Senior judges in office: No data in FY/period 2026 for 3 district(s). The producing lane logs the reason.",
+  "variables": [
+   "senior_judges"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2026
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "no_value_latest_year:weighted_filings_per_judgeship": {
+  "lane": "web",
+  "description": "Weighted filings per judgeship: No data in FY/period 2025 for 3 district(s). The producing lane logs the reason.",
+  "variables": [
+   "weighted_filings_per_judgeship"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": [
+   2025
+  ],
+  "reason": "Not published or not applicable at the source (see the producing lane's gap log)."
+ },
+ "per_capita_no_national_rate": {
+  "lane": "web",
+  "description": "No national per-capita rate is shown: national FCMS and IDB totals include the territorial courts, which have no population estimate, so numerator and denominator would not match.",
+  "variables": [
+   "civil_filings_per_100k",
+   "felony_defendants_per_100k"
+  ],
+  "districts": [],
+  "periods": "all",
+  "reason": "Not computed rather than mismatched."
+ },
+ "per_capita_population_approximate": {
+  "lane": "web",
+  "description": "Per-capita rates for these five districts use an approximate population: counties split by statute (Yellowstone NP, Fort Bragg / Camp MacKall, FCI Butner) are counted whole in one district. Values are shown with a cell note.",
+  "variables": [
+   "civil_filings_per_100k",
+   "felony_defendants_per_100k"
+  ],
+  "districts": [
+   "mtd",
+   "idd",
+   "wyd",
+   "ncmd",
+   "nced"
+  ],
+  "periods": "all",
+  "reason": "See data/gaps/boundaries.json split_counties_whole_in_county_tables."
+ },
+ "per_capita_territories_no_population": {
+  "lane": "web",
+  "description": "Per-capita rates are No data for D. Guam, D.N. Mar. I. and D.V.I.: the Census Bureau publishes no annual population estimates for the Island Areas.",
+  "variables": [
+   "civil_filings_per_100k",
+   "felony_defendants_per_100k"
+  ],
+  "districts": [
+   "gud",
+   "nmid",
+   "vid"
+  ],
+  "periods": "all",
+  "reason": "See data/gaps/population.json island_areas_no_annual_estimates."
+ },
+ "ussc_four_way_grouping_scheme_split": {
+  "lane": "web",
+  "description": "The USSC four-way grouping (within, above, government-sponsored below, non-government-sponsored below) is shown as two series: the USSC's printed FY 2006 to 2017 grouping and the same grouping rebuilt from the FY 2018 method for FY 2014 to 2025. Neither exists for FY 1995 to 2005 (before Booker the categories were departures only).",
+  "variables": [
+   "above_range_pct",
+   "govt_below_range_pct",
+   "nongovt_below_range_pct",
+   "above_range_pct_2006",
+   "govt_below_range_pct_2006",
+   "nongovt_below_range_pct_2006"
+  ],
+  "districts": [],
+  "periods": [
+   1995,
+   1996,
+   1997,
+   1998,
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005
+  ],
+  "reason": "USSC methodology; see data/gaps/ussc.json."
+ }
+}
