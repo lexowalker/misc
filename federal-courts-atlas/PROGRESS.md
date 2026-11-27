@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 14:50 UTC. Pipeline, website and verification done; closing the last gaps._
+_Last updated: 2026-11-27 16:15 UTC. Pipeline, website and verification done; final polish running._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -38,10 +38,17 @@ _Last updated: 2026-11-27 14:50 UTC. Pipeline, website and verification done; cl
   - Now 43 map variables (two juror measures added for the courtroom jury box).
   - Tests: 1,228 pipeline, 321 e2e passed (9 skipped by design), typecheck clean, first map paint 0.40 s.
 
+- **Gap closing** (workflow 4, finished 16:10 UTC): profiles now show "how cases end" (IDB dispositions) and
+  "offenses of people sentenced" (USSC); mass-tort MDL context notes for 8 districts (docket names verified from
+  GovInfo); IDB FY 2026 labeled preliminary on profiles; glossary tooltips on measure labels (53 terms); dated
+  time-machine events; vertical map controls; README test instructions; 16 visual regression baselines.
+  45 map variables. Recheck traced 31 new numbers to raw files (all match). Tests: 1,248 pipeline, 357 e2e passed
+  (11 skipped by design) in 3 full runs; first map paint 0.28 s (0.91 s at 4x CPU).
+
 ## In progress
-- Workflow 4: closing gaps a completeness review found: "how cases end" (IDB disposition mix) and more USSC offense
-  categories on profiles, preliminary labels for IDB FY 2026 on profiles, glossary tooltips on measure labels,
-  N.D. Fla. mass-tort context, README test instructions, small doc fixes, visual regression baselines.
+- Small polish pass: MDL notes for districts whose dominant docket was earlier (ohsd, wvsd, laed), MDL caveat on
+  national FY 2025 civil-closing figures, preliminary label in the compare year menu, a glossary entry for MDL,
+  data contract and doc counts.
 
 ## Next
 - Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
