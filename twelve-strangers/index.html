@@ -1,0 +1,2581 @@
+<title>Twelve Strangers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="An interactive history of trial by jury, from the first village circles to twelve strangers in a city courtroom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Grenze+Gotisch:wght@500;700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&display=swap">
+<style>
+/* Layout: a court docket. Each chapter's dates sit in a sticky left column on wide screens and fold into the chapter kicker on phones.
+   The record runs in one reading column; the interactives are court exhibits on raised sheets with exhibit stickers;
+   a sticky green-leather ticker of eras crosses the top, and a twelve-seat jury box in the corner fills with seals. */
+:root {
+  --paper: #E5E9E0;        /* page ground: pale sage court paper */
+  --sheet: #F5F6F1;        /* raised sheets: the summons, exhibits */
+  --sheet-2: #ECEFE6;      /* insets inside sheets */
+  --ink: #18201B;
+  --ink-2: #4A564E;        /* secondary text */
+  --ink-3: #6E7A72;        /* captions, quiet labels */
+  --rule: #C3CABE;
+  --accent: #1C5641;       /* courtroom green leather */
+  --accent-2: #154533;
+  --on-accent: #F2F4EE;
+  --band: #1C5641;         /* the ticker band */
+  --on-band: #EEF1EA;
+  --brass: #86640F;        /* brass fittings: highlights, seals */
+  --brass-soft: #EADCAE;
+  --seal: #962C23;         /* wax-seal red: verdicts and warnings, used sparingly */
+  --seal-soft: #F1D7D1;
+  --sticker: #E9C64F;      /* yellow exhibit sticker */
+  --on-sticker: #221D0A;
+  --wash: rgba(28, 86, 65, .07);
+  --shadow: 0 1px 0 rgba(24, 32, 27, .05), 0 14px 34px -22px rgba(24, 32, 27, .45);
+
+  --f-display: "Grenze Gotisch", "UnifrakturMaguntia", "Old English Text MT", Georgia, serif;
+  --f-body: "Literata", Georgia, "Times New Roman", serif;
+  --f-type: "Courier Prime", "Courier New", ui-monospace, monospace;
+
+  --t-label: .75rem;
+  --t-small: .9rem;
+  --t-body: 1.0625rem;
+  --t-lead: 1.22rem;
+  --t-h3: 1.3rem;
+  --t-h2: clamp(2.4rem, 9vw, 3.8rem);
+  --t-hero: clamp(3.6rem, 17vw, 8rem);
+
+  --measure: 39rem;
+  --wide: 50rem;
+  --radius: 3px;
+  --ticker-h: 3.1rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D1511; --sheet: #141F19; --sheet-2: #1A271F; --ink: #E6E3D7; --ink-2: #AAB4A8; --ink-3: #7F8B81;
+    --rule: #2B3A31; --accent: #6FC39D; --accent-2: #8AD3B0; --on-accent: #0D1511; --band: #143B2D; --on-band: #E6E3D7;
+    --brass: #DAB25C; --brass-soft: #3A321F; --seal: #E8806E; --seal-soft: #3D211C; --sticker: #D9B54C; --on-sticker: #1C180A;
+    --wash: rgba(111, 195, 157, .09); --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 18px 40px -24px rgba(0, 0, 0, .9);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D1511; --sheet: #141F19; --sheet-2: #1A271F; --ink: #E6E3D7; --ink-2: #AAB4A8; --ink-3: #7F8B81;
+  --rule: #2B3A31; --accent: #6FC39D; --accent-2: #8AD3B0; --on-accent: #0D1511; --band: #143B2D; --on-band: #E6E3D7;
+  --brass: #DAB25C; --brass-soft: #3A321F; --seal: #E8806E; --seal-soft: #3D211C; --sticker: #D9B54C; --on-sticker: #1C180A;
+  --wash: rgba(111, 195, 157, .09); --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 18px 40px -24px rgba(0, 0, 0, .9);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--ticker-h) + env(safe-area-inset-top, 0px) + 12px); }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--t-body);
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--paper); }
+::selection { background: var(--brass-soft); color: var(--ink); }
+a { color: var(--accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, h4 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+em, i { font-style: italic; }
+.tnum { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { width: 100%; max-width: var(--measure); margin-inline: auto; }
+.col-wide { width: 100%; max-width: var(--wide); margin-inline: auto; }
+
+/* shared type roles */
+.label {
+  font-family: var(--f-type);
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.typed { font-family: var(--f-type); }
+.display { font-family: var(--f-display); font-weight: 700; letter-spacing: .005em; }
+
+/* ---------- hero: the summons ---------- */
+.hero { position: relative; overflow: hidden; padding-block: 3.2rem 3.5rem; }
+.hero-watermark {
+  position: absolute; inset: auto -2vw -6vw auto; font-family: var(--f-body); font-weight: 700; letter-spacing: -.04em;
+  font-size: clamp(12rem, 52vw, 30rem); line-height: .8; color: var(--ink); opacity: .045; pointer-events: none; user-select: none;
+}
+.hero-inner { position: relative; display: grid; gap: 1.6rem; max-width: var(--wide); margin-inline: auto; }
+@media (min-width: 64rem) {
+  .hero { padding-block: 5rem 5.5rem; }
+  .hero-inner { max-width: 74rem; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); column-gap: 3.5rem; align-items: center; }
+  .hero-court, .hero-title, .hero-dek { grid-column: 1; }
+  .summons { grid-column: 2; grid-row: 1 / span 3; justify-self: end; width: 100%; }
+}
+.hero-court { font-family: var(--f-display); font-weight: 500; font-size: 1.35rem; color: var(--ink-2); }
+.hero-title {
+  font-family: var(--f-display); font-weight: 900; font-size: var(--t-hero); line-height: .86; letter-spacing: -.01em;
+  color: var(--ink);
+}
+.hero-title span { display: block; color: var(--accent); }
+.hero-dek { font-size: var(--t-lead); line-height: 1.45; max-width: 33rem; color: var(--ink); }
+.hero-dek q { quotes: "\201C" "\201D"; }
+
+.summons {
+  position: relative; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 1.25rem 1.1rem 1.2rem; max-width: 34rem; transform: rotate(-.6deg);
+  font-family: var(--f-type); font-size: .95rem; line-height: 1.5;
+}
+.summons::after { /* perforation down the stub */
+  content: ""; position: absolute; top: 0; bottom: 0; right: 3.2rem; border-right: 2px dotted var(--rule); pointer-events: none;
+}
+.summons-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; align-items: baseline; padding-right: 3.6rem; }
+.summons-no { font-weight: 700; color: var(--seal); letter-spacing: .04em; }
+.summons-fields { display: grid; gap: .55rem; margin: 1rem 0 1rem; padding-right: 3.6rem; }
+.summons-fields div { display: grid; grid-template-columns: 7.2rem minmax(0, 1fr); gap: .75rem; align-items: baseline; }
+.summons-fields dt { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.summons-fields dd { margin: 0; border-bottom: 1px solid var(--rule); padding-bottom: .15rem; }
+.summons-fine { font-size: .78rem; color: var(--ink-3); padding-right: 3.6rem; margin-bottom: 1rem; }
+.summons-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; padding-right: 3.6rem; }
+.summons-status { font-size: .8rem; color: var(--ink-2); }
+.summons-stamp {
+  position: absolute; right: 4.6rem; top: 42%; transform: rotate(-14deg) scale(1.4); opacity: 0;
+  border: 3px double var(--seal); color: var(--seal); padding: .3rem .6rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; font-size: .95rem; pointer-events: none; transition: opacity .25s, transform .35s cubic-bezier(.2, 1.6, .4, 1);
+}
+.summons.is-answered .summons-stamp { opacity: .9; transform: rotate(-14deg) scale(1); }
+@media (max-width: 30rem) {
+  .summons::after { right: 2.4rem; }
+  .summons-head, .summons-fields, .summons-fine, .summons-actions { padding-right: 2.6rem; }
+  .summons-fields div { grid-template-columns: 1fr; gap: 0; }
+  .summons-stamp { right: 3rem; }
+}
+
+/* ---------- buttons, chips ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .55rem 1.1rem;
+  border: 1px solid var(--accent); border-radius: var(--radius); background: var(--accent); color: var(--on-accent);
+  font-family: var(--f-type); font-weight: 700; font-size: .9rem; letter-spacing: .05em; text-transform: uppercase;
+  cursor: pointer; transition: transform .12s, background .15s, box-shadow .15s; touch-action: manipulation; text-align: center;
+}
+.btn:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn:active { transform: translateY(1px); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--accent); }
+.btn-ghost:hover { background: var(--wash); color: var(--accent); }
+.btn-seal { background: var(--seal); border-color: var(--seal); color: var(--sheet); }
+.btn-seal:hover { background: var(--seal); filter: brightness(1.08); border-color: var(--seal); }
+.btn-small { min-height: 2.25rem; padding: .35rem .75rem; font-size: .78rem; }
+.btn-row { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.chip {
+  min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--sheet);
+  font-family: var(--f-type); font-size: .82rem; cursor: pointer; color: var(--ink-2); touch-action: manipulation;
+}
+.chip:hover { border-color: var(--accent); color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* ---------- ticker ---------- */
+.ticker {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 25; background: var(--band); color: var(--on-band);
+  box-shadow: 0 6px 18px -14px rgba(0, 0, 0, .6);
+}
+.ticker-track {
+  display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; height: var(--ticker-h); align-items: stretch;
+  padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px));
+  scroll-behavior: smooth;
+}
+.ticker-track::-webkit-scrollbar { display: none; }
+.tick {
+  flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; padding: 0 .8rem; color: inherit; text-decoration: none;
+  border-right: 1px solid rgba(238, 241, 234, .14); opacity: .62; transition: opacity .2s, background .2s; white-space: nowrap;
+}
+.tick:hover { opacity: .9; }
+.tick-date { font-family: var(--f-type); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
+.tick-name { font-family: var(--f-body); font-size: .86rem; line-height: 1.25; }
+.tick.is-active { opacity: 1; background: rgba(255, 255, 255, .08); }
+.tick.is-active .tick-date { color: var(--brass-soft); }
+:root[data-theme="dark"] .tick.is-active .tick-date { color: var(--brass); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tick.is-active .tick-date { color: var(--brass); } }
+.ticker-progress { height: 3px; background: rgba(0, 0, 0, .18); }
+.ticker-progress span { display: block; height: 100%; width: 0; background: var(--sticker); transition: width .15s linear; }
+
+/* ---------- chapters ---------- */
+.chapter { position: relative; padding-block: 4.5rem 1.5rem; display: grid; gap: 1.4rem; }
+.chapter + .chapter { border-top: 1px solid var(--rule); }
+.ch-head { display: grid; gap: .55rem; }
+.ch-kicker { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .9rem; }
+.ch-num { font-family: var(--f-type); font-weight: 700; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.ch-num::before { content: "Chapter "; }
+.ch-date { font-family: var(--f-type); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.ch-title { font-family: var(--f-display); font-weight: 700; font-size: var(--t-h2); line-height: .95; letter-spacing: -.005em; }
+.ch-dek { font-size: var(--t-lead); line-height: 1.45; color: var(--ink-2); font-style: italic; }
+
+.prose { display: grid; gap: 1.05rem; }
+.prose h3 { font-family: var(--f-body); font-size: var(--t-h3); font-weight: 700; line-height: 1.25; margin-top: .8rem; }
+.prose strong { font-weight: 700; }
+.prose .lede::first-letter {
+  font-family: var(--f-display); font-weight: 900; float: left; font-size: 3.6em; line-height: .78; padding: .08em .1em 0 0; color: var(--accent);
+}
+.prose ul, .prose ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
+.term { font-style: italic; }
+.gk { font-style: normal; color: var(--ink-2); }
+.cite { font-family: var(--f-type); font-size: .82em; color: var(--ink-3); white-space: nowrap; }
+sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; padding: 0 .1rem; }
+
+/* wide screens: the docket date column */
+@media (min-width: 1180px) {
+  .chapter { grid-template-columns: minmax(0, 1fr) minmax(0, var(--wide)) minmax(0, 1fr); column-gap: 2rem; }
+  .chapter > * { grid-column: 2; }
+  .chapter > .rail { grid-column: 1; grid-row: 1 / span 40; justify-self: end; }
+  .rail-inner { position: sticky; top: calc(var(--ticker-h) + 2.5rem); text-align: right; display: grid; gap: .2rem; }
+  .rail-num { font-family: var(--f-body); font-weight: 700; font-size: 3.4rem; line-height: 1; letter-spacing: -.02em; color: var(--brass); }
+  .rail-date { font-family: var(--f-type); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); max-width: 11rem; }
+  .chapter .ch-num { display: none; }
+}
+@media (max-width: 1179px) { .rail { display: none; } }
+
+/* ---------- pull quotes ---------- */
+.pull { margin: .6rem 0; padding: 0 0 0 1.1rem; border-left: 3px solid var(--brass); display: grid; gap: .5rem; }
+.pull p { font-size: 1.28rem; line-height: 1.4; font-style: italic; }
+.pull footer { font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); }
+
+/* ---------- speculation: not in the record ---------- */
+.spec { border: 1.5px dashed var(--ink-3); border-radius: var(--radius); padding: 1rem 1rem 1.05rem; display: grid; gap: .6rem; background: transparent; }
+.spec-label { font-family: var(--f-type); font-size: var(--t-label); letter-spacing: .12em; text-transform: uppercase; color: var(--seal); font-weight: 700; }
+
+/* ---------- objection: myth busters ---------- */
+.objection { border: 1px solid var(--rule); background: var(--sheet); border-radius: var(--radius); padding: 1rem; display: grid; gap: .75rem; box-shadow: var(--shadow); }
+.obj-claim { display: grid; gap: .3rem; }
+.obj-claim q { font-size: 1.08rem; font-style: italic; quotes: "\201C" "\201D"; }
+.obj-btn { justify-self: start; }
+.obj-ruling { display: grid; gap: .55rem; animation: obj-in .35s ease-out; }
+.obj-stamp {
+  justify-self: start; font-family: var(--f-type); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; font-size: .9rem;
+  color: var(--seal); border: 3px double var(--seal); padding: .15rem .55rem; transform: rotate(-3deg);
+}
+.obj-stamp.is-overruled { color: var(--accent); border-color: var(--accent); }
+@keyframes obj-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- exhibits (interactives) ---------- */
+.exhibit {
+  position: relative; margin: 1.2rem 0 .6rem; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 2.1rem 1rem 1.15rem; display: grid; gap: .9rem; min-width: 0;
+}
+.exhibit-sticker {
+  position: absolute; top: -.85rem; left: .9rem; background: var(--sticker); color: var(--on-sticker); transform: rotate(-2.5deg);
+  font-family: var(--f-type); font-weight: 700; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
+  padding: .5rem .65rem .45rem; border-radius: 2px; box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .35);
+}
+.exhibit-sticker b { font-size: .95rem; letter-spacing: .06em; margin-left: .15rem; }
+.exhibit-head { display: grid; gap: .3rem; }
+.exhibit-title { font-family: var(--f-body); font-size: var(--t-h3); font-weight: 700; line-height: 1.2; }
+.exhibit-hint { font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); line-height: 1.45; }
+.exhibit-body { min-width: 0; }
+@media (min-width: 40rem) { .exhibit { padding: 2.3rem 1.5rem 1.4rem; } }
+.widget-error, .widget-missing { font-family: var(--f-type); font-size: .85rem; color: var(--seal); padding: 1rem; border: 1px dashed var(--seal); }
+
+/* ---------- seals: the twelve-seat jury box ---------- */
+.seal-box {
+  position: fixed; z-index: 40; right: calc(12px + env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex; align-items: center; gap: .55rem; padding: .45rem .6rem .45rem .55rem; border-radius: 6px;
+  background: var(--band); color: var(--on-band); border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 12px 26px -12px rgba(0, 0, 0, .55);
+  cursor: pointer; font-family: var(--f-type); font-size: .78rem; letter-spacing: .06em; transition: transform .2s;
+}
+.seal-box[hidden] { display: none !important; }
+.seal-box.is-bump { animation: bump .6s ease-out; }
+@keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.seal-grid { display: grid; grid-template-columns: repeat(6, 9px); grid-template-rows: repeat(2, 9px); gap: 3px; }
+.seal-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(238, 241, 234, .55); }
+.seal-dot.is-on { background: var(--sticker); border-color: var(--sticker); }
+.seal-count b { font-weight: 700; }
+
+.seal-panel {
+  position: fixed; z-index: 45; right: calc(12px + env(safe-area-inset-right, 0px)); bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  width: min(22rem, calc(100vw - 24px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+  max-height: min(70vh, 34rem); overflow-y: auto; background: var(--sheet); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px;
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .6); padding: 1rem; display: grid; gap: .8rem;
+}
+.seal-panel h2 { font-family: var(--f-display); font-size: 1.7rem; line-height: 1; }
+.seal-panel p { font-size: .9rem; color: var(--ink-2); }
+.seal-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+.seal-item a { display: flex; gap: .5rem; align-items: center; text-decoration: none; color: var(--ink-2); font-size: .82rem; line-height: 1.2; padding: .3rem; border-radius: 4px; }
+.seal-item a:hover { background: var(--wash); }
+.seal-medal {
+  flex: 0 0 auto; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900;
+  font-size: .95rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+}
+.seal-item.is-on .seal-medal { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
+.seal-item.is-on a { color: var(--ink); }
+
+.toast {
+  position: fixed; z-index: 50; left: 50%; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0;
+  background: var(--ink); color: var(--paper); font-family: var(--f-type); font-size: .82rem; padding: .6rem .9rem; border-radius: 4px;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .6); transition: opacity .25s, transform .25s; pointer-events: none; max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- endmatter ---------- */
+.endmatter { padding-block: 3rem 6rem; border-top: 1px solid var(--rule); display: grid; gap: 1.4rem; }
+.endmatter h2 { font-family: var(--f-display); font-size: 2.2rem; line-height: 1; }
+.sources { font-size: .88rem; color: var(--ink-2); display: grid; gap: .5rem; padding-left: 1.3rem; margin: 0; }
+.sources li { padding-left: .2rem; }
+.colophon { font-family: var(--f-type); font-size: .78rem; color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+.deeper { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+.deeper li { padding-left: 1rem; border-left: 2px solid var(--brass); font-size: .95rem; color: var(--ink-2); line-height: 1.5; }
+.deeper li b { color: var(--ink); font-weight: 600; }
+
+/* ===== widget: circle ===== */
+/* Exhibit: Everyone knows everyone */
+[data-widget="circle"] { --w-circle-seat: 44px; }
+.w-circle { display: grid; gap: 1rem; min-width: 0; }
+
+.w-circle-top { display: grid; gap: .35rem; }
+.w-circle-recon {
+  justify-self: start; font-family: var(--f-type); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--seal); border: 1.5px dashed var(--seal); border-radius: 2px; padding: .2rem .5rem; line-height: 1.3;
+}
+.w-circle-kicker { font-family: var(--f-type); font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); margin-top: .2rem; }
+.w-circle-case { font-size: 1rem; line-height: 1.5; color: var(--ink); }
+
+/* ---------- the stage ---------- */
+.w-circle-stage {
+  position: relative; width: 100%; max-width: 520px; margin-inline: auto; aspect-ratio: 1 / 1;
+  border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--wash), transparent 70%);
+}
+@supports not (aspect-ratio: 1 / 1) { .w-circle-stage { height: 0; padding-top: 100%; } }
+.w-circle-web { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+.w-circle-tie { fill: none; stroke-linecap: round; transition: opacity .25s, stroke-width .25s; }
+.w-circle-tie.t-kin { stroke: var(--accent); stroke-width: 1.9; }
+.w-circle-tie.t-trade { stroke: var(--brass); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.w-circle-tie.t-friend { stroke: var(--ink-3); stroke-width: 1; }
+.w-circle-tie.t-grudge { stroke: var(--seal); stroke-width: 1.8; stroke-dasharray: .1 4.2; }
+.w-circle-tie.t-dispute { stroke: var(--seal); stroke-width: 2.6; stroke-dasharray: 9 5; }
+.w-circle-tie.t-mended { stroke: var(--accent); stroke-width: 3; stroke-dasharray: 600; stroke-dashoffset: 0; animation: w-circle-draw .6s ease-out; }
+@keyframes w-circle-draw { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+.w-circle-lines .w-circle-tie { opacity: .5; }
+.w-circle-lines .w-circle-tie.t-dispute, .w-circle-lines .w-circle-tie.t-mended { opacity: .85; }
+.w-circle-lines .w-circle-tie.is-lit { opacity: 1; stroke-width: 2.6; }
+.w-circle-lines .w-circle-tie.t-friend.is-lit { stroke-width: 1.7; stroke: var(--ink-2); }
+.w-circle-lines .w-circle-tie.is-dim { opacity: .1; }
+
+/* fire */
+.w-circle-glow-a { stop-color: var(--brass); stop-opacity: .38; }
+.w-circle-glow-b { stop-color: var(--brass); stop-opacity: 0; }
+.w-circle-stones { fill: var(--sheet-2); stroke: var(--ink-3); stroke-width: 1.4; stroke-dasharray: 5 3; }
+.w-circle-log { fill: none; stroke: var(--ink-2); stroke-width: 4.5; stroke-linecap: round; }
+.w-circle-flame.f1 { fill: var(--seal); }
+.w-circle-flame.f2 { fill: var(--brass); }
+.w-circle-flame.f3 { fill: var(--sticker); }
+.w-circle-flames { transform-box: fill-box; transform-origin: 50% 100%; animation: w-circle-flicker 1.6s ease-in-out infinite alternate; }
+.w-circle-flame.f2 { transform-box: fill-box; transform-origin: 50% 100%; animation: w-circle-flicker2 1.1s ease-in-out infinite alternate; }
+.w-circle-glow { transform-box: fill-box; transform-origin: center; animation: w-circle-breathe 2.4s ease-in-out infinite alternate; }
+@keyframes w-circle-flicker { 0% { transform: scale(1, 1) skewX(0deg); } 50% { transform: scale(.96, 1.06) skewX(-3deg); } 100% { transform: scale(1.03, .95) skewX(2deg); } }
+@keyframes w-circle-flicker2 { 0% { transform: scaleY(1); } 100% { transform: scaleY(1.12) skewX(3deg); } }
+@keyframes w-circle-breathe { from { transform: scale(.94); opacity: .85; } to { transform: scale(1.04); opacity: 1; } }
+.w-circle.is-off .w-circle-flames, .w-circle.is-off .w-circle-flame, .w-circle.is-off .w-circle-glow,
+.w-circle.is-still .w-circle-flames, .w-circle.is-still .w-circle-flame, .w-circle.is-still .w-circle-glow { animation-play-state: paused; }
+.w-circle.is-still .w-circle-flames, .w-circle.is-still .w-circle-flame, .w-circle.is-still .w-circle-glow { animation: none; }
+.w-circle.is-flare .w-circle-fire { animation: w-circle-flare .6s ease-out; }
+@keyframes w-circle-flare { 0% { transform: translate(200px, 196px) scale(1); } 40% { transform: translate(200px, 196px) scale(1.35); } 100% { transform: translate(200px, 196px) scale(1); } }
+.w-circle.is-settled .w-circle-glow-a { stop-opacity: .55; }
+
+.w-circle-count {
+  position: absolute; left: 50%; top: 62%; transform: translate(-50%, 0); margin: 0; white-space: nowrap; pointer-events: none;
+  font-family: var(--f-type); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2);
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 999px; padding: .1rem .55rem;
+}
+.w-circle-count b { color: var(--ink); font-size: .85rem; }
+
+/* seats */
+.w-circle-seat {
+  position: absolute; width: var(--w-circle-seat); height: var(--w-circle-seat);
+  margin: calc(var(--w-circle-seat) / -2) 0 0 calc(var(--w-circle-seat) / -2);
+  border-radius: 50%; padding: 0; background: var(--sheet); color: var(--ink);
+  border: 2px solid var(--ink-2); cursor: pointer; touch-action: manipulation;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  box-shadow: 0 2px 6px -3px rgba(0, 0, 0, .4); transition: transform .18s, box-shadow .18s, background .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.w-circle-seat[data-house="oak"] { border: 4px double var(--ink-2); }
+.w-circle-seat[data-house="reed"] { border-style: dashed; }
+.w-circle-seat[data-house="hill"] { border-style: dotted; border-width: 2.5px; }
+.w-circle-seat[data-tag="accused"] { border-color: var(--seal); border-width: 3px; }
+.w-circle-seat[data-tag="accuser"] { border-color: var(--brass); }
+.w-circle-seat:hover { transform: scale(1.06); }
+.w-circle-seat:active { transform: scale(.96); }
+.w-circle-seat:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; border-radius: 50%; }
+.w-circle-fig { width: 15px; height: 10.5px; display: block; }
+.w-circle-fig circle, .w-circle-fig path { fill: var(--ink-3); }
+.w-circle-name { font-family: var(--f-type); font-size: 10.5px; font-weight: 700; line-height: 1; letter-spacing: .01em; }
+.w-circle-dot {
+  position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--sheet); transform: scale(0); transition: transform .25s cubic-bezier(.2, 1.6, .4, 1);
+}
+.w-circle-seat.is-heard { background: var(--sheet-2); }
+.w-circle-seat.is-heard .w-circle-dot { transform: scale(1); }
+.w-circle-seat.is-heard .w-circle-fig circle, .w-circle-seat.is-heard .w-circle-fig path { fill: var(--ink-2); }
+.w-circle-seat.is-active { transform: scale(1.12); box-shadow: 0 0 0 3px var(--accent), 0 6px 14px -6px rgba(0, 0, 0, .5); z-index: 2; }
+.w-circle-seat.is-mended { box-shadow: 0 0 0 3px var(--accent); }
+
+@media (min-width: 30rem) {
+  [data-widget="circle"] { --w-circle-seat: 52px; }
+  .w-circle-name { font-size: 12px; }
+  .w-circle-fig { width: 18px; height: 12.6px; }
+}
+
+/* legend */
+.w-circle-legend { display: grid; gap: .3rem; justify-items: center; font-family: var(--f-type); font-size: .72rem; color: var(--ink-2); letter-spacing: .04em; }
+.w-circle-legend > div { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem .85rem; }
+.w-circle-key { display: inline-flex; align-items: center; gap: .35rem; }
+.w-circle-key svg { width: 26px; height: 8px; overflow: visible; }
+.w-circle-key .w-circle-tie { opacity: 1; }
+.w-circle-ring { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--ink-2); display: inline-block; }
+.w-circle-ring[data-house="oak"] { border: 4px double var(--ink-2); }
+.w-circle-ring[data-house="reed"] { border-style: dashed; }
+.w-circle-ring[data-house="hill"] { border-style: dotted; border-width: 2.5px; }
+
+/* testimony card */
+.w-circle-card {
+  position: relative; background: var(--sheet-2); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
+  border-radius: var(--radius); padding: .85rem .95rem .9rem; display: grid; gap: .45rem; min-height: 9.5rem; align-content: start;
+}
+.w-circle-card.is-prompt { border-left-color: var(--rule); align-content: center; }
+.w-circle-card.is-in { animation: w-circle-in .28s ease-out; }
+@keyframes w-circle-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+.w-circle-prompt { font-family: var(--f-type); font-size: .88rem; color: var(--ink-2); line-height: 1.5; text-align: center; }
+.w-circle-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+.w-circle-card-name { font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
+.w-circle-card-name span { display: block; font-family: var(--f-type); font-size: .72rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-top: .15rem; }
+.w-circle-stamp {
+  flex: 0 0 auto; font-family: var(--f-type); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+  border: 3px double currentColor; padding: .12rem .45rem; transform: rotate(-4deg); margin-top: .1rem; color: var(--ink-2);
+}
+.w-circle-stamp[data-tag="kin"] { color: var(--accent); }
+.w-circle-stamp[data-tag="grudge"], .w-circle-stamp[data-tag="accused"] { color: var(--seal); }
+.w-circle-stamp[data-tag="reputation"], .w-circle-stamp[data-tag="accuser"] { color: var(--brass); }
+.w-circle-how { font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); line-height: 1.45; }
+.w-circle-how span { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .68rem; color: var(--ink-3); margin-right: .25rem; }
+.w-circle-says { font-size: 1.04rem; line-height: 1.5; font-style: italic; }
+.w-circle-says::before { content: "\201C"; }
+.w-circle-says::after { content: "\201D"; }
+.w-circle-weighs { display: flex; align-items: center; gap: .45rem; font-family: var(--f-type); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.w-circle-wmark { width: 12px; height: 12px; border-radius: 50%; border: 2px solid currentColor; flex: 0 0 auto; }
+.w-circle-weighs[data-weighs="for"] { color: var(--accent); }
+.w-circle-weighs[data-weighs="for"] .w-circle-wmark { background: var(--accent); }
+.w-circle-weighs[data-weighs="against"] { color: var(--seal); }
+.w-circle-weighs[data-weighs="against"] .w-circle-wmark { background: var(--seal); }
+.w-circle-weighs[data-weighs="mixed"] { color: var(--brass); }
+.w-circle-weighs[data-weighs="mixed"] .w-circle-wmark { background: linear-gradient(90deg, var(--brass) 50%, transparent 50%); }
+.w-circle-weighs[data-weighs="spite"] { color: var(--ink-3); }
+.w-circle-weighs[data-weighs="spite"] .w-circle-wmark { border-style: dotted; }
+.w-circle-weighs[data-weighs="party"] .w-circle-wmark { border-radius: 2px; }
+
+/* ledger: tally marks */
+.w-circle-ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem .9rem; font-family: var(--f-type); font-size: .75rem; }
+.w-circle-lrow { display: flex; align-items: center; gap: .5rem; min-height: 1.4rem; border-bottom: 1px dotted var(--rule); padding-bottom: .2rem; }
+.w-circle-lname { flex: 0 0 4.9rem; letter-spacing: .05em; text-transform: uppercase; font-size: .68rem; font-weight: 700; color: var(--ink-2); }
+.w-circle-lrow[data-weighs="for"] .w-circle-lname { color: var(--accent); }
+.w-circle-lrow[data-weighs="against"] .w-circle-lname { color: var(--seal); }
+.w-circle-lrow[data-weighs="mixed"] .w-circle-lname { color: var(--brass); }
+.w-circle-tally { display: inline-flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.w-circle-gate { position: relative; display: inline-flex; gap: 3px; height: 14px; align-items: stretch; }
+.w-circle-gate i { width: 2px; background: var(--ink); border-radius: 1px; animation: w-circle-tick .25s ease-out; }
+.w-circle-gate.is-full::after {
+  content: ""; position: absolute; left: -3px; right: -3px; top: 50%; height: 2px; background: var(--ink); transform: rotate(-28deg); border-radius: 1px;
+}
+.w-circle-none { color: var(--ink-3); font-size: .7rem; }
+@keyframes w-circle-tick { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* actions */
+.w-circle-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.w-circle-need { font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); }
+.w-circle-decide.is-ready { animation: w-circle-ready .6s ease-out; box-shadow: 0 0 0 3px var(--brass-soft); }
+@keyframes w-circle-ready { 0% { transform: scale(.94); } 60% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+.w-circle-proposals { display: grid; gap: .6rem; }
+.w-circle-q { font-weight: 700; font-size: 1.02rem; }
+.w-circle-options { display: grid; gap: .5rem; grid-template-columns: 1fr; }
+@media (min-width: 30rem) { .w-circle-options { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.w-circle-opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); opacity: 1; }
+.w-circle-opt[disabled][aria-pressed="false"] { opacity: .4; }
+
+/* outcome */
+.w-circle-outcome { display: grid; gap: .9rem; }
+.w-circle-outcome:empty { display: none; }
+.w-circle-reply { font-style: italic; line-height: 1.5; color: var(--ink-2); border-left: 3px solid var(--rule); padding-left: .8rem; }
+.w-circle-settle {
+  position: relative; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet-2);
+  padding: 1.1rem 1rem 1rem; display: grid; gap: .75rem; animation: w-circle-in .35s ease-out;
+}
+.w-circle-settle-stamp {
+  position: absolute; top: -.8rem; right: .8rem; background: var(--sheet); font-family: var(--f-type); font-weight: 700; font-size: .72rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--accent); border: 3px double var(--accent); padding: .15rem .5rem;
+  transform: rotate(3deg); animation: w-circle-stamp .45s cubic-bezier(.2, 1.6, .4, 1) .15s both;
+}
+@keyframes w-circle-stamp { from { opacity: 0; transform: rotate(3deg) scale(1.6); } to { opacity: 1; transform: rotate(3deg) scale(1); } }
+.w-circle-settle-title { font-size: 1.15rem; font-weight: 700; line-height: 1.25; padding-right: 1rem; }
+.w-circle-items { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.w-circle-items li { display: flex; gap: .7rem; align-items: flex-start; line-height: 1.45; font-size: .98rem; animation: w-circle-in .3s ease-out both; animation-delay: calc(var(--i) * 110ms + 200ms); }
+.w-circle-icon { flex: 0 0 auto; width: 2rem; height: 2rem; border-radius: 50%; background: var(--sheet); border: 1.5px solid var(--brass); display: grid; place-items: center; }
+.w-circle-icon svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: var(--brass); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.w-circle-net { font-family: var(--f-type); font-size: .82rem; color: var(--ink); background: var(--brass-soft); border-radius: 2px; padding: .45rem .6rem; line-height: 1.45; }
+.w-circle-lessons { margin: 0; padding: 0; list-style: none; display: grid; gap: .45rem; }
+.w-circle-lessons li { padding-left: 1.1rem; position: relative; line-height: 1.45; }
+.w-circle-lessons li::before { content: ""; position: absolute; left: 0; top: .5em; width: .5rem; height: .5rem; border-radius: 50%; background: var(--accent); }
+.w-circle-note { font-family: var(--f-type); font-size: .76rem; color: var(--ink-3); line-height: 1.5; border-top: 1px dashed var(--rule); padding-top: .6rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .w-circle-flames, .w-circle-flame, .w-circle-glow { animation: none !important; }
+}
+
+/* ===== widget: strangers ===== */
+[data-widget="strangers"] .w-str { display: grid; gap: 1rem; }
+.w-str-modes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; }
+@media (min-width: 40rem) { .w-str-modes { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.w-str-mode {
+  display: grid; gap: .1rem; text-align: left; padding: .5rem .65rem; min-height: 3.1rem; border: 1px solid var(--rule); border-radius: var(--radius);
+  background: var(--sheet); cursor: pointer; touch-action: manipulation; transition: border-color .15s, background .15s;
+}
+.w-str-mode span { font-family: var(--f-body); font-weight: 700; font-size: .95rem; line-height: 1.2; color: var(--ink); }
+.w-str-mode small { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); letter-spacing: .03em; }
+.w-str-mode:hover { border-color: var(--accent); }
+.w-str-mode[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+.w-str-mode[aria-pressed="true"] span, .w-str-mode[aria-pressed="true"] small { color: var(--on-accent); }
+
+.w-str-stage {
+  position: relative; height: 340px; border-radius: var(--radius); overflow: hidden; background: var(--sheet-2);
+  border: 1px solid var(--rule); touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none;
+}
+.w-str-stage:active { cursor: grabbing; }
+@media (min-width: 40rem) { .w-str-stage { height: 420px; } }
+.w-str-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity .5s; }
+.w-str-c3d { opacity: 0; }
+.w-str-c3d.is-on { opacity: 1; }
+.w-str-c2d.is-off { opacity: 0; }
+.w-str-place, .w-str-scale {
+  position: absolute; left: .6rem; font-size: .72rem; letter-spacing: .04em; color: var(--ink-2); pointer-events: none;
+  background: var(--sheet-2); padding: .15rem .35rem; border-radius: 2px; max-width: calc(100% - 1.2rem);
+}
+.w-str-place { top: .5rem; font-weight: 700; color: var(--ink); }
+.w-str-scale { top: 1.9rem; }
+.w-str-legend {
+  position: absolute; left: .6rem; bottom: .5rem; right: .6rem; display: flex; flex-wrap: wrap; gap: .25rem .8rem; margin: 0; padding: 0;
+  list-style: none; font-size: .7rem; color: var(--ink-2); pointer-events: none;
+}
+.w-str-legend li { display: flex; align-items: center; gap: .3rem; background: var(--sheet-2); padding: 0 .2rem; border-radius: 2px; }
+.w-str-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+.w-str-legend .is-you { background: var(--brass); box-shadow: 0 0 0 2px var(--sheet-2), 0 0 0 3px var(--brass); }
+.w-str-legend .is-know { background: var(--accent); }
+.w-str-legend .is-crowd { background: var(--ink-3); }
+
+.w-str-controls { display: grid; gap: .9rem; }
+.w-str-range { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: .2rem .6rem; }
+.w-str-range input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); height: 2rem; margin: 0; }
+.w-str-know-out { font-size: .95rem; font-weight: 700; color: var(--ink); text-align: right; }
+.w-str-range-note { grid-column: 1 / -1; font-size: .82rem; color: var(--ink-3); line-height: 1.4; }
+.w-str-rule { display: grid; gap: .4rem; }
+.w-str-draw { justify-self: start; }
+
+.w-str-result { display: grid; gap: .9rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+@media (min-width: 40rem) { .w-str-result { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 1.4rem; } }
+.w-str-box {
+  list-style: none; margin: 0; padding: .6rem .7rem; display: grid; grid-template-columns: repeat(6, 2rem); gap: .35rem .45rem;
+  justify-content: start; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); width: max-content; max-width: 100%;
+}
+.w-str-seat svg { width: 2rem; height: 2.5rem; display: block; }
+.w-str-seat circle, .w-str-seat path { fill: transparent; stroke: var(--ink-3); stroke-width: 1.3; stroke-dasharray: 2.5 2; transition: fill .2s, stroke .2s; }
+.w-str-seat.is-filled circle, .w-str-seat.is-filled path { fill: var(--sheet); stroke: var(--ink); stroke-dasharray: none; }
+.w-str-seat.is-know circle, .w-str-seat.is-know path { fill: var(--brass); stroke: var(--brass); }
+.w-str-seat.is-filled { animation: w-str-pop .28s ease-out; }
+@keyframes w-str-pop { from { transform: translateY(-5px); opacity: .3; } to { transform: none; opacity: 1; } }
+
+.w-str-readout { display: grid; gap: .6rem; min-width: 0; }
+.w-str-big { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+.w-str-big b { font-family: var(--f-display); font-weight: 900; font-size: 3rem; line-height: .9; color: var(--brass); min-width: 1.4ch; }
+.w-str-big span { font-family: var(--f-type); font-size: .9rem; color: var(--ink-2); }
+.w-str-stats { margin: 0; display: grid; gap: .35rem; }
+.w-str-stats div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--rule); padding-bottom: .2rem; }
+.w-str-stats dt { font-size: .88rem; color: var(--ink-2); }
+.w-str-stats dd { margin: 0; font-family: var(--f-type); font-weight: 700; white-space: nowrap; }
+.w-str-note { font-size: .92rem; color: var(--ink-2); }
+.w-str-insight { font-size: .95rem; font-style: italic; color: var(--ink); border-left: 3px solid var(--brass); padding-left: .7rem; }
+
+/* ===== widget: verdict ===== */
+[data-widget="verdict"] .w-ver { display: grid; gap: 1rem; }
+.w-ver-tally { display: flex; gap: .4rem; }
+.w-ver-mark { width: 1.6rem; height: .5rem; border-radius: 1px; background: var(--rule); transition: background .2s; }
+.w-ver-mark.is-now { background: var(--ink-3); }
+.w-ver-mark.is-right { background: var(--accent); }
+.w-ver-mark.is-wrong { background: var(--seal); }
+.w-ver-card { display: grid; gap: .9rem; min-width: 0; }
+.w-ver-q { font-family: var(--f-body); font-size: 1.2rem; line-height: 1.3; font-weight: 700; outline: none; }
+.w-ver-options { display: grid; gap: .5rem; }
+@media (min-width: 40rem) { .w-ver-options { grid-template-columns: 1fr 1fr; } }
+.w-ver-opt {
+  display: flex; align-items: center; gap: .7rem; text-align: left; min-height: 3rem; padding: .55rem .75rem; border: 1px solid var(--rule);
+  border-radius: var(--radius); background: var(--sheet); cursor: pointer; font-size: .98rem; line-height: 1.3; touch-action: manipulation;
+  transition: border-color .15s, background .15s, opacity .2s;
+}
+.w-ver-opt:hover:not([disabled]) { border-color: var(--accent); background: var(--wash); }
+.w-ver-opt[disabled] { cursor: default; }
+.w-ver-letter {
+  flex: 0 0 auto; width: 1.7rem; height: 1.7rem; display: grid; place-items: center; border: 1px solid var(--ink-3); border-radius: 50%;
+  font-family: var(--f-type); font-weight: 700; font-size: .8rem; color: var(--ink-2);
+}
+.w-ver-opt.is-right { border-color: var(--accent); background: var(--wash); }
+.w-ver-opt.is-right .w-ver-letter { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.w-ver-opt.is-wrong { border-color: var(--seal); background: var(--seal-soft); }
+.w-ver-opt.is-wrong .w-ver-letter { background: var(--seal); border-color: var(--seal); color: var(--sheet); }
+.w-ver-opt.is-dim { opacity: .5; }
+.w-ver-why { display: grid; gap: .8rem; animation: w-ver-in .3s ease-out; }
+.w-ver-why p { font-size: .98rem; color: var(--ink-2); }
+.w-ver-why b { color: var(--ink); }
+.w-ver-why .btn { justify-self: start; }
+@keyframes w-ver-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+.w-ver-cert {
+  position: relative; display: grid; gap: .7rem; text-align: center; padding: 1.5rem 1.1rem 1.2rem; background: var(--paper);
+  border: 1px solid var(--rule); outline: 1px solid var(--rule); outline-offset: -7px; border-radius: 2px;
+}
+.w-ver-cert.is-fresh { animation: w-ver-cert-in .6s cubic-bezier(.2, .9, .3, 1.05); }
+@keyframes w-ver-cert-in { from { opacity: 0; transform: translateY(14px) rotate(-1.2deg); } to { opacity: 1; transform: none; } }
+.w-ver-cert-court { font-family: var(--f-display); font-weight: 500; font-size: 1.05rem; color: var(--ink-2); }
+.w-ver-cert-title { font-family: var(--f-display); font-weight: 900; font-size: clamp(1.9rem, 8vw, 2.6rem); line-height: .95; outline: none; color: var(--ink); }
+.w-ver-cert-body { font-size: 1rem; line-height: 1.55; max-width: 30rem; margin-inline: auto; }
+.w-ver-cert-rank {
+  justify-self: center; font-family: var(--f-type); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: .9rem;
+  color: var(--seal); border: 3px double var(--seal); padding: .25rem .7rem; transform: rotate(-2deg);
+}
+.w-ver-cert-line { font-size: .92rem; color: var(--ink-2); max-width: 30rem; margin-inline: auto; }
+.w-ver-cert-box { display: grid; grid-template-columns: repeat(6, 2.1rem); gap: .35rem; justify-content: center; margin-top: .3rem; }
+.w-ver-cert-seat {
+  width: 2.1rem; height: 2.1rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 900;
+  font-size: .72rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+}
+.w-ver-cert-seat.is-on { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
+.w-ver-cert-seals { font-size: .78rem; color: var(--ink-3); }
+.w-ver-cert-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .3rem; font-size: .8rem; color: var(--ink-2); text-align: left; }
+.w-ver-wax { width: 4.2rem; height: 4.2rem; flex: 0 0 auto; transform: rotate(-12deg); }
+.w-ver-wax path { fill: var(--seal); }
+.w-ver-wax circle { fill: none; stroke: var(--sheet); stroke-opacity: .45; stroke-width: 1.5; }
+.w-ver-wax text { font-family: var(--f-display); font-weight: 900; font-size: 20px; fill: var(--sheet); fill-opacity: .85; }
+.w-ver-actions { justify-content: center; }
+.w-ver-copytext { width: 100%; min-height: 5rem; font-family: var(--f-type); font-size: .85rem; padding: .6rem; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: var(--radius); }
+
+</style>
+<header class="hero wrap">
+  <div class="hero-watermark" aria-hidden="true">XII</div>
+  <div class="hero-inner">
+    <p class="hero-court">In the Court of All the Ages</p>
+    <h1 class="hero-title">Twelve <span>Strangers</span></h1>
+    <p class="hero-dek">How <q>a jury of your peers</q> went from the neighbors who knew you best to twelve people who have never met you.</p>
+    <div class="summons" id="summons">
+      <div class="summons-head"><span class="label">Summons for jury service</span><span class="summons-no">Juror No. <b id="jurorNo" class="tnum">0000</b></span></div>
+      <dl class="summons-fields">
+        <div><dt>To</dt><dd>You, the reader</dd></div>
+        <div><dt>Term</dt><dd>Before history to 2026 CE</dd></div>
+        <div><dt>In the matter of</dt><dd>Who gets to judge you, and why</dd></div>
+        <div><dt>Duties</dt><dd>Draw lots in Athens. Choose an ordeal. Defy a judge. Collect twelve seals.</dd></div>
+      </dl>
+      <p class="summons-fine">Failure to appear may result in being tried by people who have never heard of you. This will probably happen anyway.</p>
+      <div class="summons-actions">
+        <button class="btn" id="answerSummons" type="button">Answer the summons</button>
+        <span class="summons-status" id="summonsStatus">Status: not yet answered</span>
+      </div>
+      <span class="summons-stamp" aria-hidden="true">Reporting</span>
+    </div>
+  </div>
+</header>
+
+<nav class="ticker" aria-label="Chapters by era">
+  <div class="ticker-track" id="tickerTrack"></div>
+  <div class="ticker-progress" aria-hidden="true"><span id="tickerBar"></span></div>
+</nav>
+
+<main class="wrap">
+
+<!-- ===================== I ===================== -->
+<section class="chapter" id="ch-circle" data-tick="The Circle" data-tick-date="Before history" data-num="I" data-date="Before history to c. 1900 BCE">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">I</span><span class="ch-date">Before history to c. 1900 BCE</span></p>
+    <h2 class="ch-title">The Circle</h2>
+    <p class="ch-dek">Long before courts, the people who judged you were the people who knew you. All of them.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">For almost all of human history, people lived in groups small enough that everyone knew everyone. The anthropologist Robin Dunbar argues that the human brain tops out at about 150 stable relationships, roughly the size of a forager clan or a traditional village. Other researchers dispute the exact number, but not the scale. Inside a group that size there is no need to ask whether the judges know the accused. They all do.</p>
+  </div>
+  <aside class="spec col">
+    <p class="spec-label">Speculation &middot; not in the record</p>
+    <p>Nobody wrote down how the first humans settled a quarrel. But anthropologists who lived with small communities in the last two centuries saw a common pattern, and it is a fair guess that it is very old. The whole group listens. Kin speak up for kin. Old grudges come out. Your reputation is the main evidence. And because everyone has to go on living together, the goal is usually repair rather than punishment: give back what was taken, pay something, make peace.</p>
+  </aside>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Everyone knows everyone</h3><p class="exhibit-hint">Tap a villager to hear what they know.</p></div>
+    <div class="exhibit-body" data-widget="circle"></div>
+  </figure>
+  <div class="prose col">
+    <p>Some of these gatherings were studied up close. Among the Kpelle of Liberia, the anthropologist James Gibbs described the <span class="term">house palaver</span>, a meeting of kin and neighbors held in the home of the complainant, where everyone could speak and the aim was to send both sides home reconciled. Gibbs called it therapy as much as law.</p>
+    <h3>The first case on clay</h3>
+    <p>The oldest trial record of this kind comes from Mesopotamia. Around 1900 BCE, in the city of Nippur, three men killed a priest named Lu-Inanna and then told his wife, Nin-dada. She said nothing. The king sent the case to the Assembly of Nippur, a gathering of citizens. Nine men spoke for putting her to death along with the killers. Two spoke for her: she had not killed anyone. In the reading of the scholar Thorkild Jacobsen, the Assembly decided that a wife who keeps silent about her husband's murder shares the guilt, and all four were condemned. An earlier translator read the tablet the other way and had her set free, which tells you how hard four-thousand-year-old law can be to read.</p>
+    <p>The judges were not professionals. They were the city's own people, judging a crime that had happened among them. That idea would keep coming back.</p>
+  </div>
+</section>
+
+<!-- ===================== II ===================== -->
+<section class="chapter" id="ch-athens" data-tick="Justice by Lottery" data-tick-date="508 to 322 BCE" data-num="II" data-date="Athens, 508 to 322 BCE">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">II</span><span class="ch-date">Athens, 508 to 322 BCE</span></p>
+    <h2 class="ch-title">Justice by Lottery</h2>
+    <p class="ch-dek">Athens handed its courts to hundreds of ordinary citizens at a time, picked at random so that nobody could buy them.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Democratic Athens had no professional judges and no public prosecutor. A citizen brought the charge, both sides spoke for themselves against a water clock, and a huge panel of citizens voted straight away. There was no deliberation and no discussion. Each juror dropped a ballot, and the majority won.</p>
+    <p>Every year 6,000 citizens over the age of thirty, roughly one adult male citizen in five, swore the jurors' oath. On a court day they gathered at dawn, and a stone machine decided which of them would serve.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The allotment machine</h3><p class="exhibit-hint">Insert your ticket. Let the dice fall.</p></div>
+    <div class="exhibit-body" data-widget="kleroterion"></div>
+  </figure>
+  <div class="prose col">
+    <p>Why so many jurors? A panel of 501 is hard to bribe and hard to frighten. Why chosen at random, on the morning of the trial? Because if nobody knows in advance who will judge, nobody can buy the judges. Athens fought corruption with chance, the same tool a modern court uses when it draws names from a voter list. It had reason to. Aristotle names the first man to bribe an Athenian jury: Anytus, in 409 BCE. Ten years later the same Anytus helped prosecute Socrates.</p>
+    <p>Jurors were paid, three obols a day from the 420s BCE, which drew the old and the poor. The comic playwright Aristophanes mocked them in <i>Wasps</i> (422 BCE) as cranky old men addicted to the thrill of voting.</p>
+    <p>Were they your peers? In one sense, very much. In a city of perhaps 30,000 adult male citizens, 501 jurors were a real slice of the citizen body. In another sense, not at all. Women, enslaved people and resident foreigners could never sit. And Athens was already too big for everyone to know everyone. By design, most of the men voting on your fate had never met you. The twelve-strangers problem is at least 2,400 years old.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">You are juror 501</h3><p class="exhibit-hint">Cast your ballot in the trial of Socrates.</p></div>
+    <div class="exhibit-body" data-widget="socrates"></div>
+  </figure>
+  <div class="prose col">
+    <h3>Meanwhile in Rome</h3>
+    <p>Rome tried serious crimes in standing courts, the <span class="term">quaestiones perpetuae</span>, before large panels of jurors drawn from an official list, the <span class="term">album iudicum</span>. Who got onto that list was a political brawl. In 122 BCE Gaius Gracchus moved the seats from senators to the wealthy order of knights. Sulla gave them back to the Senate. In 70 BCE a compromise split them among senators, knights and a class of treasury officials. Rome was arguing about a question that never went away: who counts as a fit judge of a citizen?</p>
+    <p>Neither Athens nor Rome is a direct ancestor of the English jury. Historians see no line of descent. They are better read as proof that people keep reinventing the idea of ordinary citizens judging each other.</p>
+  </div>
+</section>
+
+<!-- ===================== III ===================== -->
+<section class="chapter" id="ch-ordeal" data-tick="Oath, Ordeal, Battle" data-tick-date="500 to 1215" data-num="III" data-date="Northern Europe, 500 to 1215">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">III</span><span class="ch-date">Northern Europe, 500 to 1215</span></p>
+    <h2 class="ch-title">Oath, Ordeal or Battle</h2>
+    <p class="ch-dek">In early medieval Europe your neighbors vouched for you, and when they could not settle it, God would.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Across northern Europe, free men met in open-air assemblies called <span class="term">things</span>. The Roman historian Tacitus, writing in 98 CE, described Germanic assemblies that heard capital charges and showed approval by brandishing their spears. In Iceland, the Althing, founded around 930, ran a whole country with no king. Its Lawspeaker recited the law from memory, one third of it each summer. In the Viking-settled parts of England, a district was a <span class="term">wapentake</span>, from the Old Norse for &ldquo;weapon-taking,&rdquo; the clash of arms that signaled yes.</p>
+    <h3>Your word, and your neighbors' word</h3>
+    <p>One way to clear yourself was <span class="term">compurgation</span>. You swore you were innocent, then brought oath-helpers who swore that your oath was clean. They were not witnesses. They were character references with their souls on the line. A well-known local could clear himself with ease. A stranger with nobody to swear for him was in trouble.</p>
+    <p>Around 997 King &AElig;thelred II ordered that in each wapentake the twelve leading thegns, with the reeve, should swear on holy relics to accuse no innocent man and shield no guilty one. If they split, the view of eight of them stood, and each outvoted thegn paid a fine. Historians still argue whether these twelve are the jury's true ancestor. They are certainly England's first famous twelve.</p>
+    <p>The Normans brought another tool from France: the <span class="term">inquest</span>. A royal official summoned local men, put them on oath and made them tell the truth about the king's lands and rights. In 1086 William the Conqueror's commissioners used sworn local juries, hundred by hundred, to compile Domesday Book: who held each place before the Conquest, who held it now, and what it was worth.</p>
+    <h3>When the neighbors could not decide</h3>
+    <p>Then came the ordeal, a church ritual. In the ordeal of hot iron you carried a blessed red-hot iron nine of your own feet. Your hand was bound and sealed, and three days later a clean wound meant innocence and a festering one meant guilt. In the ordeal of cold water you were lowered on a rope into blessed water. If you sank, the water had accepted you. You were innocent, and they pulled you out. The Normans added trial by battle: God would give victory to the side in the right.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Accused, 1200</h3><p class="exhibit-hint">Pick how your guilt will be decided.</p></div>
+    <div class="exhibit-body" data-widget="ordeal"></div>
+  </figure>
+  <div class="col objection">
+    <p class="obj-claim"><span class="label">The claim</span><q>Ordeals were rigged so that almost everyone failed.</q></p>
+    <button type="button" class="btn btn-small btn-seal obj-btn">Objection!</button>
+    <div class="obj-ruling" hidden>
+      <span class="obj-stamp">Sustained</span>
+      <p>Where records survive, most people passed. In a church register from V&aacute;rad in Hungary (1208 to 1235), 130 of the 208 people who actually carried the hot iron were cleared. In 1098 fifty Englishmen accused of poaching the king's deer all passed the hot iron, and King William Rufus scoffed at the whole idea. The economist Peter Leeson argues ordeals worked because people believed in them: the guilty tended to confess or settle, and priests could quietly make the test survivable for those who did go through with it.</p>
+    </div>
+  </div>
+  <div class="col objection">
+    <p class="obj-claim"><span class="label">The claim</span><q>Trial by battle was still legal in England in 1818.</q></p>
+    <button type="button" class="btn btn-small btn-seal obj-btn">Objection!</button>
+    <div class="obj-ruling" hidden>
+      <span class="obj-stamp is-overruled">Overruled</span>
+      <p>It is true. In <i>Ashford v. Thornton</i> (1818), a man acquitted of murder answered a private appeal by throwing down a glove in the Court of King's Bench and demanding to fight. The judges agreed the law allowed it. The accuser backed down, and Parliament abolished trial by battle in 1819.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== IV ===================== -->
+<section class="chapter" id="ch-kings" data-tick="The King's Twelve" data-tick-date="1166 to 1215" data-num="IV" data-date="England, 1166 to 1215">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">IV</span><span class="ch-date">England, 1166 to 1215</span></p>
+    <h2 class="ch-title">The King's Twelve</h2>
+    <p class="ch-dek">A king who wanted order, a pope who took God out of the courtroom, and a clause about barons that grew into a promise for everyone.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Henry II wanted his peace kept, and he used neighbors to keep it. His Assize of Clarendon (1166) ordered twelve lawful men of every hundred, and four of every village, to name on oath anyone suspected of robbery, murder or theft. These twelve were accusers, not judges. The people they named went to the water ordeal, and God decided. Even passing was not always enough: a man the jurors called notorious could be made to leave the realm anyway.</p>
+    <p>For land, Henry offered something new. In quick actions over who had been thrown off a holding, twelve local men answered a single question about facts they could see for themselves. And from the late 1170s, under the Grand Assize, a landholder challenged over his title could refuse to fight and let twelve knights of the county decide who had the better right.</p>
+    <h3>1215: God leaves the courtroom</h3>
+    <p>In November 1215 the Fourth Lateran Council in Rome forbade priests to bless ordeals. Without a priest, an ordeal was just an injury. English justices suddenly had no way to decide criminal cases. In January 1219 the young Henry III's council wrote to the judges with makeshift advice, and the judges improvised with the sworn neighbors they already had. They began asking a jury not only whom it suspected, but whether he was guilty.</p>
+    <p>An accused person had to agree to this new trial. In the words of the court rolls, he <q>put himself upon the country</q>, meaning on the verdict of his neighbors.</p>
+    <h3>The judgment of his peers</h3>
+    <p>Earlier in 1215, at Runnymede, rebel barons had forced King John to seal Magna Carta. Its most famous clause promises that no free man will be punished <q>except by the lawful judgment of his peers or by the law of the land.</q> Americans read it as the birth certificate of the jury. Read the Latin closely and it says something narrower.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Clause 39, word by word</h3><p class="exhibit-hint">Tap each Latin word.</p></div>
+    <div class="exhibit-body" data-widget="carta"></div>
+  </figure>
+  <div class="prose col">
+    <p>So the first &ldquo;jury of your peers&rdquo; was a club for the rich: barons judged by barons. Peers of the realm kept a version of that privilege for more than 700 years. The last English lord tried by the House of Lords, Lord de Clifford, was acquitted of manslaughter in 1935 after a fatal car crash. Parliament abolished the privilege in 1948.</p>
+  </div>
+</section>
+
+<!-- ===================== V ===================== -->
+<section class="chapter" id="ch-twelve" data-tick="Twelve Who Knew" data-tick-date="1215 to 1700" data-num="V" data-date="England, 1215 to 1700">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">V</span><span class="ch-date">England, 1215 to 1700</span></p>
+    <h2 class="ch-title">Twelve Who Knew Too Much</h2>
+    <p class="ch-dek">For centuries a jury's whole value was what it already knew. Then, slowly, knowing became the problem.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Medieval jurors were summoned from the neighborhood of the crime, the <span class="term">vicinage</span>, precisely because they knew the people, the land and the gossip. Historians call them <span class="term">self-informing</span>. Courts expected them to find things out before they came to court. A jury of strangers would have been useless. It could not tell the judges anything.</p>
+    <p>Being judged by people who knew you could be a blessing or a terror. A man with a good name had friends in the box. A man with enemies had enemies in the box. And there was no backing out. A defendant who refused to put himself upon the country could be squeezed until he agreed. From 1275 the law allowed <span class="term">prison forte et dure</span>, which became <span class="term">peine forte et dure</span>: pressing under heavy weights. In Salem, Massachusetts, in 1692, Giles Corey refused to plead to a charge of witchcraft and was pressed to death. England ended the practice in 1772. From 1827 a silent defendant was simply treated as pleading not guilty.</p>
+    <h3>Peers, literally</h3>
+    <p>Some medieval juries were built to make &ldquo;peers&rdquo; literal. When a foreign merchant was on trial, he could ask for a jury <span class="term">de medietate linguae</span>, &ldquo;of the half tongue&rdquo;: half Englishmen and half foreigners. A royal charter for foreign merchants in 1303 and a statute of 1353 formalized it, and England kept it until 1870. When a condemned woman claimed to be pregnant, the court summoned a <span class="term">jury of matrons</span> to examine her. For centuries it was the only jury women could sit on.</p>
+    <h3>From knowing to hearing</h3>
+    <p>Over time the jury's knowledge mattered less and the evidence put before it mattered more. By the 1470s the judge Sir John Fortescue was describing English juries that heard witnesses in open court. Across the 1500s and 1600s, as towns grew and cases got more complicated, the balance tipped from what jurors knew to what they were shown. A neighbor who knew the facts was becoming a witness instead of a juror.</p>
+    <p>Some things stayed fixed. The verdict had to be unanimous, a rule settled by the late 1300s. Juries that could not agree could be kept without food, drink, fire or light until they did. Jurors had to meet property requirements, so the &ldquo;country&rdquo; that judged you meant the men of your county who owned land. And there were nearly always twelve of them. Why twelve?</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Why twelve?</h3><p class="exhibit-hint">Weigh the theories, then change the size of the jury.</p></div>
+    <div class="exhibit-body" data-widget="whytwelve"></div>
+  </figure>
+</section>
+
+<!-- ===================== VI ===================== -->
+<section class="chapter" id="ch-talks" data-tick="The Jury Talks Back" data-tick-date="1670 to 1791" data-num="VI" data-date="London and America, 1670 to 1791">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">VI</span><span class="ch-date">London and America, 1670 to 1791</span></p>
+    <h2 class="ch-title">The Jury Talks Back</h2>
+    <p class="ch-dek">Once jurors stopped being witnesses, they became something new: a wall between the citizen and the state.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">A jury that decides on the evidence can also decide against the government. English judges knew it and tried to keep juries in line. In 1554 a London jury acquitted Sir Nicholas Throckmorton of treason against Queen Mary, and the jurors were jailed and heavily fined for it. More than a century later, a jury finally made it stick that jurors may not be punished for their verdict.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The Old Bailey, September 1670</h3><p class="exhibit-hint">You are on the jury. The judge wants a conviction.</p></div>
+    <div class="exhibit-body" data-widget="bushel"></div>
+  </figure>
+  <div class="prose col">
+    <h3>Across the Atlantic</h3>
+    <p>The American colonists took the lesson to heart. In New York in 1735 the printer John Peter Zenger was tried for seditious libel against the royal governor. Under the law as the judges stated it, the truth of what he printed was no defense. His lawyer, Andrew Hamilton of Philadelphia, asked the jury to judge both the law and the facts. They acquitted.</p>
+    <p>When Parliament sent smuggling and tax cases to vice-admiralty courts, where a judge sat without a jury, the colonies treated it as an attack on their liberty. The Declaration of Independence lists among King George's offenses <q>depriving us in many cases, of the benefits of Trial by Jury</q> and <q>transporting us beyond Seas to be tried for pretended offences.</q></p>
+    <p>So the new nation wrote the jury in three times over. Article III requires that <q>the Trial of all Crimes, except in Cases of Impeachment, shall be by Jury.</q> The Sixth Amendment promises an accused <q>a speedy and public trial, by an impartial jury of the State and district wherein the crime shall have been committed.</q> The Seventh keeps the civil jury in suits at common law worth more than twenty dollars.</p>
+  </div>
+  <blockquote class="pull col">
+    <p>I consider trial by jury as the only anchor ever yet imagined by man, by which a government can be held to the principles of its constitution.</p>
+    <footer>Thomas Jefferson, letter to Thomas Paine, 1789</footer>
+  </blockquote>
+  <div class="col objection">
+    <p class="obj-claim"><span class="label">The claim</span><q>The Constitution guarantees you a jury of your peers.</q></p>
+    <button type="button" class="btn btn-small btn-seal obj-btn">Objection!</button>
+    <div class="obj-ruling" hidden>
+      <span class="obj-stamp">Sustained</span>
+      <p>The phrase appears nowhere in the Constitution or the Bill of Rights. The Sixth Amendment promises an <q>impartial jury</q> from the state and district of the crime. &ldquo;Peers&rdquo; comes from Magna Carta, where it meant equals in rank, and from the English legal writers the founders read.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VII ===================== -->
+<section class="chapter" id="ch-sit" data-tick="Who Got to Sit" data-tick-date="1791 to 2020" data-num="VII" data-date="United States, 1791 to 2020">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">VII</span><span class="ch-date">United States, 1791 to 2020</span></p>
+    <h2 class="ch-title">Who Got to Sit</h2>
+    <p class="ch-dek">The founders' jury of peers was, in practice, a jury of white men who owned property. Opening the box took two centuries.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Early American jurors were drawn from the men who could vote, and in most places that meant white men with property. Each widening of the jury box came from a fight, usually in the Supreme Court, and many of the formal victories took decades to reach real courtrooms.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The jury box, year by year</h3><p class="exhibit-hint">Drag through time and watch who may serve.</p></div>
+    <div class="exhibit-body" data-widget="whosat"></div>
+  </figure>
+  <div class="prose col">
+    <h3>Smaller, and then unanimous again</h3>
+    <p>In the twentieth century the Court also asked whether twelve, and unanimity, were essential. In <i>Williams v. Florida</i> (1970) it upheld a six-person jury and called the number twelve a historical accident. In <i>Ballew v. Georgia</i> (1978) it drew the line at five. In <i>Apodaca v. Oregon</i> (1972) it let states convict on a split vote.</p>
+    <p>That last rule had an ugly history. Louisiana adopted non-unanimous verdicts at its 1898 constitutional convention, a gathering openly devoted to white supremacy, so that a white majority could outvote Black jurors. In <i>Ramos v. Louisiana</i> (2020) the Court overruled <i>Apodaca</i> and held that a state conviction for a serious crime requires a unanimous jury.</p>
+  </div>
+</section>
+
+<!-- ===================== VIII ===================== -->
+<section class="chapter" id="ch-inversion" data-tick="The Great Inversion" data-tick-date="1300 vs 2026" data-num="VIII" data-date="1300 against 2026">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">VIII</span><span class="ch-date">1300 against 2026</span></p>
+    <h2 class="ch-title">The Great Inversion</h2>
+    <p class="ch-dek">Almost everything that once made you a good juror now gets you sent home.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Put a juror from 1300 next to a juror from 2026 and they look like opposites. One was chosen because he knew. The other is chosen because she does not. Try sorting a few would-be jurors yourself.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Would you be seated?</h3><p class="exhibit-hint">Sort each would-be juror into 1300, 2026, both or neither.</p></div>
+    <div class="exhibit-body" data-widget="inversion"></div>
+  </figure>
+  <div class="prose col">
+    <h3>What &ldquo;peers&rdquo; means now</h3>
+    <p>Watch what happened to the word. In 1215 &ldquo;peers&rdquo; meant your equals in rank. By 1300, in practice, it meant your neighbors. Today the Supreme Court treats it as something closer to statistics. In <i>Taylor v. Louisiana</i> (1975) it held that the jury pool must be drawn from a fair cross section of the community. In <i>Holland v. Illinois</i> (1990) it made clear that the guarantee covers the pool, not the twelve who end up in the box.</p>
+    <p>So you have no right to jurors who look like you, live near you or know anything about you. You have a right not to have whole groups of your community shut out. The modern peer is not someone like you. It is anyone at all, chosen fairly.</p>
+  </div>
+</section>
+
+<!-- ===================== IX ===================== -->
+<section class="chapter" id="ch-strangers" data-tick="Twelve Strangers" data-tick-date="Today" data-num="IX" data-date="Today">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">IX</span><span class="ch-date">Today</span></p>
+    <h2 class="ch-title">Twelve Strangers</h2>
+    <p class="ch-dek">In a big city, the people who judge you will almost certainly be strangers. That is the design.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">Here is how most American juries are made today. The court takes lists of residents, usually registered voters and licensed drivers, and mails summonses at random. Many never arrive and many are ignored, especially in big cities. Those who come fill out a questionnaire and wait. Then the lawyers and the judge question them, in a process called <span class="term">voir dire</span>, and strike anyone who knows the parties, the lawyers or the case, or who cannot be fair. Each side may also strike a few people without giving a reason, as long as the reason is not race or sex.</p>
+    <p>What survives is close to the opposite of a medieval jury: twelve people, sometimes six or eight, chosen because they have no connection to you. Federal jurors are paid $50 a day.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The web of knowing</h3><p class="exhibit-hint">Pick a place. Draw a jury. Count who knows you.</p></div>
+    <div class="exhibit-body" data-widget="strangers"></div>
+  </figure>
+  <div class="prose col">
+    <p>The math is the whole story. Medieval rules picked jurors who knew you, but in a village of a few hundred even a lottery would have. Today's rules screen out anyone who knows you, but in a city of a million people a lottery almost never finds one anyway. The jury of strangers is a product of scale as much as of law.</p>
+    <p>Modern courts protect that ignorance hard. Jurors are told not to look anything up, not to visit the scene and not to discuss the case online. In England in 2012 a juror named Theodora Dallas was jailed for six months for searching the internet about a defendant and telling her fellow jurors what she found. Her medieval counterparts would have been expected to do exactly that.</p>
+    <h3>And most cases never reach a jury at all</h3>
+    <p>The biggest change is easy to miss. The jury the founders fought for now decides only a sliver of criminal cases. Most end in a plea bargain, negotiated by lawyers and approved by a judge, with no jury in the room.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The vanishing trial</h3><p class="exhibit-hint">Follow 100 federal criminal cases.</p></div>
+    <div class="exhibit-body" data-widget="vanishing"></div>
+  </figure>
+</section>
+
+<!-- ===================== X ===================== -->
+<section class="chapter" id="ch-debate" data-tick="Neighbors or Strangers?" data-tick-date="Now and next" data-num="X" data-date="Now and next">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">X</span><span class="ch-date">Now and next</span></p>
+    <h2 class="ch-title">Neighbors or Strangers?</h2>
+    <p class="ch-dek">Each version of the jury solved one problem and created another.</p>
+  </header>
+  <div class="prose col">
+    <p class="lede">The jury of neighbors knew the people and the place. It also knew the feuds, feared the local lord and shared the local prejudice. In 1955 an all-white jury in Sumner, Mississippi, acquitted the two men who had murdered fourteen-year-old Emmett Till. They later admitted the killing to a magazine. A jury of the community can be the community at its worst.</p>
+    <p>The jury of strangers owes nobody anything. It can be fair to an outsider in a way neighbors rarely were. But it knows nothing about you, your street or your life, and it has to learn it all from lawyers in a few days. Studies suggest a mix helps: in a 2006 experiment, the psychologist Samuel Sommers found that racially diverse mock juries deliberated longer, discussed more of the facts and made fewer factual errors than all-white ones.</p>
+  </div>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">The scales</h3><p class="exhibit-hint">Put each argument on a pan.</p></div>
+    <div class="exhibit-body" data-widget="scale"></div>
+  </figure>
+  <div class="prose col">
+    <h3>The jury elsewhere</h3>
+    <p>Most of the world does without a classic jury, and the jury is shrinking where it began. England and Wales have allowed verdicts of ten to two since 1967, and the government has moved to send more cases to judges sitting alone to clear a huge backlog. Scotland, which used fifteen jurors and a third verdict, &ldquo;not proven,&rdquo; voted in 2025 to abolish it. India ended jury trials after the sensational Nanavati case of 1959. Other countries are moving the other way: Japan began seating ordinary citizens beside professional judges in 2009, and several Argentine provinces have adopted juries since 2015.</p>
+    <h3>So who are your peers?</h3>
+    <p>Maybe the strangers are your peers after all, in the one sense that has survived every change. They are not your equals in rank, and they are not your neighbors. They are your equals before the law: people summoned by the same lottery, bound by the same rules, and liable to stand where you stand. Alexis de Tocqueville called the American jury a free school, always open, in which every juror learns his rights. In a city of strangers, it may be one of the last places where twelve of them must sit in a room and agree.</p>
+  </div>
+</section>
+
+<!-- ===================== XI ===================== -->
+<section class="chapter" id="ch-verdict" data-tick="Your Verdict" data-tick-date="Your turn" data-num="XI" data-date="Your turn">
+  <header class="ch-head col">
+    <p class="ch-kicker"><span class="ch-num">XI</span><span class="ch-date">Your turn</span></p>
+    <h2 class="ch-title">Your Verdict</h2>
+    <p class="ch-dek">The court will now instruct the jury.</p>
+  </header>
+  <figure class="exhibit col-wide">
+    <span class="exhibit-sticker">Exhibit</span>
+    <div class="exhibit-head"><h3 class="exhibit-title">Jury instructions</h3><p class="exhibit-hint">Seven questions. Then your certificate of service.</p></div>
+    <div class="exhibit-body" data-widget="verdict"></div>
+  </figure>
+</section>
+
+</main>
+
+<footer class="endmatter wrap">
+  <div class="col" id="go-deeper">
+    <h2>Go deeper</h2><p class="colophon">Five places to start, from the ordeal to the modern jury.</p>
+  </div>
+  <ul class="col deeper">
+    <li><b>Robert Bartlett, <i>Trial by Fire and Water: The Medieval Judicial Ordeal</i></b> (Oxford, 1986). The classic history of the ordeal and its fall after 1215.</li>
+    <li><b>Thomas Andrew Green, <i>Verdict According to Conscience</i></b> (Chicago, 1985). How English juries bent the law from the 1200s to 1800, and why it mattered.</li>
+    <li><b>Leonard W. Levy, <i>The Palladium of Justice: Origins of Trial by Jury</i></b> (Ivan R. Dee, 1999). A short, readable account from the ordeal to the Bill of Rights.</li>
+    <li><b>Albert W. Alschuler and Andrew G. Deiss, &ldquo;A Brief History of the Criminal Jury in the United States,&rdquo;</b> 61 <i>University of Chicago Law Review</i> 867 (1994). Who sat, who decided and how it changed.</li>
+    <li><b>Peter T. Leeson, &ldquo;Ordeals,&rdquo;</b> 55 <i>Journal of Law and Economics</i> 691 (2012). The argument that ordeals worked because people believed in them.</li>
+  </ul>
+  <div class="col">
+    <h2>Sources</h2>
+  </div>
+  <ol class="col sources" id="sources">
+    <li><b>I.</b> Robin Dunbar, &ldquo;Coevolution of neocortical size, group size and language in humans,&rdquo; <i>Behavioral and Brain Sciences</i> 16 (1993); James L. Gibbs Jr., &ldquo;The Kpelle Moot,&rdquo; <i>Africa</i> 33 (1963); Thorkild Jacobsen, &ldquo;An Ancient Mesopotamian Trial for Homicide&rdquo; (1959).</li>
+    <li><b>II.</b> Aristotle, <i>Constitution of the Athenians</i> 27, 53, 63 to 69; Plato, <i>Apology</i> 36a; Diogenes Laertius 2.41 to 42; Aristophanes, <i>Wasps</i> (422 BCE); Mogens Herman Hansen, <i>The Athenian Democracy in the Age of Demosthenes</i> (1991).</li>
+    <li><b>III.</b> Tacitus, <i>Germania</i> 11 to 12; III &AElig;thelred 3 (Wantage code); Domesday Book and the <i>Inquisitio Eliensis</i>; Robert Bartlett, <i>Trial by Fire and Water</i> (1986); Peter T. Leeson, &ldquo;Ordeals&rdquo; (2012); <i>Ashford v. Thornton</i> (1818) 1 B. &amp; Ald. 405.</li>
+    <li><b>IV.</b> Assize of Clarendon (1166); Fourth Lateran Council, canon 18 (1215); Magna Carta (1215), clause 39, British Library translation; Criminal Justice Act 1948, s. 30.</li>
+    <li><b>V.</b> Sir John Fortescue, <i>De Laudibus Legum Angliae</i> (c. 1470); Statute of Westminster I (1275), c. 12; Statute of the Staple (1353); Naturalization Act 1870; Sir Edward Coke, <i>First Institute</i> (1628), 155a; Thomas A. Green, <i>Verdict According to Conscience</i> (1985).</li>
+    <li><b>VI.</b> <i>Bushel's Case</i> (1670) Vaughan 135, 124 E.R. 1006; the trial of John Peter Zenger (1735); Declaration of Independence (1776); U.S. Const. art. III, &sect; 2, amends. VI and VII; Thomas Jefferson to Thomas Paine, 11 July 1789.</li>
+    <li><b>VII.</b> <i>Strauder v. West Virginia</i>, 100 U.S. 303 (1880); <i>Taylor v. Louisiana</i>, 419 U.S. 522 (1975); <i>Batson v. Kentucky</i>, 476 U.S. 79 (1986); <i>Williams v. Florida</i>, 399 U.S. 78 (1970); <i>Ballew v. Georgia</i>, 435 U.S. 223 (1978); <i>Apodaca v. Oregon</i>, 406 U.S. 404 (1972); <i>Ramos v. Louisiana</i>, 590 U.S. 83 (2020).</li>
+    <li><b>VIII.</b> <i>Holland v. Illinois</i>, 493 U.S. 474 (1990); 28 U.S.C. &sect; 1865.</li>
+    <li><b>IX.</b> 28 U.S.C. &sect; 1871; Christopher McCormick, Matthew Salganik and Tian Zheng, &ldquo;How Many People Do You Know?&rdquo; <i>Journal of the American Statistical Association</i> (2010); Pew Research Center, federal criminal case outcomes for fiscal 2022 (June 2023); <i>Attorney General v. Dallas</i> [2012] EWHC 156 (Admin).</li>
+    <li><b>X.</b> Samuel R. Sommers, &ldquo;On Racial Diversity and Group Decision Making,&rdquo; <i>Journal of Personality and Social Psychology</i> 90 (2006); Alexis de Tocqueville, <i>Democracy in America</i>, vol. 1, ch. 16 (1835).</li>
+  </ol>
+  <p class="col colophon">Made with Claude, November 2026. Built as one page with three.js for the crowd. Speculation is marked as such; everything else was checked against the sources above. If you spot an error, the jury would like to hear it.</p>
+</footer>
+<script>
+/* Twelve Strangers: page core.
+   Widgets register with TS.register(name, mount) and mount into [data-widget="name"].
+   mount(el, ctx) gets a ctx with: el, name, reduced, stamp(id), hasSeal(id), on(evt, cb), emit(evt, data),
+   store.get(key, fallback) / store.set(key, value), onVisible(cb), loadScript(url), juror, rand(). */
+(function () {
+  'use strict';
+  var TS = (window.TS = window.TS || {});
+  var widgets = {};
+  var bus = document.createElement('span');
+  var reduced = false;
+  try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+  var SEALS = [
+    { id: 'circle', label: 'The Circle', num: 'I', ch: 'ch-circle' },
+    { id: 'lot', label: 'Drawn by Lot', num: 'II', ch: 'ch-athens' },
+    { id: 'socrates', label: 'Juror of Socrates', num: 'II', ch: 'ch-athens' },
+    { id: 'ordeal', label: 'Survived 1200', num: 'III', ch: 'ch-ordeal' },
+    { id: 'carta', label: 'Clause 39', num: 'IV', ch: 'ch-kings' },
+    { id: 'twelve', label: 'Why Twelve?', num: 'V', ch: 'ch-twelve' },
+    { id: 'bushel', label: 'Juror of 1670', num: 'VI', ch: 'ch-talks' },
+    { id: 'seated', label: 'Who Got to Sit', num: 'VII', ch: 'ch-sit' },
+    { id: 'inversion', label: 'The Inversion', num: 'VIII', ch: 'ch-inversion' },
+    { id: 'strangers', label: 'Drew a Jury', num: 'IX', ch: 'ch-strangers' },
+    { id: 'scale', label: 'Weighed It', num: 'X', ch: 'ch-debate' },
+    { id: 'verdict', label: 'Final Verdict', num: 'XI', ch: 'ch-verdict' }
+  ];
+  TS.SEALS = SEALS;
+
+  var store = {
+    get: function (k, d) {
+      try { var v = window.localStorage.getItem('ts:' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; }
+    },
+    set: function (k, v) {
+      try { window.localStorage.setItem('ts:' + k, JSON.stringify(v)); } catch (e) {}
+    }
+  };
+  TS.store = store;
+
+  var earned = {};
+  (store.get('seals', []) || []).forEach(function (id) { earned[id] = true; });
+  function earnedCount() { return SEALS.filter(function (s) { return earned[s.id]; }).length; }
+
+  TS.on = function (evt, cb) { bus.addEventListener(evt, function (e) { cb(e.detail); }); };
+  TS.emit = function (evt, detail) { bus.dispatchEvent(new CustomEvent(evt, { detail: detail })); };
+  TS.register = function (name, fn) { widgets[name] = fn; };
+  TS.hasSeal = function (id) { return !!earned[id]; };
+
+  var jurorNo = store.get('juror', null);
+  if (!jurorNo) { jurorNo = String(1000 + Math.floor(Math.random() * 9000)); store.set('juror', jurorNo); }
+  TS.juror = jurorNo;
+
+  /* ---------- toast ---------- */
+  var toastEl, toastTimer;
+  TS.toast = function (msg) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.className = 'toast';
+      toastEl.setAttribute('role', 'status');
+      toastEl.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = msg;
+    toastEl.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2800);
+  };
+
+  /* ---------- seals ---------- */
+  TS.stamp = function (id) {
+    var seal = SEALS.filter(function (s) { return s.id === id; })[0];
+    if (!seal || earned[id]) return false;
+    earned[id] = true;
+    store.set('seals', Object.keys(earned));
+    renderSeals(true);
+    var n = earnedCount();
+    TS.toast(n === 12 ? 'Seal earned: ' + seal.label + '. Your jury box is full.' : 'Seal earned: ' + seal.label + ' (' + n + ' of 12)');
+    TS.emit('seal', { id: id, count: n });
+    return true;
+  };
+
+  var sealBox, sealPanel;
+  function buildSeals() {
+    sealBox = document.createElement('button');
+    sealBox.className = 'seal-box';
+    sealBox.type = 'button';
+    sealBox.setAttribute('aria-expanded', 'false');
+    sealBox.setAttribute('aria-controls', 'sealPanel');
+    sealBox.innerHTML = '<span class="seal-grid" aria-hidden="true">' +
+      SEALS.map(function () { return '<span class="seal-dot"></span>'; }).join('') +
+      '</span><span class="seal-count"><b class="tnum">0</b>/12 seals</span>';
+    sealPanel = document.createElement('div');
+    sealPanel.className = 'seal-panel';
+    sealPanel.id = 'sealPanel';
+    sealPanel.hidden = true;
+    sealPanel.innerHTML = '<h2>Your jury box</h2><p>Juror No. <b class="typed">' + jurorNo + '</b>. Earn a seal in each exhibit. Twelve seals fill the box.</p>' +
+      '<ul class="seal-list">' + SEALS.map(function (s) {
+        return '<li class="seal-item" data-seal="' + s.id + '"><a href="#' + s.ch + '"><span class="seal-medal">' + s.num + '</span><span>' + s.label + '</span></a></li>';
+      }).join('') + '</ul>';
+    document.body.appendChild(sealPanel);
+    document.body.appendChild(sealBox);
+    sealBox.addEventListener('click', function () {
+      var open = sealPanel.hidden;
+      sealPanel.hidden = !open;
+      sealBox.setAttribute('aria-expanded', String(open));
+    });
+    sealPanel.addEventListener('click', function (e) {
+      if (e.target.closest('a')) { sealPanel.hidden = true; sealBox.setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !sealPanel.hidden) { sealPanel.hidden = true; sealBox.setAttribute('aria-expanded', 'false'); sealBox.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!sealPanel.hidden && !sealPanel.contains(e.target) && !sealBox.contains(e.target)) {
+        sealPanel.hidden = true; sealBox.setAttribute('aria-expanded', 'false');
+      }
+    });
+    renderSeals(false);
+    // Keep the jury box out of the way while the summons is on screen.
+    var hero = document.querySelector('.hero');
+    if (hero && 'IntersectionObserver' in window) {
+      sealBox.hidden = true;
+      new IntersectionObserver(function (entries) {
+        var heroVisible = entries[0].isIntersecting;
+        sealBox.hidden = heroVisible;
+        if (heroVisible) { sealPanel.hidden = true; sealBox.setAttribute('aria-expanded', 'false'); }
+      }, { threshold: 0.02 }).observe(hero);
+    }
+  }
+  function renderSeals(bump) {
+    if (!sealBox) return;
+    var dots = sealBox.querySelectorAll('.seal-dot');
+    SEALS.forEach(function (s, i) { dots[i].classList.toggle('is-on', !!earned[s.id]); });
+    sealBox.querySelector('.seal-count b').textContent = earnedCount();
+    sealBox.setAttribute('aria-label', earnedCount() + ' of 12 seals earned. Open your jury box.');
+    sealPanel.querySelectorAll('.seal-item').forEach(function (li) { li.classList.toggle('is-on', !!earned[li.dataset.seal]); });
+    if (bump && !reduced) {
+      sealBox.classList.remove('is-bump');
+      void sealBox.offsetWidth;
+      sealBox.classList.add('is-bump');
+    }
+  }
+
+  /* ---------- the summons ---------- */
+  function initSummons() {
+    var el = document.getElementById('summons');
+    if (!el) return;
+    var no = document.getElementById('jurorNo');
+    if (no) no.textContent = jurorNo;
+    var btn = document.getElementById('answerSummons');
+    var status = document.getElementById('summonsStatus');
+    function mark() {
+      el.classList.add('is-answered');
+      if (status) status.textContent = 'Status: reporting for service';
+      if (btn) btn.textContent = 'Begin at chapter I';
+    }
+    if (store.get('answered', false)) mark();
+    if (btn) btn.addEventListener('click', function () {
+      var first = !el.classList.contains('is-answered');
+      mark();
+      store.set('answered', true);
+      var target = document.querySelector('.chapter');
+      setTimeout(function () {
+        if (target) target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      }, first && !reduced ? 650 : 0);
+    });
+  }
+
+  /* ---------- chapters: rails, ticker, exhibit stickers ---------- */
+  function initChapters() {
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('.chapter[data-tick]'));
+    chapters.forEach(function (ch) {
+      var rail = document.createElement('div');
+      rail.className = 'rail';
+      rail.setAttribute('aria-hidden', 'true');
+      rail.innerHTML = '<div class="rail-inner"><span class="rail-num">' + (ch.dataset.num || '') + '</span><span class="rail-date">' + (ch.dataset.date || '') + '</span></div>';
+      ch.insertBefore(rail, ch.firstChild);
+    });
+
+    var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    document.querySelectorAll('.exhibit').forEach(function (ex, i) {
+      var st = ex.querySelector('.exhibit-sticker');
+      if (st) st.innerHTML = 'Exhibit <b>' + (letters[i] || i + 1) + '</b>';
+    });
+
+    var track = document.getElementById('tickerTrack');
+    var bar = document.getElementById('tickerBar');
+    if (!track) return;
+    track.innerHTML = chapters.map(function (ch) {
+      return '<a class="tick" href="#' + ch.id + '" data-for="' + ch.id + '"><span class="tick-date">' + (ch.dataset.tickDate || ch.dataset.date || '') +
+        '</span><span class="tick-name">' + ch.dataset.tick + '</span></a>';
+    }).join('');
+    var ticks = {};
+    track.querySelectorAll('.tick').forEach(function (t) { ticks[t.dataset.for] = t; });
+
+    var current = null;
+    function setActive(id) {
+      if (id === current) return;
+      current = id;
+      Object.keys(ticks).forEach(function (k) {
+        ticks[k].classList.toggle('is-active', k === id);
+        if (k === id) ticks[k].setAttribute('aria-current', 'true'); else ticks[k].removeAttribute('aria-current');
+      });
+      var t = ticks[id];
+      if (t) {
+        var left = t.offsetLeft - (track.clientWidth - t.offsetWidth) / 2;
+        track.scrollTo({ left: Math.max(0, left), behavior: reduced ? 'auto' : 'smooth' });
+      }
+    }
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var mid = window.innerHeight * 0.35;
+        var active = null;
+        for (var i = 0; i < chapters.length; i++) {
+          if (chapters[i].getBoundingClientRect().top <= mid) active = chapters[i].id;
+        }
+        if (active) setActive(active);
+        else { current = null; Object.keys(ticks).forEach(function (k) { ticks[k].classList.remove('is-active'); }); }
+        if (bar && chapters.length) {
+          var start = chapters[0].offsetTop;
+          var last = chapters[chapters.length - 1];
+          var end = last.offsetTop + last.offsetHeight - window.innerHeight;
+          var p = (window.scrollY - start) / Math.max(1, end - start);
+          bar.style.width = (Math.max(0, Math.min(1, p)) * 100).toFixed(2) + '%';
+        }
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  }
+
+  /* ---------- objections ---------- */
+  function initObjections() {
+    document.querySelectorAll('.objection').forEach(function (ob) {
+      var btn = ob.querySelector('.obj-btn');
+      var ruling = ob.querySelector('.obj-ruling');
+      if (!btn || !ruling) return;
+      btn.addEventListener('click', function () {
+        ruling.hidden = false;
+        btn.hidden = true;
+        var focusable = ruling.querySelector('.obj-stamp');
+        if (focusable) { focusable.setAttribute('tabindex', '-1'); focusable.focus({ preventScroll: true }); }
+      });
+    });
+  }
+
+  /* ---------- widget context ---------- */
+  var scriptCache = {};
+  TS.loadScript = function (url) {
+    if (scriptCache[url]) return scriptCache[url];
+    scriptCache[url] = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = url;
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      s.onload = function () { resolve(); };
+      s.onerror = function () { delete scriptCache[url]; reject(new Error('Could not load ' + url)); };
+      document.head.appendChild(s);
+    });
+    return scriptCache[url];
+  };
+
+  function ctxFor(el, name) {
+    return {
+      el: el,
+      name: name,
+      reduced: reduced,
+      juror: jurorNo,
+      stamp: TS.stamp,
+      hasSeal: TS.hasSeal,
+      on: TS.on,
+      emit: TS.emit,
+      toast: TS.toast,
+      loadScript: TS.loadScript,
+      rand: Math.random,
+      store: {
+        get: function (k, d) { return store.get(name + ':' + k, d); },
+        set: function (k, v) { store.set(name + ':' + k, v); }
+      },
+      onVisible: function (cb, opts) {
+        if (!('IntersectionObserver' in window)) { cb(true); return function () {}; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { cb(en.isIntersecting, en); });
+        }, opts || { rootMargin: '200px 0px' });
+        io.observe(el);
+        return function () { io.disconnect(); };
+      }
+    };
+  }
+
+  function mountAll() {
+    document.querySelectorAll('[data-widget]').forEach(function (el) {
+      var name = el.getAttribute('data-widget');
+      var fn = widgets[name];
+      if (!fn) {
+        el.innerHTML = '<p class="widget-missing">Exhibit "' + name + '" is missing.</p>';
+        return;
+      }
+      try { fn(el, ctxFor(el, name)); }
+      catch (err) {
+        if (window.console) console.error('[widget ' + name + ']', err);
+        el.innerHTML = '<p class="widget-error">This exhibit could not load. The rest of the page still works.</p>';
+      }
+    });
+  }
+
+  TS.init = function () {
+    initChapters();
+    initSummons();
+    initObjections();
+    buildSeals();
+    mountAll();
+    var q = /[?&]theme=(dark|light)/.exec(location.search);
+    if (q) document.documentElement.setAttribute('data-theme', q[1]);
+  };
+})();
+
+/* ===== widget: circle ===== */
+/* Exhibit: "Everyone knows everyone" (Chapter I). A speculative reconstruction of a village judging one of its own.
+   Seal: 'circle', awarded when the circle settles the case. */
+(function () {
+  'use strict';
+
+  /* =====================================================================
+     COPY AND FACTS. Everything the reader sees is here, so it is easy to correct.
+     The people and the dispute are invented. Only the closing note makes a claim
+     about the real past, and it is labeled as speculation.
+     ===================================================================== */
+  var DATA = {
+    recon: 'A reconstruction, not a record',
+    caseKicker: 'The matter of the missing honey',
+    caseText: 'Sura found a wild hive in the old oak. Each of the four families was owed one share at the feast. At first light, the Oak family\'s share was gone. Ketta of Oak accuses Pell of River.',
+    prompt: 'Tap anyone in the circle. Start with Pell, the accused, or with Ketta, who accuses him.',
+    need: 5,
+    houses: {
+      river: 'River family',
+      oak: 'Oak family',
+      reed: 'Reed family',
+      hill: 'Hill family'
+    },
+    tags: {
+      accused: 'Accused',
+      accuser: 'Accuser',
+      kin: 'Kin',
+      witness: 'Witness',
+      grudge: 'Grudge',
+      reputation: 'Reputation'
+    },
+    weighs: {
+      party: 'A party to the quarrel',
+      'for': 'Weighs for Pell',
+      against: 'Weighs against Pell',
+      mixed: 'Cuts both ways',
+      spite: 'Spite. Weigh it lightly.'
+    },
+    /* Seat order, clockwise from the top. Even seats sit in the outer ring, odd seats in the inner ring. */
+    seats: ['pell', 'tobin', 'ora', 'esk', 'lio', 'ude', 'sura', 'gali', 'coro', 'dov',
+            'ketta', 'faro', 'remi', 'nessa', 'vela', 'hesk', 'imi', 'bekk', 'tam', 'mara'],
+    people: {
+      pell:  { name: 'Pell',  house: 'river', tag: 'accused', weighs: 'party',
+               how: 'He is the one accused.',
+               says: 'I took two combs. One was River\'s share. The other pays for the net Dov lost in the flood. Oak never made that right, so I did.' },
+      ketta: { name: 'Ketta', house: 'oak', tag: 'accuser', weighs: 'party',
+               how: 'It was her family\'s share.',
+               says: 'Our share was gone at first light. Debts get settled here at the fire, in front of everyone. Nobody settles them in the dark with sticky hands.' },
+      mara:  { name: 'Mara',  house: 'river', tag: 'kin', weighs: 'for',
+               how: 'She is his mother.',
+               says: 'He fed half the riverbank in the hungry winter. He took that honey to make a point, because nobody would listen about the net.' },
+      tobin: { name: 'Tobin', house: 'river', tag: 'kin', weighs: 'for',
+               how: 'His cousin. He was with Pell at dusk.',
+               says: 'He told me he would explain it all at the feast. He was angry. He was never hiding.' },
+      tam:   { name: 'Tam',   house: 'river', tag: 'kin', weighs: 'for',
+               how: 'His little sister.',
+               says: 'This morning he gave half that comb to the Reed children. A real thief keeps what he steals.' },
+      dov:   { name: 'Dov',   house: 'oak', tag: 'kin', weighs: 'against',
+               how: 'Ketta\'s brother. He borrowed the net.',
+               says: 'The flood took that net. Blame the river. Pell had no right to help himself to our share.' },
+      faro:  { name: 'Faro',  house: 'oak', tag: 'kin', weighs: 'against',
+               how: 'Ketta\'s husband.',
+               says: 'Our little ones will sit at the feast with no honey. Whatever a net is worth, it is worth less than that.' },
+      coro:  { name: 'Coro',  house: 'oak', tag: 'grudge', weighs: 'spite',
+               how: 'He has never liked the River families.',
+               says: 'River folk think they own the river. Now they think they own the bees.' },
+      esk:   { name: 'Esk',   house: 'reed', tag: 'witness', weighs: 'against',
+               how: 'He saw it himself.',
+               says: 'At dusk I saw Pell walk away from the old oak with two combs wrapped in leaves. He walked fast. He would not meet my eye.' },
+      ora:   { name: 'Ora',   house: 'reed', tag: 'witness', weighs: 'for',
+               how: 'She watched the flood.',
+               says: 'I saw Dov\'s borrowed net go down the river in the flood. Pell\'s father wove that net. It took him a whole season.' },
+      lio:   { name: 'Lio',   house: 'reed', tag: 'grudge', weighs: 'spite',
+               how: 'Pell beat him in the spring footrace.',
+               says: 'He laughed when he won. A man who laughs like that would steal honey.' },
+      ude:   { name: 'Ude',   house: 'reed', tag: 'grudge', weighs: 'spite',
+               how: 'Ketta\'s family turned down his son\'s marriage gift.',
+               says: 'If Pell took Oak\'s honey, the bees have good taste.' },
+      sura:  { name: 'Sura',  house: 'reed', tag: 'witness', weighs: 'against',
+               how: 'She found the hive.',
+               says: 'I found the hive and marked it for all four families. Four shares. Two of them went the same way.' },
+      gali:  { name: 'Gali',  house: 'reed', tag: 'reputation', weighs: 'for',
+               how: 'Pell helped rebuild her house.',
+               says: 'When my roof fell in, Pell was first up the ladder. He never asked for a thing.' },
+      remi:  { name: 'Remi',  house: 'hill', tag: 'witness', weighs: 'against',
+               how: 'He followed the trail at first light.',
+               says: 'Honey drips on the path, all the way to the River houses. The ants found them before I did.' },
+      nessa: { name: 'Nessa', house: 'hill', tag: 'reputation', weighs: 'mixed',
+               how: 'The eldest. She has watched him since he was born.',
+               says: 'That boy keeps every promise he makes. Some of them he keeps crooked.' },
+      vela:  { name: 'Vela',  house: 'hill', tag: 'reputation', weighs: 'mixed',
+               how: 'She trades with both families.',
+               says: 'Oak always says it will repay. Pell always says he was owed. Both are telling the truth, a little.' },
+      hesk:  { name: 'Hesk',  house: 'hill', tag: 'witness', weighs: 'for',
+               how: 'He overheard them argue.',
+               says: 'Last moon I heard Dov promise to replace the net after the harvest. The harvest came. The net did not.' },
+      imi:   { name: 'Imi',   house: 'hill', tag: 'reputation', weighs: 'against',
+               how: 'She grew up next door to him.',
+               says: 'As a boy he raided the nests the elders told us to leave. He has always taken first and asked later.' },
+      bekk:  { name: 'Bekk',  house: 'hill', tag: 'grudge', weighs: 'spite',
+               how: 'His grandfather told him. Every winter.',
+               says: 'That family has been light-fingered since Pell\'s grandfather moved our boundary stone. I saw nothing last night. I do not need to.' }
+    },
+    /* Ties drawn across the circle: kin, trade, friend, grudge. 'dispute' is the live quarrel. */
+    ties: [
+      ['pell', 'mara', 'kin'], ['pell', 'tobin', 'kin'], ['mara', 'tam', 'kin'], ['ketta', 'dov', 'kin'], ['ketta', 'faro', 'kin'],
+      ['dov', 'coro', 'kin'], ['mara', 'nessa', 'kin'], ['ora', 'esk', 'kin'], ['lio', 'ude', 'kin'], ['remi', 'sura', 'kin'],
+      ['vela', 'hesk', 'kin'], ['imi', 'bekk', 'kin'],
+      ['pell', 'dov', 'trade'], ['tobin', 'gali', 'trade'], ['ora', 'coro', 'trade'], ['sura', 'ketta', 'trade'],
+      ['hesk', 'faro', 'trade'], ['esk', 'imi', 'trade'], ['tam', 'vela', 'trade'], ['remi', 'lio', 'trade'],
+      ['pell', 'gali', 'friend'], ['ketta', 'nessa', 'friend'], ['tobin', 'lio', 'friend'], ['sura', 'mara', 'friend'],
+      ['faro', 'esk', 'friend'], ['vela', 'ora', 'friend'], ['hesk', 'ude', 'friend'], ['tam', 'remi', 'friend'],
+      ['bekk', 'pell', 'grudge'], ['lio', 'pell', 'grudge'], ['coro', 'mara', 'grudge'], ['ude', 'ketta', 'grudge'], ['imi', 'gali', 'grudge'],
+      ['pell', 'ketta', 'dispute']
+    ],
+    legendTies: [['kin', 'Kin'], ['trade', 'Trade'], ['friend', 'Friends'], ['grudge', 'Grudge']],
+    legendHouses: [['river', 'River'], ['oak', 'Oak'], ['reed', 'Reed'], ['hill', 'Hill']],
+    decide: 'Decide together',
+    needMore: function (n) { return 'Hear ' + n + ' more ' + (n === 1 ? 'villager' : 'villagers') + ' first'; },
+    ready: 'The circle is ready',
+    question: 'You speak first. What do you say at the fire?',
+    proposals: [
+      { id: 'exile', label: 'Cast him out',
+        reply: 'Mara stands. So do Tobin and Tam. If Pell goes, his family goes with him, and so do the best hands at the fish weir. Nobody splits the village over two combs of honey.' },
+      { id: 'repair', label: 'Make it right',
+        reply: 'Heads nod around the fire. Even Bekk grunts. It is what the circle was going to say anyway.' },
+      { id: 'drop', label: 'Let it go',
+        reply: 'The Oak family goes quiet. A grudge left alone grows. By next moon it is a fight, and fights here spread through every family.' }
+    ],
+    settleStamp: 'Settled at the fire',
+    settleTitle: 'The circle settles on repair',
+    settleItems: [
+      { icon: 'comb', head: 'Give it back', text: 'Pell returns Oak\'s comb and adds a basket of smoked fish.' },
+      { icon: 'net', head: 'Clear the old debt', text: 'Dov owns up to the lost net. Oak will weave River a new one before the rains.' },
+      { icon: 'voice', head: 'Say sorry', text: 'Pell apologizes at the fire, where everyone can hear it.' },
+      { icon: 'pot', head: 'Eat together', text: 'River and Oak cook the feast side by side.' }
+    ],
+    missedNet: 'You never heard about the net. Pell, Dov, Ora and Hesk all knew. In a village, someone always knows the story behind the story.',
+    heardNet: 'Only people who knew the history could see the net behind the honey.',
+    lessons: [
+      ['The whole group judged.', 'There was no outsider to hand the case to.'],
+      ['Reputation was the evidence.', 'Everyone knew who kept promises, and who carried grudges.'],
+      ['Peace mattered more than punishment.', 'Tomorrow they all still share the river.']
+    ],
+    note: 'Speculation. The people and the quarrel are invented. The pattern is drawn from how anthropologists describe disputes in small communities: talk it out in public, pay something back, and keep exile as a last resort.',
+    replay: 'Hear it again'
+  };
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var R_OUT = 42.2, R_IN = 28.6; // ring radii, percent of the stage width
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function seatPos(k) {
+    var a = (-90 + 18 * k) * Math.PI / 180;
+    var r = k % 2 === 0 ? R_OUT : R_IN;
+    return { x: 50 + r * Math.cos(a), y: 50 + r * Math.sin(a) };
+  }
+
+  var FIGURE = '<svg class="w-circle-fig" viewBox="0 0 20 14" aria-hidden="true"><circle cx="10" cy="4" r="3.3"/><path d="M3 14c0-4 3-6.6 7-6.6s7 2.6 7 6.6z"/></svg>';
+
+  var ICONS = {
+    comb: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 5l5 3v6l-5 3-5-3V8zM22 5l5 3v6l-5 3-5-3V8zM16 15l5 3v6l-5 3-5-3v-6z"/></svg>',
+    net: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6h22M5 6l4 20M27 6l-4 20M9 26h14M11 6l1.5 20M16 6v20M21 6l-1.5 20M6.3 12h19.4M7.5 19h17"/></svg>',
+    voice: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="14" r="5"/><path d="M3 28c0-5 3.5-8 8-8s8 3 8 8M20 9c2 1.5 3 3.2 3 5s-1 3.5-3 5M24 6c3 2.4 4.5 5 4.5 8s-1.5 5.6-4.5 8"/></svg>',
+    pot: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 14h20c0 7-4 12-10 12S6 21 6 14zM4 14h24M12 9c0-2 2-2 2-4M18 9c0-2 2-2 2-4M9 29h14"/></svg>'
+  };
+
+  TS.register('circle', function (el, ctx) {
+    var people = DATA.people;
+    var heard = {};
+    var heardCount = 0;
+    var ledger = { 'for': 0, against: 0, mixed: 0, spite: 0 };
+    var active = null;
+    var settled = false;
+
+    /* ---------- build ---------- */
+    var seatsHtml = DATA.seats.map(function (id, k) {
+      var p = people[id], pos = seatPos(k);
+      return '<button type="button" class="w-circle-seat" data-id="' + id + '" data-house="' + p.house + '" data-tag="' + p.tag + '"' +
+        ' style="left:' + pos.x.toFixed(2) + '%;top:' + pos.y.toFixed(2) + '%">' + FIGURE +
+        '<span class="w-circle-name">' + esc(p.name) + '</span><span class="w-circle-dot" aria-hidden="true"></span></button>';
+    }).join('');
+
+    var legendTies = DATA.legendTies.map(function (t) {
+      return '<span class="w-circle-key"><svg viewBox="0 0 26 8" aria-hidden="true"><line class="w-circle-tie t-' + t[0] + '" x1="1" y1="4" x2="25" y2="4"/></svg>' + t[1] + '</span>';
+    }).join('');
+    var legendHouses = DATA.legendHouses.map(function (h) {
+      return '<span class="w-circle-key"><span class="w-circle-ring" data-house="' + h[0] + '" aria-hidden="true"></span>' + h[1] + '</span>';
+    }).join('');
+
+    el.innerHTML =
+      '<div class="w-circle">' +
+        '<div class="w-circle-top">' +
+          '<p class="w-circle-recon">' + esc(DATA.recon) + '</p>' +
+          '<p class="w-circle-kicker">' + esc(DATA.caseKicker) + '</p>' +
+          '<p class="w-circle-case">' + esc(DATA.caseText) + '</p>' +
+        '</div>' +
+        '<div class="w-circle-stage" role="group" aria-label="Twenty villagers seated in two rings around a fire. Lines between them show kin, trade, friendship and grudges.">' +
+          '<svg class="w-circle-web" viewBox="0 0 400 400" aria-hidden="true">' +
+            '<defs><radialGradient id="w-circle-glow-grad"><stop offset="0" class="w-circle-glow-a"/><stop offset="1" class="w-circle-glow-b"/></radialGradient></defs>' +
+            '<circle class="w-circle-glow" cx="200" cy="200" r="78" fill="url(#w-circle-glow-grad)"/>' +
+            '<g class="w-circle-lines"></g>' +
+            '<g class="w-circle-fire" transform="translate(200 196)">' +
+              '<ellipse class="w-circle-stones" cx="0" cy="22" rx="30" ry="8"/>' +
+              '<path class="w-circle-log" d="M-24 22L20 12M-20 12L24 22"/>' +
+              '<g class="w-circle-flames">' +
+                '<path class="w-circle-flame f1" d="M0-30C8-18 20-10 18 4 17 16 9 21 0 21S-17 16-18 4C-19-8-6-12 0-30z"/>' +
+                '<path class="w-circle-flame f2" d="M2-16C8-8 13-2 12 7 11 15 6 19 0 19S-11 15-11 7C-11-1-3-4 2-16z"/>' +
+                '<path class="w-circle-flame f3" d="M0-4C4 1 7 5 6 11 5 16 3 18 0 18S-6 16-6 11C-6 6-2 3 0-4z"/>' +
+              '</g>' +
+            '</g>' +
+          '</svg>' +
+          seatsHtml +
+          '<p class="w-circle-count" aria-hidden="true"><b class="tnum">0</b> heard</p>' +
+        '</div>' +
+        '<div class="w-circle-legend" aria-hidden="true"><div>' + legendTies + '</div><div>' + legendHouses + '</div></div>' +
+        '<div class="w-circle-card" aria-live="polite"></div>' +
+        '<div class="w-circle-ledger" aria-label="Testimony heard so far"></div>' +
+        '<div class="w-circle-actions">' +
+          '<button type="button" class="btn w-circle-decide" disabled>' + esc(DATA.decide) + '</button>' +
+          '<span class="w-circle-need"></span>' +
+        '</div>' +
+        '<div class="w-circle-proposals" hidden>' +
+          '<p class="w-circle-q">' + esc(DATA.question) + '</p>' +
+          '<div class="w-circle-options">' + DATA.proposals.map(function (p) {
+            return '<button type="button" class="btn btn-ghost w-circle-opt" data-id="' + p.id + '" aria-pressed="false">' + esc(p.label) + '</button>';
+          }).join('') + '</div>' +
+        '</div>' +
+        '<div class="w-circle-outcome" aria-live="polite"></div>' +
+      '</div>';
+
+    var root = el.querySelector('.w-circle');
+    var stage = el.querySelector('.w-circle-stage');
+    var linesG = el.querySelector('.w-circle-lines');
+    var card = el.querySelector('.w-circle-card');
+    var ledgerEl = el.querySelector('.w-circle-ledger');
+    var decideBtn = el.querySelector('.w-circle-decide');
+    var needEl = el.querySelector('.w-circle-need');
+    var propEl = el.querySelector('.w-circle-proposals');
+    var outEl = el.querySelector('.w-circle-outcome');
+    var countEl = el.querySelector('.w-circle-count b');
+    var seatEls = {};
+    Array.prototype.forEach.call(el.querySelectorAll('.w-circle-seat'), function (b) { seatEls[b.dataset.id] = b; });
+
+    /* lines */
+    var seatIndex = {};
+    DATA.seats.forEach(function (id, k) { seatIndex[id] = k; });
+    var lineEls = DATA.ties.map(function (t) {
+      var a = seatPos(seatIndex[t[0]]), b = seatPos(seatIndex[t[1]]);
+      var ln = document.createElementNS(NS, 'line');
+      ln.setAttribute('x1', (a.x * 4).toFixed(1)); ln.setAttribute('y1', (a.y * 4).toFixed(1));
+      ln.setAttribute('x2', (b.x * 4).toFixed(1)); ln.setAttribute('y2', (b.y * 4).toFixed(1));
+      ln.setAttribute('class', 'w-circle-tie t-' + t[2]);
+      ln.__a = t[0]; ln.__b = t[1]; ln.__type = t[2];
+      linesG.appendChild(ln);
+      return ln;
+    });
+    var disputeLine = lineEls.filter(function (l) { return l.__type === 'dispute'; })[0];
+
+    /* ---------- render helpers ---------- */
+    function seatLabel(id) {
+      var p = people[id];
+      var role = p.tag === 'accused' ? ', the accused' : p.tag === 'accuser' ? ', the accuser' : '';
+      return p.name + ', ' + DATA.houses[p.house] + role + (heard[id] ? '. Heard.' : '. Not yet heard.');
+    }
+    function refreshSeat(id) { seatEls[id].setAttribute('aria-label', seatLabel(id)); }
+
+    function promptCard() {
+      card.className = 'w-circle-card is-prompt';
+      card.innerHTML = '<p class="w-circle-prompt">' + esc(DATA.prompt) + '</p>';
+    }
+
+    function showCard(id) {
+      var p = people[id];
+      card.className = 'w-circle-card';
+      card.innerHTML =
+        '<div class="w-circle-card-head">' +
+          '<p class="w-circle-card-name">' + esc(p.name) + ' <span>' + esc(DATA.houses[p.house]) + '</span></p>' +
+          '<span class="w-circle-stamp" data-tag="' + p.tag + '">' + esc(DATA.tags[p.tag]) + '</span>' +
+        '</div>' +
+        '<p class="w-circle-how"><span>How they know</span> ' + esc(p.how) + '</p>' +
+        '<p class="w-circle-says">' + esc(p.says) + '</p>' +
+        '<p class="w-circle-weighs" data-weighs="' + p.weighs + '"><span class="w-circle-wmark" aria-hidden="true"></span>' + esc(DATA.weighs[p.weighs]) + '</p>';
+      if (!ctx.reduced) {
+        card.classList.remove('is-in');
+        void card.offsetWidth;
+        card.classList.add('is-in');
+      }
+    }
+
+    function tallyMarks(n) {
+      var out = '';
+      for (var g = 0; g < Math.ceil(n / 5); g++) {
+        var inGroup = Math.min(5, n - g * 5);
+        out += '<span class="w-circle-gate' + (inGroup === 5 ? ' is-full' : '') + '">';
+        for (var i = 0; i < Math.min(4, inGroup); i++) out += '<i></i>';
+        out += '</span>';
+      }
+      return out || '<span class="w-circle-none">none</span>';
+    }
+
+    function renderLedger() {
+      var rows = [['for', 'For Pell'], ['against', 'Against'], ['mixed', 'Both ways'], ['spite', 'Spite']];
+      ledgerEl.innerHTML = rows.map(function (r) {
+        return '<div class="w-circle-lrow" data-weighs="' + r[0] + '"><span class="w-circle-lname">' + r[1] + '</span>' +
+          '<span class="w-circle-tally" aria-hidden="true">' + tallyMarks(ledger[r[0]]) + '</span>' +
+          '<span class="sr-only">' + ledger[r[0]] + '</span></div>';
+      }).join('');
+    }
+
+    function renderNeed() {
+      var left = Math.max(0, DATA.need - heardCount);
+      decideBtn.disabled = left > 0 || settled;
+      decideBtn.classList.toggle('is-ready', left === 0 && !settled);
+      needEl.textContent = settled ? '' : left > 0 ? DATA.needMore(left) : DATA.ready;
+      countEl.textContent = heardCount;
+    }
+
+    function highlight(id) {
+      lineEls.forEach(function (ln) {
+        var on = id && (ln.__a === id || ln.__b === id);
+        ln.classList.toggle('is-lit', !!on);
+        ln.classList.toggle('is-dim', !!id && !on);
+      });
+      Object.keys(seatEls).forEach(function (k) {
+        seatEls[k].classList.toggle('is-active', k === id);
+        seatEls[k].setAttribute('aria-pressed', String(k === id));
+      });
+    }
+
+    /* ---------- interaction ---------- */
+    function hear(id) {
+      active = id;
+      highlight(id);
+      showCard(id);
+      if (!heard[id]) {
+        heard[id] = true;
+        heardCount++;
+        var w = people[id].weighs;
+        if (ledger[w] != null) ledger[w]++;
+        seatEls[id].classList.add('is-heard');
+        refreshSeat(id);
+        renderLedger();
+        renderNeed();
+      }
+    }
+
+    stage.addEventListener('click', function (e) {
+      var b = e.target.closest('.w-circle-seat');
+      if (!b) return;
+      if (active === b.dataset.id) { active = null; highlight(null); promptCard(); return; }
+      hear(b.dataset.id);
+    });
+
+    decideBtn.addEventListener('click', function () {
+      if (decideBtn.disabled) return;
+      propEl.hidden = false;
+      decideBtn.hidden = true;
+      needEl.textContent = '';
+      var first = propEl.querySelector('.w-circle-opt');
+      if (first) first.focus({ preventScroll: true });
+      if (propEl.scrollIntoView) propEl.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+    });
+
+    propEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.w-circle-opt');
+      if (!b || settled) return;
+      var prop = DATA.proposals.filter(function (p) { return p.id === b.dataset.id; })[0];
+      Array.prototype.forEach.call(propEl.querySelectorAll('.w-circle-opt'), function (o) {
+        o.setAttribute('aria-pressed', String(o === b));
+        o.disabled = true;
+      });
+      settle(prop);
+    });
+
+    function settle(prop) {
+      settled = true;
+      renderNeed();
+      highlight(null);
+      active = null;
+      var knewNet = heard.pell || heard.dov || heard.ora || heard.hesk;
+      outEl.innerHTML =
+        '<p class="w-circle-reply">' + esc(prop.reply) + '</p>' +
+        '<div class="w-circle-settle">' +
+          '<span class="w-circle-settle-stamp" aria-hidden="true">' + esc(DATA.settleStamp) + '</span>' +
+          '<h4 class="w-circle-settle-title">' + esc(DATA.settleTitle) + '</h4>' +
+          '<ol class="w-circle-items">' + DATA.settleItems.map(function (it, i) {
+            return '<li style="--i:' + i + '"><span class="w-circle-icon">' + ICONS[it.icon] + '</span><span><b>' + esc(it.head) + '.</b> ' + esc(it.text) + '</span></li>';
+          }).join('') + '</ol>' +
+          '<p class="w-circle-net">' + esc(knewNet ? DATA.heardNet : DATA.missedNet) + '</p>' +
+        '</div>' +
+        '<ul class="w-circle-lessons">' + DATA.lessons.map(function (l) {
+          return '<li><b>' + esc(l[0]) + '</b> ' + esc(l[1]) + '</li>';
+        }).join('') + '</ul>' +
+        '<p class="w-circle-note">' + esc(DATA.note) + '</p>' +
+        '<div class="btn-row"><button type="button" class="btn btn-ghost btn-small w-circle-replay">' + esc(DATA.replay) + '</button></div>';
+      root.classList.add('is-settled');
+      seatEls.pell.classList.add('is-mended');
+      seatEls.ketta.classList.add('is-mended');
+      if (disputeLine) disputeLine.setAttribute('class', 'w-circle-tie t-mended');
+      if (!ctx.reduced) {
+        root.classList.remove('is-flare');
+        void root.offsetWidth;
+        root.classList.add('is-flare');
+      }
+      ctx.stamp('circle');
+      outEl.querySelector('.w-circle-replay').addEventListener('click', reset);
+    }
+
+    function reset() {
+      heard = {};
+      heardCount = 0;
+      ledger = { 'for': 0, against: 0, mixed: 0, spite: 0 };
+      settled = false;
+      active = null;
+      root.classList.remove('is-settled', 'is-flare');
+      Object.keys(seatEls).forEach(function (k) {
+        seatEls[k].classList.remove('is-heard', 'is-mended');
+        refreshSeat(k);
+      });
+      if (disputeLine) disputeLine.setAttribute('class', 'w-circle-tie t-dispute');
+      highlight(null);
+      outEl.innerHTML = '';
+      propEl.hidden = true;
+      Array.prototype.forEach.call(propEl.querySelectorAll('.w-circle-opt'), function (o) { o.disabled = false; o.setAttribute('aria-pressed', 'false'); });
+      decideBtn.hidden = false;
+      promptCard();
+      renderLedger();
+      renderNeed();
+      seatEls.pell.focus({ preventScroll: true });
+      if (stage.scrollIntoView) stage.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+    }
+
+    /* ---------- start ---------- */
+    Object.keys(seatEls).forEach(refreshSeat);
+    highlight(null);
+    promptCard();
+    renderLedger();
+    renderNeed();
+    if (ctx.reduced) root.classList.add('is-still');
+    ctx.onVisible(function (on) { root.classList.toggle('is-off', !on); });
+  });
+})();
+
+/* ===== widget: strangers ===== */
+/* strangers: "The web of knowing". A three.js crowd (with a 2D canvas fallback) that draws a jury of twelve
+   from places of different sizes and counts how many jurors know you. Seal: 'strangers'. */
+(function () {
+  'use strict';
+
+  var THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+
+  /* ---- facts and settings (edit here) ---- */
+  var DATA = {
+    knowDefault: 600,   // about 600 people known by name: McCormick, Salganik and Zheng (2010)
+    knowMin: 50,
+    knowMax: 1500,      // Dunbar's outer layer: about 1,500 faces you can put a name to
+    maxDots: 9000,
+    modes: [
+      { id: 'band', chip: 'Band', size: '40 people', N: 40, rule: 'neighbors', layout: 'ring', dotPx: 11,
+        place: 'A foraging band',
+        note: 'In a band of a few dozen, everyone is kin, friend or rival. Any jury here is a jury of people who know you.' },
+      { id: 'vill', chip: 'Village, 1300', size: '300 people', N: 300, rule: 'neighbors', layout: 'village', dotPx: 7,
+        place: 'An English village, about 1300',
+        note: 'In a village of a few hundred you know nearly everyone by name. Medieval jurors came from the neighborhood because they knew the people and the facts.' },
+      { id: 'town', chip: 'Market town', size: '5,000 people', N: 5000, rule: 'random', layout: 'town', dotPx: 3.2,
+        place: 'A market town',
+        note: 'In a town of 5,000 you might know one person in eight. A random jury would usually still seat someone who knows you.' },
+      { id: 'city', chip: 'Manhattan, 2026', size: '1.2 million adults', N: 1200000, rule: 'random', layout: 'island', dotPx: 2.2,
+        place: 'Manhattan today',
+        note: 'In Manhattan a random jury almost never seats anyone who knows you. Courts now count that as a feature: knowing the accused is a reason to send a juror home.' }
+    ]
+  };
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function pct(p) {
+    if (p >= 0.9995) return '100%';
+    if (p >= 0.995) return '>99%';
+    if (p >= 0.1) return Math.round(p * 100) + '%';
+    if (p >= 0.01) return (p * 100).toFixed(1) + '%';
+    if (p >= 0.0001) return (p * 100).toFixed(2) + '%';
+    return '<0.01%';
+  }
+  function token(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#888'; }
+
+  // small seeded RNG so layouts are stable for a mode
+  function rng(seed) {
+    var s = seed >>> 0;
+    return function () { s = (s + 0x6D2B79F5) >>> 0; var t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  // chance that at least one of 12 jurors drawn without replacement from N knows you, when k people do
+  function pAtLeastOne(N, k, n) {
+    if (k <= 0) return 0;
+    if (N - k < n) return 1;
+    var q = 1;
+    for (var i = 0; i < n; i++) q *= (N - k - i) / (N - i);
+    return 1 - q;
+  }
+
+  /* ---- layouts: returns positions [x, z] in world units, index 0 is "you" at the origin ---- */
+  function buildLayout(mode, dots) {
+    var r = rng(mode.id.length * 7919 + 13);
+    var pts = [[0, 0]];
+    var i, a, rad;
+    if (mode.layout === 'ring') {
+      for (i = 1; i < dots; i++) {
+        a = (i / (dots - 1)) * Math.PI * 2;
+        rad = 6 + (r() - 0.5) * 0.9;
+        pts.push([Math.cos(a) * rad, Math.sin(a) * rad]);
+      }
+    } else if (mode.layout === 'village') {
+      // households clustered along a winding lane
+      var houses = Math.ceil((dots - 1) / 5);
+      for (var h = 0; h < houses; h++) {
+        var t = h / houses;
+        var lane = (t - 0.5) * 34;
+        var side = (h % 2 ? 1 : -1) * (3 + r() * 4);
+        var hx = lane + (r() - 0.5) * 3;
+        var hz = Math.sin(t * 5) * 4 + side;
+        for (var m = 0; m < 5 && pts.length < dots; m++) pts.push([hx + (r() - 0.5) * 1.8, hz + (r() - 0.5) * 1.8]);
+      }
+    } else if (mode.layout === 'town') {
+      var side2 = Math.ceil(Math.sqrt(dots * 1.35));
+      var cand = [];
+      for (var gx = 0; gx < side2; gx++) {
+        for (var gz = 0; gz < side2; gz++) {
+          if (gx % 7 === 3 || gz % 7 === 3) continue; // streets
+          var x = (gx - side2 / 2) * 1.0, z = (gz - side2 / 2) * 1.0;
+          if (x * x + z * z > (side2 / 2) * (side2 / 2)) continue;
+          cand.push([x + (r() - 0.5) * 0.5, z + (r() - 0.5) * 0.5]);
+        }
+      }
+      cand.sort(function () { return r() - 0.5; });
+      for (i = 0; pts.length < dots && i < cand.length; i++) if (Math.abs(cand[i][0]) + Math.abs(cand[i][1]) > 0.8) pts.push(cand[i]);
+    } else {
+      // a long, narrow island with a tilted street grid
+      var L = 190, Wmax = 34, tilt = 29 * Math.PI / 180;
+      var tries = 0;
+      while (pts.length < dots && tries < dots * 20) {
+        tries++;
+        var u = r(), v = r() - 0.5;
+        var width = Wmax * (0.35 + 0.65 * Math.sin(Math.min(1, u * 1.15) * Math.PI) * (u < 0.12 ? u / 0.12 : 1));
+        var lx = (u - 0.5) * L, lz = v * width;
+        // avenues run along the island, streets across it
+        if (Math.abs(((lz + 100) % 5.4)) < 0.9) continue;
+        if (Math.abs(((lx + 400) % 2.6)) < 0.45) continue;
+        var cx = lx * Math.cos(tilt) - lz * Math.sin(tilt);
+        var cz = lx * Math.sin(tilt) + lz * Math.cos(tilt);
+        if (cx * cx + cz * cz < 1.5) continue;
+        pts.push([cx, cz]);
+      }
+    }
+    return pts;
+  }
+
+  TS.register('strangers', function (el, ctx) {
+    var state = {
+      mode: DATA.modes[3],
+      know: DATA.knowDefault,
+      rule: 'random',
+      ruleTouched: false,
+      jury: null,           // [{knows, dot}]
+      drawsByMode: {},
+      azimuth: 0.6,
+      drag: null
+    };
+
+    el.innerHTML =
+      '<div class="w-str">' +
+        '<div class="w-str-modes" role="group" aria-label="Choose a place">' +
+          DATA.modes.map(function (m) {
+            return '<button type="button" class="w-str-mode" data-mode="' + m.id + '" aria-pressed="false"><span>' + m.chip + '</span><small>' + m.size + '</small></button>';
+          }).join('') +
+        '</div>' +
+        '<div class="w-str-stage">' +
+          '<canvas class="w-str-c2d" role="img"></canvas>' +
+          '<canvas class="w-str-c3d" aria-hidden="true"></canvas>' +
+          '<div class="w-str-place typed"></div>' +
+          '<div class="w-str-scale typed"></div>' +
+          '<ul class="w-str-legend typed" aria-hidden="true">' +
+            '<li><i class="is-you"></i>You</li><li><i class="is-know"></i>Knows you</li><li><i class="is-crowd"></i>Everyone else</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="w-str-controls">' +
+          '<div class="w-str-range">' +
+            '<label for="w-str-know" class="label">People who know you by name</label>' +
+            '<output class="w-str-know-out typed tnum" for="w-str-know"></output>' +
+            '<input type="range" id="w-str-know" min="' + DATA.knowMin + '" max="' + DATA.knowMax + '" step="10">' +
+            '<p class="w-str-range-note">About 600 is a typical estimate for an American adult. 150 is Dunbar\'s number for close ties.</p>' +
+          '</div>' +
+          '<div class="w-str-rule">' +
+            '<span class="label" id="w-str-rule-label">How jurors are picked</span>' +
+            '<div class="chips" role="group" aria-labelledby="w-str-rule-label">' +
+              '<button type="button" class="chip" data-rule="neighbors" aria-pressed="false">Neighbors who know (1300)</button>' +
+              '<button type="button" class="chip" data-rule="random" aria-pressed="false">Random draw (today)</button>' +
+            '</div>' +
+          '</div>' +
+          '<button type="button" class="btn w-str-draw">Draw a jury of twelve</button>' +
+        '</div>' +
+        '<div class="w-str-result">' +
+          '<ol class="w-str-box" aria-label="The jury box"></ol>' +
+          '<div class="w-str-readout" aria-live="polite">' +
+            '<p class="w-str-big"><b class="tnum">?</b> <span>of 12 jurors know you</span></p>' +
+            '<dl class="w-str-stats">' +
+              '<div><dt>Chance at least one juror knows you</dt><dd class="tnum w-str-p"></dd></div>' +
+              '<div><dt>Jurors who know you, on average</dt><dd class="tnum w-str-e"></dd></div>' +
+            '</dl>' +
+            '<p class="w-str-note"></p>' +
+            '<p class="w-str-insight" hidden></p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var $ = function (s) { return el.querySelector(s); };
+    var c2d = $('.w-str-c2d'), c3d = $('.w-str-c3d'), stage = $('.w-str-stage');
+    var knowInput = $('#w-str-know'), knowOut = $('.w-str-know-out');
+    var box = $('.w-str-box');
+    var seatsHtml = '';
+    for (var s = 0; s < 12; s++) {
+      seatsHtml += '<li class="w-str-seat" aria-label="Seat ' + (s + 1) + ', empty"><svg viewBox="0 0 24 30" aria-hidden="true"><circle cx="12" cy="7.5" r="5.2"/><path d="M2.5 29c0-7.2 4.2-12.5 9.5-12.5S21.5 21.8 21.5 29z"/></svg></li>';
+    }
+    box.innerHTML = seatsHtml;
+    var seatEls = box.querySelectorAll('.w-str-seat');
+    knowInput.value = state.know;
+
+    /* ---- model for the current mode ---- */
+    var model = null;
+    function kEff() { return Math.max(0, Math.min(state.know, state.mode.N - 1)); }
+    function buildModel() {
+      var mode = state.mode;
+      var dots = Math.min(mode.N, DATA.maxDots);
+      var perDot = mode.N / dots;
+      var pos = buildLayout(mode, dots);
+      dots = pos.length;
+      var k = kEff();
+      var knowDots = Math.min(dots - 1, k >= mode.N - 1 ? dots - 1 : Math.max(k > 0 ? 1 : 0, Math.round(k / perDot)));
+      // pick acquaintances: mostly the nearest dots, some scattered
+      var order = [];
+      for (var i = 1; i < dots; i++) order.push(i);
+      var r = rng(dots * 31 + 7);
+      var near = order.slice().sort(function (a, b) {
+        var da = pos[a][0] * pos[a][0] + pos[a][1] * pos[a][1], db = pos[b][0] * pos[b][0] + pos[b][1] * pos[b][1];
+        return da - db;
+      });
+      var isKnow = new Uint8Array(dots);
+      var nearShare = mode.layout === 'island' ? 0.35 : 0.65;
+      var nNear = Math.round(knowDots * nearShare), picked = 0;
+      for (i = 0; i < near.length && picked < nNear; i++) { isKnow[near[i]] = 1; picked++; }
+      var guard = 0;
+      while (picked < knowDots && guard < dots * 10) {
+        guard++;
+        var j = 1 + Math.floor(r() * (dots - 1));
+        if (!isKnow[j]) { isKnow[j] = 1; picked++; }
+      }
+      var knowList = [], crowdList = [];
+      for (i = 1; i < dots; i++) (isKnow[i] ? knowList : crowdList).push(i);
+      // a web among others, for the small places
+      var web = [];
+      if (mode.layout === 'ring') {
+        for (i = 1; i < dots; i++) for (var j2 = i + 1; j2 < dots; j2++) if (r() < 0.55) web.push([i, j2]);
+      } else if (mode.layout === 'village') {
+        for (i = 1; i < dots; i++) {
+          for (var t = 0; t < 3; t++) {
+            var o = 1 + Math.floor(r() * (dots - 1));
+            var dx = pos[i][0] - pos[o][0], dz = pos[i][1] - pos[o][1];
+            if (o !== i && dx * dx + dz * dz < 90) web.push([i, o]);
+          }
+        }
+      }
+      var extent = 0;
+      pos.forEach(function (p) { extent = Math.max(extent, Math.abs(p[0]), Math.abs(p[1])); });
+      model = { pos: pos, dots: dots, perDot: perDot, knowList: knowList, crowdList: crowdList, isKnow: isKnow, web: web, extent: extent };
+    }
+
+    /* ---- jury draw ---- */
+    function drawJury() {
+      var N = state.mode.N, k = kEff();
+      var jury = [];
+      var kr = k, nr = N;
+      for (var i = 0; i < 12; i++) {
+        var knows;
+        if (state.rule === 'neighbors') knows = kr > 0;
+        else knows = Math.random() < kr / nr;
+        if (knows) kr--;
+        nr--;
+        jury.push({ knows: knows });
+      }
+      // place each juror on a dot
+      var usedK = {}, usedC = {};
+      jury.forEach(function (j) {
+        var list = j.knows ? model.knowList : model.crowdList, used = j.knows ? usedK : usedC;
+        if (!list.length) list = j.knows ? model.crowdList : model.knowList;
+        var pick, tries = 0;
+        do { pick = list[Math.floor(Math.random() * list.length)]; tries++; } while (used[pick] && tries < 30);
+        used[pick] = 1;
+        j.dot = pick;
+      });
+      return jury;
+    }
+
+    /* ---- readouts ---- */
+    function updateReadout() {
+      var N = state.mode.N, k = kEff();
+      var p = state.rule === 'neighbors' ? (k > 0 ? 1 : 0) : pAtLeastOne(N, k, 12);
+      var e = state.rule === 'neighbors' ? Math.min(12, k) : 12 * k / N;
+      $('.w-str-p').textContent = pct(p);
+      $('.w-str-e').textContent = e >= 10 ? fmt(e) : e >= 0.1 ? e.toFixed(1) : e >= 0.01 ? e.toFixed(2) : e.toFixed(3);
+      $('.w-str-note').textContent = state.mode.note;
+      knowOut.textContent = fmt(state.know) + (state.know > N - 1 ? ' (everyone here: ' + fmt(N - 1) + ')' : '');
+      $('.w-str-place').textContent = state.mode.place;
+      $('.w-str-scale').textContent = fmt(N) + ' people, ' + (model.perDot <= 1.001 ? '1 dot each' : '1 dot = about ' + fmt(model.perDot));
+      c2d.setAttribute('aria-label', state.mode.place + '. ' + fmt(N) + ' people, ' + fmt(k) + ' of whom know you.');
+    }
+    function renderSeats(n) {
+      var known = 0;
+      seatEls.forEach(function (li, i) {
+        var j = state.jury && i < n ? state.jury[i] : null;
+        li.classList.toggle('is-filled', !!j);
+        li.classList.toggle('is-know', !!(j && j.knows));
+        li.setAttribute('aria-label', 'Seat ' + (i + 1) + ', ' + (j ? (j.knows ? 'knows you' : 'a stranger') : 'empty'));
+        if (j && j.knows) known++;
+      });
+      return known;
+    }
+    function finishDraw() {
+      var known = renderSeats(12);
+      $('.w-str-big b').textContent = known;
+      var ins = $('.w-str-insight');
+      var small = state.mode.id === 'band' || state.mode.id === 'vill';
+      if (small && state.rule === 'random') {
+        ins.textContent = 'Even a random draw here seats people who know you. Juries of strangers come from scale as much as from rules.';
+        ins.hidden = false;
+      } else if (!small && state.rule === 'neighbors') {
+        ins.textContent = 'A city court could still pick jurors who know you. It will not: today that is a reason to excuse them.';
+        ins.hidden = false;
+      } else if (state.mode.id === 'city' && known === 0) {
+        ins.textContent = 'Twelve strangers. Run it a hundred times and you will rarely see anyone you know.';
+        ins.hidden = false;
+      } else ins.hidden = true;
+      state.drawsByMode[state.mode.id] = true;
+      if (state.drawsByMode.city || Object.keys(state.drawsByMode).length >= 2) ctx.stamp('strangers');
+    }
+
+    var drawing = false;
+    function runDraw() {
+      if (drawing) return;
+      drawing = true;
+      state.jury = drawJury();
+      $('.w-str-big b').textContent = '…';
+      renderSeats(0);
+      var n = 0;
+      var step = ctx.reduced ? 0 : 110;
+      function next() {
+        n++;
+        renderSeats(n);
+        view.showJury(n);
+        if (n < 12) { if (step) setTimeout(next, step); else next(); }
+        else { finishDraw(); drawing = false; }
+      }
+      if (step) setTimeout(next, 60); else next();
+    }
+
+    /* ---- controls ---- */
+    function setMode(id) {
+      state.mode = DATA.modes.filter(function (m) { return m.id === id; })[0];
+      if (!state.ruleTouched) state.rule = state.mode.rule;
+      state.jury = null;
+      el.querySelectorAll('.w-str-mode').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === id)); });
+      syncRule();
+      buildModel();
+      renderSeats(0);
+      $('.w-str-big b').textContent = '?';
+      $('.w-str-insight').hidden = true;
+      updateReadout();
+      view.rebuild(true);
+    }
+    function syncRule() {
+      el.querySelectorAll('[data-rule]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.rule === state.rule)); });
+    }
+    el.querySelectorAll('.w-str-mode').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.mode); }); });
+    el.querySelectorAll('[data-rule]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.rule = b.dataset.rule; state.ruleTouched = true; syncRule();
+        state.jury = null; renderSeats(0); $('.w-str-big b').textContent = '?'; $('.w-str-insight').hidden = true;
+        updateReadout(); view.showJury(0);
+      });
+    });
+    var knowTimer;
+    knowInput.addEventListener('input', function () {
+      state.know = +knowInput.value;
+      state.jury = null; renderSeats(0); $('.w-str-big b').textContent = '?';
+      $('.w-str-insight').hidden = true;
+      buildModel();
+      updateReadout();
+      clearTimeout(knowTimer);
+      knowTimer = setTimeout(function () { view.rebuild(false); }, 40);
+    });
+    $('.w-str-draw').addEventListener('click', runDraw);
+
+    /* ---- colors ---- */
+    var colors = {};
+    function readColors() {
+      colors = { ink: token('--ink'), ink3: token('--ink-3'), rule: token('--rule'), accent: token('--accent'), brass: token('--brass'), seal: token('--seal'), sheet: token('--sheet-2') };
+    }
+    readColors();
+
+    /* ---- 2D renderer (always available; first paint and fallback) ---- */
+    var view2d = {
+      size: function () {
+        var w = stage.clientWidth, h = stage.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+        c2d.width = Math.round(w * dpr); c2d.height = Math.round(h * dpr);
+        return { w: w, h: h, dpr: dpr };
+      },
+      draw: function (n) {
+        if (!model) return;
+        var sz = this.size(), g = c2d.getContext('2d');
+        g.setTransform(sz.dpr, 0, 0, sz.dpr, 0, 0);
+        g.clearRect(0, 0, sz.w, sz.h);
+        var scale = (Math.min(sz.w, sz.h) * 0.44) / Math.max(6, model.extent);
+        var cx = sz.w / 2, cy = sz.h / 2 + 8;
+        var cos = Math.cos(state.azimuth), sin = Math.sin(state.azimuth);
+        function P(i) {
+          var p = model.pos[i], x = p[0] * cos - p[1] * sin, z = p[0] * sin + p[1] * cos;
+          return [cx + x * scale, cy + z * scale * 0.62];
+        }
+        var dot = Math.max(1.2, state.mode.dotPx * 0.55);
+        g.lineWidth = 1;
+        if (model.web.length) {
+          g.strokeStyle = colors.rule; g.globalAlpha = 0.7; g.beginPath();
+          model.web.forEach(function (e) { var a = P(e[0]), b = P(e[1]); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); });
+          g.stroke(); g.globalAlpha = 1;
+        }
+        var you = P(0);
+        g.strokeStyle = colors.accent; g.globalAlpha = 0.35; g.beginPath();
+        model.knowList.forEach(function (i) { var a = P(i); g.moveTo(you[0], you[1]); g.lineTo(a[0], a[1]); });
+        g.stroke(); g.globalAlpha = 1;
+        g.fillStyle = colors.ink3;
+        model.crowdList.forEach(function (i) { var a = P(i); g.fillRect(a[0] - dot / 2, a[1] - dot / 2, dot, dot); });
+        g.fillStyle = colors.accent;
+        model.knowList.forEach(function (i) { var a = P(i); g.beginPath(); g.arc(a[0], a[1], dot * 0.75 + 0.6, 0, 6.283); g.fill(); });
+        if (state.jury && n) {
+          for (var j = 0; j < n; j++) {
+            var jr = state.jury[j], a = P(jr.dot);
+            if (jr.knows) { g.strokeStyle = colors.brass; g.lineWidth = 2; g.beginPath(); g.moveTo(you[0], you[1]); g.lineTo(a[0], a[1]); g.stroke(); }
+            g.lineWidth = 2; g.strokeStyle = jr.knows ? colors.brass : colors.ink;
+            g.beginPath(); g.arc(a[0], a[1], 7, 0, 6.283); g.stroke();
+            g.fillStyle = jr.knows ? colors.brass : colors.ink; g.beginPath(); g.arc(a[0], a[1], 3, 0, 6.283); g.fill();
+          }
+        }
+        g.fillStyle = colors.brass; g.beginPath(); g.arc(you[0], you[1], 6, 0, 6.283); g.fill();
+        g.strokeStyle = colors.brass; g.lineWidth = 1.5; g.beginPath(); g.arc(you[0], you[1], 10, 0, 6.283); g.stroke();
+      }
+    };
+
+    /* ---- 3D renderer ---- */
+    var three = null; // { renderer, scene, camera, groups... }
+    var shown = 0;
+    var visible = false, raf = 0, lastT = 0;
+
+    function circleTexture(ring) {
+      var cv = document.createElement('canvas'); cv.width = cv.height = 64;
+      var g = cv.getContext('2d');
+      g.fillStyle = '#fff'; g.strokeStyle = '#fff';
+      if (ring) { g.lineWidth = 6; g.beginPath(); g.arc(32, 32, 26, 0, 6.283); g.stroke(); }
+      else { g.beginPath(); g.arc(32, 32, 28, 0, 6.283); g.fill(); }
+      var t = new THREE.CanvasTexture(cv);
+      return t;
+    }
+
+    function init3D() {
+      var T = window.THREE;
+      var renderer;
+      try {
+        renderer = new T.WebGLRenderer({ canvas: c3d, antialias: true, alpha: true, powerPreference: 'low-power' });
+      } catch (e) { return false; }
+      if (!renderer || !renderer.getContext()) return false;
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+      renderer.setClearColor(0x000000, 0);
+      var scene = new T.Scene();
+      var camera = new T.PerspectiveCamera(38, 1, 0.1, 5000);
+      var dotTex = circleTexture(false), ringTex = circleTexture(true);
+      three = { T: T, renderer: renderer, scene: scene, camera: camera, dotTex: dotTex, ringTex: ringTex, objs: [], camDist: 40, camTarget: 40, grow: 1 };
+      c3d.classList.add('is-on');
+      c2d.classList.add('is-off');
+      return true;
+    }
+
+    function disposeObjs() {
+      three.objs.forEach(function (o) { three.scene.remove(o); if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); });
+      three.objs = [];
+    }
+    function add(o) { three.scene.add(o); three.objs.push(o); return o; }
+
+    function pointsFrom(list, size, color, tex, opacity, y) {
+      var T = three.T;
+      var arr = new Float32Array(list.length * 3);
+      list.forEach(function (i, n) { var p = model.pos[i]; arr[n * 3] = p[0]; arr[n * 3 + 1] = y || 0; arr[n * 3 + 2] = p[1]; });
+      var geo = new T.BufferGeometry();
+      geo.setAttribute('position', new T.BufferAttribute(arr, 3));
+      var mat = new T.PointsMaterial({ size: size, sizeAttenuation: false, map: tex, transparent: true, alphaTest: 0.25, color: new T.Color(color), opacity: opacity == null ? 1 : opacity, depthWrite: false });
+      return new T.Points(geo, mat);
+    }
+    function linesFrom(pairs, color, opacity, y0, y1) {
+      var T = three.T;
+      var arr = new Float32Array(pairs.length * 6);
+      pairs.forEach(function (e, n) {
+        var a = model.pos[e[0]], b = model.pos[e[1]];
+        arr.set([a[0], y0 || 0, a[1], b[0], y1 || 0, b[1]], n * 6);
+      });
+      var geo = new T.BufferGeometry();
+      geo.setAttribute('position', new T.BufferAttribute(arr, 3));
+      return new T.LineSegments(geo, new T.LineBasicMaterial({ color: new T.Color(color), transparent: true, opacity: opacity, depthWrite: false }));
+    }
+
+    function rebuild3D(animate) {
+      if (!three) return;
+      disposeObjs();
+      var T = three.T, dpr = three.renderer.getPixelRatio();
+      var px = state.mode.dotPx * dpr;
+      if (model.web.length) add(linesFrom(model.web, colors.rule, 0.55));
+      add(linesFrom(model.knowList.map(function (i) { return [0, i]; }), colors.accent, model.knowList.length > 200 ? 0.16 : 0.4, 0.6, 0));
+      three.crowd = add(pointsFrom(model.crowdList, px, colors.ink3, three.dotTex, state.mode.layout === 'island' ? 0.5 : 0.9));
+      three.know = add(pointsFrom(model.knowList, px * 1.25 + dpr, colors.accent, three.dotTex, 1));
+      // you: a small brass column with a halo
+      var you = new T.Mesh(new T.CylinderGeometry(0.0, 1, 1, 24), new T.MeshBasicMaterial({ color: new T.Color(colors.brass) }));
+      var youScale = Math.max(0.22, model.extent / 32);
+      you.scale.set(youScale * 0.55, youScale * 1.6, youScale * 0.55);
+      you.position.y = youScale * 0.8;
+      you.rotation.x = Math.PI;
+      three.you = add(you);
+      three.youHalo = add(pointsFrom([0], 26 * dpr, colors.brass, three.ringTex, 0.9, 0.05));
+      three.juryRings = null; three.juryDots = null; three.juryTies = null;
+      shown = 0;
+      three.camTarget = Math.max(16, model.extent * 2.05);
+      if (animate) three.camDist = three.camTarget * (ctx.reduced ? 1 : 1.5);
+      three.grow = animate && !ctx.reduced ? 0 : 1;
+      showJury3D(state.jury ? 12 : 0);
+    }
+
+    function showJury3D(n) {
+      if (!three) return;
+      ['juryRings', 'juryDots', 'juryTies', 'juryPins'].forEach(function (k) {
+        if (three[k]) { three.scene.remove(three[k]); three[k].geometry.dispose(); three[k].material.dispose(); var idx = three.objs.indexOf(three[k]); if (idx >= 0) three.objs.splice(idx, 1); three[k] = null; }
+      });
+      shown = n;
+      if (!state.jury || !n) return;
+      var T = three.T, dpr = three.renderer.getPixelRatio();
+      var js = state.jury.slice(0, n);
+      var strangers = js.filter(function (j) { return !j.knows; }).map(function (j) { return j.dot; });
+      var knowers = js.filter(function (j) { return j.knows; }).map(function (j) { return j.dot; });
+      var lift = Math.max(1.2, model.extent / 14);
+      var group = new T.Group();
+      if (strangers.length) {
+        group.add(pointsFrom(strangers, 18 * dpr, colors.ink, three.ringTex, 1, lift));
+        group.add(pointsFrom(strangers, 7 * dpr, colors.ink, three.dotTex, 1, lift));
+      }
+      if (knowers.length) {
+        group.add(pointsFrom(knowers, 20 * dpr, colors.brass, three.ringTex, 1, lift));
+        group.add(pointsFrom(knowers, 8 * dpr, colors.brass, three.dotTex, 1, lift));
+      }
+      three.juryRings = add(group);
+      three.juryRings.geometry = { dispose: function () { group.children.forEach(function (c) { c.geometry.dispose(); }); } };
+      three.juryRings.material = { dispose: function () { group.children.forEach(function (c) { c.material.dispose(); }); } };
+      // pins from the ground to the raised marker
+      var pins = js.map(function (j) { return [j.dot, j.dot]; });
+      three.juryPins = add(linesFrom(pins, colors.ink, 0.6, 0, lift));
+      if (knowers.length) three.juryTies = add(linesFrom(knowers.map(function (d) { return [0, d]; }), colors.brass, 0.95, lift * 0.9, lift));
+    }
+
+    function recolor3D() { if (three) rebuild3D(false); }
+
+    function frame(t) {
+      raf = 0;
+      if (!visible) return;
+      var dt = lastT ? Math.min(0.05, (t - lastT) / 1000) : 0.016;
+      lastT = t;
+      if (!state.drag && !ctx.reduced) state.azimuth += dt * 0.12;
+      if (three) {
+        var w = stage.clientWidth, h = stage.clientHeight;
+        var cv = three.renderer.domElement;
+        if (cv.width !== Math.round(w * three.renderer.getPixelRatio()) || cv.height !== Math.round(h * three.renderer.getPixelRatio())) {
+          three.renderer.setSize(w, h, false);
+          three.camera.aspect = w / h;
+          three.camera.updateProjectionMatrix();
+        }
+        three.camDist += (three.camTarget - three.camDist) * Math.min(1, dt * 3.2);
+        if (three.grow < 1) {
+          three.grow = Math.min(1, three.grow + dt * 2.2);
+          var gs = 1 - Math.pow(1 - three.grow, 3);
+          three.objs.forEach(function (o) { o.scale.set(gs, 1, gs); });
+        }
+        var aspectBoost = w / h < 1 ? 1 / Math.max(0.62, w / h) : 1;
+        var d = three.camDist * aspectBoost, elev = 0.95;
+        three.camera.position.set(Math.cos(state.azimuth) * d * Math.cos(elev), d * Math.sin(elev), Math.sin(state.azimuth) * d * Math.cos(elev));
+        three.camera.lookAt(0, 0, 0);
+        if (three.youHalo) three.youHalo.material.size = (24 + Math.sin(t / 380) * 4) * three.renderer.getPixelRatio();
+        three.renderer.render(three.scene, three.camera);
+      } else {
+        view2d.draw(shown);
+      }
+      if (!ctx.reduced || state.drag || (three && (three.grow < 1 || Math.abs(three.camTarget - three.camDist) > 0.05))) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+
+    var view = {
+      rebuild: function (animate) { if (three) rebuild3D(animate); else view2d.draw(shown = 0); kick(); },
+      showJury: function (n) { shown = n; if (three) showJury3D(n); else view2d.draw(n); kick(); }
+    };
+
+    // drag to turn the scene
+    stage.addEventListener('pointerdown', function (e) { state.drag = { x: e.clientX, a: state.azimuth }; stage.setPointerCapture && stage.setPointerCapture(e.pointerId); kick(); });
+    stage.addEventListener('pointermove', function (e) { if (!state.drag) return; state.azimuth = state.drag.a + (e.clientX - state.drag.x) * 0.008; if (!three) view2d.draw(shown); kick(); });
+    function endDrag() { state.drag = null; }
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+
+    // theme changes
+    function onTheme() { readColors(); if (three) recolor3D(); else view2d.draw(shown); kick(); }
+    try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onTheme); } catch (e) {}
+    new MutationObserver(onTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    if (window.ResizeObserver) new ResizeObserver(function () { if (!three) view2d.draw(shown); kick(); }).observe(stage);
+
+    // first paint in 2D, then upgrade to 3D when the exhibit comes near
+    setMode('city');
+    var loading = false;
+    ctx.onVisible(function (isVis) {
+      visible = isVis;
+      if (isVis) {
+        lastT = 0; kick();
+        if (!three && !loading && window.WebGLRenderingContext) {
+          loading = true;
+          (window.THREE ? Promise.resolve() : ctx.loadScript(THREE_URL)).then(function () {
+            if (window.THREE && init3D()) { rebuild3D(true); kick(); }
+          }).catch(function () { /* stay in 2D */ });
+        }
+      }
+    }, { rootMargin: '400px 0px' });
+  });
+})();
+
+/* ===== widget: verdict ===== */
+/* verdict: "Jury instructions". Seven questions, then a certificate of service. Seal: 'verdict'. */
+(function () {
+  'use strict';
+
+  /* ---- questions (edit here) ---- */
+  var QUESTIONS = [
+    { q: 'In 1300, the ideal English juror was someone who…',
+      options: ['had never met the accused', 'knew the accused and the facts', 'had studied the law', 'was picked by lot'],
+      answer: 1, ch: 'V', href: '#ch-twelve',
+      why: 'Medieval jurors were neighbors, summoned because they already knew the people and what had happened. Their knowledge was the evidence.' },
+    { q: 'How did Athens choose which citizens judged a case that day?',
+      options: ['The magistrate picked the wisest', 'By lot, with an allotment machine', 'By election', 'First come, first served'],
+      answer: 1, ch: 'II', href: '#ch-athens',
+      why: 'Black and white dice decided whole rows of juror tickets. Nobody could know in advance who would sit, which made bribery hard.' },
+    { q: 'What pushed England from the ordeal toward the jury?',
+      options: ['Magna Carta', 'The Fourth Lateran Council of 1215', 'The Black Death', 'An act of Parliament'],
+      answer: 1, ch: 'III', href: '#ch-ordeal',
+      why: 'The Church barred priests from blessing ordeals in 1215. Without God as the judge, English courts turned to juries of neighbors.' },
+    { q: 'In Magna Carta, "the lawful judgment of his peers" first meant…',
+      options: ['a jury of twelve', 'judgment by equals in rank', 'trial by battle', 'the king\'s own verdict'],
+      answer: 1, ch: 'IV', href: '#ch-kings',
+      why: 'The barons wanted to be judged by barons. Reading the clause as a promise of jury trial came centuries later.' },
+    { q: 'What did Bushel\'s Case (1670) decide?',
+      options: ['Verdicts must be unanimous', 'Jurors cannot be punished for their verdict', 'A jury must have twelve members', 'Quakers may preach in the street'],
+      answer: 1, ch: 'VI', href: '#ch-talks',
+      why: 'After the jury acquitted William Penn and was fined and jailed for it, Chief Justice Vaughan ruled that jurors may not be punished for the verdict they give.' },
+    { q: 'What is the smallest jury the US Supreme Court allows in a criminal trial?',
+      options: ['Three', 'Five', 'Six', 'Twelve'],
+      answer: 2, ch: 'VII', href: '#ch-sit',
+      why: 'Williams v. Florida (1970) upheld a jury of six. Ballew v. Georgia (1978) struck down a jury of five.' },
+    { q: 'About how many federal criminal cases end in a trial?',
+      options: ['About half', 'About 1 in 10', 'About 2 in 100', 'None at all'],
+      answer: 2, ch: 'IX', href: '#ch-strangers',
+      why: 'In fiscal year 2022 about 90 percent of federal defendants pleaded guilty and about 8 percent had their cases dismissed. Only about 2 percent went to trial.' }
+  ];
+
+  var RANKS = [
+    { min: 7, title: 'Foreperson of the Court', line: 'A perfect record. The court would trust you with the verdict form.' },
+    { min: 5, title: 'Duly Sworn', line: 'Well informed and ready to deliberate.' },
+    { min: 3, title: 'Seated, With Notes', line: 'The judge has a few instructions for you.' },
+    { min: 0, title: 'Excused, With Thanks', line: 'Excused for cause, with the court\'s thanks. The record is above if you would like to try again.' }
+  ];
+
+  var LETTERS = ['A', 'B', 'C', 'D'];
+
+  function sealPath(cx, cy, r, bumps) {
+    var d = '', n = bumps * 2;
+    for (var i = 0; i <= n; i++) {
+      var a = (i / n) * Math.PI * 2, rr = i % 2 ? r : r * 0.9;
+      d += (i ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(2) + ' ' + (cy + Math.sin(a) * rr).toFixed(2);
+    }
+    return d + 'Z';
+  }
+
+  TS.register('verdict', function (el, ctx) {
+    var state = { i: 0, picks: [], done: false };
+
+    el.innerHTML =
+      '<div class="w-ver">' +
+        '<div class="w-ver-tally" aria-hidden="true"></div>' +
+        '<div class="w-ver-card"></div>' +
+        '<p class="sr-only" aria-live="polite" id="w-ver-live"></p>' +
+      '</div>';
+    var tally = el.querySelector('.w-ver-tally');
+    var card = el.querySelector('.w-ver-card');
+    var live = el.querySelector('#w-ver-live');
+
+    function renderTally() {
+      tally.innerHTML = QUESTIONS.map(function (q, i) {
+        var p = state.picks[i];
+        var cls = p == null ? '' : p === q.answer ? ' is-right' : ' is-wrong';
+        if (i === state.i && !state.done) cls += ' is-now';
+        return '<span class="w-ver-mark' + cls + '"></span>';
+      }).join('');
+    }
+
+    function renderQuestion() {
+      var q = QUESTIONS[state.i];
+      var picked = state.picks[state.i];
+      var answered = picked != null;
+      card.innerHTML =
+        '<p class="w-ver-count label">Question ' + (state.i + 1) + ' of ' + QUESTIONS.length + '</p>' +
+        '<h4 class="w-ver-q">' + q.q + '</h4>' +
+        '<div class="w-ver-options" role="group" aria-label="Answers">' +
+          q.options.map(function (o, k) {
+            var cls = '';
+            if (answered) cls = k === q.answer ? ' is-right' : k === picked ? ' is-wrong' : ' is-dim';
+            return '<button type="button" class="w-ver-opt' + cls + '" data-k="' + k + '"' + (answered ? ' disabled' : '') + '><span class="w-ver-letter">' + LETTERS[k] + '</span><span>' + o + '</span></button>';
+          }).join('') +
+        '</div>' +
+        (answered ?
+          '<div class="w-ver-why"><p><b>' + (picked === q.answer ? 'Correct.' : 'Not quite.') + '</b> ' + q.why + ' <a href="' + q.href + '">Chapter ' + q.ch + '</a></p>' +
+          '<button type="button" class="btn w-ver-next">' + (state.i + 1 < QUESTIONS.length ? 'Next question' : 'Return your verdict') + '</button></div>'
+          : '');
+      card.querySelectorAll('.w-ver-opt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          state.picks[state.i] = +b.dataset.k;
+          var right = +b.dataset.k === q.answer;
+          live.textContent = (right ? 'Correct. ' : 'Not quite. The answer is ' + q.options[q.answer] + '. ') + q.why;
+          renderTally();
+          renderQuestion();
+          var next = card.querySelector('.w-ver-next');
+          if (next) next.focus({ preventScroll: true });
+        });
+      });
+      var next = card.querySelector('.w-ver-next');
+      if (next) next.addEventListener('click', function () {
+        if (state.i + 1 < QUESTIONS.length) { state.i++; renderTally(); renderQuestion(); focusCard(); }
+        else finish();
+      });
+    }
+
+    function focusCard() {
+      var h = card.querySelector('.w-ver-q, .w-ver-cert-title');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    }
+
+    function score() { return QUESTIONS.filter(function (q, i) { return state.picks[i] === q.answer; }).length; }
+
+    function finish() {
+      state.done = true;
+      renderTally();
+      ctx.stamp('verdict');
+      ctx.store.set('last', score());
+      renderCertificate(true);
+      focusCard();
+    }
+
+    function renderCertificate(fresh) {
+      var s = score();
+      var rank = RANKS.filter(function (r) { return s >= r.min; })[0];
+      var seals = TS.SEALS.map(function (x) { return { label: x.label, num: x.num, on: ctx.hasSeal(x.id) }; });
+      var nSeals = seals.filter(function (x) { return x.on; }).length;
+      var date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      var missed = QUESTIONS.map(function (q, i) { return state.picks[i] === q.answer ? null : '<a href="' + q.href + '">Ch. ' + q.ch + '</a>'; }).filter(Boolean);
+      card.innerHTML =
+        '<div class="w-ver-cert' + (fresh && !ctx.reduced ? ' is-fresh' : '') + '">' +
+          '<p class="w-ver-cert-court">In the Court of All the Ages</p>' +
+          '<h4 class="w-ver-cert-title">Certificate of Jury Service</h4>' +
+          '<p class="w-ver-cert-body">This certifies that <b>Juror No. ' + ctx.juror + '</b> answered the summons, heard the evidence from before history to the present day, and returned a verdict of <b class="tnum">' + s + ' of ' + QUESTIONS.length + '</b>.</p>' +
+          '<p class="w-ver-cert-rank">' + rank.title + '</p>' +
+          '<p class="w-ver-cert-line">' + rank.line + (missed.length && s < 7 ? ' Review: ' + missed.join(', ') + '.' : '') + '</p>' +
+          '<div class="w-ver-cert-box" aria-label="' + nSeals + ' of 12 seals earned">' +
+            seals.map(function (x) { return '<span class="w-ver-cert-seat' + (x.on ? ' is-on' : '') + '" title="' + x.label + '">' + x.num + '</span>'; }).join('') +
+          '</div>' +
+          '<p class="w-ver-cert-seals typed">' + (nSeals === 12 ? 'Jury box full: all twelve seals.' : 'Seals earned: ' + nSeals + ' of 12. Each exhibit on the page holds one.') + '</p>' +
+          '<div class="w-ver-cert-foot">' +
+            '<span class="typed">Dated ' + date + '</span>' +
+            '<svg class="w-ver-wax" viewBox="0 0 80 80" aria-hidden="true"><path d="' + sealPath(40, 40, 37, 14) + '"/><circle cx="40" cy="40" r="25"/><text x="40" y="47" text-anchor="middle">XII</text></svg>' +
+          '</div>' +
+        '</div>' +
+        '<div class="btn-row w-ver-actions">' +
+          '<button type="button" class="btn w-ver-copy">Copy my verdict</button>' +
+          '<button type="button" class="btn btn-ghost w-ver-again">Retake</button>' +
+        '</div>' +
+        '<textarea class="w-ver-copytext" readonly hidden aria-label="Your verdict, ready to copy"></textarea>';
+      live.textContent = 'Certificate of jury service. Verdict ' + s + ' of ' + QUESTIONS.length + '. ' + rank.title + '.';
+      var text = 'I served as Juror No. ' + ctx.juror + ' in "Twelve Strangers," a history of trial by jury, and returned a verdict of ' + s + ' of ' + QUESTIONS.length + ' (' + rank.title + '), with ' + nSeals + ' of 12 seals.';
+      var copyBtn = card.querySelector('.w-ver-copy');
+      var ta = card.querySelector('.w-ver-copytext');
+      copyBtn.addEventListener('click', function () {
+        function fallback() { ta.value = text; ta.hidden = false; ta.focus(); ta.select(); copyBtn.textContent = 'Select and copy'; }
+        try {
+          navigator.clipboard.writeText(text).then(function () { copyBtn.textContent = 'Copied'; ctx.toast('Copied your verdict'); }, fallback);
+        } catch (e) { fallback(); }
+      });
+      card.querySelector('.w-ver-again').addEventListener('click', function () {
+        state = { i: 0, picks: [], done: false };
+        renderTally(); renderQuestion(); focusCard();
+      });
+    }
+
+    ctx.on('seal', function () { if (state.done) renderCertificate(false); });
+
+    renderTally();
+    renderQuestion();
+  });
+})();
+
+TS.init();
+</script>
