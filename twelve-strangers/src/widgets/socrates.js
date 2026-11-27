@@ -27,6 +27,7 @@
       'He corrupts the young.'
     ],
     caseSource: 'Wording after Plato, Apology 24b, and Diogenes Laertius 2.40.',
+    caseMore: 'Read the charge sheet',
 
     voteLabel: 'Ballot one: guilty or not guilty',
     voteIntro: 'Both sides have spoken, timed by a water clock. No judge explains the law. Nobody talks it over. You vote now, in secret, and the majority wins.',
@@ -79,6 +80,7 @@
     mina: '30 minae is 3,000 drachmas: about 6,000 days of jury pay at 3 obols a day.',
     penSource: 'After Plato, Apology 36b to 38b.',
     penAsk: 'Choose one penalty.',
+    toPen: 'Next: vote on the penalty',
     penBtn: { d: 'Death', f: 'Fine of 30 minae' },
 
     verdict2: 'Death, 360 to 141.',
@@ -162,8 +164,11 @@
             '<p class="w-socrates-era">' + esc(DATA.era) + '</p>' +
             '<h4 class="w-socrates-ctitle">' + esc(DATA.caseTitle) + '</h4>' +
             '<p class="w-socrates-kind">' + esc(DATA.caseKind) + '</p>' +
-            '<dl class="w-socrates-fields">' + rows + '</dl>' +
-            '<p class="w-socrates-src">' + esc(DATA.caseSource) + '</p>' +
+            '<details class="w-socrates-more">' +
+              '<summary class="w-socrates-moresum">' + esc(DATA.caseMore) + '</summary>' +
+              '<dl class="w-socrates-fields">' + rows + '</dl>' +
+              '<p class="w-socrates-src">' + esc(DATA.caseSource) + '</p>' +
+            '</details>' +
           '</article>' +
           '<section class="w-socrates-vote" aria-label="' + esc(DATA.voteLabel) + '">' +
             '<p class="label">' + esc(DATA.voteLabel) + '</p>' +
@@ -171,7 +176,7 @@
             '<div class="w-socrates-ballots">' + ballotBtn('c') + ballotBtn('a') + '</div>' +
             '<p class="w-socrates-note">' + esc(DATA.pinch) + '</p>' +
             '<div class="w-socrates-urns">' +
-              '<svg class="w-socrates-urnsvg" viewBox="0 0 300 146" aria-hidden="true" focusable="false">' +
+              '<svg class="w-socrates-urnsvg" viewBox="0 0 300 156" aria-hidden="true" focusable="false">' +
                 '<g class="w-socrates-falls"></g>' +
                 '<g class="w-socrates-bronze">' +
                   '<path class="u-body" d="M78 42C57 50 53 102 72 118H108C127 102 123 50 102 42Z"/>' +
@@ -188,10 +193,10 @@
                   '<path class="w-hoop" d="M190 58c16 3 34 3 50 0M190 104c16 3 34 3 50 0"/>' +
                   '<ellipse class="w-mouth" cx="215" cy="40" rx="22" ry="4"/>' +
                 '</g>' +
-                '<text class="u-label" x="90" y="134" text-anchor="middle">' + esc(DATA.urnBronze[0]) + '</text>' +
-                '<text class="u-sub" x="90" y="144" text-anchor="middle">' + esc(DATA.urnBronze[1]) + '</text>' +
-                '<text class="u-label" x="215" y="134" text-anchor="middle">' + esc(DATA.urnWood[0]) + '</text>' +
-                '<text class="u-sub" x="215" y="144" text-anchor="middle">' + esc(DATA.urnWood[1]) + '</text>' +
+                '<text class="u-label" x="90" y="137" text-anchor="middle">' + esc(DATA.urnBronze[0]) + '</text>' +
+                '<text class="u-sub" x="90" y="152" text-anchor="middle">' + esc(DATA.urnBronze[1]) + '</text>' +
+                '<text class="u-label" x="215" y="137" text-anchor="middle">' + esc(DATA.urnWood[0]) + '</text>' +
+                '<text class="u-sub" x="215" y="152" text-anchor="middle">' + esc(DATA.urnWood[1]) + '</text>' +
               '</svg>' +
             '</div>' +
             '<p class="w-socrates-note w-socrates-pebble">' + esc(DATA.pebble) + '</p>' +
@@ -227,7 +232,7 @@
           '</div>' +
         '</section>' +
         '<div class="w-socrates-result" aria-live="polite"></div>' +
-        '<section class="w-socrates-pen" hidden aria-label="' + esc(DATA.penLabel) + '">' +
+        '<section class="w-socrates-pen" hidden tabindex="-1" aria-label="' + esc(DATA.penLabel) + '">' +
           '<p class="label">' + esc(DATA.penLabel) + '</p>' +
           '<p class="w-socrates-intro">' + esc(DATA.penIntro) + '</p>' +
           '<ol class="w-socrates-props">' + DATA.props.map(function (p, k) {
@@ -251,6 +256,8 @@
     var castP = el.querySelector('.w-socrates-cast');
     var countBtn = el.querySelector('.w-socrates-count');
     var boardWrap = el.querySelector('.w-socrates-boardwrap');
+    var boardBox = el.querySelector('.w-socrates-boardbox');
+    var moreEl = el.querySelector('.w-socrates-more');
     var board = el.querySelector('.w-socrates-board');
     var cells = Array.prototype.slice.call(el.querySelectorAll('.w-socrates-cells circle'));
     var stampEl = el.querySelector('.w-socrates-stamp');
@@ -277,6 +284,42 @@
     function scrollTo(node, block) {
       if (node.scrollIntoView) node.scrollIntoView({ block: block || 'nearest', behavior: R ? 'auto' : 'smooth' });
     }
+    /* Bottom edge of the sticky ticker (about 53px), so nothing important hides under it. */
+    function tickerBottom() {
+      var t = document.querySelector('.ticker');
+      if (!t) return 0;
+      var b = t.getBoundingClientRect().bottom;
+      return b > 140 ? 56 : Math.max(0, b);
+    }
+    function vh() { return window.innerHeight || document.documentElement.clientHeight; }
+    /* When the reader drags or wheels the page during a count, the automatic scroll after it stands down. */
+    var userScrollAt = 0;
+    function noteScroll() { userScrollAt = Date.now(); }
+    window.addEventListener('touchmove', noteScroll, { passive: true });
+    window.addEventListener('wheel', noteScroll, { passive: true });
+    /* After a count: make sure the verdict line shows. If moving the board to the top of the screen is enough,
+       do that, so the stamp and the brass rings stay in view; otherwise bring the result itself to the top. */
+    function revealVerdict(since) {
+      if (userScrollAt > since) return;
+      var v = result.querySelector('.w-socrates-verdict');
+      if (!v) return;
+      var top = tickerBottom(), h = vh();
+      var vr = v.getBoundingClientRect();
+      if (vr.top >= top && vr.bottom + 8 <= h) return;
+      var shift = boardBox.getBoundingClientRect().top - (top + 25);   // where 'start' puts the board (ticker + 25px)
+      if (shift > 0 && vr.bottom + 8 - shift <= h) scrollTo(boardBox, 'start');
+      else scrollTo(result, 'start');
+    }
+    function afterStamp(fn) {
+      var id = run;
+      if (R) { fn(); return; }
+      setTimeout(function () { if (id === run) fn(); }, 650);
+    }
+    /* Phones keep the case fields folded; wide screens always show them. */
+    var wide = window.matchMedia ? window.matchMedia('(min-width: 46rem)') : null;
+    function syncCase() { if (wide && wide.matches) moreEl.open = true; }
+    syncCase();
+    if (wide) { if (wide.addEventListener) wide.addEventListener('change', syncCase); else if (wide.addListener) wide.addListener(syncCase); }
     function bumpStamp(text) {
       stampEl.textContent = text;
       stampEl.classList.remove('is-on');
@@ -346,6 +389,7 @@
       var othersA1 = N - othersC1;
       var you = { c: v1 === 'c' ? 1 : 0, a: v1 === 'a' ? 1 : 0 };
       var placedC = 0, placedA = 0;
+      var since = Date.now();
       scrollTo(boardWrap, R ? 'nearest' : 'center');
       tween(2400, function (p) {
         var k = Math.min(othersC1, Math.floor(othersC1 * p));
@@ -363,11 +407,18 @@
           '<p class="w-socrates-verdict">' + esc(DATA.verdict1) + '</p>' +
           '<p>' + esc(DATA.you1[v1]) + '</p>' +
           '<p class="w-socrates-swing"><span class="w-socrates-ring" aria-hidden="true"></span>' + esc(DATA.swing) + '</p>' +
-          '<p class="w-socrates-doubt">' + esc(DATA.doubt) + '</p>';
+          '<p class="w-socrates-doubt">' + esc(DATA.doubt) + '</p>' +
+          '<div class="btn-row"><button type="button" class="btn btn-small w-socrates-tonext">' + esc(DATA.toPen) +
+            '<svg class="w-socrates-down" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M6 1.5v8.5M2 6.5l4 4 4-4"/></svg></button></div>';
+        result.querySelector('.w-socrates-tonext').addEventListener('click', function () {
+          pen.focus({ preventScroll: true });
+          scrollTo(pen, 'start');
+        });
         castRow.hidden = true;
         pen.hidden = false;
         state = 'counted';
         ctx.stamp('socrates');
+        afterStamp(function () { revealVerdict(since); });
       });
     }
     countBtn.addEventListener('click', countFirst);
@@ -392,7 +443,8 @@
       var flips = othersD2 - othersC1;
       var done = 0;
       setTally(othersC1 + youD, N - othersC1 + youF);
-      scrollTo(boardWrap, R ? 'nearest' : 'start');
+      var since = Date.now();
+      scrollTo(boardBox, R ? 'nearest' : 'start');
       tween(1100, function (p) {
         var k = p >= 1 ? flips : Math.floor(flips * p);
         for (; done < k; done++) setCell(othersC1 + done, 'is-c is-swing' + (R ? '' : ' is-pop'));
@@ -411,6 +463,7 @@
           '<div class="btn-row"><button type="button" class="btn btn-ghost btn-small w-socrates-replay">' + esc(DATA.replay) + '</button></div>';
         result.querySelector('.w-socrates-replay').addEventListener('click', reset);
         state = 'done';
+        afterStamp(function () { revealVerdict(since); });
       });
     }
     penBtns.forEach(function (b) {

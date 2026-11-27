@@ -6,13 +6,13 @@
   background: var(--sheet); cursor: pointer; touch-action: manipulation; transition: border-color .15s, background .15s;
 }
 .w-str-mode span { font-family: var(--f-body); font-weight: 700; font-size: .95rem; line-height: 1.2; color: var(--ink); }
-.w-str-mode small { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); letter-spacing: .03em; }
+.w-str-mode small { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); letter-spacing: .03em; }
 .w-str-mode:hover { border-color: var(--accent); }
 .w-str-mode[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
 .w-str-mode[aria-pressed="true"] span, .w-str-mode[aria-pressed="true"] small { color: var(--on-accent); }
 
 .w-str-stage {
-  position: relative; height: 340px; border-radius: var(--radius); overflow: hidden; background: var(--sheet-2);
+  position: relative; height: min(320px, 48vh); min-height: 250px; border-radius: var(--radius); overflow: hidden; background: var(--sheet-2);
   border: 1px solid var(--rule); touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none;
 }
 .w-str-stage:active { cursor: grabbing; }
@@ -22,14 +22,14 @@
 .w-str-c3d.is-on { opacity: 1; }
 .w-str-c2d.is-off { opacity: 0; }
 .w-str-place, .w-str-scale {
-  position: absolute; left: .6rem; font-size: .72rem; letter-spacing: .04em; color: var(--ink-2); pointer-events: none;
+  position: absolute; left: .6rem; font-size: .75rem; letter-spacing: .03em; color: var(--ink-2); pointer-events: none;
   background: var(--sheet-2); padding: .15rem .35rem; border-radius: 2px; max-width: calc(100% - 1.2rem);
 }
 .w-str-place { top: .5rem; font-weight: 700; color: var(--ink); }
-.w-str-scale { top: 1.9rem; }
+.w-str-scale { top: 2rem; }
 .w-str-legend {
   position: absolute; left: .6rem; bottom: .5rem; right: .6rem; display: flex; flex-wrap: wrap; gap: .25rem .8rem; margin: 0; padding: 0;
-  list-style: none; font-size: .7rem; color: var(--ink-2); pointer-events: none;
+  list-style: none; font-size: .75rem; color: var(--ink-2); pointer-events: none;
 }
 .w-str-legend li { display: flex; align-items: center; gap: .3rem; background: var(--sheet-2); padding: 0 .2rem; border-radius: 2px; }
 .w-str-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
@@ -39,14 +39,14 @@
 
 .w-str-controls { display: grid; gap: .9rem; }
 .w-str-range { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: .2rem .6rem; }
-.w-str-range input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); height: 2rem; margin: 0; }
+.w-str-range input { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); height: 2.5rem; margin: 0; }
 .w-str-know-out { font-size: .95rem; font-weight: 700; color: var(--ink); text-align: right; }
 .w-str-range-note { grid-column: 1 / -1; font-size: .82rem; color: var(--ink-3); line-height: 1.4; }
 .w-str-rule { display: grid; gap: .4rem; }
-.w-str-draw { justify-self: start; }
+.w-str-drawrow { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.1rem; }
+.w-str-drawrow .w-str-big { margin: 0; }
 
 .w-str-result { display: grid; gap: .9rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
-@media (min-width: 40rem) { .w-str-result { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 1.4rem; } }
 .w-str-box {
   list-style: none; margin: 0; padding: .6rem .7rem; display: grid; grid-template-columns: repeat(6, 2rem); gap: .35rem .45rem;
   justify-content: start; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); width: max-content; max-width: 100%;
@@ -60,7 +60,7 @@
 
 .w-str-readout { display: grid; gap: .6rem; min-width: 0; }
 .w-str-big { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
-.w-str-big b { font-family: var(--f-display); font-weight: 900; font-size: 3rem; line-height: .9; color: var(--brass); min-width: 1.4ch; }
+.w-str-big b { font-family: var(--f-body); font-weight: 700; font-size: 2.4rem; line-height: .9; color: var(--brass); min-width: 1.2ch; }
 .w-str-big span { font-family: var(--f-type); font-size: .9rem; color: var(--ink-2); }
 .w-str-stats { margin: 0; display: grid; gap: .35rem; }
 .w-str-stats div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--rule); padding-bottom: .2rem; }

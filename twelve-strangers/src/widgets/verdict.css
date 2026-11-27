@@ -55,6 +55,9 @@
 .w-ver-wax { width: 4.2rem; height: 4.2rem; flex: 0 0 auto; transform: rotate(-12deg); }
 .w-ver-wax path { fill: var(--seal); }
 .w-ver-wax circle { fill: none; stroke: var(--sheet); stroke-opacity: .45; stroke-width: 1.5; }
-.w-ver-wax text { font-family: var(--f-display); font-weight: 900; font-size: 20px; fill: var(--sheet); fill-opacity: .85; }
+.w-ver-wax text { font-family: var(--f-body); font-weight: 700; font-size: 17px; fill: var(--sheet); fill-opacity: .85; }
 .w-ver-actions { justify-content: center; }
 .w-ver-copytext { width: 100%; min-height: 5rem; font-family: var(--f-type); font-size: .85rem; padding: .6rem; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: var(--radius); }
+.w-ver-cert-line a { display: inline-block; padding: .45rem .15rem; }
+.w-ver-copyhint { font-size: .9rem; color: var(--ink-2); text-align: center; }
+.w-ver-cert-seat { font-size: .78rem; }

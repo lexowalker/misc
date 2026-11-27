@@ -117,6 +117,10 @@
     decide: 'Decide together',
     needMore: function (n) { return 'Hear ' + n + ' more ' + (n === 1 ? 'villager' : 'villagers') + ' first'; },
     ready: 'The circle is ready',
+    /* The pill in the middle of the circle: progress toward the five, then where to go next. */
+    pillOf: function (n, need) { return '<b class="tnum">' + n + '</b> of ' + need + ' heard'; },
+    pillReady: ['Ready:', 'decide below'],
+    pillDone: function (n) { return '<b class="tnum">' + n + '</b> heard'; },
     question: 'You speak first. What do you say at the fire?',
     proposals: [
       { id: 'exile', label: 'Cast him out',
@@ -213,7 +217,7 @@
             '</g>' +
           '</svg>' +
           seatsHtml +
-          '<p class="w-circle-count" aria-hidden="true"><b class="tnum">0</b> heard</p>' +
+          '<p class="w-circle-count" aria-hidden="true"></p>' +
         '</div>' +
         '<div class="w-circle-legend" aria-hidden="true"><div>' + legendTies + '</div><div>' + legendHouses + '</div></div>' +
         '</div>' +
@@ -244,7 +248,7 @@
     var needEl = el.querySelector('.w-circle-need');
     var propEl = el.querySelector('.w-circle-proposals');
     var outEl = el.querySelector('.w-circle-outcome');
-    var countEl = el.querySelector('.w-circle-count b');
+    var countEl = el.querySelector('.w-circle-count');
     var seatEls = {};
     Array.prototype.forEach.call(el.querySelectorAll('.w-circle-seat'), function (b) { seatEls[b.dataset.id] = b; });
 
@@ -319,7 +323,11 @@
       decideBtn.disabled = left > 0 || settled;
       decideBtn.classList.toggle('is-ready', left === 0 && !settled);
       needEl.textContent = settled ? '' : left > 0 ? DATA.needMore(left) : DATA.ready;
-      countEl.textContent = heardCount;
+      var ready = left === 0 && !settled;
+      countEl.classList.toggle('is-ready', ready);
+      countEl.innerHTML = settled ? DATA.pillDone(heardCount)
+        : ready ? '<span>' + esc(DATA.pillReady[0]) + '</span> <span>' + esc(DATA.pillReady[1]) + '</span>'
+        : DATA.pillOf(heardCount, DATA.need);
     }
 
     function highlight(id) {
@@ -334,12 +342,27 @@
       });
     }
 
-    /* ---------- interaction ---------- */
-    function keepCardInView() {
-      var r = card.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      if (r.top > vh - 80 || r.bottom < 60) card.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+    /* ---------- keeping what the reader just revealed on screen ---------- */
+    /* Bottom edge of the sticky ticker (about 53px), so nothing important hides under it. */
+    function tickerBottom() {
+      var t = document.querySelector('.ticker');
+      if (!t) return 0;
+      var b = t.getBoundingClientRect().bottom;
+      return b > 140 ? 56 : Math.max(0, b);
     }
+    /* Scroll only when the target is off screen or under the ticker.
+       'nearest': the whole node should show. 'start': its top should show, with room below it to read. */
+    function reveal(node, block) {
+      if (!node || !node.scrollIntoView) return;
+      var r = node.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var top = tickerBottom();
+      var ok = block === 'start' ? (r.top >= top && r.top <= vh * 0.55) : (r.top >= top && r.bottom <= vh);
+      if (!ok) node.scrollIntoView({ block: block || 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+    }
+
+    /* ---------- interaction ---------- */
+    function keepCardInView() { reveal(card, 'nearest'); }
 
     function hear(id) {
       active = id;
@@ -372,7 +395,7 @@
       needEl.textContent = '';
       var first = propEl.querySelector('.w-circle-opt');
       if (first) first.focus({ preventScroll: true });
-      if (propEl.scrollIntoView) propEl.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+      reveal(propEl, 'nearest');
     });
 
     propEl.addEventListener('click', function (e) {
@@ -418,6 +441,7 @@
       }
       ctx.stamp('circle');
       outEl.querySelector('.w-circle-replay').addEventListener('click', reset);
+      reveal(outEl, 'start');
     }
 
     function reset() {
@@ -441,7 +465,7 @@
       renderLedger();
       renderNeed();
       seatEls.pell.focus({ preventScroll: true });
-      if (stage.scrollIntoView) stage.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
+      reveal(stage, 'nearest');
     }
 
     /* ---------- start ---------- */

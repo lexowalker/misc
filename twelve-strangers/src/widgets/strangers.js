@@ -137,6 +137,12 @@
             '<li><i class="is-you"></i>You</li><li><i class="is-know"></i>Knows you</li><li><i class="is-crowd"></i>Everyone else</li>' +
           '</ul>' +
         '</div>' +
+        '<div class="w-str-drawrow">' +
+          '<button type="button" class="btn w-str-draw">Draw a jury of twelve</button>' +
+          '<p class="w-str-big" aria-live="polite"><b class="tnum">?</b> <span>of 12 jurors know you</span></p>' +
+        '</div>' +
+        '<ol class="w-str-box" aria-label="The jury box"></ol>' +
+        '<p class="w-str-insight" hidden></p>' +
         '<div class="w-str-controls">' +
           '<div class="w-str-range">' +
             '<label for="w-str-know" class="label">People who know you by name</label>' +
@@ -151,18 +157,14 @@
               '<button type="button" class="chip" data-rule="random" aria-pressed="false">Random draw (today)</button>' +
             '</div>' +
           '</div>' +
-          '<button type="button" class="btn w-str-draw">Draw a jury of twelve</button>' +
         '</div>' +
         '<div class="w-str-result">' +
-          '<ol class="w-str-box" aria-label="The jury box"></ol>' +
-          '<div class="w-str-readout" aria-live="polite">' +
-            '<p class="w-str-big"><b class="tnum">?</b> <span>of 12 jurors know you</span></p>' +
+          '<div class="w-str-readout">' +
             '<dl class="w-str-stats">' +
               '<div><dt>Chance at least one juror knows you</dt><dd class="tnum w-str-p"></dd></div>' +
               '<div><dt>Jurors who know you, on average</dt><dd class="tnum w-str-e"></dd></div>' +
             '</dl>' +
             '<p class="w-str-note"></p>' +
-            '<p class="w-str-insight" hidden></p>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -298,15 +300,18 @@
     }
 
     var drawing = false;
+    function cancelDraw() { drawing = false; }
     function runDraw() {
       if (drawing) return;
       drawing = true;
-      state.jury = drawJury();
+      poke();
+      var mine = state.jury = drawJury();
       $('.w-str-big b').textContent = '…';
       renderSeats(0);
       var n = 0;
       var step = ctx.reduced ? 0 : 110;
       function next() {
+        if (state.jury !== mine) { drawing = false; return; }
         n++;
         renderSeats(n);
         view.showJury(n);
@@ -318,6 +323,7 @@
 
     /* ---- controls ---- */
     function setMode(id) {
+      cancelDraw(); poke();
       state.mode = DATA.modes.filter(function (m) { return m.id === id; })[0];
       if (!state.ruleTouched) state.rule = state.mode.rule;
       state.jury = null;
@@ -336,6 +342,7 @@
     el.querySelectorAll('.w-str-mode').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.mode); }); });
     el.querySelectorAll('[data-rule]').forEach(function (b) {
       b.addEventListener('click', function () {
+        cancelDraw(); poke();
         state.rule = b.dataset.rule; state.ruleTouched = true; syncRule();
         state.jury = null; renderSeats(0); $('.w-str-big b').textContent = '?'; $('.w-str-insight').hidden = true;
         updateReadout(); view.showJury(0);
@@ -343,6 +350,7 @@
     });
     var knowTimer;
     knowInput.addEventListener('input', function () {
+      cancelDraw(); poke();
       state.know = +knowInput.value;
       state.jury = null; renderSeats(0); $('.w-str-big b').textContent = '?';
       $('.w-str-insight').hidden = true;
@@ -411,7 +419,7 @@
     /* ---- 3D renderer ---- */
     var three = null; // { renderer, scene, camera, groups... }
     var shown = 0;
-    var visible = false, raf = 0, lastT = 0;
+    var visible = false, raf = 0, lastT = 0, lastPoke = performance.now();
 
     function circleTexture(ring) {
       var cv = document.createElement('canvas'); cv.width = cv.height = 64;
@@ -483,11 +491,12 @@
       you.scale.set(youScale * 0.55, youScale * 1.6, youScale * 0.55);
       you.position.y = youScale * 0.8;
       you.rotation.x = Math.PI;
+      you.userData.noGrow = true;
       three.you = add(you);
       three.youHalo = add(pointsFrom([0], 26 * dpr, colors.brass, three.ringTex, 0.9, 0.05));
       three.juryRings = null; three.juryDots = null; three.juryTies = null;
       shown = 0;
-      three.camTarget = Math.max(16, model.extent * 2.05);
+      three.camTarget = Math.max(7, model.extent);
       if (animate) three.camDist = three.camTarget * (ctx.reduced ? 1 : 1.5);
       three.grow = animate && !ctx.reduced ? 0 : 1;
       showJury3D(state.jury ? 12 : 0);
@@ -530,7 +539,8 @@
       if (!visible) return;
       var dt = lastT ? Math.min(0.05, (t - lastT) / 1000) : 0.016;
       lastT = t;
-      if (!state.drag && !ctx.reduced) state.azimuth += dt * 0.12;
+      var spinning = !state.drag && !ctx.reduced && (t - lastPoke) < 14000;
+      if (spinning) state.azimuth += dt * 0.12;
       if (three) {
         var w = stage.clientWidth, h = stage.clientHeight;
         var cv = three.renderer.domElement;
@@ -543,10 +553,11 @@
         if (three.grow < 1) {
           three.grow = Math.min(1, three.grow + dt * 2.2);
           var gs = 1 - Math.pow(1 - three.grow, 3);
-          three.objs.forEach(function (o) { o.scale.set(gs, 1, gs); });
+          three.objs.forEach(function (o) { if (!o.userData.noGrow) o.scale.set(gs, 1, gs); });
         }
-        var aspectBoost = w / h < 1 ? 1 / Math.max(0.62, w / h) : 1;
-        var d = three.camDist * aspectBoost, elev = 0.95;
+        var elev = 0.95, T19 = Math.tan(19 * Math.PI / 180), aspect = w / h;
+        var fit = Math.max(1 / (T19 * aspect), Math.sin(elev) / T19) * 1.18;
+        var d = three.camDist * fit;
         three.camera.position.set(Math.cos(state.azimuth) * d * Math.cos(elev), d * Math.sin(elev), Math.sin(state.azimuth) * d * Math.cos(elev));
         three.camera.lookAt(0, 0, 0);
         if (three.youHalo) three.youHalo.material.size = (24 + Math.sin(t / 380) * 4) * three.renderer.getPixelRatio();
@@ -554,9 +565,10 @@
       } else {
         view2d.draw(shown);
       }
-      if (!ctx.reduced || state.drag || (three && (three.grow < 1 || Math.abs(three.camTarget - three.camDist) > 0.05))) raf = requestAnimationFrame(frame);
+      if (spinning || state.drag || (three && (three.grow < 1 || Math.abs(three.camTarget - three.camDist) > 0.01))) raf = requestAnimationFrame(frame);
     }
     function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+    function poke() { lastPoke = performance.now(); lastT = 0; kick(); }
 
     var view = {
       rebuild: function (animate) { if (three) rebuild3D(animate); else view2d.draw(shown = 0); kick(); },
@@ -564,7 +576,7 @@
     };
 
     // drag to turn the scene
-    stage.addEventListener('pointerdown', function (e) { state.drag = { x: e.clientX, a: state.azimuth }; stage.setPointerCapture && stage.setPointerCapture(e.pointerId); kick(); });
+    stage.addEventListener('pointerdown', function (e) { lastPoke = performance.now(); state.drag = { x: e.clientX, a: state.azimuth }; stage.setPointerCapture && stage.setPointerCapture(e.pointerId); kick(); });
     stage.addEventListener('pointermove', function (e) { if (!state.drag) return; state.azimuth = state.drag.a + (e.clientX - state.drag.x) * 0.008; if (!three) view2d.draw(shown); kick(); });
     function endDrag() { state.drag = null; }
     stage.addEventListener('pointerup', endDrag);

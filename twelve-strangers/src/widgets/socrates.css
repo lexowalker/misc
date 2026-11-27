@@ -1,5 +1,9 @@
 /* Exhibit: You are juror 501 */
 .w-socrates { display: grid; gap: 1.25rem; min-width: 0; }
+/* html already pads scrolling by the ticker height + 12px; 4px more lands targets 16px below the ticker.
+   The board box gets more, so the stamp on its top corner clears the ticker too. */
+[data-widget="socrates"], .w-socrates-castrow, .w-socrates-result, .w-socrates-pen, .w-socrates-boardwrap { scroll-margin-top: 4px; }
+.w-socrates-boardbox { scroll-margin-top: 16px; }
 .w-socrates-top { display: grid; gap: 1.25rem; min-width: 0; }
 @media (min-width: 46rem) {
   .w-socrates-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1.4rem; align-items: start; }
@@ -13,17 +17,32 @@
 }
 .w-socrates-key { display: block; width: 100%; height: 10px; margin-bottom: .25rem; }
 .w-socrates-keypath { fill: none; stroke: var(--brass); stroke-width: 1.4; stroke-linecap: square; stroke-linejoin: miter; }
-.w-socrates-era { font-family: var(--f-type); font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+.w-socrates-era { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
 .w-socrates-ctitle { font-family: var(--f-body); font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
 .w-socrates-kind { font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); font-style: italic; line-height: 1.4; }
+/* The case fields fold away on phones (the script keeps them open on wide screens). */
+.w-socrates-more { display: grid; gap: .4rem; }
+.w-socrates-moresum {
+  display: flex; align-items: center; gap: .5rem; min-height: 40px; cursor: pointer; list-style: none; justify-self: start;
+  font-family: var(--f-type); font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent);
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.w-socrates-moresum::-webkit-details-marker { display: none; }
+.w-socrates-moresum::before {
+  content: ""; flex: 0 0 auto; width: .5rem; height: .5rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transition: transform .2s; margin-left: .1rem;
+}
+.w-socrates-more[open] > .w-socrates-moresum::before { transform: rotate(45deg); }
+.w-socrates-moresum:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+@media (min-width: 46rem) { .w-socrates-moresum { display: none; } }
 .w-socrates-fields { margin: .35rem 0 0; display: grid; gap: .5rem; }
 .w-socrates-row { display: grid; gap: .1rem; border-bottom: 1px dotted var(--rule); padding-bottom: .45rem; }
 .w-socrates-row:last-child { border-bottom: 0; padding-bottom: 0; }
-.w-socrates-row dt { font-family: var(--f-type); font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.w-socrates-row dt { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 .w-socrates-row dd { margin: 0; font-size: .95rem; line-height: 1.45; }
 .w-socrates-charges { margin: .1rem 0 0; padding-left: 1.6rem; list-style: upper-roman; display: grid; gap: .2rem; }
 .w-socrates-charges li::marker { font-family: var(--f-type); font-weight: 700; color: var(--seal); font-size: .85em; }
-.w-socrates-src { font-family: var(--f-type); font-size: .7rem; color: var(--ink-3); line-height: 1.4; }
+.w-socrates-src { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); line-height: 1.4; }
 
 /* ---------- ballot one ---------- */
 .w-socrates-vote, .w-socrates-pen { display: grid; gap: .7rem; min-width: 0; align-content: start; }
@@ -42,7 +61,7 @@
 .w-socrates-ballot[disabled][aria-pressed="false"] { opacity: .4; }
 .w-socrates-ballot[aria-pressed="true"] .w-socrates-disc { animation: w-socrates-flip .5s ease-out; }
 @keyframes w-socrates-flip { 0% { transform: scale(1) rotate(0); } 40% { transform: scale(1.12) rotate(-12deg); } 100% { transform: scale(1) rotate(0); } }
-.w-socrates-axle { font-family: var(--f-type); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-top: .25rem; }
+.w-socrates-axle { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-top: .25rem; }
 .w-socrates-verb { font-family: var(--f-body); font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
 .w-socrates-ballot[data-v="c"] .w-socrates-verb { color: var(--seal); }
 .w-socrates-ballot[data-v="a"] .w-socrates-verb { color: var(--accent); }
@@ -58,7 +77,7 @@
 .w-socrates-disc .d-shine { fill: var(--brass-soft); opacity: .8; }
 
 .w-socrates-note { font-size: .84rem; line-height: 1.5; color: var(--ink-2); }
-.w-socrates-pebble { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); border-left: 2px dashed var(--rule); padding-left: .6rem; }
+.w-socrates-pebble { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); border-left: 2px dashed var(--rule); padding-left: .6rem; }
 
 /* the two urns */
 .w-socrates-urns { display: grid; justify-items: center; }
@@ -72,8 +91,8 @@
 .w-socrates-wood .w-hoop { fill: none; stroke: var(--ink-3); stroke-width: 2.2; }
 .w-socrates-wood .w-grain { fill: none; stroke: var(--ink-3); stroke-width: .8; opacity: .45; }
 .w-socrates-wood .w-mouth { fill: var(--paper); stroke: var(--ink-3); stroke-width: 1.4; }
-.w-socrates-urnsvg .u-label { font-family: var(--f-type); font-size: 9.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; fill: var(--ink-2); }
-.w-socrates-urnsvg .u-sub { font-family: var(--f-type); font-size: 9px; fill: var(--ink-3); }
+.w-socrates-urnsvg .u-label { font-family: var(--f-type); font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; fill: var(--ink-2); }
+.w-socrates-urnsvg .u-sub { font-family: var(--f-type); font-size: 12.5px; fill: var(--ink-3); }
 .w-socrates-fall .e-disc { fill: var(--brass-soft); stroke: var(--brass); stroke-width: 1.2; }
 .w-socrates-fall .e-axle { fill: var(--brass); }
 .w-socrates-fall .e-hole { fill: var(--ink-2); }
@@ -106,14 +125,15 @@
 @keyframes w-socrates-pop { from { transform: scale(1.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 .w-socrates-stamp {
-  position: absolute; right: -.3rem; top: -.55rem; pointer-events: none; opacity: 0;
+  position: absolute; right: 0; top: -.55rem; pointer-events: none; opacity: 0; transform-origin: 100% 0;
   font-family: var(--f-type); font-weight: 700; font-size: 1.15rem; letter-spacing: .18em; text-transform: uppercase; line-height: 1.1;
   color: var(--seal); background: var(--sheet); border: 3px double var(--seal); padding: .15rem .55rem .1rem .7rem;
   transform: rotate(-8deg); box-shadow: 0 4px 10px -6px rgba(0, 0, 0, .45);
 }
 .w-socrates-stamp:empty { display: none; }
 .w-socrates-stamp.is-on { animation: w-socrates-stamp .45s cubic-bezier(.2, 1.6, .4, 1) forwards; }
-@keyframes w-socrates-stamp { from { opacity: 0; transform: rotate(-8deg) scale(1.9); } to { opacity: .95; transform: rotate(-8deg) scale(1); } }
+/* Grows from its top right corner and starts small, so the stamp never reaches past the edge of the screen. */
+@keyframes w-socrates-stamp { from { opacity: 0; transform: rotate(-8deg) scale(1.3); } to { opacity: .95; transform: rotate(-8deg) scale(1); } }
 
 /* your ballot and the tally */
 .w-socrates-side { display: grid; gap: .85rem; min-width: 0; align-content: center; }
@@ -125,7 +145,7 @@
 .w-socrates-ymark.is-pop { animation: w-socrates-ypop .4s cubic-bezier(.2, 1.5, .4, 1); }
 @keyframes w-socrates-ypop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
 .w-socrates-ycap { display: grid; gap: .1rem; line-height: 1.3; }
-.w-socrates-ycap b { font-family: var(--f-type); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+.w-socrates-ycap b { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
 .w-socrates-yval { font-size: .92rem; color: var(--ink-2); }
 
 .w-socrates-tally { display: grid; gap: .4rem; }
@@ -133,7 +153,7 @@
 .w-socrates-tmark { width: 14px; height: 14px; border-radius: 50%; }
 .w-socrates-t[data-k="c"] .w-socrates-tmark { border: 2.5px solid var(--seal); background: var(--sheet); }
 .w-socrates-t[data-k="a"] .w-socrates-tmark { background: var(--accent); }
-.w-socrates-tlab { font-family: var(--f-type); font-size: .74rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
+.w-socrates-tlab { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
 .w-socrates-tn { font-family: var(--f-type); font-size: 1.7rem; font-weight: 700; line-height: 1.05; min-width: 3ch; text-align: right; }
 .w-socrates-t[data-k="c"] .w-socrates-tn { color: var(--seal); }
 .w-socrates-t[data-k="a"] .w-socrates-tn { color: var(--accent); }
@@ -142,7 +162,7 @@
 .w-socrates-bar-c { background: var(--seal); }
 .w-socrates-bar-a { background: var(--accent); }
 .w-socrates-bar-mid { position: absolute; left: 50%; top: -4px; bottom: -4px; width: 2px; margin-left: -1px; background: var(--ink); }
-.w-socrates-barlab { display: flex; justify-content: space-between; font-family: var(--f-type); font-size: .66rem; color: var(--ink-3); letter-spacing: .04em; }
+.w-socrates-barlab { display: flex; justify-content: space-between; font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); letter-spacing: .04em; }
 
 /* ---------- results ---------- */
 .w-socrates-result { display: grid; gap: .6rem; }
@@ -153,16 +173,18 @@
 .w-socrates-result .w-socrates-swing { display: flex; gap: .6rem; align-items: flex-start; background: var(--brass-soft); color: var(--ink); padding: .6rem .75rem; border-radius: 2px; font-size: .93rem; }
 .w-socrates-ring { flex: 0 0 auto; width: 14px; height: 14px; margin-top: .22em; border-radius: 50%; border: 2.5px solid var(--brass); background: var(--sheet); }
 .w-socrates-end { font-style: italic; }
-.w-socrates-result .w-socrates-doubt { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); border-top: 1px dashed var(--rule); padding-top: .55rem; }
+.w-socrates-down { width: .85rem; height: .85rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.w-socrates-result .w-socrates-doubt { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); border-top: 1px dashed var(--rule); padding-top: .55rem; }
 
 /* ---------- ballot two ---------- */
 .w-socrates-pen { border-top: 1px dashed var(--rule); padding-top: 1rem; animation: w-socrates-in .35s ease-out; }
+.w-socrates-pen:focus { outline: none; }
 .w-socrates-pen[hidden] { display: none; }
 @keyframes w-socrates-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .w-socrates-props { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
 .w-socrates-props li { display: grid; gap: .1rem; padding: .1rem 0 .1rem .7rem; border-left: 3px solid var(--accent); font-size: .95rem; line-height: 1.45; }
 .w-socrates-props li[data-side="p"] { border-left-color: var(--seal); }
-.w-socrates-who { font-family: var(--f-type); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.w-socrates-who { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 .w-socrates-mina { font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); background: var(--wash); border-radius: 2px; padding: .45rem .6rem; line-height: 1.45; }
 .w-socrates-ask { font-weight: 700; }
 .w-socrates-pb[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--brass-soft); opacity: 1; }

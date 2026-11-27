@@ -114,8 +114,8 @@
             '<p class="w-kleroterion-tnote">' + esc(DATA.ticketNote) + '</p>' +
           '</div>' +
           '<div class="w-kleroterion-machine">' +
-            '<svg class="w-kleroterion-svg" viewBox="0 0 320 344" role="img" aria-label="' + esc(DATA.srMachine) + '"></svg>' +
             '<p class="w-kleroterion-cap">' + esc(DATA.machineCap) + '</p>' +
+            '<svg class="w-kleroterion-svg" viewBox="0 0 320 344" role="img" aria-label="' + esc(DATA.srMachine) + '"></svg>' +
           '</div>' +
           '<div class="w-kleroterion-ctrl">' +
             '<button type="button" class="btn w-kleroterion-go">' + esc(DATA.btn.insert) + '</button>' +
@@ -171,6 +171,36 @@
     var you = svgEl('g', { 'class': 'w-kleroterion-youtag' }, svg);
     var cubeLayer = svgEl('g', { 'class': 'w-kleroterion-cubes' }, svg);
 
+    /* ---------- keeping the machine and the result on screen ---------- */
+    /* Bottom edge of the sticky ticker (about 53px), so nothing important hides under it. */
+    function tickerBottom() {
+      var t = document.querySelector('.ticker');
+      if (!t) return 0;
+      var b = t.getBoundingClientRect().bottom;
+      return b > 140 ? 56 : Math.max(0, b);
+    }
+    function vh() { return window.innerHeight || document.documentElement.clientHeight; }
+    function scrollTo(node, block) { node.scrollIntoView({ block: block, behavior: ctx.reduced ? 'auto' : 'smooth' }); }
+    /* Before the tickets drop or the cubes pour: bring the whole machine into view, top first,
+       if its top is under the ticker or if the lines the result will fill would land below the screen.
+       It runs once per tap, never during the animation, so it does not fight the reader's own scrolling. */
+    function showMachine(roomBelow) {
+      var m = svg.getBoundingClientRect(), b = goBtn.getBoundingClientRect();
+      if (m.top < tickerBottom() || b.bottom + roomBelow > vh()) scrollTo(svg, 'start');
+    }
+    function showWhole(node) {
+      var r = node.getBoundingClientRect();
+      if (r.top < tickerBottom() || r.bottom > vh()) scrollTo(node, 'nearest');
+    }
+    /* A short pause after the button changes job, so a quick double tap cannot wipe the result it just showed. */
+    var lockTimer = 0;
+    function lock(ms) {
+      goBtn.setAttribute('aria-disabled', 'true');
+      clearTimeout(lockTimer);
+      lockTimer = setTimeout(function () { goBtn.removeAttribute('aria-disabled'); }, ms);
+    }
+    function unlock() { clearTimeout(lockTimer); goBtn.removeAttribute('aria-disabled'); }
+
     /* ---------- helpers ---------- */
     function say(lines) {
       statusEl.innerHTML = lines.map(function (l, i) { return '<p' + (i === 0 ? ' class="is-main"' : '') + '>' + esc(l) + '</p>'; }).join('');
@@ -207,6 +237,7 @@
       myRow = Math.floor(ctx.rand() * ROWS);
       ticketEl.classList.add('is-used');
       goBtn.disabled = true;
+      showMachine(0);
       var col = slots.map(function (row) { return row[me.sec]; });
       var i = 0;
       function next() {
@@ -238,6 +269,8 @@
       goBtn.disabled = true;
       goBtn.textContent = DATA.btn.busy;
       say([DATA.pouring]);
+      // the verdict for your row will fill the status lines under the button: leave room for about five lines
+      showMachine(12 + Math.max(120, statusEl.offsetHeight));
       if (ctx.reduced) {
         for (var r = 0; r < ROWS; r++) settleRow(r);
         finish();
@@ -297,6 +330,7 @@
         goBtn.textContent = DATA.btn.again;
       }
       goBtn.disabled = false;
+      lock(700);
       ctx.stamp('lot');
     }
 
@@ -332,6 +366,8 @@
       say([DATA.court(court)]);
       state = 'acorn';
       goBtn.textContent = DATA.btn.again;
+      lock(700);
+      showWhole(courtEl);
     }
 
     function tomorrow() {
@@ -350,11 +386,12 @@
       }
       goBtn.textContent = DATA.btn.insert;
       goBtn.disabled = false;
+      unlock();
       say([DATA.start]);
     }
 
     goBtn.addEventListener('click', function () {
-      if (goBtn.disabled) return;
+      if (goBtn.disabled || goBtn.getAttribute('aria-disabled') === 'true') return;
       if (state === 'ready') insert();
       else if (state === 'inserted') pour();
       else if (state === 'served') drawAcorn();

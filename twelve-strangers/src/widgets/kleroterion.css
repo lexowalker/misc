@@ -1,18 +1,36 @@
 /* Exhibit: The allotment machine */
-[data-widget="kleroterion"] { --w-kleroterion-white: var(--sheet); --w-kleroterion-black: var(--on-sticker); --w-kleroterion-cube-line: var(--ink-2); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-widget="kleroterion"] { --w-kleroterion-white: var(--ink); --w-kleroterion-cube-line: var(--ink-3); }
+[data-widget="kleroterion"] {
+  --w-kleroterion-white: var(--sheet); --w-kleroterion-black: var(--on-sticker);
+  --w-kleroterion-cube-line: var(--ink-2); --w-kleroterion-black-line: var(--ink-2); --w-kleroterion-black-w: 1.2;
 }
-:root[data-theme="dark"] [data-widget="kleroterion"] { --w-kleroterion-white: var(--ink); --w-kleroterion-cube-line: var(--ink-3); }
+/* Dark: a black cube is near-black with a light rim, so it cannot be mistaken for an empty (dashed) slot. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-widget="kleroterion"] {
+    --w-kleroterion-white: var(--ink); --w-kleroterion-cube-line: var(--ink-3);
+    --w-kleroterion-black: rgba(0, 0, 0, .88); --w-kleroterion-black-line: var(--ink); --w-kleroterion-black-w: 1.8;
+  }
+}
+:root[data-theme="dark"] [data-widget="kleroterion"] {
+  --w-kleroterion-white: var(--ink); --w-kleroterion-cube-line: var(--ink-3);
+  --w-kleroterion-black: rgba(0, 0, 0, .88); --w-kleroterion-black-line: var(--ink); --w-kleroterion-black-w: 1.8;
+}
 
 .w-kleroterion { display: grid; gap: 1.1rem; min-width: 0; }
 .w-kleroterion-intro { font-size: 1rem; line-height: 1.5; }
-.w-kleroterion-grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); grid-template-areas: "ticket" "machine" "ctrl"; }
+.w-kleroterion-grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); grid-template-areas: "ticket" "cap" "machine" "ctrl"; }
 .w-kleroterion-ticketwrap { grid-area: ticket; display: grid; gap: .45rem; min-width: 0; }
-.w-kleroterion-machine { grid-area: machine; display: grid; gap: .4rem; justify-items: center; min-width: 0; }
+/* Phones: the caption sits above the machine, so the machine and the button fit on one screen together. */
+.w-kleroterion-machine { display: contents; }
+.w-kleroterion-svg { grid-area: machine; justify-self: center; }
+.w-kleroterion-cap { grid-area: cap; justify-self: center; }
 .w-kleroterion-ctrl { grid-area: ctrl; display: grid; gap: .75rem; align-content: start; min-width: 0; }
+/* html already pads scrolling by the ticker height + 12px; 4px more lands targets 16px below the ticker. */
+.w-kleroterion-svg, .w-kleroterion-court { scroll-margin-top: 4px; }
 @media (min-width: 46rem) {
   .w-kleroterion-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 330px); grid-template-areas: "ticket machine" "ctrl machine"; column-gap: 1.5rem; align-items: start; }
+  .w-kleroterion-machine { grid-area: machine; display: grid; gap: .4rem; justify-items: center; min-width: 0; }
+  .w-kleroterion-svg, .w-kleroterion-cap { grid-area: auto; }
+  .w-kleroterion-cap { order: 1; }
   .w-kleroterion-ctrl { align-self: start; }
 }
 
@@ -34,9 +52,11 @@
 .w-kleroterion-owl circle, .w-kleroterion-owl path { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-linecap: round; }
 .w-kleroterion-owl circle.e { fill: var(--brass); stroke: none; }
 .w-kleroterion-used {
-  position: absolute; right: .6rem; top: -.75rem; font-family: var(--f-type); font-weight: 700; font-size: .68rem; letter-spacing: .14em;
+  position: absolute; right: .6rem; top: -.75rem; font-family: var(--f-type); font-weight: 700; font-size: .75rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--accent); background: var(--sheet); border: 2px solid var(--accent); padding: .1rem .4rem;
-  transform: rotate(-4deg) scale(1.5); opacity: 0; transition: opacity .2s, transform .3s cubic-bezier(.2, 1.6, .4, 1); pointer-events: none;
+  /* Grows from its top right corner, so the stamp never reaches past the edge of the screen. */
+  transform: rotate(-4deg) scale(1.3); transform-origin: 100% 0; opacity: 0;
+  transition: opacity .2s, transform .3s cubic-bezier(.2, 1.6, .4, 1); pointer-events: none;
 }
 .w-kleroterion-ticket.is-used { transform: translateX(6px); }
 .w-kleroterion-ticket.is-used > :not(.w-kleroterion-used) { opacity: .45; }
@@ -47,12 +67,12 @@
 
 /* the machine */
 .w-kleroterion-svg { width: 100%; max-width: 330px; height: auto; display: block; overflow: hidden; }
-.w-kleroterion-cap { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); text-align: center; line-height: 1.4; max-width: 22rem; }
+.w-kleroterion-cap { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); text-align: center; line-height: 1.4; max-width: 22rem; }
 .w-kleroterion-slab { fill: var(--sheet-2); stroke: var(--rule); stroke-width: 1.5; }
 .w-kleroterion-grain { fill: none; stroke: var(--rule); stroke-width: .8; opacity: .8; }
 .w-kleroterion-colhead { font-family: var(--f-body); font-size: 15px; font-weight: 700; fill: var(--ink-3); }
 .w-kleroterion-colhead.is-mine { fill: var(--accent); }
-.w-kleroterion-rownum { font-family: var(--f-type); font-size: 9.5px; fill: var(--ink-3); }
+.w-kleroterion-rownum { font-family: var(--f-type); font-size: 12.5px; font-weight: 700; fill: var(--ink-3); }
 .w-kleroterion-rowbg { fill: transparent; transition: fill .2s; }
 .w-kleroterion-rowbg.is-white { fill: var(--brass-soft); }
 .w-kleroterion-hole { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
@@ -70,6 +90,7 @@
 .w-kleroterion-mark.is-white, .w-kleroterion-cube.is-white { fill: var(--w-kleroterion-white); }
 .w-kleroterion-mark.is-black, .w-kleroterion-cube.is-black { fill: var(--w-kleroterion-black); }
 .w-kleroterion-cube { stroke: var(--w-kleroterion-cube-line); stroke-width: 1.2; }
+.w-kleroterion-mark.is-black, .w-kleroterion-cube.is-black { stroke: var(--w-kleroterion-black-line); stroke-width: var(--w-kleroterion-black-w); }
 .w-kleroterion-tube { fill: var(--brass); stroke: var(--brass); stroke-width: 1; }
 .w-kleroterion-tube-hi { fill: none; stroke: var(--brass-soft); stroke-width: 2; opacity: .55; stroke-linecap: round; }
 .w-kleroterion-funnel { fill: var(--brass); stroke: var(--brass); stroke-width: 1; stroke-linejoin: round; }
@@ -88,6 +109,8 @@
 .w-kleroterion-stats:empty { display: none; }
 
 /* the court: acorn, staff, door */
+.w-kleroterion-go[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+
 .w-kleroterion-court { display: grid; gap: .5rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); padding: .8rem .85rem .9rem; }
 .w-kleroterion-court.tone-c0 { --w-kleroterion-tone: var(--accent); }
 .w-kleroterion-court.tone-c1 { --w-kleroterion-tone: var(--seal); }
@@ -104,7 +127,7 @@
 .w-kleroterion-acorn text, .w-kleroterion-door text { font-family: var(--f-body); font-weight: 700; font-size: 24px; fill: var(--ink); }
 .w-kleroterion-door text { font-size: 19px; }
 .w-kleroterion-staff rect, .w-kleroterion-staff circle { fill: var(--w-kleroterion-tone); stroke: var(--ink-3); stroke-width: .8; }
-.w-kleroterion-figcap text { font-family: var(--f-type); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-3); }
+.w-kleroterion-figcap text { font-family: var(--f-type); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; fill: var(--ink-3); }
 .w-kleroterion-staff rect.band { fill: var(--ink); opacity: .35; stroke: none; }
 .w-kleroterion-door .jamb { fill: var(--sheet); stroke: var(--rule); stroke-width: 1.5; }
 .w-kleroterion-door .opening { fill: var(--paper); }

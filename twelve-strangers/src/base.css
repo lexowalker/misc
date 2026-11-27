@@ -7,14 +7,14 @@
   --sheet-2: #ECEFE6;      /* insets inside sheets */
   --ink: #18201B;
   --ink-2: #4A564E;        /* secondary text */
-  --ink-3: #6E7A72;        /* captions, quiet labels */
+  --ink-3: #5C685F;        /* captions, quiet labels */
   --rule: #C3CABE;
   --accent: #1C5641;       /* courtroom green leather */
   --accent-2: #154533;
   --on-accent: #F2F4EE;
   --band: #1C5641;         /* the ticker band */
   --on-band: #EEF1EA;
-  --brass: #86640F;        /* brass fittings: highlights, seals */
+  --brass: #7A5A0B;        /* brass fittings: highlights, seals */
   --brass-soft: #EADCAE;
   --seal: #962C23;         /* wax-seal red: verdicts and warnings, used sparingly */
   --seal-soft: #F1D7D1;
@@ -170,7 +170,7 @@ em, i { font-style: italic; }
 
 .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
 .chip {
-  min-height: 2.25rem; padding: .3rem .8rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--sheet);
+  min-height: 2.5rem; padding: .3rem .85rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--sheet);
   font-family: var(--f-type); font-size: .82rem; cursor: pointer; color: var(--ink-2); touch-action: manipulation;
 }
 .chip:hover { border-color: var(--accent); color: var(--ink); }
@@ -192,7 +192,7 @@ em, i { font-style: italic; }
   border-right: 1px solid rgba(238, 241, 234, .14); opacity: .8; transition: opacity .2s, background .2s; white-space: nowrap;
 }
 .tick:hover { opacity: .9; }
-.tick-date { font-family: var(--f-type); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
+.tick-date { font-family: var(--f-type); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
 .tick-name { font-family: var(--f-body); font-size: .86rem; line-height: 1.25; }
 .tick.is-active { opacity: 1; background: rgba(255, 255, 255, .08); }
 .tick.is-active .tick-date { color: var(--brass-soft); }
@@ -265,7 +265,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 }
 .exhibit-sticker {
   position: absolute; top: -.85rem; left: .9rem; background: var(--sticker); color: var(--on-sticker); transform: rotate(-2.5deg);
-  font-family: var(--f-type); font-weight: 700; font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
+  font-family: var(--f-type); font-weight: 700; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
   padding: .5rem .65rem .45rem; border-radius: 2px; box-shadow: 0 2px 6px -2px rgba(0, 0, 0, .35);
 }
 .exhibit-sticker b { font-size: .95rem; letter-spacing: .06em; margin-left: .15rem; }
@@ -304,7 +304,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .seal-item a:hover { background: var(--wash); }
 .seal-medal {
   flex: 0 0 auto; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-body); font-weight: 700;
-  font-size: .72rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
+  font-size: .85rem; border: 1.5px dashed var(--rule); color: var(--ink-3);
 }
 .seal-item.is-on .seal-medal { border: 2px solid var(--brass); background: var(--brass-soft); color: var(--brass); }
 .seal-item.is-on a { color: var(--ink); }
@@ -320,9 +320,9 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 /* ---------- endmatter ---------- */
 .endmatter { padding-block: 3rem 6rem; border-top: 1px solid var(--rule); display: grid; gap: 1.4rem; }
 .endmatter h2 { font-family: var(--f-display); font-size: 2.2rem; line-height: 1; }
-.sources { font-size: .88rem; color: var(--ink-2); display: grid; gap: .5rem; padding-left: 1.3rem; margin: 0; }
+.sources { font-size: .88rem; color: var(--ink-2); display: grid; gap: .6rem; list-style: none; padding-left: 0; margin: 0; }
 .sources li { padding-left: .2rem; }
-.colophon { font-family: var(--f-type); font-size: .78rem; color: var(--ink-3); }
+.colophon { font-family: var(--f-type); font-size: .82rem; color: var(--ink-2); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -346,3 +346,4 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .toast { top: calc(env(safe-area-inset-top, 0px) + var(--ticker-h) + 14px); bottom: auto; transform: translate(-50%, -12px); }
 .toast.is-on { transform: translate(-50%, 0); }
 main.wrap { overflow-x: clip; }
+.seal-item small { display: block; font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); letter-spacing: .04em; }

@@ -93,8 +93,8 @@
     sealPanel.id = 'sealPanel';
     sealPanel.hidden = true;
     sealPanel.innerHTML = '<h2>Your jury box</h2><p>Juror No. <b class="typed">' + jurorNo + '</b>. Earn a seal in each exhibit. Twelve seals fill the box.</p>' +
-      '<ul class="seal-list">' + SEALS.map(function (s) {
-        return '<li class="seal-item" data-seal="' + s.id + '"><a href="#' + s.ch + '"><span class="seal-medal">' + s.num + '</span><span>' + s.label + '</span></a></li>';
+      '<ul class="seal-list">' + SEALS.map(function (s, i) {
+        return '<li class="seal-item" data-seal="' + s.id + '"><a href="#' + s.ch + '"><span class="seal-medal">' + (i + 1) + '</span><span>' + s.label + '<small> Ch. ' + s.num + '</small></span></a></li>';
       }).join('') + '</ul>';
     document.body.appendChild(sealPanel);
     var slot = document.getElementById('sealSlot');

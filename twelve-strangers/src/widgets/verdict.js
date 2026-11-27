@@ -100,6 +100,8 @@
           renderTally();
           renderQuestion();
           var next = card.querySelector('.w-ver-next');
+          var why = card.querySelector('.w-ver-why');
+          if (why) why.scrollIntoView({ block: 'nearest', behavior: ctx.reduced ? 'auto' : 'smooth' });
           if (next) next.focus({ preventScroll: true });
         });
       });
@@ -141,7 +143,7 @@
           '<p class="w-ver-cert-rank">' + rank.title + '</p>' +
           '<p class="w-ver-cert-line">' + rank.line + (missed.length && s < 7 ? ' Review: ' + missed.join(', ') + '.' : '') + '</p>' +
           '<div class="w-ver-cert-box" aria-label="' + nSeals + ' of 12 seals earned">' +
-            seals.map(function (x) { return '<span class="w-ver-cert-seat' + (x.on ? ' is-on' : '') + '" title="' + x.label + '">' + x.num + '</span>'; }).join('') +
+            seals.map(function (x, i) { return '<span class="w-ver-cert-seat' + (x.on ? ' is-on' : '') + '" title="Seat ' + (i + 1) + ': ' + x.label + '">' + (i + 1) + '</span>'; }).join('') +
           '</div>' +
           '<p class="w-ver-cert-seals typed">' + (nSeals === 12 ? 'Jury box full: all twelve seals.' : 'Seals earned: ' + nSeals + ' of 12. Each exhibit on the page holds one.') + '</p>' +
           '<div class="w-ver-cert-foot">' +
@@ -153,20 +155,30 @@
           '<button type="button" class="btn w-ver-copy">Copy my verdict</button>' +
           '<button type="button" class="btn btn-ghost w-ver-again">Retake</button>' +
         '</div>' +
+        '<p class="w-ver-copyhint" hidden>This viewer blocked copying. Press and hold the text below to copy it yourself.</p>' +
         '<textarea class="w-ver-copytext" readonly hidden aria-label="Your verdict, ready to copy"></textarea>';
       live.textContent = 'Certificate of jury service. Verdict ' + s + ' of ' + QUESTIONS.length + '. ' + rank.title + '.';
       var text = 'I served as Juror No. ' + ctx.juror + ' in "Twelve Strangers," a history of trial by jury, and returned a verdict of ' + s + ' of ' + QUESTIONS.length + ' (' + rank.title + '), with ' + nSeals + ' of 12 seals.';
       var copyBtn = card.querySelector('.w-ver-copy');
       var ta = card.querySelector('.w-ver-copytext');
+      var hint = card.querySelector('.w-ver-copyhint');
       copyBtn.addEventListener('click', function () {
-        function fallback() { ta.value = text; ta.hidden = false; ta.focus(); ta.select(); copyBtn.textContent = 'Select and copy'; }
+        function fallback() {
+          ta.value = text; ta.hidden = false; ta.focus();
+          try { ta.setSelectionRange(0, ta.value.length); } catch (e) { ta.select(); }
+          copyBtn.textContent = 'Copy blocked here';
+          copyBtn.disabled = true;
+          hint.hidden = false;
+        }
         try {
           navigator.clipboard.writeText(text).then(function () { copyBtn.textContent = 'Copied'; ctx.toast('Copied your verdict'); }, fallback);
         } catch (e) { fallback(); }
       });
       card.querySelector('.w-ver-again').addEventListener('click', function () {
         state = { i: 0, picks: [], done: false };
-        renderTally(); renderQuestion(); focusCard();
+        renderTally(); renderQuestion();
+        el.scrollIntoView({ block: 'start', behavior: ctx.reduced ? 'auto' : 'smooth' });
+        focusCard();
       });
     }
 

@@ -250,7 +250,7 @@
       cow(220, 78) +
       // Walter
       fig(126, 114, { tunic: 'brass', arm: 'point', hair: true }) +
-      '<g class="wo-bubble"><rect x="84" y="18" width="66" height="22" rx="4"/><path d="M118 40 l4 8 l4 -8"/><text x="117" y="33" text-anchor="middle">My cow!</text></g>' +
+      '<g class="wo-bubble"><rect x="80" y="16" width="74" height="25" rx="4"/><path d="M118 41 l4 8 l4 -8"/><text x="117" y="33" text-anchor="middle">My cow!</text></g>' +
       '<line class="wo-ground" x1="0" y1="114" x2="320" y2="114"/>' + tufts +
       '</svg>';
   }
@@ -291,9 +291,9 @@
 
   function artHand() {
     var days = [1, 2, 3].map(function (d, i) {
-      var x = 206 + i * 36;
-      return '<g class="wo-day" data-day="' + d + '"><rect x="' + x + '" y="56" width="30" height="40" rx="3"/>' +
-        '<text class="wo-day-k" x="' + (x + 15) + '" y="69" text-anchor="middle">DAY</text><text class="wo-day-n" x="' + (x + 15) + '" y="89" text-anchor="middle">' + d + '</text></g>';
+      var x = 203 + i * 37;
+      return '<g class="wo-day" data-day="' + d + '"><rect x="' + x + '" y="52" width="33" height="46" rx="3"/>' +
+        '<text class="wo-day-k" x="' + (x + 16.5) + '" y="67" text-anchor="middle">DAY</text><text class="wo-day-n" x="' + (x + 16.5) + '" y="91" text-anchor="middle">' + d + '</text></g>';
     }).join('');
     return '<svg viewBox="0 0 320 170" aria-hidden="true" focusable="false">' +
       '<line class="wo-ground" x1="0" y1="164" x2="320" y2="164"/>' +
@@ -312,7 +312,7 @@
         '<g class="wo-seal"><circle cx="111" cy="107" r="13"/><circle class="wo-seal-ring" cx="111" cy="107" r="8.5"/><path class="wo-seal-x" d="M107 103 l8 8 M115 103 l-8 8"/></g>' +
       '</g>' +
       days +
-      '<text class="wo-tlabel" x="260" y="114" text-anchor="middle" data-daylabel>Three days</text>' +
+      '<text class="wo-tlabel" x="256.5" y="117" text-anchor="middle" data-daylabel>Three days</text>' +
       '</svg>';
   }
 
@@ -323,7 +323,7 @@
     return '<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false">' +
       '<path class="wo-bank" d="M0 96 L92 96 Q102 96 106 106 L118 180 L0 180 Z"/>' +
       '<rect class="wo-water" x="100" y="102" width="220" height="78"/>' +
-      '<line class="wo-depth" x1="180" y1="126" x2="314" y2="126"/><text class="wo-tlabel" x="312" y="120" text-anchor="end">sink past here</text>' +
+      '<line class="wo-depth" x1="180" y1="126" x2="314" y2="126"/><text class="wo-tlabel" x="316" y="120" text-anchor="end">sink past here</text>' +
       // the jetty
       '<rect class="wo-pile" x="132" y="96" width="5" height="84"/><rect class="wo-pile" x="206" y="96" width="5" height="84"/>' +
       '<rect class="wo-deck" x="86" y="92" width="130" height="5" rx="1"/>' +
@@ -383,7 +383,7 @@
       '<rect class="wo-band" x="140" y="98" width="6" height="42"/><rect class="wo-band" x="180" y="98" width="6" height="42"/><rect class="wo-slot" x="152" y="94" width="22" height="3" rx="1.5"/>' +
       '<text class="wo-tlabel" x="163" y="156" text-anchor="middle">the king</text>' +
       '<g class="wo-writ"><rect class="wo-parch" x="226" y="26" width="76" height="100" rx="3"/>' +
-        '<text class="wo-writ-t" x="264" y="46" text-anchor="middle">De odio</text><text class="wo-writ-t" x="264" y="58" text-anchor="middle">et atia</text>' +
+        '<text class="wo-writ-t" x="264" y="45" text-anchor="middle">De odio</text><text class="wo-writ-t" x="264" y="59" text-anchor="middle">et atia</text>' +
         '<path class="wo-lines" d="M236 72 h56 M236 80 h56 M236 88 h56 M236 96 h40"/>' +
         '<path class="wo-ribbon" d="M276 112 l-6 22 M282 112 l6 22"/><circle class="wo-wax" cx="279" cy="112" r="9"/>' +
       '</g>' +
@@ -452,21 +452,61 @@
     root.addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]');
       if (!b || !root.contains(b) || b.disabled) return;
+      lastAct = Date.now();
       var fn = acts[b.getAttribute('data-act')];
       if (fn) fn(b);
     });
     ctx.onVisible(function (v) { root.classList.toggle('is-paused', !v); });
 
-    function revealTop() {
-      var r = stage.getBoundingClientRect();
-      if (r.top < 56 || r.top > window.innerHeight * 0.6) {
-        stage.scrollIntoView({ block: 'start', behavior: R ? 'auto' : 'smooth' });
-      }
+    /* ---------- keeping what the reader needs on screen ----------
+       A sticky ticker covers the top of the screen. Every element we scroll to carries
+       scroll-margin-top: calc(var(--ticker-h) + 16px) in ordeal.css, and we read that value back here, so the
+       ticker height is set in one place. We move the page with window.scrollTo rather than scrollIntoView,
+       because scrollIntoView also adds the page's own scroll-padding-top and would park the target far below the
+       ticker. We only scroll in answer to the reader's own tap, and never once they have scrolled since. */
+    var lastAct = 0, lastScroll = 0, lastWheel = 0, touching = false;
+    var passive = { passive: true };
+    window.addEventListener('touchstart', function () { touching = true; }, passive);
+    window.addEventListener('touchend', function (e) { touching = e.touches.length > 0; }, passive);
+    window.addEventListener('touchcancel', function (e) { touching = e.touches.length > 0; }, passive);
+    window.addEventListener('wheel', function () { lastWheel = Date.now(); }, passive);
+    window.addEventListener('scroll', function () { if (touching || Date.now() - lastWheel < 250) lastScroll = Date.now(); }, passive);
+
+    function marks(el) {
+      var cs = getComputedStyle(el);
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var top = parseFloat(cs.scrollMarginTop) || 0;
+      // `under`: anything whose top is above this line is hidden by the ticker (ticker height plus its 3px bar)
+      return { top: top, under: Math.max(0, top - 12), bottom: vh - (parseFloat(cs.scrollMarginBottom) || 0), vh: vh };
     }
-    function focusHead(scroll) {
+    /* Show `el` after the reader acts.
+       'start':   put its top just under the ticker if it is hidden there or starts in the lower half of the screen.
+       'whole':   the same, whenever any part of it is off screen.
+       'nearest': scroll only as far as needed to show all of it.
+       `also` (optional) is a later element, such as the row of buttons, that should end up on screen too,
+       as long as `keep` (default: el) stays clear of the ticker. */
+    function reveal(el, mode, also, keep) {
+      if (!el || !el.isConnected || lastScroll > lastAct) return;
+      var m = marks(el), r = el.getBoundingClientRect(), dy = 0;
+      var hidden = r.top < m.under;
+      if (mode === 'nearest') {
+        if (hidden) dy = r.top - m.top;
+        else if (r.bottom > m.bottom) dy = Math.min(r.bottom - m.bottom, r.top - m.top);
+      } else if (hidden || (mode === 'whole' ? r.bottom > m.bottom : r.top > m.vh * 0.5)) {
+        dy = r.top - m.top;
+      }
+      if (also && also.isConnected && also.offsetHeight) {
+        var room = (keep || el).getBoundingClientRect().top - dy - m.top;
+        var over = also.getBoundingClientRect().bottom - dy - m.bottom;
+        if (over > 0) dy += Math.max(0, Math.min(over, room));
+      }
+      if (Math.abs(dy) < 2) return;
+      window.scrollTo({ top: Math.max(0, window.scrollY + dy), behavior: R ? 'auto' : 'smooth' });
+    }
+    function focusHead() {
       var hd = stage.querySelector('[data-focus]');
       if (hd) { hd.setAttribute('tabindex', '-1'); try { hd.focus({ preventScroll: true }); } catch (e) { hd.focus(); } }
-      if (scroll) revealTop();
+      return hd;
     }
 
     /* ---------- home: the charge sheet and the five trials ---------- */
@@ -524,7 +564,8 @@
         say(DATA.reps[state.rep].label + '. ' + DATA.reps[state.rep].gloss);
       };
       acts.go = function (b) { start(b.getAttribute('data-arg')); };
-      if (scroll) focusHead(true);
+      // coming back from a trial: land on the five cards, not on the charge sheet above them
+      if (scroll) { focusHead(); reveal(stage.querySelector('.w-ordeal-choose'), 'start'); }
     }
     function pipsHtml(n) {
       var s = '';
@@ -575,7 +616,11 @@
         (o.extra || '') +
         (btns ? '<div class="btn-row w-ordeal-actions">' + btns + '</div>' : '');
       if (!R) { box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in'); }
-      focusHead(o.scroll !== false);
+      var hd = focusHead();
+      // the controls for this step (buttons, or the word chips) must be on screen with the heading above them
+      var ctl = box.querySelector(o.controls || '.w-ordeal-actions');
+      if (o.scroll !== false) reveal(stage, 'start', ctl, hd);
+      else reveal(hd, 'nearest', ctl, hd);
       if (o.say) say(o.say);
     }
     function setActions(list) {
@@ -591,6 +636,7 @@
       }).join('');
       var first = row.querySelector('button:not([disabled])');
       if (first && root.contains(document.activeElement)) first.focus({ preventScroll: true });
+      if (list.length) reveal(row, 'nearest');
     }
     function kicker(id, n, of) { return DATA.paths[id].title + ' · Step ' + n + ' of ' + of; }
 
@@ -618,17 +664,18 @@
           '<h4 class="w-ordeal-h" data-focus><span class="sr-only">' + o.stamp + '. </span>' + o.title + '</h4>' +
           '<p class="w-ordeal-p">' + fill(o.body, o.vars || {}) + '</p>' +
         '</div>' +
+        // a follow-on move (Fight Walter) belongs right under the judgment, not below the long record
+        (extra ? '<div class="btn-row w-ordeal-next">' + extra + '</div>' : '') +
         '<div class="w-ordeal-record"><p class="label">' + DATA.labels.record + '</p><p>' + p.record + '</p></div>' +
         '<div class="w-ordeal-end"><p class="label">' + E.kicker + '</p><p class="w-ordeal-end-year" aria-hidden="true">' + E.year + '</p><p>' + E.body + '</p></div>' +
-        '<div class="btn-row w-ordeal-actions">' + extra +
+        '<div class="btn-row w-ordeal-actions">' +
           '<button type="button" class="btn" data-act="home">' + DATA.labels.other + '</button>' +
           '<button type="button" class="btn btn-ghost" data-act="again">' + DATA.labels.again + '</button>' +
         '</div>';
       if (!R) { box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in'); }
-      focusHead(false);
+      focusHead();
       var j = box.querySelector('.w-ordeal-judgment');
-      var r = j.getBoundingClientRect();
-      if (r.top < 56 || r.bottom > window.innerHeight) j.scrollIntoView({ block: 'start', behavior: R ? 'auto' : 'smooth' });
+      reveal(j, 'whole', box.querySelector('.w-ordeal-next'), j);
       say(o.stamp + '. ' + o.title + ' ' + fill(o.body, o.vars || {}));
       later(function () { ctx.stamp('ordeal'); }, 700);
     }
@@ -742,7 +789,7 @@
       }
       btn.addEventListener('pointerdown', function (e) {
         if (e.button && e.button !== 0) return;
-        lastInput = Date.now();
+        lastInput = lastAct = Date.now();
         e.preventDefault();
         try { btn.setPointerCapture(e.pointerId); } catch (err) {}
         btn.focus({ preventScroll: true });
@@ -753,7 +800,7 @@
       btn.addEventListener('lostpointercapture', function () { stop(false); });
       btn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
       btn.addEventListener('keydown', function (e) {
-        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); lastInput = Date.now(); if (!e.repeat) begin(); }
+        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); lastInput = lastAct = Date.now(); if (!e.repeat) begin(); }
       });
       btn.addEventListener('keyup', function (e) {
         if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); lastInput = Date.now(); stop(true); }
@@ -937,7 +984,7 @@
       var chips = mixed.map(function (i) {
         return '<button type="button" class="w-ordeal-word" data-act="word" data-arg="' + i + '">' + P.formula[i] + '</button>';
       }).join('');
-      step({ kicker: kicker('oath', 2, 3), title: S.title, body: S.say,
+      step({ kicker: kicker('oath', 2, 3), title: S.title, body: S.say, controls: '.w-ordeal-words',
         extra: '<p class="w-ordeal-said" aria-live="polite"><span class="w-ordeal-said-empty">Your oath will appear here.</span></p><div class="w-ordeal-words">' + chips + '</div>' });
       var next = 0;
       var said = stage.querySelector('.w-ordeal-said');
