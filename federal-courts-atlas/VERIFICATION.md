@@ -13,8 +13,8 @@ in `docs/audits/`.
 | Statistics audit | 51 sampled cells traced; independent recompute of the case-level files | 51 of 51 matched. 1 blocker and 1 major issue found and fixed, then rechecked against the raw files. |
 | Copy audit | About 1,400 reader-facing sentences checked against the data and fetched legal sources | 57 findings, all resolved. The recheck lane fixed 4 more sentences. |
 | UI audit | 181 screenshots at 1280, 768 and 375 px in light and dark; automated accessibility scan | 7 known issues and 11 more problems fixed. The recheck lane fixed 2 more. 0 serious or critical accessibility violations. |
-| Additions after the main audit | 31 new numbers and facts (how cases end, offenses of people sentenced, two new map measures, MDL notes, juror figures, event dates, new legal statements) traced to the raw files with independent code; 92 review captures of the changed views | All 31 matched. 4 small display problems fixed (see below). |
-| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,248 pipeline tests passed. Typecheck clean. 357 end-to-end tests passed, 0 failed, 11 skipped by design, in each of three full runs. |
+| Additions after the main audit | 51 new numbers and facts (how cases end, offenses of people sentenced, two new map measures, MDL notes for 22 districts and the MDL 2885 caveat on 11 measures, juror figures, event dates, new legal statements) traced to the raw files with independent code by two recheck lanes; 92 + 84 review captures of the changed views | All 51 matched. 5 small display problems fixed (see below). |
+| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,252 pipeline tests passed. Typecheck clean. 361 end-to-end tests passed, 0 failed, 11 skipped by design, in each of the last two full runs (one earlier run had a single timeout that did not recur; see Tests). |
 
 ## Data audit
 
@@ -215,9 +215,11 @@ code (rows 232 to 251). It streamed `cv88on.txt` out of the FJC zip, split each 
 the left and the last 23 from the right, because party names can hold a tab) and rebuilt both cohorts from the
 codebook's rules: 11,071,506 records and 11,035,840 cases after de-duplication, with no tie that changes a count. It
 read the docket names from the cached GovInfo MODS files with an XML parser and the glossary entry against the cached
-text of 28 U.S.C. § 1407. It also looked at 60 captures of the changed views: the ohsd, wvsd, laed and flnd notes
-(brief, full and glossary popover), the compare year menu, a caveat on the home map and on the table page, each at
-1280 and 375 px in light and dark. No page scrolled sideways and no page logged an error.
+text of 28 U.S.C. § 1407. It also took 84 captures of the changed views: the ohsd, wvsd, laed and flnd notes
+(brief, full, case mix and glossary popover), the compare year menu, a caveat on the home map and on the table page,
+at 1280 and 375 px in light and dark, and the fixed compare menu also at 1024 and 768 px. It looked at 26 of them by
+eye, with at least one light and one dark capture, and one at each width, of every view. A script checked all 84 for
+sideways scroll, page errors, the popover staying on screen and the menu label fitting, and found no problem.
 
 **Fixed by the second recheck** (display only; no value changed):
 
@@ -226,6 +228,8 @@ text of 28 U.S.C. § 1407. It also looked at 60 captures of the changed views: t
   that wraps, and the native select lies on top of it, invisible, so clicks, keys and screen readers still use it.
   A compare test now checks that the whole label shows without clipping and that the arrow keys still change the
   year.
+- Test only: the compare tests' wait helper could pass before the page had drawn any row, so one run read the year
+  menu before it existed. It now waits for the menu and the first row.
 
 ## Boundary audit
 
@@ -280,13 +284,13 @@ more phone problems: the new table Notes column was clipped at 375 px, and the m
 
 | Suite | Result |
 |---|---|
-| Pipeline unit tests (`pytest tests/pipeline`) | 1,248 passed, 0 failed (after `make stories web docs`; run twice) |
+| Pipeline unit tests (`pytest tests/pipeline`) | 1,252 passed, 0 failed (after `make stories web docs`; run twice by the second recheck). A second `make stories web docs` gave byte-identical output in all 543 files under `public/data/`, `data/processed/`, `SOURCES.md` and `DATA_GAPS.md`. |
 | Typecheck (`npm run typecheck`) | clean |
 | Production build (`vite build`) | succeeds |
-| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 368 tests) | Final recheck, three full runs (`CI=1 E2E_PORT=4510 npx playwright test --trace off`): 357 passed, 0 failed, 11 skipped by design each time (for example phone-only tests in the desktop project). The third run was on the final code, after the recheck's fixes. The 16 visual-regression baselines (`visual.spec.ts`) passed in all three runs and were not rewritten. The accessibility scans (`a11y.spec.ts` on every route, plus an axe test of flnd's MDL note and new case-mix blocks in `district.spec.ts`) found 0 serious or critical violations. |
-| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.28 s / 0.91 s (first contentful paint 0.08 s / 0.22 s), final run on an otherwise idle machine. Earlier runs the same day measured 0.45-0.51 s / 1.18-1.64 s while other jobs shared the CPU. |
+| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 372 tests) | Second recheck, five full runs (`CI=1 E2E_PORT=4610 npx playwright test --trace off`). Runs 1 and 2, on the polish pass's code: 361 passed, 0 failed, 11 skipped by design (for example phone-only tests in the desktop project). Runs 3 to 5 were on the final code, with the compare fix. Run 3 had 360 passed and 1 failed: the phone accessibility scan of four-district compare timed out after 1.6 minutes while scrolling the page. Rerun on its own, it passed 5 of 5 times on the phone and 5 of 5 on desktop, in about 5 s each. A scroll through that page does not redraw its toolbar at 1280, 768 or 375 px, so the new menu face does not cause a redraw loop. Runs 4 and 5 had 361 passed, 0 failed. The first recheck saw the same kind of one-off timeout in this scroll step on another page. The 16 visual-regression baselines (`visual.spec.ts`) passed in every run and were not rewritten. The accessibility scans (`a11y.spec.ts` on every route, plus an axe test of flnd's MDL note and new case-mix blocks in `district.spec.ts`) found 0 serious or critical violations. |
+| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.29 s / 0.80 s (first contentful paint 0.10 s / 0.18 s), last run on the final code. The other four runs measured 0.29-0.41 s / 0.83-0.95 s. |
 
-Home page JavaScript before first paint: 78 KB transferred; the three.js courtroom code is not loaded on the home page.
+Home page JavaScript before first paint: 79 KB transferred; the three.js courtroom code is not loaded on the home page.
 
 ## What was not verified
 
