@@ -36,7 +36,7 @@ def build() -> Story:
           formula=f"sum of felony immigration defendants filed in {B_FORMULA}",
           how="IDB criminal offense mix, immigration category, felony defendants filed.")
     s.num("imm_us_latest", im.loc[LATEST, "_national"], "defendants", source_ids=msrc, year=LATEST,
-          how="Felony immigration defendants filed in all district courts (IDB lane national total).")
+          how="Felony immigration defendants filed in all district courts (IDB national total).")
     s.num("imm5_share_latest", imm5_share[LATEST], "percent", source_ids=msrc, year=LATEST, derived=True, headline=True,
           formula=f"({B_FORMULA} felony immigration defendants) / national felony immigration defendants x 100",
           how="Sum of the five districts divided by the national count.")
@@ -63,7 +63,7 @@ def build() -> Story:
         s.num(f"fel5_{y}", fel5[y], "defendants", source_ids=fsrc, year=y, derived=True,
               formula=f"sum of felony defendants filed in {B_FORMULA} (FY {y})", how="IDB felony defendants filed.")
         s.num(f"fel_us_{y}", fn.set_index("period")["value"][y], "defendants", source_ids=ids_of(fn), year=y,
-              how="Felony defendants filed in all district courts (IDB lane national total).")
+              how="Felony defendants filed in all district courts (IDB national total).")
     s.chart("share_lines", {
         "kind": "line", "unit": "percent", "format": ".1f", "x": years, "y_min": 0, "y_max": 100, "prelim_from": PRELIM_FY,
         "title": "The five border districts' share of the nation's felony defendants",
@@ -102,7 +102,7 @@ def build() -> Story:
     usv = float(share.loc[LATEST, "_national"])
     s.num("us_imm_pct", usv, "percent", source_ids=msrc, year=LATEST, derived=True,
           formula=f"national felony immigration defendants / all felony defendants x 100 (FY {LATEST})",
-          how="IDB lane national totals.")
+          how="IDB national totals.")
     lo = min(B, key=lambda d: share.loc[LATEST, d])
     hi = max(B, key=lambda d: share.loc[LATEST, d])
     s.district("imm_pct_lo", lo, source_ids=msrc, style="short", how="Border district with the lowest felony immigration share.")
@@ -132,7 +132,8 @@ def build() -> Story:
     s.num("n_top5", len(top5), "years", source_ids=rsrc, derived=True, headline=True,
           formula="count of years in which the five districts held U.S. standings 1 to 5",
           how="Published numerical standings within the U.S., felony filings per judgeship.")
-    s.num("n_top5_years", len(ryears), "years", source_ids=rsrc, how="Years with published standings.")
+    s.num("n_top5_years", len(ryears), "years", source_ids=rsrc, derived=True,
+          formula="count of years with published U.S. standings", how="Years with published standings.")
     s.year("top5_first", ryears[0], source_ids=rsrc, how="First year with a published standing.")
     exc = [y for y in ryears if y not in top5]
     for i, y in enumerate(exc, start=1):
@@ -171,18 +172,19 @@ def build() -> Story:
     csrc = ids_of(cr[cr.district_id.isin(B)]) + ids_of(crn)
     s.num("n_disp_below", below, "count", source_ids=csrc, derived=True,
           formula="count of district-years (five districts x years) with a median below the national median",
-          how="Compared each border district's published median with the national median, current-method table.")
+          how="Compared each border district's published median with the national median, current-method series.")
     s.num("n_disp_cells", len(B) * len(cyears), "count", source_ids=csrc, how="Five districts times the years shown.")
     if below != len(B) * len(cyears):
         raise ValueError("the text says every border district was below the national median in every year")
-    s.year("disp_first", cyears[0], source_ids=ids_of(crn), how="First year of the current-method table.")
+    s.year("disp_first", cyears[0], source_ids=ids_of(crn), how="First year of the current-method series.")
     rc = obs("fcms", "fcms_rank_us_median_months_criminal_felony_filing_to_disposition", "observations_ranks")
     rcy = rc[rc.period.isin(cyears)]
     nmd_first = rcy[(rcy.district_id == "nmd") & (rcy.value == 1)]
     s.num("n_nmd_first", len(nmd_first), "years", source_ids=ids_of(rcy[rcy.district_id == "nmd"]), derived=True,
           formula="count of years where the published U.S. standing of D.N.M. = 1",
           how=f"Published standings, FY {cyears[0]} to FY {cyears[-1]}.")
-    s.num("n_disp_years", len(cyears), "years", source_ids=ids_of(crn), how="Years in the current-method table.")
+    s.num("n_disp_years", len(cyears), "years", source_ids=ids_of(crn), derived=True,
+          formula="count of years in the current-method series", how="Years in the current-method series.")
     cn_ = cell(cr, "nmd", LATEST)
     s.num("nmd_disp_latest", cn_.value, "months", source_ids=[cn_.source_id], year=LATEST, how="D.N.M. published median.")
     cu = cell(crn, None, LATEST)
@@ -193,7 +195,7 @@ def build() -> Story:
         "series": [{"id": d, "label": district_name(d), "role": "focus" if d == "nmd" else "focus2", "values": series(cr, d, cyears)} for d in B]
         + [{"id": "_national", "label": "All district courts", "role": "national", "values": series(crn, None, cyears)}],
         "source_ids": csrc, "derived": False,
-        "how": "FCMS current-method table (felony defendants; time measured from the proceeding date since March 2012).",
+        "how": "FCMS current-method series (felony defendants; time measured from the proceeding date since March 2012).",
     })
 
     # ---- pleas and trials ------------------------------------------------------------------------
@@ -224,17 +226,17 @@ def build() -> Story:
         tv = ty.loc[d]
         s.num(f"{d}_trial", tv.value, "percent", decimals=2, source_ids=[tv.source_id], year=LATEST, derived=True,
               formula=f"defendants terminated after trial / defendants terminated x 100 ({district_name(d)}, FY {LATEST})",
-              how="IDB lane trial rate (numerator and denominator published with it).")
+              how="IDB trial rate.")
         gv = gy.loc[d]
         s.num(f"{d}_plea", gv.value, "percent", source_ids=[gv.source_id], year=LATEST, derived=True,
               formula=f"defendants who pleaded guilty / defendants terminated x 100 ({district_name(d)}, FY {LATEST})",
-              how="IDB lane guilty-plea share.")
+              how="IDB guilty-plea share.")
     tn = cell(national("idb", "idb_crim_trial_rate"), None, LATEST)
     gn = cell(national("idb", "idb_crim_pct_guilty_plea"), None, LATEST)
     s.num("us_trial", tn.value, "percent", decimals=2, source_ids=[tn.source_id], year=LATEST, derived=True,
-          formula="defendants terminated after trial / defendants terminated x 100 (all districts)", how="IDB lane national rate.")
+          formula="defendants terminated after trial / defendants terminated x 100 (all districts)", how="IDB national rate.")
     s.num("us_plea", gn.value, "percent", source_ids=[gn.source_id], year=LATEST, derived=True,
-          formula="defendants who pleaded guilty / defendants terminated x 100 (all districts)", how="IDB lane national share.")
+          formula="defendants who pleaded guilty / defendants terminated x 100 (all districts)", how="IDB national share.")
     trial_lo = low5[0]
     trial_hi = low5[-1]
     s.district("trial_lo", trial_lo, source_ids=gsrc, style="short", how="Lowest trial rate among the districts above the threshold.")
@@ -243,7 +245,7 @@ def build() -> Story:
         tv = ty.loc[dd]
         s.num(key, tv.value, "percent", decimals=2, source_ids=[tv.source_id], year=LATEST, derived=True,
               formula=f"defendants terminated after trial / defendants terminated x 100 ({district_name(dd)}, FY {LATEST})",
-              how="IDB lane trial rate.")
+              how="IDB trial rate.")
     dots = []
     for d in big:
         dots.append({"id": d, "label": district_name(d), "x": round(float(ty.loc[d, "value"]), 6), "y": round(float(gy.loc[d, "value"]), 6),
@@ -256,7 +258,7 @@ def build() -> Story:
         "items": dots, "reference": {"x": round(float(tn.value), 6), "y": round(float(gn.value), 6), "label": "All districts"},
         "source_ids": gsrc + [tn.source_id, gn.source_id], "derived": True,
         "formula": "trial rate = defendants terminated after trial / defendants terminated x 100; plea share = guilty pleas / defendants terminated x 100",
-        "how": "IDB criminal file, defendants terminated, most serious count (DISP1).",
+        "how": "IDB criminal file, defendants terminated, most serious charge.",
     })
 
     # ---- early disposition (USSC 5K3.1) ----------------------------------------------------------

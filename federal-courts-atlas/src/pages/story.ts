@@ -279,11 +279,14 @@ class StoryView {
         h(
           'p',
           { class: 'story-method__maps' },
-          'The maps use the same district values; every district’s figure for every year is in the atlas’s ',
+          'Hovering a district on a story map shows its value. ',
+          maps.has('imm_share')
+            ? 'This story’s map counts felony defendants only, so its immigration shares differ from the all-defendant measure on the atlas’s '
+            : 'The same measure, with every district’s figure for every year, is on the atlas’s ',
           h('a', { href: '#/' }, 'map'),
-          ' and ',
+          '. Every source is listed on the ',
           h('a', { href: '#/sources' }, 'sources'),
-          ' pages, and hovering a district shows its value.',
+          ' page.',
         ),
       );
     }
@@ -363,7 +366,7 @@ export function render(ctx: PageContext): () => void {
       page.append(
         h('header', { class: 'page-head' }, h('h1', { class: 'page-head__title' }, content.title)),
         r.status === 'missing'
-          ? emptyState({ title: 'Story data not built yet', body: 'Run the stories pipeline to publish this story’s numbers.', file: `public/data/stories/${slug}.json`, icon: 'data' })
+          ? emptyState({ title: 'Story data not built yet', body: 'This story’s numbers have not been published yet.', file: `public/data/stories/${slug}.json`, icon: 'data' })
           : errorState(r.error, `public/data/stories/${slug}.json`),
       );
       return;

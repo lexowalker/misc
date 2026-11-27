@@ -30,6 +30,7 @@ export class YearSlider {
   private idx: number;
   private track: HTMLDivElement;
   private eventEls: HTMLButtonElement[] = [];
+  private tickEls: HTMLElement[] = [];
   private resizeObs: ResizeObserver | null = null;
 
   constructor(o: YearSliderOptions) {
@@ -59,6 +60,11 @@ export class YearSlider {
     const track = h('div', { class: 'year-slider__track' });
     this.track = track;
     const markers = h('div', { class: 'year-slider__events' });
+    // Phones: the labelled markers above the track do not fit, so the track shows plain diamonds (pips,
+    // decorative) and the events are listed under the slider as buttons with visible labels (keys). CSS
+    // shows one set or the other, with display:none, so assistive technology meets each event once.
+    const pips = h('div', { class: 'year-slider__pips', 'aria-hidden': 'true' });
+    const keys = h('ul', { class: 'year-slider__keys', role: 'list' });
     const pos = (i: number) => (years.length > 1 ? (i / (years.length - 1)) * 100 : 50);
     if (o.events !== false) {
       for (const ev of o.events ?? EVENTS) {
@@ -81,13 +87,28 @@ export class YearSlider {
           },
           h('span', { class: 'year-slider__event-label' }, ev.short),
         );
-        m.addEventListener('click', () => {
+        const jump = () => {
           this.pause();
           const exact = years.indexOf(y);
           this.set(exact >= 0 ? exact : Math.round(i), true);
-        });
+        };
+        m.addEventListener('click', jump);
         markers.append(m);
         this.eventEls.push(m);
+        pips.append(h('span', { class: 'year-slider__pip', style: `left:${pos(i)}%` }));
+        // The key's name is its visible text (label in name); the marker's longer wording is its description.
+        const descId = uniqueId('year-ev');
+        const key = h(
+          'button',
+          { type: 'button', class: 'year-slider__key', 'aria-describedby': descId },
+          h('span', { class: 'year-slider__key-mark', 'aria-hidden': 'true' }),
+          h('span', { class: 'year-slider__key-label' }, ev.short),
+          ' ',
+          h('span', { class: 'year-slider__key-year num' }, periodLabel(y, o.periodType)),
+          h('span', { id: descId, class: 'visually-hidden' }, `Jump to ${periodLabel(y, o.periodType)}: ${ev.label}. ${ev.description}`),
+        );
+        key.addEventListener('click', jump);
+        keys.append(h('li', null, key));
       }
     }
     const ticks = h('div', { class: 'year-slider__ticks', 'aria-hidden': 'true' });
@@ -96,17 +117,59 @@ export class YearSlider {
       const end = i === 0 || i === years.length - 1;
       // Label the ends and round years, but never two labels closer than minGap steps.
       const major = end || (y % 5 === 0 && i >= minGap && years.length - 1 - i >= minGap);
-      ticks.append(h('span', { class: `year-slider__tick${major ? ' is-major' : ''}`, style: `left:${pos(i)}%` }, major ? String(y) : ''));
+      const tick = h('span', { class: `year-slider__tick${major ? ' is-major' : ''}`, style: `left:${pos(i)}%` }, major ? String(y) : '');
+      ticks.append(tick);
+      if (major) this.tickEls.push(tick);
     });
-    track.append(markers, this.input, ticks);
+    track.append(markers, pips, this.input, ticks);
     this.el = h('div', { class: 'year-slider', role: 'group', 'aria-label': o.label ?? 'Time machine' }, this.btn, track, this.out);
+    if (this.eventEls.length) this.el.append(keys);
     this.set(this.idx, false);
-    // Event labels that would overlap (e.g. First Step Act, FY 2019, beside COVID-19, FY 2020)
-    // are lifted onto a second row once the slider has a width.
-    if (this.eventEls.length > 1 && typeof ResizeObserver === 'function') {
-      this.resizeObs = new ResizeObserver(() => this.layoutEvents());
+    // Event labels that would overlap (e.g. First Step Act, FY 2019, beside COVID-19, FY 2020) are lifted
+    // onto a second row, and year labels that would touch are left out, once the slider has a width.
+    if (typeof ResizeObserver === 'function') {
+      this.resizeObs = new ResizeObserver(() => {
+        if (this.eventEls.length > 1) this.layoutEvents();
+        this.layoutTicks();
+      });
       this.resizeObs.observe(track);
     }
+  }
+
+  /**
+   * Hide year labels that would touch their neighbor (a long series on a phone); the tick marks stay. When the
+   * round-year labels do not all fit, only the ends and the decades are tried, so the labels that remain are
+   * evenly spaced; any that still touch are dropped from the left, never the first or last year.
+   */
+  private layoutTicks(): void {
+    const els = this.tickEls;
+    els.forEach((e) => e.classList.remove('is-quiet'));
+    if (els.length < 3) return;
+    const box = (e: HTMLElement) => ({ l: e.offsetLeft - e.offsetWidth / 2, r: e.offsetLeft + e.offsetWidth / 2 });
+    const gap = 6;
+    const fit = (set: HTMLElement[]): HTMLElement[] => {
+      const kept: HTMLElement[] = [set[0]!];
+      for (let i = 1; i < set.length; i++) {
+        const e = set[i]!;
+        const b = box(e);
+        if (b.l >= box(kept[kept.length - 1]!).r + gap) {
+          kept.push(e);
+          continue;
+        }
+        // The last year is always labelled: drop the label before it instead (never the first).
+        if (i === set.length - 1 && kept.length > 1) {
+          kept.pop();
+          if (b.l >= box(kept[kept.length - 1]!).r + gap) kept.push(e);
+        }
+      }
+      return kept;
+    };
+    let kept = fit(els);
+    if (kept.length < els.length) {
+      const decades = els.filter((e, i) => i === 0 || i === els.length - 1 || Number(e.textContent) % 10 === 0);
+      kept = fit(decades);
+    }
+    for (const e of els) if (!kept.includes(e)) e.classList.add('is-quiet');
   }
 
   private layoutEvents(): void {

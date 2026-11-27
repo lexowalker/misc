@@ -5,6 +5,7 @@
 import { h, uniqueId } from '../../lib/dom.ts';
 import { decimalsFor, formatNumber, formatValue, ordinal } from '../../lib/format.ts';
 import type { Variable } from '../../data/types.ts';
+import { ensureFormulaPopovers } from '../../components/source-chip.ts';
 
 type Fmt = Pick<Variable, 'format' | 'unit'> | null | undefined;
 
@@ -46,11 +47,12 @@ export const RANK_FORMULA =
 
 /** A small "ƒ" button whose popover explains a derived quantity (same look as the source chip's). */
 export function formulaHint(text: string, label = 'How this rank is computed'): HTMLElement {
+  ensureFormulaPopovers();
   const id = uniqueId('fx');
   return h(
     'span',
     { class: 'fx-hint' },
-    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-label': label }, 'ƒ'),
+    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-controls': id, 'aria-label': label }, 'ƒ'),
     h('span', { id, role: 'tooltip', class: 'source-chip__pop fx-hint__pop' }, h('span', { class: 'caps' }, 'Derived by the atlas'), h('code', null, text)),
   );
 }

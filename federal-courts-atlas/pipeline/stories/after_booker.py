@@ -21,24 +21,25 @@ def build() -> Story:
     nat = wn.set_index("period")["value"]
     years = sorted(int(y) for y in nat.index)
     nsrc = ids_of(wn)
-    s.year("fy_first", years[0], source_ids=nsrc, how="First fiscal year in the USSC series.")
+    s.year("fy_first", years[0], source_ids=nsrc, how="First fiscal year in the USSC series.", headline=True)
     s.year("fy_latest", LATEST, source_ids=nsrc, how="Latest USSC fiscal year.", headline=True)
     pre = nat.loc[PRE[0]:PRE[1]]
-    s.year("pre_last", PRE[1], source_ids=nsrc, how="Last full fiscal year before Booker.")
+    s.year("pre_last", PRE[1], source_ids=nsrc, how="Last full fiscal year before Booker.", headline=True)
     s.year("post_first", POST_FIRST, source_ids=nsrc, how="First full fiscal year after Booker.")
     psrc = ids_of(wn[wn.period.between(*PRE)])
     s.num("pre_min", pre.min(), "percent", source_ids=psrc, derived=True, headline=True,
           formula=f"lowest national within-range share, FY {PRE[0]} to FY {PRE[1]}", how="Minimum of the published national shares.")
     s.num("pre_max", pre.max(), "percent", source_ids=psrc, derived=True, headline=True,
           formula=f"highest national within-range share, FY {PRE[0]} to FY {PRE[1]}",
-          how="Maximum of the national shares (FY 2004 pools the USSC's two half-year tables, so it is derived).")
+          how="Maximum of the national shares (FY 2004 pools the USSC's two part-year tables, so it is derived).")
     post = nat.loc[POST_FIRST:]
     s.num("post_max", post.max(), "percent", source_ids=ids_of(wn[wn.period >= POST_FIRST]), derived=True,
           formula=f"highest national within-range share, FY {POST_FIRST} to FY {LATEST}", how="Maximum of the published national shares.")
     s.year("post_max_year", int(post.idxmax()), source_ids=nsrc, how="Year of that maximum.")
     lo = int(post.idxmin())
     c = cell(wn, None, lo)
-    s.num("post_min", c.value, "percent", source_ids=[c.source_id], year=lo, how="Lowest national within-range share since Booker.")
+    s.num("post_min", c.value, "percent", source_ids=[c.source_id], year=lo, derived=True,
+          formula=f"lowest national within-range share, FY {POST_FIRST} to FY {LATEST}", how="Lowest national within-range share since Booker.")
     s.year("post_min_year", lo, source_ids=[c.source_id], how="Year of that low.")
     c = cell(wn, None, LATEST)
     s.num("within_latest", c.value, "percent", source_ids=[c.source_id], year=LATEST, headline=True,
@@ -63,7 +64,7 @@ def build() -> Story:
         ],
         "derived_x": pooled,
         "source_ids": nsrc + ids_of(k), "derived": True,
-        "formula": "FY 2004 and FY 2005 pool the USSC's two half-year tables: (cases in both halves within range) / (range-known cases in both halves) x 100",
+        "formula": "FY 2004 and FY 2005 pool the USSC's two part-year tables: (cases in both parts within range) / (range-known cases in both parts) x 100",
         "how": "USSC packets (FY 1995 to 2001, national column) and datafiles (FY 2002 on).",
     })
 
@@ -87,7 +88,7 @@ def build() -> Story:
         "kind": "stack", "unit": "percent", "format": ".1f", "x": split_years, "y_max": 100, "mark_x": SCHEME_YEAR,
         "title": "How federal sentences compare with the guideline range, all districts",
         "layers": layers, "source_ids": nsrc + ids_all, "derived": True,
-        "formula": "FY 2018 on: above = USSC SENTRNGE groups 1 + 6; government sponsored = 2 + 3 + 4 + 7; not government sponsored = 5 + 8 (each as a share of range-known cases)",
+        "formula": "FY 2018 on: above = USSC sentence-range codes 1 + 6; government sponsored = 2 + 3 + 4 + 7; not government sponsored = 5 + 8 (each as a share of range-known cases)",
         "how": "USSC four-way grouping as printed for FY 2006 to 2017, then rebuilt from the FY 2018 method's components. The two agree exactly in FY 2014 to 2017.",
     })
     for y in (POST_FIRST, LATEST):
@@ -103,6 +104,8 @@ def build() -> Story:
     largest = all(gv[y] > ng[y] and gv[y] > ab[y] for y in split_years)
     if not largest:
         raise ValueError("government-sponsored below is no longer the largest group outside the range every year")
+    if not all(ab[y] < ng[y] and ab[y] < gv[y] for y in split_years):
+        raise ValueError("the text calls above-range sentences the least common of the three groups every year")
     pk = int(ng.idxmax())
     s.num("nongovt_peak", ng[pk], "percent", source_ids=ids_all, year=pk, derived=pk >= SCHEME_YEAR,
           formula=("sum of the USSC's FY 2018-method components" if pk >= SCHEME_YEAR else None),
@@ -118,6 +121,7 @@ def build() -> Story:
         s.num(f"n_major_{y}", int((row > 50).sum()), "districts", source_ids=src, year=y, derived=True, headline=y in (PRE[1], LATEST),
               formula=f"count of districts whose within-range share exceeds 50% in FY {y}", how="Published district shares.")
     s.num("n_districts", int(ww.loc[LATEST].notna().sum()), "districts", source_ids=ids_of(w[w.period == LATEST]),
+          derived=True, formula=f"count of districts with a published within-range share in FY {LATEST}",
           how="Districts with a published within-range share.")
     m23 = ww.loc[years[0]:].apply(lambda r: int((r > 50).sum()), axis=1)
     lo_y = int(m23.idxmin())
@@ -137,7 +141,8 @@ def build() -> Story:
            how="Start of the run of years, through the latest, in which no district reached 80% within range.")
     s.layer("within", w, label="Sentenced within the guideline range", unit="percent", fmt_spec=".1f",
             higher_means="more sentences within the guideline range",
-            how="USSC packets (FY 1995 to 2001) and datafiles. FY 2004 and FY 2005 pool two half-year tables.")
+            how="USSC packets (FY 1995 to 2001) and datafiles. FY 2004 and FY 2005 are derived: each pools the USSC's two part-year tables, "
+                "(cases within range in both parts) / (range-known cases in both parts) x 100.")
     counts = [{"year": y, "majority": int((ww.loc[y] > 50).sum()), "eighty": int((ww.loc[y] >= 80).sum())} for y in years]
 
     # Distribution ribbon.
@@ -172,7 +177,7 @@ def build() -> Story:
     big = row[row.n_basis >= MIN_BASE]
     s.num("min_base", MIN_BASE, "cases", source_ids=ids_of(big), how="Threshold chosen for this comparison: districts with at least this many range-known cases.")
     s.num("n_big", len(big), "districts", source_ids=ids_of(big), derived=True,
-          formula=f"count of districts with at least {MIN_BASE} range-known cases in FY {LATEST}", how="USSC n_basis.")
+          formula=f"count of districts with at least {MIN_BASE} range-known cases in FY {LATEST}", how="USSC counts of cases with a known guideline range.")
     lo_d = big["value"].idxmin()
     hi_d = big["value"].idxmax()
     if (big["value"] == big["value"].min()).sum() > 1 or (big["value"] == big["value"].max()).sum() > 1:

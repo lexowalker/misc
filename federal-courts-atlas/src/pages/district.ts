@@ -155,20 +155,51 @@ export async function render(ctx: PageContext): Promise<() => void> {
       goToSection(a.dataset.sec!);
     });
   }
-  if (typeof IntersectionObserver !== 'undefined') {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const sid = (e.target as HTMLElement).id.replace(/^sec-/, '');
-          navLinks.forEach((a) => (a.dataset.sec === sid ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
-        }
-      },
-      { rootMargin: '-30% 0px -60% 0px' },
-    );
-    for (const [sid] of SECTIONS) io.observe(shells[sid]!.el);
-    disposers.push(() => io.disconnect());
-  }
+  // Current section: the last section whose top has passed a reading line a third of the way down the
+  // visible area below the sticky nav. Above the first section (the hero) nothing is current; at the very
+  // bottom of the page the last section that has come into view is current, even when it is too short to
+  // reach the line. Computed from positions on scroll (not from intersection events), so it is never stale.
+  let currentSec: string | null = null;
+  const markCurrent = () => {
+    const navBottom = Math.max(0, dnav.getBoundingClientRect().bottom);
+    const line = navBottom + (window.innerHeight - navBottom) * 0.33;
+    const atEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    let sid: string | null = null;
+    for (const [id] of SECTIONS) {
+      const top = shells[id]!.el.getBoundingClientRect().top;
+      if (top <= line || (atEnd && top < window.innerHeight - 48)) sid = id;
+    }
+    if (sid === currentSec) return;
+    currentSec = sid;
+    for (const a of navLinks) {
+      if (a.dataset.sec === sid) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    }
+    // On a phone the nav scrolls sideways: keep the current link in view (horizontal only, no page jump).
+    const cur = navLinks.find((a) => a.dataset.sec === sid);
+    const list = dnav.querySelector<HTMLElement>('.dnav__list');
+    if (cur && list && list.scrollWidth > list.clientWidth + 1) {
+      const l = cur.offsetLeft - list.offsetLeft;
+      if (l < list.scrollLeft || l + cur.offsetWidth > list.scrollLeft + list.clientWidth)
+        list.scrollTo({ left: Math.max(0, l - 16), behavior: prefersReduced() ? 'auto' : 'smooth' });
+    }
+  };
+  let navRaf = 0;
+  const onNavScroll = () => {
+    if (navRaf) return;
+    navRaf = requestAnimationFrame(() => {
+      navRaf = 0;
+      markCurrent();
+    });
+  };
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  window.addEventListener('resize', onNavScroll);
+  requestAnimationFrame(markCurrent);
+  disposers.push(() => {
+    window.removeEventListener('scroll', onNavScroll);
+    window.removeEventListener('resize', onNavScroll);
+    if (navRaf) cancelAnimationFrame(navRaf);
+  });
 
   /* ---- Data ------------------------------------------------------------------------------ */
   const geoP = loadAtlasGeometry();

@@ -76,7 +76,8 @@ def build() -> Story:
     s.num("n_below_half", len(below_half), "years", source_ids=src_trial, derived=True,
           formula="count of years where E.D. Va. median / national median < 0.5", headline=True,
           how=f"Compared the two published medians in each year, FY {first} to FY {latest}.")
-    s.num("n_years_trial", len(both), "years", source_ids=src_trial,
+    s.num("n_years_trial", len(both), "years", source_ids=src_trial, derived=True,
+          formula="count of years with both medians published",
           how=f"Years with both values published, FY {first} to FY {latest}.")
     ymin = int(vv.idxmin())
     ymax = int(vv.idxmax())
@@ -111,7 +112,8 @@ def build() -> Story:
     s.num("n_first", len(firsts), "years", source_ids=rsrc, derived=True, headline=True,
           formula="count of years where the published U.S. standing of E.D. Va. = 1",
           how=f"Counted years with a published standing of 1, FY {ryears[0]} to FY {ryears[-1]}.")
-    s.num("n_rank_years", len(ryears), "years", source_ids=rsrc, headline=True,
+    s.num("n_rank_years", len(ryears), "years", source_ids=rsrc, headline=True, derived=True,
+          formula="count of years with a published U.S. standing for E.D. Va.",
           how=f"Years with a published national standing, FY {ryears[0]} to FY {ryears[-1]}.")
     runs = [r for r in _runs(firsts) if r[1] > r[0]]
     runs.sort(key=lambda r: (-(r[1] - r[0]), r[0]))
@@ -146,7 +148,8 @@ def build() -> Story:
     if worst_y != 2021:
         raise ValueError("the text calls the worst year the first full fiscal year of the pandemic (FY 2021)")
     s.year("fy_worst", worst_y, source_ids=rsrc, how="Year of E.D. Va.'s lowest published standing.")
-    s.num("rank_worst", rv[worst_y], "rank", source_ids=[cell(rk, D, worst_y).source_id], year=worst_y,
+    s.num("rank_worst", rv[worst_y], "rank", source_ids=[cell(rk, D, worst_y).source_id], year=worst_y, derived=True,
+          formula="largest (lowest) published U.S. standing of E.D. Va. across the years shown",
           how="Lowest published U.S. standing of E.D. Va.")
     cw = cell(t, D, worst_y)
     s.num("vaed_trial_worst", cw.value, "months", source_ids=[cw.source_id], year=worst_y,
@@ -181,7 +184,8 @@ def build() -> Story:
     s.num("n_disp_below", len(below), "years", source_ids=dsrc, derived=True,
           formula="count of years where E.D. Va. median < national median",
           how=f"Compared the published medians in each year, FY {dyears[0]} to FY {dyears[-1]}.")
-    s.num("n_disp_years", len(dyears), "years", source_ids=dsrc, how="Years with both values published.")
+    s.num("n_disp_years", len(dyears), "years", source_ids=dsrc, derived=True,
+          formula="count of years with both medians published", how="Years with both values published.")
     if len(below) != len(dyears):
         raise ValueError("the text says E.D. Va. was below the national civil median in every year")
     cd = cell(d, D, latest)
@@ -197,7 +201,8 @@ def build() -> Story:
     s.num("n_disp_top5", len(top5), "years", source_ids=rdsrc, derived=True,
           formula="count of years where the published U.S. standing of E.D. Va. <= 5",
           how="Counted published standings of 5 or better.")
-    s.num("n_disp_rank_years", len(rdv), "years", source_ids=rdsrc, how="Years with a published standing.")
+    s.num("n_disp_rank_years", len(rdv), "years", source_ids=rdsrc, derived=True,
+          formula="count of years with a published U.S. standing for E.D. Va.", how="Years with a published standing.")
     s.chart("disp_line", {
         "kind": "line", "unit": "months", "format": ".1f", "x": dyears, "y_min": 0,
         "title": "Median months from filing to disposition, civil cases",
@@ -220,8 +225,9 @@ def build() -> Story:
     s.year("fy_crim_first", cyears[0], source_ids=ids_of(crn), how="First year of the current-method series.")
     s.num("n_crim_below", len(cbelow), "years", source_ids=csrc, derived=True,
           formula="count of years where E.D. Va. median < national median",
-          how="Compared the published medians in each year of the current-method table.")
-    s.num("n_crim_years", len(cyears), "years", source_ids=csrc, how="Years in the current-method table.")
+          how="Compared the published medians in each year of the current-method series.")
+    s.num("n_crim_years", len(cyears), "years", source_ids=csrc, derived=True,
+          formula="count of years in the current-method series", how="Years in the current-method series.")
     if len(cbelow) != len(cyears):
         raise ValueError("the text says E.D. Va. was below the national felony median in every year")
     rc = obs("fcms", R + "median_months_criminal_felony_filing_to_disposition", "observations_ranks")
@@ -256,7 +262,7 @@ def build() -> Story:
         "band": {"lo": cb["lo"], "hi": cb["hi"], "n": cb["n"], "label": "Range across districts"},
         "source_ids": ids_of(cr) + ids_of(crn),
         "derived": True, "formula": "band = lowest and highest published district median in each year",
-        "how": "FCMS current-method table (felony defendants; time measured from the proceeding date since March 2012).",
+        "how": "FCMS current-method series (felony defendants; time measured from the proceeding date since March 2012).",
     })
 
     # ---- trials completed per judgeship ------------------------------------------------------
@@ -271,7 +277,8 @@ def build() -> Story:
     s.num("n_trials_more", len(more), "years", source_ids=tsrc, derived=True,
           formula="count of years where E.D. Va. trials per judgeship > national figure",
           how="Compared the published figures in each year.")
-    s.num("n_trials_years", len(tyears), "years", source_ids=tsrc, how="Years with both figures published.")
+    s.num("n_trials_years", len(tyears), "years", source_ids=tsrc, derived=True,
+          formula="count of years with both figures published", how="Years with both figures published.")
     if len(equal) == 1:
         s.year("fy_trials_equal", equal[0], source_ids=tsrc, how="The one year the two figures were equal.")
     ct = cell(tr, D, latest)

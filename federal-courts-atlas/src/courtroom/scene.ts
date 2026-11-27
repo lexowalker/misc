@@ -801,15 +801,17 @@ export async function createCourtroomScene(o: CourtroomSceneOptions): Promise<Co
     set('flagCourt', dark ? '#c9c4bb' : '#ffffff');
     for (const k of hlMaterials.keys()) applyHighlight(k);
 
-    renderer.toneMappingExposure = dark ? 0.92 : 1.0;
-    scene.environmentIntensity = dark ? 0.2 : 0.5;
+    // Dark theme: an evening room lit by its lamps, but lifted enough that the furniture reads on a phone
+    // screen (UI audit: the earlier values averaged about 11% luminance across the stage).
+    renderer.toneMappingExposure = dark ? 1.05 : 1.0;
+    scene.environmentIntensity = dark ? 0.3 : 0.5;
     hemi.color.set(dark ? '#8794c4' : '#fbf7ef');
     hemi.groundColor.set(dark ? '#20160f' : '#6d5642');
-    hemi.intensity = dark ? 0.32 : 0.75;
+    hemi.intensity = dark ? 0.5 : 0.75;
     key.color.set(dark ? '#9fb0ea' : '#fff1dc');
-    key.intensity = dark ? 0.32 : 1.55;
+    key.intensity = dark ? 0.5 : 1.55;
     fill.color.set(dark ? '#5d6ca8' : '#e8ecff');
-    fill.intensity = dark ? 0.12 : 0.35;
+    fill.intensity = dark ? 0.2 : 0.35;
     lampLights.forEach((l, i) => {
       l.intensity = dark ? (i === 0 ? 6 : 4) : 0.5;
     });

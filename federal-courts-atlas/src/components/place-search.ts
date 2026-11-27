@@ -278,7 +278,9 @@ export class PlaceSearch {
             : this.indexState === 'ok'
               ? 'No matching place. Try a city, county, ZIP code, courthouse, state or district.'
               : 'Only states and district names can be searched right now: the place list did not load.';
-      this.list.append(h('li', { class: 'psearch__empty', role: 'presentation' }, msg));
+      // A listbox must own at least one option: the message is a disabled option (not selectable, skipped by
+      // the arrow keys because it is not in this.options).
+      this.list.append(h('li', { class: 'psearch__empty', role: 'option', 'aria-disabled': 'true', 'aria-selected': 'false' }, msg));
     }
     this.foot.replaceChildren();
     if (this.o.mode === 'inline' && total > hits.length) {

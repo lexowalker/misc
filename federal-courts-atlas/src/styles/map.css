@@ -178,6 +178,30 @@
   vector-effect: non-scaling-stroke;
 }
 
+/* Phones: names of the smallest insets in the free row under the inset cluster (AtlasMap.layoutInsetKey). */
+.atlas-map__inset-key {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.inset-key__label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  fill: var(--map-inset-label);
+}
+
+.inset-key__leader {
+  fill: none;
+  stroke: var(--map-inset-frame);
+  stroke-width: 0.75px;
+}
+
 .city-label {
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
@@ -449,6 +473,14 @@
 .locator-map__ctx .other { fill: var(--map-context); }
 .locator-map__ctx .same-state { fill: var(--map-context-2); }
 .locator-map__target { fill: var(--map-highlight); }
+
+/* Island districts: a non-scaling outline in the same color makes specks of land visible. */
+.locator-map__target.is-small {
+  stroke: var(--map-highlight);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
 
 .locator-map__mesh,
 .locator-map__states {

@@ -69,7 +69,7 @@ export const STORY_CONTENT: StoryContent[] = [
     dek: 'Civil cases in the Eastern District of Virginia reach trial faster than almost anywhere else. In {fy_latest}, the median case got there in {vaed_trial_latest}. Across all district courts, the median was {us_trial_latest}.',
     steps: [
       {
-        text: 'Lawyers call the Eastern District of Virginia the “rocket docket.” The court’s own statistics show why the name stuck. In {fy_latest}, the median civil case there went from filing to trial in {vaed_trial_latest}. Across all district courts, the median was {us_trial_latest}. Among the {n_trial_latest} districts with a median that year, the Eastern District ranked {rank_latest}.',
+        text: 'Lawyers call the Eastern District of Virginia the “rocket docket.” Federal court statistics fit the name. In {fy_latest}, the median civil case there went from filing to trial in {vaed_trial_latest}. Across all district courts, the median was {us_trial_latest}. Among the {n_trial_latest} districts with a median that year, the Eastern District ranked {rank_latest}.',
         graphic: { kind: 'map', layer: 'civil_trial', year: 2025, focus: ['vaed'] },
       },
       {
@@ -77,7 +77,7 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'trial_line', highlight: ['vaed'] },
       },
       {
-        text: 'The Administrative Office of the U.S. Courts ranks every district on this measure each year. From {fy_rank_first} to {fy_latest}, the Eastern District of Virginia ranked first in {n_first} of {n_rank_years} years. It held the top spot every year from {run1_start} to {run1_end}, and again from {run2_start} to {run2_end}.',
+        text: 'Each year, the Administrative Office of the U.S. Courts ranks the districts that have a median on this measure. From {fy_rank_first} to {fy_latest}, the Eastern District of Virginia ranked first in {n_first} of {n_rank_years} years. It held the top spot every year from {run1_start} to {run1_end}, and again from {run2_start} to {run2_end}.',
         graphic: { kind: 'chart', chart: 'trial_rank' },
       },
       {
@@ -89,7 +89,7 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'map', layer: 'civil_trial', year: 2020, focus: ['vaed'] },
       },
       {
-        text: 'Cases that end without a trial move quickly there, too. The court’s median time from filing to disposition was below the national median in all {n_disp_years} years. It ranked among the five fastest districts in {n_disp_top5} of the {n_disp_rank_years} years with a published standing. In {fy_latest}, its median was {vaed_disp_latest}. The national median was {us_disp_latest}.',
+        text: 'Civil cases as a whole move quickly there, too. The court’s median time from filing to disposition was below the national median in all {n_disp_years} years. It ranked among the five fastest districts in {n_disp_top5} of the {n_disp_rank_years} years with a published standing. In {fy_latest}, its median was {vaed_disp_latest}. The national median was {us_disp_latest}.',
         graphic: { kind: 'chart', chart: 'disp_line', highlight: ['vaed'] },
       },
       {
@@ -116,7 +116,7 @@ export const STORY_CONTENT: StoryContent[] = [
       notes: [
         'The AO computes the civil filing-to-trial median only for districts with at least ten civil trials in the year, so the number of districts with a median changes every year. Districts without one show as No data.',
         'Standings are as printed by the AO (first = shortest median). Years before FY 2004 have no printed standing, and none is shown.',
-        'Felony times use the FCMS current-method table, which counts defendants and, since March 2012, measures from the proceeding date. It starts in FY 2005.',
+        'Felony times use the AO’s current method, adopted in March 2012, which counts defendants and measures from each defendant’s proceeding date (for example, the date an indictment was filed). The series starts in FY 2005, the earliest year the AO has published on this method.',
         'Trials completed include evidentiary hearings on temporary restraining orders and preliminary injunctions, divided by authorized judgeships. Senior judges also try cases.',
         'The national civil disposition median rose sharply in FY 2024 and FY 2025, years in which one district, N.D. Fla., closed an unusually large number of civil cases (see Where Trials Went). In those years, compare the court’s standing rather than only the national figure.',
         '“Rocket docket” is a nickname. Nothing in this data explains why the court is fast, and nothing here describes any individual judge.',
@@ -130,7 +130,7 @@ export const STORY_CONTENT: StoryContent[] = [
     dek: 'Patent suits concentrated in East Texas for a decade. After the Supreme Court’s {evy:tc-heartland} venue ruling, filings shifted to Delaware and then to West Texas. By {txed_2025:year}, the Eastern District of Texas led again, with {txed_2025} cases.',
     steps: [
       {
-        text: 'Patent cases are a small part of the federal docket, but a closely watched one. In {us_peak_year}, {us_peak} were filed in federal district courts, the most in any year of a series that begins in {fy_first}. In {us_2025:year}, {us_2025} were filed.',
+        text: 'Patent cases are a small part of the federal docket. In {us_peak_year}, {us_peak} were filed in federal district courts, the most in any year of a series that begins in {fy_first}. In {us_2025:year}, {us_2025} were filed.',
         graphic: { kind: 'chart', chart: 'national_line' },
       },
       {
@@ -142,7 +142,7 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'annual_lines', highlight: ['txed'] },
       },
       {
-        text: 'On {ev:tc-heartland}, the Supreme Court decided [[tc-heartland|*TC Heartland v. Kraft Foods*]], which narrowed where patent suits against U.S. companies may be filed. In the four full quarters before the decision, the Eastern District of Texas received {txed_before_share} of the nation’s patent cases. In the four full quarters after it, it received {txed_after_share}.',
+        text: 'On {ev:tc-heartland}, the Supreme Court decided [[tc-heartland|*TC Heartland v. Kraft Foods*]], which narrowed where patent suits against U.S. corporations may be filed. In the four full quarters before the decision, the Eastern District of Texas received {txed_before_share} of the nation’s patent cases. In the four full quarters after it, it received {txed_after_share}.',
         graphic: { kind: 'chart', chart: 'quarterly', highlight: ['txed'], marks: [{ x: '2017Q2', label: 'TC Heartland' }] },
       },
       {
@@ -173,13 +173,13 @@ export const STORY_CONTENT: StoryContent[] = [
     },
     method: {
       intro:
-        'Counts come from the Federal Judicial Center’s Integrated Database (IDB) civil file, rebuilt by the atlas’s IDB lane. Each case is counted once, in the fiscal year (October to September) or calendar quarter of its filing date. Patent cases are those coded nature of suit 830.',
+        'Counts come from the Federal Judicial Center’s Integrated Database (IDB) civil file, rebuilt by the atlas from the FJC’s case-level records. Each case is counted once, in the fiscal year (October to September) or calendar quarter of its filing date. Patent cases are those coded nature of suit 830.',
       notes: [
         'Since June 2017, drug patent cases brought under the abbreviated new drug application process have their own code, 835. The before-and-after comparison around TC Heartland counts codes 830 and 835 together, so both periods measure the same kinds of cases. Yearly figures use code 830, the atlas’s standard patent measure.',
         'The decision quarter, April to June 2017, is left out of both comparison periods.',
         'FY 2026 figures have no published AO table to check them against yet and are marked preliminary.',
         'IDB filing counts were checked against the AO’s published totals of civil filings, but not against a published table of patent cases.',
-        'Shares, sums and the leading district in each year are derived by the atlas. Hover a number to see its formula.',
+        'Shares, sums and the leading district in each year are derived by the atlas. Hover over or select a number to see its formula.',
         'The data cannot show why filings moved. This story reports timing only, and it makes no claim about any judge or court order.',
       ],
     },
@@ -188,7 +188,7 @@ export const STORY_CONTENT: StoryContent[] = [
     slug: 'border-districts',
     title: 'The Border Districts',
     short: 'The Border Districts',
-    dek: 'Five districts along the Mexican border handle an outsized share of federal felony cases, most of them immigration cases. In {fy_latest}, they received {fel5_share_2025} of the nation’s felony defendants.',
+    dek: 'Five districts along the Mexican border handle a large share of federal felony cases, most of them immigration cases. In {fy_latest}, they received {fel5_share_2025} of the nation’s felony defendants.',
     steps: [
       {
         text: 'Five federal districts reach the border with Mexico: the Southern District of California, the District of Arizona, the District of New Mexico, and the Western and Southern Districts of Texas. In {fy_latest}, they received {imm5_latest} of the {imm_us_latest} felony immigration defendants charged in federal court, or {imm5_share_latest}.',
@@ -219,11 +219,11 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'k3_multiples' },
       },
       {
-        text: 'Yet the five use them very differently. In {fy_latest}, early-disposition reductions applied to {casd_k3} of sentences in the Southern District of California and {txwd_k3} in the Western District of Texas. In the Western District, the share has not exceeded {txwd_k3_max} in any year since {k3_first}. The data records the outcomes; it does not say why practice differs.',
+        text: 'Yet the share varies widely among the five. In {fy_latest}, early-disposition reductions applied to {casd_k3} of sentences in the Southern District of California and {txwd_k3} in the Western District of Texas. In the Western District, the share has not exceeded {txwd_k3_max} in any year since {k3_first}. The data records the outcomes; it does not say why practice differs.',
         graphic: { kind: 'chart', chart: 'k3_multiples', highlight: ['casd', 'txwd'] },
       },
       {
-        text: 'Altogether, {sent5_share_2025} of everyone sentenced in federal court in {fy_latest} was sentenced in one of these five districts, up from {sent5_share_2002} in {sent_first}.',
+        text: 'Altogether, {sent5_share_2025} of the people sentenced in federal court in {fy_latest} and reported to the Sentencing Commission were sentenced in one of these five districts, up from {sent5_share_2002} in {sent_first}.',
         graphic: { kind: 'map', layer: 'imm_share', year: 2025, focus: B, zoom: B },
       },
     ],
@@ -243,7 +243,7 @@ export const STORY_CONTENT: StoryContent[] = [
         'FCMS counted felony cases in some years and defendants in others. Published rankings compare districts within one year only. Disposition times use the FCMS current-method table.',
         'The Sentencing Commission reports early-disposition (section 5K3.1) departures separately only from FY 2006.',
         'The trial and plea comparison is limited to districts with at least {plea_base} terminated defendants, because smaller districts swing widely from year to year.',
-        'Sentence outcomes reflect each district’s mix of cases. The data does not show why practices differ, and none of these figures describes any individual judge.',
+        'Districts handle different mixes of cases, which limits direct comparison of their sentence outcomes. The data does not show why practices differ, and none of these figures describes any individual judge.',
         'FY 2026 IDB figures have no AO cross-check yet and are marked preliminary. All five-district totals and shares are derived by the atlas.',
       ],
     },
@@ -252,10 +252,10 @@ export const STORY_CONTENT: StoryContent[] = [
     slug: 'after-booker',
     title: 'After Booker: How Often Sentences Fall Outside the Guideline Range',
     short: 'After Booker',
-    dek: 'Before {evy:booker}, between {pre_min} and {pre_max} of federal sentences each year fell within the guideline range. In {fy_latest}, {within_latest} did, and the share varies far more from one district to the next.',
+    dek: 'Before {evy:booker}, from {fy_first} to {pre_last}, between {pre_min} and {pre_max} of federal sentences each year fell within the guideline range. In {fy_latest}, {within_latest} did, and districts differ more from one another.',
     steps: [
       {
-        text: 'For each federal sentence, the judge first calculates a [[guideline-range|guideline range]] under the Sentencing Guidelines. From {fy_first} to {pre_last}, the share of sentences that fell within that range stayed between {pre_min} and {pre_max}.',
+        text: 'For most federal sentences, the judge first calculates a [[guideline-range|guideline range]] under the Sentencing Guidelines. From {fy_first} to {pre_last}, the share of sentences that fell within that range stayed between {pre_min} and {pre_max}.',
         graphic: { kind: 'chart', chart: 'within_line', only: ['_within'] },
       },
       {
@@ -263,23 +263,23 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'within_line', only: ['_within'], marks: [{ x: 2005, label: 'Booker' }] },
       },
       {
-        text: 'The [[ussc|Sentencing Commission]] sorts sentences outside the range into three groups. Since {post_first}, sentences below the range on the government’s motion have been the largest of the three every year: {govt_2006} of all sentences in {govt_2006:year} and {govt_2025} in {govt_2025:year}.',
+        text: 'The [[ussc|Sentencing Commission]] sorts sentences outside the range into three groups. Since {post_first}, sentences below the range on the government’s motion have been the largest of the three every year: {govt_2006} of sentences in {govt_2006:year} and {govt_2025} in {govt_2025:year}.',
         graphic: { kind: 'chart', chart: 'split_stack', highlight: ['ussc_pct_govt_sponsored_below_range'] },
       },
       {
-        text: 'Sentences below the range without a government motion grew from {nongovt_2006} in {nongovt_2006:year} to a peak of {nongovt_peak} in {nongovt_peak_year}, and stood at {nongovt_2025} in {nongovt_2025:year}. Sentences above the range stayed rare: {above_2025} in {above_2025:year}.',
+        text: 'Sentences below the range without a government motion grew from {nongovt_2006} in {nongovt_2006:year} to a peak of {nongovt_peak} in {nongovt_peak_year}, and stood at {nongovt_2025} in {nongovt_2025:year}. Sentences above the range remained the least common of the three, though their share grew from {above_2006} in {above_2006:year} to {above_2025} in {above_2025:year}.',
         graphic: { kind: 'chart', chart: 'split_stack', highlight: ['ussc_pct_non_govt_sponsored_below_range', 'ussc_pct_above_range'] },
       },
       {
-        text: 'One kind of government motion has become less common. Sentences reduced for [[5k1-1|substantial assistance]] to prosecutors fell from {k1_1995} of all sentences in {k1_1995:year} to {k1_2025} in {k1_2025:year}.',
+        text: 'One kind of government motion has become less common. Sentences reduced for [[5k1-1|substantial assistance]] to prosecutors fell from {k1_1995} of sentences in {k1_1995:year} to {k1_2025} in {k1_2025:year}.',
         graphic: { kind: 'chart', chart: 'within_line', highlight: ['_k1'] },
       },
       {
-        text: 'District by district, the change is starker. In {n_major_2004:year}, {n_major_2004} of the {n_districts} districts sentenced a majority of their cases within the range, and {n_80_2004} kept {eighty} or more within it.',
+        text: 'District by district, the change is starker. In {n_major_2004:year}, {n_major_2004} of the {n_districts} districts sentenced a majority of their cases within the range, and {n_80_2004} had {eighty} or more within it.',
         graphic: { kind: 'map', layer: 'within', year: 2004 },
       },
       {
-        text: 'In {n_major_2025:year}, {n_major_2025} districts did. The low point was {n_major_2023:year}, with {n_major_2023}. No district has kept {eighty} of its sentences within the range in any year from {zero80_since} on.',
+        text: 'In {n_major_2025:year}, {n_major_2025} districts did. The low point was {n_major_2023:year}, with {n_major_2023}. No district has had {eighty} or more of its sentences within the range in any year from {zero80_since} on.',
         graphic: { kind: 'map', layer: 'within', year: 2025 },
       },
       {
@@ -287,24 +287,24 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'ribbon' },
       },
       {
-        text: 'The spread is widest for sentences below the range without a government motion. Among the {n_big} districts with at least {min_base} cases in {fy_latest}, the share ranged from {ng_lo_value} in {ng_lo} to {ng_hi_value} in {ng_hi}. These figures describe the reasons recorded for sentences. They do not measure any judge’s choices, and they do not explain them.',
+        text: 'Sentences below the range without a government motion also vary widely. Among the {n_big} districts with at least {min_base} cases in {fy_latest}, the share ranged from {ng_lo_value} in {ng_lo} to {ng_hi_value} in {ng_hi}. These figures describe the reasons recorded for sentences. They do not measure any judge’s choices, and they do not explain them.',
         graphic: { kind: 'chart', chart: 'nongovt_bars' },
       },
     ],
     captions: {
-      within_line: 'Shares of cases with a known guideline range. The two pooled years are derived from half-year tables.',
+      within_line: 'Shares of cases with a known guideline range. The two pooled years are derived from part-year tables.',
       split_stack: 'Shares of cases with a known guideline range. From fiscal year 2018 the three outer groups are rebuilt from the Commission’s new method.',
       ribbon: 'The dark band holds the middle half of districts; the light band runs from the lowest district to the highest.',
       nongovt_bars: 'Each bar is one district. The vertical rule marks the figure for all districts.',
     },
     method: {
       intro:
-        'Figures come from the U.S. Sentencing Commission: its statistical information packets for FY 1995 to FY 2001 and its individual offender datafiles from FY 2002, processed by the atlas’s USSC lane. Shares are of cases with a known guideline range.',
+        'Figures come from the U.S. Sentencing Commission: its statistical information packets for FY 1995 to FY 2001 and its individual offender datafiles from FY 2002, processed by the atlas. Shares are of cases with a known guideline range.',
       notes: [
         'The three groups outside the range exist only from FY 2006. Earlier years have only the within-range and substantial-assistance shares.',
-        'FY 2004 and FY 2005 each pool two half-year tables (before and after *Blakely v. Washington* in June 2004, and before and after *Booker* in January 2005), so those values are derived.',
+        'FY 2004 and FY 2005 each pool two part-year tables (before and after *Blakely v. Washington* in June 2004, and before and after *Booker* in January 2005), so those values are derived.',
         'The Commission changed how it classifies sentences in FY 2018. From FY 2018, the three outer groups are rebuilt from the new method’s components. In FY 2014 to FY 2017, when both are available, they agree exactly.',
-        'Before FY 2003, below-range sentences counted departures only. The PROTECT Act of 2003 and fast-track programs changed what “below the range” contains.',
+        'Before *Booker*, every sentence below the range was a departure. Since *Booker*, below-range sentences also include variances.',
         'Small districts swing widely from year to year. The district extremes use only districts with at least {min_base} cases.',
         'A sentence outside the range is not an error. The data records the outcome and the reason given on the statement of reasons; it does not show why a sentence was imposed, and it says nothing about any individual judge.',
         'The middle-half spread uses the 25th and 75th percentiles of the 94 district shares (linear interpolation).',
@@ -346,7 +346,7 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'map', layer: 'crim_trial', year: 2025 },
       },
       {
-        text: 'Rates still vary widely. Among the {n_big} districts where at least {base} defendants’ cases ended in {fy_latest}, the trial rate ranged from {big_lo_value} in {big_lo} to {big_hi_value} in {big_hi}. That same year, {hi_dismissed_2025} of {big_hi:bare} defendants’ cases ended in dismissal, against {hi_dismissed_2024} the year before.',
+        text: 'Rates still vary widely. Among the {n_big} districts where at least {base} defendants’ cases ended in {fy_latest}, the trial rate ranged from {big_lo_value} in {big_lo} to {big_hi_value} in {big_hi}. That same year, {hi_dismissed_2025} of {big_hi:bare} defendants’ cases ended in dismissal, against {hi_dismissed_2024} the year before. Dismissed cases count in the base of the trial rate. The data does not record why the cases were dismissed.',
         graphic: { kind: 'chart', chart: 'big_bars' },
       },
       {
@@ -363,7 +363,7 @@ export const STORY_CONTENT: StoryContent[] = [
     },
     method: {
       intro:
-        'Civil and criminal counts come from the FJC Integrated Database (IDB), rebuilt by the atlas’s IDB lane: civil cases by fiscal year of termination, criminal defendants by fiscal year of termination and most serious charge. Trials per judgeship come from the FCMS district profiles.',
+        'Civil and criminal counts come from the FJC Integrated Database (IDB), rebuilt by the atlas from the FJC’s case-level records: civil cases by fiscal year of termination, criminal defendants by fiscal year of termination and most serious charge. Trials per judgeship come from the FCMS district profiles.',
       notes: [
         'A civil case counts as decided by trial when its recorded disposition is a jury verdict, a directed verdict or a court (bench) trial.',
         'The IDB counts criminal defendants, not cases.',

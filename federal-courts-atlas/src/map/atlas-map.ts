@@ -93,6 +93,8 @@ export class AtlasMap {
   private dotsOpen: SVGPathElement;
   private labelLayer: SVGGElement;
   private insetLabels: SVGGElement;
+  /** Phones: names of the insets too small to hold a label, set below the inset cluster with leader lines. */
+  private insetKey: SVGSVGElement;
   private cityLabels: SVGGElement;
   private chipLayer: SVGGElement;
   private chips = new Map<string, { rect: SVGRectElement; leader: SVGLineElement | null; label: SVGTextElement | null; off: [number, number] }>();
@@ -175,7 +177,8 @@ export class AtlasMap {
       this.controlButton('Zoom in', ICON.plus, () => this.zoomBy(1.8)),
       this.controlButton('Zoom out', ICON.minus, () => this.zoomBy(1 / 1.8)),
     );
-    this.el.append(this.canvas, controls, this.hint, help);
+    this.insetKey = s('svg', { class: 'atlas-map__inset-key', 'aria-hidden': 'true' });
+    this.el.append(this.canvas, this.insetKey, controls, this.hint, help);
     this.tooltip = new Tooltip(this.el, 'map-tip');
     container.append(this.el);
 
@@ -784,6 +787,63 @@ export class AtlasMap {
     this.layoutLabels();
   }
 
+  /**
+   * On a phone the Guam, Northern Mariana Islands and Puerto Rico + Virgin Islands frames are too small for a
+   * name inside. At national view their names sit in a row in the free space under the inset cluster (left of
+   * the zoom buttons), each joined to its frame by a short leader line. Hidden once zoomed (the frames then
+   * grow and carry their own labels) or when there is no free row (wide screens, where every frame has a label).
+   */
+  private layoutInsetKey(items: Array<{ text: string; cx: number; bottom: number }>, px: number, font: string, width: number): void {
+    const key = this.insetKey;
+    key.replaceChildren();
+    const t = this.transform;
+    const svgH = this.svg.clientHeight;
+    const room = this.el.clientHeight - svgH;
+    const national = Math.abs(t.k - 1) < 0.01 && Math.abs(t.x) < 1 && Math.abs(t.y) < 1;
+    if (!items.length || !national || room < px + 14) {
+      key.style.display = 'none';
+      return;
+    }
+    key.style.display = '';
+    const controls = this.el.querySelector<HTMLElement>('.atlas-map__controls');
+    const elBox = this.el.getBoundingClientRect();
+    const limit = Math.min(width, controls ? controls.getBoundingClientRect().left - elBox.left - 8 : width);
+    const rowY = svgH + 8 + px; // text baseline
+    const gap = 10;
+    const placed = items
+      .sort((a, b) => a.cx - b.cx)
+      .map((it) => ({ ...it, w: measureText(it.text, font) * 1.1, x: 0 }));
+    let right = 2;
+    for (const p of placed) {
+      p.x = Math.max(p.cx - p.w / 2, right);
+      right = p.x + p.w + gap;
+    }
+    // Pull the row back from the zoom buttons if it runs into them.
+    let over = right - gap - limit;
+    for (let i = placed.length - 1; i >= 0 && over > 0; i--) {
+      const p = placed[i]!;
+      const minX = i === 0 ? 2 : placed[i - 1]!.x + placed[i - 1]!.w + gap;
+      const shift = Math.min(over, p.x - minX);
+      if (shift > 0) {
+        for (let j = i; j < placed.length; j++) placed[j]!.x -= shift;
+        over -= shift;
+      }
+    }
+    if (over > 0) {
+      key.style.display = 'none';
+      return;
+    }
+    for (const p of placed) {
+      const lx = p.x + p.w / 2;
+      key.append(
+        s('path', { class: 'inset-key__leader', d: `M${p.cx.toFixed(1)} ${(p.bottom + 1).toFixed(1)}L${p.cx.toFixed(1)} ${(p.bottom + 4).toFixed(1)}L${lx.toFixed(1)} ${(rowY - px - 1).toFixed(1)}` }),
+      );
+      const tx = s('text', { class: 'inset-key__label', x: p.x.toFixed(1), y: rowY.toFixed(1), 'font-size': px });
+      tx.textContent = p.text;
+      key.append(tx);
+    }
+  }
+
   private layoutLabels(): void {
     if (!this.geometry) return;
     const ctm = this.svg.getScreenCTM();
@@ -797,6 +857,7 @@ export class AtlasMap {
     const insetPx = width < 520 ? 8.5 : 9.5;
     const insetFont = `600 ${insetPx}px ${getComputedStyle(this.el).getPropertyValue('--font-sans') || 'sans-serif'}`;
     const reserved: Array<{ x0: number; y0: number; x1: number; y1: number }> = [];
+    const unlabelled: Array<{ text: string; cx: number; bottom: number }> = [];
     for (const r of atlasProjection().regions) {
       if (!r.box) continue;
       const [[x0, y0], [x1]] = r.box;
@@ -827,7 +888,10 @@ export class AtlasMap {
       };
       const ok = (txt: string) => fits(txt) && !onLand(txt);
       const text = ok(full) ? full : ok(short) ? short : '';
-      if (!text) continue;
+      if (!text) {
+        unlabelled.push({ text: full, cx: t.applyX((x0 + r.box[1][0]) / 2) * sc, bottom: t.applyY(r.box[1][1]) * sc });
+        continue;
+      }
       const node = s('text', {
         class: 'inset-label',
         'data-x': x0,
@@ -842,6 +906,8 @@ export class AtlasMap {
       const sy = t.applyY(y0) * sc;
       reserved.push({ x0: sx, y0: sy, x1: sx + measureText(text, insetFont) * 1.1 + 8, y1: sy + insetPx + 6 });
     }
+
+    this.layoutInsetKey(unlabelled, insetPx, insetFont, width);
 
     // Proxy chips: visible at national scale only (zoomed in, the real shapes are big enough).
     this.chipPx = width < 520 ? 9 : 10;

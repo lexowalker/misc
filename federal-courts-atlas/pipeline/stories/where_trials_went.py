@@ -55,9 +55,9 @@ def build() -> Story:
     for y in years:
         ex[y] = (cr.loc[y, "numerator"] - f.loc[y, "numerator"]) / (cr.loc[y, "denominator"] - f.loc[y, "denominator"]) * 100
     s.num("rate_first", cr.loc[first, "value"], "percent", decimals=2, source_ids=csrc, year=first, derived=True,
-          formula="civil trials / civil terminations x 100", how="IDB lane national civil trial rate.")
+          formula="civil trials / civil terminations x 100", how="IDB national civil trial rate.")
     s.num("rate_latest", cr.loc[LATEST, "value"], "percent", decimals=2, source_ids=csrc, year=LATEST, derived=True,
-          formula="civil trials / civil terminations x 100", how="IDB lane national civil trial rate.")
+          formula="civil trials / civil terminations x 100", how="IDB national civil trial rate.")
     fsrc = ids_of(c[c.district_id == MASS_DISTRICT]) + csrc
     s.num("rate_ex_latest", ex[LATEST], "percent", decimals=2, source_ids=fsrc, year=LATEST, derived=True,
           formula=f"(national civil trials - N.D. Fla. civil trials) / (national civil terminations - N.D. Fla. civil terminations) x 100, FY {LATEST}",
@@ -89,13 +89,13 @@ def build() -> Story:
     s.year("fy_crim_first", cf, source_ids=tsrc, how="First fiscal year of the IDB criminal file used here.")
     for y in (cf, LATEST):
         s.num(f"crim_rate_{y}", t.loc[y, "value"], "percent", source_ids=tsrc, year=y, derived=True, headline=y == LATEST,
-              formula="defendants whose cases ended after a trial / defendants terminated x 100", how="IDB lane national rate.")
+              formula="defendants whose cases ended after a trial / defendants terminated x 100", how="IDB national rate.")
         s.num(f"crim_trials_{y}", t.loc[y, "numerator"], "defendants", source_ids=tsrc, year=y,
               how="Defendants whose cases ended after a trial, all districts (numerator of the rate).")
         s.num(f"crim_terms_{y}", t.loc[y, "denominator"], "defendants", source_ids=tsrc, year=y,
               how="Criminal defendants terminated, all districts.")
         s.num(f"plea_{y}", g.loc[y, "value"], "percent", source_ids=tsrc, year=y, derived=True,
-              formula="defendants who pleaded guilty (including nolo contendere) / defendants terminated x 100", how="IDB lane national share.")
+              formula="defendants who pleaded guilty (including nolo contendere) / defendants terminated x 100", how="IDB national share.")
     s.num("crim_drop", (t.loc[cf, "numerator"] - t.loc[LATEST, "numerator"]) / t.loc[cf, "numerator"] * 100, "percent", source_ids=tsrc,
           derived=True, formula=f"(trials in FY {cf} - trials in FY {LATEST}) / trials in FY {cf} x 100", how="Percent decline in the count.")
     s.chart("crim_rate", {
@@ -103,14 +103,14 @@ def build() -> Story:
         "title": "Share of criminal defendants whose cases ended after a trial",
         "series": [{"id": "_national", "label": "All districts", "role": "focus", "values": [round(float(t.loc[y, "value"]), 6) for y in cyears]}],
         "source_ids": tsrc, "derived": True, "formula": "defendants terminated after trial / defendants terminated x 100",
-        "how": "IDB criminal file, most serious count (DISP1), by fiscal year of termination.",
+        "how": "IDB criminal file, most serious charge, by fiscal year of termination.",
     })
     s.chart("plea_rate", {
         "kind": "line", "unit": "percent", "format": ".1f", "x": cyears, "y_min": 0, "y_max": 100, "prelim_from": PRELIM_FY,
         "title": "Share of criminal defendants who pleaded guilty",
         "series": [{"id": "_national", "label": "All districts", "role": "focus", "values": [round(float(g.loc[y, "value"]), 6) for y in cyears]}],
         "source_ids": tsrc, "derived": True, "formula": "defendants who pleaded guilty / defendants terminated x 100",
-        "how": "IDB criminal file, most serious count (DISP1), by fiscal year of termination.",
+        "how": "IDB criminal file, most serious charge, by fiscal year of termination.",
     })
 
     # ---- districts ------------------------------------------------------------------------
@@ -135,12 +135,12 @@ def build() -> Story:
     for key, dd in (("lo", lo), ("hi", hi)):
         s.district(f"big_{key}", dd, source_ids=ids_of(big), style="short", how=f"District at the {'low' if key == 'lo' else 'high'} end.")
         s.num(f"big_{key}_value", big.loc[dd, "value"], "percent", decimals=2 if key == "lo" else 1, source_ids=[big.loc[dd, "source_id"]],
-              year=LATEST, derived=True, formula="defendants terminated after trial / defendants terminated x 100", how="IDB lane rate.")
+              year=LATEST, derived=True, formula="defendants terminated after trial / defendants terminated x 100", how="IDB rate.")
     dis = obs("idb", "idb_crim_pct_dismissed")
     for y in (2024, LATEST):
         cc = cell(dis, hi, y)
         s.num(f"hi_dismissed_{y}", cc.value, "percent", source_ids=[cc.source_id], year=y, derived=True,
-              formula="defendants whose cases were dismissed / defendants terminated x 100", how=f"IDB lane share, {district_name(hi)}.")
+              formula="defendants whose cases were dismissed / defendants terminated x 100", how=f"IDB share, {district_name(hi)}")
     items = [{"id": dd, "label": district_name(dd), "value": round(float(r.value), 6), "role": "focus" if dd in (lo, hi) else "context"}
              for dd, r in big.iterrows()]
     items.sort(key=lambda r: (-r["value"], r["id"]))

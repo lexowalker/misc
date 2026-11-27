@@ -669,22 +669,23 @@ th[aria-sort='descending'] {
   color: var(--color-text);
 }
 
-/* Labels that would collide sit on a second row with a longer leader line. */
+/* Labels that would collide sit on a second row with a longer leader line. The second row clears the first by
+   a full 24 px target height, so neighboring markers never overlap (WCAG 2.2 target size). */
 .year-slider__track.has-raised {
-  padding-top: 2.75rem;
+  padding-top: 3.35rem;
 }
 
 .year-slider__track.has-raised .year-slider__events {
-  height: 2.75rem;
+  height: 3.35rem;
 }
 
 .year-slider__event.is-raised {
-  bottom: calc(2px + 1.15rem);
+  bottom: calc(2px + 1.6rem);
 }
 
 .year-slider__event.is-raised::after {
-  height: calc(14px + 1.15rem);
-  bottom: calc(-10px - 1.15rem);
+  height: calc(14px + 1.6rem);
+  bottom: calc(-10px - 1.6rem);
 }
 
 .year-slider__value {
@@ -694,25 +695,91 @@ th[aria-sort='descending'] {
   text-align: right;
 }
 
+/* A year label that would touch its neighbor is left out; its tick mark stays. */
+.year-slider__tick.is-quiet {
+  color: transparent;
+}
+
+/* Phones: plain diamonds on the track (decorative) and a row of labelled event buttons under the slider.
+   Wide screens: labelled markers above the track. Each set is display:none where it is not used. */
+.year-slider__pips,
+.year-slider__keys {
+  display: none;
+}
+
 @media (max-width: 34rem) {
-  .year-slider__event-label {
+  .year-slider__events {
     display: none;
   }
 
-  .year-slider__event {
-    width: 24px;
+  .year-slider__pips {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    height: 1.6rem;
+    pointer-events: none;
   }
 
-  .year-slider__event::before {
+  .year-slider__pip {
+    position: absolute;
+    bottom: 4px;
+    width: 1px;
+    height: 12px;
+    background: var(--color-text-3);
+  }
+
+  .year-slider__pip::before {
     content: '';
     position: absolute;
-    left: 50%;
-    top: 6px;
+    left: -3px;
+    top: -7px;
     width: 7px;
     height: 7px;
-    margin-left: -3.5px;
     transform: rotate(45deg);
     background: var(--color-text-3);
+  }
+
+  .year-slider__keys {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .year-slider__key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-rule-strong);
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text-2);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+  }
+
+  .year-slider__key:active {
+    background: var(--color-surface);
+  }
+
+  .year-slider__key-mark {
+    width: 7px;
+    height: 7px;
+    transform: rotate(45deg);
+    background: var(--color-text-3);
+  }
+
+  .year-slider__key-year {
+    font-weight: var(--fw-regular);
+    color: var(--color-text-3);
   }
 }
 
@@ -820,8 +887,9 @@ th[aria-sort='descending'] {
 }
 
 .source-chip__formula {
-  width: 22px;
-  height: 22px;
+  /* 24 px: the WCAG 2.2 minimum target size (axe target-size). */
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: 1px solid var(--color-rule-strong);
   border-radius: 50%;
@@ -864,16 +932,34 @@ th[aria-sort='descending'] {
   white-space: normal;
 }
 
-/* Shown on hover, on keyboard focus, and on a tap (a tap focuses the button), so touch readers see the formula too.
-   Pages that toggle the popover themselves set aria-expanded on the button; for those, plain :focus is not used,
-   so a second tap can close it. */
-.source-chip__formula:hover + .source-chip__pop,
+/* Shown on hover (devices that hover), on keyboard focus, and on a click or tap: ensureFormulaPopovers() in
+   source-chip.ts toggles aria-expanded, because iOS Safari does not focus a tapped button. aria-expanded="false"
+   means the reader closed it (second tap, Escape, outside click), so hover and focus no longer show it. */
+@media (hover: hover) {
+  .source-chip__formula:hover:not([aria-expanded='false']) + .source-chip__pop {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 .source-chip__formula:not([aria-expanded]):focus + .source-chip__pop,
-.source-chip__formula:focus-visible + .source-chip__pop,
+.source-chip__formula:focus-visible:not([aria-expanded='false']) + .source-chip__pop,
 .source-chip__formula[aria-expanded='true'] + .source-chip__pop {
   display: grid;
   opacity: 1;
   visibility: visible;
+}
+
+/* The ƒ glyph stays small; its touch target grows to 32 px without moving the layout. */
+.source-chip__formula {
+  position: relative;
+}
+
+.source-chip__formula::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
 }
 
 /* ---- Coming soon ----------------------------------------------------- */

@@ -62,7 +62,7 @@ def build() -> Story:
     cs = cell(sh, "txed", 2015)
     s.num("txed_share_2015", cs.value, "percent", source_ids=[cs.source_id], year=2015, headline=True, derived=True,
           formula="E.D. Tex. patent filings / national patent filings x 100 (FY 2015)",
-          how="The IDB lane's share of national patent filings.")
+          how="Share of national patent filings, from the IDB civil file.")
     txs = sh[sh.district_id == "txed"].set_index("period")["value"]
     if int(txs.idxmax()) != 2015 or int(w["txed"].idxmax()) != 2015:
         raise ValueError("E.D. Tex. FY 2015 is no longer its peak")
@@ -129,7 +129,7 @@ def build() -> Story:
     for key, ss in (("before", bsum), ("after", asum)):
         s.num(f"us_{key}", ss["_national"], "cases", source_ids=qsrc,
               derived=True, formula="sum of national nature-of-suit 830 and 835 filings over the four quarters",
-              how="Calendar quarters of the AO filing date, IDB patent_quarterly table.")
+              how="Calendar quarters of the AO filing date, IDB civil file.")
     items = []
     for d, lab in WINDOW_DISTRICTS:
         bs = bsum[d] / bsum["_national"] * 100
@@ -172,7 +172,7 @@ def build() -> Story:
         "series": [{"id": d, "label": lab, "role": role, "values": [num_json(qw.loc[x, d]) for x in quarters]} for d, lab, role in FOCUS]
         + [{"id": "_other", "label": "All other districts combined", "role": "context", "values": [num_json(qother[x]) for x in quarters]}],
         "source_ids": qsrc, "derived": True, "formula": "all other districts = national filings minus the three districts shown",
-        "how": "IDB patent_quarterly table: calendar quarter of the AO filing date. Quarters from October 2025 fall in preliminary FY 2026.",
+        "how": "IDB civil file: calendar quarter of the AO filing date. Quarters from October 2025 fall in preliminary FY 2026.",
     })
 
     # ---- W.D. Tex. ---------------------------------------------------------------------------
@@ -182,7 +182,7 @@ def build() -> Story:
         cs = cell(sh, "txwd", y)
         s.num(f"txwd_share_{y}", cs.value, "percent", source_ids=[cs.source_id], year=y, derived=True,
               formula=f"W.D. Tex. patent filings / national patent filings x 100 (FY {y})",
-              how="The IDB lane's share of national patent filings.")
+              how="Share of national patent filings, from the IDB civil file.")
     if int(w.loc[full_years, "txwd"].idxmax()) != 2021:
         raise ValueError("W.D. Tex. peak moved")
     wd_years = [y for y in years if leaders[y] == "txwd"]
@@ -203,7 +203,7 @@ def build() -> Story:
     cs = cell(sh, "txed", 2025)
     s.num("txed_share_2025", cs.value, "percent", source_ids=[cs.source_id], year=2025, derived=True,
           formula="E.D. Tex. patent filings / national patent filings x 100 (FY 2025)",
-          how="The IDB lane's share of national patent filings.")
+          how="Share of national patent filings, from the IDB civil file.")
     if leaders[2025] != "txed":
         raise ValueError("E.D. Tex. no longer leads in FY 2025")
     back = [y for y in years if y > wd_years[-1] and leaders[y] == "txed"]

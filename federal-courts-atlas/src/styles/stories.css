@@ -312,8 +312,20 @@ button.story-num:focus-visible {
     align-items: flex-start;
   }
 
+  /* Steps not in focus recede through a quieter text color rather than opacity, so their text keeps at
+     least 4.5:1 contrast in both themes (opacity 0.55 gave 4.06:1). */
   .story-step:not(.is-active) .story-step__card {
-    opacity: 0.55;
+    border-color: var(--color-rule);
+  }
+
+  .story-step:not(.is-active) .story-step__text,
+  .story-step:not(.is-active) .story-step__text .story-num {
+    color: var(--color-text-3);
+  }
+
+  .story-step__text,
+  .story-step__text .story-num {
+    transition: color var(--dur-base) var(--ease-out);
   }
 }
 
@@ -455,16 +467,34 @@ button.story-num:focus-visible {
   overflow-wrap: anywhere;
 }
 
+/* The toggle button sets [hidden]; the display rule above must not override it. */
+.story-figure__formula[hidden] {
+  display: none;
+}
+
+/* Narrow screens: the caption and source line wrap in full (never cut off with an ellipsis); the chart
+   frame above them flexes to the room that is left. An open formula floats over the chart as a small
+   panel, so it never squeezes the graphic. */
 @media (max-width: 59.99rem) {
   .story-figure__foot {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    position: relative;
   }
 
-  .story-figure__formula {
-    display: none;
+  .story-figure__formula:not([hidden]) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + var(--space-1));
+    z-index: 2;
+    max-height: 12rem;
+    overflow-y: auto;
+    margin: 0;
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--tooltip-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-2);
+    color: var(--color-text-2);
   }
 }
 
@@ -957,8 +987,18 @@ button.story-num:focus-visible {
   box-shadow: inset 0 0 0 1px var(--color-rule-strong);
 }
 
+/* De-emphasized "first" squares while the exceptions are discussed: a pale tint with the number in the
+   series color, not a faded square. Measured text contrast: 5.4:1 light (#2f4fb5 on #dadff2), 5.2:1 dark
+   (#8297f0 on #232a41), so the numbers stay readable (WCAG AA). */
 .rank-strip.is-exceptions .rank-cell.is-first .rank-cell__box {
-  opacity: 0.35;
+  background: color-mix(in srgb, var(--story-c1) 18%, var(--color-bg));
+  color: var(--story-c1);
+  font-weight: var(--fw-semibold);
+}
+
+.rank-strip.is-exceptions ~ .rank-key .rank-key__sw.is-first {
+  background: color-mix(in srgb, var(--story-c1) 18%, var(--color-bg));
+  box-shadow: inset 0 0 0 1px var(--story-c1);
 }
 
 .rank-strip.is-exceptions .rank-cell.is-other .rank-cell__box {

@@ -64,9 +64,16 @@ export function renderLocator(o: LocatorOptions): SVGSVGElement | null {
     ctx.append(s('path', { d: d.d, class: d.state === target.state ? 'same-state' : 'other' }));
   }
   svg.append(ctx);
-  svg.append(s('path', { class: 'locator-map__target', d: target.d }));
+  // Island districts (the Northern Mariana Islands, the Virgin Islands) are specks at this scale: a halo
+  // in the highlight color keeps them visible. Large districts are drawn as before.
+  const tw = target.bounds[1][0] - target.bounds[0][0];
+  const th = target.bounds[1][1] - target.bounds[0][1];
+  const small = (tw * th) / (w * h) < 0.02;
+  const targetPath = s('path', { class: `locator-map__target${small ? ' is-small' : ''}`, d: target.d });
+  if (!small) svg.append(targetPath);
   if (g.districtMesh) svg.append(s('path', { class: 'locator-map__mesh', d: g.districtMesh }));
   if (g.stateMesh) svg.append(s('path', { class: 'locator-map__states', d: g.stateMesh }));
+  if (small) svg.append(targetPath); // above the border lines, which would otherwise cover the specks
   for (const p of o.points ?? []) {
     svg.append(s('path', { class: 'locator-map__dot-ring', d: `M${p.x} ${p.y}h0` }), s('path', { class: 'locator-map__dot', d: `M${p.x} ${p.y}h0` }));
   }

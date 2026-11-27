@@ -409,8 +409,15 @@
   max-width: min(22rem, calc(100vw - 2 * var(--gutter)));
 }
 
-.cmp-page .source-chip__formula:hover + .source-chip__pop,
-.cmp-page .source-chip__formula:focus-visible + .source-chip__pop,
+@media (hover: hover) {
+  .cmp-page .source-chip__formula:hover:not([aria-expanded='false']) + .source-chip__pop {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.cmp-page .source-chip__formula:focus-visible:not([aria-expanded='false']) + .source-chip__pop,
 .cmp-page .source-chip__pop[data-open='true'] {
   display: grid;
   opacity: 1;

@@ -18,6 +18,7 @@ import { DISTRICTS, districtName, isDistrictId } from '../data/districts.ts';
 import { pageHead } from './_page.ts';
 import { loadingState } from '../components/states.ts';
 import { hidePopover } from '../components/glossary.ts';
+import { ensureFormulaPopovers } from '../components/source-chip.ts';
 import { SEATS, SEAT_BY_ID, isSeatId, type SeatId } from '../courtroom/seats.ts';
 import { districtSelect, renderPanelBody } from '../courtroom/panel.ts';
 import { createFloorPlan, type FloorPlan } from '../courtroom/plan.ts';
@@ -300,13 +301,9 @@ export function render(ctx: PageContext): Cleanup {
   const onMq = () => updateChrome();
   sheetMq?.addEventListener('change', onMq);
 
-  // Formula and rank popovers: open on tap or click too (hover and keyboard focus are handled in CSS).
-  panel.addEventListener('click', (e) => {
-    const btn = (e.target as Element).closest<HTMLButtonElement>('.source-chip__formula');
-    const open = btn?.getAttribute('aria-expanded') === 'true';
-    panel.querySelectorAll('.source-chip__formula[aria-expanded="true"]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
-    if (btn) btn.setAttribute('aria-expanded', String(!open));
-  });
+  // Formula and rank popovers: open on tap or click too, close on Escape or an outside click (shared handler in
+  // source-chip.ts; hover and keyboard focus are handled in CSS).
+  ensureFormulaPopovers();
 
   // The sticky panel sits below the sticky site header.
   const header = document.querySelector<HTMLElement>('.site-header');

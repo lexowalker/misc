@@ -65,7 +65,7 @@ function fxHint(text: string, title: string, label: string): HTMLElement {
   return h(
     'span',
     { class: 'cr-fx' },
-    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-label': label }, 'ƒ'),
+    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-controls': id, 'aria-label': label }, 'ƒ'),
     h('span', { id, role: 'tooltip', class: 'source-chip__pop cr-fx__pop' }, h('span', { class: 'caps' }, title), h('code', null, text)),
   );
 }

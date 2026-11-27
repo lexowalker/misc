@@ -37,7 +37,7 @@ import {
 } from '../data/loaders.ts';
 import type { Family, ValuesFile, Variable } from '../data/types.ts';
 import { renderSparkline } from '../components/sparkline.ts';
-import { sourceChip } from '../components/source-chip.ts';
+import { ensureFormulaPopovers, sourceChip } from '../components/source-chip.ts';
 import { formatNumber, formatValue, periodLabel } from '../lib/format.ts';
 import { fmtNumberOnly, fmtValue, RANK_FORMULA, rankPhrase, valueParts } from './district/common.ts';
 import { pageHead } from './_page.ts';
@@ -171,7 +171,7 @@ function fxHint(text: string, popTitle: string, label: string): HTMLElement {
 function fxParts(text: string, popTitle: string, label: string): HTMLElement[] {
   const id = uniqueId('cmp-fx');
   return [
-    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-label': label, 'aria-expanded': 'false' }, 'ƒ'),
+    h('button', { type: 'button', class: 'source-chip__formula', 'aria-describedby': id, 'aria-controls': id, 'aria-label': label }, 'ƒ'),
     h('span', { id, role: 'tooltip', class: 'source-chip__pop' }, h('span', { class: 'caps' }, popTitle), h('code', null, text)),
   ];
 }
@@ -411,35 +411,9 @@ export async function render(ctx: PageContext): Promise<() => void> {
   cmp.append(top, body);
   ctx.root.append(page);
 
-  // Formula popovers: hover and keyboard focus show them (components.css); a tap toggles them here.
-  const onDocClick = (e: Event) => {
-    const t = e.target as Element | null;
-    const btn = t?.closest?.('.source-chip__formula');
-    page.querySelectorAll<HTMLElement>('.source-chip__pop[data-open="true"]').forEach((p) => {
-      if (!btn || p !== btn.nextElementSibling) {
-        p.removeAttribute('data-open');
-        p.previousElementSibling?.setAttribute('aria-expanded', 'false');
-      }
-    });
-    if (btn && page.contains(btn)) {
-      const pop = btn.nextElementSibling as HTMLElement | null;
-      if (pop?.classList.contains('source-chip__pop')) {
-        const open = pop.getAttribute('data-open') !== 'true';
-        if (open) pop.setAttribute('data-open', 'true');
-        else pop.removeAttribute('data-open');
-        btn.setAttribute('aria-expanded', String(open));
-      }
-    }
-  };
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key !== 'Escape') return;
-    page.querySelectorAll<HTMLElement>('.source-chip__pop[data-open="true"]').forEach((p) => {
-      p.removeAttribute('data-open');
-      p.previousElementSibling?.setAttribute('aria-expanded', 'false');
-    });
-  };
-  document.addEventListener('click', onDocClick);
-  document.addEventListener('keydown', onKey);
+  // Formula popovers: hover and keyboard focus show them (compare.css); a click or tap toggles them, and Escape
+  // or an outside click closes them (the shared handler in source-chip.ts).
+  ensureFormulaPopovers();
 
   // Stack the columns when they would be narrower than a comfortable cell.
   const stackFor = (w: number) => {
@@ -1074,8 +1048,6 @@ export async function render(ctx: PageContext): Promise<() => void> {
   draw();
 
   return () => {
-    document.removeEventListener('click', onDocClick);
-    document.removeEventListener('keydown', onKey);
     ro?.disconnect();
     picker.dispose();
   };

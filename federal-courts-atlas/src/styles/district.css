@@ -360,8 +360,18 @@
   display: none;
 }
 
-.district-page .source-chip__formula:hover + .source-chip__pop,
-.district-page .source-chip__formula:focus + .source-chip__pop {
+/* Hover on devices that hover, focus, or a click or tap (aria-expanded, set by source-chip.ts). A second tap,
+   Escape or an outside click sets aria-expanded="false" and closes it even while the button keeps focus. */
+@media (hover: hover) {
+  .district-page .source-chip__formula:hover:not([aria-expanded='false']) + .source-chip__pop {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.district-page .source-chip__formula:focus:not([aria-expanded='false']) + .source-chip__pop,
+.district-page .source-chip__formula[aria-expanded='true'] + .source-chip__pop {
   display: grid;
   opacity: 1;
   visibility: visible;
@@ -976,12 +986,13 @@
   outline-offset: -2px;
 }
 
+/* A long name wraps onto a second line (its row grows) instead of being cut off with an ellipsis. */
 .bench__name {
   flex: 1 1 auto;
   min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  padding: 3px 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .bench__name-short {
