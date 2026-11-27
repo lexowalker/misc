@@ -53,6 +53,21 @@ test('glossary popover: a click after hovering keeps it open; a second click, Es
   await expect(pop).toHaveAttribute('data-open', 'false');
   await expect(term).toBeFocused();
 
+  // Pinned, then a click inside the popover (to select its text) moves focus off the term. Escape still closes it,
+  // returns focus to the term, and that focus does not reopen it.
+  await page.mouse.move(2, 2);
+  await page.waitForTimeout(HIDE_DELAY);
+  await term.click();
+  await expect(pop).toHaveAttribute('data-open', 'true');
+  await pop.click({ position: { x: 8, y: 8 } });
+  await expect(pop).toHaveAttribute('data-open', 'true');
+  await expect(term).not.toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(pop).toHaveAttribute('data-open', 'false');
+  await expect(term).toBeFocused();
+  await page.waitForTimeout(HIDE_DELAY);
+  await expect(pop).toHaveAttribute('data-open', 'false');
+
   // Pinned by a click, then a click elsewhere on the page closes it.
   await page.mouse.move(2, 2);
   await page.waitForTimeout(HIDE_DELAY);

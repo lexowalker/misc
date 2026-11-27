@@ -139,7 +139,9 @@ URL, panel, national figures and sources); district figures, ranks, derived chip
 population and places; keyboard (arrows, Home, End, Enter focus, Escape return); picking by label and by
 clicking the furniture (raycast); reduced motion cuts; no-WebGL fallback (plan, list, picker, three.js not
 requested); context loss; `?webgl=0`; disposal and rebuild on route change; dark mode and a runtime theme
-switch; the mobile bottom sheet (geometry, expand, close, focus return, no horizontal scroll).
+switch; the mobile bottom sheet (geometry, expand, close, focus return, no horizontal scroll). The geometry check
+waits for the sheet's 420 ms slide-in to end before measuring (third recheck, Nov 27: one full run measured it
+167 ms in, 8.76 px short of the bottom).
 
 Screenshots (`tests/e2e/__screenshots__/{desktop,mobile}/`): `courtroom-room`, `courtroom-seat-jury`,
 `courtroom-district-gallery`, `courtroom-fallback`, `courtroom-dark-lectern`, and on mobile

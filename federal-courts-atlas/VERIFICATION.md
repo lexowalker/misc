@@ -12,9 +12,9 @@ in `docs/audits/`.
 | Boundary audit | 64 counties in 24 multi-district states spot-checked against the statute text, then all 2,225 counties in those states re-derived from scratch | Passed. 0 district or division mismatches. 5 minor issues, all fixed or documented. |
 | Statistics audit | 51 sampled cells traced; independent recompute of the case-level files | 51 of 51 matched. 1 blocker and 1 major issue found and fixed, then rechecked against the raw files. |
 | Copy audit | About 1,400 reader-facing sentences checked against the data and fetched legal sources | 57 findings, all resolved. The recheck lane fixed 4 more sentences. |
-| UI audit | 181 screenshots at 1280, 768 and 375 px in light and dark; automated accessibility scan | 7 known issues and 11 more problems fixed. The recheck lane fixed 2 more. 0 serious or critical accessibility violations. |
-| Additions after the main audit | 51 new numbers and facts (how cases end, offenses of people sentenced, two new map measures, MDL notes for 22 districts and the MDL 2885 caveat on 11 measures, juror figures, event dates, new legal statements) traced to the raw files with independent code by two recheck lanes; 92 + 84 review captures of the changed views | All 51 matched. 5 small display problems fixed (see below). |
-| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,252 pipeline tests passed. Typecheck clean. 361 end-to-end tests passed, 0 failed, 11 skipped by design, in each of the last two full runs (one earlier run had a single timeout that did not recur; see Tests). |
+| UI audit | 181 screenshots at 1280, 768 and 375 px in light and dark; automated accessibility scan | 7 known issues and 11 more problems fixed. The recheck lane fixed 2 more, and the third recheck 1 (a glossary popover that reopened after a quick closing click). 0 serious or critical accessibility violations. |
+| Additions after the main audit | 51 new numbers and facts (how cases end, offenses of people sentenced, two new map measures, MDL notes for 22 districts and the MDL 2885 caveat on 11 measures, juror figures, event dates, new legal statements) traced to the raw files with independent code by two recheck lanes; 92 + 84 review captures of the changed views. A third recheck checked the fix pass that followed (no new numbers). | All 51 matched. 5 small display problems fixed (see below). |
+| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,254 pipeline tests passed. Typecheck clean. 364 end-to-end tests passed, 0 failed, 14 skipped by design, in the third recheck's last full run, on the final code (an earlier run had one test that measured a sliding panel too early; the test was fixed; see Tests). |
 
 ## Data audit
 
@@ -241,13 +241,14 @@ on the site changed and no docket was newly named, so no data-audit row was adde
 - **Rebuild.** `make stories web docs` ran three times. All 563 files under `public/data/`, `data/processed/`,
   `data/gaps/`, `data/sources/`, plus `SOURCES.md` and `DATA_GAPS.md`, were byte-identical after every run and equal
   to the files the fix pass left.
-- **Tests.** Pipeline tests: 1,254 passed, twice. Typecheck clean; `vite build` succeeds. Four full end-to-end runs
-  (`CI=1 E2E_PORT=4710 npx playwright test --trace off`, both projects, 378 tests). Run 1, on the fix pass's code,
-  and run 2, after the glossary fix: 364 passed, 14 skipped by design, 0 failed. Run 3: 363 passed, 1 failed. The
-  phone courtroom test read the bottom sheet's position 167 ms into its 420 ms slide-in, 8.76 px short of the
-  bottom; a frame-by-frame sample of the same slide-in reads 8.76 px at 167 ms and 0.01 px at 485 ms. Alone, the
-  test passed 30 of 30 times. It now waits for the slide-in to end (below). Run 4, on the final code: RUN4_RESULT.
-  The 16 visual baselines passed in every run and were not rewritten.
+- **Tests.** Pipeline tests: 1,254 passed in each of three runs. Typecheck clean; `vite build` succeeds. Four full
+  end-to-end runs (`CI=1 E2E_PORT=4710 npx playwright test --trace off`, both projects, 378 tests). Run 1, on the
+  fix pass's code, and run 2, after the glossary fix: 364 passed, 14 skipped by design, 0 failed. Run 3: 363
+  passed, 1 failed. The phone courtroom test read the bottom sheet's position 167 ms into its 420 ms slide-in,
+  8.76 px short of the bottom; a frame-by-frame sample of the same slide-in reads 8.76 px at 167 ms and 0.01 px at
+  485 ms. Alone, the test passed 30 of 30 times. It now waits for the slide-in to end (below). Run 4, on the final
+  code: 364 passed, 14 skipped by design, 0 failed. The 16 visual baselines passed in every run and were not
+  rewritten.
 - **Gap record.** The new record `mass_tort_story_not_written` is true: 5 stories ship, the docket table
   `data/processed/idb/civil_mdl_dockets` exists, `civil_mdl_meta.json` gives FY 2010, and the MDL 2885 caveats are on
   the affected measures. The two stories describe N.D. Fla.'s closings without naming the docket; those closings were
@@ -268,8 +269,8 @@ on the site changed and no docket was newly named, so no data-audit row was adde
   85 candidate ids are cached, and rerunning `make idb-mdl` left the cache at 4,295 files and its outputs unchanged.
   The gap record lists exactly the 13 unnamed dockets and their 9 transferee courts. The 26 named dockets still
   verify (file sha256 equal to the manifest, an md, mn or ml case number ending in the docket, the transferee court).
-- **Preview image.** Only pixel rows 13 to 30 of `preview.png` changed: the title's em-dash became a colon. Nothing else
-  in the image or the boundary files changed.
+- **Preview image.** Only pixel rows 13 to 30 of `preview.png` changed: the title's em-dash became a colon.
+  Nothing else in the image or the boundary files changed.
 - **Accessibility scan.** Only `scrollThrough` changed: the same 19 routes, the same axe tags, the same target-size
   exclusion and the same serious-or-critical filter. A verbatim copy of the helper, run on four-district compare at
   375 px with the page's main thread blocked, failed after 5,006 ms with "scrollThrough: reading the window height
@@ -302,9 +303,10 @@ on the site changed and no docket was newly named, so no data-audit row was adde
 - The glossary popover was driven only in headless Chromium with a simulated mouse, keyboard and touch: no screen
   reader, no real touch screen, no pen. The story number popovers and the formula popovers were not driven.
 - Seen but left as is: hovering a second term while one is pinned shows the second term's popover, which closes when
-  the pointer leaves it. After a click inside a pinned popover, focus is on the page itself, and Escape closes the
-  popover without moving focus back to the term; the Escape handler's focus return never runs, because closing the
-  popover clears the term first. That code predates the fix pass.
+  the pointer leaves it. (Fixed after this recheck, by the orchestrator: after a click inside a pinned popover,
+  focus was on the page itself and Escape closed the popover without moving focus back to the term, because closing
+  the popover cleared the term first. Escape now returns focus to the term without reopening the popover;
+  `glossary-popover.spec.ts` checks it, and that check fails on the previous `glossary.ts`.)
 - The cause of the earlier one-off 1.6-minute stall in the scroll step is still unknown; it did not recur in any of
   this lane's four full runs.
 
@@ -361,11 +363,11 @@ more phone problems: the new table Notes column was clipped at 375 px, and the m
 
 | Suite | Result |
 |---|---|
-| Pipeline unit tests (`pytest tests/pipeline`) | 1,252 passed, 0 failed (after `make stories web docs`; run twice by the second recheck). A second `make stories web docs` gave byte-identical output in all 543 files under `public/data/`, `data/processed/`, `SOURCES.md` and `DATA_GAPS.md`. |
+| Pipeline unit tests (`pytest tests/pipeline`) | 1,254 passed, 0 failed (after `make stories web docs`; run three times by the third recheck). Three more `make stories web docs` runs gave byte-identical output in all 563 files under `public/data/`, `data/processed/`, `data/gaps/`, `data/sources/`, `SOURCES.md` and `DATA_GAPS.md`. |
 | Typecheck (`npm run typecheck`) | clean |
 | Production build (`vite build`) | succeeds |
-| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 372 tests) | Second recheck, five full runs (`CI=1 E2E_PORT=4610 npx playwright test --trace off`). Runs 1 and 2, on the polish pass's code: 361 passed, 0 failed, 11 skipped by design (for example phone-only tests in the desktop project). Runs 3 to 5 were on the final code, with the compare fix. Run 3 had 360 passed and 1 failed: the phone accessibility scan of four-district compare timed out after 1.6 minutes while scrolling the page. Rerun on its own, it passed 5 of 5 times on the phone and 5 of 5 on desktop, in about 5 s each. A scroll through that page does not redraw its toolbar at 1280, 768 or 375 px, so the new menu face does not cause a redraw loop. Runs 4 and 5 had 361 passed, 0 failed. The first recheck saw the same kind of one-off timeout in this scroll step on another page. The 16 visual-regression baselines (`visual.spec.ts`) passed in every run and were not rewritten. The accessibility scans (`a11y.spec.ts` on every route, plus an axe test of flnd's MDL note and new case-mix blocks in `district.spec.ts`) found 0 serious or critical violations. |
-| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.29 s / 0.80 s (first contentful paint 0.10 s / 0.18 s), last run on the final code. The other four runs measured 0.29-0.41 s / 0.83-0.95 s. |
+| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 378 tests) | Third recheck, four full runs (`CI=1 E2E_PORT=4710 npx playwright test --trace off`). Run 1 (the fix pass's code), run 2 (after the glossary fix) and run 4 (the final code, with the courtroom test fix): 364 passed, 0 failed, 14 skipped by design (for example phone-only tests in the desktop project). Run 3: 363 passed, 1 failed: the phone courtroom test measured the bottom sheet 167 ms into its 420 ms slide-in. It passed 30 of 30 times alone; it now waits for the slide-in to end and passed 20 of 20 times alone and in run 4. Earlier, the second recheck (372 tests, five runs) saw one 1.6-minute timeout in the phone accessibility scan of four-district compare, while scrolling; it did not recur there or in any later run, and that scroll step now fails within 5 s with a message instead (fix pass). The 16 visual-regression baselines (`visual.spec.ts`) passed in every run and were not rewritten. The accessibility scans (`a11y.spec.ts` on every route, plus an axe test of flnd's MDL note and case-mix blocks in `district.spec.ts`) found 0 serious or critical violations. |
+| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.30 s / 0.89 s (first contentful paint 0.08 s / 0.17 s), last run on the final code. The third recheck's other three runs measured 0.28-0.35 s / 0.81-0.99 s. |
 
 Home page JavaScript before first paint: 79 KB transferred; the three.js courtroom code is not loaded on the home page.
 

@@ -436,6 +436,9 @@ Fix pass (Nov 27):
   term (so the hover-open delay was still pending) closed it and then reopened it, unpinned, 120 ms later. The
   spec checked the closed state at once and missed it. A press on a term now cancels a pending hover-open, and the
   spec checks that the popover is still closed 400 ms after the second click (that check fails without the fix).
+  After the third recheck: a click inside a pinned popover moved focus to the page, and Escape then closed the
+  popover without returning focus to the term. Escape now focuses the term again (a `refocusing` flag keeps that
+  focus from reopening the popover); the spec checks focus and that the popover stays closed.
 - **MDL note in "What stands out".** The line about the other dockets was a fragment ("Also above a quarter in
   earlier years: ..."). It is now one sentence: "MDL 2433 also made up more than a quarter of this court’s civil
   cases filed or closed in FY 2015 and FY 2019." or, for several, "MDL 2592 (FY 2015 to 2023), MDL 2179 (FY 2013)

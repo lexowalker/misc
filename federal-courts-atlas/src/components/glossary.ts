@@ -17,6 +17,8 @@ let current: HTMLElement | null = null;
 let hideTimer: ReturnType<typeof setTimeout> | undefined;
 /** The open popover was pinned by a click on its term: leaving the term with the pointer does not close it. */
 let pinned = false;
+/** Set while Escape returns focus to a term, so that focus does not reopen its popover. */
+let refocusing = false;
 
 function popover(): HTMLDivElement {
   if (pop) return pop;
@@ -28,8 +30,14 @@ function popover(): HTMLDivElement {
   document.body.append(pop);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && pop?.dataset.open === 'true') {
+      const term = current;
       hidePopover();
-      current?.focus();
+      // A click inside a pinned popover moves focus off the term; give it back without reopening the popover.
+      if (term && document.activeElement !== term) {
+        refocusing = true;
+        term.focus();
+        refocusing = false;
+      }
     }
   });
   document.addEventListener('pointerdown', (e) => {
@@ -163,7 +171,9 @@ export function term(id: string, text?: string, opts: TermOptions = {}): HTMLEle
     clearTimeout(hoverTimer);
     if (!(pinned && current === btn)) scheduleHide();
   });
-  btn.addEventListener('focus', () => showPopover(btn, id));
+  btn.addEventListener('focus', () => {
+    if (!refocusing) showPopover(btn, id);
+  });
   btn.addEventListener('blur', () => {
     // A press inside a pinned popover (to select its text) takes focus off the term; keep it open then.
     if (pinned && current === btn && pop?.matches(':hover')) return;
