@@ -339,19 +339,79 @@ export interface MixGroup {
   share: number | null;
   national_count?: number;
   national_share?: number;
+  /** A group whose share the atlas computed when the block's other shares are published (USSC "all other"). */
+  derived?: boolean;
+  formula?: string | null;
 }
 
-export interface MixBlock {
+/** One fiscal year of a mix block. */
+export interface MixYearBlock {
   year: number;
   period_type: PeriodType;
   total: number;
   national_total: number | null;
   groups: MixGroup[];
   source_ids: string[];
+  /** IDB years with no published AO cross-check yet (FY 2026). */
+  preliminary?: boolean;
+  /** When one MDL docket is more than a quarter of all districts' civil cases that year (the all-district ticks include it). */
+  national_note?: { text: string; year: number; cohort: string; docket: string; count: number; total: number; share: number; source_ids: string[] };
+}
+
+export interface MixBlock extends MixYearBlock {
   source: string;
   basis: string;
   derived: boolean;
+  formula: string | null;
+  /** Short plain-English note on what each group means. */
+  definitions?: string;
+  /** "fixed": groups are in reading order (dispositions, USSC offense types); otherwise sort by share. */
+  order?: 'fixed' | 'share';
+  /** The latest year with a published cross-check, when the latest year is preliminary. */
+  other_years?: MixYearBlock[];
+}
+
+/** Multidistrict litigation context on a profile (web lane, from the IDB lane's MDL docket table). */
+export interface MdlSentence {
+  text: string;
+  year: number;
+  cohort: 'filed' | 'terminated';
+  count: number;
+  total: number;
+  share: number;
+  preliminary: boolean;
+}
+
+export interface MdlHistory {
+  text: string;
+  cohort: 'filed' | 'terminated';
+  years: number[];
+  peak_year: number;
+  peak_count: number;
+  peak_total: number;
+}
+
+export interface MdlDocket {
+  docket: string;
+  /** Litigation name, only when a GovInfo court record confirms it. */
+  name?: string;
+  case_number?: string;
+  court?: string;
+  name_source_id?: string;
+  sentences: MdlSentence[];
+  history: MdlHistory[];
+  source_ids: string[];
+}
+
+export interface MdlContext {
+  intro: string;
+  dockets: MdlDocket[];
+  years: number[];
+  threshold_pct: number;
+  rule: string;
+  derived: boolean;
   formula: string;
+  source_ids: string[];
 }
 
 export interface SentencingCompositionYear {
@@ -393,7 +453,15 @@ export interface DistrictProfile {
     civil_nature_of_suit?: MixBlock;
     criminal_offense?: MixBlock;
     sentencing_composition: SentencingComposition;
+    /** How civil cases ended (IDB disposition groups), latest year plus the latest cross-checked year. */
+    civil_disposition?: MixBlock;
+    /** How criminal defendants' cases ended (AO Table D-4 groups). */
+    criminal_disposition?: MixBlock;
+    /** USSC offense types of people sentenced, latest fiscal year. */
+    sentenced_offense?: MixBlock;
   };
+  /** Present only when one MDL docket is more than a quarter of the court's civil cases in a year shown. */
+  mdl_context?: MdlContext;
 }
 
 export interface DivisionRecord {

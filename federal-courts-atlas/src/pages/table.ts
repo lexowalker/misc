@@ -3,7 +3,7 @@
 
 import '../styles/pages.css';
 import { h } from '../lib/dom.ts';
-import { formatValue, periodLabel, periodLabelFor, rankText } from '../lib/format.ts';
+import { formatValue, periodLabelFor, rankText } from '../lib/format.ts';
 import type { PageContext } from '../app/router.ts';
 import { replaceQuery } from '../app/router.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
@@ -63,7 +63,7 @@ export async function render(ctx: PageContext): Promise<void> {
   }
   const y0 = Number(ctx.query.get('y'));
   let year = file.years.includes(y0) ? y0 : file.years[file.years.length - 1]!;
-  const select = h('select', { id: 'table-year', class: 'compare-select' }, ...[...file.years].reverse().map((y) => h('option', { value: String(y) }, periodLabel(y, file.period_type))));
+  const select = h('select', { id: 'table-year', class: 'compare-select' }, ...[...file.years].reverse().map((y) => h('option', { value: String(y) }, periodLabelFor(v, y, file.period_type))));
   select.value = String(year);
   const slot = h('div');
   page.append(

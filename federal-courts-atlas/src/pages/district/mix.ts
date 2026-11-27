@@ -5,44 +5,57 @@
 // public/data/profiles/<id>.json; nothing is computed here except pixel positions.
 
 import { h, s, uniqueId } from '../../lib/dom.ts';
-import { formatNumber, periodLabel } from '../../lib/format.ts';
+import { formatNumber, periodLabelFor } from '../../lib/format.ts';
 import { Tooltip } from '../../components/tooltip.ts';
 import { DataTable } from '../../components/data-table.ts';
 import { sourceChip } from '../../components/source-chip.ts';
 import { phraseLabel, term } from '../../components/glossary.ts';
-import type { MixBlock, SentencingComposition, SentencingCompositionYear, Variable } from '../../data/types.ts';
-import { viewToggle } from './common.ts';
+import type { DistrictProfile, MixBlock, MixYearBlock, SentencingComposition, SentencingCompositionYear, Variable } from '../../data/types.ts';
+import { formulaHint, viewToggle } from './common.ts';
+import { mdlCallout } from './context.ts';
 
 const SMALL_BASE = 30;
 const SHOW_FIRST = 8;
 
 const pct = (v: number) => `${formatNumber(v, 1)}%`;
 
-/* ---- Nature-of-suit and offense mix ------------------------------------------------------ */
+/* ---- Mix panels: nature of suit, charges, how cases end, offenses of people sentenced ------- */
 
-function mixPanel(o: { id: string; title: string; unitNoun: string; block: MixBlock | undefined; notes: Array<string | Node> }): HTMLElement {
-  const panel = h('figure', { class: 'mix', id: `mix-${o.id}` });
-  const b = o.block;
-  if (!b || !b.groups?.length) {
-    panel.append(h('figcaption', { class: 'mix__title' }, phraseLabel(o.title)), h('p', { class: 'no-data' }, 'No data'));
-    return panel;
-  }
-  const groups = [...b.groups].sort((a, z) => (z.share ?? -1) - (a.share ?? -1));
+interface MixPanelOptions {
+  id: string;
+  title: string;
+  unitNoun: string;
+  block: MixBlock | undefined;
+  notes: Array<string | Node>;
+  /** An IDB catalog variable: its preliminary_years label FY 2026 "(preliminary)". */
+  variable?: Variable;
+  /** Shown while the year on display is preliminary. */
+  prelimNote?: string | null;
+}
+
+/** "FY 2026 (preliminary)" from the variable's preliminary_years, or from the block's own flag. */
+export function blockPeriod(b: MixYearBlock, v: Variable | undefined): string {
+  const base = periodLabelFor(v, b.year, b.period_type);
+  return b.preliminary && !base.includes('(preliminary)') ? `${base} (preliminary)` : base;
+}
+
+function mixRows(b: MixYearBlock, fixed: boolean): { list: HTMLOListElement; n: number; hasNational: boolean } {
+  const groups = fixed ? [...b.groups] : [...b.groups].sort((a, z) => (z.share ?? -1) - (a.share ?? -1));
   const max = Math.max(1, ...groups.map((g) => Math.max(g.share ?? 0, g.national_share ?? 0)));
   const scaleMax = Math.ceil(max / 10) * 10;
   const hasNational = groups.some((g) => typeof g.national_share === 'number');
-
+  const collapse = !fixed && groups.length > SHOW_FIRST;
   const list = h('ol', { class: 'mix__rows' });
   groups.forEach((g, i) => {
     const share = g.share;
     const nat = g.national_share;
     const row = h(
       'li',
-      { class: `mix__row${i >= SHOW_FIRST ? ' mix__row--extra' : ''}` },
+      { class: `mix__row${collapse && i >= SHOW_FIRST ? ' mix__row--extra' : ''}`, 'data-group': g.id },
       h(
         'div',
         { class: 'mix__line' },
-        h('span', { class: 'mix__label' }, g.label),
+        h('span', { class: 'mix__labelbox' }, h('span', { class: 'mix__label' }, g.label), g.derived && g.formula ? formulaHint(g.formula, `How the share for ${g.label.toLowerCase()} is computed`) : null),
         h('span', { class: 'mix__val' }, share === null ? 'No data' : pct(share), h('span', { class: 'mix__count' }, ` (${formatNumber(g.count, 0)})`)),
       ),
       h(
@@ -56,42 +69,77 @@ function mixPanel(o: { id: string; title: string; unitNoun: string; block: MixBl
     row.title = `${g.label}: ${formatNumber(g.count, 0)} of ${formatNumber(b.total, 0)} (${share === null ? 'no data' : pct(share)})${typeof nat === 'number' ? `; all districts ${pct(nat)}` : ''}`;
     list.append(row);
   });
-  if (groups.length > SHOW_FIRST) list.classList.add('mix__rows--collapsed');
+  if (collapse) list.classList.add('mix__rows--collapsed');
+  return { list, n: groups.length, hasNational };
+}
 
-  const legend = h(
-    'p',
-    { class: 'mix__legend', 'aria-hidden': 'true' },
-    h('span', { class: 'mix__key mix__key--bar' }),
-    'This district',
-    hasNational ? h('span', { class: 'mix__key mix__key--nat' }) : null,
-    hasNational ? 'All districts' : null,
-    h('span', { class: 'mix__key-count' }, 'Share (count)'),
-  );
-
+function mixPanel(o: MixPanelOptions): HTMLElement {
+  const panel = h('figure', { class: 'mix', id: `mix-${o.id}` });
+  const b = o.block;
+  if (!b || !b.groups?.length) {
+    panel.append(h('figcaption', { class: 'mix__title' }, phraseLabel(o.title)), h('p', { class: 'no-data' }, 'No data'));
+    return panel;
+  }
+  const fixed = b.order === 'fixed';
+  // The latest year first; a preliminary year comes with the latest year that has a published cross-check.
+  const blocks: MixYearBlock[] = [b, ...(b.other_years ?? [])];
+  const sub = h('span', { class: 'mix__sub' });
+  const body = h('div', { class: 'mix__body' });
   panel.append(
     h(
       'figcaption',
       { class: 'mix__head' },
       h('span', { class: 'mix__title' }, phraseLabel(o.title)),
-      h('span', { class: 'mix__sub' }, `${periodLabel(b.year, b.period_type)} · ${formatNumber(b.total, 0)} ${o.unitNoun}`),
+      sub,
     ),
-    legend,
-    list,
   );
-  if (groups.length > SHOW_FIRST) {
-    const more = h('button', { type: 'button', class: 'btn btn--quiet mix__more', 'aria-expanded': 'false' }, `Show all ${groups.length} categories`);
-    more.addEventListener('click', () => {
-      const open = !list.classList.toggle('mix__rows--collapsed');
-      more.setAttribute('aria-expanded', String(open));
-      more.textContent = open ? 'Show fewer' : `Show all ${groups.length} categories`;
+  if (blocks.length > 1) {
+    const seg = h('div', { class: 'seg mix__years', role: 'group', 'aria-label': `Fiscal year for ${o.title.toLowerCase()}` });
+    const btns = blocks.map((blk, i) => {
+      const btn = h('button', { type: 'button', class: 'seg__btn', 'aria-pressed': String(i === 0), 'data-year': String(blk.year) }, blockPeriod(blk, o.variable));
+      btn.addEventListener('click', () => {
+        btns.forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
+        draw(blk);
+      });
+      seg.append(btn);
+      return btn;
     });
-    panel.append(more);
+    panel.append(seg);
   }
-  const foot = h('div', { class: 'mix__foot' }, h('p', null, b.basis));
-  if (b.total < SMALL_BASE) foot.append(h('p', { class: 'stat__note' }, h('span', { class: 'stat__note-mark' }, 'Note'), ` Based on only ${formatNumber(b.total, 0)} ${o.unitNoun}, so these shares can swing widely from year to year.`));
-  for (const n of o.notes) foot.append(h('p', null, n));
-  foot.append(sourceChip({ sourceIds: b.source_ids, derived: b.derived, formula: b.formula, compact: true }));
-  panel.append(foot);
+  panel.append(body);
+
+  function draw(blk: MixYearBlock): void {
+    sub.textContent = `${blockPeriod(blk, o.variable)} · ${formatNumber(blk.total, 0)} ${o.unitNoun}`;
+    const { list, n, hasNational } = mixRows(blk, fixed);
+    const legend = h(
+      'p',
+      { class: 'mix__legend', 'aria-hidden': 'true' },
+      h('span', { class: 'mix__key mix__key--bar' }),
+      'This district',
+      hasNational ? h('span', { class: 'mix__key mix__key--nat' }) : null,
+      hasNational ? 'All districts' : null,
+      h('span', { class: 'mix__key-count' }, 'Share (count)'),
+    );
+    body.replaceChildren(legend, list);
+    if (list.classList.contains('mix__rows--collapsed')) {
+      const more = h('button', { type: 'button', class: 'btn btn--quiet mix__more', 'aria-expanded': 'false' }, `Show all ${n} categories`);
+      more.addEventListener('click', () => {
+        const open = !list.classList.toggle('mix__rows--collapsed');
+        more.setAttribute('aria-expanded', String(open));
+        more.textContent = open ? 'Show fewer' : `Show all ${n} categories`;
+      });
+      body.append(more);
+    }
+    const foot = h('div', { class: 'mix__foot' }, h('p', null, b!.basis));
+    if (blk.total < SMALL_BASE) foot.append(h('p', { class: 'stat__note' }, h('span', { class: 'stat__note-mark' }, 'Note'), ` Based on only ${formatNumber(blk.total, 0)} ${o.unitNoun}, so these shares can swing widely from year to year.`));
+    if (o.prelimNote && (blk.preliminary || o.variable?.preliminary_years?.includes(blk.year))) foot.append(h('p', null, o.prelimNote));
+    if (blk.national_note) foot.append(h('p', { class: 'mix__natnote' }, blk.national_note.text));
+    for (const note of o.notes) foot.append(h('p', null, note));
+    if (b!.definitions) foot.append(h('details', { class: 'mix__defs' }, h('summary', null, 'What the groups mean'), h('p', null, b!.definitions)));
+    foot.append(sourceChip({ sourceIds: blk.source_ids, derived: b!.derived, formula: b!.formula, compact: true }));
+    body.append(foot);
+  }
+  draw(b);
   return panel;
 }
 
@@ -345,26 +393,106 @@ export interface MixOptions {
   criminal?: MixBlock;
   composition: SentencingComposition;
   variables: Variable[];
+  /** The whole profile: how cases end, offenses of people sentenced and the MDL note (optional, additive). */
+  profile?: DistrictProfile;
 }
+
+const PRELIM_NOTE = 'FY 2026 figures from the IDB have not yet been checked against the AO’s published tables.';
+
+/** Section subhead inside the case mix (same type as the composition title). */
+function subhead(title: string, dek: string | null): HTMLElement[] {
+  const id = uniqueId('mixsec');
+  return [h('h3', { class: 'mix-sec__title comp__title', id }, title), ...(dek ? [h('p', { class: 'comp__dek mix-sec__dek' }, dek)] : [])];
+}
+
+/** USSC offense types that have their own map measure. */
+const SENTENCED_MAP: Array<[string, string]> = [
+  ['drug_trafficking', 'sentenced_drug_trafficking_pct'],
+  ['immigration', 'sentenced_immigration_pct'],
+  ['firearms', 'sentenced_firearms_pct'],
+  ['child_pornography', 'sentenced_child_pornography_pct'],
+];
 
 export function renderCaseMix(host: HTMLElement, o: MixOptions): () => void {
   const byId = new Map(o.variables.map((v) => [v.id, v]));
+  const cm = o.profile?.case_mix;
   const prisoner = byId.get('prisoner_petitions_pct');
+  // IDB catalog variables carry preliminary_years (FY 2026); the mix blocks use them for their period labels.
+  const idbCivil = byId.get('civil_trial_rate_pct') ?? prisoner;
+  const idbCrim = byId.get('guilty_plea_pct') ?? byId.get('crim_drugs_pct');
   const civilNotes: Array<string | Node> = [
     'This grouping follows the civil cover sheet (JS 44), which counts immigration detention petitions (nature of suit 463) as prisoner petitions.' +
       (prisoner ? ` The “${prisoner.label.toLowerCase()}” measure in the statistics above counts only codes 510 to 560, so the two can differ.` : ''),
   ];
-  const latestIdb = [o.civil?.year, o.criminal?.year].filter((y): y is number => typeof y === 'number');
-  const idbNote = latestIdb.length && Math.max(...latestIdb) >= 2026 ? 'FY 2026 figures from the IDB have not yet been checked against the AO’s published tables.' : null;
-  if (idbNote) civilNotes.push(idbNote);
-  const crimNotes: Array<string | Node> = idbNote ? [idbNote] : [];
+
+  // Multidistrict litigation note for the IDB years shown in this section.
+  const idbYears = [o.civil, o.criminal, cm?.civil_disposition, cm?.criminal_disposition]
+    .flatMap((b) => (b ? [b.year, ...(b.other_years ?? []).map((x) => x.year)] : []));
+  const mdl = mdlCallout(o.profile?.mdl_context, { years: [...new Set(idbYears)], label: 'Multidistrict litigation in the case mix years' });
 
   const mixes = h(
     'div',
     { class: 'mix-grid' },
-    mixPanel({ id: 'civil', title: 'Civil cases by nature of suit', unitNoun: 'civil cases filed', block: o.civil, notes: civilNotes }),
-    mixPanel({ id: 'criminal', title: 'Criminal defendants by most serious charge', unitNoun: 'defendants charged', block: o.criminal, notes: crimNotes }),
+    mixPanel({ id: 'civil', title: 'Civil cases by nature of suit', unitNoun: 'civil cases filed', block: o.civil, notes: civilNotes, variable: idbCivil, prelimNote: PRELIM_NOTE }),
+    mixPanel({ id: 'criminal', title: 'Criminal defendants by most serious charge', unitNoun: 'defendants charged', block: o.criminal, notes: [], variable: idbCrim, prelimNote: PRELIM_NOTE }),
   );
+  host.append(...subhead('New cases and charges', null));
+  if (mdl) host.append(mdl);
+  host.append(mixes);
+
+  // How cases end (IDB disposition groups).
+  if (cm?.civil_disposition || cm?.criminal_disposition) {
+    const prelim = [cm.civil_disposition, cm.criminal_disposition].some((b) => b?.preliminary && b.other_years?.length);
+    host.append(
+      h(
+        'div',
+        { class: 'mix-sec', id: 'mix-ends' },
+        ...subhead(
+          'How cases end',
+          `Civil cases and criminal defendants whose cases closed during the year, by how they ended.${prelim ? ' FY 2026 figures are preliminary; switch to FY 2025 for the latest year checked against the AO’s published tables.' : ''}`,
+        ),
+        h(
+          'div',
+          { class: 'mix-grid' },
+          mixPanel({ id: 'civil-ends', title: 'How civil cases ended', unitNoun: 'civil cases closed', block: cm.civil_disposition, notes: [], variable: idbCivil, prelimNote: PRELIM_NOTE }),
+          mixPanel({ id: 'criminal-ends', title: 'How criminal cases ended', unitNoun: 'defendants whose cases closed', block: cm.criminal_disposition, notes: [], variable: idbCrim, prelimNote: PRELIM_NOTE }),
+        ),
+      ),
+    );
+  }
+
+  // Offenses of people sentenced (USSC).
+  const off = cm?.sentenced_offense;
+  if (off) {
+    const links = SENTENCED_MAP.filter(([gid, vid]) => byId.has(vid) && off.groups.some((g) => g.id === gid)).map(([gid, vid]) =>
+      h('li', null, h('a', { href: `#/?v=${encodeURIComponent(vid)}` }, off.groups.find((g) => g.id === gid)!.label)),
+    );
+    host.append(
+      h(
+        'div',
+        { class: 'mix-sec', id: 'mix-sentenced-sec' },
+        ...subhead('Offenses of people sentenced', 'The main offense of each person sentenced during the year, as the U.S. Sentencing Commission classifies it.'),
+        h(
+          'div',
+          { class: 'mix-grid' },
+          mixPanel({ id: 'sentenced', title: 'People sentenced, by offense type', unitNoun: 'people sentenced with a known offense type', block: off, notes: [] }),
+          h(
+            'div',
+            { class: 'mix-aside' },
+            h('p', { class: 'mix-aside__title' }, 'How this differs from the charge mix'),
+            h(
+              'p',
+              null,
+              'The charge mix above counts defendants when their cases begin, by the most serious charge filed. This chart counts people when they are sentenced, using the Sentencing Commission’s offense types. People whose cases end in a dismissal or an acquittal are not sentenced, so they are not in it.',
+            ),
+            links.length ? h('p', { class: 'mix-aside__title' }, 'See these offense types on the map') : null,
+            links.length ? h('ul', { class: 'mix-aside__links' }, ...links) : null,
+          ),
+        ),
+      ),
+    );
+  }
+
   const compId = uniqueId('comp');
   const comp = h(
     'div',
@@ -382,6 +510,6 @@ export function renderCaseMix(host: HTMLElement, o: MixOptions): () => void {
       ' fast-track motions.',
     ),
   );
-  host.append(mixes, comp);
+  host.append(comp);
   return renderComposition(comp, o.composition, byId);
 }

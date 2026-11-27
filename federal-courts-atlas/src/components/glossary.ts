@@ -157,9 +157,16 @@ export function term(id: string, text?: string, opts: TermOptions = {}): HTMLEle
   });
   btn.addEventListener('focus', () => showPopover(btn, id));
   btn.addEventListener('blur', () => scheduleHide());
+  // A press focuses the button in Chrome (desktop and Android), and focus opens the popover, so the click that
+  // follows must toggle from the state before the press; otherwise a tap opened and then closed it at once.
+  let openBeforePress = false;
+  btn.addEventListener('pointerdown', () => {
+    openBeforePress = current === btn && pop?.dataset.open === 'true';
+  });
   btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (current === btn && pop?.dataset.open === 'true') hidePopover();
+    const open = e.detail > 0 ? openBeforePress : current === btn && pop?.dataset.open === 'true';
+    if (open) hidePopover();
     else showPopover(btn, id);
   });
   return h('span', { class: 'term-wrap' }, btn, desc);
@@ -198,11 +205,18 @@ export function glossLabel(text: string, refs: readonly TermRef[]): DocumentFrag
   hits.sort((a, b) => a.at - b.at);
   const frag = document.createDocumentFragment();
   let last = 0;
-  for (const x of hits) {
-    if (x.at > last) frag.append(text.slice(last, x.at));
-    frag.append(term(x.term, text.slice(x.at, x.end), { label: true }));
-    last = x.end;
-  }
+  hits.forEach((x, i) => {
+    // A term button is an atomic inline box, so the line may break right beside it: punctuation touching the
+    // term ("(" and ")" around "§5K1.1") goes into one no-wrap group with it.
+    const before = text.slice(last, x.at);
+    const lead = /[^\s]+$/.exec(before)?.[0] ?? '';
+    const nextAt = hits[i + 1]?.at ?? text.length;
+    const trail = /^[^\s]+/.exec(text.slice(x.end, nextAt))?.[0] ?? '';
+    if (before.length > lead.length) frag.append(before.slice(0, before.length - lead.length));
+    const t = term(x.term, text.slice(x.at, x.end), { label: true });
+    frag.append(lead || trail ? h('span', { class: 'term-nowrap' }, lead, t, trail) : t);
+    last = x.end + trail.length;
+  });
   if (last < text.length) frag.append(text.slice(last));
   return frag;
 }

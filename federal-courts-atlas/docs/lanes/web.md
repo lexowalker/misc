@@ -5,9 +5,9 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 `public/data/geo/divisions.json` and `geo/courthouses.json`). It never fetches anything and never calls a model.
 
 - **Rebuild:** `make web` (= `PYTHONPATH=. .venv/bin/python -m pipeline.web.build`, about 6 seconds).
-- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (145 tests) and
+- **Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_web.py` (156 tests) and
   `tests/pipeline/test_data_audit_fixes.py` (16 tests, data audit of 2026-11-27). The whole pipeline suite passes
-  (1,228 tests on 2026-11-27). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
+  (1,248 tests on 2026-11-27, after the profile additions below). Front end: `npm run typecheck`; e2e `tests/e2e/web-data.spec.ts` (10 tests)
   plus the existing suite (50 passed, 4 skipped by design).
 - **Deterministic:** two runs on the same inputs give byte-identical files (tested by hashing every file before and
   after a rebuild). Dictionaries are written with sorted keys; `manifest.json` uses the newest source retrieval date
@@ -18,13 +18,13 @@ reads only `data/processed/*` and `data/sources/*.json` (plus, read-only, the bo
 
 | file | content | size |
 |---|---|---|
-| `variables.json` | The catalog: 43 map variables in four families, with copy, caveats, years and citations (below). | 78 KB |
+| `variables.json` | The catalog: 45 map variables in four families, with copy, caveats, years and citations (below). | 91 KB |
 | `values/<variable>.json` | `{variable, period_type, unit, years, values: {district: {year: value}}, ranks, ranked_of, rank_method, provenance, source_by_year, cell_sources?, cell_notes?, n_basis?, national?, national_source_by_year?, national_note?, national_derived_years?, derived, formula?, derived_years?, derived_cells?, basis_by_year?, formula_by_basis?}` | 38 to 390 KB each |
 | `districts.json` | Keyed by id: registry fields, latest population (value, year, source, derived, formula; `population_approximate` and a note for mtd, idd, wyd, ncmd, nced; No data for the territories) and the 2020 Census count, counties `{geoid, name}`, statutory divisions `{name, ordinal, statute_section, counties: [geoid], places}`, places of holding court, statute sections, partial (carve-out) counties, courthouse ids, latest authorized judgeships, latest active and senior judges, `prev` / `next` (registry order, wrapping). | 306 KB |
 | `judges.json` | `{_meta, <district>: [records]}`: every FJC service record on a current district court, oldest first. Public fields only: name, sort name, initials, appointing president and party exactly as FJC gives them, `party_of_appointing_president` (resolved for statutory reassignments, with `reassignment: true`, `party_note` and `president_of_record`), appointment kind, commission, recess appointment and service start dates, senior status date (and the effective date when it differs), service end date and reason, active service end, seat id. No photos, no performance statistics. Biography link template `https://www.fjc.gov/node/{nid}` in `_meta`. | 1.5 MB |
 | `judges/<district>.json` | The same records for one district (up to 77 KB; under 1 KB for the territories), so a profile page does not load all 3,412. | |
 | `cases/<district>.json` | The cases lane's items, normalized: `{district_id, district_name, retrieved_at, selection, source_ids, publisher, items: [{id, kind: docket or opinion, item_type, case_name, url, date_filed, date_terminated, docket_number, docket_type, nature_of_suit, cause, court_id, opinion_status, source_id}], note?}`. | 1 to 5 KB |
-| `profiles/<district>.json` | `distinctive` (paragraph, sentences with claims, the size-and-circuit context sentence, method), `key_stats` (one row per catalog variable: latest year, value, rank, ranked_of, national, full series, derived flag, sources, note), `case_mix` (civil nature-of-suit mix and criminal offense mix for the latest IDB year with national shares, and the USSC four-way sentencing composition by year). | 31 to 37 KB |
+| `profiles/<district>.json` | `distinctive` (paragraph, sentences with claims, the size-and-circuit context sentence, method), `key_stats` (one row per catalog variable: latest year, value, rank, ranked_of, national, full series, derived flag, sources, note), `case_mix` (civil nature-of-suit mix and criminal offense mix for the latest IDB year with national shares; how civil and criminal cases ended, latest IDB year plus the latest cross-checked year; offenses of people sentenced, latest USSC year; the USSC four-way sentencing composition by year) and, for 8 districts, `mdl_context` (below). | 43 to 51 KB |
 | `sources.json` | Every source id referenced by any public file (values, profiles, districts, judges, cases, and the geo files' `source_id`/`source_ids`), keyed by id: `lane, url, dataset, publisher, vintage, retrieved_at`. No local paths or hashes. Plus three citation "series" records (below). 910 entries. | 381 KB |
 | `manifest.json` | `version` (first 10 hex of a hash over all file hashes), `build_date`, counts, and `files: {path: {sha256, bytes}}` for every file under `public/data/` (including geo/ and search/). | 44 KB |
 
@@ -93,6 +93,8 @@ simply absent, so the UI shows No data. Every variable has at least 12 years.
 | `sentenced_drug_trafficking_pct` | casemix | Drug trafficking, share of people sentenced | ussc `ussc_pct_offense_drug_trafficking` | 1995 to 2025 (31) | 94 | no |
 | `sentenced_immigration_pct` | casemix | Immigration, share of people sentenced | ussc `ussc_pct_offense_immigration` | 1995 to 2025 (31) | 94 | no |
 | `sentenced_firearms_pct` | casemix | Firearms, share of people sentenced | ussc `ussc_pct_offense_firearms` | 1995 to 2025 (31) | 94 | no |
+| `criminal_dismissed_pct` | casemix | Criminal defendants whose cases were dismissed | idb `idb_crim_pct_dismissed` | 1996 to 2026 (31) | 94 | yes |
+| `sentenced_child_pornography_pct` | casemix | Child pornography, share of people sentenced | ussc `ussc_pct_offense_child_pornography` | 2010 to 2025 (16) | 94 | no |
 
 Choices, in brief:
 
@@ -119,6 +121,17 @@ Choices, in brief:
 - **Offense mix.** IDB shares (most serious filing charge, FY 1996 to 2026, one coding scheme) are the main criminal
   case-mix variables. The three USSC offense shares are included as the brief asks, with the FY 2018 classification
   break in `breaks` and caveats; they are excluded from profile facts.
+- **Added 2026-11-27 (profiles pass).** `criminal_dismissed_pct`: the IDB lane's dismissal share, which is the AO's
+  Table D-4 "dismissed" column (national totals match it exactly FY 2005 to 2025; FY 1997 to 2004 the FJC records
+  hold 7% to 12% more dismissals, so a FY 2005 break and a caveat say so). `sentenced_child_pornography_pct`: USSC,
+  FY 2010 to 2025 (16 years; the USSC first reported the category in FY 2010), with the same FY 2018 classification
+  break as the other USSC offense shares. Neither has a fact template, so no profile paragraph changed (checked:
+  all 94 `distinctive` blocks identical before and after).
+- **Considered and not added.** `sentenced_fraud_pct`: the USSC's "Fraud/Theft/Embezzlement" type exists only from
+  FY 2018 (8 years, below the 10-year bar), and its "Fraud" type to FY 2017 is a different category that must not be
+  spliced. "All other offense types" changes composition at every break. A civil "settled" share was not added:
+  settled, voluntary and other dismissals depend on how each clerk's office codes them, and the profile shows them
+  with that caveat instead.
 - **Not chosen.** USSC prison-only sentence length (a second convention, easy to confuse with the average sentence),
   IDB class-action share and acquittal share, and FCMS percent changes. All remain in the lane tables. (The two FCMS
   juror measures were added on 2026-11-27; see below.)
@@ -198,6 +211,39 @@ number appears in the sentence, and that no paragraph contains a judge's name or
 Case mix in profiles uses the IDB mix tables for the latest IDB year (FY 2026 for all districts) and labels the
 source and basis. Shares are recomputed as count / total, rounded to one decimal, and marked derived. The sentencing
 composition gives both USSC series separately with a note.
+
+### Profile additions (2026-11-27, profiles pass)
+
+- **`case_mix.civil_disposition` and `case_mix.criminal_disposition`** ("How cases end"), from the IDB lane's
+  `civil_disposition_mix` and `criminal_disposition_mix`. Groups are the IDB lane's (`pipeline/idb/codes.py`) with
+  reader labels, in a fixed reading order (`order: "fixed"`): civil settled, withdrawn by the plaintiff, other
+  dismissals, judgment on a motion before trial, default or consent, jury trial (incl. directed verdicts), bench
+  trial, other judgment, transferred or remanded, statistical closing; criminal guilty plea (incl. no contest),
+  convicted after a jury or bench trial, dismissed, acquitted by a jury or a judge (AO Table D-4 groups). Each block
+  is the latest IDB year with `preliminary: true` for FY 2026, plus `other_years: [FY 2025]`, the latest year with an
+  AO cross-check. Shares are `round(100 × count / total, 1)` (derived, formula given), with national counts and
+  shares and a `definitions` note written from the codebook text. Every count is re-derived in
+  `test_profile_disposition_mix_recomputes`; the plea and dismissal shares agree with `guilty_plea_pct` and
+  `criminal_dismissed_pct` within display rounding (`test_criminal_disposition_shares_match_map_measures`).
+- **`case_mix.sentenced_offense`** ("Offenses of people sentenced"): the USSC lane's `ussc_pct_offense_*` and
+  `ussc_count_offense_*` for the latest USSC year (FY 2025) and `ussc_cases_offense_known` as the base, copied
+  exactly, with the USSC national row. Categories keep the USSC's own types (drug trafficking, immigration, firearms,
+  fraud/theft/embezzlement or, before FY 2018, fraud; child pornography; all other). Only "All other offense types"
+  is marked derived (the atlas combines the remaining USSC types; formula on the row). Tested against the USSC table.
+- **`national_note`** on a civil block year when one MDL docket is more than 25% of all districts' civil cases filed
+  (or closed) that year. Today only FY 2025 closings qualify: 147,231 of the 407,539 civil cases closed nationally
+  were in MDL 2885 (N.D. Fla.), so the all-district ticks for that year say they include them.
+- **`mdl_context`** (top level of the profile): for each district-year shown on the page (FY 2025, the latest FCMS
+  year, and FY 2026, the latest IDB year) where one MDL docket made up more than 25% of the district's civil cases
+  filed or closed (IDB lane `civil_mdl_dockets`), one sentence per year and cohort ("In FY 2025, 147,231 of the
+  149,260 civil cases closed in N.D. Fla. were part of MDL 2885."), plus a history line for the other years in which
+  the same docket was above 25% (with the year that had the most cases). Counts only in the text; the 25% test is
+  derived and its formula is on the block. A docket is named only from `civil_mdl_docket_names.csv` (GovInfo-verified)
+  and the GovInfo record is cited. Districts with a note: azd, flnd, laed, mnd, nhd, njd, ohnd, scd.
+  `test_profile_mdl_context_complete_and_exact` checks completeness (every qualifying district-year has a sentence and
+  no other does), every count, the "(preliminary)" label for FY 2026 and the names.
+- The data contract's profile line (`docs/DATA_CONTRACT.md`) lists only `distinctive`, `key_stats` and the first two
+  case-mix blocks; these fields are additive and documented here.
 
 ## Caveats
 

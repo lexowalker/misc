@@ -134,3 +134,41 @@ test('glossary term opens an accessible definition', async ({ page }) => {
   await page.keyboard.press('Escape');
   await expect(page.locator('.gloss-pop')).toHaveAttribute('data-open', 'false');
 });
+
+// Client style: navy rounded-square Home, +, - buttons stacked at the bottom right, at every width. On phones
+// the stack hangs below the map's bottom edge; it must not sit on a district, an inset frame or an inset name.
+test('zoom controls: a vertical stack at the bottom right, clear of districts and insets', async ({ page }, testInfo) => {
+  await openMap(page);
+  const r = await page.evaluate(() => {
+    const map = document.querySelector('.atlas-map')!.getBoundingClientRect();
+    const btns = [...document.querySelectorAll('.map-control')].map((b) => b.getBoundingClientRect());
+    const stack = document.querySelector('.atlas-map__controls')!.getBoundingClientRect();
+    const frames = [...document.querySelectorAll('.inset-frame, .atlas-map__inset-key text')].map((e) => e.getBoundingClientRect());
+    // Districts under the stack: sample its area on a 4px grid.
+    const hits = new Set<string>();
+    const ctl = document.querySelector<HTMLElement>('.atlas-map__controls')!;
+    ctl.style.visibility = 'hidden';
+    for (let x = stack.left + 1; x < stack.right; x += 4)
+      for (let y = stack.top + 1; y < stack.bottom; y += 4) {
+        const id = document.elementFromPoint(x, y)?.closest('path.district, .district-chip')?.getAttribute('data-id');
+        if (id) hits.add(id);
+      }
+    ctl.style.visibility = '';
+    return { map: map.toJSON(), btns: btns.map((b) => b.toJSON()), stack: stack.toJSON(), frames: frames.map((f) => f.toJSON()), hits: [...hits] };
+  });
+  expect(r.btns).toHaveLength(3);
+  // One column: same left edge, each button below the previous one.
+  for (let i = 1; i < 3; i++) {
+    expect(Math.abs(r.btns[i]!.left - r.btns[0]!.left)).toBeLessThan(1);
+    expect(r.btns[i]!.top).toBeGreaterThanOrEqual(r.btns[i - 1]!.bottom);
+  }
+  // Bottom right of the map.
+  expect(r.map.right - r.stack.right).toBeLessThan(24);
+  expect(r.map.bottom - r.stack.bottom).toBeLessThan(24);
+  if (testInfo.project.name === 'mobile') for (const b of r.btns) expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(44);
+  for (const f of r.frames) {
+    const overlap = f.left < r.stack.right && r.stack.left < f.right && f.top < r.stack.bottom && r.stack.top < f.bottom;
+    expect(overlap, 'stack overlaps an inset').toBe(false);
+  }
+  expect(r.hits, 'districts under the zoom buttons at national view').toEqual([]);
+});

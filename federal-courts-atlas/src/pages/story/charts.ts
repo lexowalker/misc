@@ -849,7 +849,9 @@ export function chartTable(spec: ChartSpec): HTMLTableElement | null {
   switch (spec.kind) {
     case 'line': {
       head(['Period', ...spec.series.map((s2) => s2.label), ...(spec.band ? [spec.band.label] : [])]);
-      spec.x.forEach((x, i) => row(xLabel(x), [...spec.series.map((sr) => fv(sr.values[i], spec.unit, spec.format)), ...(spec.band ? [spec.band.lo[i] === null ? 'No data' : `${fv(spec.band.lo[i], spec.unit, spec.format)} to ${fv(spec.band.hi[i], spec.unit, spec.format)}`] : [])]));
+      // Rows from the chart's preliminary year on say so, as the chart's shaded band and tooltip do (recheck, Nov 27).
+      const p0 = spec.prelim_from !== undefined ? spec.x.indexOf(spec.prelim_from as never) : -1;
+      spec.x.forEach((x, i) => row(p0 >= 0 && i >= p0 ? `${xLabel(x)} (preliminary)` : xLabel(x), [...spec.series.map((sr) => fv(sr.values[i], spec.unit, spec.format)), ...(spec.band ? [spec.band.lo[i] === null ? 'No data' : `${fv(spec.band.lo[i], spec.unit, spec.format)} to ${fv(spec.band.hi[i], spec.unit, spec.format)}`] : [])]));
       break;
     }
     case 'rankstrip':

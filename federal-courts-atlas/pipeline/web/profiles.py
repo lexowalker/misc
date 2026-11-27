@@ -6,10 +6,12 @@ number against the values files.
 """
 from __future__ import annotations
 
+import pandas as pd
+
 from pipeline.common.districts import BY_ID, DISTRICTS, IDS
 
 from .catalog import BY_ID as CAT, CATALOG, FACT_PRIORITY, FALLBACK_SIZE_VARIABLE
-from .common import CIRCUIT_NAMES, FACT_MIN_BASE, display_round, fmt_number, fmt_value, table
+from .common import CIRCUIT_NAMES, FACT_MIN_BASE, PROC, display_round, fmt_number, fmt_value, table
 from .values import Cell
 
 POS_PREFIX = {1: "", 2: "second-", 3: "third-"}
@@ -307,7 +309,307 @@ def case_mix(d: str, vfs: dict[str, dict]) -> dict:
             "formula": "share = 100 × defendants in the category ÷ all defendants filed in the district that year, rounded to 1 decimal",
         }
     out["sentencing_composition"] = sentencing_composition(d, vfs)
+    if civ:
+        nn = national_mdl_note(civ["year"], "filed")
+        if nn:
+            out["civil_nature_of_suit"]["national_note"] = nn
+    civ_disp = disposition_block(table("idb", "civil_disposition_mix"), d, CIVIL_DISP_GROUPS)
+    if civ_disp:
+        for blk in [civ_disp, *civ_disp.get("other_years", [])]:
+            nn = national_mdl_note(blk["year"], "terminated")
+            if nn:
+                blk["national_note"] = nn
+        out["civil_disposition"] = {**civ_disp, **CIVIL_DISP_META}
+    cri_disp = disposition_block(table("idb", "criminal_disposition_mix"), d, CRIM_DISP_GROUPS)
+    if cri_disp:
+        out["criminal_disposition"] = {**cri_disp, **CRIM_DISP_META}
+    off = sentenced_offenses(d)
+    if off:
+        out["sentenced_offense"] = off
     return out
+
+
+# ---- How cases end (IDB disposition mix) ---------------------------------------------------------------------
+# Reader labels for the IDB lane's disposition groups (pipeline/idb/codes.py), in reading order.
+CIVIL_DISP_GROUPS = [
+    ("dismissed_settled", "Dismissed: settled"),
+    ("dismissed_voluntary", "Dismissed: withdrawn by the plaintiff"),
+    ("dismissed_other", "Dismissed: other reasons"),
+    ("judgment_motion_before_trial", "Judgment on a motion before trial"),
+    ("judgment_default_consent", "Default or consent judgment"),
+    ("trial_jury", "Judgment after a jury trial"),
+    ("trial_court", "Judgment after a bench trial"),
+    ("judgment_other", "Other judgment"),
+    ("transferred_remanded", "Transferred or remanded"),
+    ("statistical_closing", "Statistical closing"),
+    ("missing", "Not reported"),
+]
+CRIM_DISP_GROUPS = [
+    ("plea", "Convicted: guilty plea"),
+    ("convicted_jury", "Convicted after a jury trial"),
+    ("convicted_bench", "Convicted after a bench trial"),
+    ("dismissed", "Not convicted: dismissed"),
+    ("acquitted_jury", "Not convicted: acquitted by a jury"),
+    ("acquitted_bench", "Not convicted: acquitted by a judge"),
+    ("missing", "Not reported"),
+]
+CIVIL_DISP_META = {
+    "source": "FJC Integrated Database (IDB), civil cases",
+    "basis": ("Civil cases closed in the fiscal year (IDB termination records), grouped by how each case ended, "
+              "using the disposition codes in the FJC civil codebook."),
+    "definitions": ("Settled means the case was dismissed after the parties settled out of court. A case withdrawn by "
+                    "the plaintiff is a voluntary dismissal. Other dismissals include want of prosecution and lack of "
+                    "jurisdiction. Judgments on a motion before trial include orders dismissing prisoner petitions. "
+                    "Jury trials include directed verdicts. Other judgments include arbitration awards, stays for "
+                    "bankruptcy and judgments the court coded as other. Transferred or remanded covers transfers to "
+                    "another district or to a multidistrict litigation court, and remands to state court or a federal "
+                    "agency. A statistical closing ends a case open more than three years with no activity for a year."),
+    "derived": True,
+    "formula": "share = 100 × civil cases closed this way ÷ all civil cases closed in the district that year, rounded to 1 decimal",
+    "order": "fixed",
+}
+CRIM_DISP_META = {
+    "source": "FJC Integrated Database (IDB), criminal defendants",
+    "basis": ("Criminal defendants whose cases closed in the fiscal year (excluding transfers to another district), "
+              "by the disposition of the most serious charge, grouped as in the AO's Judicial Business Table D-4."),
+    "definitions": ("Guilty pleas include pleas of no contest. Dismissed includes dismissals with or without "
+                    "prejudice, nolle prosequi, pretrial diversion, mistrials and statistical closings. A bench trial "
+                    "is decided by a judge, a jury trial by a jury."),
+    "derived": True,
+    "formula": "share = 100 × defendants whose cases ended this way ÷ all defendants whose cases closed in the district that year, rounded to 1 decimal",
+    "order": "fixed",
+}
+
+
+def _disp_year(df: pd.DataFrame, d: str, y: int, groups: list[tuple[str, str]]) -> dict | None:
+    cur = df[(df["district_id"] == d) & (df["period"] == y)]
+    if cur.empty:
+        return None
+    nat = df[(df["district_id"] == "_national") & (df["period"] == y)]
+    total = int(cur["terminated_total"].iloc[0])
+    ntotal = int(nat["terminated_total"].iloc[0]) if not nat.empty else None
+    counts = cur.groupby("disp_group")["count"].sum().to_dict()
+    ncounts = nat.groupby("disp_group")["count"].sum().to_dict()
+    unknown = set(counts) - {g for g, _ in groups}
+    if unknown:
+        raise ValueError(f"{d} FY{y}: disposition groups without a label: {sorted(unknown)}")
+    out = []
+    for gid, label in groups:
+        c, nc = int(counts.get(gid, 0)), int(ncounts.get(gid, 0))
+        if c == 0 and nc == 0:
+            continue
+        g = {"id": gid, "label": label, "count": c, "share": round(100 * c / total, 1) if total else None}
+        if ntotal:
+            g["national_count"] = nc
+            g["national_share"] = round(100 * nc / ntotal, 1)
+        out.append(g)
+    return {"year": y, "period_type": str(cur["period_type"].iloc[0]), "total": total, "national_total": ntotal,
+            "groups": out, "source_ids": sorted(set(cur["source_id"])), "preliminary": y >= IDB_PRELIM_FROM}
+
+
+def disposition_block(df: pd.DataFrame, d: str, groups: list[tuple[str, str]]) -> dict | None:
+    """Latest IDB year, plus the latest year with a published AO cross-check when the latest is preliminary."""
+    mine = df[df["district_id"] == d]
+    if mine.empty:
+        return None
+    y = int(mine["period"].max())
+    latest = _disp_year(df, d, y, groups)
+    if latest is None:
+        return None
+    if latest["preliminary"]:
+        checked = sorted(int(x) for x in mine["period"].unique() if int(x) < IDB_PRELIM_FROM)
+        prev = _disp_year(df, d, checked[-1], groups) if checked else None
+        if prev:
+            latest["other_years"] = [prev]
+    return latest
+
+
+# ---- Offenses of people sentenced (USSC) -----------------------------------------------------------------------
+# USSC offense types as the USSC lane publishes them (docs/lanes/ussc.md section 3). Labels keep the USSC's names.
+USSC_OFFENSES = [
+    ("drug_trafficking", "Drug trafficking"),
+    ("immigration", "Immigration"),
+    ("firearms", "Firearms"),
+    ("fraud_theft_embezzlement", "Fraud/theft/embezzlement"),
+    ("fraud", "Fraud"),
+    ("child_pornography", "Child pornography"),
+    ("other", "All other offense types"),
+]
+USSC_OTHER_FORMULA = ("100 × people whose primary offense falls in any other USSC offense type ÷ people sentenced with "
+                      "a known primary offense type (the USSC lists these types separately; the atlas combines them)")
+
+
+def _ussc_rows(df: pd.DataFrame, d: str) -> dict[tuple[str, int], pd.Series]:
+    sub = df[df["district_id"] == d]
+    return {(r.variable, int(r.period)): r for r in sub.itertuples(index=False)}
+
+
+def sentenced_offenses(d: str) -> dict | None:
+    obs = table("ussc", "observations")
+    obs = obs[obs["variable"].str.startswith(("ussc_pct_offense_", "ussc_count_offense_", "ussc_cases_offense_known"))]
+    mine = _ussc_rows(obs, d)
+    years = sorted({y for (v, y) in mine if v == "ussc_cases_offense_known"})
+    if not years:
+        return None
+    y = years[-1]
+    nat_df = table("ussc", "national")
+    nat_df = nat_df[(nat_df["district_id"] == "US") & (nat_df["period"] == y)]
+    nat = {r.variable: r for r in nat_df.itertuples(index=False)}
+    n = mine[("ussc_cases_offense_known", y)]
+    groups, srcs = [], {str(n.source_id)}
+    for key, label in USSC_OFFENSES:
+        pr = mine.get((f"ussc_pct_offense_{key}", y))
+        cr = mine.get((f"ussc_count_offense_{key}", y))
+        if pr is None or cr is None:
+            continue
+        g = {"id": key, "label": label, "count": int(cr.value), "share": float(pr.value),
+             "derived": key == "other" or bool(pr.derived)}
+        if g["derived"]:
+            g["formula"] = USSC_OTHER_FORMULA if key == "other" else None
+        np_, nc = nat.get(f"ussc_pct_offense_{key}"), nat.get(f"ussc_count_offense_{key}")
+        if np_ is not None and nc is not None:
+            g["national_share"] = float(np_.value)
+            g["national_count"] = int(nc.value)
+        groups.append(g)
+        srcs |= {str(pr.source_id), str(cr.source_id)}
+    nk = nat.get("ussc_cases_offense_known")
+    return {
+        "year": y, "period_type": str(n.period_type), "total": int(n.value),
+        "national_total": int(nk.value) if nk is not None else None,
+        "groups": groups, "source_ids": sorted(srcs), "order": "fixed",
+        "source": "U.S. Sentencing Commission, individual offender datafiles",
+        "basis": ("People sentenced in the fiscal year whose primary offense type is known, by the USSC's offense "
+                  "type. Since FY 2018 the USSC assigns the type from the main sentencing guideline applied."),
+        "definitions": ("Shares are as the USSC publishes them, so they may not add to exactly 100. They count people "
+                        "sentenced, not charges filed, so they can differ from the criminal charge mix above. \"All "
+                        "other offense types\" combines the remaining USSC types, which the USSC lists one by one."),
+        "derived": False,
+        "formula": None,
+    }
+
+
+# ---- Multidistrict litigation context -------------------------------------------------------------------------
+MDL_SHARE = 25.0   # a docket above this share of a district's civil cases in a year shown gets a note
+MDL_INTRO = ("A multidistrict litigation (MDL) docket brings similar civil cases from many districts before one "
+             "court for pretrial proceedings. In each year listed here, a single docket made up more than a quarter "
+             "of the civil cases this court received or closed.")
+MDL_FORMULA = ("share = 100 × civil cases carrying the MDL docket number ÷ all civil cases filed (or closed) in the "
+               "district that fiscal year, counted from FJC case records; a note appears when one docket is above 25%")
+
+
+def _fy(y: int) -> str:
+    return f"FY {y} (preliminary)" if y >= IDB_PRELIM_FROM else f"FY {y}"
+
+
+def _year_runs(years: list[int]) -> str:
+    runs, start, prev = [], None, None
+    for y in sorted(years):
+        if start is None:
+            start = prev = y
+        elif y == prev + 1:
+            prev = y
+        else:
+            runs.append((start, prev))
+            start = prev = y
+    if start is not None:
+        runs.append((start, prev))
+    parts = [_fy(a) if a == b else f"FY {a} to {b}{' (preliminary)' if b >= IDB_PRELIM_FROM else ''}" for a, b in runs]
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
+
+
+def _mdl_tables() -> tuple[pd.DataFrame, pd.DataFrame] | None:
+    pq = PROC / "idb" / "civil_mdl_dockets.parquet"
+    if not pq.exists():
+        return None
+    t = pd.read_parquet(pq)
+    names_csv = PROC / "idb" / "civil_mdl_docket_names.csv"
+    names = pd.read_csv(names_csv, dtype=str) if names_csv.exists() else pd.DataFrame(
+        columns=["mdl_docket", "district_id", "case_number", "title", "source_id"])
+    return t, names
+
+
+def national_mdl_note(year: int, cohort: str) -> dict | None:
+    """When one MDL docket is more than a quarter of all districts' civil cases filed (or closed) in a year, the
+    all-district comparison ticks for that year include those cases; say so next to them."""
+    got = _mdl_tables()
+    if got is None:
+        return None
+    t, names = got
+    n = t[(t["district_id"] == "_national") & (t["period"] == year) & (t["cohort"] == cohort) & (t["share"] > MDL_SHARE)]
+    if n.empty:
+        return None
+    r = n.sort_values("share", ascending=False).iloc[0]
+    dk = str(r["mdl_docket"])
+    home = t[(t["district_id"] != "_national") & (t["period"] == year) & (t["cohort"] == cohort) & (t["mdl_docket"] == dk)]
+    top = home.sort_values("count", ascending=False).iloc[0] if not home.empty else None
+    where = f" in {BY_ID[top['district_id']].short}" if top is not None and top["count"] / r["count"] > 0.9 else ""
+    what = "civil cases filed" if cohort == "filed" else "civil cases closed"
+    return {
+        "text": (f"{int(r['count']):,} of the {int(r['total']):,} {what} in all districts in {_fy(year)} were part of "
+                 f"MDL {dk}{where}, one multidistrict litigation docket. The all-district shares for that year include "
+                 "them."),
+        "year": year, "cohort": cohort, "docket": dk, "count": int(r["count"]), "total": int(r["total"]),
+        "share": float(r["share"]), "source_ids": ["idb_civil_cv88on"],
+    }
+
+
+def mdl_context(d: str, vfs: dict[str, dict]) -> dict | None:
+    got = _mdl_tables()
+    if got is None:
+        return None
+    t, names = got
+    years = sorted({vfs["civil_filings_per_judgeship"]["years"][-1], vfs["civil_trial_rate_pct"]["years"][-1]})
+    mine = t[(t["district_id"] == d) & (t["share"] > MDL_SHARE)]
+    notes = mine[mine["period"].isin(years)]
+    if notes.empty:
+        return None
+    short = BY_ID[d].short
+    noun = {"filed": "civil cases filed in", "terminated": "civil cases closed in"}
+    order = notes.groupby("mdl_docket")["share"].max().sort_values(ascending=False).index.tolist()
+    dockets, all_srcs = [], {"idb_civil_cv88on", "idb_civil_codebook"}
+    for dk in order:
+        rows = notes[notes["mdl_docket"] == dk].sort_values(["period", "cohort"], ascending=[False, True])
+        sentences = []
+        for r in rows.itertuples(index=False):
+            sentences.append({
+                "text": (f"In {_fy(int(r.period))}, {int(r.count):,} of the {int(r.total):,} {noun[r.cohort]} "
+                         f"{short} were part of MDL {dk}."),
+                "year": int(r.period), "cohort": r.cohort, "count": int(r.count), "total": int(r.total),
+                "share": float(r.share), "preliminary": int(r.period) >= IDB_PRELIM_FROM,
+            })
+        history = []
+        for cohort in ("filed", "terminated"):
+            shown = set(rows.loc[rows["cohort"] == cohort, "period"].astype(int))
+            h = mine[(mine["mdl_docket"] == dk) & (mine["cohort"] == cohort) & ~mine["period"].isin(shown)]
+            if h.empty:
+                continue
+            peak = h.sort_values(["count", "period"], ascending=[False, False]).iloc[0]
+            what = "filed in" if cohort == "filed" else "closed in"
+            hy = h["period"].astype(int).tolist()
+            lead = f"It also made up more than a quarter of the civil cases {what} {short} in {_year_runs(hy)}"
+            text = (f"{lead}: {int(peak['count']):,} of {int(peak['total']):,}." if len(hy) == 1 else
+                    f"{lead}; the most was {int(peak['count']):,} of {int(peak['total']):,} in {_fy(int(peak['period']))}.")
+            history.append({
+                "text": text,
+                "cohort": cohort, "years": sorted(int(x) for x in h["period"]), "peak_year": int(peak["period"]),
+                "peak_count": int(peak["count"]), "peak_total": int(peak["total"]),
+            })
+        nm = names[names["mdl_docket"] == dk]
+        item = {"docket": dk, "sentences": sentences, "history": history, "source_ids": ["idb_civil_cv88on"]}
+        if not nm.empty:
+            n0 = nm.iloc[0]
+            item.update({"name": n0["title"], "case_number": n0["case_number"], "court": n0["district_id"],
+                         "name_source_id": n0["source_id"]})
+            item["source_ids"].append(n0["source_id"])
+            all_srcs.add(n0["source_id"])
+        dockets.append(item)
+    return {
+        "intro": MDL_INTRO, "dockets": dockets, "years": years, "threshold_pct": MDL_SHARE,
+        "rule": (f"Shown when one MDL docket made up more than 25% of the court's civil cases filed or closed in "
+                 f"{' or '.join(_fy(y) for y in years)}, counted from FJC case records. A docket is named only when a "
+                 "court record on GovInfo confirms the name; otherwise it is shown by number."),
+        "derived": True, "formula": MDL_FORMULA, "source_ids": sorted(all_srcs),
+    }
 
 
 SCHEMES = [
@@ -354,7 +656,7 @@ def sentencing_composition(d: str, VFS: dict[str, dict]) -> dict:
 
 def build_profile(d: str, vfs: dict[str, dict], cells: dict[str, dict]) -> dict:
     dist = BY_ID[d]
-    return {
+    prof = {
         "district_id": d,
         "name": dist.name,
         "short": dist.short,
@@ -363,6 +665,10 @@ def build_profile(d: str, vfs: dict[str, dict], cells: dict[str, dict]) -> dict:
         "key_stats": key_stats(d, vfs),
         "case_mix": case_mix(d, vfs),
     }
+    mdl = mdl_context(d, vfs)
+    if mdl:
+        prof["mdl_context"] = mdl
+    return prof
 
 
 def all_profiles(vfs: dict[str, dict], cells: dict[str, dict]) -> dict[str, dict]:

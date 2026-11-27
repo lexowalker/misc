@@ -7,7 +7,7 @@
 PY ?= .venv/bin/python
 export PYTHONPATH := $(CURDIR)
 
-.PHONY: setup data test docs boundaries population fcms ussc idb judges courthouses cases web stories clean-processed
+.PHONY: setup data test docs boundaries population fcms ussc idb judges courthouses cases web stories
 
 setup:
 	python3 -m venv .venv

@@ -127,7 +127,7 @@ def test_names_verified_against_cached_govinfo_records():
         assert f"United States District Court {BY_ID[r.district_id].name}" in text
         import html
         assert html.escape(r.title_as_printed, quote=False) in text or r.title_as_printed in text
-        assert "—" not in r.title
+        assert "\u2014" not in r.title
 
 
 def test_display_title():

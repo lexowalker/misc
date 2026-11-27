@@ -3,13 +3,14 @@
 // labels, units, formulas and caveats come from public/data/variables.json.
 
 import { h } from '../../lib/dom.ts';
-import { periodLabel } from '../../lib/format.ts';
+import { periodLabelFor } from '../../lib/format.ts';
 import { renderSparkline } from '../../components/sparkline.ts';
 import { sourceChip } from '../../components/source-chip.ts';
 import { variableLabel } from '../../components/glossary.ts';
 import { caveatList } from '../../data/loaders.ts';
 import type { DistrictProfile, Family, KeyStatRow, ProfileClaim, ProfileSentence, Variable } from '../../data/types.ts';
 import { fmtNumberOnly, fmtValue, formulaHint, RANK_FORMULA, rankPhrase, rankStrip, valueParts } from './common.ts';
+import { mdlCallout } from './context.ts';
 
 export const FAMILIES: Array<{ id: Family; label: string; dek: string }> = [
   { id: 'speed', label: 'Speed', dek: 'How long cases take to move through the court.' },
@@ -32,7 +33,7 @@ function statRow(row: KeyStatRow, v: Variable): HTMLLIElement {
     'div',
     { class: 'stat__head' },
     h('h4', { class: 'stat__label' }, variableLabel(v)),
-    h('p', { class: 'stat__period' }, periodLabel(row.year, row.period_type)),
+    h('p', { class: 'stat__period' }, periodLabelFor(v, row.year, row.period_type)),
   );
 
   // Value
@@ -40,7 +41,7 @@ function statRow(row: KeyStatRow, v: Variable): HTMLLIElement {
   if (row.value === null) {
     value.append(h('span', { class: 'no-data stat__nodata' }, 'No data'));
     if (row.latest_year_with_data) {
-      value.append(h('span', { class: 'stat__sub' }, `Last reported for ${periodLabel(row.latest_year_with_data, row.period_type)}`));
+      value.append(h('span', { class: 'stat__sub' }, `Last reported for ${periodLabelFor(v, row.latest_year_with_data, row.period_type)}`));
     }
   } else {
     const p = valueParts(row.value, v);
@@ -122,6 +123,12 @@ export function renderKeyStats(host: HTMLElement, profile: DistrictProfile, vari
       h('span', { class: 'dsec__note-key' }, h('span', { class: 'source-chip__label source-chip--derived-label' }, 'Derived'), 'marks values the atlas or its sources computed; the ƒ button shows the formula.'),
     ),
   );
+  // Multidistrict litigation: shown above the measures it touches (civil filings, closings, medians, shares).
+  const mdl = mdlCallout(profile.mdl_context);
+  if (mdl) {
+    mdl.id = 'mdl-note';
+    host.append(mdl);
+  }
   for (const fam of FAMILIES) {
     const vars = variables.filter((v) => v.family === fam.id && rows.has(v.id));
     if (!vars.length) continue;
@@ -175,7 +182,7 @@ export function sentenceIsSupported(s: { text: string; claims: ProfileClaim[] },
 }
 
 function claimLine(c: ProfileClaim, v: Variable | undefined): string {
-  const parts = [v?.label ?? c.variable, periodLabel(c.year, v?.period_type)];
+  const parts = [v?.label ?? c.variable, periodLabelFor(v, c.year, v?.period_type)];
   if (c.rank && c.ranked_of) parts.push(`rank ${c.rank} of ${c.ranked_of}${c.scope === 'circuit' && c.circuit_of ? `; ${c.position === 1 ? 'extreme' : 'position ' + c.position} of ${c.circuit_of} in its circuit` : ''}`);
   return parts.join(', ');
 }
@@ -221,6 +228,9 @@ export function renderStandout(host: HTMLElement, profile: DistrictProfile, vari
     list.querySelectorAll<HTMLAnchorElement>('.standout__link').forEach((a) => (a.href = `#/district/${districtId}?s=stats`));
     host.append(list);
   }
+  // Multidistrict litigation context next to the sentences it bears on (full note under Key statistics).
+  const mdl = mdlCallout(profile.mdl_context, { compact: true, moreHref: `#/district/${districtId}?s=stats`, label: 'Multidistrict litigation, in brief' });
+  if (mdl) host.append(mdl);
   // No outlier sentence: say so, also when the size-and-circuit sentence is shown on its own (oknd, waed, idd),
   // so the section's "where this court sits at an extreme" dek is not read as covering that sentence.
   if (!shown.length || profile.distinctive.kind === 'size_and_circuit') {

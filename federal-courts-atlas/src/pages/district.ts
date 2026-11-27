@@ -309,7 +309,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
           return;
         }
         const cm = prof.data.case_mix;
-        disposers.push(m.renderCaseMix(body, { civil: cm.civil_nature_of_suit, criminal: cm.criminal_offense, composition: cm.sentencing_composition, variables }));
+        disposers.push(m.renderCaseMix(body, { civil: cm.civil_nature_of_suit, criminal: cm.criminal_offense, composition: cm.sentencing_composition, variables, profile: prof.data }));
       });
     }),
   );

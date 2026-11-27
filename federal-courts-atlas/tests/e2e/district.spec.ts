@@ -26,7 +26,7 @@ async function open(page: Page, id: string): Promise<void> {
   await expect(page.locator('#sec-stats .stat-list').first()).toBeVisible({ timeout: 15_000 });
 }
 
-const SAMPLE = ['vaed', 'txed', 'cand', 'nmid', 'dcd', 'akd', 'wyd', 'prd', 'gud'];
+const SAMPLE = ['vaed', 'txed', 'cand', 'nmid', 'dcd', 'akd', 'wyd', 'prd', 'gud', 'flnd', 'txwd'];
 
 for (const id of SAMPLE) {
   test(`profile ${id} renders every section without errors`, async ({ page }, testInfo) => {
@@ -43,7 +43,7 @@ for (const id of SAMPLE) {
     // No em-dash in any rendered text.
     const text = await page.locator('body').innerText();
     expect(text.includes('\u2014'), 'em-dash in page text').toBe(false);
-    if (['vaed', 'nmid', 'wyd', 'txed'].includes(id) || testInfo.project.name === 'desktop') {
+    if (['vaed', 'nmid', 'wyd', 'txed', 'flnd', 'txwd'].includes(id) || testInfo.project.name === 'desktop') {
       await settle(page);
       await shot(page, testInfo, `district-${id}`);
     }
@@ -233,6 +233,163 @@ test('dark mode profile', async ({ page }, testInfo) => {
   await page.locator('#sec-mix').scrollIntoViewIfNeeded();
   await settle(page);
   await shot(page, testInfo, 'district-txed-dark-mix', false);
+});
+
+type Grp = { id: string; label: string; share: number; count: number; derived?: boolean };
+type Blk = { year: number; total: number; groups: Grp[]; national_note?: { text: string }; other_years?: Array<{ year: number; total: number; groups: Grp[]; national_note?: { text: string } }> };
+type Var = { id: string; lane?: string; preliminary_years?: number[] };
+
+test('IDB FY 2026 values carry "(preliminary)" on the profile; FCMS and USSC years do not', async ({ page }) => {
+  const vars = readJson('variables.json') as Var[];
+  const prof = readJson('profiles/vaed.json') as { key_stats: Array<{ variable: string; year: number; featured: boolean }>; case_mix: Record<string, Blk> };
+  await open(page, 'vaed');
+  for (const b of await page.locator('.stat-group__more').all()) await b.click();
+  let prelim = 0;
+  for (const row of prof.key_stats) {
+    const v = vars.find((x) => x.id === row.variable)!;
+    const period = page.locator(`#stat-${row.variable} .stat__period`);
+    if (v.preliminary_years?.includes(row.year)) {
+      await expect(period).toHaveText(`FY ${row.year} (preliminary)`);
+      prelim++;
+    } else {
+      await expect(period).not.toContainText('preliminary');
+    }
+  }
+  expect(prelim).toBeGreaterThanOrEqual(10);
+  // The case-mix blocks label the same year.
+  await page.locator('#sec-mix').scrollIntoViewIfNeeded();
+  for (const id of ['civil', 'criminal', 'civil-ends', 'criminal-ends']) {
+    await expect(page.locator(`#mix-${id} .mix__sub`)).toContainText('FY 2026 (preliminary)');
+  }
+  await expect(page.locator('#mix-sentenced .mix__sub')).not.toContainText('preliminary');
+});
+
+test('how cases end: IDB disposition groups with a year switch, and offenses of people sentenced', async ({ page }, testInfo) => {
+  const prof = readJson('profiles/vaed.json') as { case_mix: Record<string, Blk> };
+  const civ = prof.case_mix.civil_disposition!;
+  const cri = prof.case_mix.criminal_disposition!;
+  const off = prof.case_mix.sentenced_offense!;
+  await open(page, 'vaed');
+  await page.locator('#sec-mix').scrollIntoViewIfNeeded();
+  await page.locator('#mix-ends').scrollIntoViewIfNeeded();
+  await expect(page.locator('#mix-ends h3')).toHaveText('How cases end');
+  // Civil: one row per group, in the published order, with share and count.
+  const rows = page.locator('#mix-civil-ends .mix__row');
+  await expect(rows).toHaveCount(civ.groups.length);
+  for (const [i, g] of civ.groups.entries()) {
+    await expect(rows.nth(i).locator('.mix__label')).toHaveText(g.label);
+    await expect(rows.nth(i).locator('.mix__val')).toContainText(`${g.share.toFixed(1)}%`);
+    await expect(rows.nth(i).locator('.mix__count')).toContainText(g.count.toLocaleString('en-US'));
+  }
+  await expect(page.locator('#mix-civil-ends .mix__sub')).toContainText(`${civ.total.toLocaleString('en-US')} civil cases closed`);
+  // Switch to the latest year with a published cross-check.
+  const prev = civ.other_years![0]!;
+  await page.locator('#mix-civil-ends').getByRole('button', { name: `FY ${prev.year}`, exact: true }).click();
+  await expect(page.locator('#mix-civil-ends .mix__sub')).toHaveText(`FY ${prev.year} · ${prev.total.toLocaleString('en-US')} civil cases closed`);
+  await expect(rows.first().locator('.mix__val')).toContainText(`${prev.groups[0]!.share.toFixed(1)}%`);
+  await expect(page.locator('#mix-civil-ends')).not.toContainText('have not yet been checked');
+  // An all-district note appears in a year when one MDL docket is above a quarter of all civil cases closed.
+  await expect(page.locator('#mix-civil-ends .mix__natnote')).toHaveCount(prev.national_note ? 1 : 0);
+  if (prev.national_note) await expect(page.locator('#mix-civil-ends .mix__natnote')).toHaveText(prev.national_note.text);
+  await page.locator('#mix-civil-ends summary', { hasText: 'What the groups mean' }).click();
+  await expect(page.locator('#mix-civil-ends .mix__defs p')).toContainText('Settled means');
+  // Criminal: guilty pleas first, the AO's D-4 groups.
+  const plea = cri.groups.find((g) => g.id === 'plea')!;
+  await expect(page.locator('#mix-criminal-ends .mix__row').first().locator('.mix__label')).toHaveText(plea.label);
+  await expect(page.locator('#mix-criminal-ends .mix__row').first().locator('.mix__val')).toContainText(`${plea.share.toFixed(1)}%`);
+  await expect(page.locator('#mix-criminal-ends .source-chip').first()).toContainText('Derived');
+  await settle(page);
+  await shot(page, testInfo, 'district-vaed-ends', false);
+  // Offenses of people sentenced: USSC shares as published; only "all other" is derived.
+  await page.locator('#mix-sentenced').scrollIntoViewIfNeeded();
+  const srows = page.locator('#mix-sentenced .mix__row');
+  await expect(srows).toHaveCount(off.groups.length);
+  for (const [i, g] of off.groups.entries()) {
+    await expect(srows.nth(i).locator('.mix__label')).toHaveText(g.label);
+    await expect(srows.nth(i).locator('.mix__val')).toContainText(`${g.share.toFixed(1)}%`);
+    await expect(srows.nth(i).locator('.source-chip__formula')).toHaveCount(g.derived ? 1 : 0);
+  }
+  await expect(page.locator('#mix-sentenced .mix__sub')).toContainText(`FY ${off.year}`);
+  await expect(page.locator('#mix-sentenced-sec .mix-aside__links a', { hasText: 'Child pornography' })).toHaveAttribute('href', '#/?v=sentenced_child_pornography_pct');
+  await settle(page);
+  await shot(page, testInfo, 'district-vaed-sentenced', false);
+});
+
+test('bench notes that duty stations are not in the FJC export', async ({ page }) => {
+  await open(page, 'vaed');
+  await page.locator('#sec-bench').scrollIntoViewIfNeeded();
+  await expect(page.locator('#sec-bench .bench__note--duty')).toHaveText('Duty stations are not in the FJC directory export, so judges are listed by district.');
+});
+
+test('multidistrict litigation note on N.D. Fla., near the statistics it bears on', async ({ page }, testInfo) => {
+  type Mdl = { dockets: Array<{ docket: string; name?: string; sentences: Array<{ text: string; year: number }>; history: Array<{ text: string }> }> };
+  const prof = readJson('profiles/flnd.json') as { mdl_context?: Mdl };
+  const mdl = prof.mdl_context!;
+  expect(mdl.dockets.map((d) => d.docket)).toContain('2885');
+  await open(page, 'flnd');
+  // In brief: next to the sentences.
+  const brief = page.locator('#sec-standout .mdl-note--compact');
+  await expect(brief).toBeVisible();
+  for (const d of mdl.dockets) for (const s of d.sentences) await expect(brief).toContainText(s.text);
+  // Key statistics: the full note with names, history and the rule, above the measures.
+  const full = page.locator('#mdl-note');
+  for (const d of mdl.dockets) {
+    await expect(full).toContainText(`MDL ${d.docket}`);
+    if (d.name) await expect(full).toContainText(d.name);
+    for (const h of d.history) await expect(full).toContainText(h.text);
+  }
+  await expect(full.locator('.source-chip')).toContainText('Derived');
+  await brief.getByRole('link', { name: /What an MDL docket is/ }).click();
+  await expect(full).toBeFocused();
+  await expect(full).toBeInViewport();
+  await settle(page);
+  await shot(page, testInfo, 'district-flnd-mdl', false);
+  // Case mix: the note for the IDB years shown there.
+  await page.locator('#sec-mix').scrollIntoViewIfNeeded();
+  await expect(page.locator('#sec-mix .mdl-note')).toContainText('MDL 2885');
+  // A district without a dominant docket has no note.
+  await open(page, 'vaed');
+  await renderAll(page);
+  await expect(page.locator('.mdl-note')).toHaveCount(0);
+});
+
+test('dark mode: MDL note and how cases end', async ({ page }, testInfo) => {
+  await page.addInitScript(() => localStorage.setItem('fca-theme', 'dark'));
+  await open(page, 'flnd');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.locator('#mdl-note').scrollIntoViewIfNeeded();
+  await settle(page);
+  await shot(page, testInfo, 'district-flnd-dark-mdl', false);
+  await page.locator('#sec-mix').scrollIntoViewIfNeeded();
+  await page.locator('#mix-ends').scrollIntoViewIfNeeded();
+  await settle(page);
+  await shot(page, testInfo, 'district-flnd-dark-ends', false);
+});
+
+test('axe: the MDL note, year switches and new case-mix blocks have no serious or critical violations (flnd)', async ({ page }) => {
+  test.setTimeout(90_000);
+  const problems: string[] = [];
+  for (const theme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme: theme, reducedMotion: 'reduce' });
+    await open(page, 'flnd');
+    await renderAll(page);
+    await page.locator('#mix-civil-ends').getByRole('button', { name: 'FY 2025', exact: true }).click();
+    await page.locator('#mix-civil-ends summary', { hasText: 'What the groups mean' }).click();
+    await page.addScriptTag({ path: path.join('node_modules', 'axe-core', 'axe.min.js') });
+    const v = await page.evaluate(async () => {
+      const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
+      // @ts-expect-error injected by addScriptTag
+      const all = await window.axe.run(document, { runOnly: { type: 'tag', values: tags }, rules: { 'target-size': { enabled: false } }, resultTypes: ['violations'] });
+      // Same exclusion as a11y.spec.ts: glossary terms inside sentences are exempt from WCAG 2.5.8.
+      // @ts-expect-error injected by addScriptTag
+      const ts = await window.axe.run({ include: [document], exclude: [['.term']] }, { runOnly: { type: 'rule', values: ['target-size'] }, resultTypes: ['violations'] });
+      return [...all.violations, ...ts.violations] as Array<{ id: string; impact: string; nodes: Array<{ target: string[] }> }>;
+    });
+    for (const x of v.filter((y) => y.impact === 'serious' || y.impact === 'critical')) {
+      problems.push(`${theme}: ${x.id} (${x.impact}) ${x.nodes.slice(0, 4).map((n) => n.target.join(' ')).join(' | ')}`);
+    }
+  }
+  expect(problems, problems.join('\n')).toEqual([]);
 });
 
 test('all 94 profiles render every section without console errors', async ({ page, isMobile }) => {

@@ -78,7 +78,7 @@
  },
  "not_fetched_rate_limit": {
   "lane": "cases",
-  "description": "Districts whose RECAP query has not been fetched: CourtListener's free-tier quota was exhausted (HTTP 429 with Retry-After 2,497 s after ~50 requests in an hour, then Retry-After 69,262 s after ~124 requests in a day, on 2026-11-27). Re-run `python -m pipeline.cases.build` after the quota resets; cached responses are reused and each run makes at most 0 new requests, coverage first.",
+  "description": "Districts whose RECAP query has not been fetched: CourtListener's free-tier quota was exhausted (HTTP 429 with Retry-After 2,497 s after ~50 requests in an hour, then Retry-After 69,262 s after ~124 requests in a day, on 2026-11-27). Re-run `python -m pipeline.cases.build` after the quota resets; cached responses are reused and each run makes at most 45 new requests by default (environment variable CASES_RUN_BUDGET), coverage first.",
   "variables": [],
   "districts": [
    "wied",

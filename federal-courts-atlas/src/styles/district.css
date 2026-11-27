@@ -1727,3 +1727,209 @@
     outline-offset: 2px;
   }
 }
+
+/* ---- Case mix: section subheads, how cases end, offenses of people sentenced ------------- */
+
+.mix-sec {
+  margin-top: var(--space-8);
+}
+
+.mix-sec__title {
+  margin-bottom: var(--space-1);
+}
+
+.dsec--mix .dsec__body > .mix-sec__title:first-child {
+  margin-bottom: var(--space-4);
+}
+
+.mix-sec__dek {
+  margin-bottom: var(--space-5);
+}
+
+.mix__labelbox {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.mix__labelbox .fx-hint {
+  flex: none;
+}
+
+.mix__years {
+  margin-top: var(--space-3);
+}
+
+.mix__years .seg__btn {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font-size: var(--fs-xs);
+}
+
+@media (pointer: coarse) {
+  .mix__years .seg__btn {
+    min-height: var(--tap);
+  }
+}
+
+.mix__defs summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--color-link);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.mix__defs p {
+  margin-top: var(--space-2);
+  max-width: var(--measure);
+  color: var(--color-text-2);
+}
+
+.mix-aside {
+  align-self: start;
+  display: grid;
+  gap: var(--space-2);
+  max-width: var(--measure);
+  padding-top: var(--space-2);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--color-text-2);
+}
+
+@media (min-width: 56rem) {
+  .mix-aside {
+    padding: var(--space-2) 0 0 var(--space-5);
+    border-left: 1px solid var(--color-rule);
+  }
+}
+
+.mix-aside__title {
+  margin-top: var(--space-2);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+
+.mix-aside__title:first-child {
+  margin-top: 0;
+}
+
+.mix-aside__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mix-aside__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-weight: var(--fw-semibold);
+}
+
+/* ---- Multidistrict litigation note ------------------------------------------------------- */
+
+.mdl-note {
+  max-width: var(--measure-wide);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-surface);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--color-text-2);
+}
+
+.mdl-note:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.mdl-note--compact {
+  margin: var(--space-5) 0 0;
+  padding: var(--space-3) var(--space-4);
+}
+
+.mdl-note__kicker {
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-2);
+}
+
+.mdl-note__intro {
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+.mdl-note__item + .mdl-note__item {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-rule);
+}
+
+.mdl-note__docket {
+  color: var(--color-text);
+}
+
+.mdl-note__case {
+  color: var(--color-text-3);
+  font-size: var(--fs-xs);
+  /* A case number such as 3:25-md-03140 must not break at its hyphens (recheck, Nov 27). */
+  white-space: nowrap;
+}
+
+.mdl-note__list {
+  margin: var(--space-1) 0 0;
+  padding-left: 1.1em;
+}
+
+.mdl-note__list li + li {
+  margin-top: var(--space-1);
+}
+
+.mdl-note__history {
+  color: var(--color-text-2);
+}
+
+.mdl-note__rule {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+.mdl-note__more {
+  margin-top: var(--space-2);
+  font-size: var(--fs-xs);
+}
+
+.mdl-note__more a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+.bench__note--duty {
+  margin-top: var(--space-2);
+}
+
+.mdl-note--compact .mdl-note__text {
+  margin-top: 2px;
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.mdl-note--compact .mdl-note__item + .mdl-note__item {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+}

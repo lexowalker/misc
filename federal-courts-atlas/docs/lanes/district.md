@@ -12,13 +12,14 @@ reads "No data" and a missing file shows a designed empty state.
 | `src/pages/district/common.ts` | Formatting that never rounds away a published fraction, rank phrasing, rank strip, formula hint, section shell, `whenNear()` lazy trigger, date helpers, view toggle. |
 | `src/pages/district/stats.ts` | Key statistics by family, and "What stands out" with per-sentence verification. |
 | `src/pages/district/bench.ts` | The bench timeline and its table (lazy chunk). |
-| `src/pages/district/mix.ts` | Nature-of-suit and offense mix bars; sentencing composition chart and table (lazy chunk). |
+| `src/pages/district/mix.ts` | Nature-of-suit and offense mix bars; how cases end (civil and criminal dispositions, with a year switch); offenses of people sentenced (USSC); sentencing composition chart and table (lazy chunk). |
+| `src/pages/district/context.ts` | The multidistrict litigation (MDL) note, in a compact form under "What stands out" and in full above the key statistics and in the case mix. |
 | `src/pages/district/geography.ts` | Divisions, places of holding court, statutory carve-outs, county list, courthouse buildings (lazy chunk). |
 | `src/pages/district/cases.ts` | Recent CourtListener items or the empty state (lazy chunk). |
 | `src/styles/district.css` | All district styles, including four page-scoped chart colors (below). |
 | `tests/e2e/district.spec.ts` | 21 tests, run in both projects (the 94-district sweep runs on desktop only). |
 
-Shared modules touched (additive only): `src/components/source-chip.ts` gained an optional `compact` flag (default
+Shared modules touched (additive only): `src/data/types.ts` gained `MixYearBlock`, the `Mdl*` types, optional `MixGroup.derived/formula`, `MixBlock.definitions/order/other_years` (and `formula` may be null), `DistrictProfile.mdl_context` and the three new `case_mix` keys (profiles pass, Nov 27); `src/pages/district.ts` passes the profile to `renderCaseMix` (one line). `src/components/source-chip.ts` gained an optional `compact` flag (default
 `false`): publisher and dataset name only, with the full dataset, vintage and retrieval date in the link title,
 and duplicate short names collapsed. No signature changed. `src/styles/pages.css` was not edited; its existing
 district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are still used.
@@ -52,14 +53,21 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    When a district has no outlier sentence (profile `kind` `size_and_circuit`: oknd, waed and idd in this build),
    the size-and-circuit sentence is followed by the note that no measure used for the summary puts the district at
    an extreme, so the section's dek is not read as covering the size sentence (recheck lane, Nov 27).
+   For the 8 districts with a profile `mdl_context` (azd, flnd, laed, mnd, nhd, njd, ohnd, scd), a compact
+   "Context: multidistrict litigation" note follows the sentences: each docket (named only when GovInfo verifies
+   it) and its sentences, a derived source chip, and a link that scrolls to the full note.
 4. **Key statistics.** Grouped as Speed, Workload, Sentencing, Case mix. The 15 featured measures show first;
-   "Show N more … measures" reveals the rest (41 in all). Each row: label and period; value with unit (or
+   "Show N more … measures" reveals the rest (45 in all). Each row: label and period; value with unit (or
    "No data", plus "Last reported for FY …" when older data exist); rank phrased with an explicit direction
    ("84th highest of 94", "Highest of 94", "Lowest of 51") with an ƒ popover giving the rank formula and a rank
    strip from lowest (left) to highest (right); national figure or "None published"; a sparkline over the
    variable's full year range with gaps left as gaps; a compact source chip ("Derived" plus formula where the
    latest cell is derived); cell notes (small bases, approximate population, FCMS flagged cells); and "About
    this measure" (explainer, "Higher means", series breaks, caveats, links to the table and the map).
+   Periods use `periodLabelFor` with the catalog record, so IDB FY 2026 rows read "FY 2026 (preliminary)" (also in
+   "Last reported for" and in the claim line of "See the measure"). For the MDL districts the full note
+   (`#mdl-note`) sits above the measures: what an MDL docket is, one line per district-year, the history of the
+   same docket, the rule for when a note appears, and the sources (IDB file, civil codebook, GovInfo record).
 5. **The bench over time.** One row per FJC service record: initials avatar ringed in the party color, name
    (last name only on phones), a D / R / O letter tag (the non-color cue), and a bar from start of service to
    senior status in the party color, then a fainter band of the same hue for senior service. Ongoing service
@@ -70,6 +78,8 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    table with the same rows. The party is the appointing president's as the FJC records it; the note under the
    chart says it says nothing about how a judge decides cases. No photos and no judge-level statistics. The
    three territorial courts get an empty state explaining that Article IV judges are not in the FJC directory.
+   A plain line under the chart says duty stations are not in the FJC directory export, so judges are listed by
+   district (judges lane gap `duty_station_not_in_fjc_export`).
 6. **Case mix.** IDB civil nature-of-suit mix and criminal offense mix for the latest IDB year: one bar per
    group (share, with the count in parentheses) and a tick for the all-district share; 8 groups first, then
    "Show all". Each block keeps the lane's basis text, a small-base note under 30 cases, the IDB FY 2026
@@ -78,6 +88,14 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    from the FY 2018 method), with the FY 2018 method change marked in the second panel. Columns resting on
    fewer than 30 people are drawn lighter. Hover, or focus the chart and use the arrow keys, for a tooltip with
    all four shares and the number of people; "View as table" gives every year of both series.
+   The case mix now has subheads: **New cases and charges** (the two mixes above, labelled "FY 2026 (preliminary)"
+   from the IDB variables' `preliminary_years`), the MDL note for the IDB years shown (MDL districts only), **How
+   cases end** (civil and criminal disposition groups in a fixed reading order, national ticks, a "What the groups
+   mean" note from the codebook, and a FY 2026 (preliminary) / FY 2025 switch; FY 2025 is the latest year with an AO
+   cross-check, and in that year an all-district note says 147,231 of the 407,539 civil cases closed nationally were
+   in MDL 2885) and **Offenses of people sentenced** (USSC types for FY 2025 with shares and counts as published, the
+   atlas-combined "All other offense types" row carrying its own ƒ formula, and a side note on how this differs from
+   the charge mix, with links to the USSC offense measures on the map).
 7. **Geography.** Statutory divisions (name, places where court is held, member counties by name) or, for
    districts without divisions, the statute's places of holding court; statutory carve-outs (Yellowstone,
    Fort Bragg and Camp MacKall, FCI Butner); the full county list (collapsible); courthouse buildings in use
@@ -136,8 +154,9 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
 
 ## Tests
 
-`CI=1 E2E_PORT=4202 npx playwright test tests/e2e/district.spec.ts --trace off`: **41 passed, 1 skipped**
-(the 94-district sweep runs on desktop only). The smoke spec also passes on port 4202 (31 passed, 1 skipped by
+`CI=1 E2E_PORT=4501 npx playwright test tests/e2e/district.spec.ts --trace off` (profiles pass, Nov 27): **57 passed,
+1 skipped** (the 94-district sweep runs on desktop only); with `web-data.spec.ts` and `a11y.spec.ts` on the same
+port: 107 passed, 1 skipped. Earlier: 41 passed, 1 skipped on port 4202. The smoke spec also passes on port 4202 (31 passed, 1 skipped by
 design, both projects). Expectations about numbers are read from `public/data/` inside the tests.
 
 - vaed, txed, cand, nmid, dcd, akd, wyd, prd, gud: every section renders, no console errors, no horizontal
@@ -154,10 +173,17 @@ design, both projects). Expectations about numbers are read from `public/data/` 
 - Cases link to CourtListener; prev / next and compare links.
 - Section nav updates the URL; `?s=geography` deep link.
 - Dark mode capture; all 94 profiles render every section without errors or overflow.
+- Profiles pass (Nov 27): vaed IDB rows and case-mix blocks read "FY 2026 (preliminary)" while FCMS and USSC rows
+  do not; how cases end (every row, label, share and count from the profile; the FY 2025 switch; the all-district
+  MDL note; the definitions); offenses of people sentenced (rows, the single derived row, map links); the bench
+  duty-station line; the flnd MDL note in brief, in key statistics (names, history, derived chip, the scroll link
+  focuses it) and in the case mix, and no note on vaed; dark captures; an axe scan of flnd in both themes after
+  switching years and opening the definitions (0 serious or critical). flnd and txwd joined the sample sweep.
 
 Review captures (JPEG) in `tests/e2e/__screenshots__/{desktop,mobile}/`: `district-<id>.jpg` for the sample
 districts, `district-gud-full.jpg`, `district-txed-dark.jpg`, `district-txed-dark-mix.jpg`,
-`district-bench-tooltip.jpg`. Mobile full-page captures are clipped at the encoder limit (8,000 CSS px) by the
+`district-bench-tooltip.jpg`, and from the profiles pass `district-vaed-ends.jpg`, `district-vaed-sentenced.jpg`,
+`district-flnd-mdl.jpg`, `district-flnd-dark-mdl.jpg`, `district-flnd-dark-ends.jpg`. Mobile full-page captures are clipped at the encoder limit (8,000 CSS px) by the
 shared helper.
 
 ## Issues for other lanes

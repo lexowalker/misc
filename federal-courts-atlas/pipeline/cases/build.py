@@ -52,7 +52,8 @@ REQUEST_BUDGET = 300   # whole-lane ceiling (all runs)
 # Per-run ceiling on new network requests. On 2026-11-27 CourtListener answered this pipeline with HTTP 429
 # twice: after ~50 requests within an hour (Retry-After 2,497 s), and after ~124 requests since 04:18 UTC
 # (Retry-After 69,262 s, i.e. a daily quota). A run stops at 45 new requests; later runs continue from the cache.
-RUN_BUDGET = int(os.environ.get("CASES_RUN_BUDGET", "45"))
+RUN_BUDGET_DEFAULT = 45
+RUN_BUDGET = int(os.environ.get("CASES_RUN_BUDGET", str(RUN_BUDGET_DEFAULT)))
 
 _requests_made = 0
 _offline = False
@@ -365,7 +366,8 @@ def main() -> None:
                                "was exhausted (HTTP 429 with Retry-After 2,497 s after ~50 requests in an hour, then "
                                "Retry-After 69,262 s after ~124 requests in a day, on 2026-11-27). Re-run "
                                "`python -m pipeline.cases.build` after the quota resets; cached responses are reused "
-                               f"and each run makes at most {RUN_BUDGET} new requests, coverage first.",
+                               f"and each run makes at most {RUN_BUDGET_DEFAULT} new requests by default "
+                               "(environment variable CASES_RUN_BUDGET), coverage first.",
                    districts=unfetched, reason="API rate limit (free tier); backed off, not retried in a loop.")
     if gap_d:
         record_gap(LANE, "fewer_than_3_cases",

@@ -45,15 +45,19 @@ src/map/thumbnail.ts           small-multiple thumbnail maps (static SVG, decima
 src/map/locator.ts             locator map: one district highlighted in state context + national key map
 src/map/labels.ts              greedy collision-avoided label placement; canvas text measuring
 src/components/                tooltip, legend (+ No-data hatch), data-table, sparkline, year-slider, glossary, source-chip, states
-src/content/glossary.ts        47 plain-English, cited definitions (all 31 required terms + procedure terms used on Learn)
-src/content/events.ts          Booker, TC Heartland, First Step Act, COVID-19 with exact dates + periodYear() mapping
+src/content/glossary.ts        53 plain-English, cited definitions (all 31 required terms + procedure terms used on Learn
+                               + terms used in measure names); GlossaryId type lists every id
+src/content/variable-terms.ts  which glossary terms each measure's label uses (typed by GlossaryId) + fixed heading phrases
+src/content/events.ts          Booker, TC Heartland, First Step Act, COVID-19 with exact dates, eventDateLabel() (AP style)
+                               + periodYear() mapping
 src/content/stories.ts         story prose with {key} placeholders, filled at runtime from public/data/stories/ (stories lane)
 src/pages/                     home (+ home-switcher), district (+ district/), compare, stories, story (+ story/), courtroom,
                                learn (+ learn-diagrams), search, sources, table, not-found
 src/courtroom/                 three.js scene, seats, floor plan, panel (courtroom lane; loaded only on #/courtroom)
 src/styles/                    tokens.css, base.css, shell.css, components.css, map.css (eager); one CSS file per page chunk
-tests/e2e/                     one spec per page lane, plus smoke, map, choropleth, perf, web-data and integration;
-                               __screenshots__/{desktop,mobile}/*.jpg
+tests/e2e/                     one spec per page lane, plus smoke, map, choropleth, perf, web-data, integration, a11y,
+                               glossary-labels and visual; __screenshots__/{desktop,mobile,tablet}/*.jpg (review
+                               captures, git-ignored); visual.spec.ts-snapshots/*.png (committed baselines)
 ```
 
 ## Design system (`src/styles/tokens.css`)
@@ -84,7 +88,11 @@ Every color, size, radius, shadow, z-index and duration is a custom property; co
 - 5-step quantile scale, pale periwinkle to deep navy; legend reads **Lowest … Highest** with break values beneath
   and a separate hatched **No data** swatch; thin white district borders (0.6px) and heavier white state borders
   (1.4px), both `vector-effect: non-scaling-stroke`; white background; navy rounded-square Home, +, − buttons
-  stacked bottom-right.
+  stacked bottom-right at every width (36 px with a mouse, 44 px on touch screens). On phones the map is only about
+  235 px tall, so the stack hangs below the map's bottom edge: its upper half sits over the Atlantic east of the
+  Southeast coast, its lower half in a 68 px strip under the map that it shares with the inset names (they stop
+  short of it). `map.spec.ts` checks the column, the 44 px targets and that no district, inset frame or inset name
+  lies under the stack at national view. (Until Nov 27 the phone layout put the three buttons in a row.)
 - **Light ramp** (OKLCH, lightness evenly spaced, hue drifting 278°→266° so the light end reads lavender-periwinkle
   and the dark end true navy): `#e0e5fe` `#acb7ee` `#7388da` `#435cb7` `#182e72` (CIELAB L* 91, 75, 58, 42, 21).
 - **Dark ramp**: `#2a3556` `#3f5190` `#6074c8` `#93a3ee` `#d4dbff` (L* 23, 36, 51, 68, 88). On a dark ground,
@@ -204,6 +212,17 @@ Shorthand addresses go in `ALIASES` there and are rewritten in the address bar (
 - Reusable pieces: `ChoroplethView` / `AtlasMap`, `renderLocator`, `renderThumbnail`, `YearSlider`,
   `renderSparkline` (shared domains and a dashed national reference line are options), `DataTable`, `PlaceSearch`,
   `term()` / `rich()` for glossary terms, and the designed empty states in `src/components/states.ts`.
+- **Glossary terms in labels.** `variableLabel(v)` renders a measure's name with the terms listed for it in
+  `src/content/variable-terms.ts`; `phraseLabel(text)` does the same for fixed headings ("nature of suit",
+  "guideline range", §5K1.1, §5K3.1); `glossLabel(text, refs)` is the general form. They use
+  `term(id, text, { label: true })`: the definition is referenced from one shared hidden container instead of sitting
+  inside the label, so a heading, a row header or anything named by its content keeps the plain label as its name;
+  where the line is under 24 px tall, padding with an equal negative margin makes the target 24 px without moving
+  the text; punctuation touching a term ("(§5K1.1)") stays on its line. Used on the home measure header, compare
+  rows, the `#/table/<variable>` heading, the profile's key statistics and its case-mix headings. The home switcher's
+  thumbnails are buttons, so the family's terms are listed under the strip instead. A tap opens a term's
+  definition: a press focuses the button in Chrome, so the click now toggles from the state before the press
+  (before Nov 27 a tap on Android opened and closed it at once).
 
 ## Pages
 
@@ -252,8 +271,28 @@ each district, counted in the test from the real `districts-hi.topo.json` and la
 latest period has values; earlier periods are empty to exercise the No-data hatch and the slider. Nothing is
 written to `src/` or `public/`.
 
-Screenshots (JPEG, q80) go to `tests/e2e/__screenshots__/{desktop,mobile}/`, about 12 MB in total. They are review
-captures for the UI audit, not pixel-diff baselines: the data changes as lanes publish.
+Screenshots (JPEG, q80) go to `tests/e2e/__screenshots__/{desktop,mobile,tablet}/`, about 160 MB in total
+(git-ignored; 153 to 162 MB measured with `du -sh` on Nov 27, growing as specs add captures). They are review captures for the UI audit, not pixel-diff
+baselines: the data changes as lanes publish.
+
+**Visual regression** (`visual.spec.ts`, Nov 27). `toHaveScreenshot()` compares a few views that should change only
+when the design does, at both widths: the two Learn diagrams, the not-found page (light and dark), the search page
+before a query (the index counts in the help line are masked), the home map for authorized judgeships in FY 2015
+with courthouse dots and city labels hidden (light and dark), and the E.D. Va. profile header. Animations are off,
+motion is reduced, fonts are loaded, the caret is hidden, captures are clipped to the element at CSS-pixel scale,
+and `maxDiffPixelRatio` is 0.002. The 16 baselines (8 views at 2 widths, about 0.9 MB) live in `tests/e2e/visual.spec.ts-snapshots/`,
+which is committed (only `__screenshots__/` is git-ignored). They are specific to headless Chromium from Playwright
+1.63.0 on Linux (file names end in `-linux`); fonts and anti-aliasing differ elsewhere, so run the spec on the same
+kind of machine. After a deliberate design change, look at the failing diff in `test-results/`, then refresh with
+`CI=1 E2E_PORT=<port> npx playwright test tests/e2e/visual.spec.ts --update-snapshots`, look at the new PNGs, and
+run the spec twice more to confirm it is stable. A data rebuild that changes FY 2015 judgeships or the E.D. Va. name
+would also need a refresh.
+
+**Glossary terms on measure labels** (`glossary-labels.spec.ts`, Nov 27): every term id in
+`src/content/variable-terms.ts` exists (also enforced by the typecheck through `GlossaryId`), every marked phrase
+occurs in its measure's current label, glossary cross-references resolve, and the labels on the home header and
+switcher, compare rows, table heading and profile open their definition by keyboard and by tap, keep the plain
+label as the heading's name, give a target at least 24 px tall, and do not change the heading's height.
 
 ## Performance
 
@@ -327,3 +366,33 @@ legend track is now `clamp(12.5rem, 52vw, 15rem)` (was 10rem at 375 px), because
 Closed since the foundation report: the courthouse and search files are published and in use; the web lane emits
 `ranks` as `{district: {year: rank}}`, `ranked_of` and list-form `caveats`; the profile body, compare statistics,
 stories and courtroom are built (see [Pages](#pages)); the `#/sources` page groups its files by kind of data.
+
+UX follow-up (Nov 27, completeness review of the brief):
+
+- **Glossary terms on measure labels**, with six new cited entries (below-range sentence, guilty plea, jury
+  selection, median time to trial, active judge, patent case). See [How pages plug in](#how-pages-plug-in).
+- **Map controls** are a vertical stack at every width, as the brief specifies (phones had a row). See
+  [The map style](#the-map-style-clients-choice-and-its-palette).
+- **Time machine events show their real dates** (AP style: Jan. 12, 2005; May 22, 2017; Dec. 21, 2018; March 13,
+  2020) as a second line under each name, and a note under the slider says why a marker sits where it does
+  ("Fiscal years run from October 1 to September 30, so an event on Dec. 21, 2018 (First Step Act) sits at FY 2019";
+  for the September 30 judge counts it names the count instead). On phones the event buttons show name, period and
+  date and are 44 px tall. Wider labels collide more, so `YearSlider.layoutEvents` now scores every placement of the
+  (at most four) labels on up to four rows, centered or as a flag that starts or ends at its marker, and keeps the
+  one with no overlap, no leader line through another label and nothing past the track's ends, then the fewest rows.
+  It also runs for a single event (TC Heartland at the right end of the FY 2006 to 2017 series used to hang past the
+  track) and again once web fonts load. Checked for every distinct year range in the catalog at 1280, 1024, 800, 600
+  and 560 px: no overlaps, no crossings.
+- **IDB FY 2026 reads "(preliminary)"** on the home map's legend year, the national figure, the map's table caption
+  and the live announcement, and the slider shows "Preliminary" under the year (its spoken value ends in
+  "(preliminary)"), through `periodLabelFor` and `YearSlider`'s `isPreliminary` option. The final recheck (Nov 27)
+  added the same label to the `#/table/<variable>` period menu, to story chart data-table rows from a chart's
+  `prelim_from` year, and to the spoken label of `renderSparkline` (its `variable` option now accepts
+  `preliminary_years`).
+- At 545 to 640 px with a mouse, the switcher's next arrow hung 12 px past the page edge and the page scrolled
+  sideways. The arrows now sit inside the edge where the strip is full-bleed.
+- Full suite after these changes (`CI=1 E2E_PORT=4502 npx playwright test --trace off`, Nov 27): 357 passed,
+  11 skipped by design, 0 failed, including `a11y.spec.ts` (0 serious or critical) and `visual.spec.ts` (also run
+  four more times on its own: stable).
+- Not checked: real touch devices (taps were checked in Chromium's mobile emulation only), screen readers, and
+  window widths other than those listed.

@@ -730,23 +730,49 @@ th[aria-sort='descending'] {
   color: var(--color-text-3);
 }
 
-/* Labels that would collide sit on a second row with a longer leader line. The second row clears the first by
-   a full label height (two lines, more than 24 px), so neighboring markers never overlap (WCAG 2.2 target size). */
+/* Labels that would collide sit on a higher row (--row, set by YearSlider.layoutEvents) with a longer leader
+   line, or as a flag that starts or ends at its marker. Rows are a full label height apart (two lines, more
+   than 24 px), so neighboring markers never overlap (WCAG 2.2 target size), and no leader crosses a label. */
 .year-slider__track.has-raised {
-  padding-top: 4.65rem;
+  padding-top: calc(2.4rem + var(--event-rows, 1) * 2.25rem);
 }
 
 .year-slider__track.has-raised .year-slider__events {
-  height: 4.65rem;
+  height: calc(2.4rem + var(--event-rows, 1) * 2.25rem);
 }
 
 .year-slider__event.is-raised {
-  bottom: calc(2px + 2.25rem);
+  bottom: calc(2px + var(--row, 1) * 2.25rem);
 }
 
 .year-slider__event.is-raised::after {
-  height: calc(14px + 2.25rem);
-  bottom: calc(-10px - 2.25rem);
+  height: calc(14px + var(--row, 1) * 2.25rem);
+  bottom: calc(-10px - var(--row, 1) * 2.25rem);
+}
+
+.year-slider__event.is-start {
+  transform: translateX(-4px);
+}
+
+.year-slider__event.is-start::after {
+  left: 4px;
+}
+
+.year-slider__event.is-start .year-slider__event-label {
+  align-items: flex-start;
+}
+
+.year-slider__event.is-end {
+  transform: translateX(calc(-100% + 4px));
+}
+
+.year-slider__event.is-end::after {
+  left: auto;
+  right: 4px;
+}
+
+.year-slider__event.is-end .year-slider__event-label {
+  align-items: flex-end;
 }
 
 .year-slider__value {
@@ -908,12 +934,20 @@ th[aria-sort='descending'] {
   text-decoration-style: solid;
 }
 
-/* A term inside a label (measure names, headings, row headers). Vertical padding on an inline box widens the
-   tap and click area to at least 24px without changing the line box, so the label does not move. */
+/* A term inside a label (measure names, headings, row headers). A button lays out as an inline-block one line
+   tall, so where the line is shorter than 24px, padding grows the tap and click area to 24px and an equal
+   negative margin keeps the line box, so the label does not move. */
 .term--label {
-  padding-block: max(2px, calc((24px - 1.2em) / 2 + 0.5px));
+  --term-pad: max(0px, calc((24px - 1lh) / 2));
+  padding-block: var(--term-pad);
+  margin-block: calc(-1 * var(--term-pad));
   text-underline-offset: 0.18em;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Keeps punctuation that touches a term, such as the brackets in "(§5K1.1)", on the term's line. */
+.term-nowrap {
+  white-space: nowrap;
 }
 
 .term--label:focus-visible {

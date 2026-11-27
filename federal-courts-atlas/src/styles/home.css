@@ -844,6 +844,16 @@
     scroll-padding-inline: var(--gutter);
   }
 
+  /* The strip is full-bleed here, so the arrows (narrow windows with a mouse) sit inside the page edge
+     instead of hanging 12px past it, which made the page scroll sideways. */
+  .vswitch__nav--prev {
+    left: var(--space-1);
+  }
+
+  .vswitch__nav--next {
+    right: var(--space-1);
+  }
+
   .home-map .choropleth__legend,
   .home-map .choropleth__after-map,
   .home-map .choropleth__foot,

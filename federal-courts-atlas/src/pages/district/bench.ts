@@ -180,6 +180,7 @@ export function renderBench(host: HTMLElement, o: BenchOptions): () => void {
       term('senior-status', 'senior status'),
       ' (fainter band) and the end of service. Colors and letters show the party of the appointing president as the FJC records it; they say nothing about how a judge decides cases. Initials stand in for photographs.',
     ),
+    h('p', { class: 'bench__note bench__note--duty' }, 'Duty stations are not in the FJC directory export, so judges are listed by district.'),
     h('div', { class: 'bench__source' }, sourceChip({ sourceIds: o.file.source_ids, compact: true }), h('span', { class: 'bench__asof' }, `Records as of ${longDate(o.asOfIso)}.`)),
   );
 

@@ -469,6 +469,149 @@ def test_profile_case_mix_recomputes():
                     assert row[k] == VALUES[vid]["values"].get(d, {}).get(y)
 
 
+DISP_TABLES = {"civil_disposition": "civil_disposition_mix", "criminal_disposition": "criminal_disposition_mix"}
+
+
+def _disp_check(block: dict, df: pd.DataFrame, d: str, y: int):
+    sub = df[(df["district_id"] == d) & (df["period"] == y)]
+    nat = df[(df["district_id"] == "_national") & (df["period"] == y)]
+    assert block["year"] == y
+    assert block["total"] == int(sub["terminated_total"].iloc[0]) == int(sub["count"].sum())
+    assert block["national_total"] == int(nat["terminated_total"].iloc[0])
+    counts = sub.groupby("disp_group")["count"].sum().to_dict()
+    ncounts = nat.groupby("disp_group")["count"].sum().to_dict()
+    assert {g["id"] for g in block["groups"]} >= {k for k, v in counts.items() if v}
+    assert sum(g["count"] for g in block["groups"]) == block["total"]
+    for g in block["groups"]:
+        assert g["count"] == counts.get(g["id"], 0)
+        assert g["share"] == round(100 * g["count"] / block["total"], 1)
+        assert g["national_count"] == ncounts.get(g["id"], 0)
+        assert g["national_share"] == round(100 * g["national_count"] / block["national_total"], 1)
+        assert g["label"] and "\u2014" not in g["label"]
+    assert block["preliminary"] == (y >= 2026)
+
+
+def test_profile_disposition_mix_recomputes():
+    """How cases end: counts from the IDB disposition tables, shares recomputed, FY 2026 flagged preliminary and
+    paired with the latest year that has an AO cross-check."""
+    for d, p in PROFILES.items():
+        for key, tbl in DISP_TABLES.items():
+            df = lane_table("idb", tbl)
+            b = p["case_mix"][key]
+            latest = int(df[df["district_id"] == d]["period"].max())
+            _disp_check(b, df, d, latest)
+            assert b["derived"] and b["formula"] and b["basis"] and b["definitions"]
+            if b["preliminary"]:
+                (prev,) = b["other_years"]
+                assert prev["year"] == latest - 1 and not prev["preliminary"]
+                _disp_check(prev, df, d, prev["year"])
+            else:
+                assert "other_years" not in b
+            assert set(b["source_ids"]) <= set(SOURCES)
+
+
+def test_criminal_disposition_shares_match_map_measures():
+    """The profile's plea and dismissal shares are the same counts as the guilty-plea and dismissal measures."""
+    for d, p in PROFILES.items():
+        b = p["case_mix"]["criminal_disposition"]
+        y = str(b["year"])
+        by = {g["id"]: g for g in b["groups"]}
+        for gid, vid in (("plea", "guilty_plea_pct"), ("dismissed", "criminal_dismissed_pct")):
+            v = VALUES[vid]["values"].get(d, {}).get(y)
+            if v is None:
+                assert b["total"] == 0 or gid not in by
+                continue
+            assert abs(by[gid]["share"] - v) < 0.05 + 1e-9, (d, gid, by[gid]["share"], v)
+
+
+def test_profile_sentenced_offense_equals_ussc():
+    obs = lane_table("ussc", "observations")
+    nat = lane_table("ussc", "national")
+    nat = nat[nat["district_id"] == "US"]
+    for d, p in PROFILES.items():
+        b = p["case_mix"]["sentenced_offense"]
+        y = b["year"]
+        mine = obs[(obs["district_id"] == d) & (obs["period"] == y)].set_index("variable")
+        assert y == int(obs[(obs["district_id"] == d) & (obs["variable"] == "ussc_cases_offense_known")]["period"].max())
+        assert b["total"] == mine.loc["ussc_cases_offense_known", "value"]
+        n = nat[nat["period"] == y].set_index("variable")
+        assert b["national_total"] == n.loc["ussc_cases_offense_known", "value"]
+        ids = [g["id"] for g in b["groups"]]
+        assert ids[:3] == ["drug_trafficking", "immigration", "firearms"] and ids[-1] == "other"
+        assert ("fraud_theft_embezzlement" in ids) == (y >= 2018) and ("fraud" in ids) == (y < 2018)
+        for g in b["groups"]:
+            assert g["share"] == mine.loc[f"ussc_pct_offense_{g['id']}", "value"]
+            assert g["count"] == mine.loc[f"ussc_count_offense_{g['id']}", "value"]
+            assert g["national_share"] == n.loc[f"ussc_pct_offense_{g['id']}", "value"]
+            assert g["national_count"] == n.loc[f"ussc_count_offense_{g['id']}", "value"]
+            assert g["derived"] == (g["id"] == "other")
+            if g["derived"]:
+                assert g["formula"]
+        assert sum(g["count"] for g in b["groups"]) == b["total"]
+        assert set(b["source_ids"]) <= set(SOURCES)
+
+
+def test_national_mdl_notes_on_civil_blocks():
+    """The all-district comparison carries a note in exactly the years one MDL docket is above 25% nationally."""
+    mdl = lane_table("idb", "civil_mdl_dockets")
+    nat = mdl[(mdl["district_id"] == "_national") & (mdl["share"] > 25)]
+    big = {(int(r.period), r.cohort): r for r in nat.itertuples()}
+    for d, p in PROFILES.items():
+        cm = p["case_mix"]
+        blocks = [(cm["civil_nature_of_suit"], "filed")]
+        blocks += [(b, "terminated") for b in [cm["civil_disposition"], *cm["civil_disposition"].get("other_years", [])]]
+        for b, cohort in blocks:
+            r = big.get((b["year"], cohort))
+            nn = b.get("national_note")
+            assert (nn is not None) == (r is not None), (d, b["year"], cohort)
+            if nn:
+                assert (nn["count"], nn["total"], nn["docket"]) == (r.count, r.total, r.mdl_docket)
+                assert f"{r.count:,} of the {r.total:,}" in nn["text"] and ".." not in nn["text"]
+                assert nn["total"] == b["national_total"]
+
+
+def test_profile_mdl_context_complete_and_exact():
+    """A note for every district-year shown where one MDL docket is above 25% of civil cases filed or closed, and
+    nowhere else; each number equals the IDB lane's MDL table; names only with a cited GovInfo record."""
+    mdl = lane_table("idb", "civil_mdl_dockets")
+    names = pd.read_csv(PROC / "idb" / "civil_mdl_docket_names.csv", dtype=str).set_index("mdl_docket")
+    years = sorted({VAR_BY_ID["civil_filings_per_judgeship"]["years"][-1], VAR_BY_ID["civil_trial_rate_pct"]["years"][-1]})
+    big = mdl[(mdl["district_id"] != "_national") & (mdl["share"] > 25)]
+    expected = {(r.district_id, int(r.period), r.cohort, r.mdl_docket) for r in big.itertuples() if int(r.period) in years}
+    got = set()
+    for d, p in PROFILES.items():
+        m = p.get("mdl_context")
+        if not m:
+            continue
+        assert m["years"] == years and m["derived"] and m["formula"]
+        assert set(m["source_ids"]) <= set(SOURCES)
+        for item in m["dockets"]:
+            dk = item["docket"]
+            for s in item["sentences"]:
+                got.add((d, s["year"], s["cohort"], dk))
+                row = mdl[(mdl["district_id"] == d) & (mdl["period"] == s["year"]) & (mdl["cohort"] == s["cohort"])
+                          & (mdl["mdl_docket"] == dk)].iloc[0]
+                assert (s["count"], s["total"]) == (row["count"], row["total"])
+                assert f"{s['count']:,} of the {s['total']:,}" in s["text"] and f"MDL {dk}" in s["text"]
+                assert ("(preliminary)" in s["text"]) == (s["year"] >= 2026)
+            for h in item["history"]:
+                rows = big[(big["district_id"] == d) & (big["mdl_docket"] == dk) & (big["cohort"] == h["cohort"])]
+                shown = {s["year"] for s in item["sentences"] if s["cohort"] == h["cohort"]}
+                assert h["years"] == sorted(int(y) for y in rows["period"] if int(y) not in shown)
+                peak = rows[rows["period"] == h["peak_year"]].iloc[0]
+                assert (h["peak_count"], h["peak_total"]) == (peak["count"], peak["total"])
+                assert f"{h['peak_count']:,} of {h['peak_total']:,}" in h["text"]
+            if dk in names.index:
+                assert item["name"] == names.loc[dk, "title"]
+                assert item["name_source_id"] == names.loc[dk, "source_id"] in item["source_ids"]
+            else:
+                assert "name" not in item
+            for t in [s["text"] for s in item["sentences"]] + [h["text"] for h in item["history"]] + [m["intro"], m["rule"]]:
+                assert "\u2014" not in t and not BANNED_WORDS.search(t), t
+    assert got == expected
+    assert "flnd" in {d for d, *_ in got}
+
+
 def test_overlap_years_of_four_way_series_agree():
     for d, p in PROFILES.items():
         old, new = p["case_mix"]["sentencing_composition"]["series"]

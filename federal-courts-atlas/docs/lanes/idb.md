@@ -13,7 +13,11 @@ has not yet published its FY2026 tables, so FY2026 values have no published cros
 
 **Rebuild:** `PYTHONPATH=. .venv/bin/python -m pipeline.idb.build` (about 5 minutes from cache; the first run
 also streams the two zips into Parquet extracts, about 5 more minutes).
-**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_idb*.py` (172 tests).
+**MDL docket table only:** `PYTHONPATH=. .venv/bin/python -m pipeline.idb.mdl` (about 40 seconds; reads the cached civil
+extract, downloads nothing new except the GovInfo name records it has not cached yet). The full build runs it as its
+last step.
+**Tests:** `PYTHONPATH=. .venv/bin/python -m pytest -q tests/pipeline/test_idb*.py` (179 tests, 7 of them in
+`test_idb_mdl.py`).
 **Extra dependency:** `zipfile-deflate64` (requirements/idb.txt). The criminal zip uses Deflate64 (zip method 9),
 which the standard-library `zipfile` cannot read.
 
@@ -33,6 +37,8 @@ retrieval time (2026-11-27) and sha256.
 | `ao_js44` | AO civil cover sheet JS 44 (Rev. 03/24): the nature-of-suit category headings | https://www.uscourts.gov/sites/default/files/js_044_-_civil_cover_sheet_1.pdf |
 | `ao_nos_descriptions` | AO Civil Nature of Suit Code Descriptions | https://www.uscourts.gov/sites/default/files/document/nos_code_descriptions.pdf |
 | `ao_jb_<table>_<FY>` (121 files) | AO *Judicial Business* tables C-1, C-4, D-1, D-4 (FY1997-2025) and D-2 (FY2009, 2014, 2019, 2024, 2025), used only for reconciliation. PDFs through FY2016; xlsx from FY2017. | `https://www.uscourts.gov/data-news/data-tables/<FY>/09/30/judicial-business/<table>` |
+
+| `govinfo_uscourts_<court>_<case>` (7 records) | GovInfo "United States Courts Opinions" (USCOURTS) MODS metadata for the transferee court's MDL case, used only to verify a docket's litigation name and case number (section 4a). | `https://www.govinfo.gov/metadata/pkg/USCOURTS-<court>-<case>/mods.xml` |
 
 Dataset pages used for discovery:
 https://www.fjc.gov/research/idb/civil-cases-filed-terminated-and-pending-sy-1988-present and
@@ -196,6 +202,38 @@ cases from FY1988 on, or 0.16% of filings.
 | `reconciliation.csv`, `reconciliation_summary.csv`, `offense_mapping_check.csv` | Section 6. |
 | `district_crosswalk.csv`, `nos_groups.csv`, `d2_offense_codes.csv` | Code tables. |
 | `build_meta.json` | De-duplication counts, structural checks, unlisted NOS codes. |
+| `civil_mdl_dockets.{parquet,csv}` | Civil cases by multidistrict litigation (MDL) docket: district, FY, cohort (`filed` or `terminated`), 4-digit MDLDOCK, count, the district's civil total for that cohort and year, share, source locator. Section 4a. |
+| `civil_mdl_docket_names.csv` | Verified litigation names for the dockets the site names: docket, transferee district, case number, title as GovInfo prints it, display title, GovInfo source id. |
+
+### 4a. Civil cases by MDL docket (`pipeline/idb/mdl.py`)
+
+* **Field.** MDLDOCK, "MULTIDISTRICT LITIGATION DOCKET NUMBER (MDLDOCK): A 4-digit multi district litigation docket
+  number" (civil codebook). Only 4-digit values other than `0000` count (982,985 records in this vintage); `-8`
+  (missing, 10.1 million records), `0000` (2 records) and 1,191 other one- to three-character values (for example
+  `300`, `E`, `__`) are left out.
+* **Cohorts.** Exactly the lane's civil cohorts: `filed` is the de-duplicated filing cohort (the docket comes from the
+  record kept for the case, its latest), `terminated` is the termination cohort. So `total` equals
+  `idb_civil_filed` / `idb_civil_terminated` for every district-year in the table (tested).
+* **Rows kept.** A district x FY x cohort x docket row is kept when the docket holds at least 100 cases and at least
+  5% of the district's civil cases in that cohort and year: 940 rows, 82 dockets, 37 districts, plus `_national`
+  rows for the same docket, year and cohort (all districts combined).
+* **N.D. Fla.** MDL 2885 holds 202,693 of the 204,990 civil cases filed in FY2020 (98.9%), more than 90% of filings
+  in every year FY2020-2024, and 147,231 of the 149,260 civil cases closed in FY2025. Nationally it is 36.1% of all
+  civil cases closed in FY2025 (147,231 of 407,539) and 43.1% of those filed in FY2020. MDL 3140 holds 1,275 of
+  3,251 filings in FY2025 and 5,256 of 7,237 in FY2026.
+* **Other districts above 25% in FY2025 or FY2026:** D. Ariz. (3081), D.N.J. (2738), D. Minn. (2666), D.S.C. (2873),
+  N.D. Ohio (3092) for filings; E.D. La. (2740) and D.N.H. (2753) for terminations.
+* **Names.** A docket is named only when a GovInfo USCOURTS record for the transferee court verifies it: the MODS
+  case number must end in `md-0NNNN` (or `mn-0NNNN`) for the docket and the record's author must be that district
+  court. The package ids tried are typed in `NAME_CANDIDATES`; each is checked, never trusted. Verified: 2885
+  (In re: 3M Combat Arms Earplug Products Liability Litigation, 3:19-md-02885, N.D. Fla.), 3140 (Depo-Provera,
+  3:25-md-03140, N.D. Fla.), 3081 (Bard Implanted Port Catheter, D. Ariz.), 2738 (Johnson & Johnson Talcum Powder,
+  D.N.J.), 2666 (Bair Hugger, D. Minn.), 3092 (Suboxone Film, N.D. Ohio), 2740 (Taxotere, E.D. La.). Not verified,
+  so shown by number only: 2873 (D.S.C.) and 2753 (D.N.H.); the guessed GovInfo pages returned "Page Not Found"
+  (gap `civil_mdl_docket_names_unverified`). Display titles turn all-capital titles into title case and normalise
+  the "In re:" prefix; the title as printed is kept beside it.
+* **Independent recount** (`test_idb_mdl.py`): N.D. Fla. (IDB code 29) FY2021 filings and FY2025 terminations by
+  docket, re-counted from the civil extract with code that does not use `pipeline.idb.mdl`.
 
 ## 5. Coverage
 
@@ -297,7 +335,8 @@ is also encoded as a tolerance test in `tests/pipeline/test_idb_outputs.py`.
   204,990 filings in FY2020, 202,838 of them NOS 365. These dominate N.D. Fla.'s values and the national NOS mix
   in those years. Many of these MDL cases carry pro se codes: 110,916 of 204,990 in FY2020 and 23,884 of 25,251
   in FY2024, almost all in MDL 2885. That lifts the national pro se share to 38.7% (FY2020) and 34.8%
-  (FY2024).
+  (FY2024). The MDL docket counts by district and year are in `civil_mdl_dockets` (section 4a); the site
+  shows them as a context note on the profiles of the districts concerned.
 * **Civil trial-verdict spike, FY2007.** M.D. La. recorded 6,350 of its 7,365 FY2007 terminations as jury
   verdicts, 6,305 of them NOS 360 and almost all dated May 2007. That lifts the national trial rate to 3.85% in
   FY2007, against 1.10% in FY2006 and 1.36% in FY2008.

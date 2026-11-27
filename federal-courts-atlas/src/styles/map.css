@@ -264,11 +264,11 @@
 
 /* Phones: the client's style is a vertical stack at every width. The map is only about 235px tall at 375px,
    so the stack (3 x 44px touch targets) hangs below the map's bottom edge: its top half sits over the Atlantic
-   east of Florida and the Carolinas, its bottom half in a 60px strip under the map (shared with the inset names,
+   east of Florida and the Carolinas, its bottom half in a 68px strip under the map (shared with the inset names,
    which stop short of the stack). 12px from the edge keeps it clear of the Southeast coast down to 360px. */
 @media (max-width: 40rem) {
   .atlas-map[data-state='ready'] {
-    padding-bottom: 60px;
+    padding-bottom: 68px;
   }
 
   .atlas-map__controls {

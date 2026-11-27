@@ -13,7 +13,8 @@ in `docs/audits/`.
 | Statistics audit | 51 sampled cells traced; independent recompute of the case-level files | 51 of 51 matched. 1 blocker and 1 major issue found and fixed, then rechecked against the raw files. |
 | Copy audit | About 1,400 reader-facing sentences checked against the data and fetched legal sources | 57 findings, all resolved. The recheck lane fixed 4 more sentences. |
 | UI audit | 181 screenshots at 1280, 768 and 375 px in light and dark; automated accessibility scan | 7 known issues and 11 more problems fixed. The recheck lane fixed 2 more. 0 serious or critical accessibility violations. |
-| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,228 pipeline tests passed. Typecheck clean. 321 end-to-end tests passed, 0 failed, 9 skipped by design. |
+| Additions after the main audit | 31 new numbers and facts (how cases end, offenses of people sentenced, two new map measures, MDL notes, juror figures, event dates, new legal statements) traced to the raw files with independent code; 92 review captures of the changed views | All 31 matched. 4 small display problems fixed (see below). |
+| Tests | Pipeline unit tests, typecheck, end-to-end browser tests | 1,248 pipeline tests passed. Typecheck clean. 357 end-to-end tests passed, 0 failed, 11 skipped by design, in each of three full runs. |
 
 ## Data audit
 
@@ -110,7 +111,82 @@ N 932; W.D. Tex. median 6.62, N 10,416; national mean 47.4988 against 47 printed
 
 **Also fixed after the data audit:** table views now show the Derived tag and cell notes; ranks are taken at the
 precision shown, so districts that show the same number share a rank (recheck: 0 of 72,357 groups differ); rank
-wording says when districts are tied; IDB FY 2026 is labeled preliminary everywhere it appears.
+wording says when districts are tied. IDB FY 2026 values are labeled "(preliminary)" wherever one is shown: on the
+home map (legend year, national figure, slider readout, tooltip, each district's accessible name, map table
+caption), on the table page (caption and period menu), on district profiles (key statistics, "What stands out",
+the case mix, "How cases end", the MDL notes and the sparklines' spoken labels), in compare rows and gaps, in the
+courtroom panel, and in story charts (a shaded "Prelim." band, the tooltip and the data-table rows). Three things
+name the year without the word because they label a choice or a span rather than a value: the compare page's
+"Year shown" menu (the IDB rows it fills read "FY 2026 (preliminary)"), year ranges such as "1996 to 2026" under
+sparklines and on axes, and source citations that quote the FJC's own file description ("FY 1996 through FY
+2026"). The period menu, the story table rows and the sparkline labels were fixed by the final recheck (Nov 27).
+
+## Additions after the main audit
+
+After the audits, a gap-closing pass added "How cases end" (civil and criminal) and "Offenses of people sentenced"
+to every profile, two map measures (criminal defendants whose cases were dismissed; child pornography as a share of
+people sentenced), notes on multidistrict litigation (MDL) dockets for 8 districts, a line on duty stations, glossary
+terms on measure labels and dated time-machine events. A final recheck lane traced the new kinds of number to the
+cached raw files with its own code. It did not use the pipeline's parsers: it streamed `cv88on.txt` and `cr96on.txt`
+out of the FJC zips, split the lines itself and applied the codebooks' rules. The civil termination cohort is every
+record not pending (TAPEYEAR other than 2099), by the fiscal year of TDATEUSE. The civil filing cohort is
+de-duplicated on district, office, docket, origin and filing date, keeping the latest tape year. The criminal side is
+the FISCALYR snapshot with CTTR = 1. Group codes were read from the codebook PDFs, and PDFs were read with
+`pdftotext`. Its civil closing totals equal the AO's Table C-1, read from the xlsx: 396,635 in FY 2024 and 407,539
+in FY 2025, and for FY 2025 E.D. Va. 3,869, N.D. Fla. 149,260 and D.N.M.I. 15. TAPEYEAR equals the TDATEUSE fiscal
+year on every FY 2024 to 2026 record.
+
+| n | Where shown | District | Measure | Year | Value shown | Source file and locator | Result |
+|---|---|---|---|---|---|---|---|
+| 201 | profile, How civil cases ended | vaed | Dismissed: settled (derived) | FY 2026 (preliminary) | 6.2% (372 of 5,988) | IDB civil `www.fjc.gov/8248453448ff200d56a790af.zip`, DISTRICT 22, DISP 13, termination cohort | match |
+| 202 | same panel, All districts tick | all 94 | Dismissed: settled (derived) | FY 2026 (preliminary) | 16.9% (54,323 of 322,269) | same file, all districts | match |
+| 203 | same panel, FY 2025 switch | vaed | Dismissed: settled (derived) | FY 2025 | 10.5% (406 of 3,869) | same file | match |
+| 204 | same panel, FY 2025 switch | flnd | Dismissed: withdrawn by the plaintiff (derived) | FY 2025 | 98.9% (147,646 of 149,260) | same file, DISTRICT 29, DISP 12 | match |
+| 205 | same panel | nmid | Transferred or remanded (derived) | FY 2026 (preliminary) | 27.3% (9 of 33) | same file, DISTRICT 94, DISP 0, 1, 10, 11 | match |
+| 206 | profile, How criminal cases ended | vaed | Convicted: guilty plea (derived) | FY 2026 (preliminary) | 76.2% (1,027 of 1,347) | IDB criminal `www.fjc.gov/9f961c8f3159642783af4592.zip`, FISCALYR 2026, CTTR 1, DISTRICT 22, DISP1 4 and 5 | match |
+| 207 | same panel, FY 2025 switch | vaed | Not convicted: dismissed (derived) | FY 2025 | 18.2% (247 of 1,360) | same file, DISP1 1, 10-15, 20, 21 | match |
+| 208 | same panel, All districts ticks | all 94 | the six criminal groups and the total | FY 2025 | 75,151 plea; 1,189 jury; 174 bench; 5,336 dismissed; 135 and 57 acquitted; 82,042 | AO Table D-4 FY 2025 `www.uscourts.gov/3404f78624cfe3df3e0b9c14.xlsx`, Total row | match (7 of 7) |
+| 209 | map, table, profile key statistics | vaed | Criminal defendants whose cases were dismissed (derived) | FY 2026 (preliminary) | 19.3% (260 of 1,347) | IDB criminal file | match |
+| 210 | home map, all district courts | all 94 | same measure (derived) | FY 2026 (preliminary) | 5.8% (4,810 of 82,895) | IDB criminal file | match |
+| 211 | same measure, caveat | all 94 | FJC dismissals above the AO's table | FY 1997-2004 | "7% to 12% more" | IDB criminal file against the D-4 PDFs (`ao_jb_d4_1997` to `_2005`), Total rows | match (7.2% to 11.9%; FY 2005 equal at 8,141) |
+| 212 | profile, Offenses of people sentenced | vaed | Fraud/theft/embezzlement | FY 2025 | 15.6% (138 of 884); all districts 7.6% (5,080 of 66,662) | USSC packet `www.ussc.gov/968d645857350fd39905a3b0.pdf` Table 1, p.2 | match |
+| 213 | same block | mtd | Drug trafficking (and the 4 other named types) | FY 2025 | 39.7% (160 of 403) | USSC packet `a659493fe314cbed39860d93.pdf` Table 1 | match (5 of 5) |
+| 214 | same block | vaed | All other offense types (derived) | FY 2025 | 32.7% (289 of 884) | packet Table 1: 884 − 227 − 103 − 96 − 138 − 31; the USSC prints no combined row, so the derived label is right | match |
+| 215 | map, table, profile key statistics | vaed | Child pornography, share of people sentenced | FY 2025 | 3.5% (31 of 884) | packet Table 1 | match |
+| 216 | same measure | vaed | same | FY 2010, FY 2015 | 2.7% (55 of 2,075), 2.4% (35 of 1,461) | packets `7643e3deef9d1916b990627e.pdf`, `b5823123c538fd6ba9bee2bc.pdf`, primary offense table | match |
+| 217 | profile, What stands out, Key statistics and Case mix MDL notes | flnd | civil cases closed in MDL 2885 | FY 2025 | 147,231 of 149,260 | IDB civil file, DISTRICT 29, termination cohort, MDLDOCK 2885 | match |
+| 218 | full MDL note, history | flnd | civil cases filed in MDL 2885, the most | FY 2020 | 202,693 of 204,990 | IDB civil file, filing cohort | match |
+| 219 | full MDL note, history | flnd | civil cases closed in MDL 2885, the most | FY 2024 | 139,357 of 141,214 | IDB civil file, termination cohort | match |
+| 220 | MDL notes | flnd | civil cases filed in MDL 3140 | FY 2026 (preliminary), FY 2025 | 5,256 of 7,237; 1,275 of 3,251 | IDB civil file, filing cohort | match (C-1 prints 3,248 filings for FY 2025; the note counts FJC records, as its formula says) |
+| 221 | every profile, How civil cases ended, FY 2025 | all 94 | civil cases closed in MDL 2885 | FY 2025 | 147,231 of 407,539 | IDB civil file, all districts | match |
+| 222 | MDL notes | flnd | docket names and case numbers | 2019, 2025 | In re: 3M Combat Arms Earplug Products Liability Litigation, 3:19-md-02885; Depo-Provera, 3:25-md-03140 | GovInfo MODS `www.govinfo.gov/fc4a82b76010883aa3ca9972.xml`, `80f4b0da02c64347c544d9f1.xml` (sha256 equal to the source records; author N.D. Fla.) | match |
+| 223 | courtroom jury box, map, table | vaed | average present for jury selection | FY 2025 | 54.5 | FCMS `www.uscourts.gov/b1bbda81a12a87b71e626c3a.pdf` p.25 | match |
+| 224 | same | vaed | percent not selected or challenged | FY 2025 | 31.0% | same PDF p.25 | match |
+| 225 | same | flnd | both juror measures | FY 2025 | 43.7; 28.4% | same PDF p.90 | match |
+| 226 | same | nmid | both juror measures | FY 2025; FY 2024 | 116.0, 52.6%; FY 2024 "No data" | same PDF p.78 prints 0 for FY 2024 (no jury selection held); gap record in `data/gaps/fcms.json` | match |
+| 227 | home time machine | national | event dates | 2005-2020 | Jan. 12, 2005; May 22, 2017; Dec. 21, 2018; March 13, 2020 | LII syllabi 04-104 and 16-341 ("Decided"); GovInfo Pub. L. 115-391 ("Approved December 21, 2018"); Federal Register 2020-05794 (Proclamation 9994 of March 13, 2020) | match |
+| 228 | glossary, median time to trial | national | not computed below 10 civil trials | current | 10 | AO Explanation of the Judicial Caseload Profiles `15d2d50a078fed33d349b32a.xlsx` | match |
+| 229 | MDL note, first sentence | national | what an MDL docket is | current | cases from many districts, one court, pretrial proceedings | 28 U.S.C. § 1407(a), fetched from LII by the recheck | match |
+| 230 | child pornography measure, caveat | national | own USSC category from FY 2010 | FY 2010 | "first reported ... in FY 2010" | FY 2008 packet `4584cfe715ce20ed293498a3.pdf` lists "Pornography/Prostitution"; USSC codebook: OFFTYPSB from FY 2010 | match |
+| 231 | same caveat; Offenses of people sentenced note | national | classification by main guideline from FY 2018 | FY 2018 | "main guideline applied" | USSC codebook `36b420a2608f0e77db3cad32.pdf`: OFFGUIDE "generated mainly from the primary guideline", used from FY 2018 | match |
+
+Beyond these rows, the recheck recomputed every group in the two "How cases end" panels for vaed, flnd and nmid in
+both years, for the district and the all-district column. That is 120 civil and 72 criminal cells, all equal to
+the profiles. It also recomputed the dismissed share for those three districts in FY 2025 and FY 2026 (6 cells,
+equal to the values file).
+
+**Fixed by the final recheck** (all display only; no value changed):
+
+- On the MDL notes, the case number 3:25-md-03140 broke across two lines at a hyphen on desktop. Case numbers now
+  stay on one line.
+- The table page's period menu showed "FY 2026" for IDB measures. It now reads "FY 2026 (preliminary)", as the
+  caption under it already did.
+- The data tables under story charts printed "FY 2026" rows without the word preliminary, although the chart above
+  shades that year as preliminary. The rows now say so.
+- The spoken label of profile sparklines ended "in FY 2026". It now ends "in FY 2026 (preliminary)" for IDB
+  measures.
+- A doc said the visual-regression set has 20 baselines. It has 16 (8 views at 2 widths, 901 KB); corrected in
+  `docs/lanes/frontend.md`.
 
 ## Boundary audit
 
@@ -165,13 +241,13 @@ more phone problems: the new table Notes column was clipped at 375 px, and the m
 
 | Suite | Result |
 |---|---|
-| Pipeline unit tests (`pytest tests/pipeline`) | 1,228 passed, 0 failed |
+| Pipeline unit tests (`pytest tests/pipeline`) | 1,248 passed, 0 failed (after `make stories web docs`; run twice) |
 | Typecheck (`npm run typecheck`) | clean |
 | Production build (`vite build`) | succeeds |
-| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 330 tests) | Final run: 321 passed, 0 failed, 9 skipped by design (for example phone-only tests in the desktop project). Of three full runs today, the first and third were clean; the second had one timeout in an accessibility test's scrolling helper that passed on 3 of 3 reruns; the helper is now bounded. |
-| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.40 s / 0.90 s (first contentful paint 0.11 s / 0.25 s) |
+| End-to-end, Chromium, desktop 1280 px and phone 375 px (`playwright test`, 368 tests) | Final recheck, three full runs (`CI=1 E2E_PORT=4510 npx playwright test --trace off`): 357 passed, 0 failed, 11 skipped by design each time (for example phone-only tests in the desktop project). The third run was on the final code, after the recheck's fixes. The 16 visual-regression baselines (`visual.spec.ts`) passed in all three runs and were not rewritten. The accessibility scans (`a11y.spec.ts` on every route, plus an axe test of flnd's MDL note and new case-mix blocks in `district.spec.ts`) found 0 serious or critical violations. |
+| First map paint (perf test, unthrottled / 4x CPU throttle; target under 2 s) | 0.28 s / 0.91 s (first contentful paint 0.08 s / 0.22 s), final run on an otherwise idle machine. Earlier runs the same day measured 0.45-0.51 s / 1.18-1.64 s while other jobs shared the CPU. |
 
-Home page JavaScript before first paint: 75 KB transferred; the three.js courtroom code is not loaded on the home page.
+Home page JavaScript before first paint: 78 KB transferred; the three.js courtroom code is not loaded on the home page.
 
 ## What was not verified
 
@@ -188,7 +264,17 @@ Home page JavaScript before first paint: 75 KB transferred; the three.js courtro
 - **Uncached USSC district packets** (D.N.M.I. FY 2010 and FY 2018, D. Colo. FY 2020, D.R.I. FY 2006, N.D. Ill.
   FY 2005, W.D. Ark. FY 2025) were not downloaded; those cells were checked against the USSC case-level files only.
 - **IDB FY 2026** has no published court table to compare with; it was checked against the raw file only and is
-  labeled preliminary on the site.
+  labeled preliminary on the site (see the Data audit section for exactly where).
+- **Civil "How cases end" groups** were recomputed from the FJC records but have no AO table at district level to
+  compare with: only the civil closing totals match Table C-1. The settled, voluntary and other-dismissal codes
+  depend on how each clerk's office codes cases. The criminal groups match AO Table D-4 nationally for FY 2005 to
+  2025; D-4 has no district rows.
+- **MDL dockets 2873 (D.S.C.) and 2753 (D.N.H.)** are shown by number only; their names were not found on GovInfo.
+  Dockets that passed 25% only before FY 2025 (for example S.D. Ohio, S.D. W. Va.) get no note.
+- **Not re-checked by the final recheck:** the new glossary statement that drug-patent (Hatch-Waxman) cases carry
+  nature-of-suit code 835 since 2017 (it rests on the IDB lane's first 835 filing, June 2017); the other new
+  glossary definitions beyond those in the additions table; numbers for districts other than those in the table.
+  The final recheck read 92 captures of the changed views, not every page.
 - **The IDB firearms and immigration categories** are the atlas's mapping of FJC offense codes. They match the AO's
   published national totals for FY 2005 to 2025; earlier years and district-level splits could not be checked.
 - **CourtListener links** were compared with cached responses only; the live pages were not opened (daily quota).
@@ -200,5 +286,7 @@ Home page JavaScript before first paint: 75 KB transferred; the three.js courtro
 - **Not read for wording:** CourtListener case titles, judge biographical records, courthouse notes.
 - **Boundaries:** the Fort Bragg, Camp Mackall and Butner areas use Census landmark polygons as a stand-in for the
   surveyed legal lines.
-- **N.D. Fla.** shows 37,423 cases closed per judgeship in FY 2025, correct as published but driven by one mass-tort
-  docket; the district profile does not yet explain that.
+- **N.D. Fla.** shows 37,423 cases closed per judgeship in FY 2025, as published. The profile now carries an MDL
+  note (147,231 of its 149,260 civil cases closed that year were in MDL 2885). Other measures that count FY 2025
+  civil closings nationally (for example the all-district civil trial rate) also include those cases; only the
+  profile's "How cases end" panel says so.

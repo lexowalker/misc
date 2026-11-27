@@ -106,6 +106,30 @@ Not a defect: when the recheck lane moved between routes by changing only the UR
 a focus ring. That is the router moving focus to the heading for screen readers after an in-app navigation with no
 pointer click; a mouse click on a link does not show the ring.
 
+## Final recheck after the gap-closing pass
+
+A last recheck lane captured the views the gap-closing pass added or changed: 92 captures,
+`__screenshots__/{desktop,mobile}/rw4-*.jpg`, at 1280 and 375 px in light and dark, each one read. It used its own
+scratch spec, so the project suite is unchanged.
+
+- **District profiles vaed, flnd, nmid:** "What stands out" (with the compact MDL note on flnd), Key statistics (the
+  full MDL note, "FY 2026 (preliminary)" on IDB rows only), "How cases end" in both years (FY 2025 adds the
+  all-district MDL 2885 note on every profile), "Offenses of people sentenced" with its side note and map links, and
+  the bench with its duty-station line. Small-base notes appear where expected (nmid: 18 defendants, 17 people
+  sentenced; none for 33 civil cases).
+- **Home:** the glossary popover on the measure header (`guideline range`, dark), the preliminary year for a new
+  measure (legend "FY 2026 (preliminary)", national figure, slider "Preliminary"), the vertical map controls on a
+  phone (clear of districts and insets), and the dated time-machine labels (no overlaps at 1280 or 375 px).
+- **Compare** (vaed, flnd, nmid) with a row's glossary popover open, and the **table page** for the new dismissal
+  measure.
+- No capture scrolled sideways at 375 px and none logged a console error.
+
+Fixed: on desktop the MDL case number 3:25-md-03140 broke at a hyphen (now kept on one line); the table page's period
+menu, story chart data tables and the sparklines' spoken labels now mark FY 2026 as preliminary.
+
+Not a defect: element captures of tall sections show the sticky site header part-way down the image. That is the
+capture stitching the scrolled page, not an overlap a reader sees.
+
 ## Tests and performance
 
 See `VERIFICATION.md` for the final counts. The UI lane's own full run on port 4303 gave 319 passed and 9 skipped

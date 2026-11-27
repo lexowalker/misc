@@ -28,7 +28,9 @@ export interface YearSliderOptions {
  */
 export function eventPlacementNote(shown: AtlasEvent[], periodType?: string): string | null {
   const ex = shown.find((e) => periodYear(e.date, periodType) !== Number(e.date.slice(0, 4)));
-  const example = ex ? `an event on ${eventDateLabel(ex.date)} (${ex.short}) sits at ${periodLabel(periodYear(ex.date, periodType), periodType)}` : null;
+  const at = ex ? periodYear(ex.date, periodType) : 0;
+  const where = periodType === 'SNAPSHOT_SEP30' ? `the count of Sept. 30, ${at}` : periodLabel(at, periodType);
+  const example = ex ? `an event on ${eventDateLabel(ex.date)} (${ex.short}) sits at ${where}` : null;
   switch (periodType) {
     case 'FY_SEP30':
       return `Each event sits in the federal fiscal year it fell in. Fiscal years run from October 1 to September 30${example ? `, so ${example}` : ''}.`;
@@ -164,14 +166,20 @@ export class YearSlider {
     }
     this.set(this.idx, false);
     // Event labels that would overlap (e.g. First Step Act, FY 2019, beside COVID-19, FY 2020) are lifted
-    // onto a second row, and year labels that would touch are left out, once the slider has a width.
+    // onto a higher row or turned into flags (layoutEvents), and year labels that would touch are left out,
+    // once the slider has a width.
     if (typeof ResizeObserver === 'function') {
-      this.resizeObs = new ResizeObserver(() => {
-        if (this.eventEls.length > 1) this.layoutEvents();
-        this.layoutTicks();
-      });
+      this.resizeObs = new ResizeObserver(() => this.relayout());
       this.resizeObs.observe(track);
     }
+    // Label widths change when the web fonts arrive, without a resize: lay out again then.
+    void document.fonts?.ready.then(() => this.relayout());
+  }
+
+  private relayout(): void {
+    if (!this.el.isConnected) return;
+    if (this.eventEls.length) this.layoutEvents();
+    this.layoutTicks();
   }
 
   /**
@@ -210,29 +218,81 @@ export class YearSlider {
     for (const e of els) if (!kept.includes(e)) e.classList.add('is-quiet');
   }
 
+  /**
+   * Place the event labels (name over date) above the track. Each label sits on one of up to four rows, centered on
+   * its marker or as a flag that starts or ends at it. Every combination is scored (there are at most a few
+   * events) and the best one wins: first no overlaps, no leader line crossing a label and nothing past the
+   * ends of the track; then as few rows as possible; then as few raised or flagged labels as possible.
+   */
   private layoutEvents(): void {
     const items = this.eventEls
       .map((el) => {
-        el.classList.remove('is-raised');
+        el.classList.remove('is-raised', 'is-start', 'is-end');
+        el.style.removeProperty('--row');
         const label = el.querySelector<HTMLElement>('.year-slider__event-label');
-        const w = label?.offsetWidth ?? 0;
-        return { el, w, x: el.offsetLeft };
+        return { el, w: label?.offsetWidth ? el.offsetWidth : 0, x: el.offsetLeft };
       })
       .filter((it) => it.w > 0)
       .sort((a, b) => a.x - b.x);
-    let lastRight = -Infinity;
-    let raised = false;
-    for (const it of items) {
-      const left = it.x - it.el.offsetWidth / 2;
-      if (left < lastRight + 6) {
-        it.el.classList.add('is-raised');
-        raised = true;
-        // A raised label does not block the next one on the base row.
-        continue;
+    if (!items.length) return;
+    const width = items[0]!.el.parentElement?.clientWidth || this.track.clientWidth;
+    type Align = 'center' | 'start' | 'end';
+    type Cand = { row: number; align: Align; l: number; r: number; x: number; out: boolean };
+    const GAP = 6;
+    // A leader may pass through a label's 4px side padding but stays at least 2px clear of its text.
+    const PAD = -2;
+    const ALIGNS: Align[] = ['center', 'start', 'end'];
+    // Four rows always suffice for the four events: a staircase of flags never crosses a leader.
+    const ROWS = Math.min(4, Math.max(1, items.length));
+    const cands = items.map((it) => {
+      const list: Cand[] = [];
+      for (let row = 0; row < ROWS; row++)
+        for (const align of ALIGNS) {
+          const [l, r] = align === 'center' ? [it.x - it.w / 2, it.x + it.w / 2] : align === 'start' ? [it.x - 4, it.x - 4 + it.w] : [it.x + 4 - it.w, it.x + 4];
+          list.push({ row, align, l, r, x: it.x, out: l < -10 || r > width + 10 });
+        }
+      return list;
+    });
+    const clash = (a: Cand, b: Cand): number => {
+      let n = 0;
+      if (a.row === b.row && a.l < b.r + GAP && b.l < a.r + GAP) n += 1;
+      // A leader runs from its label down through every lower row.
+      if (a.row > b.row && a.x > b.l - PAD && a.x < b.r + PAD) n += 1;
+      if (b.row > a.row && b.x > a.l - PAD && b.x < a.r + PAD) n += 1;
+      return n;
+    };
+    const cost = (c: Cand) => c.row * 2 + (c.align === 'center' ? 0 : 1);
+    let best: { bad: number; rows: number; cost: number; pick: Cand[] } | null = null;
+    const pick: Cand[] = [];
+    const search = (i: number, bad: number, rows: number, total: number): void => {
+      if (best && (bad > best.bad || (bad === best.bad && rows > best.rows))) return;
+      if (i === items.length) {
+        if (!best || bad < best.bad || rows < best.rows || total < best.cost) best = { bad, rows, cost: total, pick: [...pick] };
+        return;
       }
-      lastRight = left + it.el.offsetWidth;
-    }
-    this.track.classList.toggle('has-raised', raised);
+      for (const c of cands[i]!) {
+        let add = c.out ? 1 : 0;
+        for (const p of pick) add += clash(c, p);
+        pick.push(c);
+        search(i + 1, bad + add, Math.max(rows, c.row), total + cost(c));
+        pick.pop();
+      }
+    };
+    search(0, 0, 0, 0);
+    const chosen = (best as { pick: Cand[] } | null)?.pick ?? [];
+    let maxRow = 0;
+    items.forEach((it, i) => {
+      const c = chosen[i];
+      if (!c) return;
+      if (c.row > 0) {
+        it.el.classList.add('is-raised');
+        it.el.style.setProperty('--row', String(c.row));
+      }
+      if (c.align !== 'center') it.el.classList.add(`is-${c.align}`);
+      maxRow = Math.max(maxRow, c.row);
+    });
+    this.track.classList.toggle('has-raised', maxRow > 0);
+    this.track.style.setProperty('--event-rows', String(maxRow));
   }
 
   get year(): number {

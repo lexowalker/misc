@@ -6,13 +6,14 @@
 // a dashed reference series (e.g. the national figure) and a marked year.
 
 import { s, h } from '../lib/dom.ts';
-import { formatTick, periodLabel } from '../lib/format.ts';
+import { formatTick, periodLabel, periodLabelFor } from '../lib/format.ts';
 import type { Variable } from '../data/types.ts';
 
 export interface SparklineOptions {
   /** [year, value|null] pairs in ascending year order. */
   points: Array<[number, number | null]>;
-  variable?: Pick<Variable, 'unit' | 'format' | 'label'> | null;
+  /** Its preliminary_years, when given, mark those years "(preliminary)" in the accessible label. */
+  variable?: (Pick<Variable, 'unit' | 'format' | 'label'> & Partial<Pick<Variable, 'preliminary_years'>>) | null;
   periodType?: string;
   width?: number;
   height?: number;
@@ -73,7 +74,7 @@ export function renderSparkline(o: SparklineOptions): HTMLElement {
   const maxP = valid.find((p) => p[1] === vmax)!;
   const last = valid[valid.length - 1]!;
   const first = valid[0]!;
-  let label = `${o.variable?.label ?? 'Trend'}: ${formatTick(first[1], o.variable)} in ${periodLabel(first[0], o.periodType)} to ${formatTick(last[1], o.variable)} in ${periodLabel(last[0], o.periodType)}; low ${formatTick(vmin, o.variable)} (${minP[0]}), high ${formatTick(vmax, o.variable)} (${maxP[0]}).`;
+  let label = `${o.variable?.label ?? 'Trend'}: ${formatTick(first[1], o.variable)} in ${periodLabel(first[0], o.periodType)} to ${formatTick(last[1], o.variable)} in ${periodLabelFor(o.variable, last[0], o.periodType)}; low ${formatTick(vmin, o.variable)} (${minP[0]}), high ${formatTick(vmax, o.variable)} (${maxP[0]}).`;
   if (o.labelPrefix) label = `${o.labelPrefix}. ${label}`;
   if (ref.length && o.referenceLabel) label += ` ${o.referenceLabel} shown as a dashed line.`;
   const svg = s('svg', { class: 'sparkline__svg', width: W, height: H, viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': label });
