@@ -11,14 +11,13 @@ from pipeline.common.districts import IDS, TERRITORIAL
 from pipeline.common.http import PROJECT_ROOT
 
 OUT = PROJECT_ROOT / "data" / "processed" / "fcms"
+TABLES = ["observations", "observations_ranks", "observations_casemix"]
 pytestmark = pytest.mark.skipif(not (OUT / "observations.parquet").exists(), reason="fcms build not run")
 
 
 @pytest.fixture(scope="module")
 def obs():
-    a = pd.read_parquet(OUT / "observations.parquet")
-    b = pd.read_parquet(OUT / "observations_ranks.parquet")
-    return pd.concat([a, b], ignore_index=True)
+    return pd.concat([pd.read_parquet(OUT / f"{n}.parquet") for n in TABLES], ignore_index=True)
 
 
 @pytest.fixture(scope="module")
@@ -230,7 +229,9 @@ def test_variables_json_matches_outputs(obs):
         for k in ["id", "label", "unit", "period_type", "description", "source_ids", "caveats", "higher_means"]:
             assert v.get(k) not in (None, ""), (v["id"], k)
         assert v["period_type"] == "FY_SEP30"
-        assert v["table"] in ("observations", "observations_ranks")
+        assert v["table"] in TABLES
+        assert v["table"] == ("observations_ranks" if v["id"].startswith("fcms_rank_") else
+                              "observations_casemix" if "_type_" in v["id"] else "observations")
     long = [v for v in vj if v["id"] == "fcms_filings_total"][0]
     assert long["first_period"] == 1999 and long["last_period"] == 2025 and long["n_districts"] == 94
 

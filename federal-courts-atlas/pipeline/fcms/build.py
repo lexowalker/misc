@@ -62,6 +62,14 @@ LEGEND_2011 = {
 }
 
 
+def table_of(var: str) -> str:
+    if var.startswith("fcms_rank_"):
+        return "observations_ranks"
+    if var.startswith("fcms_civil_type_") or var.startswith("fcms_criminal_type_"):
+        return "observations_casemix"
+    return "observations"
+
+
 def source_id(year: int) -> str:
     return f"fcms_fy{year}"
 
@@ -290,7 +298,7 @@ def main() -> None:
                     if v is None and L != "Total" and dash_is_zero and raw is not None and parse_value(raw) is None \
                             and raw.strip().translate({0xad: 45, 0x2010: 45}) == "-":
                         v = 0.0
-                        loc += " (printed '-' = 0; letters sum to Total)"
+                        loc += " ('-' = 0: letters sum to Total)"
                     letter_rows.append({"district_id": did, "period": P, "kind": kind, "letter": L, "raw": raw,
                                         "value": v, "label": label, "source_id": source_id(P), "source_locator": loc,
                                         "criminal_basis": basis_by_year[P] if kind == "criminal" else ""})
@@ -298,7 +306,7 @@ def main() -> None:
                         var = "fcms_filings_civil" if kind == "civil" else "fcms_filings_criminal_felony"
                     elif legend:
                         var = nos_variable(kind, legend[kind][L])
-                        loc += f" ({L} = {label}; legend {legend_src[0]})"
+                        loc += f" ({L} = {label}" + ("" if legend_src[0] == source_id(P) else f"; legend {legend_src[0]}") + ")"
                     else:
                         continue   # letters without a legend stay in nos_letters.csv only
                     if v is None:
@@ -315,10 +323,10 @@ def main() -> None:
     df["source_id"] = df["profile_year"].map(source_id)
     district = df[df["district_id"] != NATIONAL].copy()
     national = df[df["district_id"] == NATIONAL].drop(columns=["district_id"]).copy()
-    is_rank = district["variable"].str.startswith("fcms_rank_")
-    # published ranks go to their own table so each CSV stays under the 20 MB limit
-    write_observations(LANE, district[~is_rank].drop(columns=["profile_year"]))
-    write_observations(LANE, district[is_rank].drop(columns=["profile_year"]), name="observations_ranks")
+    # three tables (core / published ranks / case-mix categories) so each CSV stays well under 20 MB
+    tbl = district["variable"].map(table_of)
+    for name in ("observations", "observations_ranks", "observations_casemix"):
+        write_observations(LANE, district[tbl == name].drop(columns=["profile_year"]), name=name)
     national = national[["period", "period_type", "variable", "value", "unit", "source_id", "source_locator",
                          "profile_year", "method"]].sort_values(["variable", "period"]).reset_index(drop=True)
     national.to_parquet(OUT / "national.parquet", index=False)
@@ -594,7 +602,7 @@ def write_variables(district: pd.DataFrame, rev_summary: pd.DataFrame) -> None:
             "first_period": int(years[0]), "last_period": int(years[-1]), "n_periods": len(years),
             "n_districts": int(g["district_id"].nunique()),
             "method_values": sorted(x for x in g["method"].unique() if x),
-            "table": "observations_ranks" if var.startswith("fcms_rank_") else "observations",
+            "table": table_of(var),
         })
     (OUT / "variables.json").write_text(json.dumps(out, indent=1))
 
