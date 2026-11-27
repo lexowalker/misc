@@ -13,7 +13,8 @@ printed or stored). Every response is cached on disk, so a rebuild reuses it and
   4. Phase 3, only where the phase-1 page held fewer than 2 usable criminal dockets:
      /search/?type=r&court=<id>&order_by=dateFiled desc&q=docketNumber:cr
 Only the first page (20 results) of each query is read. Each run makes at most RUN_BUDGET (45) new requests:
-CourtListener answered HTTP 429 with Retry-After ~2,500 s after ~50 requests in an hour. On a 429 that outlasts
+CourtListener answered HTTP 429 with Retry-After 2,497 s after ~50 requests in an hour, and later with
+Retry-After 69,262 s (a daily quota) after ~124 requests in a day. On a 429 that outlasts
 the fetcher's back-off (Retry-After honoured, 5 attempts) the run stops requesting and builds from the cache;
 a later run continues where it stopped. Nothing is retried in a loop.
 
@@ -48,9 +49,9 @@ OUT = DATA / "processed" / LANE
 MAX_ITEMS, MAX_CRIMINAL, MAX_OPINIONS, MAX_CIVIL = 5, 2, 1, 4
 MIN_ITEMS = 3
 REQUEST_BUDGET = 300   # whole-lane ceiling (all runs)
-# Per-run ceiling on new network requests. CourtListener answered this pipeline with HTTP 429
-# (Retry-After ~2,500 s) after ~50 requests within one hour, so a run stops at 45 and a later run (an hour or
-# more after the first request of the previous one) continues from the cache.
+# Per-run ceiling on new network requests. On 2026-11-27 CourtListener answered this pipeline with HTTP 429
+# twice: after ~50 requests within an hour (Retry-After 2,497 s), and after ~124 requests since 04:18 UTC
+# (Retry-After 69,262 s, i.e. a daily quota). A run stops at 45 new requests; later runs continue from the cache.
 RUN_BUDGET = int(os.environ.get("CASES_RUN_BUDGET", "45"))
 
 _requests_made = 0
@@ -360,10 +361,11 @@ def main() -> None:
                    districts=missing, reason="Not returned by /api/rest/v4/courts/.")
     if unfetched:
         record_gap(LANE, "not_fetched_rate_limit",
-                   description="Districts whose RECAP query has not been fetched yet: CourtListener answered HTTP 429 "
-                               "(Retry-After about 2,500 s) after about 50 requests in an hour, and each run stops at "
-                               f"{RUN_BUDGET} new requests. Re-run `python -m pipeline.cases.build` an hour later; "
-                               "cached responses are reused.",
+                   description="Districts whose RECAP query has not been fetched: CourtListener's free-tier quota "
+                               "was exhausted (HTTP 429 with Retry-After 2,497 s after ~50 requests in an hour, then "
+                               "Retry-After 69,262 s after ~124 requests in a day, on 2026-11-27). Re-run "
+                               "`python -m pipeline.cases.build` after the quota resets; cached responses are reused "
+                               f"and each run makes at most {RUN_BUDGET} new requests, coverage first.",
                    districts=unfetched, reason="API rate limit (free tier); backed off, not retried in a loop.")
     if gap_d:
         record_gap(LANE, "fewer_than_3_cases",
@@ -380,9 +382,18 @@ def main() -> None:
     no_op_fetch = summary.loc[summary.queries_not_fetched.str.contains("opinions"), "district_id"].tolist()
     if no_op_fetch:
         record_gap(LANE, "opinions_not_fetched",
-                   description="Districts whose opinion query has not been fetched yet (rate limit); their files "
-                               "list RECAP dockets only.", districts=no_op_fetch,
-                   reason="API rate limit; re-run the build later.")
+                   description="Districts whose opinion query has not been fetched (API quota); their files list "
+                               "RECAP dockets only.", districts=no_op_fetch,
+                   reason="API rate limit; re-run the build after the quota resets.")
+    no_cr_fetch = summary.loc[summary.queries_not_fetched.str.contains("recap_cr")
+                              & ~summary.queries_not_fetched.str.contains("recap;"), "district_id"].tolist()
+    no_cr_fetch = [d for d in no_cr_fetch if d not in unfetched]
+    if no_cr_fetch:
+        record_gap(LANE, "criminal_query_not_fetched",
+                   description="Districts whose first RECAP page held fewer than 2 usable criminal dockets and whose "
+                               "criminal-only follow-up query has not been fetched (API quota); they show fewer "
+                               "criminal items and more civil ones.", districts=no_cr_fetch,
+                   reason="API rate limit; re-run the build after the quota resets.")
     (OUT / "variables.json").write_text("[]\n")  # case metadata only; no district statistics
     srcs = json.loads((DATA / "sources" / f"{LANE}.json").read_text())
     (OUT / "build_summary.json").write_text(json.dumps({

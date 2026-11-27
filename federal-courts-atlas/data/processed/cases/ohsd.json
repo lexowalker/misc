@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Brancifort v. Southwest Airlines Co.",
+   "court": "District Court, S.D. Ohio",
+   "court_id": "ohsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01224",
+   "docket_type": "cv",
+   "nature_of_suit": "442 Civil Rights: Jobs",
+   "cause": "29:626 Job Discrimination (Age)",
+   "url": "https://www.courtlistener.com/docket/75176379/brancifort-v-southwest-airlines-co/",
+   "courtlistener_id": 75176379,
+   "retrieved_at": "2026-11-27T08:38:55+00:00",
+   "source_id": "cl_search_ohsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Boards of Trustees of the Ohio Laborers Benefits v. Americut Coring & Sawing, Inc.",
+   "court": "District Court, S.D. Ohio",
+   "court_id": "ohsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01735",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179470/boards-of-trustees-of-the-ohio-laborers-benefits-v-americut-coring/",
+   "courtlistener_id": 75179470,
+   "retrieved_at": "2026-11-27T08:38:55+00:00",
+   "source_id": "cl_search_ohsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Boards of Trustees of the Ohio Laborers Benefits v. Cole Excavating, LLC",
+   "court": "District Court, S.D. Ohio",
+   "court_id": "ohsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01734",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179328/boards-of-trustees-of-the-ohio-laborers-benefits-v-cole-excavating-llc/",
+   "courtlistener_id": 75179328,
+   "retrieved_at": "2026-11-27T08:38:55+00:00",
+   "source_id": "cl_search_ohsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Divisions, Inc. d/b/a Divisions Maintenance Group v. Whittington",
+   "court": "District Court, S.D. Ohio",
+   "court_id": "ohsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-01228",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179265/divisions-inc-dba-divisions-maintenance-group-v-whittington/",
+   "courtlistener_id": 75179265,
+   "retrieved_at": "2026-11-27T08:38:55+00:00",
+   "source_id": "cl_search_ohsd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ohsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:38:55+00:00"
 }

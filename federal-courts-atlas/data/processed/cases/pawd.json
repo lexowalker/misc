@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lachman v. The Individuals, Partnerships, and Unincorporated Associations Identified in Schedule A",
+   "court": "District Court, W.D. Pennsylvania",
+   "court_id": "pawd",
+   "date_filed": "2026-11-27",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02541",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181119/lachman-v-the-individuals-partnerships-and-unincorporated-associations/",
+   "courtlistener_id": 75181119,
+   "retrieved_at": "2026-11-27T08:40:58+00:00",
+   "source_id": "cl_search_pawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Conti v. Experian Information Solutions, Inc.",
+   "court": "District Court, W.D. Pennsylvania",
+   "court_id": "pawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02538",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179217/conti-v-experian-information-solutions-inc/",
+   "courtlistener_id": 75179217,
+   "retrieved_at": "2026-11-27T08:40:58+00:00",
+   "source_id": "cl_search_pawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mikel v. American Wind Transport Group LLC",
+   "court": "District Court, W.D. Pennsylvania",
+   "court_id": "pawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02537",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178793/mikel-v-american-wind-transport-group-llc/",
+   "courtlistener_id": 75178793,
+   "retrieved_at": "2026-11-27T08:40:58+00:00",
+   "source_id": "cl_search_pawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "WRAY v. INDIANA REGIONAL MEDICAL CENTER",
+   "court": "District Court, W.D. Pennsylvania",
+   "court_id": "pawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-02536",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178543/wray-v-indiana-regional-medical-center/",
+   "courtlistener_id": 75178543,
+   "retrieved_at": "2026-11-27T08:40:58+00:00",
+   "source_id": "cl_search_pawd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=pawd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:40:58+00:00"
 }

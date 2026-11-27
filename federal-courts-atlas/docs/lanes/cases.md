@@ -15,7 +15,11 @@ Cases are not summarised or characterised.
 - **Authentication:** the network proxy injects the token into requests sent by `pipeline.common.http.fetch`. The
   token is never printed, logged or stored, and a test checks that no output contains one.
 
-STATUS_PLACEHOLDER
+**Status: partial.**
+- **87 of 94 districts** have 3–5 items (394 in all).
+- **7 districts** (wied, wiwd, wyd, prd, vid, gud, nmid) have none yet. CourtListener's free-tier quota ran out
+  first: HTTP 429 with `Retry-After: 69262`, about 19 hours, at 08:57 UTC on 2026-11-27. They are recorded as
+  gaps. Re-running the build after the quota resets fills them from where it stopped.
 
 ## Outputs
 
@@ -58,16 +62,35 @@ requests, and backs off on 429/5xx.
    `q=docketNumber:cr`.
 
 Only the first page of each query is read. The phases run in this order so that every district gets its RECAP
-page before any district gets extras.
+page before any district gets extras. Run 1 used an earlier order: all three queries for one district before the
+next. That is why the first 15 districts have opinions and the rest do not.
 
-**Rate limit.** The first run sent 50 requests between 06:33 and 06:45 UTC. CourtListener then answered
-**HTTP 429 with `Retry-After: 2497`** (about 42 minutes), the end of a one-hour window. The run was stopped and
-not retried in a loop. After that:
+**Rate limit.** After 50 requests between 06:33 and 06:45 UTC (the exploratory ones and run 1), CourtListener
+answered **HTTP 429 with `Retry-After: 2497`** (about 42 minutes, the end of a one-hour window). The run was
+stopped and not retried in a loop.
+
+After run 3, at about 124 requests for the day, it answered **`Retry-After: 69262`** (about 19 hours): a daily
+quota.
+
+Since then:
 - each run makes at most **45** new requests (`CASES_RUN_BUDGET`);
 - on a 429 that outlasts the fetcher's back-off, a run stops requesting and builds from the cache;
-- the remaining districts are filled by later runs, spaced at least an hour apart.
+- later runs, after the quota resets, continue where the last one stopped.
 
-REQUESTS_PLACEHOLDER
+**Request ledger, 2026-11-27 UTC**
+
+| When | Requests | Result |
+|---|---|---|
+| 06:27–06:33 | 4 | Exploratory: court record, opinion and RECAP query shapes. 2 of them were reused by the build. |
+| 06:36–06:45 | 46 | Run 1: 7 court pages and 15 districts (with vaed's exploratory pages, 16). Then HTTP 429 with Retry-After 2,497 s; the process was stopped. |
+| 07:35–07:45 | 45 | Run 2: phase 1 for 45 more districts. |
+| 08:37–08:46 | 26 | Run 3: phase 1 for 26 more districts. Then HTTP 429. |
+| 08:51, 08:57 | 2 | Probes of the rate-limit headers, both 429. The second showed `Retry-After: 69262`, a daily quota reached after about 124 requests since 04:18 UTC. |
+| 06:46–06:51, 08:46–08:57 | a few | The fetcher's own back-off attempts, all 429, before the stalled runs were stopped. |
+
+In all: **121 successful requests**, plus a handful answered 429. The lane's ceiling was 300.
+`data/sources/cases.json` lists the 119 responses the build uses: 7 court pages, 87 RECAP pages, 9
+criminal-only RECAP pages and 16 opinion pages.
 
 ## Selection and filtering (`filters.py`)
 
@@ -75,8 +98,8 @@ REQUESTS_PLACEHOLDER
 1. 2 criminal (`cr`) dockets, newest filed first. A docket number appears only once, even when CourtListener
    holds one docket per defendant.
 2. The newest opinion.
-3. Civil (`cv`) dockets, newest first, preferring distinct natures of suit, until there are 5 items. At most 4
-   are civil.
+3. Civil (`cv`) dockets until there are 5 items, at most 4 of them civil. The order is newest first, with
+   preferences described below the skip list.
 
 The result depends only on the cached responses, so it is the same on every run.
 
@@ -97,21 +120,43 @@ The result depends only on the cached responses, so it is the same on every run.
 - **Immigration-detention habeas petitions**: nature of suit 463, "Habeas Corpus – Alien Detainee", or a cause
   under 8 U.S.C. § 1105(a). Their petitioners include asylum seekers.
 - **Docket types other than `cv` and `cr`**: `mj`, `po`, `sw`, `gj`, `mc` and others.
+- **Civil dockets with no nature of suit yet whose defendant also appears in an immigration-detention petition**
+  in any fetched page (e.g. "… v. Blanche"). New dockets often lack a nature of suit, so this catches the same
+  kind of petition.
+- **Evident source-data errors**: a filing date after the retrieval date, or a docket number whose two-digit year
+  disagrees with the filing date. One case: a 1983 New Hampshire docket listed as filed on 2027-09-29.
+
+Within the civil pick, dockets that already carry a nature of suit come first (distinct ones), then dockets
+without one, preferring distinct defendants. A brand-new docket cannot be screened by nature of suit, and one
+mass-tort wave can fill a page: N.D. Fla.'s newest 20 civil dockets are all against one defendant.
 
 These rules are conservative and mechanical. They will drop some ordinary cases; they are meant never to let a
-protected one through. Rejection counts are in `build_summary.json`. For the first 16 districts:
+protected one through. They cannot catch a sensitive case whose caption and metadata give no sign of it.
+
+Rejections over the 87 fetched districts, each item counted once (`build_summary.json`):
 
 | Rule | Items rejected |
 |---|---|
-| nature of suit 463 | 80 |
-| Social Security | 30 |
-| initials-only parties | 12 |
-| sensitive caption | 9 |
-| no caption | 6 |
+| nature of suit 463 (immigration-detention habeas) | 215 |
+| Social Security | 118 |
+| no nature of suit; defendant named in detention petitions | 54 |
+| parties named by initials | 32 |
+| sensitive caption | 23 |
+| no caption | 4 |
+| date error | 1 |
 
 ## Coverage
 
-COVERAGE_PLACEHOLDER
+| What | Districts | Notes |
+|---|---|---|
+| CourtListener court id confirmed | 94 | All registry ids, including gud, vid and nmid. |
+| ≥ 3 items | 87 | 49 districts with 5 items, 35 with 4, 3 with 3. |
+| RECAP page fetched (phase 1) | 87 | Missing: wied, wiwd, wyd, prd, vid, gud, nmid. |
+| Opinion page fetched (phase 2) | 16 | The first 15 districts in registry order (alnd … dcd) and vaed, whose page was fetched while exploring. Their newest usable opinions date from 2017-09-26 to 2026-11-25. Only dcd's is from 2026; the other 15 are from 2017–2019. |
+| Criminal-only page fetched where needed (phase 3) | 9 | 52 districts still need it, so they show 0–1 criminal items and more civil ones. |
+| Items | | 378 RECAP dockets, filed 2026-11-05 to 2026-11-27, and 16 opinions. By docket type, opinions included: 307 `cv`, 87 `cr`. 84 items carry a nature of suit. |
+
+Retrieved 2026-11-27, 06:36–08:46 UTC. There is one time point and no time series.
 
 ## Caveats
 
@@ -133,4 +178,16 @@ COVERAGE_PLACEHOLDER
 
 ## Gaps (`data/gaps/cases.json`)
 
-GAPS_PLACEHOLDER
+- `not_fetched_rate_limit`, `fewer_than_3_cases`: **wied, wiwd, wyd, prd, vid, gud, nmid** have no items. The API
+  quota ran out before their RECAP query (see the request ledger).
+- `opinions_not_fetched`: 78 districts have no opinion query yet, so their files list RECAP dockets only.
+- `criminal_query_not_fetched`: 52 districts whose first RECAP page held fewer than 2 usable criminal dockets
+  have not had the criminal-only follow-up.
+
+**To complete**, run `PYTHONPATH=. .venv/bin/python -m pipeline.cases.build` after the quota resets (about 04:15
+UTC on 2026-11-28). Each run:
+- makes at most 45 new requests, in the order missing RECAP pages, then opinions, then criminal follow-ups;
+- stops cleanly on a 429;
+- rewrites every output and this lane's gap fragment from the cache.
+
+About three such runs on separate days would complete every phase.

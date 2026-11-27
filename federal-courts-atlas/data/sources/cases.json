@@ -1000,6 +1000,226 @@
   "sha256": "b074443bb1d548a51d1e95d6fcbf9880507f500bbe9c53233e07118820a9bc0b",
   "notes": "First page (20 results) only; court=nywd."
  },
+ "cl_search_ohnd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=ohnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:37:49+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/145061595f86e62447831e94.bin",
+  "sha256": "42874eb2116dc68dfecef5df948a85715cbe353ba19fa278290560ed1749e641",
+  "notes": "First page (20 results) only; court=ohnd."
+ },
+ "cl_search_ohsd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=ohsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:38:55+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/80693fef5346b968b30ffc1d.bin",
+  "sha256": "db96c93deaabf15ef9f917e30fa38fcd9038bf8d1d9408df0f5f289e3922dbfd",
+  "notes": "First page (20 results) only; court=ohsd."
+ },
+ "cl_search_oked_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=oked&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:39:57+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/96c53579d111db8197efac63.bin",
+  "sha256": "ec8ba73cdceafe301619a58df050460dca45e4941efca5921c094f4c97766b4e",
+  "notes": "First page (20 results) only; court=oked."
+ },
+ "cl_search_oknd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=oknd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:38:56+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/41b7b420a11c4dabd363f2c0.bin",
+  "sha256": "4b7bc138f91c0a23902fca1a763692f8100348847c69a065dec4eaabfe1dbf90",
+  "notes": "First page (20 results) only; court=oknd."
+ },
+ "cl_search_okwd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=okwd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:40:00+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/b3adabd1bcf2faf03d3d431b.bin",
+  "sha256": "3e102c9dc6d6c97152c6d8b7f8483c0ed3e8ddfcc7683cec5fc2ebe6f919a92a",
+  "notes": "First page (20 results) only; court=okwd."
+ },
+ "cl_search_ord_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=ord&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:40:07+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/750bf0acfbb47d24191bf227.bin",
+  "sha256": "e94631b2bb42b5b6f19ccc09141b525cfab44b6eeafb8b65e454e49399c7b971",
+  "notes": "First page (20 results) only; court=ord."
+ },
+ "cl_search_paed_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=paed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:40:12+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/bb003796565287ec990f0cc9.bin",
+  "sha256": "2bf3e7725a5b499b4a29285de53b8642fcf5454e1e8bbb816bb061d050366138",
+  "notes": "First page (20 results) only; court=paed."
+ },
+ "cl_search_pamd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=pamd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:40:20+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/01625b9586ccc7f891c93b14.bin",
+  "sha256": "a671090877779064c9a10e1b4ff3aa37635406bcd339f35fa8b4a223abd0f978",
+  "notes": "First page (20 results) only; court=pamd."
+ },
+ "cl_search_pawd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=pawd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:40:58+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/4c2cc45381fb65a98b924fb7.bin",
+  "sha256": "1bb88bd49da3a1944d314fb65dc06359939546dce57a0ac84234d6dd13da6c75",
+  "notes": "First page (20 results) only; court=pawd."
+ },
+ "cl_search_rid_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=rid&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:42:22+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/8a94e88e4afaca868010ed62.bin",
+  "sha256": "4ba5a1115f172c828308ad82205fe50e0cd5fe2c296177eef3eb798649a09a94",
+  "notes": "First page (20 results) only; court=rid."
+ },
+ "cl_search_scd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=scd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:42:35+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/be669bba03e667542010289e.bin",
+  "sha256": "2140af8e3c2a6950b910882551194e6063b449ffb7493356828201302d765e8d",
+  "notes": "First page (20 results) only; court=scd."
+ },
+ "cl_search_sdd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=sdd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:42:38+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/f747401a4862923fdfaf2c74.bin",
+  "sha256": "6402f00d2a44d4183c2daab2cf2ca5f1ac52df020f864fb3db865d1f86c185a1",
+  "notes": "First page (20 results) only; court=sdd."
+ },
+ "cl_search_tned_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=tned&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:42:41+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/2ffec89d9b59dfa8a8653c70.bin",
+  "sha256": "2bc863c08edc9d5ae2961ce4d14fc207d3f2d6ec619559a06ab531eb315f45b4",
+  "notes": "First page (20 results) only; court=tned."
+ },
+ "cl_search_tnmd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=tnmd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:42:43+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/af711aef456c1e38a4f14e64.bin",
+  "sha256": "b0e1c18e3fd60b8931f9d3878e1c225b7b9d0c1d03f299619e952a99d9c9e8db",
+  "notes": "First page (20 results) only; court=tnmd."
+ },
+ "cl_search_tnwd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=tnwd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:44:01+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/1d80581640b36d704faade78.bin",
+  "sha256": "811ed35b5e92f87dd1cd5d9a87a73ca78f922800368609e5ecf51095d2adac4e",
+  "notes": "First page (20 results) only; court=tnwd."
+ },
+ "cl_search_txed_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=txed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:44:13+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/eae1a7f9fcc9d1b7b3231a75.bin",
+  "sha256": "ec942edefdbade26b3743cc46f7d2df9db751f0c2c58600680a5b2accc87af25",
+  "notes": "First page (20 results) only; court=txed."
+ },
+ "cl_search_txnd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=txnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:44:09+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/1f21585b58d6ed0596369f4f.bin",
+  "sha256": "a9c7a8abe88135bb7c0cf82a994a848c5b0e40183025124bf51226e91407438e",
+  "notes": "First page (20 results) only; court=txnd."
+ },
+ "cl_search_txsd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=txsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:44:16+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/82e3998cf79c85a120cce036.bin",
+  "sha256": "f6b25570a297355239a5e1eb45f62a5ad2f0c74e7d229db2f63e45ea783e692f",
+  "notes": "First page (20 results) only; court=txsd."
+ },
+ "cl_search_txwd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=txwd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:44:18+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/6216bc7c6a4b1eb4c6d1cf28.bin",
+  "sha256": "1b86059fb2893a734b2f23d793a7bb4e7cff71864287e5775e2ac285d9feaa3a",
+  "notes": "First page (20 results) only; court=txwd."
+ },
+ "cl_search_utd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=utd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:45:02+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/c910964f67a91e730c1102c1.bin",
+  "sha256": "d012fc8ae671847c979a6fe1a2a17fc3644201a5266dd6b23fba0fc793146301",
+  "notes": "First page (20 results) only; court=utd."
+ },
  "cl_search_vaed_opinions": {
   "lane": "cases",
   "url": "https://www.courtlistener.com/api/rest/v4/search/?court=vaed&order_by=dateFiled+desc&type=o",
@@ -1021,5 +1241,71 @@
   "local_path": "data/raw/http/www.courtlistener.com/b8c9f2b9628c8b1e855383d1.bin",
   "sha256": "96495bcae4c9f3d86ccc5e9932e6007a309533dace423a6c019b1a0e6b536dcb",
   "notes": "First page (20 results) only; court=vaed."
+ },
+ "cl_search_vawd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=vawd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:45:12+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/2d635dbc2ec9d02474554fb6.bin",
+  "sha256": "b9c911c856177a3d1a2e9bc0d4c5c10111ba048dd38b4f1b22a607864cf8bfc0",
+  "notes": "First page (20 results) only; court=vawd."
+ },
+ "cl_search_vtd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=vtd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:45:03+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/c3a331e9e7407069d69701df.bin",
+  "sha256": "d9a9cfccd9fec914558e9facea8a9783f5598e22cf3d8982cbfae2b992525268",
+  "notes": "First page (20 results) only; court=vtd."
+ },
+ "cl_search_waed_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=waed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:45:18+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/3fbd63ac18f440ac8f260a3d.bin",
+  "sha256": "5fe69a9842cc31accf2969865df4ad237e73b5c0735b353c45428c279e57b582",
+  "notes": "First page (20 results) only; court=waed."
+ },
+ "cl_search_wawd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=wawd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:45:26+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/117648daecd91ab3db7d7c4b.bin",
+  "sha256": "1ff9c6d79623f6d183060d64c631c2c1080758398a993a66553bb90a64cf3fd1",
+  "notes": "First page (20 results) only; court=wawd."
+ },
+ "cl_search_wvnd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=wvnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:46:05+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/e05f13d94ae2436f09fa0520.bin",
+  "sha256": "e8ddfc55f78d94d22cd66321cb8b6e269cec422c93c9c9bcc502426a4f4deeab",
+  "notes": "First page (20 results) only; court=wvnd."
+ },
+ "cl_search_wvsd_recap": {
+  "lane": "cases",
+  "url": "https://www.courtlistener.com/api/rest/v4/search/?court=wvsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r",
+  "dataset": "CourtListener API v4 search: RECAP dockets with cv or cr docket numbers, newest first",
+  "publisher": "Free Law Project (CourtListener)",
+  "vintage": "retrieved 2026-11-27",
+  "retrieved_at": "2026-11-27T08:46:09+00:00",
+  "local_path": "data/raw/http/www.courtlistener.com/bfad756dd461dbe8fbb4d1c1.bin",
+  "sha256": "973612539ddcd4f1dcafa8844582a10377b602c19044d6dbadfa465492323941",
+  "notes": "First page (20 results) only; court=wvsd."
  }
 }

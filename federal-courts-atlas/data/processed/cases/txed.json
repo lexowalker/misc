@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "XR Communications LLC d/b/a Vivato Technologies v. Lenovo Group Limited",
+   "court": "District Court, E.D. Texas",
+   "court_id": "txed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01068",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179903/xr-communications-llc-dba-vivato-technologies-v-lenovo-group-limited/",
+   "courtlistener_id": 75179903,
+   "retrieved_at": "2026-11-27T08:44:13+00:00",
+   "source_id": "cl_search_txed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "PerfectRX, LLC d/b/a Perfect Scripts, LLC v. Click to Fill Inc. d/b/a Wellsync a/k/a BoomRx",
+   "court": "District Court, E.D. Texas",
+   "court_id": "txed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-01790",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179840/perfectrx-llc-dba-perfect-scripts-llc-v-click-to-fill-inc-dba/",
+   "courtlistener_id": 75179840,
+   "retrieved_at": "2026-11-27T08:44:13+00:00",
+   "source_id": "cl_search_txed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "FireAngel Safety Technology Limited v. X-Sense Innovations Co., Ltd.",
+   "court": "District Court, E.D. Texas",
+   "court_id": "txed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01067",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178700/fireangel-safety-technology-limited-v-x-sense-innovations-co-ltd/",
+   "courtlistener_id": 75178700,
+   "retrieved_at": "2026-11-27T08:44:13+00:00",
+   "source_id": "cl_search_txed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Reese",
+   "court": "District Court, E.D. Texas",
+   "court_id": "txed",
+   "date_filed": "2026-11-25",
+   "date_terminated": "2026-11-25",
+   "docket_number": "4:26-cr-00329",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178049/united-states-v-reese/",
+   "courtlistener_id": 75178049,
+   "retrieved_at": "2026-11-27T08:44:13+00:00",
+   "source_id": "cl_search_txed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Nimako",
+   "court": "District Court, E.D. Texas",
+   "court_id": "txed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cr-00330",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177313/united-states-v-nimako/",
+   "courtlistener_id": 75177313,
+   "retrieved_at": "2026-11-27T08:44:13+00:00",
+   "source_id": "cl_search_txed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=txed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:44:13+00:00"
 }

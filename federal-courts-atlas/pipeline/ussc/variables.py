@@ -185,7 +185,7 @@ def variable_specs() -> list[dict]:
     V.append(_v("ussc_mean_sentence_months", "Average sentence (months)", "months",
                 "Mean sentence length in months under the USSC's FY2018+ convention: imprisonment plus months of "
                 "alternative confinement, probation-only and fine-only sentences counted as 0 months, terms over "
-                "470 months set to 470 (life = 470). Variable SENSPCAP (FY2018+); for FY2002-FY2017 the identical "
+                "470 months set to 469.99 (life = 470). Variable SENSPCAP (FY2018+); for FY2002-FY2017 the identical "
                 "rule applied to SENSPLT0.",
                 ["FY2018-FY2025 reproduce packet Table 7 'Sentence length'. FY2002-FY2017 are computed by this lane "
                  "with the same rule; the USSC's own packets for those years published only the "
@@ -195,13 +195,13 @@ def variable_specs() -> list[dict]:
                  "USSC leaves out a missing SENSPCAP. Before 2026-11-27 this lane wrongly counted them as 469.99 "
                  "months in FY2002-FY2017 (statistics audit, blocker 1); corrected.", SMALL_N],
                 "longer sentences", DATAFILE_FIRST, LAST,
-                formula="mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value"))
+                formula="mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value"))
     V.append(_v("ussc_median_sentence_months", "Median sentence (months)", "months",
-                "Median of the same quantity as ussc_mean_sentence_months (probation = 0; cap 470).",
+                "Median of the same quantity as ussc_mean_sentence_months (probation = 0; terms over 470 months set to 469.99, life = 470).",
                 ["As for ussc_mean_sentence_months. The median is 0 where more than half the individuals received "
                  "no confinement.", SMALL_N],
                 "longer sentences", DATAFILE_FIRST, LAST,
-                formula="median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value"))
+                formula="median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value"))
     V.append(_v("ussc_mean_prison_months", "Average prison term (months, prison cases only)", "months",
                 "Mean length of imprisonment in months among individuals sentenced to prison (USSC pre-FY2018 "
                 "'Length of imprisonment' convention, packet Table 7 FY1995-FY2017): variable SENTTOT, cases with "

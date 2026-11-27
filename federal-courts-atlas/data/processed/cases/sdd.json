@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Kolding v. South Dakota Attorney General Office",
+   "court": "District Court, D. South Dakota",
+   "court_id": "sdd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-04221",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178316/kolding-v-south-dakota-attorney-general-office/",
+   "courtlistener_id": 75178316,
+   "retrieved_at": "2026-11-27T08:42:38+00:00",
+   "source_id": "cl_search_sdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Rosebud v. United States",
+   "court": "District Court, D. South Dakota",
+   "court_id": "sdd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-05142",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75171054/rosebud-v-united-states/",
+   "courtlistener_id": 75171054,
+   "retrieved_at": "2026-11-27T08:42:38+00:00",
+   "source_id": "cl_search_sdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Szot v. California Commercial Investment",
+   "court": "District Court, D. South Dakota",
+   "court_id": "sdd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-04220",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75168477/szot-v-california-commercial-investment/",
+   "courtlistener_id": 75168477,
+   "retrieved_at": "2026-11-27T08:42:38+00:00",
+   "source_id": "cl_search_sdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Rivers",
+   "court": "District Court, D. South Dakota",
+   "court_id": "sdd",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "5:26-cr-50106",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75154007/united-states-v-rivers/",
+   "courtlistener_id": 75154007,
+   "retrieved_at": "2026-11-27T08:42:38+00:00",
+   "source_id": "cl_search_sdd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Miller",
+   "court": "District Court, D. South Dakota",
+   "court_id": "sdd",
+   "date_filed": "2026-11-19",
+   "date_terminated": null,
+   "docket_number": "5:26-cr-50105",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75152936/united-states-v-miller/",
+   "courtlistener_id": 75152936,
+   "retrieved_at": "2026-11-27T08:42:38+00:00",
+   "source_id": "cl_search_sdd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=sdd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:42:38+00:00"
 }

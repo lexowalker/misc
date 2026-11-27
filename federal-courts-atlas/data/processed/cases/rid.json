@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "City of Providence v. AIP CF IV, LLC",
+   "court": "District Court, D. Rhode Island",
+   "court_id": "rid",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00887",
+   "docket_type": "cv",
+   "nature_of_suit": "410 Anti-Trust",
+   "cause": "15:15 Antitrust Litigation",
+   "url": "https://www.courtlistener.com/docket/75175593/city-of-providence-v-aip-cf-iv-llc/",
+   "courtlistener_id": 75175593,
+   "retrieved_at": "2026-11-27T08:42:22+00:00",
+   "source_id": "cl_search_rid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mahmoud v. Oz",
+   "court": "District Court, D. Rhode Island",
+   "court_id": "rid",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00881",
+   "docket_type": "cv",
+   "nature_of_suit": "899 Other Statutes: Administrative Procedures Act/Review or Appeal of Agency Decision",
+   "cause": "05:702 Administrative Procedure Act",
+   "url": "https://www.courtlistener.com/docket/75165734/mahmoud-v-oz/",
+   "courtlistener_id": 75165734,
+   "retrieved_at": "2026-11-27T08:42:22+00:00",
+   "source_id": "cl_search_rid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Desrosier v. Amedisys Holding, LLC",
+   "court": "District Court, D. Rhode Island",
+   "court_id": "rid",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00882",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75169114/desrosier-v-amedisys-holding-llc/",
+   "courtlistener_id": 75169114,
+   "retrieved_at": "2026-11-27T08:42:22+00:00",
+   "source_id": "cl_search_rid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Milanovich",
+   "court": "District Court, D. Rhode Island",
+   "court_id": "rid",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00099",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175861/united-states-v-milanovich/",
+   "courtlistener_id": 75175861,
+   "retrieved_at": "2026-11-27T08:42:22+00:00",
+   "source_id": "cl_search_rid_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Baptiste",
+   "court": "District Court, D. Rhode Island",
+   "court_id": "rid",
+   "date_filed": "2026-11-18",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00098",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75139913/united-states-v-baptiste/",
+   "courtlistener_id": 75139913,
+   "retrieved_at": "2026-11-27T08:42:22+00:00",
+   "source_id": "cl_search_rid_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=rid&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:42:22+00:00"
 }

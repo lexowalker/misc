@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Gutschmidt v. Tumble Creek Golf, LLC",
+   "court": "District Court, E.D. Washington",
+   "court_id": "waed",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03243",
+   "docket_type": "cv",
+   "nature_of_suit": "890 Other Statutory Actions",
+   "cause": "28:1446pr Petition for Removal",
+   "url": "https://www.courtlistener.com/docket/75171696/gutschmidt-v-tumble-creek-golf-llc/",
+   "courtlistener_id": 75171696,
+   "retrieved_at": "2026-11-27T08:45:18+00:00",
+   "source_id": "cl_search_waed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Klein v. United States Citizenship and Immigration Services",
+   "court": "District Court, E.D. Washington",
+   "court_id": "waed",
+   "date_filed": "2026-11-20",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00518",
+   "docket_type": "cv",
+   "nature_of_suit": "540 Mandamus & Other",
+   "cause": "28:1361 Petition for Writ of Mandamus",
+   "url": "https://www.courtlistener.com/docket/75155773/klein-v-united-states-citizenship-and-immigration-services/",
+   "courtlistener_id": 75155773,
+   "retrieved_at": "2026-11-27T08:45:18+00:00",
+   "source_id": "cl_search_waed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Alcala v. Texas Roadhouse Holdings LLC",
+   "court": "District Court, E.D. Washington",
+   "court_id": "waed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00525",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179473/alcala-v-texas-roadhouse-holdings-llc/",
+   "courtlistener_id": 75179473,
+   "retrieved_at": "2026-11-27T08:45:18+00:00",
+   "source_id": "cl_search_waed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Owens v. DiBartolo",
+   "court": "District Court, E.D. Washington",
+   "court_id": "waed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00524",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178809/owens-v-dibartolo/",
+   "courtlistener_id": 75178809,
+   "retrieved_at": "2026-11-27T08:45:18+00:00",
+   "source_id": "cl_search_waed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=waed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:45:18+00:00"
 }

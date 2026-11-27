@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Thomasson v. Ellis County Tree Service LLC",
+   "court": "District Court, W.D. Texas",
+   "court_id": "txwd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-07352",
+   "docket_type": "cv",
+   "nature_of_suit": "485 Telephone Consumer Protection Act (TCPA)",
+   "cause": "47:227 Restrictions of Use of Telephone Equipment",
+   "url": "https://www.courtlistener.com/docket/75177825/thomasson-v-ellis-county-tree-service-llc/",
+   "courtlistener_id": 75177825,
+   "retrieved_at": "2026-11-27T08:44:18+00:00",
+   "source_id": "cl_search_txwd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Motion Offense, LLC v. Dropbox, Inc.",
+   "court": "District Court, W.D. Texas",
+   "court_id": "txwd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "6:26-cv-00744",
+   "docket_type": "cv",
+   "nature_of_suit": "830 Patent",
+   "cause": "35:100 Patent Infringement",
+   "url": "https://www.courtlistener.com/docket/75177430/motion-offense-llc-v-dropbox-inc/",
+   "courtlistener_id": 75177430,
+   "retrieved_at": "2026-11-27T08:44:18+00:00",
+   "source_id": "cl_search_txwd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Dyche v. Blue Cross and Blue Shield of Texas, a Division of Health Care Service Corporation, a Mutual Legal Reserve Company",
+   "court": "District Court, W.D. Texas",
+   "court_id": "txwd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03293",
+   "docket_type": "cv",
+   "nature_of_suit": "110 Insurance",
+   "cause": "28:1332 Diversity-Breach of Contract",
+   "url": "https://www.courtlistener.com/docket/75175471/dyche-v-blue-cross-and-blue-shield-of-texas-a-division-of-health-care/",
+   "courtlistener_id": 75175471,
+   "retrieved_at": "2026-11-27T08:44:18+00:00",
+   "source_id": "cl_search_txwd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Plata Feliz v. MULLIN, Secretary of U.S. Department of Homeland Security",
+   "court": "District Court, W.D. Texas",
+   "court_id": "txwd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-02823",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180992/plata-feliz-v-mullin-secretary-of-us-department-of-homeland-security/",
+   "courtlistener_id": 75180992,
+   "retrieved_at": "2026-11-27T08:44:18+00:00",
+   "source_id": "cl_search_txwd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Sandoval-Salas",
+   "court": "District Court, W.D. Texas",
+   "court_id": "txwd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00533",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174108/united-states-v-sandoval-salas/",
+   "courtlistener_id": 75174108,
+   "retrieved_at": "2026-11-27T08:44:18+00:00",
+   "source_id": "cl_search_txwd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=txwd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:44:18+00:00"
 }

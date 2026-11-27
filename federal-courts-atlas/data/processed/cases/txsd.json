@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "First National Bank of Omaha v. Concord EMS Inc.",
+   "court": "District Court, S.D. Texas",
+   "court_id": "txsd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-10312",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181004/first-national-bank-of-omaha-v-concord-ems-inc/",
+   "courtlistener_id": 75181004,
+   "retrieved_at": "2026-11-27T08:44:16+00:00",
+   "source_id": "cl_search_txsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Ascentra Ventures LLC v. New Vision Palliative & Hospice Care, LLC",
+   "court": "District Court, S.D. Texas",
+   "court_id": "txsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00434",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179975/ascentra-ventures-llc-v-new-vision-palliative-hospice-care-llc/",
+   "courtlistener_id": 75179975,
+   "retrieved_at": "2026-11-27T08:44:16+00:00",
+   "source_id": "cl_search_txsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "610 & SAN FELIPE, INC. v. The Dufresne Spencer Group, LLC",
+   "court": "District Court, S.D. Texas",
+   "court_id": "txsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-10310",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179824/610-san-felipe-inc-v-the-dufresne-spencer-group-llc/",
+   "courtlistener_id": 75179824,
+   "retrieved_at": "2026-11-27T08:44:16+00:00",
+   "source_id": "cl_search_txsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "BARAN v. IMMIGRATION SERVICES (USCIS)",
+   "court": "District Court, S.D. Texas",
+   "court_id": "txsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-10305",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179433/baran-v-immigration-services-uscis/",
+   "courtlistener_id": 75179433,
+   "retrieved_at": "2026-11-27T08:44:16+00:00",
+   "source_id": "cl_search_txsd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=txsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:44:16+00:00"
 }

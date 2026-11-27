@@ -1,0 +1,6 @@
+profile_year,district_id,data_year,check,lhs,rhs,deviation
+2004,wvsd,2000,pj_pending ~ pending_total/judgeships (tol 2.0),243.0,240.8,-2.2
+2004,wvsd,2001,pj_pending ~ pending_total/judgeships (tol 2.0),265.0,259.0,-6.0
+2005,wvsd,2000,pj_pending ~ pending_total/judgeships (tol 2.0),243.0,240.8,-2.2
+2005,wvsd,2001,pj_pending ~ pending_total/judgeships (tol 2.0),265.0,259.0,-6.0
+2006,wvsd,2001,pj_pending ~ pending_total/judgeships (tol 2.0),265.0,259.0,-6.0

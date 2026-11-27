@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Nitowski v. McDougall",
+   "court": "District Court, D. Oregon",
+   "court_id": "ord",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-02587",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179259/nitowski-v-mcdougall/",
+   "courtlistener_id": 75179259,
+   "retrieved_at": "2026-11-27T08:40:07+00:00",
+   "source_id": "cl_search_ord_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Wright v. Skims Body, Inc.",
+   "court": "District Court, D. Oregon",
+   "court_id": "ord",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-02586",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178636/wright-v-skims-body-inc/",
+   "courtlistener_id": 75178636,
+   "retrieved_at": "2026-11-27T08:40:07+00:00",
+   "source_id": "cl_search_ord_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Board of Trustees of the Employee Painters' Trust v. Grizzly Glass & Door LLC",
+   "court": "District Court, D. Oregon",
+   "court_id": "ord",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-02584",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178412/board-of-trustees-of-the-employee-painters-trust-v-grizzly-glass-door/",
+   "courtlistener_id": 75178412,
+   "retrieved_at": "2026-11-27T08:40:07+00:00",
+   "source_id": "cl_search_ord_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Lepe-Rodriguez",
+   "court": "District Court, D. Oregon",
+   "court_id": "ord",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00499",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176383/united-states-v-lepe-rodriguez/",
+   "courtlistener_id": 75176383,
+   "retrieved_at": "2026-11-27T08:40:07+00:00",
+   "source_id": "cl_search_ord_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Lucas",
+   "court": "District Court, D. Oregon",
+   "court_id": "ord",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00498",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75171902/united-states-v-lucas/",
+   "courtlistener_id": 75171902,
+   "retrieved_at": "2026-11-27T08:40:07+00:00",
+   "source_id": "cl_search_ord_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ord&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:40:07+00:00"
 }

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "MERCADO JR. v. THE VANGUARD GROUP, INC.",
+   "court": "District Court, E.D. Pennsylvania",
+   "court_id": "paed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-09016",
+   "docket_type": "cv",
+   "nature_of_suit": "190 Contract: Other",
+   "cause": "18:133",
+   "url": "https://www.courtlistener.com/docket/75178866/mercado-jr-v-the-vanguard-group-inc/",
+   "courtlistener_id": 75178866,
+   "retrieved_at": "2026-11-27T08:40:12+00:00",
+   "source_id": "cl_search_paed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Swaby v. Western Express, Inc.",
+   "court": "District Court, E.D. Pennsylvania",
+   "court_id": "paed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-09012",
+   "docket_type": "cv",
+   "nature_of_suit": "350 P.I.: Motor Vehicle",
+   "cause": "28:1332 Diversity-Personal Injury",
+   "url": "https://www.courtlistener.com/docket/75178186/swaby-v-western-express-inc/",
+   "courtlistener_id": 75178186,
+   "retrieved_at": "2026-11-27T08:40:12+00:00",
+   "source_id": "cl_search_paed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Samuels-Bey v. CITY OF PHILADELPHIA",
+   "court": "District Court, E.D. Pennsylvania",
+   "court_id": "paed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-09013",
+   "docket_type": "cv",
+   "nature_of_suit": "710 Labor: Fair Standards",
+   "cause": "15:2(a) Fair Labor Standards Act",
+   "url": "https://www.courtlistener.com/docket/75178046/samuels-bey-v-city-of-philadelphia/",
+   "courtlistener_id": 75178046,
+   "retrieved_at": "2026-11-27T08:40:12+00:00",
+   "source_id": "cl_search_paed_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "K. v. NAZARETH AREA SCHOOL DISTRICT",
+   "court": "District Court, E.D. Pennsylvania",
+   "court_id": "paed",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-09010",
+   "docket_type": "cv",
+   "nature_of_suit": "448 Civil Rights: Education",
+   "cause": "20:1400 Civil Rights of Handicapped Child",
+   "url": "https://www.courtlistener.com/docket/75177195/k-v-nazareth-area-school-district/",
+   "courtlistener_id": 75177195,
+   "retrieved_at": "2026-11-27T08:40:12+00:00",
+   "source_id": "cl_search_paed_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=paed&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:40:12+00:00"
 }

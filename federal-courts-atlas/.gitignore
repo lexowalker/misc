@@ -9,4 +9,5 @@ test-results/
 playwright-report/
 .DS_Store
 tests/e2e/__screenshots__/
-data/processed/fcms/
+# FCMS: CSV mirrors of the parquet tables are large; `make fcms` regenerates them.
+data/processed/fcms/observations*.csv

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "McCoy v. Giant Eagle, Inc.",
+   "court": "District Court, N.D. Ohio",
+   "court_id": "ohnd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-03109",
+   "docket_type": "cv",
+   "nature_of_suit": "190 Contract: Other",
+   "cause": "28:1332 Diversity-Injunctive & Declaratory Relief",
+   "url": "https://www.courtlistener.com/docket/75168210/mccoy-v-giant-eagle-inc/",
+   "courtlistener_id": 75168210,
+   "retrieved_at": "2026-11-27T08:37:49+00:00",
+   "source_id": "cl_search_ohnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Movemate Innovations Inc. v. Mollein, Inc.",
+   "court": "District Court, N.D. Ohio",
+   "court_id": "ohnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03127",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179822/movemate-innovations-inc-v-mollein-inc/",
+   "courtlistener_id": 75179822,
+   "retrieved_at": "2026-11-27T08:37:49+00:00",
+   "source_id": "cl_search_ohnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "K. v. Revlon Consumer Products, LLC",
+   "court": "District Court, N.D. Ohio",
+   "court_id": "ohnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03125",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178314/k-v-revlon-consumer-products-llc/",
+   "courtlistener_id": 75178314,
+   "retrieved_at": "2026-11-27T08:37:49+00:00",
+   "source_id": "cl_search_ohnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Livers v. Forrester Education, LLC",
+   "court": "District Court, N.D. Ohio",
+   "court_id": "ohnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-03124",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177406/livers-v-forrester-education-llc/",
+   "courtlistener_id": 75177406,
+   "retrieved_at": "2026-11-27T08:37:49+00:00",
+   "source_id": "cl_search_ohnd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=ohnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:37:49+00:00"
 }

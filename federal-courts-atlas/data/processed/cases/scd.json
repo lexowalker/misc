@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "GREENVILLE WATER SYSTEM, SOUTH CAROLINA v. AGC Chemicals Americas Inc.",
+   "court": "District Court, D. South Carolina",
+   "court_id": "scd",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-06127",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75181080/greenville-water-system-south-carolina-v-agc-chemicals-americas-inc/",
+   "courtlistener_id": 75181080,
+   "retrieved_at": "2026-11-27T08:42:35+00:00",
+   "source_id": "cl_search_scd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Espinoza v. 3M Company (f/k/a Minnesota Mining and Manufacturing Company)",
+   "court": "District Court, D. South Carolina",
+   "court_id": "scd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-06125",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176205/espinoza-v-3m-company-fka-minnesota-mining-and-manufacturing-company/",
+   "courtlistener_id": 75176205,
+   "retrieved_at": "2026-11-27T08:42:35+00:00",
+   "source_id": "cl_search_scd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Brogan v. 3M COMPANY (f/k/a Minnesota Mining and Manufacturing Co.)",
+   "court": "District Court, D. South Carolina",
+   "court_id": "scd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-06124",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174626/brogan-v-3m-company-fka-minnesota-mining-and-manufacturing-co/",
+   "courtlistener_id": 75174626,
+   "retrieved_at": "2026-11-27T08:42:35+00:00",
+   "source_id": "cl_search_scd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Mitchell v. 3M COMPANY f/k/a Minnesota Mining and Manufacturing",
+   "court": "District Court, D. South Carolina",
+   "court_id": "scd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-06123",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75174218/mitchell-v-3m-company-fka-minnesota-mining-and-manufacturing/",
+   "courtlistener_id": 75174218,
+   "retrieved_at": "2026-11-27T08:42:35+00:00",
+   "source_id": "cl_search_scd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=scd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:42:35+00:00"
 }

@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "SKA Medical LLC v. 209 E Gordon LLC",
+   "court": "District Court, D. Utah",
+   "court_id": "utd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01184",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75179382/ska-medical-llc-v-209-e-gordon-llc/",
+   "courtlistener_id": 75179382,
+   "retrieved_at": "2026-11-27T08:45:02+00:00",
+   "source_id": "cl_search_utd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Wyatt v. Salt Lake County Jail",
+   "court": "District Court, D. Utah",
+   "court_id": "utd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01179",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178551/wyatt-v-salt-lake-county-jail/",
+   "courtlistener_id": 75178551,
+   "retrieved_at": "2026-11-27T08:45:02+00:00",
+   "source_id": "cl_search_utd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hugentobler v. ARUP Laboratories",
+   "court": "District Court, D. Utah",
+   "court_id": "utd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01180",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178425/hugentobler-v-arup-laboratories/",
+   "courtlistener_id": 75178425,
+   "retrieved_at": "2026-11-27T08:45:02+00:00",
+   "source_id": "cl_search_utd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Pacheco v. Utah State Tax Commission",
+   "court": "District Court, D. Utah",
+   "court_id": "utd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-01181",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178321/pacheco-v-utah-state-tax-commission/",
+   "courtlistener_id": 75178321,
+   "retrieved_at": "2026-11-27T08:45:02+00:00",
+   "source_id": "cl_search_utd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=utd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:45:02+00:00"
 }

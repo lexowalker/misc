@@ -10,13 +10,79 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Harper v. NRVRJ",
+   "court": "District Court, W.D. Virginia",
+   "court_id": "vawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00939",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176643/harper-v-nrvrj/",
+   "courtlistener_id": 75176643,
+   "retrieved_at": "2026-11-27T08:45:12+00:00",
+   "source_id": "cl_search_vawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "West v. Hutcheson",
+   "court": "District Court, W.D. Virginia",
+   "court_id": "vawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00938",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176433/west-v-hutcheson/",
+   "courtlistener_id": 75176433,
+   "retrieved_at": "2026-11-27T08:45:12+00:00",
+   "source_id": "cl_search_vawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Haley v. Faquier County Circuit Court",
+   "court": "District Court, W.D. Virginia",
+   "court_id": "vawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00936",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175352/haley-v-faquier-county-circuit-court/",
+   "courtlistener_id": 75175352,
+   "retrieved_at": "2026-11-27T08:45:12+00:00",
+   "source_id": "cl_search_vawd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Lewis v. Carilion Clinic, Inc.",
+   "court": "District Court, W.D. Virginia",
+   "court_id": "vawd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "7:26-cv-00937",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175348/lewis-v-carilion-clinic-inc/",
+   "courtlistener_id": 75175348,
+   "retrieved_at": "2026-11-27T08:45:12+00:00",
+   "source_id": "cl_search_vawd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=vawd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:45:12+00:00"
 }

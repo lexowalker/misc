@@ -25,7 +25,8 @@ your lane report instead of silently diverging.
 ```
 pipeline/<lane>/build.py      entry point: `python -m pipeline.<lane>.build` (idempotent; cached downloads)
 data/raw/                     download cache (git-ignored)
-data/processed/<lane>/        lane outputs (parquet + csv, committed; keep each file < 20 MB)
+data/processed/<lane>/        lane outputs (parquet + csv, committed; keep each file < 20 MB; a large CSV that only
+                              mirrors a committed parquet table may be git-ignored, e.g. fcms/observations*.csv)
 data/sources/<lane>.json      source manifest fragment
 data/gaps/<lane>.json         data-gap fragment
 public/data/                  web-ready JSON (written ONLY by the `web` lane, except geo/ by boundaries)
@@ -70,7 +71,9 @@ Each lane also writes `data/processed/<lane>/variables.json`: a list of
 * `public/data/geo/districts-lo.topo.json` (national view) and `public/data/geo/districts-hi.topo.json` (zoomed),
   unprojected lon/lat WGS84 TopoJSON with objects:
   `districts` (id = district_id, props: name, short, state, circuit),
-  `states` (id = postal), `counties` (hi only; id = geoid, props: name, district_id).
+  `states` (id = postal), `counties` (hi only; id = geoid, props: name, district_id, state, and `split_districts`
+  such as `ncmd;nced` on the 8 statute-split counties only). Resolve a point to a district against `districts`,
+  never against a county's `district_id`.
   The front end projects with a composite AlbersUSA + territories projection.
 * `public/data/geo/divisions.json` — statutory divisions per district (from the statute text) with member counties.
 

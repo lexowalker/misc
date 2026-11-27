@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Patel v. United States",
+   "court": "District Court, E.D. Tennessee",
+   "court_id": "tned",
+   "date_filed": "2026-11-26",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00074",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75180999/patel-v-united-states/",
+   "courtlistener_id": 75180999,
+   "retrieved_at": "2026-11-27T08:42:41+00:00",
+   "source_id": "cl_search_tned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Foster v. Baxter Enterprises",
+   "court": "District Court, E.D. Tennessee",
+   "court_id": "tned",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-00073",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178427/foster-v-baxter-enterprises/",
+   "courtlistener_id": 75178427,
+   "retrieved_at": "2026-11-27T08:42:41+00:00",
+   "source_id": "cl_search_tned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Tennessee Valley Land Company, LLC v. Blount County",
+   "court": "District Court, E.D. Tennessee",
+   "court_id": "tned",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00651",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178426/tennessee-valley-land-company-llc-v-blount-county/",
+   "courtlistener_id": 75178426,
+   "retrieved_at": "2026-11-27T08:42:41+00:00",
+   "source_id": "cl_search_tned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Ford",
+   "court": "District Court, E.D. Tennessee",
+   "court_id": "tned",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00096",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175637/united-states-v-ford/",
+   "courtlistener_id": 75175637,
+   "retrieved_at": "2026-11-27T08:42:41+00:00",
+   "source_id": "cl_search_tned_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Paige",
+   "court": "District Court, E.D. Tennessee",
+   "court_id": "tned",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cr-00113",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175600/united-states-v-paige/",
+   "courtlistener_id": 75175600,
+   "retrieved_at": "2026-11-27T08:42:41+00:00",
+   "source_id": "cl_search_tned_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=tned&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:42:41+00:00"
 }

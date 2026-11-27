@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Appalachian Power Company v. Inter Mountain Cable, Inc.",
+   "court": "District Court, S.D. West Virginia",
+   "court_id": "wvsd",
+   "date_filed": "2026-11-19",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00742",
+   "docket_type": "cv",
+   "nature_of_suit": "190 Contract: Other",
+   "cause": "28:1332 Diversity-Breach of Contract",
+   "url": "https://www.courtlistener.com/docket/75146206/appalachian-power-company-v-inter-mountain-cable-inc/",
+   "courtlistener_id": 75146206,
+   "retrieved_at": "2026-11-27T08:46:09+00:00",
+   "source_id": "cl_search_wvsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Vess v. Vess",
+   "court": "District Court, S.D. West Virginia",
+   "court_id": "wvsd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00751",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177208/vess-v-vess/",
+   "courtlistener_id": 75177208,
+   "retrieved_at": "2026-11-27T08:46:09+00:00",
+   "source_id": "cl_search_wvsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Sarabia v. Hilco Transport, Inc.",
+   "court": "District Court, S.D. West Virginia",
+   "court_id": "wvsd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-00750",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75170576/sarabia-v-hilco-transport-inc/",
+   "courtlistener_id": 75170576,
+   "retrieved_at": "2026-11-27T08:46:09+00:00",
+   "source_id": "cl_search_wvsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Shamblin v. Life Insurance Company of North America",
+   "court": "District Court, S.D. West Virginia",
+   "court_id": "wvsd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "2:26-cv-00749",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75169164/shamblin-v-life-insurance-company-of-north-america/",
+   "courtlistener_id": 75169164,
+   "retrieved_at": "2026-11-27T08:46:09+00:00",
+   "source_id": "cl_search_wvsd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Hoffmann",
+   "court": "District Court, S.D. West Virginia",
+   "court_id": "wvsd",
+   "date_filed": "2026-11-16",
+   "date_terminated": null,
+   "docket_number": "2:26-cr-00140",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75123829/united-states-v-hoffmann/",
+   "courtlistener_id": 75123829,
+   "retrieved_at": "2026-11-27T08:46:09+00:00",
+   "source_id": "cl_search_wvsd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=wvsd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:46:09+00:00"
 }

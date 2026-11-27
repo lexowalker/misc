@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Butler II v. Head",
+   "court": "District Court, M.D. Tennessee",
+   "court_id": "tnmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01917",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178699/butler-ii-v-head/",
+   "courtlistener_id": 75178699,
+   "retrieved_at": "2026-11-27T08:42:43+00:00",
+   "source_id": "cl_search_tnmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Belton-Hall v. Amazon.com Services LLC",
+   "court": "District Court, M.D. Tennessee",
+   "court_id": "tnmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01911",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178639/belton-hall-v-amazoncom-services-llc/",
+   "courtlistener_id": 75178639,
+   "retrieved_at": "2026-11-27T08:42:43+00:00",
+   "source_id": "cl_search_tnmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Coleman v. Metropolitan Government of Nashville and Davidson County",
+   "court": "District Court, M.D. Tennessee",
+   "court_id": "tnmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01915",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178319/coleman-v-metropolitan-government-of-nashville-and-davidson-county/",
+   "courtlistener_id": 75178319,
+   "retrieved_at": "2026-11-27T08:42:43+00:00",
+   "source_id": "cl_search_tnmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Hauser v. State of Tennessee",
+   "court": "District Court, M.D. Tennessee",
+   "court_id": "tnmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "3:26-cv-01916",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178317/hauser-v-state-of-tennessee/",
+   "courtlistener_id": 75178317,
+   "retrieved_at": "2026-11-27T08:42:43+00:00",
+   "source_id": "cl_search_tnmd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Porter",
+   "court": "District Court, M.D. Tennessee",
+   "court_id": "tnmd",
+   "date_filed": "2026-11-25",
+   "date_terminated": "2026-11-25",
+   "docket_number": "3:26-cr-00276",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75178549/united-states-v-porter/",
+   "courtlistener_id": 75178549,
+   "retrieved_at": "2026-11-27T08:42:43+00:00",
+   "source_id": "cl_search_tnmd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=tnmd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:42:43+00:00"
 }

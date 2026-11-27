@@ -10,13 +10,95 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Carrington v. United States",
+   "court": "District Court, M.D. Pennsylvania",
+   "court_id": "pamd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03443",
+   "docket_type": "cv",
+   "nature_of_suit": "Mandamus & Other",
+   "cause": "28:2241fd",
+   "url": "https://www.courtlistener.com/docket/75169600/carrington-v-united-states/",
+   "courtlistener_id": 75169600,
+   "retrieved_at": "2026-11-27T08:40:20+00:00",
+   "source_id": "cl_search_pamd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Kline v. LendingTree, LLC",
+   "court": "District Court, M.D. Pennsylvania",
+   "court_id": "pamd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-03451",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177703/kline-v-lendingtree-llc/",
+   "courtlistener_id": 75177703,
+   "retrieved_at": "2026-11-27T08:40:20+00:00",
+   "source_id": "cl_search_pamd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Zech v. Sentinel Connector Systems, Inc.",
+   "court": "District Court, M.D. Pennsylvania",
+   "court_id": "pamd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-03458",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177411/zech-v-sentinel-connector-systems-inc/",
+   "courtlistener_id": 75177411,
+   "retrieved_at": "2026-11-27T08:40:20+00:00",
+   "source_id": "cl_search_pamd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "State Farm Fire and Casualty Company v. Orind Dibble, IV",
+   "court": "District Court, M.D. Pennsylvania",
+   "court_id": "pamd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "4:26-cv-03456",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75177311/state-farm-fire-and-casualty-company-v-orind-dibble-iv/",
+   "courtlistener_id": 75177311,
+   "retrieved_at": "2026-11-27T08:40:20+00:00",
+   "source_id": "cl_search_pamd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Camacho-Lopez",
+   "court": "District Court, M.D. Pennsylvania",
+   "court_id": "pamd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00274",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75170052/united-states-v-camacho-lopez/",
+   "courtlistener_id": 75170052,
+   "retrieved_at": "2026-11-27T08:40:20+00:00",
+   "source_id": "cl_search_pamd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=pamd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
   "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:40:20+00:00"
 }

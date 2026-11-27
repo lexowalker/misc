@@ -164,3 +164,27 @@ def test_short_districts_are_gaps(files, gaps):
         assert sorted(gaps["fewer_than_3_cases"]["districts"]) == short
     else:
         assert "fewer_than_3_cases" not in gaps
+
+
+def test_items_match_cached_api_responses(files):
+    """Every item's fields equal the corresponding result in the cached API response it came from."""
+    srcs = json.loads((ROOT / "data" / "sources" / "cases.json").read_text())
+    checked = 0
+    for rec in files.values():
+        for it in rec["items"]:
+            path = ROOT / srcs[it["source_id"]]["local_path"]
+            if not path.exists():
+                pytest.skip("CourtListener download cache not present")
+            results = json.loads(path.read_text())["results"]
+            idk = "docket_id" if it["item_type"] == "recap_docket" else "cluster_id"
+            match = [x for x in results if x.get(idk) == it["courtlistener_id"]]
+            assert match, it
+            x = match[0]
+            assert x["caseName"] == it["case_name"]
+            assert x["dateFiled"] == it["date_filed"]
+            assert x["docketNumber"] == it["docket_number"]
+            assert x["court_id"] == it["court_id"]
+            url = x["docket_absolute_url"] if idk == "docket_id" else x["absolute_url"]
+            assert "https://www.courtlistener.com" + url == it["url"]
+            checked += 1
+    assert checked > 0

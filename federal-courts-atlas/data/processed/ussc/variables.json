@@ -2900,7 +2900,7 @@
   "label": "Average sentence (months)",
   "unit": "months",
   "period_type": "FY_SEP30",
-  "description": "Mean sentence length in months under the USSC's FY2018+ convention: imprisonment plus months of alternative confinement, probation-only and fine-only sentences counted as 0 months, terms over 470 months set to 470 (life = 470). Variable SENSPCAP (FY2018+); for FY2002-FY2017 the identical rule applied to SENSPLT0.",
+  "description": "Mean sentence length in months under the USSC's FY2018+ convention: imprisonment plus months of alternative confinement, probation-only and fine-only sentences counted as 0 months, terms over 470 months set to 469.99 (life = 470). Variable SENSPCAP (FY2018+); for FY2002-FY2017 the identical rule applied to SENSPLT0.",
   "caveats": [
    "FY2018-FY2025 reproduce packet Table 7 'Sentence length'. FY2002-FY2017 are computed by this lane with the same rule; the USSC's own packets for those years published only the length of imprisonment (see ussc_mean_prison_months).",
    "Cases with no sentence-length value (SENSPLT0/SENSPCAP missing: 746 records nationally in FY2002, falling to 0-2 a year from FY2017) are left out of the mean, the median and N (n_basis), as the USSC leaves out a missing SENSPCAP. Before 2026-11-27 this lane wrongly counted them as 469.99 months in FY2002-FY2017 (statistics audit, blocker 1); corrected.",
@@ -2909,7 +2909,7 @@
   "higher_means": "longer sentences",
   "first_period": 2002,
   "last_period": 2025,
-  "formula": "mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value",
+  "formula": "mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value",
   "derived": false,
   "breaks": [],
   "source_ids": [
@@ -3057,7 +3057,7 @@
    2017
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "mean(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "mean(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {
@@ -3065,7 +3065,7 @@
   "label": "Median sentence (months)",
   "unit": "months",
   "period_type": "FY_SEP30",
-  "description": "Median of the same quantity as ussc_mean_sentence_months (probation = 0; cap 470).",
+  "description": "Median of the same quantity as ussc_mean_sentence_months (probation = 0; terms over 470 months set to 469.99, life = 470).",
   "caveats": [
    "As for ussc_mean_sentence_months. The median is 0 where more than half the individuals received no confinement.",
    "Territorial courts (D. Guam, D.N. Mar. I., D.V.I.) and some small districts have few cases; see ussc_cases_total and the n_basis column before comparing percentages."
@@ -3073,7 +3073,7 @@
   "higher_means": "longer sentences",
   "first_period": 2002,
   "last_period": 2025,
-  "formula": "median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value",
+  "formula": "median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value",
   "derived": false,
   "breaks": [],
   "source_ids": [
@@ -3221,7 +3221,7 @@
    2017
   ],
   "derived_formula_by_basis": {
-   "computed_ussc_definition": "median(min(SENSPCAP or SENSPLT0, 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
+   "computed_ussc_definition": "median(min(SENSPCAP or SENSPLT0, 469.99; life = 470)) over cases with a non-missing value, computed by this lane from the USSC Individual Offender datafile with the USSC's own definition, in a year when the USSC did not print this statistic"
   }
  },
  {

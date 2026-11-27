@@ -10,13 +10,94 @@
   "end_date": null
  },
  "court_confirmed": true,
- "items": [],
- "queries": [],
+ "items": [
+  {
+   "item_type": "recap_docket",
+   "case_name": "Seoane v. Pedophile Terrorist Pornstar Hooker Hiring War Mongering Dictator Treasonous convicted Felon Kiddy Fiddler Rapist President Donald John Trump",
+   "court": "District Court, N.D. West Virginia",
+   "court_id": "wvnd",
+   "date_filed": "2026-11-23",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00211",
+   "docket_type": "cv",
+   "nature_of_suit": "540 Mandamus & Other",
+   "cause": "28:1361 Petition for Writ of Mandamus",
+   "url": "https://www.courtlistener.com/docket/75165671/seoane-v-pedophile-terrorist-pornstar-hooker-hiring-war-mongering-dictator/",
+   "courtlistener_id": 75165671,
+   "retrieved_at": "2026-11-27T08:46:05+00:00",
+   "source_id": "cl_search_wvnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Delaware Life Insurance Company v. Mullens",
+   "court": "District Court, N.D. West Virginia",
+   "court_id": "wvnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "1:26-cv-00170",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75176104/delaware-life-insurance-company-v-mullens/",
+   "courtlistener_id": 75176104,
+   "retrieved_at": "2026-11-27T08:46:05+00:00",
+   "source_id": "cl_search_wvnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "Curtis v. Antero Resources Corporation",
+   "court": "District Court, N.D. West Virginia",
+   "court_id": "wvnd",
+   "date_filed": "2026-11-25",
+   "date_terminated": null,
+   "docket_number": "5:26-cv-00212",
+   "docket_type": "cv",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75175967/curtis-v-antero-resources-corporation/",
+   "courtlistener_id": 75175967,
+   "retrieved_at": "2026-11-27T08:46:05+00:00",
+   "source_id": "cl_search_wvnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Ramney",
+   "court": "District Court, N.D. West Virginia",
+   "court_id": "wvnd",
+   "date_filed": "2026-11-24",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00059",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75165751/united-states-v-ramney/",
+   "courtlistener_id": 75165751,
+   "retrieved_at": "2026-11-27T08:46:05+00:00",
+   "source_id": "cl_search_wvnd_recap"
+  },
+  {
+   "item_type": "recap_docket",
+   "case_name": "United States v. Styles",
+   "court": "District Court, N.D. West Virginia",
+   "court_id": "wvnd",
+   "date_filed": "2026-11-17",
+   "date_terminated": null,
+   "docket_number": "3:26-cr-00058",
+   "docket_type": "cr",
+   "nature_of_suit": null,
+   "cause": null,
+   "url": "https://www.courtlistener.com/docket/75130877/united-states-v-styles/",
+   "courtlistener_id": 75130877,
+   "retrieved_at": "2026-11-27T08:46:05+00:00",
+   "source_id": "cl_search_wvnd_recap"
+  }
+ ],
+ "queries": [
+  "https://www.courtlistener.com/api/rest/v4/search/?court=wvnd&order_by=dateFiled+desc&q=docketNumber%3A%28cv+OR+cr%29&type=r"
+ ],
  "queries_not_fetched": [
-  "recap",
-  "recap_cr",
   "opinions"
  ],
  "selection": "Up to 2 criminal (cr) RECAP dockets and the newest opinion, then civil (cv) RECAP dockets (newest filed first; dockets with a recorded nature of suit, distinct natures of suit and distinct defendants preferred) up to 5 items in all; sealed, minor-party, pseudonymous, initials-only, Social Security and immigration-detention items skipped. Metadata only; not a sample of the court's docket.",
- "retrieved_at": null
+ "retrieved_at": "2026-11-27T08:46:05+00:00"
 }
