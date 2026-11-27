@@ -115,6 +115,17 @@
       }
     });
     renderSeals(false);
+    // Tuck the badge away while the reader scrolls down, bring it back on any scroll up.
+    var lastY = window.scrollY, tuckTimer;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY, dy = y - lastY;
+      if (Math.abs(dy) < 6) return;
+      lastY = y;
+      if (!sealPanel.hidden) return;
+      sealBox.classList.toggle('is-tucked', dy > 0);
+      clearTimeout(tuckTimer);
+      tuckTimer = setTimeout(function () { sealBox.classList.remove('is-tucked'); }, 1800);
+    }, { passive: true });
     // Keep the jury box out of the way while the summons is on screen.
     var hero = document.querySelector('.hero');
     if (hero && 'IntersectionObserver' in window) {
@@ -133,6 +144,7 @@
     sealBox.querySelector('.seal-count b').textContent = earnedCount();
     sealBox.setAttribute('aria-label', earnedCount() + ' of 12 seals earned. Open your jury box.');
     sealPanel.querySelectorAll('.seal-item').forEach(function (li) { li.classList.toggle('is-on', !!earned[li.dataset.seal]); });
+    if (bump) sealBox.classList.remove('is-tucked');
     if (bump && !reduced) {
       sealBox.classList.remove('is-bump');
       void sealBox.offsetWidth;

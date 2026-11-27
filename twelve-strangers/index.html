@@ -291,6 +291,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
   cursor: pointer; font-family: var(--f-type); font-size: .78rem; letter-spacing: .06em; transition: transform .2s;
 }
 .seal-box[hidden] { display: none !important; }
+.seal-box { transition: transform .28s ease, opacity .28s ease; }
+.seal-box.is-tucked { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
 .seal-box.is-bump { animation: bump .6s ease-out; }
 @keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.12); } 100% { transform: scale(1); } }
 .seal-grid { display: grid; grid-template-columns: repeat(6, 9px); grid-template-rows: repeat(2, 9px); gap: 3px; }
@@ -337,6 +339,285 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .deeper { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
 .deeper li { padding-left: 1rem; border-left: 2px solid var(--brass); font-size: .95rem; color: var(--ink-2); line-height: 1.5; }
 .deeper li b { color: var(--ink); font-weight: 600; }
+
+/* ===== widget: bushel ===== */
+/* Exhibit: The Old Bailey, September 1670. A court calendar, a meter for nights and hunger, an engraved scene,
+   and the record of your service. SVG parts use .wb-* classes, always scoped under [data-widget="bushel"]. */
+.w-bushel { display: grid; gap: .9rem; min-width: 0; scroll-margin-top: calc(var(--ticker-h, 3.1rem) + 16px); }
+.w-bushel.is-paused * { animation-play-state: paused !important; }
+.w-bushel-h { font-family: var(--f-body); font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--ink); }
+.w-bushel-h:focus { outline: none; }
+.w-bushel-p { font-size: 1rem; line-height: 1.55; color: var(--ink); }
+.w-bushel-p b { font-weight: 700; }
+.w-bushel-kicker { font-family: var(--f-type); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.w-bushel-q { font-family: var(--f-type); font-size: .86rem; font-weight: 700; color: var(--ink); line-height: 1.45; margin-top: .2rem; }
+.w-bushel-fine { font-family: var(--f-type); font-size: .74rem; line-height: 1.45; color: var(--ink-3); }
+
+/* ---------- HUD: the court calendar, nights, hunger ---------- */
+.w-bushel-hud { display: grid; gap: .5rem; }
+.w-bushel-days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; }
+.w-bushel-days li {
+  display: grid; justify-items: center; gap: 0; padding: .3rem .1rem .32rem; font-family: var(--f-type); color: var(--ink-3); background: var(--sheet);
+  border-left: 1px solid var(--rule); line-height: 1.15; transition: background .25s, color .25s; min-width: 0;
+}
+.w-bushel-days li:first-child { border-left: 0; }
+.w-bushel-days li span { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+.w-bushel-days li b { font-size: .78rem; font-weight: 700; white-space: nowrap; }
+.w-bushel-days li.is-past { color: var(--ink-2); background: var(--sheet-2); }
+.w-bushel-days li.is-on { background: var(--accent); color: var(--on-accent); }
+.w-bushel-meters { display: flex; flex-wrap: wrap; gap: .35rem 1.2rem; align-items: center; }
+.w-bushel-meters.is-bump { animation: w-bushel-bump .5s ease-out; }
+@keyframes w-bushel-bump { 0% { transform: none; } 30% { transform: translateY(-2px); } 100% { transform: none; } }
+.w-bushel-meter { display: inline-flex; align-items: center; gap: .5rem; }
+.w-bushel-meter .label { font-size: .66rem; }
+.w-bushel-moons { display: inline-flex; gap: 3px; }
+.w-bushel-moons svg { width: 17px; height: 17px; display: block; }
+.w-bushel-moons path { fill: transparent; stroke: var(--ink-3); stroke-width: 1.4; transition: fill .3s, stroke .3s; }
+.w-bushel-moons .is-on path { fill: var(--brass); stroke: var(--brass); }
+.w-bushel-bar { display: inline-flex; gap: 2px; }
+.w-bushel-bar i { width: 15px; height: 9px; border: 1.5px solid var(--seal); border-radius: 1px; transition: background .3s; }
+.w-bushel-bar i.is-on { background: var(--seal); }
+.w-bushel-hword { font-family: var(--f-type); font-size: .78rem; font-weight: 700; color: var(--seal); min-width: 5.5rem; }
+
+/* ---------- the scene ---------- */
+.w-bushel-art { position: relative; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; min-width: 0; }
+.w-bushel-art svg { display: block; width: 100%; height: auto; max-width: 560px; margin: 0 auto; }
+.w-bushel-art-plaque { background: var(--sheet); padding: 1rem .8rem .8rem; }
+
+/* ---------- a step ---------- */
+.w-bushel-step { display: grid; gap: .7rem; min-width: 0; }
+.w-bushel-step.is-in > * { animation: w-bushel-in .34s ease-out both; }
+.w-bushel-step.is-in > :nth-child(2) { animation-delay: .04s; }
+.w-bushel-step.is-in > :nth-child(3) { animation-delay: .08s; }
+.w-bushel-step.is-in > :nth-child(n+4) { animation-delay: .12s; }
+.is-in.w-bushel-after, .is-in.w-bushel-reply, .is-in.w-bushel-finebox { animation: w-bushel-in .32s ease-out both; }
+@keyframes w-bushel-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.w-bushel-actions { margin-top: .15rem; }
+.w-bushel-actions .btn { min-height: 2.75rem; }
+.w-bushel-after { display: grid; gap: .7rem; }
+@media (min-width: 46rem) {
+  .w-bushel { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); column-gap: 1.4rem; align-items: start; }
+  .w-bushel-hud { grid-column: 1 / -1; }
+  .w-bushel-art { grid-column: 1; position: sticky; top: calc(var(--ticker-h, 3.1rem) + 16px); }
+  .w-bushel-step { grid-column: 2; }
+}
+
+/* the docket */
+.w-bushel-docket { margin: 0; display: grid; gap: .35rem; padding: .7rem .8rem .75rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: 2px; box-shadow: inset 0 0 0 3px var(--sheet), inset 0 0 0 4px var(--rule); }
+.w-bushel-docket div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .6rem; align-items: baseline; }
+.w-bushel-docket dt { font-family: var(--f-type); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.w-bushel-docket dd { margin: 0; font-family: var(--f-type); font-size: .86rem; line-height: 1.4; color: var(--ink); border-bottom: 1px dotted var(--rule); padding-bottom: .2rem; min-width: 0; }
+.w-bushel-docket div:last-child dd { color: var(--seal); font-weight: 700; }
+@media (max-width: 24rem) { .w-bushel-docket div { grid-template-columns: 1fr; gap: 0; } }
+
+/* margin notes and quotations */
+.w-bushel-margin { display: grid; gap: .25rem; padding: .55rem .75rem; background: var(--sheet-2); border-left: 3px solid var(--brass); font-size: .93rem; line-height: 1.5; color: var(--ink-2); }
+.w-bushel-margin .label { color: var(--brass); }
+.w-bushel-quote { margin: 0; padding: .5rem .8rem .55rem; border-left: 3px solid var(--ink-3); display: grid; gap: .3rem; }
+.w-bushel-quote p { font-family: var(--f-body); font-style: italic; font-size: 1.08rem; line-height: 1.45; color: var(--ink); }
+.w-bushel-quote p::before { content: "\201C"; }
+.w-bushel-quote p::after { content: "\201D"; }
+.w-bushel-quote footer { font-family: var(--f-type); font-size: .74rem; color: var(--ink-2); }
+.w-bushel-quote.is-bench { border-left-color: var(--seal); background: var(--seal-soft); }
+.w-bushel-quote.is-penn { border-left-color: var(--accent); background: var(--wash); }
+
+/* without meat, drink, fire and tobacco */
+.w-bushel-ban { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .4rem; }
+.w-bushel-ban li { display: grid; justify-items: center; gap: .2rem; padding: .45rem .2rem .4rem; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 2px; animation: w-bushel-in .3s ease-out both; animation-delay: var(--d, 0ms); }
+.w-bushel-ban svg { width: 34px; height: 34px; display: block; }
+.w-bushel-ban span { font-family: var(--f-type); font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--seal); }
+[data-widget="bushel"] .wb-i-fill { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.3; stroke-linejoin: round; }
+[data-widget="bushel"] .wb-i-ln { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
+[data-widget="bushel"] .wb-i-bone { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-i-smoke { fill: none; stroke: var(--ink-3); stroke-width: 1.3; stroke-linecap: round; }
+[data-widget="bushel"] .wb-i-x { fill: none; stroke: var(--seal); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 34; stroke-dashoffset: 0; animation: wb-strike .35s ease-out both; animation-delay: calc(var(--d, 0ms) + .25s); }
+@keyframes wb-strike { from { stroke-dashoffset: 34; } to { stroke-dashoffset: 0; } }
+
+/* witnesses */
+.w-bushel-calls { display: grid; gap: .45rem; }
+.w-bushel-call {
+  display: grid; gap: .15rem; text-align: left; min-height: 2.9rem; padding: .55rem .75rem; background: var(--sheet); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
+  border-radius: var(--radius); cursor: pointer; color: var(--ink); touch-action: manipulation; transition: border-color .15s, transform .12s;
+}
+.w-bushel-call:hover { border-color: var(--accent); border-left-color: var(--brass); }
+.w-bushel-call:active { transform: translateY(1px); }
+.w-bushel-call-n { font-family: var(--f-type); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.w-bushel-call-who { font-family: var(--f-body); font-weight: 700; font-size: .98rem; line-height: 1.3; }
+.w-bushel-call-said { font-size: .94rem; line-height: 1.5; color: var(--ink-2); animation: w-bushel-in .3s ease-out both; }
+.w-bushel-call.is-heard { border-left-color: var(--accent); cursor: default; }
+.w-bushel-call.is-heard .w-bushel-call-n { color: var(--accent); }
+
+/* ballots */
+.w-bushel-ballot { display: grid; gap: .45rem; }
+.w-bushel-opt {
+  display: grid; grid-template-columns: 1.7rem minmax(0, 1fr); gap: .7rem; align-items: center; text-align: left; min-height: 3rem; padding: .55rem .75rem;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--radius); cursor: pointer; color: var(--ink); touch-action: manipulation;
+  transition: border-color .15s, background .15s, transform .12s;
+}
+.w-bushel-opt:hover:not([disabled]) { border-color: var(--accent); }
+.w-bushel-opt:active:not([disabled]) { transform: translateY(1px); }
+.w-bushel-opt[disabled] { cursor: default; }
+.w-bushel-opt[disabled]:not([aria-pressed="true"]) { opacity: .5; }
+.w-bushel-box { width: 1.7rem; height: 1.7rem; border: 2px solid var(--ink-2); border-radius: 2px; display: grid; place-items: center; background: var(--sheet); }
+.w-bushel-box svg { width: 1.1rem; height: 1.1rem; }
+.w-bushel-box path { fill: none; stroke: var(--seal); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 36; stroke-dashoffset: 36; transition: stroke-dashoffset .3s ease-out; }
+.w-bushel-opt[aria-pressed="true"] { border-color: var(--accent); background: var(--wash); box-shadow: inset 3px 0 0 var(--accent); }
+.w-bushel-opt[aria-pressed="true"] .w-bushel-box path { stroke-dashoffset: 0; }
+.w-bushel-opt-text { display: grid; gap: .1rem; min-width: 0; }
+.w-bushel-opt-label { font-family: var(--f-body); font-weight: 700; font-size: 1rem; line-height: 1.3; }
+.w-bushel-opt-sub { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); line-height: 1.35; }
+.w-bushel-reply { padding: .55rem .8rem; border-left: 3px solid var(--brass); background: var(--sheet-2); font-size: .96rem; line-height: 1.55; color: var(--ink); }
+.w-bushel-reply[hidden] { display: none; }
+
+/* hold firm */
+.btn.w-bushel-hold { position: relative; overflow: hidden; min-width: 10.5rem; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: none; }
+.w-bushel-hold-fill { position: absolute; inset: 0; background: var(--brass); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); pointer-events: none; }
+.w-bushel-hold-label { position: relative; }
+.btn.w-bushel-hold.is-holding { transform: translateY(1px) scale(.98); }
+.btn.w-bushel-hold.is-done { background: var(--brass); border-color: var(--brass); }
+.w-bushel-holdhint { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); line-height: 1.4; }
+.w-bushel-holdhint.is-nudge { color: var(--seal); animation: w-bushel-shake .4s; }
+@keyframes w-bushel-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-3px); } 50% { transform: translateX(3px); } 75% { transform: translateX(-2px); } }
+
+/* the fine */
+.w-bushel-finebox { position: relative; display: grid; gap: .4rem; padding: .7rem .8rem .8rem; background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--seal); border-radius: 2px; font-size: .98rem; line-height: 1.55; }
+.w-bushel-finebox[hidden] { display: none; }
+.w-bushel-finestamp {
+  justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--seal);
+  border: 3px double var(--seal); padding: .1rem .5rem; transform: rotate(-4deg); animation: w-bushel-stamp .4s cubic-bezier(.2, 1.5, .4, 1) both;
+}
+@keyframes w-bushel-stamp { from { opacity: 0; transform: rotate(-4deg) scale(1.8); } to { opacity: 1; transform: rotate(-4deg) scale(1); } }
+
+/* ---------- the ending ---------- */
+.w-bushel-plaque { margin: 0; display: grid; gap: .55rem; justify-items: center; }
+.w-bushel-plaque-in {
+  position: relative; max-width: 30rem; padding: 1.1rem 1.15rem 1.15rem; background: var(--brass-soft); border: 2px solid var(--brass); border-radius: 3px;
+  box-shadow: inset 0 0 0 4px var(--brass-soft), inset 0 0 0 5px var(--brass), 0 10px 22px -16px rgba(0, 0, 0, .6);
+  animation: w-bushel-in .45s ease-out both;
+}
+.w-bushel-plaque-in::before, .w-bushel-plaque-in::after { content: ""; position: absolute; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--brass); }
+.w-bushel-plaque-in::before { left: 9px; }
+.w-bushel-plaque-in::after { right: 9px; }
+.w-bushel-plaque-in p { font-family: var(--f-body); font-size: .86rem; line-height: 1.55; text-align: center; color: var(--ink); letter-spacing: .01em; }
+.w-bushel-plaque figcaption { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); text-align: center; }
+.w-bushel-teach, .w-bushel-coda { display: grid; gap: .3rem; padding: .1rem 0 .1rem .85rem; border-left: 3px solid var(--brass); font-size: .96rem; line-height: 1.55; color: var(--ink); }
+.w-bushel-teach .label, .w-bushel-coda .label { color: var(--brass); }
+.w-bushel-coda { border-left-color: var(--accent); }
+.w-bushel-coda .label { color: var(--accent); }
+.w-bushel-record { position: relative; display: grid; gap: .4rem; padding: .8rem .85rem .85rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: 2px; box-shadow: inset 0 0 0 3px var(--sheet), inset 0 0 0 4px var(--rule); }
+.w-bushel-record .label { color: var(--seal); padding-right: 7rem; }
+.w-bushel-record dl { margin: 0; display: grid; gap: .3rem; }
+.w-bushel-record dl div { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: .6rem; align-items: baseline; }
+.w-bushel-record dt { font-family: var(--f-type); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.w-bushel-record dd { margin: 0; font-family: var(--f-type); font-size: .86rem; line-height: 1.4; border-bottom: 1px dotted var(--rule); padding-bottom: .15rem; min-width: 0; }
+.w-bushel-record-stamp {
+  position: absolute; top: .55rem; right: .6rem; font-family: var(--f-type); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); border: 3px double var(--accent); padding: .1rem .4rem; transform: rotate(-6deg); background: var(--sheet-2);
+  animation: w-bushel-stamp .42s cubic-bezier(.2, 1.5, .4, 1) .3s both;
+}
+
+/* =====================================================================
+   SVG drawing classes (page tokens only, so both themes work)
+   ===================================================================== */
+[data-widget="bushel"] svg text { font-family: var(--f-type); }
+[data-widget="bushel"] .wb-wall { fill: var(--sheet-2); }
+[data-widget="bushel"] .wb-panel { stroke: var(--rule); stroke-width: 1; }
+[data-widget="bushel"] .wb-floor { fill: var(--sheet); }
+[data-widget="bushel"] .wb-line { stroke: var(--ink-3); stroke-width: 1.4; }
+[data-widget="bushel"] .wb-ln { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+[data-widget="bushel"] .wb-lbl { font-size: 8.5px; fill: var(--ink-2); letter-spacing: .04em; }
+[data-widget="bushel"] .wb-shield { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-cross { fill: none; stroke: var(--seal); stroke-width: 4; }
+[data-widget="bushel"] .wb-sword { fill: none; stroke: var(--seal); stroke-width: 1.4; stroke-linecap: round; }
+
+/* people */
+[data-widget="bushel"] .wb-robe { stroke: var(--ink); stroke-width: .8; stroke-linejoin: round; }
+[data-widget="bushel"] .wb-ink { fill: var(--ink-2); }
+[data-widget="bushel"] .wb-ink3 { fill: var(--ink-3); }
+[data-widget="bushel"] .wb-seal { fill: var(--seal); }
+[data-widget="bushel"] .wb-acc { fill: var(--accent); }
+[data-widget="bushel"] .wb-brass { fill: var(--brass); }
+[data-widget="bushel"] .wb-face { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.1; }
+[data-widget="bushel"] .wb-hair { fill: var(--ink); }
+[data-widget="bushel"] .wb-hairback { fill: var(--ink-2); stroke: var(--ink); stroke-width: 1; }
+[data-widget="bushel"] .wb-hat { fill: var(--ink); }
+[data-widget="bushel"] .wb-wig { fill: var(--sheet); stroke: var(--ink-2); stroke-width: 1; }
+[data-widget="bushel"] .wb-chain { fill: none; stroke: var(--sticker); stroke-width: 1.6; }
+[data-widget="bushel"] .wb-chain-b { fill: var(--sticker); }
+[data-widget="bushel"] .wb-you-ring { fill: none; stroke: var(--sticker); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; animation: wb-pulse 1.8s ease-in-out infinite; }
+@keyframes wb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+[data-widget="bushel"] .wb-you-lbl { font-size: 9px; font-weight: 700; fill: var(--brass); letter-spacing: .08em; }
+[data-widget="bushel"] .wb-you-arrow { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-linecap: round; }
+
+/* the court */
+[data-widget="bushel"] .wb-desk { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-desk-top { fill: var(--brass); }
+[data-widget="bushel"] .wb-dock, [data-widget="bushel"] .wb-stand, [data-widget="bushel"] .wb-box { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.1; }
+[data-widget="bushel"] .wb-rail { stroke: var(--brass); stroke-width: 1.6; }
+[data-widget="bushel"] .wb-rail-top { stroke: var(--brass); stroke-width: 3.2; stroke-linecap: round; }
+[data-widget="bushel"] .wb-witness { opacity: 0; transition: opacity .25s; }
+[data-widget="bushel"] .is-witness .wb-witness { opacity: 1; }
+[data-widget="bushel"] .is-witness .wb-bubble { animation: wb-pop .35s ease-out; transform-box: fill-box; transform-origin: 0 100%; }
+[data-widget="bushel"] .wb-bubble rect, [data-widget="bushel"] .wb-bubble path { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
+[data-widget="bushel"] .wb-bubble text { font-size: 10px; font-weight: 700; fill: var(--ink-2); }
+@keyframes wb-pop { from { transform: scale(.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+[data-widget="bushel"] .wb-refused { opacity: 0; transition: opacity .2s; }
+[data-widget="bushel"] .wb-refused rect { fill: var(--sheet); stroke: var(--seal); stroke-width: 2.4; }
+[data-widget="bushel"] .wb-refused text { font-size: 14px; font-weight: 700; letter-spacing: .18em; fill: var(--seal); }
+[data-widget="bushel"] .is-refused .wb-refused { opacity: 1; animation: wb-stamp .42s cubic-bezier(.2, 1.5, .4, 1) both; transform-box: fill-box; transform-origin: center; }
+@keyframes wb-stamp { from { opacity: 0; transform: scale(1.7); } to { opacity: 1; transform: scale(1); } }
+[data-widget="bushel"] .wb-verdict { opacity: 0; }
+[data-widget="bushel"] .wb-verdict rect { fill: var(--accent); }
+[data-widget="bushel"] .wb-verdict text { font-size: 11px; font-weight: 700; letter-spacing: .14em; fill: var(--on-accent); }
+[data-widget="bushel"] .is-verdict .wb-verdict { opacity: 1; animation: wb-stamp .42s cubic-bezier(.2, 1.5, .4, 1) both; transform-box: fill-box; transform-origin: center; }
+
+/* the locked room */
+[data-widget="bushel"] .wb-board { stroke: var(--rule); stroke-width: 1; }
+[data-widget="bushel"] .wb-mantel { fill: var(--brass); }
+[data-widget="bushel"] .wb-hearth { fill: var(--on-sticker); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-ash { fill: var(--ink-3); }
+[data-widget="bushel"] .wb-log { fill: none; stroke: var(--ink-3); stroke-width: 3; stroke-linecap: round; }
+[data-widget="bushel"] .wb-door { fill: var(--brass); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-band { fill: var(--ink-2); }
+[data-widget="bushel"] .wb-shackle { fill: none; stroke: var(--ink-2); stroke-width: 2.6; }
+[data-widget="bushel"] .wb-lock { fill: var(--sticker); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-keyhole { fill: var(--on-sticker); stroke: var(--on-sticker); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-tally { stroke: var(--ink-2); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 22; stroke-dashoffset: 22; transition: stroke-dashoffset .4s ease-out; }
+[data-widget="bushel"] .wb-tally.is-on { stroke-dashoffset: 0; }
+[data-widget="bushel"] .wb-table { fill: var(--brass); stroke: var(--ink); stroke-width: 1.1; }
+[data-widget="bushel"] .wb-dark { fill: var(--on-sticker); opacity: 0; transition: opacity .6s; pointer-events: none; }
+[data-widget="bushel"] .is-night .wb-dark { opacity: .32; }
+[data-widget="bushel"] .wb-sky { fill: var(--seal-soft); transition: fill .6s; }
+[data-widget="bushel"] .is-night .wb-sky { fill: var(--on-sticker); }
+[data-widget="bushel"] .wb-moon, [data-widget="bushel"] .wb-stars circle { fill: var(--sticker); opacity: 0; transition: opacity .6s .2s; }
+[data-widget="bushel"] .is-night .wb-moon, [data-widget="bushel"] .is-night .wb-stars circle { opacity: 1; }
+[data-widget="bushel"] .wb-bars { fill: none; stroke: var(--ink); stroke-width: 2.4; }
+[data-widget="bushel"] .wb-frame { fill: none; stroke: var(--ink); stroke-width: 2.4; }
+
+/* Newgate */
+[data-widget="bushel"] .wb-stone { stroke: var(--rule); stroke-width: 1; }
+[data-widget="bushel"] .wb-arch { fill: var(--on-sticker); }
+[data-widget="bushel"] .wb-arch-rim { fill: none; stroke: var(--ink-3); stroke-width: 3.5; }
+[data-widget="bushel"] .wb-portcullis line { stroke: var(--brass); stroke-width: 2.8; stroke-linecap: round; }
+[data-widget="bushel"] .wb-portcullis { transition: transform .6s ease-in-out .2s; }
+[data-widget="bushel"] .is-paid .wb-portcullis { transform: translateY(-112px); }
+[data-widget="bushel"] .wb-sign { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.1; }
+[data-widget="bushel"] .wb-sign-t { font-size: 10px; font-weight: 700; letter-spacing: .22em; fill: var(--ink); }
+[data-widget="bushel"] .wb-ledge { fill: var(--ink-3); }
+[data-widget="bushel"] .wb-purse { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-coin { fill: var(--sticker); stroke: var(--brass); stroke-width: 1.3; }
+[data-widget="bushel"] .wb-purse-g { transition: transform .5s ease-in, opacity .4s .2s; }
+[data-widget="bushel"] .is-paid .wb-purse-g { transform: translate(70px, -20px) scale(.6); opacity: 0; }
+[data-widget="bushel"] .wb-writ { opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .4s cubic-bezier(.2, 1.4, .4, 1); }
+[data-widget="bushel"] .is-writ .wb-writ { opacity: 1; transform: rotate(3deg); transform-box: fill-box; transform-origin: center; }
+[data-widget="bushel"] .wb-parch { fill: var(--brass-soft); stroke: var(--ink-3); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-writ-t { font-family: var(--f-body); font-style: italic; font-weight: 700; font-size: 11px; fill: var(--ink); }
+[data-widget="bushel"] .wb-lines { fill: none; stroke: var(--ink-3); stroke-width: 1.2; }
+[data-widget="bushel"] .wb-wax { fill: var(--seal); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-widget="bushel"] .wb-you-ring { animation: none; }
+}
 
 /* ===== widget: carta ===== */
 /* Exhibit: Clause 39, word by word */
@@ -1314,6 +1595,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 [data-widget="ordeal"] .wo-hill-fill { fill: var(--accent); opacity: .22; }
 [data-widget="ordeal"] .wo-crowd { fill: var(--ink-3); }
 [data-widget="ordeal"] .wo-field { fill: var(--accent); opacity: .1; }
+[data-widget="ordeal"] .is-t4 .wo-field { fill: var(--on-sticker); opacity: .55; }
 [data-widget="ordeal"] .wo-fence { stroke: var(--brass); stroke-width: 2.2; stroke-linecap: round; }
 [data-widget="ordeal"] .is-t4 .wo-tlabel { fill: var(--sticker); }
 [data-widget="ordeal"] .is-down .wo-tlabel, [data-widget="ordeal"] .is-yield .wo-tlabel { opacity: 0; transition: opacity .3s; }
@@ -2471,7 +2753,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     <div class="exhibit-body" data-widget="carta"></div>
   </figure>
   <div class="prose col">
-    <p>So the first &ldquo;jury of your peers&rdquo; was a club for the rich: barons judged by barons. Peers of the realm kept a version of that privilege for more than 700 years. The last English lord tried by the House of Lords, Lord de Clifford, was acquitted of manslaughter in 1935 after a fatal car crash. Parliament abolished the privilege in 1948.</p>
+    <p>So the first &ldquo;jury of your peers&rdquo; was a club for the rich: barons judged by barons. Lords kept their own version of it, trial in the House of Lords, until 1948. Everyone else would get the neighbors.</p>
   </div>
 </section>
 
@@ -2792,6 +3074,17 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       }
     });
     renderSeals(false);
+    // Tuck the badge away while the reader scrolls down, bring it back on any scroll up.
+    var lastY = window.scrollY, tuckTimer;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY, dy = y - lastY;
+      if (Math.abs(dy) < 6) return;
+      lastY = y;
+      if (!sealPanel.hidden) return;
+      sealBox.classList.toggle('is-tucked', dy > 0);
+      clearTimeout(tuckTimer);
+      tuckTimer = setTimeout(function () { sealBox.classList.remove('is-tucked'); }, 1800);
+    }, { passive: true });
     // Keep the jury box out of the way while the summons is on screen.
     var hero = document.querySelector('.hero');
     if (hero && 'IntersectionObserver' in window) {
@@ -2810,6 +3103,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     sealBox.querySelector('.seal-count b').textContent = earnedCount();
     sealBox.setAttribute('aria-label', earnedCount() + ' of 12 seals earned. Open your jury box.');
     sealPanel.querySelectorAll('.seal-item').forEach(function (li) { li.classList.toggle('is-on', !!earned[li.dataset.seal]); });
+    if (bump) sealBox.classList.remove('is-tucked');
     if (bump && !reduced) {
       sealBox.classList.remove('is-bump');
       void sealBox.offsetWidth;
@@ -3155,11 +3449,11 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     var panels = '';
     for (var px = 16; px < 320; px += 32) panels += '<line class="wb-panel" x1="' + px + '" y1="0" x2="' + px + '" y2="150"/>';
     var bars = '';
-    for (var bx = 12; bx <= 92; bx += 8) bars += '<line class="wb-rail" x1="' + bx + '" y1="140" x2="' + bx + '" y2="174"/>';
+    for (var bx = 10; bx <= 82; bx += 8) bars += '<line class="wb-rail" x1="' + bx + '" y1="140" x2="' + bx + '" y2="174"/>';
     var jurors = '';
-    for (var i = 0; i < 6; i++) jurors += person(243 + i * 12.6, 124, { robe: ['acc', 'brass', 'ink', 'seal', 'acc', 'ink'][i] });
+    for (var i = 0; i < 6; i++) jurors += person(190 + i * 23, 123, { robe: ['acc', 'brass', 'ink', 'seal', 'acc', 'ink'][i] });
     var front = '';
-    for (var j = 0; j < 6; j++) front += person(236 + j * 14, 138, { robe: ['ink', 'acc', 'brass', 'ink', 'seal', 'brass'][j], you: j === 2 });
+    for (var j = 0; j < 6; j++) front += person(178 + j * 23, 138, { robe: ['ink', 'acc', 'brass', 'ink', 'seal', 'brass'][j], you: j === 2 });
     return '<svg viewBox="0 0 320 200" aria-hidden="true" focusable="false">' +
       '<rect class="wb-wall" x="0" y="0" width="320" height="200"/>' + panels +
       '<rect class="wb-floor" x="0" y="150" width="320" height="50"/><line class="wb-line" x1="0" y1="150" x2="320" y2="150"/>' +
@@ -3167,26 +3461,26 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       '<path class="wb-shield" d="M147 10 h26 v15 q0 12 -13 18 q-13 -6 -13 -18 z"/>' +
       '<path class="wb-cross" d="M160 11 V42 M148 21 H172"/><path class="wb-sword" d="M152 12.5 V19 M150 14.5 H154"/>' +
       // the bench
-      person(84, 58, { robe: 'ink3' }) + person(134, 56, { robe: 'seal', chain: true }) + person(186, 56, { robe: 'ink', wig: true }) + person(236, 58, { robe: 'ink3' }) +
+      person(80, 58, { robe: 'ink3' }) + person(124, 56, { robe: 'seal', chain: true }) + person(196, 56, { robe: 'ink', wig: true }) + person(240, 58, { robe: 'ink3' }) +
       '<rect class="wb-desk-top" x="54" y="74" width="212" height="6" rx="1"/><rect class="wb-desk" x="58" y="80" width="204" height="30"/>' +
-      '<text class="wb-lbl" x="134" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="186" y="98" text-anchor="middle">Recorder</text>' +
+      '<text class="wb-lbl" x="124" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="196" y="98" text-anchor="middle">Recorder</text>' +
       // the verdict refused
       '<g class="wb-refused"><rect x="112" y="22" width="96" height="24" rx="2" transform="rotate(-6 160 34)"/><text x="160" y="39" text-anchor="middle" transform="rotate(-6 160 34)">REFUSED</text></g>' +
       // the dock
-      person(36, 126, { robe: 'ink', hat: true }) + person(68, 126, { robe: 'ink', hat: true }) +
-      '<rect class="wb-dock" x="8" y="140" width="88" height="34"/>' + bars + '<line class="wb-rail-top" x1="6" y1="140" x2="98" y2="140"/>' +
-      '<text class="wb-lbl" x="36" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="68" y="188" text-anchor="middle">Mead</text>' +
+      person(28, 126, { robe: 'ink', hat: true }) + person(62, 126, { robe: 'ink', hat: true }) +
+      '<rect class="wb-dock" x="6" y="140" width="80" height="34"/>' + bars + '<line class="wb-rail-top" x1="4" y1="140" x2="88" y2="140"/>' +
+      '<text class="wb-lbl" x="28" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="62" y="188" text-anchor="middle">Mead</text>' +
       // the witness
-      '<g class="wb-witness">' + person(160, 128, { robe: 'brass' }) +
-        '<g class="wb-bubble"><rect x="168" y="104" width="30" height="16" rx="4"/><path d="M172 120 l-3 6 l8 -6"/><text x="183" y="116" text-anchor="middle">. . .</text></g>' +
+      '<g class="wb-witness">' + person(124, 128, { robe: 'brass' }) +
+        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><text x="147" y="116" text-anchor="middle">. . .</text></g>' +
       '</g>' +
-      '<rect class="wb-stand" x="146" y="142" width="28" height="32"/><text class="wb-lbl" x="160" y="188" text-anchor="middle">Witness</text>' +
+      '<rect class="wb-stand" x="110" y="142" width="28" height="32"/><text class="wb-lbl" x="124" y="188" text-anchor="middle">Witness</text>' +
       // the jury box
       jurors + front +
-      '<rect class="wb-box" x="226" y="148" width="90" height="26"/>' +
-      '<text class="wb-you-lbl" x="264" y="113" text-anchor="middle">you</text><path class="wb-you-arrow" d="M264 116 v8"/>' +
-      '<text class="wb-lbl" x="271" y="188" text-anchor="middle">Jury</text>' +
-      '<g class="wb-verdict"><rect x="210" y="84" width="104" height="22" rx="2"/><text x="262" y="99" text-anchor="middle">NOT GUILTY</text></g>' +
+      '<rect class="wb-box" x="164" y="148" width="152" height="26"/>' +
+      '<path class="wb-you-arrow" d="M224 187 v-8 M220.5 182.5 l3.5 -3.5 l3.5 3.5"/><text class="wb-you-lbl" x="224" y="196" text-anchor="middle">you</text>' +
+      '<text class="wb-lbl" x="290" y="188" text-anchor="middle">Jury</text>' +
+      '<g class="wb-verdict"><rect x="104" y="20" width="112" height="24" rx="2" transform="rotate(-4 160 32)"/><text x="160" y="36.5" text-anchor="middle" transform="rotate(-4 160 32)">NOT GUILTY</text></g>' +
       '</svg>';
   }
 
@@ -3626,6 +3920,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
     function stageEnding() {
       var E = DATA.ending;
       state.day = 4;
+      state.hunger = 0;
       hud(false);
       scene('plaque', { force: true, html:
         '<figure class="w-bushel-plaque"><div class="w-bushel-plaque-in"><p>' + E.plaque + '</p></div>' +
@@ -7977,8 +8272,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
         { key: 'slice', label: 'Acquitted by that jury', n: 230 },
         { key: 'ghost', label: 'Tried by a judge alone', n: 194 }
       ],
-      big: 'The jury decides a sliver. Plea bargaining decides the rest.',
-      lesson: 'Of every 100 federal defendants, about 2 faced a jury, and juries acquitted about a third of one. Counting judges, 0.4% were acquitted: fewer than 1 in 100. Plea bargains settled nearly everything else. A defendant pleads guilty, usually for a lighter charge or sentence, a judge approves the deal, and no jury ever hears the case.',
+      big: 'The jury decides a sliver. Plea bargaining decides most of the rest.',
+      lesson: 'Of every 100 federal defendants, about 2 faced a jury, and juries acquitted about a third of one. Counting judges, 0.4% were acquitted: fewer than 1 in 100. Guilty pleas ended nearly 9 cases in 10. Most come through plea bargaining: the defendant pleads guilty, usually for a lighter charge or sentence, a judge approves the deal, and no jury ever hears the case.',
       quote: '“[C]riminal justice today is for the most part a system of pleas, not a system of trials.”',
       quoteBy: 'Justice Anthony Kennedy, <i>Lafler v. Cooper</i> (2012)'
     },
@@ -7999,7 +8294,7 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
         { key: 'none', label: 'Tried by a judge alone', n: 635 }
       ],
       big: 'The jury decides a sliver. Settlements and judges decide the rest.',
-      lesson: 'Fewer than 1 in 100 federal civil cases reached a trial, and about half of 1 in 100 reached a jury. The rest settled, were dropped or were decided by a judge on written motions.',
+      lesson: 'Fewer than 1 in 100 federal civil cases reached a trial, and about half of 1 in 100 reached a jury. The rest ended without one: they settled, were dropped, were dismissed or were decided by a judge on written motions.',
       quote: '',
       quoteBy: ''
     },
@@ -8596,19 +8891,19 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
       { year: 1830, when: '1800 to 1860', title: 'Property tests fade', lanes: ['noprop'],
         text: 'State by state, property tests for voting fall away, and jury lists widen with them. By the 1850s most white men could vote without owning property. Some states kept property or householder rules for jurors longer.' },
       { year: 1860, when: '1860', title: 'Worcester, Massachusetts', lanes: ['black'],
-        text: 'Francis Clough and William Jenkins sit on a jury in Worcester, often called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has turned up a few earlier Black jurors elsewhere.' },
+        text: 'Two Black men are seated on a jury in Worcester, long called the first Black jurors in the country. No Massachusetts law had barred Black men. Custom had. Recent research has found a few earlier Black jurors elsewhere and questions the 1860 date.' },
       { year: 1870, when: '1870', title: 'Laramie, Wyoming Territory', lanes: ['women'],
-        text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women who claimed to be pregnant. The experiment ended within about a year.' },
+        text: 'Women sit on a grand jury and on trial juries in Laramie, the first women known to serve on American juries apart from juries of matrons, which only examined women who claimed to be pregnant. The experiment was short-lived.' },
       { year: 1875, when: '1875', title: 'Civil Rights Act of 1875', lanes: ['black'],
         text: 'Congress makes it a crime for an official to exclude anyone from a jury because of race, color or previous condition of servitude. The Supreme Court struck down the act\'s public accommodations sections in 1883. The jury section survived. It is still federal law.' },
       { year: 1880, when: '1880', title: '<i>Strauder v. West Virginia</i>', lanes: ['black'],
         text: 'The Supreme Court strikes down a state law that let only white men sit on juries. The same opinion said a state could still limit jury service to men, to property owners or to the educated.' },
       { year: 1898, when: '1898', title: 'Louisiana\'s convention', lanes: ['black'],
-        text: 'A state constitutional convention, whose leaders said its purpose was to establish the supremacy of the white race, lets juries convict on 9 votes of 12. A white majority could now outvote Black jurors.' },
+        text: 'Its avowed purpose, one committee chairman said, was to “establish the supremacy of the white race.” The new constitution lets juries convict on 9 votes of 12. In 2020 the Supreme Court recounted that the rule was meant to make Black jurors\' service meaningless.' },
       { year: 1935, when: '1935', title: '<i>Norris v. Alabama</i>', lanes: ['black'],
         text: 'Clarence Norris, one of the Scottsboro defendants, wins a new trial. Witnesses could not remember a Black person ever serving on a jury in the county. Shutting Black citizens out of jury service, the Court held, denied him equal protection.' },
       { year: 1946, when: '1946', title: '<i>Thiel</i> and <i>Ballard</i>', lanes: ['women'],
-        text: 'The Court bars federal courts from leaving daily wage earners off jury lists, and from leaving women off where state law lets them serve. From <i>Ballard</i>: “The two sexes are not fungible.”' },
+        text: 'The Court bars federal courts from leaving daily wage earners off jury lists, and from leaving women off where state law lets them serve. From <i>Ballard</i>: “[T]he two sexes are not fungible.”' },
       { year: 1954, when: '1954', title: '<i>Hernandez v. Texas</i>', lanes: [],
         text: 'In 25 years, no one with a Mexican or Latin American surname had served on a jury in Jackson County, Texas. Pete Hernandez wins a new trial. Equal protection, the Court held, is not limited to Black and white.' },
       { year: 1957, when: '1957', title: 'Civil Rights Act of 1957', lanes: ['women'],

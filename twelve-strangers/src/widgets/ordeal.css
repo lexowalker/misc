@@ -330,6 +330,7 @@
 [data-widget="ordeal"] .wo-hill-fill { fill: var(--accent); opacity: .22; }
 [data-widget="ordeal"] .wo-crowd { fill: var(--ink-3); }
 [data-widget="ordeal"] .wo-field { fill: var(--accent); opacity: .1; }
+[data-widget="ordeal"] .is-t4 .wo-field { fill: var(--on-sticker); opacity: .55; }
 [data-widget="ordeal"] .wo-fence { stroke: var(--brass); stroke-width: 2.2; stroke-linecap: round; }
 [data-widget="ordeal"] .is-t4 .wo-tlabel { fill: var(--sticker); }
 [data-widget="ordeal"] .is-down .wo-tlabel, [data-widget="ordeal"] .is-yield .wo-tlabel { opacity: 0; transition: opacity .3s; }

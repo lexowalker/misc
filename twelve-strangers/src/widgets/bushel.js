@@ -156,11 +156,11 @@
     var panels = '';
     for (var px = 16; px < 320; px += 32) panels += '<line class="wb-panel" x1="' + px + '" y1="0" x2="' + px + '" y2="150"/>';
     var bars = '';
-    for (var bx = 12; bx <= 92; bx += 8) bars += '<line class="wb-rail" x1="' + bx + '" y1="140" x2="' + bx + '" y2="174"/>';
+    for (var bx = 10; bx <= 82; bx += 8) bars += '<line class="wb-rail" x1="' + bx + '" y1="140" x2="' + bx + '" y2="174"/>';
     var jurors = '';
-    for (var i = 0; i < 6; i++) jurors += person(243 + i * 12.6, 124, { robe: ['acc', 'brass', 'ink', 'seal', 'acc', 'ink'][i] });
+    for (var i = 0; i < 6; i++) jurors += person(190 + i * 23, 123, { robe: ['acc', 'brass', 'ink', 'seal', 'acc', 'ink'][i] });
     var front = '';
-    for (var j = 0; j < 6; j++) front += person(236 + j * 14, 138, { robe: ['ink', 'acc', 'brass', 'ink', 'seal', 'brass'][j], you: j === 2 });
+    for (var j = 0; j < 6; j++) front += person(178 + j * 23, 138, { robe: ['ink', 'acc', 'brass', 'ink', 'seal', 'brass'][j], you: j === 2 });
     return '<svg viewBox="0 0 320 200" aria-hidden="true" focusable="false">' +
       '<rect class="wb-wall" x="0" y="0" width="320" height="200"/>' + panels +
       '<rect class="wb-floor" x="0" y="150" width="320" height="50"/><line class="wb-line" x1="0" y1="150" x2="320" y2="150"/>' +
@@ -168,26 +168,26 @@
       '<path class="wb-shield" d="M147 10 h26 v15 q0 12 -13 18 q-13 -6 -13 -18 z"/>' +
       '<path class="wb-cross" d="M160 11 V42 M148 21 H172"/><path class="wb-sword" d="M152 12.5 V19 M150 14.5 H154"/>' +
       // the bench
-      person(84, 58, { robe: 'ink3' }) + person(134, 56, { robe: 'seal', chain: true }) + person(186, 56, { robe: 'ink', wig: true }) + person(236, 58, { robe: 'ink3' }) +
+      person(80, 58, { robe: 'ink3' }) + person(124, 56, { robe: 'seal', chain: true }) + person(196, 56, { robe: 'ink', wig: true }) + person(240, 58, { robe: 'ink3' }) +
       '<rect class="wb-desk-top" x="54" y="74" width="212" height="6" rx="1"/><rect class="wb-desk" x="58" y="80" width="204" height="30"/>' +
-      '<text class="wb-lbl" x="134" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="186" y="98" text-anchor="middle">Recorder</text>' +
+      '<text class="wb-lbl" x="124" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="196" y="98" text-anchor="middle">Recorder</text>' +
       // the verdict refused
       '<g class="wb-refused"><rect x="112" y="22" width="96" height="24" rx="2" transform="rotate(-6 160 34)"/><text x="160" y="39" text-anchor="middle" transform="rotate(-6 160 34)">REFUSED</text></g>' +
       // the dock
-      person(36, 126, { robe: 'ink', hat: true }) + person(68, 126, { robe: 'ink', hat: true }) +
-      '<rect class="wb-dock" x="8" y="140" width="88" height="34"/>' + bars + '<line class="wb-rail-top" x1="6" y1="140" x2="98" y2="140"/>' +
-      '<text class="wb-lbl" x="36" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="68" y="188" text-anchor="middle">Mead</text>' +
+      person(28, 126, { robe: 'ink', hat: true }) + person(62, 126, { robe: 'ink', hat: true }) +
+      '<rect class="wb-dock" x="6" y="140" width="80" height="34"/>' + bars + '<line class="wb-rail-top" x1="4" y1="140" x2="88" y2="140"/>' +
+      '<text class="wb-lbl" x="28" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="62" y="188" text-anchor="middle">Mead</text>' +
       // the witness
-      '<g class="wb-witness">' + person(160, 128, { robe: 'brass' }) +
-        '<g class="wb-bubble"><rect x="168" y="104" width="30" height="16" rx="4"/><path d="M172 120 l-3 6 l8 -6"/><text x="183" y="116" text-anchor="middle">. . .</text></g>' +
+      '<g class="wb-witness">' + person(124, 128, { robe: 'brass' }) +
+        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><text x="147" y="116" text-anchor="middle">. . .</text></g>' +
       '</g>' +
-      '<rect class="wb-stand" x="146" y="142" width="28" height="32"/><text class="wb-lbl" x="160" y="188" text-anchor="middle">Witness</text>' +
+      '<rect class="wb-stand" x="110" y="142" width="28" height="32"/><text class="wb-lbl" x="124" y="188" text-anchor="middle">Witness</text>' +
       // the jury box
       jurors + front +
-      '<rect class="wb-box" x="226" y="148" width="90" height="26"/>' +
-      '<text class="wb-you-lbl" x="264" y="113" text-anchor="middle">you</text><path class="wb-you-arrow" d="M264 116 v8"/>' +
-      '<text class="wb-lbl" x="271" y="188" text-anchor="middle">Jury</text>' +
-      '<g class="wb-verdict"><rect x="210" y="84" width="104" height="22" rx="2"/><text x="262" y="99" text-anchor="middle">NOT GUILTY</text></g>' +
+      '<rect class="wb-box" x="164" y="148" width="152" height="26"/>' +
+      '<path class="wb-you-arrow" d="M224 187 v-8 M220.5 182.5 l3.5 -3.5 l3.5 3.5"/><text class="wb-you-lbl" x="224" y="196" text-anchor="middle">you</text>' +
+      '<text class="wb-lbl" x="290" y="188" text-anchor="middle">Jury</text>' +
+      '<g class="wb-verdict"><rect x="104" y="20" width="112" height="24" rx="2" transform="rotate(-4 160 32)"/><text x="160" y="36.5" text-anchor="middle" transform="rotate(-4 160 32)">NOT GUILTY</text></g>' +
       '</svg>';
   }
 
@@ -627,6 +627,7 @@
     function stageEnding() {
       var E = DATA.ending;
       state.day = 4;
+      state.hunger = 0;
       hud(false);
       scene('plaque', { force: true, html:
         '<figure class="w-bushel-plaque"><div class="w-bushel-plaque-in"><p>' + E.plaque + '</p></div>' +

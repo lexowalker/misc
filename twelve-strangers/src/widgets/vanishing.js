@@ -26,8 +26,8 @@
         { key: 'slice', label: 'Acquitted by that jury', n: 230 },
         { key: 'ghost', label: 'Tried by a judge alone', n: 194 }
       ],
-      big: 'The jury decides a sliver. Plea bargaining decides the rest.',
-      lesson: 'Of every 100 federal defendants, about 2 faced a jury, and juries acquitted about a third of one. Counting judges, 0.4% were acquitted: fewer than 1 in 100. Plea bargains settled nearly everything else. A defendant pleads guilty, usually for a lighter charge or sentence, a judge approves the deal, and no jury ever hears the case.',
+      big: 'The jury decides a sliver. Plea bargaining decides most of the rest.',
+      lesson: 'Of every 100 federal defendants, about 2 faced a jury, and juries acquitted about a third of one. Counting judges, 0.4% were acquitted: fewer than 1 in 100. Guilty pleas ended nearly 9 cases in 10. Most come through plea bargaining: the defendant pleads guilty, usually for a lighter charge or sentence, a judge approves the deal, and no jury ever hears the case.',
       quote: '“[C]riminal justice today is for the most part a system of pleas, not a system of trials.”',
       quoteBy: 'Justice Anthony Kennedy, <i>Lafler v. Cooper</i> (2012)'
     },
@@ -48,7 +48,7 @@
         { key: 'none', label: 'Tried by a judge alone', n: 635 }
       ],
       big: 'The jury decides a sliver. Settlements and judges decide the rest.',
-      lesson: 'Fewer than 1 in 100 federal civil cases reached a trial, and about half of 1 in 100 reached a jury. The rest settled, were dropped or were decided by a judge on written motions.',
+      lesson: 'Fewer than 1 in 100 federal civil cases reached a trial, and about half of 1 in 100 reached a jury. The rest ended without one: they settled, were dropped, were dismissed or were decided by a judge on written motions.',
       quote: '',
       quoteBy: ''
     },

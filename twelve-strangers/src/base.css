@@ -284,6 +284,8 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
   cursor: pointer; font-family: var(--f-type); font-size: .78rem; letter-spacing: .06em; transition: transform .2s;
 }
 .seal-box[hidden] { display: none !important; }
+.seal-box { transition: transform .28s ease, opacity .28s ease; }
+.seal-box.is-tucked { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
 .seal-box.is-bump { animation: bump .6s ease-out; }
 @keyframes bump { 0% { transform: scale(1); } 30% { transform: scale(1.12); } 100% { transform: scale(1); } }
 .seal-grid { display: grid; grid-template-columns: repeat(6, 9px); grid-template-rows: repeat(2, 9px); gap: 3px; }
