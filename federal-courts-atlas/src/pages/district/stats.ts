@@ -219,7 +219,10 @@ export function renderStandout(host: HTMLElement, profile: DistrictProfile, vari
     const list = h('ol', { class: 'standout__list' }, ...shown.map((s) => sentenceBlock(s, byId, goTo)));
     list.querySelectorAll<HTMLAnchorElement>('.standout__link').forEach((a) => (a.href = `#/district/${districtId}?s=stats`));
     host.append(list);
-  } else {
+  }
+  // No outlier sentence: say so, also when the size-and-circuit sentence is shown on its own (oknd, waed, idd),
+  // so the section's "where this court sits at an extreme" dek is not read as covering that sentence.
+  if (!shown.length || profile.distinctive.kind === 'size_and_circuit') {
     host.append(
       h(
         'p',

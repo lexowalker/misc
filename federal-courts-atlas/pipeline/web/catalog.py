@@ -28,7 +28,7 @@ FCMS_WEIGHTS = ("Case weights were revised for use after December 2015, and the 
 FCMS_NO_JURY_SELECTION = ("The Northern Mariana Islands held no jury selection in FY 2024. The AO printed 0, which is "
                           "not a measured figure, so the atlas shows No data for that year.")
 FCMS_TERRITORIES_WEIGHTED ="The AO prints no weighted filings for the three territorial courts (Guam, Northern Mariana Islands, Virgin Islands)."
-USSC_BASE = ("Territorial courts and some small districts sentence few people a year, so their shares can swing "
+USSC_BASE = ("Territorial courts and some small districts sentence few people a year, so their figures can swing "
              "widely. Cells based on fewer than 30 people carry a note.")
 USSC_FY = "USSC fiscal years run October 1 to September 30."
 USSC_BOOKER = ("Before United States v. Booker (January 2005) the guidelines were mandatory, and \"within range\" "
@@ -420,7 +420,7 @@ CATALOG: list[dict] = [
                       "and fine-only sentences count as zero months."),
         "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
                     "Terms of 470 months or more, including life, count as 470 months, as the USSC does.",
-                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
+                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the USSC prints these figures in whole months. Its tables match the atlas's unrounded figures, but can differ from the one-decimal figure shown here by up to half a month.",
                     USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_mean_sentence_months"},
         "base": "n_basis",
@@ -439,7 +439,7 @@ CATALOG: list[dict] = [
         "explainer": ("The middle sentence in months: half of people sentenced got less, half got more. Probation "
                       "and fine-only sentences count as zero months."),
         "caveats": ["Follows the USSC's FY 2018 convention for every year. FY 2002 to 2017 are computed by the atlas with that rule.",
-                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the figures match the USSC's tables once rounded, but the USSC prints whole months, so its tables can differ by up to half a month.",
+                    "The atlas computes every year from the USSC's case-level datafiles and shows one decimal, so every year is marked derived. From FY 2018 the USSC prints these figures in whole months. Its tables match the atlas's unrounded figures, but can differ from the one-decimal figure shown here by up to half a month.",
                     USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_median_sentence_months"},
         "base": "n_basis",

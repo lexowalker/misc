@@ -47,9 +47,13 @@ const ROUTES: Route[] = [
 type Violation = { id: string; impact: string | null; help: string; nodes: Array<{ target: string[]; failureSummary?: string }> };
 
 async function scrollThrough(page: Page): Promise<void> {
+  // Bounded (recheck lane, 2026-11-27): one full-suite run timed out here once on the stories index (mobile) and
+  // passed on every rerun. The loop now stops after 400 steps or 20 s, so a page that keeps growing, or a slow
+  // machine, cannot hold the test until its 90 s timeout; lazy sections far down still get rendered first.
   await page.evaluate(async () => {
     const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
-    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+    const t0 = performance.now();
+    for (let i = 0, y = 0; y < document.documentElement.scrollHeight && i < 400 && performance.now() - t0 < 20_000; i++, y += step) {
       window.scrollTo(0, y);
       await new Promise((r) => setTimeout(r, 30));
     }

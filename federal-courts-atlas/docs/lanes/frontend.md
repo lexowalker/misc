@@ -317,6 +317,13 @@ lowest of 94 (66 districts)", and the home tooltip's derived rank reads "tied fo
 the web lane ranks values at display precision). `periodLabelFor` adds "(preliminary)" to IDB FY 2026 on the home
 tooltip and accessible name, the table caption, compare rows and gaps, and the courtroom panel.
 
+Recheck lane follow-up (Nov 27): at 375 px the new Notes column squeezed into about 45 px, so "Derived" was cut to
+"DERIVE" and notes wrapped one word per line. On phones the Notes column is now hidden (marked optional) and the same
+flags show under the district name (`src/components/cell-flags.ts`; only one copy is ever displayed). A text column
+that follows a number column gets its own left gap, so "4th of 94" and "Derived" no longer touch on wide screens. The
+legend track is now `clamp(12.5rem, 52vw, 15rem)` (was 10rem at 375 px), because the four break labels such as
+"39.4%" overlapped by about 4 px on phones.
+
 Closed since the foundation report: the courthouse and search files are published and in use; the web lane emits
 `ranks` as `{district: {year: rank}}`, `ranked_of` and list-form `caveats`; the profile body, compare statistics,
 stories and courtroom are built (see [Pages](#pages)); the `#/sources` page groups its files by kind of data.

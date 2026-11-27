@@ -6,7 +6,8 @@ import { h, uniqueId } from '../lib/dom.ts';
 import { formatValue, periodLabel, rankText } from '../lib/format.ts';
 import type { ValuesFile, Variable } from '../data/types.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
-import { getCellNote, getRank, getValue, isDerivedCell, rankedCount, rankTies } from '../data/loaders.ts';
+import { getRank, getValue, rankedCount, rankTies } from '../data/loaders.ts';
+import { cellFlags, flagNodes, flagsText, hasFlags, nameWithFlags } from '../components/cell-flags.ts';
 import { renderLegend } from '../components/legend.ts';
 import { DataTable, type Column } from '../components/data-table.ts';
 import { sourceChipForVariable } from '../components/source-chip.ts';
@@ -155,12 +156,17 @@ export class ChoroplethView {
     if (this.tableSlot.hidden) return;
     const v = this.variable;
     const of = rankedCount(this.values, this.year);
+    // Cell flags, as on the tooltip: derived cells and cell notes (data audit 2026-11-27). On phones they sit
+    // under the district name instead of in a Notes column (see cell-flags.ts).
+    const file = this.values;
+    const year = this.year;
+    const flags = (id: string) => (v ? cellFlags(file, id, year) : { derived: false, note: null });
     const cols: Column<Row>[] = [
       {
         key: 'name',
         label: 'District',
         value: (r) => r.name,
-        render: (r) => h('a', { href: `#/district/${r.id}` }, r.name),
+        render: (r) => nameWithFlags(h('a', { href: `#/district/${r.id}` }, r.name), flags(r.id)),
       },
       { key: 'state', label: 'State', value: (r) => r.state, optional: true },
       { key: 'circuit', label: 'Circuit', value: (r) => (r.circuit === 'DC' ? 0 : Number(r.circuit)), render: (r) => circuitLabel(r.circuit), optional: true },
@@ -176,21 +182,14 @@ export class ChoroplethView {
       if (this.values.ranks) {
         cols.push({ key: 'rank', label: this.o.rankLabel ?? 'Rank', numeric: true, value: (r) => r.rank, render: (r) => (r.value === null ? '' : rankText(r.rank, of, rankTies(this.values, this.year, r.rank)) ?? '') });
       }
-      // Cell flags, as on the tooltip: derived cells and cell notes (data audit 2026-11-27).
-      const file = this.values;
-      const year = this.year;
-      const derivedAt = (id: string) => getValue(file, id, year) !== null && isDerivedCell(file, id, year);
-      const noteAt = (id: string) => (getValue(file, id, year) !== null ? getCellNote(file, id, year) : null);
-      if (DISTRICTS.some((d) => derivedAt(d.id) || !!noteAt(d.id))) {
+      if (DISTRICTS.some((d) => hasFlags(flags(d.id)))) {
         cols.push({
           key: 'notes',
           label: 'Notes',
-          value: (r) => [derivedAt(r.id) ? 'Derived' : '', noteAt(r.id) ?? ''].filter(Boolean).join(' '),
+          optional: true,
+          value: (r) => flagsText(flags(r.id)),
           render: (r) => {
-            const parts: Array<Node | string> = [];
-            if (derivedAt(r.id)) parts.push(h('span', { class: 'source-chip source-chip--derived' }, h('span', { class: 'source-chip__label' }, 'Derived')));
-            const note = noteAt(r.id);
-            if (note) parts.push(h('span', { class: 'table-note' }, `${parts.length ? ' ' : ''}${note}`));
+            const parts = flagNodes(flags(r.id));
             return parts.length ? h('span', null, ...parts) : '';
           },
         });

@@ -7,7 +7,8 @@ import { formatValue, periodLabel, periodLabelFor, rankText } from '../lib/forma
 import type { PageContext } from '../app/router.ts';
 import { replaceQuery } from '../app/router.ts';
 import { DISTRICTS, circuitLabel } from '../data/districts.ts';
-import { getCellNote, getRank, getValue, isDerivedCell, loadValues, loadVariables, rankedCount, rankTies, caveatList } from '../data/loaders.ts';
+import { getRank, getValue, loadValues, loadVariables, rankedCount, rankTies, caveatList } from '../data/loaders.ts';
+import { cellFlags, flagNodes, flagsText, hasFlags, nameWithFlags } from '../components/cell-flags.ts';
 import type { ValuesFile, Variable } from '../data/types.ts';
 import { DataTable } from '../components/data-table.ts';
 import { dataNotBuilt, emptyState, errorState, noData } from '../components/states.ts';
@@ -73,11 +74,10 @@ export async function render(ctx: PageContext): Promise<void> {
     const of = rankedCount(file, year);
     // Cell flags, as on the map tooltip: derived cells and cell notes (small bases, approximate population,
     // printed caveats). Data audit 2026-11-27: the table view showed neither.
-    const has = (id: string) => getValue(file, id, year) !== null;
-    const derivedHere = (id: string) => has(id) && isDerivedCell(file, id, year);
-    const noteHere = (id: string) => (has(id) ? getCellNote(file, id, year) : null);
-    const anyFlag = DISTRICTS.some((d) => derivedHere(d.id) || !!noteHere(d.id));
-    const formula = DISTRICTS.some((d) => derivedHere(d.id)) ? yearFormula(v, file, year) : null;
+    // On phones the flags sit under the district name instead of in a fourth column (see cell-flags.ts).
+    const flags = (id: string) => cellFlags(file, id, year);
+    const anyFlag = DISTRICTS.some((d) => hasFlags(flags(d.id)));
+    const formula = DISTRICTS.some((d) => flags(d.id).derived) ? yearFormula(v, file, year) : null;
     const t = new DataTable<Row>({
       caption: `${v?.label ?? id}, ${periodLabelFor(v, year, file.period_type)}`,
       rowKey: (r) => r.id,
@@ -86,7 +86,7 @@ export async function render(ctx: PageContext): Promise<void> {
       sortDir: 'desc',
       rows: DISTRICTS.map((d) => ({ id: d.id, name: d.name, state: d.stateName, circuit: d.circuit })),
       columns: [
-        { key: 'name', label: 'District', value: (r) => r.name, render: (r) => h('a', { href: `#/district/${r.id}` }, r.name) },
+        { key: 'name', label: 'District', value: (r) => r.name, render: (r) => nameWithFlags(h('a', { href: `#/district/${r.id}` }, r.name), flags(r.id)) },
         { key: 'state', label: 'State', value: (r) => r.state, optional: true },
         { key: 'circuit', label: 'Circuit', value: (r) => (r.circuit === 'DC' ? 0 : Number(r.circuit)), render: (r) => circuitLabel(r.circuit), optional: true },
         {
@@ -106,12 +106,10 @@ export async function render(ctx: PageContext): Promise<void> {
           ? [{
               key: 'notes',
               label: 'Notes',
-              value: (r: Row) => [derivedHere(r.id) ? 'Derived' : '', noteHere(r.id) ?? ''].filter(Boolean).join(' '),
+              optional: true,
+              value: (r: Row) => flagsText(flags(r.id)),
               render: (r: Row) => {
-                const parts: Array<Node | string> = [];
-                if (derivedHere(r.id)) parts.push(h('span', { class: 'source-chip source-chip--derived' }, h('span', { class: 'source-chip__label' }, 'Derived')));
-                const note = noteHere(r.id);
-                if (note) parts.push(h('span', { class: 'table-note' }, `${parts.length ? ' ' : ''}${note}`));
+                const parts = flagNodes(flags(r.id));
                 return parts.length ? h('span', null, ...parts) : '';
               },
             }]

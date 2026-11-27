@@ -102,7 +102,10 @@ test('table view shows cell notes, derived tags and the year formula (data audit
   await page.goto(`./#/table/within_range_pct?y=${y}`);
   const row = page.locator('table tbody tr', { hasText: name });
   await expect(row).toContainText(f.cell_notes![id]![String(y)]!);
-  await expect(row.locator('.source-chip--derived')).toHaveText('Derived');
+  // Wide screens show the flags in a Notes column; phones show them under the district name. Either way exactly
+  // one copy is visible (recheck lane 2026-11-27: the fourth column did not fit at 375 px).
+  await expect(row.locator('.source-chip--derived:visible')).toHaveText('Derived');
+  await expect(row.locator('.table-note:visible')).toHaveText(f.cell_notes![id]![String(y)]!);
   await expect(page.locator('.data-table__foot')).toContainText('Derived values:');
   expect(errors, errors.join('\n')).toEqual([]);
 });

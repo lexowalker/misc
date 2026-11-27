@@ -49,6 +49,9 @@ district rules (`.crumbs`, `.district-head`, `.district-hero`, `.facts`) are sti
    formula when any claim is derived) and a "See the measure" link that scrolls to and highlights the stat row.
    "How this is written" shows the method. **Each sentence is re-checked in the browser**: every claim's value,
    printed the way the page prints it, must appear in the sentence, or the sentence is not shown (see Issues).
+   When a district has no outlier sentence (profile `kind` `size_and_circuit`: oknd, waed and idd in this build),
+   the size-and-circuit sentence is followed by the note that no measure used for the summary puts the district at
+   an extreme, so the section's dek is not read as covering the size sentence (recheck lane, Nov 27).
 4. **Key statistics.** Grouped as Speed, Workload, Sentencing, Case mix. The 15 featured measures show first;
    "Show N more … measures" reveals the rest (41 in all). Each row: label and period; value with unit (or
    "No data", plus "Last reported for FY …" when older data exist); rank phrased with an explicit direction

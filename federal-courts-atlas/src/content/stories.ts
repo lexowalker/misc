@@ -93,7 +93,7 @@ export const STORY_CONTENT: StoryContent[] = [
         graphic: { kind: 'chart', chart: 'disp_line', highlight: ['vaed'] },
       },
       {
-        text: 'On criminal cases the court is quick, but not the quickest. Its median time to resolve a felony case was below the national median in each of the {n_crim_years} years from {fy_crim_first} to {fy_latest}. Its national standing ranged from {crim_rank_best} to {crim_rank_worst}. In {fy_latest}, the fastest district was {fastest_crim_latest}, at {fastest_crim_value}.',
+        text: 'On criminal cases the court is quick, but not the quickest. Its median time to resolve a felony case was below the national median in each of the {n_crim_years} years from {fy_crim_first} to {fy_latest}. In the years the AO ranked districts on this same measure, its national standing ranged from {crim_rank_best} to {crim_rank_worst}. In {fy_latest}, the fastest district was {fastest_crim_latest}, at {fastest_crim_value}.',
         graphic: { kind: 'chart', chart: 'crim_line', highlight: ['vaed'] },
       },
       {

@@ -1376,13 +1376,13 @@
    "sha256": "8a4045b3c63fba04dc6662d17945aa58d5aa99e38e34e950443888a16da4d645"
   },
   "variables.json": {
-   "bytes": 85785,
-   "sha256": "6b53be65abecb937365e3eb3940742c1a727860fcbf3743dc798814f55dff25b"
+   "bytes": 85880,
+   "sha256": "17c4516de51aab888e2b3ec226b9cfcc199c731ac16f1894d30ddeca9fe52c6f"
   }
  },
  "generator": "python -m pipeline.web.build",
  "sources": 910,
- "total_bytes": 19444070,
+ "total_bytes": 19444165,
  "variables": 43,
- "version": "68486d443d"
+ "version": "9829aa7379"
 }
