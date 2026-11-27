@@ -1,6 +1,6 @@
 # PROGRESS
 
-_Last updated: 2026-11-27 12:05 UTC. Data pipeline and website built; verification next._
+_Last updated: 2026-11-27 12:40 UTC. Data pipeline and website built; verification next._
 
 ## Done
 - **Skeleton**: 94-district registry, cached/throttled HTTP fetcher, source and gap manifests, data contract
@@ -30,7 +30,9 @@ _Last updated: 2026-11-27 12:05 UTC. Data pipeline and website built; verificati
     (0.89 s at 4x CPU throttle); no em-dash in `src/` or `public/data/`.
 
 ## In progress
-- Workflow 3: verification (data audit into `VERIFICATION.md`, copy audit, UI audit), then fixes.
+- Workflow 3 (verification, started 12:10 UTC): copy audit done (findings being applied); two independent data
+  auditors tracing displayed numbers to raw files; UI audit with an automated accessibility scan (axe-core) fixing
+  layout and contrast issues. Then a recheck lane writes `VERIFICATION.md`, and a completeness critic checks the brief.
 
 ## Next
 - Retry CourtListener for the 7 districts with no cases after the daily quota resets (about 04:15 UTC Nov 28).
