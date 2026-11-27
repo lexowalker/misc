@@ -349,7 +349,7 @@ class LineChart extends BaseChart<LineChartSpec> {
         box.append(h('p', { class: 'chart-tip__row chart-tip__row--band' }, h('span', null, sp.band.label), h('strong', { class: 'num' }, `${fmtShort(sp.band.lo[i]!, sp.unit, sp.format)} to ${fmtShort(sp.band.hi[i]!, sp.unit, sp.format)}`)));
       }
       if (sp.prelim_from !== undefined && sp.x.indexOf(sp.prelim_from as never) <= i) box.append(h('p', { class: 'chart-tip__note' }, 'Preliminary'));
-      if (sp.derived_x?.includes(sp.x[i] as number)) box.append(h('p', { class: 'chart-tip__note' }, 'Derived: pooled from two half-year tables'));
+      if (sp.derived_x?.includes(sp.x[i] as number)) box.append(h('p', { class: 'chart-tip__note' }, 'Derived: pooled from two part-year tables'));
       this.tip.show(box, e.clientX - this.el.getBoundingClientRect().left, e.clientY - this.el.getBoundingClientRect().top);
     };
     hit.addEventListener('pointermove', move);
