@@ -21,10 +21,9 @@ _Last updated: 2026-11-27 09:35 UTC (overnight build). Data pipeline complete; w
 - `SOURCES.md` (1,547 source files) and `DATA_GAPS.md` generated from the lane fragments.
 
 ## In progress
-- Workflow 2 (website): web data lane done (41 map variables in four families, all with 10+ years; see
-  `docs/lanes/web.md`). Home (variable switcher, place search), district profile, compare and search pages are built
-  with e2e specs (`docs/lanes/{home,district,compare}.md`). Stories pipeline built; story pages, then the courtroom
-  page and an integration pass are still running.
+- Workflow 2 (website): all page lanes are built with e2e specs: home (variable switcher, place search), district
+  profiles, compare, search, stories and the three.js courtroom (`docs/lanes/*.md`). The integration pass (full e2e
+  suite, cross-lane fixes) is running.
 
 ## Next
 - Workflow 3: verification lanes (data audit of 50+ numbers into `VERIFICATION.md`, copy audit, UI audit with
