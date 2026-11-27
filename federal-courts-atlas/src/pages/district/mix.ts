@@ -9,7 +9,7 @@ import { formatNumber, periodLabel } from '../../lib/format.ts';
 import { Tooltip } from '../../components/tooltip.ts';
 import { DataTable } from '../../components/data-table.ts';
 import { sourceChip } from '../../components/source-chip.ts';
-import { term } from '../../components/glossary.ts';
+import { phraseLabel, term } from '../../components/glossary.ts';
 import type { MixBlock, SentencingComposition, SentencingCompositionYear, Variable } from '../../data/types.ts';
 import { viewToggle } from './common.ts';
 
@@ -24,7 +24,7 @@ function mixPanel(o: { id: string; title: string; unitNoun: string; block: MixBl
   const panel = h('figure', { class: 'mix', id: `mix-${o.id}` });
   const b = o.block;
   if (!b || !b.groups?.length) {
-    panel.append(h('figcaption', { class: 'mix__title' }, o.title), h('p', { class: 'no-data' }, 'No data'));
+    panel.append(h('figcaption', { class: 'mix__title' }, phraseLabel(o.title)), h('p', { class: 'no-data' }, 'No data'));
     return panel;
   }
   const groups = [...b.groups].sort((a, z) => (z.share ?? -1) - (a.share ?? -1));
@@ -72,7 +72,7 @@ function mixPanel(o: { id: string; title: string; unitNoun: string; block: MixBl
     h(
       'figcaption',
       { class: 'mix__head' },
-      h('span', { class: 'mix__title' }, o.title),
+      h('span', { class: 'mix__title' }, phraseLabel(o.title)),
       h('span', { class: 'mix__sub' }, `${periodLabel(b.year, b.period_type)} · ${formatNumber(b.total, 0)} ${o.unitNoun}`),
     ),
     legend,

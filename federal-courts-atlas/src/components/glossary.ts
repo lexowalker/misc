@@ -8,6 +8,7 @@
 
 import { h, uniqueId } from '../lib/dom.ts';
 import { glossaryEntry } from '../content/glossary.ts';
+import { PHRASE_TERMS, termsForVariable, type TermRef } from '../content/variable-terms.ts';
 
 let pop: HTMLDivElement | null = null;
 let current: HTMLElement | null = null;
@@ -106,18 +107,43 @@ function inlineItalics(text: string): DocumentFragment {
   return frag;
 }
 
+// Definitions for terms inside labels live in one hidden container (one copy per term), so a heading, a table
+// row header or anything named by its content (aria-labelledby) does not take the whole definition into its name.
+let defsHost: HTMLElement | null = null;
+
+function sharedDescription(id: string, definition: string): string {
+  const did = `gloss-def-${id}`;
+  if (document.getElementById(did)) return did;
+  if (!defsHost || !defsHost.isConnected) {
+    defsHost = h('div', { id: 'glossary-definitions', hidden: true });
+    document.body.append(defsHost);
+  }
+  defsHost.append(h('span', { id: did }, definition));
+  return did;
+}
+
+export interface TermOptions {
+  /**
+   * The term sits in a label (heading, row header, caption) rather than in running text: its definition is
+   * referenced from a shared hidden container instead of being placed inline, and the hit area is padded to
+   * at least 24px tall without moving the text.
+   */
+  label?: boolean;
+}
+
 /** An inline glossary term. Falls back to plain text if the id is unknown. */
-export function term(id: string, text?: string): HTMLElement {
+export function term(id: string, text?: string, opts: TermOptions = {}): HTMLElement {
   const entry = glossaryEntry(id);
   const shown = text ?? entry?.term ?? id;
   if (!entry) return h('span', null, shown);
-  const descId = uniqueId('gloss');
+  const definition = `Definition: ${entry.definition.replace(/\*/g, '')}`;
+  const descId = opts.label ? sharedDescription(id, definition) : uniqueId('gloss');
   const btn = h(
     'button',
-    { type: 'button', class: 'term', 'aria-describedby': descId, 'aria-expanded': 'false', 'data-term': id },
+    { type: 'button', class: opts.label ? 'term term--label' : 'term', 'aria-describedby': descId, 'aria-expanded': 'false', 'data-term': id },
     inlineItalics(shown),
   );
-  const desc = h('span', { id: descId, class: 'visually-hidden' }, `Definition: ${entry.definition.replace(/\*/g, '')}`);
+  const desc = opts.label ? null : h('span', { id: descId, class: 'visually-hidden' }, definition);
   let hoverTimer: ReturnType<typeof setTimeout> | undefined;
   btn.addEventListener('pointerenter', (e) => {
     if (e.pointerType === 'touch') return;
@@ -152,4 +178,41 @@ export function rich(text: string): DocumentFragment {
   }
   if (last < text.length) frag.append(inlineItalics(text.slice(last)));
   return frag;
+}
+
+/**
+ * A label with its legal terms marked: each ref's words, found without regard to case, become a glossary term
+ * (label variant) that keeps the label's own casing. Refs that do not occur, or overlap an earlier match, are
+ * skipped, so the label always reads exactly as written.
+ */
+export function glossLabel(text: string, refs: readonly TermRef[]): DocumentFragment {
+  const lower = text.toLowerCase();
+  const hits: Array<{ at: number; end: number; term: string }> = [];
+  for (const r of refs) {
+    const at = lower.indexOf(r.text.toLowerCase());
+    if (at < 0) continue;
+    const end = at + r.text.length;
+    if (hits.some((x) => at < x.end && end > x.at)) continue;
+    hits.push({ at, end, term: r.term });
+  }
+  hits.sort((a, b) => a.at - b.at);
+  const frag = document.createDocumentFragment();
+  let last = 0;
+  for (const x of hits) {
+    if (x.at > last) frag.append(text.slice(last, x.at));
+    frag.append(term(x.term, text.slice(x.at, x.end), { label: true }));
+    last = x.end;
+  }
+  if (last < text.length) frag.append(text.slice(last));
+  return frag;
+}
+
+/** A measure's label (or `text`, e.g. its short label) with the glossary terms listed in variable-terms.ts. */
+export function variableLabel(v: { id: string; label: string }, text: string = v.label): DocumentFragment {
+  return glossLabel(text, termsForVariable(v.id));
+}
+
+/** A fixed heading with the terms in PHRASE_TERMS marked (nature of suit, guideline range, §5K1.1, §5K3.1). */
+export function phraseLabel(text: string): DocumentFragment {
+  return glossLabel(text, PHRASE_TERMS);
 }

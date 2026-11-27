@@ -10,6 +10,8 @@ import { loadAtlasGeometry, type AtlasGeometry } from '../map/geo.ts';
 import { renderThumbnail } from '../map/thumbnail.ts';
 import { scaleForValues } from '../map/scale.ts';
 import { periodLabel } from '../lib/format.ts';
+import { term } from '../components/glossary.ts';
+import { termsForVariables } from '../content/variable-terms.ts';
 
 export const FAMILY_ORDER = ['speed', 'workload', 'sentencing', 'casemix'] as const;
 export const FAMILY_LABEL: Record<string, string> = { speed: 'Speed', workload: 'Workload', sentencing: 'Sentencing', casemix: 'Case mix' };
@@ -37,6 +39,8 @@ export class VariableSwitcher {
   private thumbs = new Map<string, HTMLButtonElement>();
   private panel: HTMLDivElement;
   private panelDek: HTMLParagraphElement;
+  private termsRow: HTMLParagraphElement;
+  private termsByFamily = new Map<string, Array<Node | string>>();
   private scroller: HTMLDivElement;
   private prevBtn: HTMLButtonElement;
   private nextBtn: HTMLButtonElement;
@@ -102,12 +106,15 @@ export class VariableSwitcher {
     });
 
     this.panelDek = h('p', { class: 'vswitch__dek' });
+    // The thumbnails are buttons, so a glossary term cannot sit inside one: the family's legal terms are listed
+    // under the strip instead, each with its definition popover.
+    this.termsRow = h('p', { class: 'vswitch__terms' });
     this.scroller = h('div', { class: 'vswitch__scroller' });
     this.prevBtn = h('button', { type: 'button', class: 'vswitch__nav vswitch__nav--prev', tabindex: '-1', 'aria-hidden': 'true', html: ARROW_L });
     this.nextBtn = h('button', { type: 'button', class: 'vswitch__nav vswitch__nav--next', tabindex: '-1', 'aria-hidden': 'true', html: ARROW_R });
     this.prevBtn.addEventListener('click', () => this.page(-1));
     this.nextBtn.addEventListener('click', () => this.page(1));
-    this.panel = h('div', { id: panelId, class: 'vswitch__panel', role: 'tabpanel' }, this.panelDek, h('div', { class: 'vswitch__viewport' }, this.prevBtn, this.scroller, this.nextBtn));
+    this.panel = h('div', { id: panelId, class: 'vswitch__panel', role: 'tabpanel' }, this.panelDek, h('div', { class: 'vswitch__viewport' }, this.prevBtn, this.scroller, this.nextBtn), this.termsRow);
     this.scroller.addEventListener('scroll', () => this.updateNav(), { passive: true });
 
     const selectId = 'variable-select';
@@ -225,10 +232,25 @@ export class VariableSwitcher {
       this.strips.set(f, strip);
     }
     this.scroller.replaceChildren(strip);
+    this.showTerms(f);
     this.scroller.scrollLeft = 0;
     this.observeFamily(f);
     if (!user) this.revealActive();
     this.updateNav();
+  }
+
+  private showTerms(f: string): void {
+    let nodes = this.termsByFamily.get(f);
+    if (!nodes) {
+      const ids = termsForVariables((this.byFamily.get(f) ?? []).map((v) => v.id));
+      const list: Array<Node | string> = ids.length
+        ? [h('span', { class: 'vswitch__terms-label' }, 'Terms in these measures: '), ...ids.flatMap((id, i) => [i ? ', ' : '', term(id, undefined, { label: true })])]
+        : [];
+      this.termsByFamily.set(f, list);
+      nodes = list;
+    }
+    this.termsRow.replaceChildren(...nodes);
+    this.termsRow.hidden = !nodes.length;
   }
 
   private buildStrip(f: string): HTMLDivElement {

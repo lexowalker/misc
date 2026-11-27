@@ -1352,6 +1352,83 @@
   "sha256": "bb95000e70479ad56d37d3009484d7bf099c3e2e060dfe87ace7b791e1e92164",
   "notes": "Found on https://www.uscourts.gov/forms-rules/forms/civil-cover-sheet."
  },
+ "govinfo_uscourts_azd_2_23_md_03081": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-azd-2_23-md-03081/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: Bard Implanted Port Catheter Products Liability Litigation, case 2:23-md-03081 (District of Arizona), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:22+00:00",
+  "retrieved_at": "2026-11-27T14:34:22+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/5c7e6b1924d4dac7b9f55056.xml",
+  "sha256": "1a01f194d5ef0db01d8a8890ce095b8938c67d63ef76bc2cd05f0e2f1037c764",
+  "notes": "Used only for the litigation name and case number of MDL docket 3081. Package page: https://www.govinfo.gov/app/details/USCOURTS-azd-2_23-md-03081."
+ },
+ "govinfo_uscourts_flnd_3_19_md_02885": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-flnd-3_19-md-02885/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: 3M COMBAT ARMS EARPLUG PRODUCTS LIABILITY LITIGATION, case 3:19-md-02885 (Northern District of Florida), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:32:51+00:00",
+  "retrieved_at": "2026-11-27T14:32:51+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/fc4a82b76010883aa3ca9972.xml",
+  "sha256": "f0897b8dd6a1f467e36b1a50322b170ca59809e299f0705af699229dbae85090",
+  "notes": "Used only for the litigation name and case number of MDL docket 2885. Package page: https://www.govinfo.gov/app/details/USCOURTS-flnd-3_19-md-02885."
+ },
+ "govinfo_uscourts_flnd_3_25_md_03140": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-flnd-3_25-md-03140/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: DEPO-PROVERA (DEPOT MEDROXYPROGESTERONE ACETATE) PRODUCTS LIABILITY LITIGATION, case 3:25-md-03140 (Northern District of Florida), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:21+00:00",
+  "retrieved_at": "2026-11-27T14:34:21+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/80f4b0da02c64347c544d9f1.xml",
+  "sha256": "4ef82419ae2b9ba4e125282a58a8093d6e0485b7deacb3d8e1b001ba0c0f8f2c",
+  "notes": "Used only for the litigation name and case number of MDL docket 3140. Package page: https://www.govinfo.gov/app/details/USCOURTS-flnd-3_25-md-03140."
+ },
+ "govinfo_uscourts_laed_2_16_md_02740": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-laed-2_16-md-02740/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In Re: Taxotere (Docetaxel) Products Liability Litigation, case 2:16-md-02740 (Eastern District of Louisiana), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:25+00:00",
+  "retrieved_at": "2026-11-27T14:34:25+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/80d19d3d4a80bb297df2d782.xml",
+  "sha256": "e0a102798fc755a7ae92b6b40943a26fd42e606b360a5d1d62580e0b48add50b",
+  "notes": "Used only for the litigation name and case number of MDL docket 2740. Package page: https://www.govinfo.gov/app/details/USCOURTS-laed-2_16-md-02740."
+ },
+ "govinfo_uscourts_mnd_0_15_md_02666": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-mnd-0_15-md-02666/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): IN RE: Bair Hugger Forced Air Warming Devices Products Liability Litigation, case 0:15-md-02666 (District of Minnesota), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:23+00:00",
+  "retrieved_at": "2026-11-27T14:34:23+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/1f4ee4b893425521b3fc8b77.xml",
+  "sha256": "ae87d50bc0bb7b32edd1287317b0701582f32ed996d298028c4482745cf2616f",
+  "notes": "Used only for the litigation name and case number of MDL docket 2666. Package page: https://www.govinfo.gov/app/details/USCOURTS-mnd-0_15-md-02666."
+ },
+ "govinfo_uscourts_njd_3_16_md_02738": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-njd-3_16-md-02738/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): JOHNSON & JOHNSON TALCUM POWDER PRODUCTS MARKETING, SALES PRACTICES AND PRODUCTS LIABILITY LITIGATION, case 3:16-md-02738 (District of New Jersey), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:23+00:00",
+  "retrieved_at": "2026-11-27T14:34:23+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/529de34d9d8e40c193d97ccb.xml",
+  "sha256": "a8d84d6437d1e00d744e5547037980b20d02ce3a63c2c317af2df7940be4f2dd",
+  "notes": "Used only for the litigation name and case number of MDL docket 2738. Package page: https://www.govinfo.gov/app/details/USCOURTS-njd-3_16-md-02738."
+ },
+ "govinfo_uscourts_ohnd_1_24_md_03092": {
+  "lane": "idb",
+  "url": "https://www.govinfo.gov/metadata/pkg/USCOURTS-ohnd-1_24-md-03092/mods.xml",
+  "dataset": "GovInfo, United States Courts Opinions (USCOURTS): In re: Suboxone (Buprenorphine/Naloxone) Film Products Liability Litigation, case 1:24-md-03092 (Northern District of Ohio), MODS metadata",
+  "publisher": "U.S. Government Publishing Office (Administrative Office of the U.S. Courts)",
+  "vintage": "retrieved 2026-11-27T14:34:24+00:00",
+  "retrieved_at": "2026-11-27T14:34:24+00:00",
+  "local_path": "data/raw/http/www.govinfo.gov/80ae892f47b24d2013e379c2.xml",
+  "sha256": "c1d9bdbce5f753939019e49e9cae90106e7c45d509d80a9a4da7c1e4407c96d3",
+  "notes": "Used only for the litigation name and case number of MDL docket 3092. Package page: https://www.govinfo.gov/app/details/USCOURTS-ohnd-1_24-md-03092."
+ },
  "idb_civil_codebook": {
   "lane": "idb",
   "url": "https://www.fjc.gov/sites/default/files/idb/codebooks/Civil%20Codebook%201988%20Forward%2010252023.pdf",

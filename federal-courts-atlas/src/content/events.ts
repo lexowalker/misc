@@ -47,6 +47,14 @@ export const EVENTS: AtlasEvent[] = [
   },
 ];
 
+const AP_MONTHS = ['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+
+/** An event's date in newspaper (AP) style, e.g. "Dec. 21, 2018" or "March 13, 2020". */
+export function eventDateLabel(dateIso: string): string {
+  const [y, m, d] = dateIso.split('-').map(Number) as [number, number, number];
+  return `${AP_MONTHS[m - 1] ?? ''} ${d}, ${y}`;
+}
+
 /** The period label (year) an event falls in, for a dataset's period type. */
 export function periodYear(dateIso: string, periodType?: string | null): number {
   const [y, m] = dateIso.split('-').map(Number) as [number, number];

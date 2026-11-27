@@ -6,6 +6,7 @@ import { h } from '../../lib/dom.ts';
 import { periodLabel } from '../../lib/format.ts';
 import { renderSparkline } from '../../components/sparkline.ts';
 import { sourceChip } from '../../components/source-chip.ts';
+import { variableLabel } from '../../components/glossary.ts';
 import { caveatList } from '../../data/loaders.ts';
 import type { DistrictProfile, Family, KeyStatRow, ProfileClaim, ProfileSentence, Variable } from '../../data/types.ts';
 import { fmtNumberOnly, fmtValue, formulaHint, RANK_FORMULA, rankPhrase, rankStrip, valueParts } from './common.ts';
@@ -30,7 +31,7 @@ function statRow(row: KeyStatRow, v: Variable): HTMLLIElement {
   const head = h(
     'div',
     { class: 'stat__head' },
-    h('h4', { class: 'stat__label' }, v.label),
+    h('h4', { class: 'stat__label' }, variableLabel(v)),
     h('p', { class: 'stat__period' }, periodLabel(row.year, row.period_type)),
   );
 

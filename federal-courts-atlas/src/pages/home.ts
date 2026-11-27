@@ -17,7 +17,7 @@ import type { MapData } from '../map/atlas-map.ts';
 import { YearSlider } from '../components/year-slider.ts';
 import { emptyState, errorState } from '../components/states.ts';
 import { noDataSwatch } from '../components/legend.ts';
-import { rich } from '../components/glossary.ts';
+import { rich, variableLabel } from '../components/glossary.ts';
 import { PlaceSearch } from '../components/place-search.ts';
 import { FAMILY_LABEL, FAMILY_ORDER, VariableSwitcher, familyOf } from './home-switcher.ts';
 
@@ -278,7 +278,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
         'div',
         { class: 'home-measure__text' },
         h('p', { class: 'home-measure__family caps' }, FAMILY_LABEL[familyOf(v)] ?? 'Measure'),
-        h('h2', { class: 'home-measure__title', id: 'home-measure-title' }, v.label, tag ? ' ' : '', tag),
+        h('h2', { class: 'home-measure__title', id: 'home-measure-title' }, variableLabel(v), tag ? ' ' : '', tag),
         v.explainer ? h('p', { class: 'home-measure__explainer' }, v.explainer) : null,
         h(
           'p',
@@ -397,6 +397,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
         value: y,
         periodType: values.period_type,
         label: `Year shown for ${v.label}`,
+        isPreliminary: (yr) => !!v.preliminary_years?.includes(yr),
         onChange: (yr) => {
           if (!current) return;
           current.year = yr;

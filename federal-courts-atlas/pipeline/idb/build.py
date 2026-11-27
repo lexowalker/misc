@@ -10,6 +10,7 @@ Steps (idempotent; downloads cached by pipeline.common.http.fetch, extracts cach
   5. Variables -> observations (contract table) with numerator/denominator columns; detail tables.
   6. Fetch AO Judicial Business tables (C-1, C-4, D-1, D-2, D-4) and the FCMS lane output; reconcile.
   7. Write variables.json, gaps, crosswalk and code tables.
+  8. Civil cases by MDL docket (pipeline/idb/mdl.py; also runs on its own as ``python -m pipeline.idb.mdl``).
 """
 from __future__ import annotations
 
@@ -27,7 +28,7 @@ from pipeline.common.districts import BY_ID, IDS
 from pipeline.common.http import PROJECT_ROOT, FetchError, fetch
 from pipeline.common.manifest import DATA, record_gap, register_source, write_observations
 
-from . import LANE, civil, criminal, jb, reconcile
+from . import LANE, civil, criminal, jb, mdl, reconcile
 from .codes import (CIVIL_DISP_GROUP_LABEL, CRIM_DISP_GROUP_LABEL, NOS_GROUP_LABEL, NOS_GROUPS,
                     OFFENSE_CATEGORIES, d2_category)
 from .crosswalk import IDB_DISTRICT, ID_TO_CODE, circuit_code
@@ -430,6 +431,10 @@ def main() -> int:
         "criminal": {"records": crim_rows, "first_fy": criminal.FIRST_FY, "last_fy": crim_last},
     }
     (OUT / "build_meta.json").write_text(json.dumps(meta, indent=1))
+
+    # ---------------------------------------------------------------- MDL dockets (also: python -m pipeline.idb.mdl)
+    log("civil: cases by MDL docket")
+    mdl.build(civ_x)
     log("done")
     return 0
 

@@ -858,6 +858,20 @@ th[aria-sort='descending'] {
   text-decoration-style: solid;
 }
 
+/* A term inside a label (measure names, headings, row headers). Vertical padding on an inline box widens the
+   tap and click area to at least 24px without changing the line box, so the label does not move. */
+.term--label {
+  padding-block: max(2px, calc((24px - 1.2em) / 2 + 0.5px));
+  text-underline-offset: 0.18em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.term--label:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+  border-radius: 2px;
+}
+
 .gloss-pop {
   position: fixed;
   z-index: var(--z-popover);

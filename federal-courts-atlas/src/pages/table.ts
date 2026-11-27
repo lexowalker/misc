@@ -13,6 +13,7 @@ import type { ValuesFile, Variable } from '../data/types.ts';
 import { DataTable } from '../components/data-table.ts';
 import { dataNotBuilt, emptyState, errorState, noData } from '../components/states.ts';
 import { sourceChipForVariable } from '../components/source-chip.ts';
+import { variableLabel } from '../components/glossary.ts';
 import { pageHead } from './_page.ts';
 
 /** Formula behind the derived cells of one year: the variable's own, else that year's derived basis (USSC). */
@@ -47,7 +48,10 @@ export async function render(ctx: PageContext): Promise<void> {
     );
     return;
   }
-  page.append(pageHead({ kicker: 'Data table', title: v?.label ?? id, dek: v?.explainer }));
+  const head = pageHead({ kicker: 'Data table', title: v?.label ?? id, dek: v?.explainer });
+  // Legal terms in the measure's name open their glossary definitions (src/content/variable-terms.ts).
+  if (v) head.querySelector('h1')?.replaceChildren(variableLabel(v));
+  page.append(head);
   if (values.status !== 'ok') {
     page.append(values.status === 'missing' ? dataNotBuilt(`values/${id}.json`, 'This table') : errorState(values.error, values.url));
     return;

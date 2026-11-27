@@ -14,7 +14,15 @@ export interface GlossaryEntry {
   see?: string[];
 }
 
-export const GLOSSARY: GlossaryEntry[] = [
+/**
+ * Keeps each entry's id as a literal type, so `GlossaryId` (below) lists every id. Code that names a term
+ * in a typed position (src/content/variable-terms.ts) then fails the typecheck if the id does not exist.
+ */
+function entries<const I extends string>(list: Array<GlossaryEntry & { id: I }>): Array<GlossaryEntry & { id: I }> {
+  return list;
+}
+
+const ENTRIES = entries([
   // ---- Sentencing ------------------------------------------------------
   {
     id: 'guideline-range',
@@ -55,6 +63,14 @@ export const GLOSSARY: GlossaryEntry[] = [
       'A sentence outside the guideline range for a reason that the Guidelines Manual itself recognizes, such as substantial assistance (§5K1.1). Amendments effective November 1, 2025 removed most departure provisions from the Manual, kept §5K1.1, and turned the early disposition departure (§5K3.1) into a reduction in offense level (§3F1.1). Sentencing data through FY 2025 still distinguish departures from variances.',
     cite: 'U.S.S.G. ch. 5, pt. K',
     see: ['variance', '5k1-1', '5k3-1'],
+  },
+  {
+    id: 'below-range',
+    term: 'below-range sentence',
+    definition:
+      'A sentence shorter than the bottom of the guideline range. Sentencing Commission data sort these by whether the government asked for them. Government-sponsored below-range sentences follow a motion by the prosecution: for substantial assistance (§5K1.1), under an early disposition program (§5K3.1), for another departure, or for a variance. All others are non-government-sponsored: the judge went below the range without such a motion.',
+    cite: 'U.S. Sentencing Commission, Sourcebook of Federal Sentencing Statistics',
+    see: ['guideline-range', '5k1-1', '5k3-1', 'variance'],
   },
   {
     id: 'sentencing-factors',
@@ -157,6 +173,14 @@ export const GLOSSARY: GlossaryEntry[] = [
     cite: 'Fed. R. Crim. P. 11',
   },
   {
+    id: 'guilty-plea',
+    term: 'guilty plea',
+    definition:
+      'A defendant’s formal admission in court that he or she committed the offense charged. Before accepting it, the judge must speak with the defendant in open court, make sure the defendant understands the rights being given up, including the right to a trial, confirm that the plea is voluntary, and find a factual basis for it. A defendant may instead plead no contest (nolo contendere), which requires the court’s consent.',
+    cite: 'Fed. R. Crim. P. 11',
+    see: ['plea-agreement'],
+  },
+  {
     id: 'bench-trial',
     term: 'bench trial',
     definition:
@@ -169,6 +193,14 @@ export const GLOSSARY: GlossaryEntry[] = [
     definition:
       'A trial in which a jury decides the facts. Federal criminal juries normally have 12 members and must reach a unanimous verdict. Federal civil juries have 6 to 12 members, and their verdicts must be unanimous unless the parties agree otherwise.',
     cite: 'Fed. R. Crim. P. 23(b), 31(a); Fed. R. Civ. P. 48',
+  },
+  {
+    id: 'jury-selection',
+    term: 'jury selection',
+    definition:
+      'The process of choosing a trial jury from citizens summoned for service, also called voir dire. The judge, and often the lawyers, question the prospective jurors. Some are excused for cause, for example because they could not be impartial, and each side may also strike a limited number without giving a reason (peremptory challenges).',
+    cite: '28 U.S.C. §§ 1861–1870; Fed. R. Civ. P. 47; Fed. R. Crim. P. 24',
+    see: ['jury-trial'],
   },
   {
     id: 'magistrate-judge',
@@ -193,6 +225,14 @@ export const GLOSSARY: GlossaryEntry[] = [
       'A code that classifies a federal civil case by subject, for example contract, civil rights, prisoner petitions or patent (code 830). The filer selects it on the civil cover sheet (form JS 44), and federal court statistics, including the FJC’s Integrated Database, group civil cases by it.',
     cite: 'Civil Cover Sheet, Form JS 44',
     see: ['idb'],
+  },
+  {
+    id: 'patent-case',
+    term: 'patent case',
+    definition:
+      'A civil suit under the federal patent laws, most often a claim that a product or process infringes a patent, or a request to declare a patent invalid or not infringed. Only federal courts can hear these claims, and appeals go to the Federal Circuit. On the civil cover sheet a patent case carries nature-of-suit code 830. Since 2017, drug-patent cases under the Hatch-Waxman Act (abbreviated new drug applications) carry their own code, 835.',
+    cite: '28 U.S.C. §§ 1338(a), 1295(a)(1), 1400(b); Civil Cover Sheet, Form JS 44',
+    see: ['nature-of-suit', 'tc-heartland', 'federal-circuit'],
   },
   {
     id: 'pro-se',
@@ -228,6 +268,14 @@ export const GLOSSARY: GlossaryEntry[] = [
     see: ['fcms'],
   },
   {
+    id: 'time-to-trial',
+    term: 'median time to trial',
+    definition:
+      'In Federal Court Management Statistics, the midpoint of the time from filing to trial for the civil cases that reached trial during a 12-month period: half got there sooner and half later. It is reported in months. The AO does not compute it for a district that tried fewer than 10 civil cases in the period.',
+    cite: 'Administrative Office of the U.S. Courts, Federal Court Management Statistics',
+    see: ['median-time', 'fcms'],
+  },
+  {
     id: 'weighted-filings',
     term: 'weighted filings',
     definition:
@@ -255,6 +303,14 @@ export const GLOSSARY: GlossaryEntry[] = [
       'A form of semi-retirement for Article III judges who meet the “Rule of 80”: at least 65 years old, with age plus years of service totaling at least 80 (and at least 10 years of service). A senior judge remains a federal judge and may keep hearing cases, often a reduced load, while the judgeship becomes vacant and can be filled by a new appointee.',
     cite: '28 U.S.C. § 371(c)',
     see: ['article-iii'],
+  },
+  {
+    id: 'active-judge',
+    term: 'active judge',
+    definition:
+      'An Article III judge in regular active service, holding one of the judgeships Congress has authorized for a court. A judge who takes senior status or retires leaves active service and the judgeship becomes vacant, so a court can have fewer active judges than authorized judgeships.',
+    cite: '28 U.S.C. §§ 133, 371',
+    see: ['judgeship', 'senior-status'],
   },
 
   // ---- Structure -------------------------------------------------------
@@ -363,7 +419,12 @@ export const GLOSSARY: GlossaryEntry[] = [
       'The United States Sentencing Commission: an independent agency in the judicial branch, created by the Sentencing Reform Act of 1984, that writes and amends the Federal Sentencing Guidelines and collects, analyzes and publishes data on federal sentences.',
     cite: '28 U.S.C. § 991',
   },
-];
+]);
+
+/** Every glossary id, as a literal union (a typecheck guard for term references). */
+export type GlossaryId = (typeof ENTRIES)[number]['id'];
+
+export const GLOSSARY: GlossaryEntry[] = ENTRIES;
 
 const BY_ID = new Map(GLOSSARY.map((g) => [g.id, g]));
 

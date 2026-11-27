@@ -566,6 +566,28 @@ CATALOG: list[dict] = [
         "fact": {"text": "{value} of criminal defendants whose cases closed pleaded guilty", "high": "highest share", "low": "lowest share"},
     },
     {
+        "id": "criminal_dismissed_pct", "family": "casemix",
+        "label": "Criminal defendants whose cases were dismissed", "short_label": "Criminal cases dismissed",
+        "unit": "percent", "format": ".1f", "higher_means": "more defendants' cases end in a dismissal",
+        "default_rank_direction": "desc",
+        "explainer": ("The share of criminal defendants whose cases closed during the year without a conviction "
+                      "because the charges were dismissed. This includes dismissals with or without prejudice, "
+                      "nolle prosequi, pretrial diversion and mistrials."),
+        "caveats": ["Counts the disposition of the most serious charge. The grouping is the AO's \"dismissed\" column in "
+                    "Judicial Business Table D-4; the atlas's national totals match that column exactly for FY 2005 to 2025.",
+                    "For FY 1997 to 2004 the FJC records hold 7% to 12% more dismissals nationally than the AO's printed "
+                    "table, whose scope was narrower in those years, and FY 1996 could not be checked; compare earlier years with care.",
+                    "The group also counts records closed as \"dismissal superseded\" or \"statistically closed\" in "
+                    "the FJC codebook. The records do not say why a case was dismissed.",
+                    IDB_COMPUTED, IDB_2026, IDB_BASE, RANK],
+        "input": {"lane": "idb", "table": "observations", "variable": "idb_crim_pct_dismissed"},
+        "derived": True,
+        "formula": "100 × defendants whose cases closed with a dismissal ÷ all defendants whose cases closed",
+        "base": "denominator",
+        "breaks": [{"year": 2005, "note": "The AO's dismissal table matches the FJC records exactly from FY 2005; earlier years count somewhat more dismissals than the AO printed."}],
+        "fact": None,
+    },
+    {
         "id": "crim_immigration_pct", "family": "casemix",
         "label": "Immigration charges, share of new defendants", "short_label": "Immigration defendants",
         "unit": "percent", "format": ".1f", "higher_means": "more of the criminal docket is immigration cases",
@@ -641,6 +663,22 @@ CATALOG: list[dict] = [
         "explainer": "The share of people sentenced whose main offense was a firearms offense, as classified by the U.S. Sentencing Commission.",
         "caveats": [USSC_OFFENSE_2018, USSC_PACKETS, USSC_FY, USSC_BASE, RANK],
         "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_offense_firearms"},
+        "base": "n_basis",
+        "breaks": [{"year": 2018, "note": "USSC offense classification moved from statute of conviction to primary guideline."}],
+        "fact": None,
+    },
+    {
+        "id": "sentenced_child_pornography_pct", "family": "casemix",
+        "label": "Child pornography, share of people sentenced", "short_label": "Sentenced: child pornography",
+        "unit": "percent", "format": ".1f", "higher_means": "more of those sentenced were child pornography cases",
+        "default_rank_direction": "desc",
+        "explainer": "The share of people sentenced whose main offense was child pornography, as classified by the U.S. Sentencing Commission.",
+        "caveats": ["The USSC first reported child pornography as its own offense category in FY 2010. Before that it "
+                    "was part of a wider category, so this series starts in FY 2010.",
+                    USSC_OFFENSE_2018,
+                    "Reproduced from the USSC's case-level datafiles; the values match the USSC's published district tables.",
+                    USSC_FY, USSC_BASE, RANK],
+        "input": {"lane": "ussc", "table": "observations", "variable": "ussc_pct_offense_child_pornography"},
         "base": "n_basis",
         "breaks": [{"year": 2018, "note": "USSC offense classification moved from statute of conviction to primary guideline."}],
         "fact": None,

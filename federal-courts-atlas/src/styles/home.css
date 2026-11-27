@@ -197,6 +197,23 @@
   color: var(--color-text-3);
 }
 
+/* The family's legal terms, each with its definition popover (thumbnails are buttons, so terms cannot sit in them). */
+.vswitch__terms {
+  margin-top: var(--space-2);
+  font-size: var(--fs-xs);
+  line-height: 2;
+  color: var(--color-text-3);
+}
+
+.vswitch__terms .term {
+  color: var(--color-text-2);
+}
+
+.vswitch__terms .term:hover,
+.vswitch__terms .term[aria-expanded='true'] {
+  color: var(--color-link);
+}
+
 .vswitch__viewport {
   position: relative;
 }

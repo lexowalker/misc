@@ -38,6 +38,7 @@ import {
 } from '../data/loaders.ts';
 import type { Family, ValuesFile, Variable } from '../data/types.ts';
 import { renderSparkline } from '../components/sparkline.ts';
+import { variableLabel } from '../components/glossary.ts';
 import { ensureFormulaPopovers, sourceChip } from '../components/source-chip.ts';
 import { formatNumber, formatValue, periodLabel, periodLabelFor } from '../lib/format.ts';
 import { fmtNumberOnly, fmtValue, RANK_FORMULA, rankPhrase, valueParts } from './district/common.ts';
@@ -704,7 +705,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
     h(
       'div',
       { class: 'cmp-tr cmp-tr--missing', role: 'row', 'data-variable': v.id },
-      h('div', { class: 'cmp-measure', role: 'rowheader' }, h('h3', { class: 'cmp-measure__label' }, v.label), h('p', { class: 'cmp-measure__period' }, why)),
+      h('div', { class: 'cmp-measure', role: 'rowheader' }, h('h3', { class: 'cmp-measure__label' }, variableLabel(v)), h('p', { class: 'cmp-measure__period' }, why)),
       ...ids.map(() => h('div', { class: 'cmp-td', role: 'cell' }, h('span', { class: 'no-data' }, 'No data'))),
     );
 
@@ -764,7 +765,7 @@ export async function render(ctx: PageContext): Promise<() => void> {
     const measure = h(
       'div',
       { class: 'cmp-measure', role: 'rowheader' },
-      h('h3', { class: 'cmp-measure__label' }, v.label),
+      h('h3', { class: 'cmp-measure__label' }, variableLabel(v)),
       h('p', { class: `cmp-measure__period${ry.mode === 'outside' || ry.mode === 'none' ? ' cmp-measure__period--warn' : ''}` }, rowYearText(ry, v, file, n)),
       h(
         'p',

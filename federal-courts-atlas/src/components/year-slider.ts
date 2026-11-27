@@ -4,7 +4,7 @@
 
 import { h, html, uniqueId, prefersReducedMotion } from '../lib/dom.ts';
 import { periodLabel } from '../lib/format.ts';
-import { EVENTS, periodYear, type AtlasEvent } from '../content/events.ts';
+import { EVENTS, eventDateLabel, periodYear, type AtlasEvent } from '../content/events.ts';
 
 export interface YearSliderOptions {
   years: number[];
@@ -15,6 +15,32 @@ export interface YearSliderOptions {
   interval?: number;
   onChange: (year: number) => void;
   label?: string;
+  /**
+   * Years whose figures are preliminary (e.g. IDB FY 2026, which has no AO cross-check yet). The value readout
+   * then says "Preliminary" under the year, and the slider's spoken value ends in "(preliminary)".
+   */
+  isPreliminary?: (year: number) => boolean;
+}
+
+/**
+ * One short sentence on where events sit on the track, with a worked example when an event's calendar year
+ * differs from its period (the First Step Act, signed Dec. 21, 2018, sits at FY 2019). Null for calendar years.
+ */
+export function eventPlacementNote(shown: AtlasEvent[], periodType?: string): string | null {
+  const ex = shown.find((e) => periodYear(e.date, periodType) !== Number(e.date.slice(0, 4)));
+  const example = ex ? `an event on ${eventDateLabel(ex.date)} (${ex.short}) sits at ${periodLabel(periodYear(ex.date, periodType), periodType)}` : null;
+  switch (periodType) {
+    case 'FY_SEP30':
+      return `Each event sits in the federal fiscal year it fell in. Fiscal years run from October 1 to September 30${example ? `, so ${example}` : ''}.`;
+    case 'SNAPSHOT_SEP30':
+      return `Counts are taken each September 30, and each event sits at the first count after it${example ? `: ${example}` : ''}.`;
+    case '12M_JUN30':
+      return `Each event sits in the 12-month period ending June 30 that it fell in${example ? `: ${example}` : ''}.`;
+    case '12M_MAR31':
+      return `Each event sits in the 12-month period ending March 31 that it fell in${example ? `: ${example}` : ''}.`;
+    default:
+      return null;
+  }
 }
 
 const PLAY = '<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M6 4.2v11.6a.6.6 0 0 0 .9.5l9.2-5.8a.6.6 0 0 0 0-1L6.9 3.7a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>';
@@ -66,6 +92,7 @@ export class YearSlider {
     const pips = h('div', { class: 'year-slider__pips', 'aria-hidden': 'true' });
     const keys = h('ul', { class: 'year-slider__keys', role: 'list' });
     const pos = (i: number) => (years.length > 1 ? (i / (years.length - 1)) * 100 : 50);
+    const shown: AtlasEvent[] = [];
     if (o.events !== false) {
       for (const ev of o.events ?? EVENTS) {
         const y = periodYear(ev.date, o.periodType);
@@ -76,16 +103,20 @@ export class YearSlider {
           const after = years.findIndex((v) => v > y);
           i = after - 1 + (y - years[after - 1]!) / (years[after]! - years[after - 1]!);
         }
+        shown.push(ev);
+        // Each event shows its real date; the marker sits on the period the date falls in (see the note).
+        const date = eventDateLabel(ev.date);
+        const at = periodLabel(y, o.periodType);
         const m = h(
           'button',
           {
             type: 'button',
             class: 'year-slider__event',
             style: `left:${pos(i)}%`,
-            title: `${ev.label} (${periodLabel(y, o.periodType)}): ${ev.description}`,
-            'aria-label': `Jump to ${periodLabel(y, o.periodType)}: ${ev.label}. ${ev.description}`,
+            title: `${ev.label}, ${date} (${at}): ${ev.description}`,
+            'aria-label': `${ev.short}, ${date}. Jump to ${at}. ${ev.description}`,
           },
-          h('span', { class: 'year-slider__event-label' }, ev.short),
+          h('span', { class: 'year-slider__event-label' }, h('span', { class: 'year-slider__event-name' }, ev.short), h('span', { class: 'year-slider__event-date num' }, date)),
         );
         const jump = () => {
           this.pause();
@@ -96,19 +127,22 @@ export class YearSlider {
         markers.append(m);
         this.eventEls.push(m);
         pips.append(h('span', { class: 'year-slider__pip', style: `left:${pos(i)}%` }));
-        // The key's name is its visible text (label in name); the marker's longer wording is its description.
+        // The key's name is its visible text (label in name); the marker's longer wording is its description,
+        // kept outside the button so it is not read twice.
         const descId = uniqueId('year-ev');
         const key = h(
           'button',
           { type: 'button', class: 'year-slider__key', 'aria-describedby': descId },
           h('span', { class: 'year-slider__key-mark', 'aria-hidden': 'true' }),
-          h('span', { class: 'year-slider__key-label' }, ev.short),
-          ' ',
-          h('span', { class: 'year-slider__key-year num' }, periodLabel(y, o.periodType)),
-          h('span', { id: descId, class: 'visually-hidden' }, `Jump to ${periodLabel(y, o.periodType)}: ${ev.label}. ${ev.description}`),
+          h(
+            'span',
+            { class: 'year-slider__key-text' },
+            h('span', { class: 'year-slider__key-line' }, h('span', { class: 'year-slider__key-label' }, ev.short), ' ', h('span', { class: 'year-slider__key-year num' }, at)),
+            h('span', { class: 'year-slider__key-date num' }, date),
+          ),
         );
         key.addEventListener('click', jump);
-        keys.append(h('li', null, key));
+        keys.append(h('li', null, key, h('span', { id: descId, class: 'visually-hidden' }, `Jump to ${at}. ${ev.label}, ${date}. ${ev.description}`)));
       }
     }
     const ticks = h('div', { class: 'year-slider__ticks', 'aria-hidden': 'true' });
@@ -123,7 +157,11 @@ export class YearSlider {
     });
     track.append(markers, pips, this.input, ticks);
     this.el = h('div', { class: 'year-slider', role: 'group', 'aria-label': o.label ?? 'Time machine' }, this.btn, track, this.out);
-    if (this.eventEls.length) this.el.append(keys);
+    if (this.eventEls.length) {
+      this.el.append(keys);
+      const note = eventPlacementNote(shown, o.periodType);
+      if (note) this.el.append(h('p', { class: 'year-slider__note' }, note));
+    }
     this.set(this.idx, false);
     // Event labels that would overlap (e.g. First Step Act, FY 2019, beside COVID-19, FY 2020) are lifted
     // onto a second row, and year labels that would touch are left out, once the slider has a width.
@@ -210,8 +248,9 @@ export class YearSlider {
     this.idx = Math.max(0, Math.min(this.o.years.length - 1, i));
     this.input.value = String(this.idx);
     const label = periodLabel(this.year, this.o.periodType);
-    this.input.setAttribute('aria-valuetext', label);
-    this.out.textContent = label;
+    const prelim = this.o.isPreliminary?.(this.year) ?? false;
+    this.input.setAttribute('aria-valuetext', prelim ? `${label} (preliminary)` : label);
+    this.out.replaceChildren(label, prelim ? h('span', { class: 'year-slider__flag' }, 'Preliminary') : '');
     this.el?.style.setProperty('--progress', `${this.o.years.length > 1 ? (this.idx / (this.o.years.length - 1)) * 100 : 100}%`);
     if (emit) this.o.onChange(this.year);
   }
