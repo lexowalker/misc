@@ -1,0 +1,382 @@
+.learn-layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 64rem) {
+  .learn-layout {
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .learn-toc {
+    position: sticky;
+    top: 5rem;
+    align-self: start;
+  }
+}
+
+.learn-toc ol {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+  border-top: 1px solid var(--color-rule);
+}
+
+.learn-toc li {
+  counter-increment: toc;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.learn-toc__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-2);
+  text-align: left;
+}
+
+.learn-toc__link::before {
+  content: counter(toc, decimal-leading-zero);
+  font-size: var(--fs-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-3);
+}
+
+.learn-toc__link:hover {
+  color: var(--color-link);
+}
+
+@media (max-width: 63.99rem) {
+  .learn-toc ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    column-gap: var(--space-5);
+  }
+}
+
+.learn-main {
+  max-width: none;
+}
+
+.learn-main > .learn-section > p,
+.learn-main > .learn-section > ol,
+.learn-main > .learn-section > dl {
+  max-width: var(--measure);
+}
+
+.learn-section {
+  padding-top: var(--space-6);
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-rule);
+}
+
+.learn-section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.learn-section > * + * {
+  margin-top: 1em;
+}
+
+.prose .learn-section__title {
+  margin-top: 0;
+  font-size: var(--fs-xl);
+}
+
+.learn-figure {
+  margin: var(--space-6) 0;
+  max-width: 60rem;
+}
+
+.learn-figure--map {
+  max-width: 48rem;
+}
+
+.diagram-host {
+  width: 100%;
+  min-height: 10rem;
+}
+
+.learn-steps {
+  padding-left: 0 !important;
+  list-style: none;
+  counter-reset: step;
+}
+
+.learn-steps li {
+  position: relative;
+  counter-increment: step;
+  padding-left: 2.5rem;
+}
+
+.learn-steps li + li {
+  margin-top: 0.85em !important;
+}
+
+.learn-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-link);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  line-height: 1.6rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.learn-steps strong {
+  font-family: var(--font-sans);
+  font-size: 0.92em;
+  font-weight: var(--fw-bold);
+}
+
+.learn-glossary-intro {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm) !important;
+  color: var(--color-text-3);
+}
+
+.glossary-list {
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  border-top: 2px solid var(--color-text);
+}
+
+.glossary-list dt {
+  padding-top: var(--space-4);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-base);
+}
+
+.glossary-list dd {
+  margin: var(--space-1) 0 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-text-2);
+}
+
+.glossary-list__cite {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+}
+
+/* ---- Diagram styling (shared tokens) ---------------------------------- */
+
+.diagram {
+  display: block;
+  overflow: visible;
+  font-family: var(--font-sans);
+}
+
+.dg-tier {
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  fill: var(--color-text-3);
+}
+
+.dg-box {
+  fill: var(--color-bg-raised);
+  stroke: var(--color-rule-strong);
+  stroke-width: 1;
+}
+
+.dg-box--top {
+  fill: var(--map-q4);
+  stroke: none;
+}
+
+
+
+.dg-box--fed {
+  stroke-dasharray: 4 3;
+}
+
+.dg-box--alt {
+  fill: var(--color-surface);
+}
+
+.dg-box-title {
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+  fill: var(--color-text);
+}
+
+.dg-box-title--sm {
+  font-size: 12.5px;
+}
+
+.dg-box-sub {
+  font-size: 11px;
+  fill: var(--color-text-3);
+}
+
+.dg-box-sub--left {
+  font-size: 12.5px;
+  fill: var(--color-text-2);
+}
+
+.dg-line {
+  fill: none;
+  stroke: var(--color-text-3);
+  stroke-width: 1.25;
+}
+
+.dg-line--up {
+  stroke: var(--color-rule-strong);
+}
+
+.dg-line--dash {
+  stroke-dasharray: 4 3;
+}
+
+.dg-arrowhead {
+  fill: var(--color-text-3);
+}
+
+.dg-district {
+  fill: var(--map-q3);
+}
+
+.dg-district--iv {
+  fill: var(--color-bg);
+  stroke: var(--map-q3);
+  stroke-width: 1.25;
+}
+
+.dg-count {
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  fill: var(--color-text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.dg-note {
+  font-size: 11px;
+  font-weight: var(--fw-medium);
+  fill: var(--color-text-3);
+}
+
+.dg-key {
+  font-size: 11px;
+  fill: var(--color-text-3);
+}
+
+.dg-num {
+  fill: var(--color-accent-soft);
+}
+
+.dg-num-text {
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  fill: var(--color-link);
+  font-variant-numeric: tabular-nums;
+}
+
+.dg-box-title--left {
+  text-anchor: start;
+}
+
+.dg-box-title.dg-on-dark,
+.dg-box-sub.dg-on-dark {
+  fill: var(--color-text-inverse);
+}
+
+.dg-box-sub.dg-on-dark {
+  opacity: 0.82;
+}
+
+.dg-phase-rule {
+  stroke: var(--color-text);
+  stroke-width: 1;
+}
+
+.dg-callout {
+  fill: var(--color-accent-soft);
+  stroke: none;
+}
+
+.dg-substep-num {
+  font-size: 12.5px;
+  font-weight: var(--fw-bold);
+  fill: var(--color-link);
+}
+
+/* Circuit map */
+.circuit-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.circuit-fill {
+  stroke: none;
+}
+
+/* Categorical, equal-lightness tints (not the data ramp): circuits are groups, not ranks. */
+.circuit-fill.tone-0 { fill: var(--circuit-0); }
+.circuit-fill.tone-1 { fill: var(--circuit-1); }
+.circuit-fill.tone-2 { fill: var(--circuit-2); }
+.circuit-fill.tone-3 { fill: var(--circuit-3); }
+
+.circuit-leader {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.circuit-dc-dot {
+  fill: var(--color-text);
+}
+
+.circuit-states {
+  fill: none;
+  stroke: var(--map-border);
+  stroke-width: 0.7px;
+  vector-effect: non-scaling-stroke;
+}
+
+.circuit-borders {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 1.4px;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.circuit-badge {
+  fill: var(--color-bg-raised);
+  stroke: var(--color-text);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.circuit-badge-text {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: var(--fw-bold);
+  fill: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}

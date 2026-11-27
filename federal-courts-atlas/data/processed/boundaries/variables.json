@@ -1,0 +1,47 @@
+[
+ {
+  "id": "statutory_divisions",
+  "label": "Statutory divisions",
+  "unit": "count",
+  "period_type": "CY",
+  "description": "Number of divisions into which the district is divided by statute (28 U.S.C. \u00a7\u00a7 81-131; 48 U.S.C. \u00a7 1615 for the Virgin Islands). 0 = the statute names no divisions (many such courts create divisions by local rule, which this does not count).",
+  "source_ids": [
+   "olrc_usc28_xml",
+   "olrc_usc48_xml"
+  ],
+  "caveats": "Statute current through Pub. L. 119-142 (Nov. 10, 2026); period = 2026. E.D. Tex.: \u00a7 124(c) says 'seven divisions' but lists six; the six listed are counted.",
+  "higher_means": "more statutory divisions",
+  "derived": false,
+  "formula": ""
+ },
+ {
+  "id": "statutory_places_of_holding_court",
+  "label": "Statutory places of holding court",
+  "unit": "count",
+  "period_type": "CY",
+  "description": "Number of distinct places where the statute says court shall (or, for Odessa, may) be held. 'Champaign/Urbana' and 'Eugene or Springfield' count as two places each; a described site (D. Md. Southern Division; the Middletown-Wallkill area) counts as one.",
+  "source_ids": [
+   "olrc_usc28_xml",
+   "olrc_usc48_xml"
+  ],
+  "caveats": "Statutory places are not the same as the courthouses a court actually uses. Title 48 names no place for D. Guam or D.V.I.; those two districts have no value (see data gaps).",
+  "higher_means": "more places named in statute",
+  "derived": false,
+  "formula": ""
+ },
+ {
+  "id": "county_equivalents",
+  "label": "County-equivalents in the district",
+  "unit": "count",
+  "period_type": "CY",
+  "description": "Number of Census 2025 county-equivalents (counties, parishes, boroughs, census areas, independent cities, planning regions, municipios, islands) assigned to the district in county_district.csv.",
+  "source_ids": [
+   "census_cb2025_county_500k",
+   "olrc_usc28_xml"
+  ],
+  "caveats": "Counties divided by a statutory carve-out (Yellowstone NP; Fort Bragg/Camp MacKall; FCI Butner) are counted once, in the district that holds the rest of the county.",
+  "higher_means": "more county-equivalents",
+  "derived": true,
+  "formula": "count(county_district.csv rows where district_id = d)"
+ }
+]

@@ -1,1 +1,3 @@
-# extra deps for the boundaries lane
+# extra deps for the boundaries lane (base deps in requirements.txt: geopandas, shapely, pyogrio, pyproj, lxml, bs4, ...)
+matplotlib>=3.8    # data/processed/boundaries/preview.png
+# Also needs Node.js/npx at build time: `npx -y mapshaper@0.6` (simplification + TopoJSON); no package.json entry.

@@ -1,0 +1,281 @@
+district_id,period,period_type,variable,value,unit,source_id,source_locator
+akd,2025,CY,county_equivalents,30,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+almd,2025,CY,county_equivalents,23,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+alnd,2025,CY,county_equivalents,31,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+alsd,2025,CY,county_equivalents,13,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ared,2025,CY,county_equivalents,41,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+arwd,2025,CY,county_equivalents,34,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+azd,2025,CY,county_equivalents,15,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+cacd,2025,CY,county_equivalents,7,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+caed,2025,CY,county_equivalents,34,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+cand,2025,CY,county_equivalents,15,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+casd,2025,CY,county_equivalents,2,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+cod,2025,CY,county_equivalents,64,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ctd,2025,CY,county_equivalents,9,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+dcd,2025,CY,county_equivalents,1,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ded,2025,CY,county_equivalents,3,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+flmd,2025,CY,county_equivalents,35,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+flnd,2025,CY,county_equivalents,23,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+flsd,2025,CY,county_equivalents,9,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+gamd,2025,CY,county_equivalents,70,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+gand,2025,CY,county_equivalents,46,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+gasd,2025,CY,county_equivalents,43,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+gud,2025,CY,county_equivalents,1,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+hid,2025,CY,county_equivalents,5,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+iand,2025,CY,county_equivalents,52,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+iasd,2025,CY,county_equivalents,47,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+idd,2025,CY,county_equivalents,44,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ilcd,2025,CY,county_equivalents,46,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ilnd,2025,CY,county_equivalents,18,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ilsd,2025,CY,county_equivalents,38,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+innd,2025,CY,county_equivalents,32,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+insd,2025,CY,county_equivalents,60,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ksd,2025,CY,county_equivalents,105,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+kyed,2025,CY,county_equivalents,67,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+kywd,2025,CY,county_equivalents,53,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+laed,2025,CY,county_equivalents,13,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+lamd,2025,CY,county_equivalents,9,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+lawd,2025,CY,county_equivalents,42,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mad,2025,CY,county_equivalents,14,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mdd,2025,CY,county_equivalents,24,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+med,2025,CY,county_equivalents,16,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mied,2025,CY,county_equivalents,34,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+miwd,2025,CY,county_equivalents,49,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mnd,2025,CY,county_equivalents,87,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+moed,2025,CY,county_equivalents,49,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mowd,2025,CY,county_equivalents,66,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+msnd,2025,CY,county_equivalents,37,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mssd,2025,CY,county_equivalents,45,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+mtd,2025,CY,county_equivalents,56,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nced,2025,CY,county_equivalents,44,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ncmd,2025,CY,county_equivalents,24,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ncwd,2025,CY,county_equivalents,32,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ndd,2025,CY,county_equivalents,53,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ned,2025,CY,county_equivalents,93,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nhd,2025,CY,county_equivalents,10,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+njd,2025,CY,county_equivalents,21,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nmd,2025,CY,county_equivalents,33,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nmid,2025,CY,county_equivalents,4,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nvd,2025,CY,county_equivalents,17,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nyed,2025,CY,county_equivalents,5,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nynd,2025,CY,county_equivalents,32,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nysd,2025,CY,county_equivalents,8,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+nywd,2025,CY,county_equivalents,17,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ohnd,2025,CY,county_equivalents,40,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ohsd,2025,CY,county_equivalents,48,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+oked,2025,CY,county_equivalents,26,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+oknd,2025,CY,county_equivalents,11,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+okwd,2025,CY,county_equivalents,40,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+ord,2025,CY,county_equivalents,36,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+paed,2025,CY,county_equivalents,9,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+pamd,2025,CY,county_equivalents,33,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+pawd,2025,CY,county_equivalents,25,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+prd,2025,CY,county_equivalents,78,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+rid,2025,CY,county_equivalents,5,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+scd,2025,CY,county_equivalents,46,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+sdd,2025,CY,county_equivalents,66,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+tned,2025,CY,county_equivalents,41,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+tnmd,2025,CY,county_equivalents,32,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+tnwd,2025,CY,county_equivalents,22,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+txed,2025,CY,county_equivalents,43,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+txnd,2025,CY,county_equivalents,100,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+txsd,2025,CY,county_equivalents,43,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+txwd,2025,CY,county_equivalents,68,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+utd,2025,CY,county_equivalents,29,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+vaed,2025,CY,county_equivalents,64,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+vawd,2025,CY,county_equivalents,69,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+vid,2025,CY,county_equivalents,3,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+vtd,2025,CY,county_equivalents,14,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+waed,2025,CY,county_equivalents,20,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wawd,2025,CY,county_equivalents,19,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wied,2025,CY,county_equivalents,28,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wiwd,2025,CY,county_equivalents,44,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wvnd,2025,CY,county_equivalents,32,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wvsd,2025,CY,county_equivalents,23,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+wyd,2025,CY,county_equivalents,23,count,census_cb2025_county_500k,county_district.csv rows with this district_id (cb_2025_us_county_500k GEOIDs)
+akd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 81A: count of '(n) The ... Division comprises' paragraphs
+almd,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 81: count of '(n) The ... Division comprises' paragraphs
+alnd,2026,CY,statutory_divisions,5,count,olrc_usc28_xml,28 U.S.C. § 81: count of '(n) The ... Division comprises' paragraphs
+alsd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 81: count of '(n) The ... Division comprises' paragraphs
+ared,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 83: count of '(n) The ... Division comprises' paragraphs
+arwd,2026,CY,statutory_divisions,6,count,olrc_usc28_xml,28 U.S.C. § 83: count of '(n) The ... Division comprises' paragraphs
+azd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 82: count of '(n) The ... Division comprises' paragraphs
+cacd,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 84: count of '(n) The ... Division comprises' paragraphs
+caed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 84: count of '(n) The ... Division comprises' paragraphs
+cand,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 84: count of '(n) The ... Division comprises' paragraphs
+casd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 84: count of '(n) The ... Division comprises' paragraphs
+cod,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 85: count of '(n) The ... Division comprises' paragraphs
+ctd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 86: count of '(n) The ... Division comprises' paragraphs
+dcd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 88: count of '(n) The ... Division comprises' paragraphs
+ded,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 87: count of '(n) The ... Division comprises' paragraphs
+flmd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 89: count of '(n) The ... Division comprises' paragraphs
+flnd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 89: count of '(n) The ... Division comprises' paragraphs
+flsd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 89: count of '(n) The ... Division comprises' paragraphs
+gamd,2026,CY,statutory_divisions,7,count,olrc_usc28_xml,28 U.S.C. § 90: count of '(n) The ... Division comprises' paragraphs
+gand,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 90: count of '(n) The ... Division comprises' paragraphs
+gasd,2026,CY,statutory_divisions,6,count,olrc_usc28_xml,28 U.S.C. § 90: count of '(n) The ... Division comprises' paragraphs
+gud,2026,CY,statutory_divisions,0,count,olrc_usc48_xml,48 U.S.C. § 1424: count of '(n) The ... Division comprises' paragraphs
+hid,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 91: count of '(n) The ... Division comprises' paragraphs
+iand,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 95: count of '(n) The ... Division comprises' paragraphs
+iasd,2026,CY,statutory_divisions,6,count,olrc_usc28_xml,28 U.S.C. § 95: count of '(n) The ... Division comprises' paragraphs
+idd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 92: count of '(n) The ... Division comprises' paragraphs
+ilcd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 93: count of '(n) The ... Division comprises' paragraphs
+ilnd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 93: count of '(n) The ... Division comprises' paragraphs
+ilsd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 93: count of '(n) The ... Division comprises' paragraphs
+innd,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 94: count of '(n) The ... Division comprises' paragraphs
+insd,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 94: count of '(n) The ... Division comprises' paragraphs
+ksd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 96: count of '(n) The ... Division comprises' paragraphs
+kyed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 97: count of '(n) The ... Division comprises' paragraphs
+kywd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 97: count of '(n) The ... Division comprises' paragraphs
+laed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 98: count of '(n) The ... Division comprises' paragraphs
+lamd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 98: count of '(n) The ... Division comprises' paragraphs
+lawd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 98: count of '(n) The ... Division comprises' paragraphs
+mad,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 101: count of '(n) The ... Division comprises' paragraphs
+mdd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 100: count of '(n) The ... Division comprises' paragraphs
+med,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 99: count of '(n) The ... Division comprises' paragraphs
+mied,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 102: count of '(n) The ... Division comprises' paragraphs
+miwd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 102: count of '(n) The ... Division comprises' paragraphs
+mnd,2026,CY,statutory_divisions,6,count,olrc_usc28_xml,28 U.S.C. § 103: count of '(n) The ... Division comprises' paragraphs
+moed,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 105: count of '(n) The ... Division comprises' paragraphs
+mowd,2026,CY,statutory_divisions,5,count,olrc_usc28_xml,28 U.S.C. § 105: count of '(n) The ... Division comprises' paragraphs
+msnd,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 104: count of '(n) The ... Division comprises' paragraphs
+mssd,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 104: count of '(n) The ... Division comprises' paragraphs
+mtd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 106: count of '(n) The ... Division comprises' paragraphs
+nced,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 113: count of '(n) The ... Division comprises' paragraphs
+ncmd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 113: count of '(n) The ... Division comprises' paragraphs
+ncwd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 113: count of '(n) The ... Division comprises' paragraphs
+ndd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 114: count of '(n) The ... Division comprises' paragraphs
+ned,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 107: count of '(n) The ... Division comprises' paragraphs
+nhd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 109: count of '(n) The ... Division comprises' paragraphs
+njd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 110: count of '(n) The ... Division comprises' paragraphs
+nmd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 111: count of '(n) The ... Division comprises' paragraphs
+nmid,2026,CY,statutory_divisions,0,count,olrc_usc48_xml,48 U.S.C. § 1821: count of '(n) The ... Division comprises' paragraphs
+nvd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 108: count of '(n) The ... Division comprises' paragraphs
+nyed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 112: count of '(n) The ... Division comprises' paragraphs
+nynd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 112: count of '(n) The ... Division comprises' paragraphs
+nysd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 112: count of '(n) The ... Division comprises' paragraphs
+nywd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 112: count of '(n) The ... Division comprises' paragraphs
+ohnd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 115: count of '(n) The ... Division comprises' paragraphs
+ohsd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 115: count of '(n) The ... Division comprises' paragraphs
+oked,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 116: count of '(n) The ... Division comprises' paragraphs
+oknd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 116: count of '(n) The ... Division comprises' paragraphs
+okwd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 116: count of '(n) The ... Division comprises' paragraphs
+ord,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 117: count of '(n) The ... Division comprises' paragraphs
+paed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 118: count of '(n) The ... Division comprises' paragraphs
+pamd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 118: count of '(n) The ... Division comprises' paragraphs
+pawd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 118: count of '(n) The ... Division comprises' paragraphs
+prd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 119: count of '(n) The ... Division comprises' paragraphs
+rid,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 120: count of '(n) The ... Division comprises' paragraphs
+scd,2026,CY,statutory_divisions,11,count,olrc_usc28_xml,28 U.S.C. § 121: count of '(n) The ... Division comprises' paragraphs
+sdd,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 122: count of '(n) The ... Division comprises' paragraphs
+tned,2026,CY,statutory_divisions,4,count,olrc_usc28_xml,28 U.S.C. § 123: count of '(n) The ... Division comprises' paragraphs
+tnmd,2026,CY,statutory_divisions,3,count,olrc_usc28_xml,28 U.S.C. § 123: count of '(n) The ... Division comprises' paragraphs
+tnwd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 123: count of '(n) The ... Division comprises' paragraphs
+txed,2026,CY,statutory_divisions,6,count,olrc_usc28_xml,28 U.S.C. § 124: count of '(n) The ... Division comprises' paragraphs
+txnd,2026,CY,statutory_divisions,7,count,olrc_usc28_xml,28 U.S.C. § 124: count of '(n) The ... Division comprises' paragraphs
+txsd,2026,CY,statutory_divisions,7,count,olrc_usc28_xml,28 U.S.C. § 124: count of '(n) The ... Division comprises' paragraphs
+txwd,2026,CY,statutory_divisions,7,count,olrc_usc28_xml,28 U.S.C. § 124: count of '(n) The ... Division comprises' paragraphs
+utd,2026,CY,statutory_divisions,2,count,olrc_usc28_xml,28 U.S.C. § 125: count of '(n) The ... Division comprises' paragraphs
+vaed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 127: count of '(n) The ... Division comprises' paragraphs
+vawd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 127: count of '(n) The ... Division comprises' paragraphs
+vid,2026,CY,statutory_divisions,2,count,olrc_usc48_xml,48 U.S.C. § 1615: count of '(n) The ... Division comprises' paragraphs
+vtd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 126: count of '(n) The ... Division comprises' paragraphs
+waed,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 128: count of '(n) The ... Division comprises' paragraphs
+wawd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 128: count of '(n) The ... Division comprises' paragraphs
+wied,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 130: count of '(n) The ... Division comprises' paragraphs
+wiwd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 130: count of '(n) The ... Division comprises' paragraphs
+wvnd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 129: count of '(n) The ... Division comprises' paragraphs
+wvsd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 129: count of '(n) The ... Division comprises' paragraphs
+wyd,2026,CY,statutory_divisions,0,count,olrc_usc28_xml,28 U.S.C. § 131: count of '(n) The ... Division comprises' paragraphs
+akd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 81A: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+almd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 81: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+alnd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 81: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+alsd,2026,CY,statutory_places_of_holding_court,2,count,olrc_usc28_xml,28 U.S.C. § 81: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ared,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 83: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+arwd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 83: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+azd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 82: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+cacd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 84: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+caed,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 84: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+cand,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 84: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+casd,2026,CY,statutory_places_of_holding_court,2,count,olrc_usc28_xml,28 U.S.C. § 84: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+cod,2026,CY,statutory_places_of_holding_court,8,count,olrc_usc28_xml,28 U.S.C. § 85: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ctd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 86: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+dcd,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc28_xml,28 U.S.C. § 88: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ded,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc28_xml,28 U.S.C. § 87: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+flmd,2026,CY,statutory_places_of_holding_court,8,count,olrc_usc28_xml,28 U.S.C. § 89: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+flnd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 89: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+flsd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 89: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+gamd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 90: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+gand,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 90: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+gasd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 90: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+hid,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc28_xml,28 U.S.C. § 91: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+iand,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 95: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+iasd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 95: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+idd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 92: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ilcd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 93: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ilnd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 93: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ilsd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 93: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+innd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 94: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+insd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 94: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ksd,2026,CY,statutory_places_of_holding_court,9,count,olrc_usc28_xml,28 U.S.C. § 96: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+kyed,2026,CY,statutory_places_of_holding_court,9,count,olrc_usc28_xml,28 U.S.C. § 97: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+kywd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 97: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+laed,2026,CY,statutory_places_of_holding_court,2,count,olrc_usc28_xml,28 U.S.C. § 98: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+lamd,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc28_xml,28 U.S.C. § 98: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+lawd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 98: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mad,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 101: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mdd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 100: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+med,2026,CY,statutory_places_of_holding_court,2,count,olrc_usc28_xml,28 U.S.C. § 99: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mied,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 102: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+miwd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 102: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mnd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 103: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+moed,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 105: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mowd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 105: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+msnd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 104: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mssd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 104: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+mtd,2026,CY,statutory_places_of_holding_court,11,count,olrc_usc28_xml,28 U.S.C. § 106: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nced,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 113: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ncmd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 113: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ncwd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 113: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ndd,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 114: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ned,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 107: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nhd,2026,CY,statutory_places_of_holding_court,2,count,olrc_usc28_xml,28 U.S.C. § 109: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+njd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 110: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nmd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 111: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nmid,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc48_xml,48 U.S.C. § 1821: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nvd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 108: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nyed,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 112: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nynd,2026,CY,statutory_places_of_holding_court,8,count,olrc_usc28_xml,28 U.S.C. § 112: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nysd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 112: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+nywd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 112: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ohnd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 115: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ohsd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 115: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+oked,2026,CY,statutory_places_of_holding_court,8,count,olrc_usc28_xml,28 U.S.C. § 116: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+oknd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 116: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+okwd,2026,CY,statutory_places_of_holding_court,10,count,olrc_usc28_xml,28 U.S.C. § 116: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+ord,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 117: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+paed,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 118: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+pamd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 118: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+pawd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 118: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+prd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 119: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+rid,2026,CY,statutory_places_of_holding_court,1,count,olrc_usc28_xml,28 U.S.C. § 120: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+scd,2026,CY,statutory_places_of_holding_court,11,count,olrc_usc28_xml,28 U.S.C. § 121: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+sdd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 122: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+tned,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 123: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+tnmd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 123: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+tnwd,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 123: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+txed,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 124: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+txnd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 124: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+txsd,2026,CY,statutory_places_of_holding_court,8,count,olrc_usc28_xml,28 U.S.C. § 124: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+txwd,2026,CY,statutory_places_of_holding_court,9,count,olrc_usc28_xml,28 U.S.C. § 124: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+utd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 125: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+vaed,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 127: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+vawd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 127: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+vtd,2026,CY,statutory_places_of_holding_court,7,count,olrc_usc28_xml,28 U.S.C. § 126: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+waed,2026,CY,statutory_places_of_holding_court,4,count,olrc_usc28_xml,28 U.S.C. § 128: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wawd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 128: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wied,2026,CY,statutory_places_of_holding_court,3,count,olrc_usc28_xml,28 U.S.C. § 130: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wiwd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 130: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wvnd,2026,CY,statutory_places_of_holding_court,5,count,olrc_usc28_xml,28 U.S.C. § 129: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wvsd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 129: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)
+wyd,2026,CY,statutory_places_of_holding_court,6,count,olrc_usc28_xml,28 U.S.C. § 131: distinct places in 'Court ... shall be held at' sentences (statute_places.csv)

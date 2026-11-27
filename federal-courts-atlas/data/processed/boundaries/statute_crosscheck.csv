@@ -1,0 +1,433 @@
+section,district_id,division,kind,sentence,in_lii
+28 U.S.C. § 81,alnd,Northwestern Division,county_sentence,"(1) The Northwestern Division comprises the counties of Colbert, Franklin, Lauderdale, and Lawrence.",True
+28 U.S.C. § 81,alnd,Northwestern Division,court_sentence,Court for the Northwestern Division shall be held at Florence.,True
+28 U.S.C. § 81,alnd,Northeastern Division,county_sentence,"(2) The Northeastern Division comprises the counties of Cullman, Jackson, Limestone, Madison, Marshall, and Morgan.",True
+28 U.S.C. § 81,alnd,Northeastern Division,court_sentence,Court for the Northeastern Division shall be held at Huntsville.,True
+28 U.S.C. § 81,alnd,Southern Division,county_sentence,"(3) The Southern Division comprises the counties of Blount, Jefferson, and Shelby.",True
+28 U.S.C. § 81,alnd,Southern Division,court_sentence,Court for the Southern Division shall be held at Birmingham.,True
+28 U.S.C. § 81,alnd,Eastern Division,county_sentence,"(4) The Eastern Division comprises the counties of Calhoun, Cherokee, Clay, Cleburne, DeKalb, Etowah, Saint Clair, and Talladega.",True
+28 U.S.C. § 81,alnd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Anniston.,True
+28 U.S.C. § 81,alnd,Western Division,county_sentence,"(5) The Western Division comprises the counties of Bibb, Fayette, Greene, Lamar, Marion, Pickens, Sumter, Tuscaloosa, Walker, and Winston.",True
+28 U.S.C. § 81,alnd,Western Division,court_sentence,Court for the Western Division shall be held at Tuscaloosa.,True
+28 U.S.C. § 81,almd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Autauga, Barbour, Bullock, Butler, Chilton, Coosa, Covington, Crenshaw, Elmore, Lowndes, Montgomery, and Pike.",True
+28 U.S.C. § 81,almd,Northern Division,court_sentence,Court for the Northern Division shall be held at Montgomery.,True
+28 U.S.C. § 81,almd,Southern Division,county_sentence,"(2) The Southern Division comprises the counties of Coffee, Dale, Geneva, Henry, and Houston.",True
+28 U.S.C. § 81,almd,Southern Division,court_sentence,Court for the Southern Division shall be held at Dothan.,True
+28 U.S.C. § 81,almd,Eastern Division,county_sentence,"(3) The Eastern Division comprises the counties of Chambers, Lee, Macon, Randolph, Russell, and Tallapoosa.",True
+28 U.S.C. § 81,almd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Opelika.,True
+28 U.S.C. § 81,alsd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Dallas, Hale, Marengo, Perry, and Wilcox.",True
+28 U.S.C. § 81,alsd,Northern Division,court_sentence,Court for the Northern Division shall be held at Selma.,True
+28 U.S.C. § 81,alsd,Southern Division,county_sentence,"(2) The Southern Division comprises the counties of Baldwin, Choctaw, Clarke, Conecuh, Escambia, Mobile, Monroe, and Washington.",True
+28 U.S.C. § 81,alsd,Southern Division,court_sentence,Court for the Southern Division shall be held at Mobile.,True
+28 U.S.C. § 81A,akd,,court_sentence,"Court shall be held at Anchorage, Fairbanks, Juneau, Ketchikan, and Nome.",True
+28 U.S.C. § 82,azd,,court_sentence,"Court shall be held at Flagstaff, Globe, Phoenix, Prescott, Tucson, and Yuma.",True
+28 U.S.C. § 83,ared,Central Division,county_sentence,"(1) The Central Division comprises the counties of Cleburne, Cleveland, Conway, Dallas, Drew, Faulkner, Grant, Jefferson, Lincoln, Lonoke, Perry, Pope, Prairie, Pulaski, Saline, Stone, Van Buren, White, and Yell.",True
+28 U.S.C. § 83,ared,Central Division,court_sentence,Court for the Central Division shall be held at Little Rock.,True
+28 U.S.C. § 83,ared,Delta Division,county_sentence,"(2) The Delta Division comprises the counties of Arkansas, Chicot, Crittenden, Desha, Lee, Monroe, Phillips, and St. Francis.",True
+28 U.S.C. § 83,ared,Delta Division,court_sentence,Court for the Delta Division shall be held at Helena.,True
+28 U.S.C. § 83,ared,Northern Division,county_sentence,"(3) The Northern Division comprises the counties of Clay, Craighead, Cross, Fulton, Greene, Independence, Izard, Jackson, Lawrence, Mississippi, Poinsett, Randolph, Sharp, and Woodruff.",True
+28 U.S.C. § 83,ared,Northern Division,court_sentence,Court for the Northern Division shall be held at Jonesboro.,True
+28 U.S.C. § 83,arwd,Texarkana Division,county_sentence,"(1) The Texarkana Division comprises the counties of Hempstead, Howard, Lafayette, Little River, Miller, Nevada, and Sevier.",True
+28 U.S.C. § 83,arwd,Texarkana Division,court_sentence,"Court for the Texarkana Division shall be held at Texarkana, and may be held anywhere within the Federal courthouse in Texarkana that is located astride the State line between Texas and Arkansas.",True
+28 U.S.C. § 83,arwd,El Dorado Division,county_sentence,"(2) The El Dorado Division comprises the counties of Ashley, Bradley, Calhoun, Columbia, Ouachita, and Union.",True
+28 U.S.C. § 83,arwd,El Dorado Division,court_sentence,Court for the El Dorado Division shall be held at El Dorado.,True
+28 U.S.C. § 83,arwd,Fort Smith Division,county_sentence,"(3) The Fort Smith Division comprises the counties of Crawford, Franklin, Johnson, Logan, Polk, Scott, and Sebastian.",True
+28 U.S.C. § 83,arwd,Fort Smith Division,court_sentence,Court for the Fort Smith Division shall be held at Fort Smith.,True
+28 U.S.C. § 83,arwd,Harrison Division,county_sentence,"(4) The Harrison Division comprises the counties of Baxter, Boone, Carroll, Marion, Newton, and Searcy.",True
+28 U.S.C. § 83,arwd,Harrison Division,court_sentence,Court for the Harrison Division shall be held at Harrison.,True
+28 U.S.C. § 83,arwd,Fayetteville Division,county_sentence,"(5) The Fayetteville Division comprises the counties of Benton, Madison, and Washington.",True
+28 U.S.C. § 83,arwd,Fayetteville Division,court_sentence,Court for the Fayetteville Division shall be held at Fayetteville.,True
+28 U.S.C. § 83,arwd,Hot Springs Division,county_sentence,"(6) The Hot Springs Division comprises the counties of Clark, Garland, Hot Springs, Montgomery, and Pike.",True
+28 U.S.C. § 83,arwd,Hot Springs Division,court_sentence,Court for the Hot Springs Division shall be held at Hot Springs.,True
+28 U.S.C. § 84,cand,,county_sentence,"(a) The Northern District comprises the counties of Alameda, Contra Costa, Del Norte, Humboldt, Lake, Marin, Mendocino, Monterey, Napa, San Benito, Santa Clara, Santa Cruz, San Francisco, San Mateo, and Sonoma.",True
+28 U.S.C. § 84,cand,,court_sentence,"Court for the Northern District shall be held at Eureka, Oakland, San Francisco, and San Jose.",True
+28 U.S.C. § 84,caed,,county_sentence,"(b) The Eastern District comprises the counties of Alpine, Amador, Butte, Calaveras, Colusa, El Dorado, Fresno, Glenn, Inyo, Kern, Kings, Lassen, Madera, Mariposa, Merced, Modoc, Mono, Nevada, Placer, Plumas, Sacramento, San Joaquin, Shasta, Sierra, Siskiyou, Solano, Stanislaus, Sutter, Tehama, Trinity, Tulare, Tuolumne, Yolo, and Yuba.",True
+28 U.S.C. § 84,caed,,court_sentence,"Court for the Eastern District shall be held at Bakersfield, Fresno, Redding, and Sacramento.",True
+28 U.S.C. § 84,cacd,Eastern Division,county_sentence,(1) The Eastern Division comprises the counties of Riverside and San Bernardino.,True
+28 U.S.C. § 84,cacd,Eastern Division,court_sentence,"Court for the Eastern Division shall be held at a suitable site in the city of Riverside, the city of San Bernardino, or not more than 5 miles from the boundary of either such city.",True
+28 U.S.C. § 84,cacd,Western Division,county_sentence,"(2) The Western Division comprises the counties of Los Angeles, San Luis Obispo, Santa Barbara, and Ventura.",True
+28 U.S.C. § 84,cacd,Western Division,court_sentence,Court for the Western Division shall be held at Los Angeles.,True
+28 U.S.C. § 84,cacd,Southern Division,county_sentence,(3) The Southern Division comprises Orange County.,True
+28 U.S.C. § 84,cacd,Southern Division,court_sentence,Court for the Southern Division shall be held at Santa Ana.,True
+28 U.S.C. § 84,casd,,county_sentence,(d) The Southern District comprises the counties of Imperial and San Diego.,True
+28 U.S.C. § 84,casd,,court_sentence,Court for the Southern District shall be held at San Diego and El Centro.,True
+28 U.S.C. § 85,cod,,court_sentence,"Court shall be held at Boulder, Colorado Springs, Denver, Durango, Grand Junction, Montrose, Pueblo, and Sterling.",True
+28 U.S.C. § 86,ctd,,court_sentence,"Court shall be held at Bridgeport, Hartford, New Haven, New London, and Waterbury.",True
+28 U.S.C. § 87,ded,,court_sentence,Court shall be held at Wilmington.,True
+28 U.S.C. § 88,dcd,,court_sentence,Court shall be held at Washington.,True
+28 U.S.C. § 89,flnd,,county_sentence,"(a) The Northern District comprises the counties of Alachua, Bay, Calhoun, Dixie, Escambia, Franklin, Gadsden, Gilchrist, Gulf, Holmes, Jackson, Jefferson, Lafayette, Leon, Levy, Liberty, Madison, Okaloosa, Santa Rosa, Taylor, Wakulla, Walton, and Washington.",True
+28 U.S.C. § 89,flnd,,court_sentence,"Court for the Northern District shall be held at Gainesville, Marianna, Panama City, Pensacola, and Tallahassee.",True
+28 U.S.C. § 89,flmd,,county_sentence,"(b) The Middle District comprises the counties of Baker, Bradford, Brevard, Charlotte, Citrus, Clay, Collier, Columbia, De Soto, Duval, Flagler, Glades, Hamilton, Hardee, Hendry, Hernando, Hillsborough, Lake, Lee, Manatee, Marion, Nassau, Orange, Osceola, Pasco, Pinellas, Polk, Putnam, St. Johns, Sarasota, Seminole, Sumter, Suwannee, Union, and Volusia.",True
+28 U.S.C. § 89,flmd,,court_sentence,"Court for the Middle District shall be held at Fernandina, Fort Myers, Jacksonville, Live Oak, Ocala, Orlando, Saint Petersburg, and Tampa.",True
+28 U.S.C. § 89,flsd,,county_sentence,"(c) The Southern District comprises the counties of Broward, Dade, Highlands, Indian River, Martin, Monroe, Okeechobee, Palm Beach, and St. Lucie.",True
+28 U.S.C. § 89,flsd,,court_sentence,"Court for the Southern District shall be held at Fort Lauderdale, Fort Pierce, Key West, Miami, and West Palm Beach.",True
+28 U.S.C. § 90,gand,Gainesville Division,county_sentence,"(1) The Gainesville Division comprises the counties of Banks, Barrow, Dawson, Fannin, Forsyth, Gilmer, Habersham, Hall, Jackson, Lumpkin, Pickens, Rabun, Stephens, Towns, Union, and White.",True
+28 U.S.C. § 90,gand,Gainesville Division,court_sentence,Court for the Gainesville Division shall be held at Gainesville.,True
+28 U.S.C. § 90,gand,Atlanta Division,county_sentence,"(2) The Atlanta Division comprises the counties of Cherokee, Clayton, Cobb, De Kalb, Douglas, Fulton, Gwinnett, Henry, Newton, and Rockdale.",True
+28 U.S.C. § 90,gand,Atlanta Division,court_sentence,Court for the Atlanta Division shall be held at Atlanta.,True
+28 U.S.C. § 90,gand,Rome Division,county_sentence,"(3) The Rome Division comprises the counties of Bartow, Catoosa, Chattooga, Dade, Floyd, Gordon, Murray, Paulding, Polk, Walker, and Whitfield.",True
+28 U.S.C. § 90,gand,Rome Division,court_sentence,Court for the Rome Division shall be held at Rome.,True
+28 U.S.C. § 90,gand,Newnan Division,county_sentence,"(4) The Newnan Division comprises the counties of Carroll, Coweta, Fayette, Haralson, Heard, Meriwether, Pike, Spalding, and Troup.",True
+28 U.S.C. § 90,gand,Newnan Division,court_sentence,Court for the Newnan Division shall be held at Newnan.,True
+28 U.S.C. § 90,gamd,Athens Division,county_sentence,"(1) The Athens Division comprises the counties of Clarke, Elbert, Franklin, Greene, Hart, Madison, Morgan, Oconee, Oglethorpe, and Walton.",True
+28 U.S.C. § 90,gamd,Athens Division,court_sentence,Court for the Athens Division shall be held at Athens.,True
+28 U.S.C. § 90,gamd,Macon Division,county_sentence,"(2) The Macon Division comprises the counties of Baldwin, Bibb, Bleckley, Butts, Crawford, Hancock, Houston, Jasper, Jones, Lamar, Monroe, Peach, Pulaski, Putnam, Twiggs, Upson, Washington, and Wilkinson.",True
+28 U.S.C. § 90,gamd,Macon Division,court_sentence,Court for the Macon Division shall be held at Macon.,True
+28 U.S.C. § 90,gamd,Columbus Division,county_sentence,"(3) The Columbus Division comprises the counties of Chattahoochee, Clay, Harris, Marion, Muscogee, Quitman, Randolph, Stewart, Talbot, and Taylor.",True
+28 U.S.C. § 90,gamd,Columbus Division,court_sentence,Court for the Columbus Division shall be held at Columbus.,True
+28 U.S.C. § 90,gamd,Americus Division,county_sentence,"(4) The Americus Division comprises the counties of Ben Hill, Crisp, Dooly, Lee, Macon, Schley, Sumter, Terrell, Webster, and Wilcox.",True
+28 U.S.C. § 90,gamd,Americus Division,court_sentence,Court for the Americus Division shall be held at Americus.,True
+28 U.S.C. § 90,gamd,Albany Division,county_sentence,"(5) The Albany Division comprises the counties of Baker, Calhoun, Dougherty, Early, Miller, Mitchell, Turner, and Worth.",True
+28 U.S.C. § 90,gamd,Albany Division,court_sentence,Court for the Albany Division shall be held at Albany.,True
+28 U.S.C. § 90,gamd,Valdosta Division,county_sentence,"(6) The Valdosta Division comprises the counties of Berrien, Clinch, Cook, Echols, Irwin, Lanier, Lowndes, and Tift.",True
+28 U.S.C. § 90,gamd,Valdosta Division,court_sentence,Court for the Valdosta Division shall be held at Valdosta.,True
+28 U.S.C. § 90,gamd,Thomasville Division,county_sentence,"(7) The Thomasville Division comprises the counties of Brooks, Colquitt, Decatur, Grady, Seminole, and Thomas.",True
+28 U.S.C. § 90,gamd,Thomasville Division,court_sentence,Court for the Thomasville Division shall be held at Thomasville.,True
+28 U.S.C. § 90,gasd,Augusta Division,county_sentence,"(1) The Augusta Division comprises the Counties of Burke, Columbia, Glascock, Jefferson, Lincoln, McDuffie, Richmond, Taliaferro, Warren, and Wilkes.",True
+28 U.S.C. § 90,gasd,Augusta Division,court_sentence,Court for the Augusta Division shall be held at Augusta.,True
+28 U.S.C. § 90,gasd,Dublin Division,county_sentence,"(2) The Dublin Division comprises the counties of Dodge, Johnson, Laurens, Montgomery, Telfair, Treutlen, and Wheeler.",True
+28 U.S.C. § 90,gasd,Dublin Division,court_sentence,Court for the Dublin Division shall be held at Dublin.,True
+28 U.S.C. § 90,gasd,Savannah Division,county_sentence,"(3) The Savannah Division comprises the counties of Bryan, Chatham, Effingham, and Liberty.",True
+28 U.S.C. § 90,gasd,Savannah Division,court_sentence,Court for the Savannah Division shall be held at Savannah.,True
+28 U.S.C. § 90,gasd,Waycross Division,county_sentence,"(4) The Waycross Division comprises the counties of Atkinson, Bacon, Brantley, Charlton, Coffee, Pierce, and Ware.",True
+28 U.S.C. § 90,gasd,Waycross Division,court_sentence,Court for the Waycross Division shall be held at Waycross.,True
+28 U.S.C. § 90,gasd,Brunswick Division,county_sentence,"(5) The Brunswick Division comprises the counties of Appling, Camden, Glynn, Jeff Davis, Long, McIntosh, and Wayne.",True
+28 U.S.C. § 90,gasd,Brunswick Division,court_sentence,Court for the Brunswick Division shall be held at Brunswick.,True
+28 U.S.C. § 90,gasd,Statesboro Division,county_sentence,"(6) The Statesboro Division comprises the counties of Bulloch, Candler, Emanuel, Evans, Jenkins, Screven, Tattnall, and Toombs.",True
+28 U.S.C. § 90,gasd,Statesboro Division,court_sentence,Court for the Statesboro Division shall be held at Statesboro.,True
+28 U.S.C. § 91,hid,,court_sentence,Court shall be held at Honolulu.,True
+28 U.S.C. § 92,idd,,court_sentence,"Court shall be held at Boise, Coeur d’Alene, Moscow, and Pocatello.",True
+28 U.S.C. § 93,ilnd,Eastern Division,county_sentence,"(1) The Eastern Division comprises the counties of Cook, Du Page, Grundy, Kane, Kendall, Lake, La Salle, and Will.",True
+28 U.S.C. § 93,ilnd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Chicago and Wheaton.,True
+28 U.S.C. § 93,ilnd,Western Division,county_sentence,"(2) The Western Division comprises the counties of Boone, Carroll, De Kalb, Jo Daviess, Lee, McHenry, Ogle, Stephenson, Whiteside, and Winnebago.",True
+28 U.S.C. § 93,ilnd,Western Division,court_sentence,Court for the Western Division shall be held at Freeport and Rockford.,True
+28 U.S.C. § 93,ilcd,,county_sentence,"(b) The Central District comprises the counties of Adams, Brown, Bureau, Cass, Champaign, Christian, Coles, De Witt, Douglas, Edgar, Ford, Fulton, Greene, Hancock, Henderson, Henry, Iroquois, Kankakee, Knox, Livingston, Logan, McDonough, McLean, Macoupin, Macon, Marshall, Mason, Menard, Mercer, Montgomery, Morgan, Moultrie, Peoria, Piatt, Pike, Putnam, Rock Island, Sangamon, Schuyler, Scott, Shelby, Stark, Tazewell, Vermilion, Warren, and Woodford.",True
+28 U.S.C. § 93,ilcd,,court_sentence,"Court for the Central District shall be held at Champaign/Urbana, Danville, Peoria, Quincy, Rock Island, and Springfield.",True
+28 U.S.C. § 93,ilsd,,county_sentence,"(c) The Southern District comprises the counties of Alexander, Bond, Calhoun, Clark, Clay, Clinton, Crawford, Cumberland, Edwards, Effingham, Fayette, Franklin, Gallatin, Hamilton, Hardin, Jackson, Jasper, Jefferson, Jersey, Johnson, Lawrence, Madison, Marion, Massac, Monroe, Perry, Pope, Pulaski, Randolph, Richland, St. Clair, Saline, Union, Wabash, Washington, Wayne, White, and Williamson.",True
+28 U.S.C. § 93,ilsd,,court_sentence,"Court for the Southern District shall be held at Alton, Benton, Cairo, and East Saint Louis.",True
+28 U.S.C. § 94,innd,Fort Wayne Division,county_sentence,"(1) The Fort Wayne Division comprises the counties of Adams, Allen, Blackford, De Kalb, Grant, Huntington, Jay, Lagrange, Noble, Steuben, Wells, and Whitley.",True
+28 U.S.C. § 94,innd,Fort Wayne Division,court_sentence,Court for the Fort Wayne Division shall be held at Fort Wayne.,True
+28 U.S.C. § 94,innd,South Bend Division,county_sentence,"(2) The South Bend Division comprises the counties of Cass, Elkhart, Fulton, Kosciusko, La Porte, Marshall, Miami, Pulaski, St. Joseph, Starke, and Wabash.",True
+28 U.S.C. § 94,innd,South Bend Division,court_sentence,Court for the South Bend Division shall be held at South Bend.,True
+28 U.S.C. § 94,innd,Hammond Division,county_sentence,"(3) The Hammond Division comprises the counties of Benton, Carroll, Jasper, Lake, Newton, Porter, Tippecanoe, Warren, and White.",True
+28 U.S.C. § 94,innd,Hammond Division,court_sentence,Court for the Hammond Division shall be held at Hammond and Lafayette.,True
+28 U.S.C. § 94,insd,Indianapolis Division,county_sentence,"(1) The Indianapolis Division comprises the counties of Bartholomew, Boone, Brown, Clinton, Decatur, Delaware, Fayette, Fountain, Franklin, Hamilton, Hancock, Hendricks, Henry, Howard, Johnson, Madison, Marion, Monroe, Montgomery, Morgan, Randolph, Rush, Shelby, Tipton, Union, and Wayne.",True
+28 U.S.C. § 94,insd,Indianapolis Division,court_sentence,Court for the Indianapolis Division shall be held at Indianapolis and Richmond.,True
+28 U.S.C. § 94,insd,Terre Haute Division,county_sentence,"(2) The Terre Haute Division comprises the counties of Clay, Greene, Knox, Owen, Parke, Putnam, Sullivan, Vermilion, and Vigo.",True
+28 U.S.C. § 94,insd,Terre Haute Division,court_sentence,Court for the Terre Haute Division shall be held at Terre Haute.,True
+28 U.S.C. § 94,insd,Evansville Division,county_sentence,"(3) The Evansville Division comprises the counties of Davies, Dubois, Gibson, Martin, Perry, Pike, Posey, Spencer, Vanderburgh, and Warrick.",True
+28 U.S.C. § 94,insd,Evansville Division,court_sentence,Court for the Evansville Division shall be held at Evansville.,True
+28 U.S.C. § 94,insd,New Albany Division,county_sentence,"(4) The New Albany Division comprises the counties of Clark, Crawford, Dearborn, Floyd, Harrison, Jackson, Jefferson, Jennings, Lawrence, Ohio, Orange, Ripley, Scott, Switzerland, and Washington.",True
+28 U.S.C. § 94,insd,New Albany Division,court_sentence,Court for the New Albany Division shall be held at New Albany.,True
+28 U.S.C. § 95,iand,Cedar Rapids Division,county_sentence,"(1) The Cedar Rapids Division comprises the counties of Benton, Cedar, Grundy, Hardin, Iowa, Jones, Linn, and Tama.",True
+28 U.S.C. § 95,iand,Cedar Rapids Division,court_sentence,Court for the Cedar Rapids Division shall be held at Cedar Rapids.,True
+28 U.S.C. § 95,iand,Eastern Division,county_sentence,"(2) The Eastern Division comprises the counties of Allamakee, Black Hawk, Bremer, Buchanan, Chickasaw, Clayton, Delaware, Dubuque, Fayette, Floyd, Howard, Jackson, Mitchell, and Winneshiek.",True
+28 U.S.C. § 95,iand,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Dubuque and Waterloo.,True
+28 U.S.C. § 95,iand,Western Division,county_sentence,"(3) The Western Division comprises the counties of Buena Vista, Cherokee, Clay, Crawford, Dickinson, Ida, Lyon, Monona, O’Brien, Osceola, Plymouth, Sac, Sioux, and Woodbury.",True
+28 U.S.C. § 95,iand,Western Division,court_sentence,Court for the Western Division shall be held at Sioux City.,True
+28 U.S.C. § 95,iand,Central Division,county_sentence,"(4) The Central Division comprises the counties of Butler, Calhoun, Carroll, Cerro Gordo, Emmet, Franklin, Hamilton, Hancock, Humboldt, Kossuth, Palo Alto, Pocahontas, Webster, Winnebago, Worth, and Wright.",True
+28 U.S.C. § 95,iand,Central Division,court_sentence,Court for the Central Division shall be held at Fort Dodge and Mason City.,True
+28 U.S.C. § 95,iasd,Central Division,county_sentence,"(1) The Central Division comprises the counties of Boone, Dallas, Greene, Guthrie, Jasper, Madison, Marion, Marshall, Polk, Poweshiek, Story, and Warren.",True
+28 U.S.C. § 95,iasd,Central Division,court_sentence,Court for the Central Division shall be held at Des Moines.,True
+28 U.S.C. § 95,iasd,Eastern Division,county_sentence,"(2) The Eastern Division comprises the counties of Des Moines, Henry, Lee, Louisa, and Van Buren.",True
+28 U.S.C. § 95,iasd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Keokuk.,True
+28 U.S.C. § 95,iasd,Western Division,county_sentence,"(3) The Western Division comprises the counties of Audubon, Cass, Fremont, Harrison, Mills, Montgomery, Page, Pottawattamie, and Shelby.",True
+28 U.S.C. § 95,iasd,Western Division,court_sentence,Court for the Western Division shall be held at Council Bluffs.,True
+28 U.S.C. § 95,iasd,Southern Division,county_sentence,"(4) The Southern Division comprises the counties of Adair, Adams, Clarke, Decatur, Lucas, Ringgold, Taylor, Union, and Wayne.",True
+28 U.S.C. § 95,iasd,Southern Division,court_sentence,Court for the Southern Division shall be held at Creston.,True
+28 U.S.C. § 95,iasd,Davenport Division,county_sentence,"(5) The Davenport Division comprises the counties of Clinton, Johnson, Muscatine, Scott, and Washington.",True
+28 U.S.C. § 95,iasd,Davenport Division,court_sentence,Court for the Davenport Division shall be held at Davenport.,True
+28 U.S.C. § 95,iasd,Ottumwa Division,county_sentence,"(6) The Ottumwa Division comprises the counties of Appanoose, Davis, Jefferson, Keokuk, Mahaska, Monroe, and Wapello.",True
+28 U.S.C. § 95,iasd,Ottumwa Division,court_sentence,Court for the Ottumwa Division shall be held at Ottumwa.,True
+28 U.S.C. § 96,ksd,,court_sentence,"Court shall be held at Kansas City, Lawrence, Leavenworth, Salina, Topeka, Hutchinson, Wichita, Dodge City, and Fort Scott.",True
+28 U.S.C. § 97,kyed,,county_sentence,"(a) The Eastern District comprises the counties of Anderson, Bath, Bell, Boone, Bourbon, Boyd, Boyle, Bracken, Breathitt, Campbell, Carroll, Carter, Clark, Clay, Elliott, Estill, Fayette, Fleming, Floyd, Franklin, Gallatin, Garrard, Grant, Greenup, Harlan, Harrison, Henry, Jackson, Jessamine, Johnson, Kenton, Knott, Knox, Laurel, Lawrence, Lee, Leslie, Letcher, Lewis, Lincoln, McCreary, Madison, Magoffin, Martin, Mason, Menifee, Mercer, Montgomery, Morgan, Nicholas, Owen, Owsley, Pendleton, Perry, Pike, Powell, Pulaski, Robertson, Rockcastle, Rowan, Scott, Shelby, Trimble, Wayne, Whitley, Wolfe, and Woodford.",True
+28 U.S.C. § 97,kyed,,court_sentence,"Court for the Eastern District shall be held at Ashland, Catlettsburg, Covington, Frankfort, Jackson, Lexington, London, Pikeville, and Richmond.",True
+28 U.S.C. § 97,kywd,,county_sentence,"(b) The Western District comprises the counties of Adair, Allen, Ballard, Barren, Breckenridge, Bullitt, Butler, Caldwell, Calloway, Carlisle, Casey, Christian, Clinton, Crittenden, Cumberland, Daviess, Edmonson, Fulton, Graves, Grayson, Green, Hancock, Hardin, Hart, Henderson, Hickman, Hopkins, Jefferson, Larue, Livingston, Logan, Lyon, McCracken, McLean, Marion, Marshall, Meade, Metcalfe, Monroe, Muhlenberg, Nelson, Ohio, Oldham, Russell, Simpson, Spencer, Taylor, Todd, Trigg, Union, Warren, Washington, and Webster.",True
+28 U.S.C. § 97,kywd,,court_sentence,"Court for the Western District shall be held at Bowling Green, Louisville, Owensboro, and Paducah.",True
+28 U.S.C. § 98,laed,,county_sentence,"(a) The Eastern District comprises the parishes of Assumption, Jefferson, Lafourche, Orleans, Plaquemines, Saint Bernard, Saint Charles, Saint James, Saint John the Baptist, Saint Tammany, Tangipahoa, Terrebonne, and Washington.",True
+28 U.S.C. § 98,laed,,court_sentence,"Court for the Eastern District shall be held at New Orleans, and Houma.",True
+28 U.S.C. § 98,lamd,,county_sentence,"(b) The Middle District comprises the parishes of Ascension, East Baton Rouge, East Feliciana, Iberville, Livingston, Pointe Coupee, Saint Helena, West Baton Rouge, and West Feliciana.",True
+28 U.S.C. § 98,lamd,,court_sentence,Court for the Middle District shall be held at Baton Rouge.,True
+28 U.S.C. § 98,lawd,,county_sentence,"(c) The Western District comprises the parishes of Acadia, Allen, Avoyelles, Beauregard, Bienville, Bossier, Caddo, Calcasieu, Caldwell, Cameron, Catahoula, Claiborne, Concordia, Jefferson Davis, De Soto, East Carroll, Evangeline, Franklin, Grant, Iberia, Jackson, Lafayette, La Salle, Lincoln, Madison, Morehouse, Natchitoches, Ouachita, Rapides, Red River, Richland, Sabine, Saint Landry, Saint Martin, Saint Mary, Tensas, Union, Vermilion, Vernon, Webster, West Carroll, and Winn.",True
+28 U.S.C. § 98,lawd,,court_sentence,"Court for the Western District shall be held at Alexandria, Lafayette, Lake Charles, Monroe, Opelousas, and Shreveport.",True
+28 U.S.C. § 99,med,,court_sentence,Court shall be held at Bangor and Portland.,True
+28 U.S.C. § 100,mdd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Allegany, Anne Arundel, Baltimore, Caroline, Carroll, Cecil, Dorchester, Frederick, Garrett, Harford, Howard, Kent, Queen Anne’s, Somerset, Talbot, Washington, Wicomico, and Worcester, and the City of Baltimore.",True
+28 U.S.C. § 100,mdd,Northern Division,court_sentence,"Court for the Northern Division shall be held at Baltimore, Cumberland, and Denton.",True
+28 U.S.C. § 100,mdd,Southern Division,county_sentence,"(2) The Southern Division comprises the counties of Calvert, Charles, Montgomery, Prince George’s, and St. Mary’s.",True
+28 U.S.C. § 100,mdd,Southern Division,court_sentence,Court for the Southern Division shall be held at a suitable site in Montgomery or Prince George’s County not more than five miles from the boundary of Montgomery and Prince George’s Counties.,True
+28 U.S.C. § 101,mad,,court_sentence,"Court shall be held at Boston, New Bedford, Springfield, and Worcester.",True
+28 U.S.C. § 102,mied,Southern Division,county_sentence,"(1) The Southern Division comprises the counties of Genesee, Jackson, Lapeer, Lenawee, Livingston, Macomb, Monroe, Oakland, Saint Clair, Sanilac, Shiawassee, Washtenaw, and Wayne.",True
+28 U.S.C. § 102,mied,Southern Division,court_sentence,"Court for the Southern Division shall be held at Ann Arbor, Detroit, Flint, and Port Huron.",True
+28 U.S.C. § 102,mied,Northern Division,county_sentence,"(2) The Northern Division comprises the counties of Alcona, Alpena, Arenac, Bay, Cheboygan, Clare, Crawford, Gladwin, Gratiot, Huron, Iosco, Isabella, Midland, Montmorency, Ogemaw, Oscoda, Otsego, Presque Isle, Roscommon, Saginaw, and Tuscola.",True
+28 U.S.C. § 102,mied,Northern Division,court_sentence,Court for the Northern Division shall be held at Bay City.,True
+28 U.S.C. § 102,miwd,Southern Division,county_sentence,"(1) The Southern Division comprises the counties of Allegan, Antrim, Barry, Benzie, Berrien, Branch, Calhoun, Cass, Charlevoix, Clinton, Eaton, Emmet, Grand Traverse, Hillsdale, Ingham, Ionia, Kalamazoo, Kalkaska, Kent, Lake, Leelanau, Manistee, Mason, Mecosta, Missaukee, Montcalm, Muskegon, Newaygo, Oceana, Osceola, Ottawa, Saint Joseph, Van Buren, and Wexford.",True
+28 U.S.C. § 102,miwd,Southern Division,court_sentence,"Court for the Southern Division shall be held at Grand Rapids, Kalamazoo, Lansing, and Traverse City.",True
+28 U.S.C. § 102,miwd,Northern Division,county_sentence,"(2) The Northern Division comprises the counties of Alger, Baraga, Chippewa, Delta, Dickinson, Gogebic, Houghton, Iron, Keweenaw, Luce, Mackinac, Marquette, Menominee, Ontonagon, and Schoolcraft.",True
+28 U.S.C. § 102,miwd,Northern Division,court_sentence,Court for the Northern Division shall be held at Marquette and Sault Sainte Marie.,True
+28 U.S.C. § 103,mnd,First Division,county_sentence,"(1) The First Division comprises the counties of Dodge, Fillmore, Houston, Mower, Olmsted, Steele, Wabasha, and Winona.",True
+28 U.S.C. § 103,mnd,First Division,court_sentence,Court for the First Division shall be held at Winona.,True
+28 U.S.C. § 103,mnd,Second Division,county_sentence,"(2) The Second Division comprises the counties of Blue Earth, Brown, Cottonwood, Faribault, Freeborn, Jackson, Lac qui Parle, Le Sueur, Lincoln, Lyon, Martin, Murray, Nicollet, Nobles, Pipestone, Redwood, Rock, Sibley, Waseca, Watonwan, and Yellow Medicine.",True
+28 U.S.C. § 103,mnd,Second Division,court_sentence,Court for the Second Division shall be held at Mankato.,True
+28 U.S.C. § 103,mnd,Third Division,county_sentence,"(3) The Third Division comprises the counties of Chisago, Dakota, Goodhue, Ramsey, Rice, Scott, and Washington.",True
+28 U.S.C. § 103,mnd,Third Division,court_sentence,Court for the Third Division shall be held at Saint Paul.,True
+28 U.S.C. § 103,mnd,Fourth Division,county_sentence,"(4) The Fourth Division comprises the counties of Anoka, Carver, Chippewa, Hennepin, Isanti, Kandiyohi, McLeod, Meeker, Renville, Sherburne, Swift, and Wright.",True
+28 U.S.C. § 103,mnd,Fourth Division,court_sentence,Court for the Fourth Division shall be held at Minneapolis.,True
+28 U.S.C. § 103,mnd,Fifth Division,county_sentence,"(5) The Fifth Division comprises the counties of Aitkin, Benton, Carlton, Cass, Cook, Crow Wing, Itasca, Kanabec, Koochiching, Lake, Mille Lacs, Morrison, Pine, and Saint Louis.",True
+28 U.S.C. § 103,mnd,Fifth Division,court_sentence,Court for the Fifth Division shall be held at Duluth.,True
+28 U.S.C. § 103,mnd,Sixth Division,county_sentence,"(6) The Sixth Division comprises the counties of Becker, Beltrami, Big Stone, Clay, Clearwater, Douglas, Grant, Hubbard, Kittson, Lake of the Woods, Mahnomen, Marshall, Norman, Otter Tail, Pennington, Polk, Pope, Red Lake, Roseau, Stearns, Stevens, Todd, Traverse, Wadena, and Wilkin.",True
+28 U.S.C. § 103,mnd,Sixth Division,court_sentence,Court for the Sixth Division shall be held at Fergus Falls and Bemidji.,True
+28 U.S.C. § 104,msnd,Aberdeen Division,county_sentence,"(1) The Aberdeen Division comprises the counties of Alcorn, Chickasaw, Choctaw, Clay, Itawamba, Lee, Lowndes, Monroe, Oktibbeha, Prentiss, Tishomingo, Webster, and Winston.",True
+28 U.S.C. § 104,msnd,Aberdeen Division,court_sentence,"Court for the Aberdeen Division shall be held at Aberdeen, Ackerman, and Corinth.",True
+28 U.S.C. § 104,msnd,Oxford Division,county_sentence,"(2) The Oxford Division comprises the counties of Benton, Calhoun, DeSoto, Lafayette, Marshall, Panola, Pontotoc, Quitman, Tallahatchie, Tate, Tippah, Tunica, Union, and Yalobusha.",True
+28 U.S.C. § 104,msnd,Oxford Division,court_sentence,Court for the Oxford Division shall be held at Oxford.,True
+28 U.S.C. § 104,msnd,Greenville Division,county_sentence,"(3) The Greenville Division comprises the counties of Attala, Bolivar, Carroll, Coahoma, Grenada, Humphreys, Leflore, Montgomery, Sunflower, and Washington.",True
+28 U.S.C. § 104,msnd,Greenville Division,court_sentence,"Court for the Greenville Division shall be held at Clarksdale, Cleveland, and Greenville.",True
+28 U.S.C. § 104,mssd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Copiah, Hinds, Holmes, Issaquena, Kemper, Lauderdale, Leake, Madison, Neshoba, Newton, Noxubee, Rankin, Scott, Simpson, Sharkey, Smith, Warren, and Yazoo.",True
+28 U.S.C. § 104,mssd,Northern Division,court_sentence,Court for the Northern Division shall be held at Jackson.,True
+28 U.S.C. § 104,mssd,Southern Division,county_sentence,"(2) The Southern Division comprises the counties of George, Greene, Hancock, Harrison, Jackson, Pearl River, and Stone.",True
+28 U.S.C. § 104,mssd,Southern Division,court_sentence,Court for the Southern Division shall be held at Gulfport.,True
+28 U.S.C. § 104,mssd,Eastern Division,county_sentence,"(3) The Eastern Division comprises the counties of Clarke, Covington, Forrest, Jasper, Jefferson Davis, Jones, Lamar, Lawrence, Marion, Perry, Wayne, and Walthall.",True
+28 U.S.C. § 104,mssd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Hattiesburg.,True
+28 U.S.C. § 104,mssd,Western Division,county_sentence,"(4) The Western Division comprises the counties of Adams, Amite, Claiborne, Franklin, Jefferson, Lincoln, Pike, and Wilkinson.",True
+28 U.S.C. § 104,mssd,Western Division,court_sentence,Court for the Western Division shall be held at Natchez.,True
+28 U.S.C. § 105,moed,Eastern Division,county_sentence,"(1) The Eastern Division comprises the counties of Crawford, Dent, Franklin, Gasconade, Jefferson, Lincoln, Maries, Phelps, Saint Charles, Saint Francois, Saint Louis, Warren, and Washington, and the city of Saint Louis.",True
+28 U.S.C. § 105,moed,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Saint Louis.,True
+28 U.S.C. § 105,moed,Northern Division,county_sentence,"(2) The Northern Division comprises the counties of Adair, Audrain, Chariton, Clark, Knox, Lewis, Linn, Macon, Marion, Monroe, Montgomery, Pike, Ralls, Randolph, Schuyler, Scotland, and Shelby.",True
+28 U.S.C. § 105,moed,Northern Division,court_sentence,Court for the Northern Division shall be held at Hannibal.,True
+28 U.S.C. § 105,moed,Southeastern Division,county_sentence,"(3) The Southeastern Division comprises the counties of Bollinger, Butler, Cape Girardeau, Carter, Dunklin, Iron, Madison, Mississippi, New Madrid, Pemiscot, Perry, Reynolds, Ripley, Saint Genevieve, Scott, Shannon, Stoddard, and Wayne.",True
+28 U.S.C. § 105,moed,Southeastern Division,court_sentence,Court for the Southeastern Division shall be held at Cape Girardeau.,True
+28 U.S.C. § 105,mowd,Western Division,county_sentence,"(1) The Western Division comprises the counties of Bates, Carroll, Cass, Clay, Henry, Jackson, Johnson, Lafayette, Ray, Saint Clair, and Saline.",True
+28 U.S.C. § 105,mowd,Western Division,court_sentence,Court for the Western Division shall be held at Kansas City.,True
+28 U.S.C. § 105,mowd,Southwestern Division,county_sentence,"(2) The Southwestern Division comprises the counties of Barton, Barry, Jasper, Lawrence, McDonald, Newton, Stone, and Vernon.",True
+28 U.S.C. § 105,mowd,Southwestern Division,court_sentence,Court for the Southwestern Division shall be held at Joplin.,True
+28 U.S.C. § 105,mowd,Saint Joseph Division,county_sentence,"(3) The Saint Joseph Division comprises the counties of Andrew, Atchison, Buchanan, Caldwell, Clinton, Daviess, De Kalb, Gentry, Grundy, Harrison, Holt, Livingston, Mercer, Nodaway, Platte, Putnam, Sullivan, and Worth.",True
+28 U.S.C. § 105,mowd,Saint Joseph Division,court_sentence,Court for the Saint Joseph Division shall be held at Saint Joseph.,True
+28 U.S.C. § 105,mowd,Central Division,county_sentence,"(4) The Central Division comprises the counties of Benton, Boone, Callaway, Camden, Cole, Cooper, Hickory, Howard, Miller, Moniteau, Morgan, Osage, and Pettis.",True
+28 U.S.C. § 105,mowd,Central Division,court_sentence,Court for the Central Division shall be held at Jefferson City.,True
+28 U.S.C. § 105,mowd,Southern Division,county_sentence,"(5) The Southern Division comprises the counties of Cedar, Christian, Dade, Dallas, Douglas, Greene, Howell, Laclede, Oregon, Ozark, Polk, Pulaski, Taney, Texas, Webster, and Wright.",True
+28 U.S.C. § 105,mowd,Southern Division,court_sentence,Court for the Southern Division shall be held at Springfield.,True
+28 U.S.C. § 106,mtd,,court_sentence,"Court shall be held at Billings, Butte, Glasgow, Great Falls, Havre, Helena, Kalispell, Lewistown, Livingston, Miles City, and Missoula.",True
+28 U.S.C. § 107,ned,,court_sentence,"Court shall be held at Lincoln, North Platte, and Omaha.",True
+28 U.S.C. § 108,nvd,,court_sentence,"Court shall be held at Carson City, Elko, Las Vegas, Reno, Ely, and Lovelock.",True
+28 U.S.C. § 109,nhd,,court_sentence,Court shall be held at Concord and Littleton.,True
+28 U.S.C. § 110,njd,,court_sentence,"Court shall be held at Camden, Newark and Trenton.",True
+28 U.S.C. § 111,nmd,,court_sentence,"Court shall be held at Albuquerque, Las Cruces, Las Vegas, Roswell, Santa Fe, and Silver City.",True
+28 U.S.C. § 112,nynd,,county_sentence,"(a) The Northern District comprises the counties of Albany, Broome, Cayuga, Chenango, Clinton, Columbia, Cortland, Delaware, Essex, Franklin, Fulton, Greene, Hamilton, Herkimer, Jefferson, Lewis, Madison, Montgomery, Oneida, Onondaga, Oswego, Otsego, Rensselaer, Saint Lawrence, Saratoga, Schenectady, Schoharie, Tioga, Tompkins, Ulster, Warren, and Washington.",True
+28 U.S.C. § 112,nynd,,court_sentence,"Court for the Northern District shall be held at Albany, Auburn, Binghamton, Malone, Plattsburgh, Syracuse, Utica, Watertown, and Plattsburgh.",True
+28 U.S.C. § 112,nysd,,county_sentence,"(b) The Southern District comprises the counties of Bronx, Dutchess, New York, Orange, Putnam, Rockland, Sullivan, and Westchester and concurrently with the Eastern District, the waters within the Eastern District.",True
+28 U.S.C. § 112,nysd,,court_sentence,"Court for the Southern District shall be held at New York, White Plains, and in the Middletown-Wallkill area of Orange County or such nearby location as may be deemed appropriate.",True
+28 U.S.C. § 112,nyed,,county_sentence,"(c) The Eastern District comprises the counties of Kings, Nassau, Queens, Richmond, and Suffolk and concurrently with the Southern District, the waters within the counties of Bronx and New York.",True
+28 U.S.C. § 112,nyed,,court_sentence,"Court for the Eastern District shall be held at Brooklyn, Hauppauge, Hempstead (including the village of Uniondale), and Central Islip.",True
+28 U.S.C. § 112,nywd,,county_sentence,"(d) The Western District comprises the counties of Allegany, Cattaraugus, Chautauqua, Chemung, Erie, Genesee, Livingston, Monroe, Niagara, Ontario, Orleans, Schuyler, Seneca, Steuben, Wayne, Wyoming, and Yates.",True
+28 U.S.C. § 112,nywd,,court_sentence,"Court for the Western District shall be held at Buffalo, Canandaigua, Elmira, Jamestown, and Rochester.",True
+28 U.S.C. § 113,nced,,county_sentence,"(a) The Eastern District comprises the counties of Beaufort, Bertie, Bladen, Brunswick, Camden, Carteret, Chowan, Columbus, Craven, Cumberland, Currituck, Dare, Duplin, Edgecombe, Franklin, Gates, Granville, Greene, Halifax, Harnett, Hertford, Hyde, Johnston, Jones, Lenoir, Martin, Nash, New Hanover, Northampton, Onslow, Pamlico, Pasquotank, Pender, Perquimans, Pitt, Robeson, Sampson, Tyrrell, Vance, Wake, Warren, Washington, Wayne, Wilson, those portions of Hoke, Moore, Scotland, and Richmond counties encompassing the Fort Bragg Military Reservation and Camp Mackall, and that portion of Durham County encompassing the Federal Correctional Institution, Butner, North Carolina.",True
+28 U.S.C. § 113,nced,,court_sentence,"Court for the Eastern District shall be held at Elizabeth City, Fayetteville, Greenville, New Bern, Raleigh, Wilmington, and Wilson.",True
+28 U.S.C. § 113,ncmd,,county_sentence,"(b) Middle District.—The Middle District comprises the counties of Alamance, Cabarrus, Caswell, Chatham, Davidson, Davie, Durham (excluding that portion of Durham County encompassing the Federal Correctional Institution, Butner, North Carolina), Forsyth, Guilford, Hoke (excluding that portion of Hoke County encompassing the Fort Bragg Military Reservation and Camp Mackall), Lee, Montgomery, Moore (excluding that portion of Moore County encompassing the Fort Bragg Military Reservation and Camp Mackall), Orange, Person, Randolph, Richmond (excluding that portion of Richmond County encompassing the Fort Bragg Military Reservation and Camp Mackall), Rockingham, Rowan, Scotland (excluding that portion of Scotland County encompassing the Fort Bragg Military Reservation and Camp Mackall), Stanly, Stokes, Surry, and Yadkin.",True
+28 U.S.C. § 113,ncmd,,court_sentence,"Court for the Middle District shall be held at Durham, Greensboro, and Winston-Salem.",True
+28 U.S.C. § 113,ncwd,,county_sentence,"(c) The Western District comprises the counties of Alexander, Alleghany, Anson, Ashe, Avery, Buncombe, Burke, Caldwell, Catawba, Cherokee, Clay, Cleveland, Gaston, Graham, Haywood, Henderson, Iredell, Jackson, Lincoln, McDowell, Macon, Madison, Mecklenburg, Mitchell, Polk, Rutherford, Swain, Transylvania, Union, Watauga, Wilkes, and Yancey.",True
+28 U.S.C. § 113,ncwd,,court_sentence,"Court for the Western District shall be held at Asheville, Bryson City, Charlotte, Shelby, and Statesville.",True
+28 U.S.C. § 114,ndd,,court_sentence,"Court shall be held at Bismarck, Fargo, Grand Forks, and Minot.",True
+28 U.S.C. § 115,ohnd,Eastern Division,county_sentence,"(1) The Eastern Division comprises the counties of Ashland, Ashtabula, Carroll, Columbiana, Crawford, Cuyahoga, Geauga, Holmes, Lake, Lorain, Mahoning, Medina, Portage, Richland, Stark, Summit, Trumbull, Tuscarawas, and Wayne.",True
+28 U.S.C. § 115,ohnd,Eastern Division,court_sentence,"Court for the Eastern Division shall be held at Cleveland, Youngstown, and Akron.",True
+28 U.S.C. § 115,ohnd,Western Division,county_sentence,"(2) The Western Division comprises the counties of Allen, Auglaize, Defiance, Erie, Fulton, Hancock, Hardin, Henry, Huron, Lucas, Marion, Mercer, Ottawa, Paulding, Putnam, Sandusky, Seneca, Van Wert, Williams, Woods, and Wyandot.",True
+28 U.S.C. § 115,ohnd,Western Division,court_sentence,Court for the Western Division shall be held at Lima and Toledo.,True
+28 U.S.C. § 115,ohsd,Western Division,county_sentence,"(1) The Western Division comprises the counties of Adams, Brown, Butler, Champaign, Clark, Clermont, Clinton, Darke, Greene, Hamilton, Highland, Lawrence, Miami, Montgomery, Preble, Scioto, Shelby, and Warren.",True
+28 U.S.C. § 115,ohsd,Western Division,court_sentence,Court for the Western Division shall be held at Cincinnati and Dayton.,True
+28 U.S.C. § 115,ohsd,Eastern Division,county_sentence,"(2) The Eastern Division comprises the counties of Athens, Belmont, Coshocton, Delaware, Fairfield, Fayette, Franklin, Gallia, Guernsey, Harrison, Hocking, Jackson, Jefferson, Knox, Licking, Logan, Madison, Meigs, Monroe, Morgan, Morrow, Muskingum, Noble, Perry, Pickaway, Pike, Ross, Union, Vinton, and Washington.",True
+28 U.S.C. § 115,ohsd,Eastern Division,court_sentence,"Court for the Eastern Division shall be held at Columbus St. Clairsville, and Steubenville.",True
+28 U.S.C. § 116,oknd,,county_sentence,"(a) The Northern District comprises the counties of Craig, Creek, Delaware, Mayes, Nowata, Osage, Ottawa, Pawnee, Rogers, Tulsa, and Washington.",True
+28 U.S.C. § 116,oknd,,court_sentence,"Court for the Northern District shall be held at Bartlesville, Miami, Pawhuska, Tulsa, and Vinita.",True
+28 U.S.C. § 116,oked,,county_sentence,"(b) The Eastern District comprises the counties of Adair, Atoka, Bryan, Carter, Cherokee, Choctaw, Coal, Haskell, Hughes, Johnston, Latimer, Le Flore Love, McCurtain, McIntosh, Marshall, Murray, Muskogee, Okfuskee, Okmulgee, Pittsburg, Pontotoc, Pushmataha, Seminole, Sequoyah, and Wagoner.",True
+28 U.S.C. § 116,oked,,court_sentence,"Court for the Eastern District shall be held at Ada, Ardmore, Durant, Hugo, Muskogee, Okmulgee, Poteau, and S. McAlester.",True
+28 U.S.C. § 116,okwd,,county_sentence,"(c) The Western District comprises the counties of Alfalfa, Beaver, Beckham, Blaine, Caddo, Canadian, Cimarron, Cleveland, Comanche, Cotton, Custer, Dewey, Ellis, Garfield, Garvin, Grady, Grant, Greer, Harmon, Harper, Jackson, Jefferson, Kay, Kingfisher, Kiowa, Lincoln, Logan, McClain, Major, Noble, Oklahoma, Payne, Pottawatomie, Roger Mills, Stephens, Texas, Tillman, Washita, Woods, and Woodward.",True
+28 U.S.C. § 116,okwd,,court_sentence,"Court for the Western District shall be held at Chickasha, Enid, Guthrie, Lawton, Mangum, Oklahoma City, Pauls Valley, Ponca City, Shawnee, and Woodward.",True
+28 U.S.C. § 117,ord,,court_sentence,"Court shall be held at Coquille, Eugene or Springfield, Klamath Falls, Medford, Pendleton, and Portland.",True
+28 U.S.C. § 118,paed,,county_sentence,"(a) The Eastern District comprises the counties of Berks, Bucks, Chester, Delaware, Lancaster, Lehigh, Montgomery, Northampton, and Philadelphia.",True
+28 U.S.C. § 118,paed,,court_sentence,"Court for the Eastern District shall be held at Allentown, Easton, Lancaster, Reading, and Philadelphia.",True
+28 U.S.C. § 118,pamd,,county_sentence,"(b) The Middle District comprises the counties of Adams, Bradford, Cameron, Carbon, Centre, Clinton, Columbia, Cumberland, Dauphin, Franklin, Fulton, Huntingdon, Juniata, Lackawanna, Lebanon, Luzerne, Lycoming, Mifflin, Monroe, Montour, Northumberland, Perry, Pike, Potter, Schuylkill, Snyder, Sullivan, Susquehanna, Tioga, Union, Wayne, Wyoming, and York.",True
+28 U.S.C. § 118,pamd,,court_sentence,"Court for the Middle District shall be held at Harrisburg, Lewisburg, Scranton, Wilkes-Barre, and Williamsport.",True
+28 U.S.C. § 118,pawd,,county_sentence,"(c) The Western District comprises the counties of Allegheny, Armstrong, Beaver, Bedford, Blair, Butler, Cambria, Clarion, Clearfield, Crawford, Elk, Erie, Fayette, Forest, Greene, Indiana, Jefferson, Lawrence, McKean, Mercer, Somerset, Venango, Warren, Washington, and Westmoreland.",True
+28 U.S.C. § 118,pawd,,court_sentence,"Court for the Western District shall be held at Erie, Johnstown, and Pittsburgh.",True
+28 U.S.C. § 119,prd,,court_sentence,"Court shall be held at Mayaguez, Ponce, and San Juan.",True
+28 U.S.C. § 120,rid,,court_sentence,Court shall be held at Providence.,True
+28 U.S.C. § 121,scd,Charleston Division,county_sentence,"(1) The Charleston Division comprises the counties of Berkeley, Charleston, Clarendon, Colleton, Dorchester, and Georgetown.",True
+28 U.S.C. § 121,scd,Charleston Division,court_sentence,Court for the Charleston Division shall be held at Charleston.,True
+28 U.S.C. § 121,scd,Columbia Division,county_sentence,"(2) The Columbia Division comprises the counties of Kershaw, Lee, Lexington, Richland, and Sumter.",True
+28 U.S.C. § 121,scd,Columbia Division,court_sentence,Court for the Columbia Division shall be held at Columbia.,True
+28 U.S.C. § 121,scd,Florence Division,county_sentence,"(3) The Florence Division comprises the counties of Chesterfield, Darlington, Dillon, Florence, Horry, Marion, Marlboro, and Williamsburg.",True
+28 U.S.C. § 121,scd,Florence Division,court_sentence,Court for the Florence Division shall be held at Florence.,True
+28 U.S.C. § 121,scd,Aiken Division,county_sentence,"(4) The Aiken Division comprises the counties of Aiken, Allendale, and Barnwell.",True
+28 U.S.C. § 121,scd,Aiken Division,court_sentence,Court for the Aiken Division shall be held at Aiken.,True
+28 U.S.C. § 121,scd,Orangeburg Division,county_sentence,"(5) The Orangeburg Division comprises the counties of Bamberg, Calhoun, and Orangeburg.",True
+28 U.S.C. § 121,scd,Orangeburg Division,court_sentence,Court for the Orangeburg Division shall be held at Orangeburg.,True
+28 U.S.C. § 121,scd,Greenville Division,county_sentence,(6) The Greenville Division comprises the counties of Greenville and Laurens.,True
+28 U.S.C. § 121,scd,Greenville Division,court_sentence,Court for the Greenville Division shall be held at Greenville.,True
+28 U.S.C. § 121,scd,Rock Hill Division,county_sentence,"(7) The Rock Hill Division comprises the counties of Chester, Fairfield, Lancaster, and York.",True
+28 U.S.C. § 121,scd,Rock Hill Division,court_sentence,Court for the Rock Hill Division shall be held at Rock Hill.,True
+28 U.S.C. § 121,scd,Greenwood Division,county_sentence,"(8) The Greenwood Division comprises the counties of Abbeville, Edgefield, Greenwood, McCormick, Newberry, and Saluda.",True
+28 U.S.C. § 121,scd,Greenwood Division,court_sentence,Court for the Greenwood Division shall be held at Greenwood.,True
+28 U.S.C. § 121,scd,Anderson Division,county_sentence,"(9) The Anderson Division comprises the counties of Anderson, Oconee, and Pickens.",True
+28 U.S.C. § 121,scd,Anderson Division,court_sentence,Court for the Anderson Division shall be held at Anderson.,True
+28 U.S.C. § 121,scd,Spartanburg Division,county_sentence,"(10) The Spartanburg Division comprises the counties of Cherokee, Spartanburg, and Union.",True
+28 U.S.C. § 121,scd,Spartanburg Division,court_sentence,Court for the Spartanburg Division shall be held at Spartanburg.,True
+28 U.S.C. § 121,scd,Beaufort Division,county_sentence,"(11) The Beaufort Division comprises the counties of Beaufort, Hampton, and Jasper.",True
+28 U.S.C. § 121,scd,Beaufort Division,court_sentence,Court for the Beaufort Division shall be held at Beaufort.,True
+28 U.S.C. § 122,sdd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Brown, Campbell, Clark, Codington, Corson, Day, Deuel, Edmonds, Grant, Hamlin, McPherson, Marshall, Roberts, Spink, and Walworth.",True
+28 U.S.C. § 122,sdd,Northern Division,court_sentence,Court for the Northern Division shall be held at Aberdeen.,True
+28 U.S.C. § 122,sdd,Southern Division,county_sentence,"(2) The Southern Division comprises the counties of Aurora, Beadle, Bon Homme, Brookings, Brule, Charles Mix, Clay, Davison, Douglas, Hanson, Hutchinson, Kingsbury, Lake, Lincoln, McCook, Miner, Minnehaha, Moody, Sanborn, Turner, Union, and Yankton.",True
+28 U.S.C. § 122,sdd,Southern Division,court_sentence,Court for the Southern Division shall be held at Sioux Falls.,True
+28 U.S.C. § 122,sdd,Central Division,county_sentence,"(3) The central division comprises the counties of Buffalo, Dewey, Faulk, Gregory, Haakon, Hand, Hughes, Hyde, Jerauld, Jones, Lyman, Mellette, Potter, Stanley, Sully, Todd, Tripp, and Ziebach.",True
+28 U.S.C. § 122,sdd,Central Division,court_sentence,Court for the Central Division shall be held at Pierre.,True
+28 U.S.C. § 122,sdd,Western Division,county_sentence,"(4) The Western Division comprises the counties of Bennett, Butte, Custer, Fall River, Harding, Jackson, Lawrence, Meade, Pennington, Perkins, and Shannon.",True
+28 U.S.C. § 122,sdd,Western Division,court_sentence,Court for the Western Division shall be held at Deadwood and Rapid City.,True
+28 U.S.C. § 123,tned,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Anderson, Blount, Campbell, Claiborne, Grainger, Jefferson, Knox, Loudon, Monroe, Morgan, Roane, Scott, Sevier, and Union.",True
+28 U.S.C. § 123,tned,Northern Division,court_sentence,Court for the Northern Division shall be held at Knoxville.,True
+28 U.S.C. § 123,tned,Northeastern Division,county_sentence,"(2) The Northeastern Division comprises the counties of Carter, Cocke, Greene, Hamblen, Hancock, Hawkins, Johnson, Sullivan, Unicoi, and Washington.",True
+28 U.S.C. § 123,tned,Northeastern Division,court_sentence,Court for the Northeastern Division shall be held at Greenville.,True
+28 U.S.C. § 123,tned,Southern Division,county_sentence,"(3) The Southern Division comprises the counties of Bledsoe, Bradley, Hamilton, McMinn, Marion, Meigs, Polk, Rhea, and Sequatchie.",True
+28 U.S.C. § 123,tned,Southern Division,court_sentence,Court for the Southern Division shall be held at Chattanooga.,True
+28 U.S.C. § 123,tned,Winchester Division,county_sentence,"(4) The Winchester Division comprises the counties of Bedford, Coffee, Franklin, Grundy, Lincoln, Moore, Van Buren, and Warren.",True
+28 U.S.C. § 123,tned,Winchester Division,court_sentence,Court for the Winchester Division shall be held at Winchester.,True
+28 U.S.C. § 123,tnmd,Nashville Division,county_sentence,"(1) The Nashville Division comprises the counties of Cannon, Cheatham, Davidson, Dickson, Houston, Humphreys, Montgomery, Robertson, Rutherford, Stewart, Sumner, Trousdale, Williamson, and Wilson.",True
+28 U.S.C. § 123,tnmd,Nashville Division,court_sentence,Court for the Nashville Division shall be held at Nashville.,True
+28 U.S.C. § 123,tnmd,Northeastern Division,county_sentence,"(2) The Northeastern Division comprises the counties of Clay, Cumberland, De Kalb, Fentress, Jackson, Macon, Overton, Pickett, Putnam, Smith, and White.",True
+28 U.S.C. § 123,tnmd,Northeastern Division,court_sentence,Court for the Northeastern Division shall be held at Cookeville.,True
+28 U.S.C. § 123,tnmd,Columbia Division,county_sentence,"(3) The Columbia Division comprises the counties of Giles, Hickman, Lawrence, Lewis, Marshall, Maury, and Wayne.",True
+28 U.S.C. § 123,tnmd,Columbia Division,court_sentence,Court for the Columbia Division shall be held at Columbia.,True
+28 U.S.C. § 123,tnwd,Eastern Division,county_sentence,"(1) The Eastern Division comprises the counties of Benton, Carroll, Chester, Crockett, Decatur, Dyer, Gibson, Hardeman, Hardin, Haywood, Henderson, Henry, Lake, McNairy, Madison, Obion, Perry, and Weakley.",True
+28 U.S.C. § 123,tnwd,Eastern Division,court_sentence,Court for the Eastern Division shall be held at Jackson and Dyersburg.,True
+28 U.S.C. § 123,tnwd,Western Division,county_sentence,"(2) The Western Division comprises the counties of Fayette, Lauderdale, Shelby, and Tipton.",True
+28 U.S.C. § 123,tnwd,Western Division,court_sentence,Court for the Western Division shall be held at Memphis.,True
+28 U.S.C. § 124,txnd,Dallas Division,county_sentence,"(1) The Dallas Division comprises the counties of Dallas, Ellis, Hunt, Johnson, Kaufman, Navarro, and Rockwall.",True
+28 U.S.C. § 124,txnd,Dallas Division,court_sentence,Court for the Dallas Division shall be held at Dallas.,True
+28 U.S.C. § 124,txnd,Fort Worth Division,county_sentence,"(2) The Fort Worth Division comprises the counties of Comanche, Erath, Hood, Jack, Palo Pinto, Parker, Tarrant, and Wise.",True
+28 U.S.C. § 124,txnd,Fort Worth Division,court_sentence,Court for the Fort Worth Division shall be held at Fort Worth.,True
+28 U.S.C. § 124,txnd,Abilene Division,county_sentence,"(3) The Abilene Division comprises the counties of Callahan, Eastland, Fisher, Haskell, Howard, Jones, Mitchell, Nolan, Shackleford, Stephens, Stonewall, Taylor, and Throckmorton.",True
+28 U.S.C. § 124,txnd,Abilene Division,court_sentence,Court for the Abilene Division shall be held at Abilene.,True
+28 U.S.C. § 124,txnd,San Angelo Division,county_sentence,"(4) The San Angelo Division comprises the counties of Brown, Coke, Coleman, Concho, Crockett, Glasscock, Irion, Menard, Mills, Reagan, Runnels, Schleicher, Sterling, Sutton, and Tom Green.",True
+28 U.S.C. § 124,txnd,San Angelo Division,court_sentence,Court for the San Angelo Division shall be held at San Angelo.,True
+28 U.S.C. § 124,txnd,Amarillo Division,county_sentence,"(5) The Amarillo Division comprises the counties of Armstrong, Brisco, Carson, Castro, Childress, Collingsworth, Dallam, Deaf Smith, Donley, Gray, Hall, Hansford, Hartley, Hemphill, Hutchinson, Lipscomb, Moore, Ochiltree, Oldham, Parmer, Potter, Randall, Roberts, Sherman, Swisher, and Wheeler.",True
+28 U.S.C. § 124,txnd,Amarillo Division,court_sentence,Court for the Amarillo Division shall be held at Amarillo.,True
+28 U.S.C. § 124,txnd,Wichita Falls Division,county_sentence,"(6) The Wichita Falls Division comprises the counties of Archer, Baylor, Clay, Cottle, Foard, Hardeman, King, Knox, Montague, Wichita, Wilbarger, and Young.",True
+28 U.S.C. § 124,txnd,Wichita Falls Division,court_sentence,Court for the Wichita Falls Division shall be held at Wichita Falls.,True
+28 U.S.C. § 124,txnd,Lubbock Division,county_sentence,"(7) The Lubbock Division comprises the counties of Bailey, Borden, Cochran, Crosby, Dawson, Dickens, Floyd, Gaines, Garza, Hale, Hockley, Kent, Lamb, Lubbock, Lynn, Motley, Scurry, Terry, and Yoakum.",True
+28 U.S.C. § 124,txnd,Lubbock Division,court_sentence,Court for the Lubbock Division shall be held at Lubbock.,True
+28 U.S.C. § 124,txsd,Galveston Division,county_sentence,"(1) The Galveston Division comprises the counties of Brazoria, Chambers, Galveston, and Matagorda.",True
+28 U.S.C. § 124,txsd,Galveston Division,court_sentence,Court for the Galveston Division shall be held at Galveston.,True
+28 U.S.C. § 124,txsd,Houston Division,county_sentence,"(2) The Houston Division comprises the counties of Austin, Brazos, Colorado, Fayette, Fort Bend, Grimes, Harris, Madison, Montgomery, San Jacinto, Walker, Waller, and Wharton.",True
+28 U.S.C. § 124,txsd,Houston Division,court_sentence,Court for the Houston Division shall be held at Houston and College Station.,True
+28 U.S.C. § 124,txsd,Laredo Division,county_sentence,"(3) The Laredo Division comprises the counties of Jim Hogg, La Salle, McMullen, Webb, and Zapata.",True
+28 U.S.C. § 124,txsd,Laredo Division,court_sentence,Court for the Laredo Division shall be held at Laredo.,True
+28 U.S.C. § 124,txsd,Brownsville Division,county_sentence,(4) The Brownsville Division comprises the counties of Cameron and Willacy.,True
+28 U.S.C. § 124,txsd,Brownsville Division,court_sentence,Court for the Brownsville Division shall be held at Brownsville.,True
+28 U.S.C. § 124,txsd,Victoria Division,county_sentence,"(5) The Victoria Division comprises the counties of Calhoun, DeWitt, Goliad, Jackson, Lavaca, Refugio, and Victoria.",True
+28 U.S.C. § 124,txsd,Victoria Division,court_sentence,Court for the Victoria Division shall be held at Victoria.,True
+28 U.S.C. § 124,txsd,Corpus Christi Division,county_sentence,"(6) The Corpus Christi Division comprises the counties of Aransas, Bee, Brooks, Duval, Jim Wells, Kenedy, Kleberg, Live Oak, Nueces, and San Patricio.",True
+28 U.S.C. § 124,txsd,Corpus Christi Division,court_sentence,Court for the Corpus Christi Division shall be held at Corpus Christi.,True
+28 U.S.C. § 124,txsd,McAllen Division,county_sentence,(7) The McAllen Division comprises the counties of Hidalgo and Starr.,True
+28 U.S.C. § 124,txsd,McAllen Division,court_sentence,Court for the McAllen Division shall be held at McAllen.,True
+28 U.S.C. § 124,txed,Tyler Division,county_sentence,"(1) The Tyler Division comprises the counties of Anderson, Cherokee, Gregg, Henderson, Panola, Rains, Rusk, Smith, Van Zandt, and Wood.",True
+28 U.S.C. § 124,txed,Tyler Division,court_sentence,Court for Tyler Division will be held at Tyler.,True
+28 U.S.C. § 124,txed,Beaumont Division,county_sentence,"(2) The Beaumont Division comprises the counties of Hardin, Jasper, Jefferson, Liberty, Newton, and Orange.",True
+28 U.S.C. § 124,txed,Beaumont Division,court_sentence,Court for the Beaumont Division is to be held at Beaumont.,True
+28 U.S.C. § 124,txed,Sherman Division,county_sentence,"(3) The Sherman Division comprises the counties of Collin, Cook, Delta, Denton, Fannin, Grayson, Hopkins, and Lamar.",True
+28 U.S.C. § 124,txed,Sherman Division,court_sentence,Court for the Sherman Division shall be held at Sherman and Plano.,True
+28 U.S.C. § 124,txed,Marshall Division,county_sentence,"(4) The Marshall Division comprises the counties of Camp, Cass, Harrison, Marion, Morris, and Upshur.",True
+28 U.S.C. § 124,txed,Marshall Division,court_sentence,Court for the Marshall Division shall be held at Marshall.,True
+28 U.S.C. § 124,txed,Texarkana Division,county_sentence,"(5) The Texarkana Division comprises the counties of Bowie, Franklin, Red River, and Titus.",True
+28 U.S.C. § 124,txed,Texarkana Division,court_sentence,"Court for the Texarkana Division shall be held at Texarkana, and may be held anywhere within the Federal courthouse in Texarkana that is located astride the State line between Texas and Arkansas.",True
+28 U.S.C. § 124,txed,Lufkin Division,county_sentence,"(6) The Lufkin Division comprises the counties of Angelina, Houston, Nacogdoches, Polk, Sabine, San Augustine, Shelby, Trinity, and Tyler.",True
+28 U.S.C. § 124,txed,Lufkin Division,court_sentence,Court for the Lufkin Division shall be held at Lufkin.,True
+28 U.S.C. § 124,txwd,Austin Division,county_sentence,"(1) The Austin Division comprises the counties of Bastrop, Blanco, Burleson, Burnet, Caldwell, Gillespie, Hays, Kimble, Lampasas, Lee, Llano, Mason, McCulloch, San Saba, Travis, Washington, and Williamson.",True
+28 U.S.C. § 124,txwd,Austin Division,court_sentence,Court for the Austin Division shall be held at Austin.,True
+28 U.S.C. § 124,txwd,Waco Division,county_sentence,"(2) The Waco Division comprises the counties of Bell, Bosque, Coryell, Falls, Freestone, Hamilton, Hill, Leon, Limestone, McLennan, Milam, Robertson, and Somervell.",True
+28 U.S.C. § 124,txwd,Waco Division,court_sentence,Court for the Waco Division shall be held at Waco.,True
+28 U.S.C. § 124,txwd,El Paso Division,county_sentence,(3) The El Paso Division comprises the county of El Paso.,True
+28 U.S.C. § 124,txwd,El Paso Division,court_sentence,Court for the El Paso Division shall be held at El Paso.,True
+28 U.S.C. § 124,txwd,San Antonio Division,county_sentence,"(4) The San Antonio Division comprises the counties of Atascosa, Bandera, Bexar, Comal, Dimmit, Frio, Gonzales, Guadalupe, Karnes, Kendall, Kerr, Medina, Real, and Wilson.",True
+28 U.S.C. § 124,txwd,San Antonio Division,court_sentence,Court for the San Antonio Division shall be held at San Antonio.,True
+28 U.S.C. § 124,txwd,Del Rio Division,county_sentence,"(5) The Del Rio Division comprises the counties of Edwards, Kinney, Maverick, Terrell, Uvalde, Val Verde, and Zavalla.",True
+28 U.S.C. § 124,txwd,Del Rio Division,court_sentence,Court for the Del Rio Division shall be held at Del Rio.,True
+28 U.S.C. § 124,txwd,Pecos Division,county_sentence,"(6) The Pecos Division comprises the counties of Brewster, Culberson, Jeff Davis, Hudspeth, Loving, Pecos, Presidio, Reeves, Ward, and Winkler.",True
+28 U.S.C. § 124,txwd,Pecos Division,court_sentence,Court for the Pecos Division shall be held at Pecos and Alpine.,True
+28 U.S.C. § 124,txwd,Midland-Odessa Division,county_sentence,"(7) The Midland-Odessa Division comprises the counties of Andrews, Crane, Ector, Martin, Midland, and Upton.",True
+28 U.S.C. § 124,txwd,Midland-Odessa Division,court_sentence,"Court for the Midland-Odessa Division shall be held at Midland. Court may be held, in the discretion of the court, in Odessa, when courtroom facilities are made available at no expense to the Government.",True
+28 U.S.C. § 125,utd,Northern Division,county_sentence,"(1) The Northern Division comprises the counties of Box Elder, Cache, Davis, Morgan, Rich, and Weber.",True
+28 U.S.C. § 125,utd,Northern Division,court_sentence,Court for the Northern Division shall be held at Salt Lake City and Ogden.,True
+28 U.S.C. § 125,utd,Central Division,county_sentence,"(2) The Central Division comprises the counties of Beaver, Carbon, Daggett, Duchesne, Emery, Garfield, Grand, Iron, Juab, Kane, Millard, Piute, Salt Lake, San Juan, Sanpete, Sevier, Summit, Tooele, Uintah, Utah, Wasatch, Washington, and Wayne.",True
+28 U.S.C. § 125,utd,Central Division,court_sentence,"Court for the Central Division shall be held at Salt Lake City, Provo, St. George, Moab, and Monticello..",True
+28 U.S.C. § 126,vtd,,court_sentence,"Court shall be held at Bennington, Brattleboro, Burlington, Montpelier, Rutland, Saint Johnsbury, and Windsor.",True
+28 U.S.C. § 127,vaed,,county_sentence,"(a) The Eastern District comprises the counties of Accomac, Amelia, Arlington, Brunswick, Caroline, Charles City, Chesterfield, Dinwiddie, Elizabeth City, Essex, Fairfax, Fauquier, Gloucester, Goochland, Greensville, Hanover, Henrico, Isle of Wight, James City, King and Queen, King George, King William, Lancaster, Loudoun, Lunenburg, Mathews, Mecklenburg, Middlesex, Nansemond, New Kent, Norfolk, Northampton, Northumberland, Nottoway, Powhatan, Prince Edward, Prince George, Prince William, Princess Anne, Richmond, Southampton, Spotsylvania, Stafford, Surry, Sussex, Warwick, Westmoreland, and York.",True
+28 U.S.C. § 127,vaed,,court_sentence,"Court for the Eastern District shall be held at Alexandria, Newport News, Norfolk, and Richmond.",True
+28 U.S.C. § 127,vawd,,county_sentence,"(b) The Western District comprises the counties of Albemarle, Alleghany, Amherst, Appomattox, Augusta, Bath, Bedford, Bland, Botetourt, Buchanan, Buckingham, Campbell, Carroll, Charlotte, Clarke, Craig, Culpeper, Cumberland, Dickenson, Floyd, Fluvanna, Franklin, Frederick, Giles, Grayson, Greene, Halifax, Henry, Highland, Lee, Louisa, Madison, Montgomery, Nelson, Orange, Page, Patrick, Pittsylvania, Pulaski, Rappahannock, Roanoke, Rockbridge, Rockingham, Russell, Scott, Shenandoah, Smyth, Tazewell, Warren, Washington, Wise, and Wythe.",True
+28 U.S.C. § 127,vawd,,court_sentence,"Court for the Western District shall be held at Abingdon, Big Stone Gap, Charlottesville, Danville, Harrisonburg, Lynchburg, and Roanoke.",True
+28 U.S.C. § 128,waed,,county_sentence,"(a) The Eastern District comprises the counties of Adams, Asotin, Benton, Chelan, Columbia, Douglas, Ferry, Franklin, Garfield, Grant, Kittitas, Klickitat, Lincoln, Okanogan, Pend Oreille, Spokane, Stevens, Walla Walla, Whitman, and Yakima.",True
+28 U.S.C. § 128,waed,,court_sentence,"Court for the Eastern District shall be held at Spokane, Yakima, Walla Walla, and Richland.",True
+28 U.S.C. § 128,wawd,,county_sentence,"(b) The Western District comprises the counties of Clallam, Clark, Cowlitz, Grays Harbor, Island, Jefferson, King, Kitsap, Lewis, Mason, Pacific, Pierce, San Juan, Skagit, Skamania, Snohomish, Thurston, Wahkiakum, and Whatcom.",True
+28 U.S.C. § 128,wawd,,court_sentence,"Court for the Western District shall be held at Bellingham, Seattle, Tacoma, Mount Vernon, and Vancouver.",True
+28 U.S.C. § 129,wvnd,,county_sentence,"(a) The Northern District comprises the counties of Barbour, Berkeley, Braxton, Brooke, Calhoun, Doddridge, Gilmer, Grant, Hampshire, Hancock, Hardy, Harrison, Jefferson, Lewis, Marion, Marshall, Mineral, Monongalia, Morgan, Ohio, Pendleton, Pleasants, Pocahontas, Preston, Randolph, Ritchie, Taylor, Tucker, Tyler, Upshur, Webster, and Wetzel.",True
+28 U.S.C. § 129,wvnd,,court_sentence,"Court for the Northern District shall be held at Clarksburg, Elkins, Fairmont, Martinsburg, and Wheeling.",True
+28 U.S.C. § 129,wvsd,,county_sentence,"(b) The Southern District comprises the counties of Boone, Cabell, Clay, Fayette, Greenbrier, Jackson, Kanawha, Lincoln, Logan, McDowell, Mason, Mercer, Mingo, Monroe, Nicholas, Putnam, Raleigh, Roane, Summers, Wayne, Wirt, Wood, and Wyoming.",True
+28 U.S.C. § 129,wvsd,,court_sentence,"Court for the Southern District shall be held at Beckley, Bluefield, Charleston, Huntington, Lewisburg, and Parkersburg.",True
+28 U.S.C. § 130,wied,,county_sentence,"(a) The Eastern District comprises the counties of Brown, Calumet, Dodge, Door, Florence, Fond du Lac, Forest, Green Lake, Kenosha, Kewaunee, Langlade, Manitowoc, Marinette, Marquette, Menominee, Milwaukee, Oconto, Outagamie, Ozaukee, Racine, Shawano, Sheboygan, Walworth, Washington, Waukesha, Waupaca, Waushara, and Winnebago.",True
+28 U.S.C. § 130,wied,,court_sentence,"Court for the Eastern District shall be held at Green Bay, Milwaukee, and Oshkosh.",True
+28 U.S.C. § 130,wiwd,,county_sentence,"(b) The Western District comprises the counties of Adams, Ashland, Barron, Bayfield, Buffalo, Burnett, Chippewa, Clark, Columbia, Crawford, Dane, Douglas, Dunn, Eau Claire, Grant, Green, Iowa, Iron, Jackson, Jefferson, Juneau, La Crosse, Lafayette, Lincoln, Marathon, Monroe, Oneida, Pepin, Pierce, Polk, Portage, Price, Richland, Rock, Rusk, Saint Croix, Sauk, Sawyer, Taylor, Trempealeau, Vernon, Vilas, Washburn, and Wood.",True
+28 U.S.C. § 130,wiwd,,court_sentence,"Court for the Western District shall be held at Eau Claire, La Crosse, Madison, Superior, and Wausau.",True
+28 U.S.C. § 131,wyd,,court_sentence,"Court shall be held at Casper, Cheyenne, Evanston, Lander, Jackson, and Sheridan.",True
+48 U.S.C. § 1424,gud,,county_sentence,"(1) The judicial authority of Guam shall be vested in a court established by Congress designated as the “District Court of Guam”, and a judicial branch of Guam which branch shall constitute a unified judicial system and include an appellate court designated as the “Supreme Court of Guam”, a trial court designated as the “Superior Court of Guam”, and such other lower local courts as may have been or shall hereafter be established by the laws of Guam.",True
+48 U.S.C. § 1615,vid,Division of Saint Croix,county_sentence,"The Virgin Islands consists of two judicial divisions; the Division of Saint Croix, comprising the island of Saint Croix and adjacent islands and cays, and the Division of Saint Thomas and Saint John, comprising the islands of Saint Thomas and Saint John and adjacent islands and cays.",True
+48 U.S.C. § 1615,vid,Division of Saint Thomas and Saint John,county_sentence,"The Virgin Islands consists of two judicial divisions; the Division of Saint Croix, comprising the island of Saint Croix and adjacent islands and cays, and the Division of Saint Thomas and Saint John, comprising the islands of Saint Thomas and Saint John and adjacent islands and cays.",True
+48 U.S.C. § 1821,nmid,,county_sentence,There is established for and within the Northern Mariana Islands a court of record to be known as the District Court for the Northern Mariana Islands. The Northern Mariana Islands shall constitute a part of the same judicial circuit of the United States as Guam. Terms of court shall be held on Saipan and at such other places and at such times as the court may designate by rule or order.,True
+48 U.S.C. § 1821,nmid,,court_sentence,There is established for and within the Northern Mariana Islands a court of record to be known as the District Court for the Northern Mariana Islands. The Northern Mariana Islands shall constitute a part of the same judicial circuit of the United States as Guam. Terms of court shall be held on Saipan and at such other places and at such times as the court may designate by rule or order.,True
+28 U.S.C. § 81,,,intro_sentence,"Alabama is divided into three judicial districts to be known as the Northern, Middle, and Southern Districts of Alabama.",True
+28 U.S.C. § 81A,,,intro_sentence,Alaska constitutes one judicial district.,True
+28 U.S.C. § 82,,,intro_sentence,Arizona constitutes one judicial district.,True
+28 U.S.C. § 83,,,intro_sentence,Arkansas is divided into two judicial districts to be known as the Eastern and Western Districts of Arkansas.,True
+28 U.S.C. § 84,,,intro_sentence,"California is divided into four judicial districts to be known as the Northern, Eastern, Central, and Southern Districts of California.",True
+28 U.S.C. § 85,,,intro_sentence,Colorado constitutes one judicial district.,True
+28 U.S.C. § 86,,,intro_sentence,Connecticut constitutes one judicial district.,True
+28 U.S.C. § 87,,,intro_sentence,Delaware constitutes one judicial district.,True
+28 U.S.C. § 88,,,intro_sentence,The District of Columbia constitutes one judicial district.,True
+28 U.S.C. § 89,,,intro_sentence,"Florida is divided into three judicial districts to be known as the Northern, Middle, and Southern Districts of Florida.",True
+28 U.S.C. § 90,,,intro_sentence,"Georgia is divided into three judicial districts to be known as the Northern, Middle, and Southern Districts of Georgia.",True
+28 U.S.C. § 91,,,intro_sentence,"Hawaii constitutes one judicial district which includes the Midway Islands, Wake Island, Johnston Island, Sand Island, Kingman Reef, Palmyra Island, Baker Island, Howland Island, Jarvis Island, Canton Island, and Enderbury Island: Provided, That the inclusion of Canton and Enderbury Islands in such judicial district shall in no way be construed to be prejudicial to the claims of the United Kingdom to said Islands in accordance with the agreement of April 6, 1939, between the Governments of the United States and of the United Kingdom to set up a regime for their use in common.",True
+28 U.S.C. § 92,,,intro_sentence,"Idaho, exclusive of Yellowstone National Park, constitutes one judicial district.",True
+28 U.S.C. § 93,,,intro_sentence,"Illinois is divided into three judicial districts to be known as the Northern, Central, and Southern Districts of Illinois.",True
+28 U.S.C. § 94,,,intro_sentence,Indiana is divided into two judicial districts to be known as the Northern and Southern Districts of Indiana.,True
+28 U.S.C. § 95,,,intro_sentence,Iowa is divided into two judicial districts to be known as the Northern and Southern Districts of Iowa.,True
+28 U.S.C. § 96,,,intro_sentence,Kansas constitutes one judicial district.,True
+28 U.S.C. § 97,,,intro_sentence,Kentucky is divided into two judicial districts to be known as the Eastern and Western Districts of Kentucky.,True
+28 U.S.C. § 98,,,intro_sentence,"Louisiana is divided into three judicial districts to be known as the Eastern, Middle, and Western Districts of Louisiana.",True
+28 U.S.C. § 99,,,intro_sentence,Maine constitutes one judicial district.,True
+28 U.S.C. § 100,,,intro_sentence,Maryland constitutes one judicial district comprising two divisions.,True
+28 U.S.C. § 101,,,intro_sentence,Massachusetts constitutes one judicial district.,True
+28 U.S.C. § 102,,,intro_sentence,Michigan is divided into two judicial districts to be known as the Eastern and Western Districts of Michigan.,True
+28 U.S.C. § 103,,,intro_sentence,Minnesota constitutes one judicial district comprising six divisions.,True
+28 U.S.C. § 104,,,intro_sentence,Mississippi is divided into two judicial districts to be known as the northern and southern districts of Mississippi.,True
+28 U.S.C. § 105,,,intro_sentence,Missouri is divided into two judicial districts to be known as the Eastern and Western Districts of Missouri.,True
+28 U.S.C. § 106,,,intro_sentence,"Montana, exclusive of Yellowstone National Park, constitutes one judicial district.",True
+28 U.S.C. § 107,,,intro_sentence,Nebraska constitutes one judicial district.,True
+28 U.S.C. § 108,,,intro_sentence,Nevada constitutes one judicial district.,True
+28 U.S.C. § 109,,,intro_sentence,New Hampshire constitutes one judicial district.,True
+28 U.S.C. § 110,,,intro_sentence,New Jersey constitutes one judicial district.,True
+28 U.S.C. § 111,,,intro_sentence,New Mexico constitutes one judicial district.,True
+28 U.S.C. § 112,,,intro_sentence,"New York is divided into four judicial districts to be known as the Northern, Southern, Eastern, and Western Districts of New York.",True
+28 U.S.C. § 113,,,intro_sentence,"North Carolina is divided into three judicial districts to be known as the Eastern, Middle, and Western Districts of North Carolina.",True
+28 U.S.C. § 114,,,intro_sentence,North Dakota constitutes one judicial district.,True
+28 U.S.C. § 115,,,intro_sentence,Ohio is divided into two judicial districts to be known as the Northern and Southern Districts of Ohio.,True
+28 U.S.C. § 116,,,intro_sentence,"Oklahoma is divided into three judicial districts to be known as the Northern, Eastern, and Western Districts of Oklahoma.",True
+28 U.S.C. § 117,,,intro_sentence,Oregon constitutes one judicial district.,True
+28 U.S.C. § 118,,,intro_sentence,"Pennsylvania is divided into three judicial districts to be known as the Eastern, Middle, and Western Districts of Pennsylvania.",True
+28 U.S.C. § 119,,,intro_sentence,Puerto Rico constitutes one judicial district.,True
+28 U.S.C. § 120,,,intro_sentence,Rhode Island constitutes one judicial district.,True
+28 U.S.C. § 121,,,intro_sentence,South Carolina constitutes one judicial district comprising eleven divisions.,True
+28 U.S.C. § 122,,,intro_sentence,South Dakota constitutes one judicial district comprising four divisions.,True
+28 U.S.C. § 123,,,intro_sentence,"Tennessee is divided into three judicial districts to be known as the Eastern, Middle, and Western Districts of Tennessee.",True
+28 U.S.C. § 124,,,intro_sentence,"Texas is divided into four judicial districts to be known as the Northern, Southern, Eastern, and Western Districts of Texas.",True
+28 U.S.C. § 125,,,intro_sentence,Utah constitutes one judicial district comprising two divisions.,True
+28 U.S.C. § 126,,,intro_sentence,Vermont constitutes one judicial district.,True
+28 U.S.C. § 127,,,intro_sentence,"Virginia is divided into two judicial districts, to be known as the Eastern and Western districts of Virginia.",True
+28 U.S.C. § 128,,,intro_sentence,Washington is divided into two judicial districts to be known as the Eastern and Western Districts of Washington.,True
+28 U.S.C. § 129,,,intro_sentence,West Virginia is divided into two judicial districts to be known as the Northern and Southern Districts of West Virginia.,True
+28 U.S.C. § 130,,,intro_sentence,Wisconsin is divided into two judicial districts to be known as the Eastern and Western districts of Wisconsin.,True
+28 U.S.C. § 131,,,intro_sentence,Wyoming and those portions of Yellowstone National Park situated in Montana and Idaho constitute one judicial district.,True

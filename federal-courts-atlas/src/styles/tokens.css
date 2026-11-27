@@ -1,0 +1,328 @@
+/*
+ * The Federal Courts Atlas: design tokens.
+ *
+ * One system for the whole site. Components read only these custom properties;
+ * nothing below the token layer hard-codes a color, size or duration.
+ *
+ * Themes: light is the default. Dark applies when the OS prefers dark and the
+ * reader has not chosen light, or when <html data-theme="dark">. The toggle in
+ * the header writes data-theme and persists it (src/app/theme.ts).
+ *
+ * The dark theme is designed, not inverted: an ink-navy ground instead of black,
+ * text at ~92% white to avoid halation, shadows replaced by hairline borders, and
+ * the map ramp re-ordered in lightness so "Highest" is always the most salient
+ * color against the page (see the palette notes below and docs/lanes/frontend.md).
+ *
+ * scripts/check-palette.mjs parses the @palette blocks below (keep the markers).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Typography ---------------------------------------------------- */
+  --font-serif: 'Newsreader Variable', 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Public Sans Variable', 'Libre Franklin', 'Franklin Gothic', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Modular scale (~1.2 at small sizes, fluid at display sizes). 1rem = 16px. */
+  --fs-2xs: 0.6875rem;  /* 11px  chart annotations, small-caps labels */
+  --fs-xs: 0.75rem;     /* 12px  legends, captions, table meta */
+  --fs-sm: 0.875rem;    /* 14px  UI, tooltips, tables */
+  --fs-base: 1rem;      /* 16px  UI body */
+  --fs-md: 1.125rem;    /* 18px  dek, lead UI */
+  --fs-story: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); /* 17-19px serif reading text */
+  --fs-lg: clamp(1.25rem, 1.15rem + 0.4vw, 1.4375rem);   /* 20-23px  section heads */
+  --fs-xl: clamp(1.5rem, 1.25rem + 1vw, 1.9375rem);      /* 24-31px  subheads */
+  --fs-2xl: clamp(1.875rem, 1.45rem + 1.9vw, 2.75rem);   /* 30-44px  page headlines */
+  --fs-3xl: clamp(2.125rem, 1.5rem + 2.8vw, 3.5rem);     /* 34-56px  home headline */
+
+  --lh-tight: 1.08;
+  --lh-snug: 1.25;
+  --lh-ui: 1.4;
+  --lh-body: 1.6;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-heavy: 800;
+
+  --ls-caps: 0.075em;    /* tracking for small-caps-style labels */
+  --ls-tight: -0.012em;  /* display serif */
+  --measure: 38rem;      /* ~68 characters of serif body text */
+  --measure-wide: 46rem;
+
+  /* ---- Spacing (4px base) ------------------------------------------ */
+  --space-1: 0.25rem;  /* 4  */
+  --space-2: 0.5rem;   /* 8  */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 3rem;     /* 48 */
+  --space-8: 4rem;     /* 64 */
+  --space-9: 6rem;     /* 96 */
+  --gutter: clamp(1rem, 0.6rem + 1.8vw, 2rem);
+  --page-max: 75rem;   /* 1200px content frame */
+  --tap: 44px;         /* minimum touch target */
+
+  /* ---- Radii -------------------------------------------------------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-control: 7px; /* navy rounded-square map buttons */
+  --radius-pill: 999px;
+
+  /* ---- Z-index ------------------------------------------------------ */
+  --z-map: 0;
+  --z-map-overlay: 5;
+  --z-map-controls: 10;
+  --z-sticky: 50;
+  --z-header: 100;
+  --z-menu: 150;
+  --z-popover: 200;
+  --z-tooltip: 300;
+  --z-skip: 1000;
+
+  /* ---- Motion ------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-instant: 80ms;
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+  --dur-map: 750ms; /* read by src/map for zoom transitions */
+
+  /* ---- Color: light ------------------------------------------------- */
+  --color-bg: #ffffff;
+  --color-bg-raised: #ffffff;
+  --color-surface: #f6f7f9;
+  --color-surface-2: #eceef2;
+  --color-rule: #e3e6ec;          /* hairlines */
+  --color-rule-strong: #c5cad4;
+  --color-text: #121418;          /* 18.6:1 on bg */
+  --color-text-2: #464c58;        /* 8.6:1 */
+  --color-text-3: #646b78;        /* 5.4:1: captions, meta */
+  --color-text-inverse: #ffffff;
+  --color-link: #233a9a;          /* 9.0:1 */
+  --color-link-hover: #142464;
+  --color-accent: #1a2a6c;        /* navy: buttons, active nav */
+  --color-accent-hover: #24388a;
+  --color-accent-soft: #e8ebfa;
+  --color-focus: #1b47d6;
+  --color-focus-halo: #ffffff;
+  --color-highlight: #fff3c4;     /* search-term marks */
+  --color-warn-bg: #fff7e6;
+  --color-warn-text: #7a4b00;
+  --color-dev-bg: #fdecef;
+  --color-dev-text: #8a1530;
+
+  /* Party colors for the bench timeline (future). Muted, not campaign-bright. */
+  --color-party-d: #3a63b8;
+  --color-party-r: #c0483e;
+  --color-party-other: #8a8f99;
+
+  --shadow-1: 0 1px 2px rgb(16 20 28 / 0.06), 0 1px 1px rgb(16 20 28 / 0.04);
+  --shadow-2: 0 6px 20px rgb(16 20 28 / 0.12), 0 1px 3px rgb(16 20 28 / 0.08);
+  --shadow-3: 0 16px 40px rgb(16 20 28 / 0.18), 0 2px 6px rgb(16 20 28 / 0.08);
+  --tooltip-border: rgb(16 20 28 / 0.08);
+
+  /* ---- Map: the client's chosen style ----------------------------------
+   * 5-step quantile ramp, pale periwinkle -> deep navy, built in OKLCH with
+   * evenly spaced lightness (L* ~91 -> 22) and hue drifting 278 -> 266 so the
+   * light end reads lavender-periwinkle and the dark end true navy.
+   */
+  /* @palette light */
+  --map-q0: #e0e5fe;
+  --map-q1: #acb7ee;
+  --map-q2: #7388da;
+  --map-q3: #435cb7;
+  --map-q4: #182e72;
+  --map-bg: #ffffff;
+  --map-border: #ffffff;
+  --map-nodata: #f1f2f4;
+  --map-nodata-line: #a9afba;
+  /* @end */
+  --map-base: #dfe3ec;             /* districts when no variable is loaded */
+  --map-district-stroke: var(--map-border);
+  --map-state-stroke: var(--map-border);
+  --map-district-width: 0.6px;
+  --map-state-width: 1.4px;
+  --map-county-stroke: rgb(255 255 255 / 0.55);
+  --map-county-width: 0.35px;
+  --map-hover-stroke: #121418;
+  --map-hover-halo: #ffffff;
+  --map-dot: #121418;
+  --map-dot-ring: #ffffff;
+  --map-label: #121418;
+  --map-label-halo: rgb(255 255 255 / 0.92);
+  --map-inset-frame: #c9ced8;
+  --map-inset-label: #646b78;
+  --map-control-bg: #1a2a6c;
+  --map-control-bg-hover: #26398f;
+  --map-control-fg: #ffffff;
+  --map-control-border: transparent;
+  --map-highlight: #182e72;        /* locator: the selected district */
+  --map-context: #e4e7ee;          /* locator: neighbors */
+  --map-context-2: #d2d7e1;        /* locator: same state */
+  /* Circuit map: four categorical tints of equal lightness (Learn page). */
+  --circuit-0: #dfe5f4;
+  --circuit-1: #efe7d8;
+  --circuit-2: #dcebe2;
+  --circuit-3: #ece0ec;
+}
+
+/* ---- Color: dark ------------------------------------------------------
+ * Ground is ink navy (#0e121a), not black: it keeps the atlas's blue identity
+ * and lets the dimmest map step sit visibly above it. Elevation comes from
+ * lighter surfaces + hairlines rather than shadows.
+ *
+ * Map ramp: on a dark ground, salience comes from luminance contrast with the
+ * page. Keeping light-mode order would make "Highest" (navy) disappear into the
+ * background, so the lightness direction flips: "Lowest" is a dim indigo just
+ * above the ground and "Highest" is a bright periwinkle. Hue stays in the same
+ * periwinkle/navy family so the legend reads the same in both themes.
+ * Borders become ground-colored gaps (the dark analog of white borders).
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-bg: #0e121a;
+    --color-bg-raised: #151a24;
+    --color-surface: #141923;
+    --color-surface-2: #1c2230;
+    --color-rule: #252c3a;
+    --color-rule-strong: #364052;
+    --color-text: #e9ebf1;
+    --color-text-2: #b9bfcc;
+    --color-text-3: #959cab;
+    --color-text-inverse: #0e121a;
+    --color-link: #a9b8ff;
+    --color-link-hover: #d3dbff;
+    --color-accent: #c9d2ff;
+    --color-accent-hover: #e1e6ff;
+    --color-accent-soft: #1f2846;
+    --color-focus: #8fa6ff;
+    --color-focus-halo: #0e121a;
+    --color-highlight: #4a3f12;
+    --color-warn-bg: #2a2110;
+    --color-warn-text: #f3cf86;
+    --color-dev-bg: #3a1520;
+    --color-dev-text: #ffb3c2;
+    --color-party-d: #7f9fe6;
+    --color-party-r: #e5867c;
+    --color-party-other: #9aa0ab;
+    --shadow-1: 0 0 0 1px rgb(255 255 255 / 0.04);
+    --shadow-2: 0 8px 24px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.06);
+    --shadow-3: 0 18px 44px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06);
+    --tooltip-border: rgb(255 255 255 / 0.1);
+    --map-q0: #2a3556;
+    --map-q1: #3f5190;
+    --map-q2: #6074c8;
+    --map-q3: #93a3ee;
+    --map-q4: #d4dbff;
+    --map-bg: #0e121a;
+    --map-border: #0e121a;
+    --map-nodata: #1a1f2a;
+    --map-nodata-line: #5b6375;
+    --map-base: #2a3142;
+    --map-county-stroke: rgb(14 18 26 / 0.55);
+    --map-hover-stroke: #ffffff;
+    --map-hover-halo: #0e121a;
+    --map-dot: #f3f4f8;
+    --map-dot-ring: #0e121a;
+    --map-label: #e9ebf1;
+    --map-label-halo: rgb(14 18 26 / 0.9);
+    --map-inset-frame: #364052;
+    --map-inset-label: #959cab;
+    --map-control-bg: #26346e;
+    --map-control-bg-hover: #33459a;
+    --map-control-fg: #ffffff;
+    --map-control-border: #6b7cc4;
+    --map-highlight: #c9d2ff;
+    --map-context: #1e2431;
+    --map-context-2: #2b3344;
+    --circuit-0: #25304a;
+    --circuit-1: #3a3426;
+    --circuit-2: #23382e;
+    --circuit-3: #392c3d;
+  }
+}
+
+/* Same values, applied by the manual toggle. Keep in sync with the block above
+   (scripts/check-palette.mjs reads this one). */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #0e121a;
+  --color-bg-raised: #151a24;
+  --color-surface: #141923;
+  --color-surface-2: #1c2230;
+  --color-rule: #252c3a;
+  --color-rule-strong: #364052;
+  --color-text: #e9ebf1;
+  --color-text-2: #b9bfcc;
+  --color-text-3: #959cab;
+  --color-text-inverse: #0e121a;
+  --color-link: #a9b8ff;
+  --color-link-hover: #d3dbff;
+  --color-accent: #c9d2ff;
+  --color-accent-hover: #e1e6ff;
+  --color-accent-soft: #1f2846;
+  --color-focus: #8fa6ff;
+  --color-focus-halo: #0e121a;
+  --color-highlight: #4a3f12;
+  --color-warn-bg: #2a2110;
+  --color-warn-text: #f3cf86;
+  --color-dev-bg: #3a1520;
+  --color-dev-text: #ffb3c2;
+  --color-party-d: #7f9fe6;
+  --color-party-r: #e5867c;
+  --color-party-other: #9aa0ab;
+  --shadow-1: 0 0 0 1px rgb(255 255 255 / 0.04);
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.06);
+  --shadow-3: 0 18px 44px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06);
+  --tooltip-border: rgb(255 255 255 / 0.1);
+  /* @palette dark */
+  --map-q0: #2a3556;
+  --map-q1: #3f5190;
+  --map-q2: #6074c8;
+  --map-q3: #93a3ee;
+  --map-q4: #d4dbff;
+  --map-bg: #0e121a;
+  --map-border: #0e121a;
+  --map-nodata: #1a1f2a;
+  --map-nodata-line: #5b6375;
+  /* @end */
+  --map-base: #2a3142;
+  --map-county-stroke: rgb(14 18 26 / 0.55);
+  --map-hover-stroke: #ffffff;
+  --map-hover-halo: #0e121a;
+  --map-dot: #f3f4f8;
+  --map-dot-ring: #0e121a;
+  --map-label: #e9ebf1;
+  --map-label-halo: rgb(14 18 26 / 0.9);
+  --map-inset-frame: #364052;
+  --map-inset-label: #959cab;
+  --map-control-bg: #26346e;
+  --map-control-bg-hover: #33459a;
+  --map-control-fg: #ffffff;
+  --map-control-border: #6b7cc4;
+  --map-highlight: #c9d2ff;
+  --map-context: #1e2431;
+  --map-context-2: #2b3344;
+  --circuit-0: #25304a;
+  --circuit-1: #3a3426;
+  --circuit-2: #23382e;
+  --circuit-3: #392c3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-map: 0ms;
+  }
+}

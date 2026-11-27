@@ -1,0 +1,473 @@
+/* ---- Atlas map ------------------------------------------------------- */
+
+.atlas-map {
+  position: relative;
+  isolation: isolate;
+  background: var(--map-bg);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.atlas-map__canvas {
+  position: relative;
+  width: 100%;
+}
+
+.atlas-map__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 975 / 610;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.atlas-map[data-state='loading'] .atlas-map__svg {
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-surface-2) 70%, transparent), transparent) 0 0 / 40% 100% no-repeat,
+    var(--map-bg);
+  animation: map-shimmer 1.4s linear infinite;
+}
+
+@keyframes map-shimmer {
+  from { background-position: -60% 0, 0 0; }
+  to { background-position: 160% 0, 0 0; }
+}
+
+.atlas-map[data-state='missing'] .atlas-map__svg,
+.atlas-map[data-state='error'] .atlas-map__svg {
+  display: none;
+}
+
+.atlas-map[data-state='missing'] .atlas-map__controls,
+.atlas-map[data-state='error'] .atlas-map__controls,
+.atlas-map[data-state='loading'] .atlas-map__controls {
+  display: none;
+}
+
+.atlas-map__svg:active {
+  cursor: grabbing;
+}
+
+.atlas-map__bg {
+  fill: var(--map-bg);
+}
+
+/* Districts: fills come from the theme's ramp through classes, so a theme
+   switch recolors the map without re-rendering. */
+.district {
+  fill: var(--map-base);
+  stroke: none;
+  outline: none;
+  cursor: pointer;
+  transition: fill var(--dur-slow) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+}
+
+.district.q0 { fill: var(--map-q0); }
+.district.q1 { fill: var(--map-q1); }
+.district.q2 { fill: var(--map-q2); }
+.district.q3 { fill: var(--map-q3); }
+.district.q4 { fill: var(--map-q4); }
+.district.nodata { fill: var(--hatch); }
+
+.district[role='img'] {
+  cursor: default;
+}
+
+/* Tiny island districts get an invisible hit halo so they can be hovered and tapped. */
+.district--tiny {
+  stroke: transparent;
+  stroke-width: 14px;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke;
+}
+
+.is-filtering .district:not(.is-match) {
+  opacity: 0.22;
+}
+
+.mesh {
+  fill: none;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.mesh--district {
+  stroke: var(--map-district-stroke);
+  stroke-width: var(--map-district-width);
+}
+
+.mesh--state {
+  stroke: var(--map-state-stroke);
+  stroke-width: var(--map-state-width);
+}
+
+.mesh--county {
+  stroke: var(--map-county-stroke);
+  stroke-width: var(--map-county-width);
+}
+
+.outline {
+  fill: none;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+.outline--halo {
+  stroke: var(--map-hover-halo);
+  stroke-width: 4px;
+}
+
+.outline--line {
+  stroke: var(--map-hover-stroke);
+  stroke-width: 1.75px;
+}
+
+.inset-frame {
+  fill: none;
+  stroke: var(--map-inset-frame);
+  stroke-width: 0.75px;
+  vector-effect: non-scaling-stroke;
+}
+
+.dots {
+  fill: none;
+  pointer-events: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+.dots--ring {
+  stroke: var(--map-dot-ring);
+  stroke-width: 5.5px;
+}
+
+.dots--fill {
+  stroke: var(--map-dot);
+  stroke-width: 3.25px;
+}
+
+.atlas-map[data-zoomed='true'] .dots--ring { stroke-width: 7px; }
+.atlas-map[data-zoomed='true'] .dots--fill { stroke-width: 4.25px; }
+
+.atlas-map__labels text {
+  pointer-events: none;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+
+.inset-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  fill: var(--map-inset-label);
+  stroke: var(--map-bg);
+  stroke-width: 2.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.city-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  fill: var(--map-label);
+  stroke: var(--map-label-halo);
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+.atlas-map.is-zooming .city-labels {
+  opacity: 0.35;
+}
+
+/* Navy rounded-square Home, +, - buttons stacked bottom-right (client style). */
+.atlas-map__controls {
+  position: absolute;
+  right: var(--space-2);
+  bottom: var(--space-2);
+  z-index: var(--z-map-controls);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--map-control-bg);
+  color: var(--map-control-fg);
+  box-shadow: inset 0 0 0 1px var(--map-control-border), 0 1px 2px rgb(10 18 50 / 0.25);
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-instant) var(--ease-out);
+}
+
+.map-control:hover {
+  background: var(--map-control-bg-hover);
+}
+
+.map-control:active {
+  transform: scale(0.96);
+}
+
+.map-control:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .map-control {
+    width: var(--tap);
+    height: var(--tap);
+  }
+}
+
+/* Phones: the map is only ~235px tall, so a vertical stack of 44px buttons would
+   cover the East Coast. The same navy squares sit in a row just below the map's
+   bottom-right corner instead. */
+@media (max-width: 40rem) {
+  .atlas-map[data-state='ready'] {
+    padding-bottom: calc(var(--tap) + 8px);
+  }
+
+  .atlas-map__controls {
+    flex-direction: row;
+    right: var(--gutter);
+    bottom: 0;
+  }
+
+  .map-control {
+    width: var(--tap);
+    height: var(--tap);
+  }
+}
+
+.atlas-map__hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: var(--z-map-overlay);
+  transform: translate(-50%, -50%);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  background: rgb(14 18 26 / 0.82);
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.atlas-map__hint[data-show='true'] {
+  opacity: 1;
+}
+
+.atlas-map__dev {
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  z-index: var(--z-map-overlay);
+  max-width: min(26rem, calc(100% - 1rem));
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-dev-bg);
+  color: var(--color-dev-text);
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+}
+
+.atlas-map__dev strong {
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  font-size: var(--fs-2xs);
+  margin-right: var(--space-1);
+}
+
+/* Proxy chips for tiny districts (D.C., Virgin Islands, Northern Mariana Islands). */
+.district-chips {
+  pointer-events: auto;
+}
+
+.district-chip {
+  fill: var(--map-base);
+  stroke: var(--map-bg);
+  stroke-width: 1.25px;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill var(--dur-slow) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+}
+
+.district-chip.q0 { fill: var(--map-q0); stroke: var(--map-q2); }
+.district-chip.q1 { fill: var(--map-q1); }
+.district-chip.q2 { fill: var(--map-q2); }
+.district-chip.q3 { fill: var(--map-q3); }
+.district-chip.q4 { fill: var(--map-q4); }
+.district-chip.nodata { fill: var(--hatch); stroke: var(--map-nodata-line); }
+.district-chip.base { stroke: var(--map-inset-frame); }
+
+.is-filtering .district-chip:not(.is-match) {
+  opacity: 0.22;
+}
+
+.chip-leader {
+  stroke: var(--map-inset-label);
+  stroke-width: 0.75px;
+  vector-effect: non-scaling-stroke;
+}
+
+.chip-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  fill: var(--map-inset-label);
+  pointer-events: none;
+}
+
+/* Map tooltip */
+.map-tip__name {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+.map-tip__label {
+  margin-top: var(--space-2);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-3);
+}
+
+.map-tip__value {
+  margin-top: 1px;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.map-tip__value.is-missing {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-md);
+  color: var(--color-text-3);
+}
+
+.map-tip__unit {
+  margin-left: 0.3em;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-2);
+  letter-spacing: 0;
+}
+
+.map-tip__meta {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.map-tip__link {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  margin: var(--space-2) calc(-1 * var(--space-3)) calc(-1 * var(--space-3));
+  padding: 0 var(--space-3);
+  border-top: 1px solid var(--color-rule);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+}
+
+/* ---- Thumbnails + locator ------------------------------------------- */
+
+.thumb-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.thumb-map__fill { stroke: none; }
+.thumb-map__fill.base { fill: var(--map-base); }
+.thumb-map__fill.ctx { fill: var(--map-context-2); }
+.thumb-map__fill.hl { fill: var(--map-highlight); }
+.thumb-map__fill.q0 { fill: var(--map-q0); }
+.thumb-map__fill.q1 { fill: var(--map-q1); }
+.thumb-map__fill.q2 { fill: var(--map-q2); }
+.thumb-map__fill.q3 { fill: var(--map-q3); }
+.thumb-map__fill.q4 { fill: var(--map-q4); }
+
+.thumb-map__states {
+  fill: none;
+  stroke: var(--map-border);
+  stroke-width: 0.6px;
+  vector-effect: non-scaling-stroke;
+}
+
+.thumb-map__frame {
+  fill: none;
+  stroke: var(--map-inset-frame);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.thumb-map__ring {
+  fill: none;
+  stroke: var(--map-highlight);
+  stroke-width: 1.25px;
+  vector-effect: non-scaling-stroke;
+}
+
+.locator-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.locator-map__bg { fill: var(--map-bg); }
+.locator-map__ctx .other { fill: var(--map-context); }
+.locator-map__ctx .same-state { fill: var(--map-context-2); }
+.locator-map__target { fill: var(--map-highlight); }
+
+.locator-map__mesh,
+.locator-map__states {
+  fill: none;
+  stroke: var(--map-border);
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+.locator-map__mesh { stroke-width: 0.75px; }
+.locator-map__states { stroke-width: 1.5px; }
+
+.locator-map__dot-ring,
+.locator-map__dot {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+}
+
+.locator-map__dot-ring { stroke: var(--map-dot-ring); stroke-width: 7px; }
+.locator-map__dot { stroke: var(--map-dot); stroke-width: 4px; }
+
+.locator-map__key-bg {
+  fill: var(--color-bg-raised);
+  stroke: var(--color-rule);
+  stroke-width: 0.75px;
+  vector-effect: non-scaling-stroke;
+}
+
+.locator-map__key .thumb-map__fill.ctx { fill: var(--map-context-2); }

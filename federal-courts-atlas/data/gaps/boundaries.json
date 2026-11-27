@@ -1,0 +1,73 @@
+{
+ "american_samoa_no_district": {
+  "lane": "boundaries",
+  "description": "American Samoa (5 county-equivalents, GEOIDs 60010-60050) belongs to no federal judicial district; county_district.csv carries it with district_id ''. It is not drawn.",
+  "variables": [],
+  "districts": [],
+  "periods": [],
+  "reason": "American Samoa is not part of any judicial district: no section of 28 U.S.C. \u00a7\u00a7 81-131 or of title 48 creates a federal district court for it (its trial court is the territorial High Court)."
+ },
+ "cb2025_20m_lacks_island_areas": {
+  "lane": "boundaries",
+  "description": "The 1:20m Census county file omits AS, GU, MP, VI; it is not used for geometry (the low-res topology is simplified from the 1:500k file instead).",
+  "variables": [],
+  "districts": [],
+  "periods": [],
+  "reason": "Census product scope."
+ },
+ "hawaii_outlying_islands_not_drawn": {
+  "lane": "boundaries",
+  "description": "28 U.S.C. \u00a7 91 includes in the District of Hawaii: Midway Islands, Wake Island, Johnston Island, Sand Island, Kingman Reef, Palmyra Island, Baker Island, Howland Island, Jarvis Island, Canton Island, Enderbury Island. None is a Census county-equivalent, so none is drawn or listed in county_district.csv.",
+  "variables": [],
+  "districts": [
+   "hid"
+  ],
+  "periods": [],
+  "reason": "Not present in Census county files (cb_2025/tl_2025 contain no U.S. Minor Outlying Islands); Canton and Enderbury are no longer U.S. territory."
+ },
+ "legacy_files_unavailable": {
+  "lane": "boundaries",
+  "description": "Historical county files that www2.census.gov answered with a 'Request Rejected' page (HTTP 200) on every attempt: https://www2.census.gov/geo/tiger/PREVGENZ/co/co00shp/co19_d00_shp.zip. Legacy GEOIDs that appear only in these files are missing from legacy_geoids.csv.",
+  "variables": [],
+  "districts": [],
+  "periods": [],
+  "reason": "Census CDN/WAF rejection; not worked around."
+ },
+ "ny_concurrent_waters_not_drawn": {
+  "lane": "boundaries",
+  "description": "28 U.S.C. \u00a7 112(b)-(c): S.D.N.Y. and E.D.N.Y. share jurisdiction over certain waters. Shared jurisdiction is not drawable as territory; maps show the county lists only.",
+  "variables": [],
+  "districts": [
+   "nysd",
+   "nyed"
+  ],
+  "periods": [],
+  "reason": "Concurrent, not exclusive, jurisdiction."
+ },
+ "statutory_places_not_named_gud_vid": {
+  "lane": "boundaries",
+  "description": "Title 48 names no place of holding court for the District Court of Guam or the District Court of the Virgin Islands; statute_places.csv has no rows for gud and vid.",
+  "variables": [
+   "statutory_places_of_holding_court"
+  ],
+  "districts": [
+   "gud",
+   "vid"
+  ],
+  "periods": [
+   2026
+  ],
+  "reason": "Not specified in 48 U.S.C. \u00a7\u00a7 1424, 1611-1615."
+ },
+ "tennessee_river_waters_not_delineated": {
+  "lane": "boundaries",
+  "description": "28 U.S.C. \u00a7 123(c)(1): W.D. Tenn. (Eastern Division) includes the waters of the Tennessee River to the low-water mark on the eastern shore where the river divides the Western and Middle Districts. That strip is not drawn; the Census county lines are used as is.",
+  "variables": [],
+  "districts": [
+   "tnwd",
+   "tnmd"
+  ],
+  "periods": [],
+  "reason": "No allowed public source gives the historical low-water line of the (now impounded) river."
+ }
+}

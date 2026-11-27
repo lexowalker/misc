@@ -1,0 +1,53 @@
+{
+ "units": 203,
+ "matches": 2452,
+ "county_rows": 3235,
+ "districts": 94,
+ "splits": 8,
+ "legacy": 20,
+ "places": 457,
+ "lii_identical": "432/432",
+ "lo": {
+  "path": "public/data/geo/districts-lo.topo.json",
+  "bytes": 349885,
+  "objects": {
+   "districts": 94,
+   "states": 55
+  },
+  "validity": {
+   "districts": {
+    "features": 94,
+    "invalid": []
+   },
+   "states": {
+    "features": 55,
+    "invalid": []
+   }
+  }
+ },
+ "hi": {
+  "path": "public/data/geo/districts-hi.topo.json",
+  "bytes": 2793059,
+  "objects": {
+   "districts": 94,
+   "states": 55,
+   "counties": 3230
+  },
+  "validity": {
+   "districts": {
+    "features": 94,
+    "invalid": []
+   },
+   "states": {
+    "features": 55,
+    "invalid": []
+   },
+   "counties": {
+    "features": 3230,
+    "invalid": [
+     "22045"
+    ]
+   }
+  }
+ }
+}

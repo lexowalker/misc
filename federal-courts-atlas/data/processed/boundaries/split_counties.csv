@@ -1,0 +1,9 @@
+geoid,county_name,state,county_district,carved_to,area,carved_km2,remainder_km2,statute,feature
+30031,Gallatin County,MT,mtd,wyd,yellowstone,261.333,6559.598,"28 U.S.C. §§ 92, 106, 131","TIGER/Line 2025 area landmark 'Yellowstone Natl Pk' (MTFCC K2181, AREAID 1102215199136), union of the ID, MT and WY parts"
+37125,Moore County,NC,ncmd,nced,fort_bragg_camp_mackall,13.488,1814.337,"28 U.S.C. § 113(a), (b)",TIGER/Line 2025 military installations 'Fort Bragg' and 'Camp MacKall' (MTFCC G6500)
+37153,Richmond County,NC,ncmd,nced,fort_bragg_camp_mackall,10.487,1232.494,"28 U.S.C. § 113(a), (b)",TIGER/Line 2025 military installations 'Fort Bragg' and 'Camp MacKall' (MTFCC G6500)
+16043,Fremont County,ID,idd,wyd,yellowstone,149.365,4761.336,"28 U.S.C. §§ 92, 106, 131","TIGER/Line 2025 area landmark 'Yellowstone Natl Pk' (MTFCC K2181, AREAID 1102215199136), union of the ID, MT and WY parts"
+37165,Scotland County,NC,ncmd,nced,fort_bragg_camp_mackall,18.312,811.975,"28 U.S.C. § 113(a), (b)",TIGER/Line 2025 military installations 'Fort Bragg' and 'Camp MacKall' (MTFCC G6500)
+37093,Hoke County,NC,ncmd,nced,fort_bragg_camp_mackall,362.305,651.982,"28 U.S.C. § 113(a), (b)",TIGER/Line 2025 military installations 'Fort Bragg' and 'Camp MacKall' (MTFCC G6500)
+30067,Park County,MT,mtd,wyd,yellowstone,377.071,6909.017,"28 U.S.C. §§ 92, 106, 131","TIGER/Line 2025 area landmark 'Yellowstone Natl Pk' (MTFCC K2181, AREAID 1102215199136), union of the ID, MT and WY parts"
+37063,Durham County,NC,ncmd,nced,fci_butner,2.121,769.107,"28 U.S.C. § 113(a), (b)","TIGER/Line 2025 area landmark 'Butner Federal Correctional Complx' (MTFCC K1237; 2 polygons) used as the extent of 'the Federal Correctional Institution, Butner'"

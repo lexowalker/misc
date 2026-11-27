@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The Federal Courts Atlas</title>
+    <meta name="description" content="An interactive atlas of the 94 U.S. federal district courts: how fast they move, how much work they carry, how they sentence and what cases they hear. Every number from a cited public source." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e121a" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a2a6c'/%3E%3Crect x='6' y='9' width='4' height='14' rx='1' fill='%23e0e5fe'/%3E%3Crect x='11' y='9' width='4' height='14' rx='1' fill='%23acb7ee'/%3E%3Crect x='16' y='9' width='4' height='14' rx='1' fill='%237388da'/%3E%3Crect x='21' y='9' width='4' height='14' rx='1' fill='%23435cb7'/%3E%3C/svg%3E" />
+    <script>
+      // Apply a stored theme before first paint (no flash). Storage may be blocked.
+      try {
+        var t = localStorage.getItem('fca-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>
+      <p style="font-family: Georgia, serif; max-width: 36rem; margin: 3rem auto; padding: 0 1rem">
+        The Federal Courts Atlas is an interactive map and needs JavaScript. The underlying data files are in the
+        <code>data/</code> folder of this site.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

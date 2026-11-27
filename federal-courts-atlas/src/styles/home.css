@@ -1,0 +1,209 @@
+.home {
+  padding-top: var(--space-6);
+}
+
+.home-head {
+  max-width: 46rem;
+  margin-bottom: var(--space-5);
+}
+
+.home-head .kicker {
+  margin-bottom: var(--space-3);
+}
+
+.home-head__title {
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-semibold);
+  font-variation-settings: 'opsz' 72;
+  letter-spacing: -0.02em;
+}
+
+.home-head__dek {
+  margin-top: var(--space-3);
+}
+
+.home-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-text);
+}
+
+.home-select-label {
+  color: var(--color-text-2);
+}
+
+.home-select-wrap {
+  position: relative;
+  flex: 1 1 18rem;
+  max-width: 28rem;
+}
+
+.home-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -6px;
+  border-right: 2px solid var(--color-text-2);
+  border-bottom: 2px solid var(--color-text-2);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.home-select {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 2.5rem 0 var(--space-3);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-raised);
+  color: var(--color-text);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.home-select:hover {
+  border-color: var(--color-text-3);
+}
+
+.home-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 46rem;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--color-text-2);
+}
+
+.home-notice strong {
+  color: var(--color-text);
+}
+
+.home-notice__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  border-radius: 50%;
+  background: var(--map-q2);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--map-q2) 22%, transparent);
+}
+
+.home-time {
+  margin-top: var(--space-3);
+}
+
+.home-time:empty {
+  display: none;
+}
+
+.home-about {
+  display: grid;
+  gap: var(--space-5) var(--space-7);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-rule);
+}
+
+@media (min-width: 52rem) {
+  .home-about {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  }
+}
+
+.home-about__title {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-3);
+}
+
+.home-about__text {
+  font-family: var(--font-serif);
+  font-size: var(--fs-story);
+  line-height: var(--lh-body);
+  max-width: var(--measure);
+}
+
+.home-about__higher,
+.home-about__formula {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-2);
+}
+
+.home-about__side h3 {
+  margin-bottom: var(--space-2);
+}
+
+.home-about__caveats,
+.home-about__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.home-about__caveats li {
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-rule);
+  color: var(--color-text-2);
+}
+
+.home-about__links li {
+  border-top: 1px solid var(--color-rule);
+}
+
+.home-about__links li:last-child {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.home-about__links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--tap);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.home-about__links a::after {
+  content: '→';
+  color: var(--color-text-3);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.home-about__links a:hover::after {
+  transform: translateX(3px);
+  color: var(--color-link);
+}
+
+@media (max-width: 40rem) {
+  .home {
+    padding-top: var(--space-5);
+  }
+
+  /* Full-bleed map on phones. */
+  .home-map {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
+
+  .home-map .choropleth__legend,
+  .home-map .choropleth__after-map,
+  .home-map .choropleth__foot,
+  .home-map .choropleth__table {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+}

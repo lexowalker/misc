@@ -1,0 +1,39 @@
+geoid,city,district_id,neighbour_counties,neighbour_cities,consistent
+51510,Alexandria,vaed,Fairfax County (vaed); Arlington County (vaed),,True
+51520,Bristol,vawd,Washington County (vawd),,True
+51530,Buena Vista,vawd,Rockbridge County (vawd),,True
+51540,Charlottesville,vawd,Albemarle County (vawd),,True
+51550,Chesapeake,vaed,,Norfolk city (vaed); Portsmouth city (vaed); Suffolk city (vaed); Virginia Beach city (vaed),True
+51570,Colonial Heights,vaed,Chesterfield County (vaed),Petersburg city (vaed),True
+51580,Covington,vawd,Alleghany County (vawd),,True
+51590,Danville,vawd,Pittsylvania County (vawd),,True
+51595,Emporia,vaed,Greensville County (vaed),,True
+51600,Fairfax,vaed,Fairfax County (vaed),,True
+51610,Falls Church,vaed,Fairfax County (vaed); Arlington County (vaed),,True
+51620,Franklin,vaed,Isle of Wight County (vaed); Southampton County (vaed),,True
+51630,Fredericksburg,vaed,Stafford County (vaed); Spotsylvania County (vaed),,True
+51640,Galax,vawd,Grayson County (vawd); Carroll County (vawd),,True
+51650,Hampton,vaed,York County (vaed),Newport News city (vaed); Poquoson city (vaed),True
+51660,Harrisonburg,vawd,Rockingham County (vawd),,True
+51670,Hopewell,vaed,Chesterfield County (vaed); Prince George County (vaed),,True
+51678,Lexington,vawd,Rockbridge County (vawd),,True
+51680,Lynchburg,vawd,Campbell County (vawd); Amherst County (vawd); Bedford County (vawd),,True
+51683,Manassas,vaed,Prince William County (vaed),Manassas Park city (vaed),True
+51685,Manassas Park,vaed,Prince William County (vaed),Manassas city (vaed),True
+51690,Martinsville,vawd,Henry County (vawd),,True
+51700,Newport News,vaed,York County (vaed); James City County (vaed),Hampton city (vaed),True
+51710,Norfolk,vaed,,Portsmouth city (vaed); Virginia Beach city (vaed); Chesapeake city (vaed),True
+51720,Norton,vawd,Wise County (vawd),,True
+51730,Petersburg,vaed,Chesterfield County (vaed); Prince George County (vaed); Dinwiddie County (vaed),Colonial Heights city (vaed),True
+51735,Poquoson,vaed,York County (vaed),Hampton city (vaed),True
+51740,Portsmouth,vaed,,Norfolk city (vaed); Suffolk city (vaed); Chesapeake city (vaed),True
+51750,Radford,vawd,Montgomery County (vawd); Pulaski County (vawd),,True
+51760,Richmond,vaed,Henrico County (vaed); Chesterfield County (vaed),,True
+51770,Roanoke,vawd,Roanoke County (vawd),Salem city (vawd),True
+51775,Salem,vawd,Roanoke County (vawd),Roanoke city (vawd),True
+51790,Staunton,vawd,Augusta County (vawd),,True
+51800,Suffolk,vaed,Isle of Wight County (vaed); Southampton County (vaed),Portsmouth city (vaed); Chesapeake city (vaed),True
+51810,Virginia Beach,vaed,,Norfolk city (vaed); Chesapeake city (vaed),True
+51820,Waynesboro,vawd,Augusta County (vawd),,True
+51830,Williamsburg,vaed,York County (vaed); James City County (vaed),,True
+51840,Winchester,vawd,Frederick County (vawd),,True

@@ -1,0 +1,385 @@
+profile_year,kind,letter,label,variable,legend_source_id,legend_locator,letter_prefix_printed
+2010,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2010,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2010,District_FCMS_Sep_2010.pdf p.1 national profile nature-of-suit list,True
+2011,civil,A,Social Security,fcms_civil_type_social_security,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,E,Real Property,fcms_civil_type_real_property,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,F,Labor Suits,fcms_civil_type_labor,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,G,Contracts,fcms_civil_type_contracts,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,H,Torts (other than personal injury/product liability),fcms_civil_type_torts_other,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,civil,L,All Other Civil Cases,fcms_civil_type_all_other_civil,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2011,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_explanation_district_2011,Nature of Suit and Offense Categories box,True
+2012,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2012,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2012,district-fcms-profiles-september-2012.pdf p.1 national profile nature-of-suit list,True
+2013,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2013,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2013,district-fcms-profiles-september-2013.pdf p.1 national profile nature-of-suit list,True
+2014,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2014,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2014,district-fcms-profiles-september-2014.pdf p.1 national profile nature-of-suit list,True
+2015,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2015,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2015,fcms_district_profiles_september_2015.pdf p.1 national profile nature-of-suit list,True
+2016,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2016,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2016,fcms_na_distprofile0930.2016.pdf p.1 national profile nature-of-suit list,True
+2017,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2017,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2017,fcms_na_distprofile0930.2017.pdf p.1 national profile nature-of-suit list,True
+2018,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2018,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2018,fcms_na_distprofile0930.2018.pdf p.1 national profile nature-of-suit list,True
+2019,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2019,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2019,fcms_na_distprofile0930.2019.pdf p.1 national profile nature-of-suit list,True
+2020,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,I,"Copyright, Patent, and Trademark",fcms_civil_type_copyright_patent_trademark,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2020,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2020,fcms_na_distprofile0930.2020.pdf p.1 national profile nature-of-suit list,True
+2021,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,I,Intellectual Property Rights,fcms_civil_type_intellectual_property_rights,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,False
+2021,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2021,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2021,fcms_na_distprofile0930.2021.pdf p.1 national profile nature-of-suit list,True
+2022,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,I,Intellectual Property Rights,fcms_civil_type_intellectual_property_rights,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,False
+2022,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2022,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2022,fcms_na_distprofile0930.2022.pdf p.1 national profile nature-of-suit list,True
+2023,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,I,Intellectual Property Rights,fcms_civil_type_intellectual_property_rights,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2023,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2023,fcms_na_disprofile0930.2023.pdf p.1 national profile nature-of-suit list,True
+2024,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,I,Intellectual Property Rights,fcms_civil_type_intellectual_property_rights,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2024,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2024,fcms_na_distprofile0930.2024.pdf p.1 national profile nature-of-suit list,True
+2025,civil,A,Social Security,fcms_civil_type_social_security,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,B,Personal Injury/Product Liability,fcms_civil_type_personal_injury_product_liability,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,C,Prisoner Petitions,fcms_civil_type_prisoner_petitions,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,D,Forfeitures and Penalties,fcms_civil_type_forfeitures_penalties,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,E,Real Property,fcms_civil_type_real_property,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,F,Labor Suits,fcms_civil_type_labor,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,G,Contracts,fcms_civil_type_contracts,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,H,Torts (other than Personal Injury/Product Liability),fcms_civil_type_torts_other,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,I,Intellectual Property Rights,fcms_civil_type_intellectual_property_rights,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,J,Civil Rights,fcms_civil_type_civil_rights,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,K,Antitrust,fcms_civil_type_antitrust,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,civil,L,All Other Civil,fcms_civil_type_all_other_civil,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,A,Marijuana,fcms_criminal_type_marijuana,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,B,All Other Drugs,fcms_criminal_type_other_drugs,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,C,Immigration,fcms_criminal_type_immigration,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,D,Firearms and Explosives,fcms_criminal_type_firearms_explosives,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,E,Fraud,fcms_criminal_type_fraud,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,F,Violent Offenses,fcms_criminal_type_violent_offenses,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,G,Sex Offenses,fcms_criminal_type_sex_offenses,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,H,Forgery and Counterfeiting,fcms_criminal_type_forgery_counterfeiting,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,I,Larceny and Theft,fcms_criminal_type_larceny_theft,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,J,Justice System Offenses,fcms_criminal_type_justice_system_offenses,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,K,Regulatory Offenses,fcms_criminal_type_regulatory_offenses,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
+2025,criminal,L,All Other Criminal,fcms_criminal_type_all_other_criminal,fcms_district_profiles_sep2025,fcms_na_distprofile0930_2025.pdf p.1 national profile nature-of-suit list,True
