@@ -157,9 +157,9 @@
     var ruling = el.querySelector('.w-scale-ruling');
 
     /* ---------- keeping the reader's place ----------
-       The sticky ticker covers the top of the screen. Everything we scroll to carries
-       scroll-margin-top: calc(var(--ticker-h) + 16px) in scale.css. We read that back and move the page with
-       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       The sticky ticker covers the top of the screen. The page's scroll-padding-top clears it, and everything we
+       scroll to adds a small scroll-margin-top in scale.css. gapOf() adds the two, which is where scrollIntoView
+       would park the element; we move the page with window.scrollTo so we can decide whether to move it at all.
        We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
     var acted = 0, moved = 0;
     function act() { acted = Date.now(); }
@@ -167,7 +167,11 @@
     window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
     el.addEventListener('click', act, true);
     el.addEventListener('keydown', act, true);
-    function gapOf(node) { return parseFloat(getComputedStyle(node).scrollMarginTop) || 0; }
+    function gapOf(node) {
+      var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+      if (!(pad > 0)) pad = 64;
+      return pad + (parseFloat(getComputedStyle(node).scrollMarginTop) || 0);
+    }
     function nudge(dy) {
       if (Math.abs(dy) < 2) return;
       var top = Math.max(0, (window.pageYOffset || document.documentElement.scrollTop) + dy);

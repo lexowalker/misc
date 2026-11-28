@@ -1,7 +1,8 @@
 /* scale: "The scales". A brass balance, a deck of argument chips, a ruling and a then-and-now panel. */
 [data-widget="scale"] .w-scale { position: relative; display: grid; gap: .8rem; min-width: 0; }
-/* what the widget scrolls to after a tap lands just under the sticky ticker */
-.w-scale-deck, .w-scale-note, .w-scale-ruling { scroll-margin-top: calc(var(--ticker-h) + 16px); }
+/* what the widget scrolls to after a tap lands just under the sticky ticker: the page's own scroll-padding-top
+   (the ticker plus 12px) plus this margin, both read back by scale.js */
+[data-widget="scale"] .w-scale-deck, [data-widget="scale"] .w-scale-note, [data-widget="scale"] .w-scale-ruling { scroll-margin-top: 4px; }
 
 /* ---- the deck: one argument at a time, like a brass weight with a paper tag ---- */
 .w-scale-deck { display: grid; gap: .55rem; }

@@ -27,7 +27,7 @@
 /* ---------- Part A: the theory card (an index card) ---------- */
 .w-wt-card {
   position: relative; display: flex; flex-direction: column; gap: .7rem; min-width: 0; padding: .95rem .95rem 1rem; border: 1px solid var(--rule); border-radius: 3px;
-  background: var(--sheet); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
+  background: var(--sheet); scroll-margin-top: 4px; scroll-margin-bottom: 12px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 12px 24px -20px rgba(0, 0, 0, .55);
 }
 .w-wt-card.is-in { animation: w-wt-cardin .28s ease-out; }
@@ -86,7 +86,7 @@
 .w-wt-status:empty { display: none; }
 
 /* ---------- Part A: the ruling ---------- */
-.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; scroll-margin-top: calc(var(--ticker-h) + 16px); }
+.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; scroll-margin-top: 4px; }
 .w-wt-ruling.is-in { animation: w-wt-cardin .3s ease-out; }
 .w-wt-rstamp {
   justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: 1.35rem; letter-spacing: .14em; text-transform: uppercase;
@@ -104,7 +104,7 @@
 .w-wt-kian { font-size: .95rem; line-height: 1.5; color: var(--ink); padding-left: 1.05rem; }
 .w-wt-benchtitle { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-top: .2rem; }
 /* the quotes and the bench fold away on phones */
-.w-wt-more { min-width: 0; border-top: 1px solid var(--rule); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px; }
+.w-wt-more { min-width: 0; border-top: 1px solid var(--rule); scroll-margin-top: 4px; scroll-margin-bottom: 12px; }
 .w-wt-more:last-of-type { border-bottom: 1px solid var(--rule); }
 .w-wt-more + .w-wt-more { margin-top: -.85rem; }
 .w-wt-more > summary {
@@ -231,7 +231,11 @@
 .w-wt-ramos, .w-wt-lesson { font-size: .9rem; line-height: 1.5; color: var(--ink-2); }
 
 /* the seal requirement */
-.w-wt-req { scroll-margin-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; padding: .45rem .7rem; border: 1px dashed var(--rule); border-radius: var(--radius); }
+.w-wt-req {
+  scroll-margin-bottom: 12px; display: grid; grid-template-columns: auto auto; justify-content: start; align-items: center; gap: .3rem .8rem;
+  padding: .5rem .75rem; border: 1px dashed var(--rule); border-radius: var(--radius);
+}
+.w-wt-req > .label { grid-row: span 2; }
 .w-wt-req.is-done { border-style: solid; border-color: var(--accent); }
 .w-wt-reqi { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); }
 .w-wt-tick { width: 1.15rem; height: 1.15rem; }

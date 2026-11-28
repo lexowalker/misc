@@ -254,13 +254,13 @@
     const statusA = h('p', 'w-wt-status');
     statusA.setAttribute('aria-live', 'polite');
     partA.appendChild(statusA);
-    /* the seal needs both parts: say so beside the ruling button and again beside the draw button */
-    const reqA = makeReq();
-    partA.appendChild(reqA);
-
     const ruling = h('section', 'w-wt-ruling');
     ruling.hidden = true;
     partA.appendChild(ruling);
+    /* The seal needs both parts: say so beside the ruling button and again beside the draw button. This copy sits
+       after the ruling, so before the reveal it is just under the button, and after it the ruling leads into it. */
+    const reqA = makeReq();
+    partA.appendChild(reqA);
     root.appendChild(partA);
 
     /* =================== PART B =================== */

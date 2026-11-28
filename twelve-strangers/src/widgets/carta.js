@@ -100,7 +100,7 @@
       items: [
         ['1215', 'Barons win judgment by their equals. Clause 21 adds that earls and barons may be fined only by their peers.'],
         ['Later', 'For centuries, a peer of the realm accused of treason or felony was tried by the House of Lords. No jury sat.'],
-        ['1935', 'The last such trial. Lord de Clifford was charged with manslaughter after a fatal car crash. Eighty-six peers heard the case and acquitted him.'],
+        ['1935', 'The last such trial. Lord de Clifford was charged with manslaughter after a fatal car crash. More than eighty peers heard the case and acquitted him.'],
         ['1948', 'The Criminal Justice Act ended the privilege. Peers now face juries like everyone else.']
       ]
     },

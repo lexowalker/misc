@@ -743,7 +743,7 @@ main.wrap { overflow-x: clip; }
 .w-carta-gloss {
   display: grid; gap: .55rem; min-width: 0; background: var(--sheet-2); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
   border-radius: var(--radius); padding: .8rem .9rem .9rem;
-  scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
+  scroll-margin-top: 4px; scroll-margin-bottom: 12px;
 }
 .w-carta-gloss.is-later { border-left-color: var(--accent); }
 .w-carta-gloss.is-empty { justify-items: start; }
@@ -1009,8 +1009,9 @@ main.wrap { overflow-x: clip; }
 /* ===== widget: inversion ===== */
 /* inversion: "Would you be seated?" A card-sorting game in the voir dire room. */
 [data-widget="inversion"] .w-inversion { display: grid; gap: .9rem; min-width: 0; }
-/* what the widget scrolls to after a tap lands just under the sticky ticker */
-[data-widget="inversion"] .w-inversion, .w-inversion-card, .w-inversion-end { scroll-margin-top: calc(var(--ticker-h) + 16px); }
+/* what the widget scrolls to after a tap lands just under the sticky ticker: the page's own scroll-padding-top
+   (the ticker plus 12px) plus this margin, both read back by inversion.js */
+[data-widget="inversion"] .w-inversion, [data-widget="inversion"] .w-inversion-card, [data-widget="inversion"] .w-inversion-end { scroll-margin-top: 4px; }
 
 /* ---- header: count, tally of ten, score ---- */
 .w-inversion-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
@@ -1725,8 +1726,9 @@ main.wrap { overflow-x: clip; }
 /* ===== widget: scale ===== */
 /* scale: "The scales". A brass balance, a deck of argument chips, a ruling and a then-and-now panel. */
 [data-widget="scale"] .w-scale { position: relative; display: grid; gap: .8rem; min-width: 0; }
-/* what the widget scrolls to after a tap lands just under the sticky ticker */
-.w-scale-deck, .w-scale-note, .w-scale-ruling { scroll-margin-top: calc(var(--ticker-h) + 16px); }
+/* what the widget scrolls to after a tap lands just under the sticky ticker: the page's own scroll-padding-top
+   (the ticker plus 12px) plus this margin, both read back by scale.js */
+[data-widget="scale"] .w-scale-deck, [data-widget="scale"] .w-scale-note, [data-widget="scale"] .w-scale-ruling { scroll-margin-top: 4px; }
 
 /* ---- the deck: one argument at a time, like a brass weight with a paper tag ---- */
 .w-scale-deck { display: grid; gap: .55rem; }
@@ -2519,7 +2521,7 @@ main.wrap { overflow-x: clip; }
 /* ---------- Part A: the theory card (an index card) ---------- */
 .w-wt-card {
   position: relative; display: flex; flex-direction: column; gap: .7rem; min-width: 0; padding: .95rem .95rem 1rem; border: 1px solid var(--rule); border-radius: 3px;
-  background: var(--sheet); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
+  background: var(--sheet); scroll-margin-top: 4px; scroll-margin-bottom: 12px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 12px 24px -20px rgba(0, 0, 0, .55);
 }
 .w-wt-card.is-in { animation: w-wt-cardin .28s ease-out; }
@@ -2578,7 +2580,7 @@ main.wrap { overflow-x: clip; }
 .w-wt-status:empty { display: none; }
 
 /* ---------- Part A: the ruling ---------- */
-.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; scroll-margin-top: calc(var(--ticker-h) + 16px); }
+.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; scroll-margin-top: 4px; }
 .w-wt-ruling.is-in { animation: w-wt-cardin .3s ease-out; }
 .w-wt-rstamp {
   justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: 1.35rem; letter-spacing: .14em; text-transform: uppercase;
@@ -2596,7 +2598,7 @@ main.wrap { overflow-x: clip; }
 .w-wt-kian { font-size: .95rem; line-height: 1.5; color: var(--ink); padding-left: 1.05rem; }
 .w-wt-benchtitle { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-top: .2rem; }
 /* the quotes and the bench fold away on phones */
-.w-wt-more { min-width: 0; border-top: 1px solid var(--rule); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px; }
+.w-wt-more { min-width: 0; border-top: 1px solid var(--rule); scroll-margin-top: 4px; scroll-margin-bottom: 12px; }
 .w-wt-more:last-of-type { border-bottom: 1px solid var(--rule); }
 .w-wt-more + .w-wt-more { margin-top: -.85rem; }
 .w-wt-more > summary {
@@ -2723,7 +2725,11 @@ main.wrap { overflow-x: clip; }
 .w-wt-ramos, .w-wt-lesson { font-size: .9rem; line-height: 1.5; color: var(--ink-2); }
 
 /* the seal requirement */
-.w-wt-req { scroll-margin-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; padding: .45rem .7rem; border: 1px dashed var(--rule); border-radius: var(--radius); }
+.w-wt-req {
+  scroll-margin-bottom: 12px; display: grid; grid-template-columns: auto auto; justify-content: start; align-items: center; gap: .3rem .8rem;
+  padding: .5rem .75rem; border: 1px dashed var(--rule); border-radius: var(--radius);
+}
+.w-wt-req > .label { grid-row: span 2; }
 .w-wt-req.is-done { border-style: solid; border-color: var(--accent); }
 .w-wt-reqi { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); }
 .w-wt-tick { width: 1.15rem; height: 1.15rem; }
@@ -4272,7 +4278,7 @@ main.wrap { overflow-x: clip; }
       items: [
         ['1215', 'Barons win judgment by their equals. Clause 21 adds that earls and barons may be fined only by their peers.'],
         ['Later', 'For centuries, a peer of the realm accused of treason or felony was tried by the House of Lords. No jury sat.'],
-        ['1935', 'The last such trial. Lord de Clifford was charged with manslaughter after a fatal car crash. Eighty-six peers heard the case and acquitted him.'],
+        ['1935', 'The last such trial. Lord de Clifford was charged with manslaughter after a fatal car crash. More than eighty peers heard the case and acquitted him.'],
         ['1948', 'The Criminal Justice Act ended the privilege. Peers now face juries like everyone else.']
       ]
     },
@@ -5351,9 +5357,9 @@ main.wrap { overflow-x: clip; }
     var root = el.querySelector('.w-inversion');
 
     /* ---------- keeping the reader's place ----------
-       The sticky ticker covers the top of the screen. Everything we scroll to carries
-       scroll-margin-top: calc(var(--ticker-h) + 16px) in inversion.css. We read that back and move the page with
-       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       The sticky ticker covers the top of the screen. The page's scroll-padding-top clears it, and everything we
+       scroll to adds a small scroll-margin-top in inversion.css. gapOf() adds the two, which is where scrollIntoView
+       would park the element; we move the page with window.scrollTo so we can decide whether to move it at all.
        We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
     var acted = 0, moved = 0;
     function act() { acted = Date.now(); }
@@ -5361,12 +5367,17 @@ main.wrap { overflow-x: clip; }
     window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
     el.addEventListener('click', act, true);
     el.addEventListener('keydown', act, true);
+    function gapOf(node) {
+      var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+      if (!(pad > 0)) pad = 64;
+      return pad + (parseFloat(getComputedStyle(node).scrollMarginTop) || 0);
+    }
     /* If `need` is hidden under the ticker (or, unless topOnly, runs off the bottom of the screen),
        put `anchor` (default: need) just under the ticker. */
     function show(need, anchor, topOnly) {
       if (!need || !need.isConnected || moved > acted) return;
       anchor = anchor || need;
-      var gap = parseFloat(getComputedStyle(anchor).scrollMarginTop) || 0;
+      var gap = gapOf(anchor);
       var vh = window.innerHeight || document.documentElement.clientHeight;
       var r = need.getBoundingClientRect();
       if (r.top >= gap - 12 && (topOnly || r.bottom <= vh)) return;
@@ -7294,9 +7305,9 @@ main.wrap { overflow-x: clip; }
     var ruling = el.querySelector('.w-scale-ruling');
 
     /* ---------- keeping the reader's place ----------
-       The sticky ticker covers the top of the screen. Everything we scroll to carries
-       scroll-margin-top: calc(var(--ticker-h) + 16px) in scale.css. We read that back and move the page with
-       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       The sticky ticker covers the top of the screen. The page's scroll-padding-top clears it, and everything we
+       scroll to adds a small scroll-margin-top in scale.css. gapOf() adds the two, which is where scrollIntoView
+       would park the element; we move the page with window.scrollTo so we can decide whether to move it at all.
        We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
     var acted = 0, moved = 0;
     function act() { acted = Date.now(); }
@@ -7304,7 +7315,11 @@ main.wrap { overflow-x: clip; }
     window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
     el.addEventListener('click', act, true);
     el.addEventListener('keydown', act, true);
-    function gapOf(node) { return parseFloat(getComputedStyle(node).scrollMarginTop) || 0; }
+    function gapOf(node) {
+      var pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+      if (!(pad > 0)) pad = 64;
+      return pad + (parseFloat(getComputedStyle(node).scrollMarginTop) || 0);
+    }
     function nudge(dy) {
       if (Math.abs(dy) < 2) return;
       var top = Math.max(0, (window.pageYOffset || document.documentElement.scrollTop) + dy);
@@ -10115,13 +10130,13 @@ main.wrap { overflow-x: clip; }
     const statusA = h('p', 'w-wt-status');
     statusA.setAttribute('aria-live', 'polite');
     partA.appendChild(statusA);
-    /* the seal needs both parts: say so beside the ruling button and again beside the draw button */
-    const reqA = makeReq();
-    partA.appendChild(reqA);
-
     const ruling = h('section', 'w-wt-ruling');
     ruling.hidden = true;
     partA.appendChild(ruling);
+    /* The seal needs both parts: say so beside the ruling button and again beside the draw button. This copy sits
+       after the ruling, so before the reveal it is just under the button, and after it the ruling leads into it. */
+    const reqA = makeReq();
+    partA.appendChild(reqA);
     root.appendChild(partA);
 
     /* =================== PART B =================== */

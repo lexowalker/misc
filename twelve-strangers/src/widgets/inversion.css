@@ -1,7 +1,8 @@
 /* inversion: "Would you be seated?" A card-sorting game in the voir dire room. */
 [data-widget="inversion"] .w-inversion { display: grid; gap: .9rem; min-width: 0; }
-/* what the widget scrolls to after a tap lands just under the sticky ticker */
-[data-widget="inversion"] .w-inversion, .w-inversion-card, .w-inversion-end { scroll-margin-top: calc(var(--ticker-h) + 16px); }
+/* what the widget scrolls to after a tap lands just under the sticky ticker: the page's own scroll-padding-top
+   (the ticker plus 12px) plus this margin, both read back by inversion.js */
+[data-widget="inversion"] .w-inversion, [data-widget="inversion"] .w-inversion-card, [data-widget="inversion"] .w-inversion-end { scroll-margin-top: 4px; }
 
 /* ---- header: count, tally of ten, score ---- */
 .w-inversion-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }

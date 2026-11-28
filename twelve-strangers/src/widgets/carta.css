@@ -88,7 +88,7 @@
 .w-carta-gloss {
   display: grid; gap: .55rem; min-width: 0; background: var(--sheet-2); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
   border-radius: var(--radius); padding: .8rem .9rem .9rem;
-  scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
+  scroll-margin-top: 4px; scroll-margin-bottom: 12px;
 }
 .w-carta-gloss.is-later { border-left-color: var(--accent); }
 .w-carta-gloss.is-empty { justify-items: start; }
