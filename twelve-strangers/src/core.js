@@ -50,7 +50,7 @@
   TS.juror = jurorNo;
 
   /* ---------- toast ---------- */
-  var toastEl, toastTimer;
+  var toastEl, toastTimer, toastShown = 0;
   TS.toast = function (msg) {
     if (!toastEl) {
       toastEl = document.createElement('div');
@@ -60,10 +60,14 @@
       document.body.appendChild(toastEl);
     }
     toastEl.textContent = msg;
+    toastShown = Date.now();
     toastEl.classList.add('is-on');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2800);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('is-on'); }, 2400);
   };
+  window.addEventListener('scroll', function () {
+    if (toastEl && toastEl.classList.contains('is-on') && Date.now() - toastShown > 700) toastEl.classList.remove('is-on');
+  }, { passive: true });
 
   /* ---------- seals ---------- */
   TS.stamp = function (id) {
@@ -73,7 +77,7 @@
     store.set('seals', Object.keys(earned));
     renderSeals(true);
     var n = earnedCount();
-    TS.toast(n === 12 ? 'Seal earned: ' + seal.label + '. Your jury box is full.' : 'Seal earned: ' + seal.label + ' (' + n + ' of 12)');
+    TS.toast(n === 12 ? 'Seal 12 of 12: ' + seal.label + '. Jury box full.' : 'Seal ' + n + ' of 12: ' + seal.label);
     TS.emit('seal', { id: id, count: n });
     return true;
   };

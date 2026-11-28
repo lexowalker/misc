@@ -347,3 +347,13 @@ sup.fn a { font-family: var(--f-type); font-size: .7rem; text-decoration: none; 
 .toast.is-on { transform: translate(-50%, 0); }
 main.wrap { overflow-x: clip; }
 .seal-item small { display: block; font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); letter-spacing: .04em; }
+/* in the ticker the badge flashes instead of growing, so it never widens the page */
+.seal-box.in-ticker.is-bump { animation: seal-flash .9s ease-out; }
+@keyframes seal-flash { 0% { background: var(--sticker); color: var(--on-sticker); } 100% { background: var(--band); color: var(--on-band); } }
+.ticker { overflow: hidden; }
+/* the seal toast drops from the badge at the top right, small, and leaves quickly */
+.toast {
+  left: auto; right: max(10px, env(safe-area-inset-right, 0px)); transform: translateY(-8px); max-width: min(17rem, calc(100vw - 20px));
+  font-size: .8rem; padding: .5rem .75rem; text-align: left;
+}
+.toast.is-on { transform: none; }
