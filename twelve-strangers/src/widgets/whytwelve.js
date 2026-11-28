@@ -65,6 +65,7 @@
       willQ2: 'wholly without significance ‘except to mystics.’',
       kian: 'In June 2026 the Court agreed to look again, in *Kian v. Florida*. The accident is back on the docket.',
       willCite: '*Williams v. Florida*, 399 U.S. 78 (1970), opinion of Justice White. “Except to mystics” is Justice Harlan’s phrase, from his dissent in *Duncan v. Louisiana* (1968).',
+      quotesTitle: 'Coke and the Supreme Court',
       benchTitle: 'Your bench against the record',
       you: 'You',
       record: 'Record',
@@ -180,7 +181,9 @@
       p: ctx.store.get('p', 0.1),
       seats: null,
       draws: 0,
-      none: 0
+      none: 0,
+      openQ: null,
+      openB: null
     };
     if (!(st.n >= DATA.min && st.n <= DATA.max)) st.n = DATA.start;
     if (DATA.shares.indexOf(st.p) < 0) st.p = 0.1;
@@ -251,6 +254,9 @@
     const statusA = h('p', 'w-wt-status');
     statusA.setAttribute('aria-live', 'polite');
     partA.appendChild(statusA);
+    /* the seal needs both parts: say so beside the ruling button and again beside the draw button */
+    const reqA = makeReq();
+    partA.appendChild(reqA);
 
     const ruling = h('section', 'w-wt-ruling');
     ruling.hidden = true;
@@ -341,6 +347,8 @@
     const resultB = h('div', 'w-wt-result');
     resultB.setAttribute('aria-live', 'polite');
     boxWrap.appendChild(resultB);
+    const reqB = makeReq();
+    boxWrap.appendChild(reqB);
     lab.appendChild(boxWrap);
 
     const mathBox = h('div', 'w-wt-math');
@@ -366,9 +374,45 @@
     lab.appendChild(lawBox);
     root.appendChild(partB);
 
-    const req = h('div', 'w-wt-req');
-    req.innerHTML = '<span class="label">' + esc(DATA.sealReq) + '</span><span class="w-wt-reqi" data-r="1">' + TICK + esc(DATA.req1) + '</span><span class="w-wt-reqi" data-r="2">' + TICK + esc(DATA.req2) + '</span>';
-    root.appendChild(req);
+
+    function makeReq() {
+      const r = h('div', 'w-wt-req');
+      r.innerHTML = '<span class="label">' + esc(DATA.sealReq) + '</span><span class="w-wt-reqi" data-r="1">' + TICK + esc(DATA.req1) + '</span><span class="w-wt-reqi" data-r="2">' + TICK + esc(DATA.req2) + '</span>';
+      return r;
+    }
+
+    /* =================== keeping what a tap reveals on screen =================== */
+    /* The sticky ticker covers the top of the viewport. Scroll only in answer to a tap, and only when the target is
+       under the ticker or below the fold. */
+    function tickerBottom() {
+      const t = document.querySelector('.ticker');
+      const b = t ? t.getBoundingClientRect().bottom : 0;
+      return b > 0 ? b : 0;
+    }
+    /* html may already pad its scroll by the ticker (scroll-padding-top); trim the margin so the gap under the ticker
+       is 16px either way, never double. */
+    function fitMargin(target) {
+      let pad = 0;
+      try { pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; } catch (e) {}
+      target.style.scrollMarginTop = Math.max(0, Math.round(tickerBottom() + 16 - pad)) + 'px';
+    }
+    /* block 'nearest': scroll when any part is hidden. block 'start': scroll when the top is hidden or sits in the
+       lower half of the screen with the rest below the fold. */
+    function show(target, block) {
+      const r = target.getBoundingClientRect();
+      if (!r.height) return false;
+      const tb = tickerBottom(), vh = window.innerHeight;
+      let need = r.top < tb - 1;
+      if (!need && block === 'nearest') need = r.bottom > vh + 1;
+      if (!need && block === 'start') need = r.bottom > vh + 1 && r.top > tb + (vh - tb) / 2;
+      if (!need) return false;
+      fitMargin(target);
+      target.scrollIntoView({ block: block, behavior: ctx.reduced ? 'auto' : 'smooth' });
+      return true;
+    }
+    function isPhone() {
+      try { return window.matchMedia('(max-width: 40rem)').matches; } catch (e) { return false; }
+    }
 
     /* =================== Part A behaviour =================== */
     function nMarked() { return T.filter((t) => st.marks[t.id]).length; }
@@ -391,10 +435,10 @@
       revealBtn.classList.toggle('is-ready', n === T.length && !st.revealed);
     }
 
-    function renderCard(anim) {
-      const t = T[st.idx];
+    function fillCard(idx) {
+      const t = T[idx];
       cEm.innerHTML = emblem(t.emblem);
-      cNum.textContent = 'Theory ' + (st.idx + 1) + ' of 5';
+      cNum.textContent = 'Theory ' + (idx + 1) + ' of 5';
       cName.textContent = t.name;
       cSpec.hidden = !t.speculative;
       cSpec.textContent = DATA.specLabel;
@@ -414,6 +458,23 @@
       cRec.querySelector('p').textContent = t.record;
       card.classList.toggle('is-spec', !!t.speculative);
       card.dataset.tag = t.id;
+    }
+
+    /* Every card gets the height of the tallest, so the mark buttons (pinned to the bottom) do not jump under the
+       thumb when the next theory slides in. Measured, because the tallest depends on width, fonts and the ruling. */
+    let cardW = 0;
+    function sizeCard() {
+      card.style.minHeight = '';
+      if (!card.offsetWidth) return;
+      let max = 0;
+      T.forEach((t, i) => { fillCard(i); max = Math.max(max, card.getBoundingClientRect().height); });
+      fillCard(st.idx);
+      cardW = card.offsetWidth;
+      card.style.minHeight = Math.ceil(max) + 'px';
+    }
+
+    function renderCard(anim) {
+      fillCard(st.idx);
       if (anim && !ctx.reduced) { card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in'); }
       renderTabs();
     }
@@ -421,6 +482,7 @@
     let advanceTimer = null;
     function mark(m) {
       const t = T[st.idx];
+      const wasAll = nMarked() === T.length;
       st.marks[t.id] = m;
       saveA();
       renderCard(false);
@@ -429,7 +491,15 @@
       const next = T.findIndex((x, i) => i > st.idx && !st.marks[x.id]);
       const wrap = next < 0 ? T.findIndex((x) => !st.marks[x.id]) : next;
       if (wrap >= 0 && !st.revealed) {
-        advanceTimer = setTimeout(() => { st.idx = wrap; renderCard(true); }, ctx.reduced ? 150 : 450);
+        const y0 = window.scrollY;
+        advanceTimer = setTimeout(() => {
+          st.idx = wrap;
+          renderCard(true);
+          if (Math.abs(window.scrollY - y0) < 48) show(card, 'nearest');
+        }, ctx.reduced ? 150 : 450);
+      } else if (!wasAll && nMarked() === T.length && !st.revealed) {
+        /* all five weighed: the next step is the ruling button, with the seal checklist under it */
+        show(reqA, 'nearest');
       }
     }
 
@@ -444,25 +514,36 @@
     function renderRuling() {
       const R = DATA.ruling;
       const nP = T.filter((t) => st.marks[t.id] === 'p').length;
+      /* On a phone the quotes and the bench table fold away behind toggles; wider screens open them. */
+      const wide = !isPhone();
+      const openQ = st.openQ == null ? wide : st.openQ;
+      const openB = st.openB == null ? wide : st.openB;
       ruling.innerHTML =
         '<div class="w-wt-rstamp" tabindex="-1">' + esc(R.stamp) + '</div>' +
         '<p class="w-wt-rlead">' + esc(R.lead) + '</p>' +
+        '<details class="w-wt-more" data-k="q"' + (openQ ? ' open' : '') + '><summary><span class="w-wt-moretitle">' + esc(R.quotesTitle) + '</span></summary><div class="w-wt-morebody">' +
         '<figure class="w-wt-rq"><blockquote><p>' + esc(R.cokePre) + ' <q>' + esc(R.cokeQ) + '</q></p></blockquote><figcaption>' + esc(R.cokeCite) + '</figcaption></figure>' +
         '<figure class="w-wt-rq"><blockquote><p>' + esc(R.willPre) + ' <q>' + esc(R.willQ) + '</q> ' + esc(R.willPre2) + ' <q>' + esc(R.willQ2) + '</q></p></blockquote><figcaption>' + fmt(R.willCite) + '</figcaption></figure>' +
-        '<p class="w-wt-kian">' + fmt(R.kian) + '</p>' +
-        '<h5 class="w-wt-benchtitle">' + esc(R.benchTitle) + '</h5>' +
+        '<p class="w-wt-kian">' + fmt(R.kian) + '</p></div></details>' +
+        '<details class="w-wt-more" data-k="b"' + (openB ? ' open' : '') + '><summary><span class="w-wt-moretitle">' + esc(R.benchTitle) + '</span></summary><div class="w-wt-morebody">' +
         '<ul class="w-wt-bench">' + T.map((t) => {
           const m = st.marks[t.id];
           return '<li><span class="w-wt-bname">' + (st.fav === t.id ? STAR : '') + esc(t.name) + '</span>' +
             '<span class="w-wt-byou w-wt-mk-' + (m || 'x') + '"><i>' + esc(R.you) + '</i> ' + esc(m ? DATA.marks[m] : 'none') + '</span>' +
             '<span class="w-wt-brec"><i>' + esc(R.record) + '</i> ' + esc(t.tag) + '</span></li>';
-        }).join('') + '</ul>' +
+        }).join('') + '</ul></div></details>' +
         '<p class="w-wt-rtally">' + esc(R.tally(nP)) + (st.fav ? ' ' + esc(R.favNote[st.fav]) : '') + '</p>';
       const again = h('button', 'btn btn-ghost btn-small w-wt-again');
       again.type = 'button';
       again.textContent = R.again;
       again.addEventListener('click', weighAgain);
       ruling.appendChild(again);
+      ruling.querySelectorAll('.w-wt-more').forEach((d) => {
+        d.addEventListener('toggle', () => {
+          if (d.dataset.k === 'q') st.openQ = d.open; else st.openB = d.open;
+          if (d.open) show(d, 'nearest');
+        });
+      });
     }
 
     function reveal() {
@@ -471,6 +552,7 @@
         st.idx = open;
         renderCard(true);
         statusA.textContent = DATA.needAll(T[open].name);
+        show(card, 'nearest');
         return;
       }
       clearTimeout(advanceTimer);
@@ -481,10 +563,12 @@
       ruling.hidden = false;
       revealBtn.hidden = true;
       if (first && !ctx.reduced) { ruling.classList.remove('is-in'); void ruling.offsetWidth; ruling.classList.add('is-in'); }
+      sizeCard();
       renderCard(false);
       statusA.textContent = '';
       const stamp = ruling.querySelector('.w-wt-rstamp');
-      if (stamp) stamp.focus({ preventScroll: false });
+      if (stamp) stamp.focus({ preventScroll: true });
+      show(ruling, 'start');
       checkSeal();
     }
 
@@ -496,8 +580,10 @@
       ruling.hidden = true;
       revealBtn.hidden = false;
       st.idx = 0;
+      sizeCard();
       renderCard(true);
-      tabBtns[0].focus();
+      tabBtns[0].focus({ preventScroll: true });
+      show(tabs, 'start');
     }
 
     /* =================== Part B behaviour =================== */
@@ -528,7 +614,7 @@
       s += '<rect class="w-wt-panel" x="6" y="118" width="328" height="46" rx="3"/>';
       s += '<rect class="w-wt-rail" x="2" y="113" width="336" height="7" rx="2"/>';
       for (let k = 0; k < 6; k++) s += '<rect class="w-wt-inset" x="' + (14 + k * 53.5) + '" y="125" width="44.5" height="32" rx="2"/>';
-      s += '<rect class="w-wt-plaque" x="128" y="133" width="84" height="17" rx="2"/><text class="w-wt-plaquetext" x="170" y="145" text-anchor="middle">' + esc(DATA.boxLabel) + '</text>';
+      s += '<rect class="w-wt-plaque" x="113" y="129" width="114" height="24" rx="2"/><text class="w-wt-plaquetext" x="170" y="146" text-anchor="middle">' + esc(DATA.boxLabel) + '</text>';
       svg.innerHTML = s;
       const k = filled ? st.seats.filter(Boolean).length : 0;
       svg.setAttribute('aria-label', 'A jury box with ' + n + ' seats' + (filled ? ', ' + k + ' filled by members of the group' : ', all empty') + '.');
@@ -610,6 +696,7 @@
       renderResult(k);
       if (!st.drawn) { st.drawn = true; ctx.store.set('drawn', true); }
       checkSeal();
+      show(reqB, 'nearest');
     }
 
     range.addEventListener('input', () => setN(+range.value));
@@ -617,9 +704,11 @@
     plus.addEventListener('click', () => setN(st.n + 1));
 
     function renderReq() {
-      req.querySelector('[data-r="1"]').classList.toggle('is-done', st.revealed);
-      req.querySelector('[data-r="2"]').classList.toggle('is-done', st.drawn);
-      req.classList.toggle('is-done', st.revealed && st.drawn);
+      [reqA, reqB].forEach((req) => {
+        req.querySelector('[data-r="1"]').classList.toggle('is-done', st.revealed);
+        req.querySelector('[data-r="2"]').classList.toggle('is-done', st.drawn);
+        req.classList.toggle('is-done', st.revealed && st.drawn);
+      });
     }
 
     function checkSeal() {
@@ -635,5 +724,10 @@
     renderMath();
     renderResult();
     renderReq();
+    sizeCard();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCard);
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => { if (card.offsetWidth && card.offsetWidth !== cardW) sizeCard(); }).observe(partA);
+    }
   });
 })();

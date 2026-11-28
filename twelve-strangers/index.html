@@ -358,15 +358,16 @@ main.wrap { overflow-x: clip; }
 /* ===== widget: bushel ===== */
 /* Exhibit: The Old Bailey, September 1670. A court calendar, a meter for nights and hunger, an engraved scene,
    and the record of your service. SVG parts use .wb-* classes, always scoped under [data-widget="bushel"]. */
-.w-bushel { display: grid; gap: .9rem; min-width: 0; scroll-margin-top: calc(var(--ticker-h, 3.1rem) + 16px); }
+/* overflow-anchor: none: steps replace their content in place, and bushel.js decides where the page goes after a tap */
+.w-bushel { display: grid; gap: .9rem; min-width: 0; scroll-margin-top: calc(var(--ticker-h, 3.1rem) + 16px); overflow-anchor: none; }
 .w-bushel.is-paused * { animation-play-state: paused !important; }
 .w-bushel-h { font-family: var(--f-body); font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--ink); }
 .w-bushel-h:focus { outline: none; }
 .w-bushel-p { font-size: 1rem; line-height: 1.55; color: var(--ink); }
 .w-bushel-p b { font-weight: 700; }
-.w-bushel-kicker { font-family: var(--f-type); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.w-bushel-kicker { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
 .w-bushel-q { font-family: var(--f-type); font-size: .86rem; font-weight: 700; color: var(--ink); line-height: 1.45; margin-top: .2rem; }
-.w-bushel-fine { font-family: var(--f-type); font-size: .74rem; line-height: 1.45; color: var(--ink-3); }
+.w-bushel-fine { font-family: var(--f-type); font-size: .78rem; line-height: 1.45; color: var(--ink-3); }
 
 /* ---------- HUD: the court calendar, nights, hunger ---------- */
 .w-bushel-hud { display: grid; gap: .5rem; }
@@ -376,7 +377,7 @@ main.wrap { overflow-x: clip; }
   border-left: 1px solid var(--rule); line-height: 1.15; transition: background .25s, color .25s; min-width: 0;
 }
 .w-bushel-days li:first-child { border-left: 0; }
-.w-bushel-days li span { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+.w-bushel-days li span { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
 .w-bushel-days li b { font-size: .78rem; font-weight: 700; white-space: nowrap; }
 .w-bushel-days li.is-past { color: var(--ink-2); background: var(--sheet-2); }
 .w-bushel-days li.is-on { background: var(--accent); color: var(--on-accent); }
@@ -384,7 +385,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-meters.is-bump { animation: w-bushel-bump .5s ease-out; }
 @keyframes w-bushel-bump { 0% { transform: none; } 30% { transform: translateY(-2px); } 100% { transform: none; } }
 .w-bushel-meter { display: inline-flex; align-items: center; gap: .5rem; }
-.w-bushel-meter .label { font-size: .66rem; }
+.w-bushel-meter .label { font-size: .75rem; }
 .w-bushel-moons { display: inline-flex; gap: 3px; }
 .w-bushel-moons svg { width: 17px; height: 17px; display: block; }
 .w-bushel-moons path { fill: transparent; stroke: var(--ink-3); stroke-width: 1.4; transition: fill .3s, stroke .3s; }
@@ -398,6 +399,10 @@ main.wrap { overflow-x: clip; }
 .w-bushel-art { position: relative; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: 2px; overflow: hidden; min-width: 0; }
 .w-bushel-art svg { display: block; width: 100%; height: auto; max-width: 560px; margin: 0 auto; }
 .w-bushel-art-plaque { background: var(--sheet); padding: 1rem .8rem .8rem; }
+.w-bushel-art:empty { display: none; }
+@media (max-width: 45.99rem) {
+  .w-bushel-art svg { max-height: 32vh; max-height: 32svh; }
+}
 
 /* ---------- a step ---------- */
 .w-bushel-step { display: grid; gap: .7rem; min-width: 0; }
@@ -420,7 +425,7 @@ main.wrap { overflow-x: clip; }
 /* the docket */
 .w-bushel-docket { margin: 0; display: grid; gap: .35rem; padding: .7rem .8rem .75rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: 2px; box-shadow: inset 0 0 0 3px var(--sheet), inset 0 0 0 4px var(--rule); }
 .w-bushel-docket div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .6rem; align-items: baseline; }
-.w-bushel-docket dt { font-family: var(--f-type); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.w-bushel-docket dt { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .w-bushel-docket dd { margin: 0; font-family: var(--f-type); font-size: .86rem; line-height: 1.4; color: var(--ink); border-bottom: 1px dotted var(--rule); padding-bottom: .2rem; min-width: 0; }
 .w-bushel-docket div:last-child dd { color: var(--seal); font-weight: 700; }
 @media (max-width: 24rem) { .w-bushel-docket div { grid-template-columns: 1fr; gap: 0; } }
@@ -432,7 +437,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-quote p { font-family: var(--f-body); font-style: italic; font-size: 1.08rem; line-height: 1.45; color: var(--ink); }
 .w-bushel-quote p::before { content: "\201C"; }
 .w-bushel-quote p::after { content: "\201D"; }
-.w-bushel-quote footer { font-family: var(--f-type); font-size: .74rem; color: var(--ink-2); }
+.w-bushel-quote footer { font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); }
 .w-bushel-quote.is-bench { border-left-color: var(--seal); background: var(--seal-soft); }
 .w-bushel-quote.is-penn { border-left-color: var(--accent); background: var(--wash); }
 
@@ -440,7 +445,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-ban { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .4rem; }
 .w-bushel-ban li { display: grid; justify-items: center; gap: .2rem; padding: .45rem .2rem .4rem; background: var(--sheet); border: 1px dashed var(--rule); border-radius: 2px; animation: w-bushel-in .3s ease-out both; animation-delay: var(--d, 0ms); }
 .w-bushel-ban svg { width: 34px; height: 34px; display: block; }
-.w-bushel-ban span { font-family: var(--f-type); font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--seal); }
+.w-bushel-ban span { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--seal); }
 [data-widget="bushel"] .wb-i-fill { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.3; stroke-linejoin: round; }
 [data-widget="bushel"] .wb-i-ln { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
 [data-widget="bushel"] .wb-i-bone { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
@@ -456,7 +461,7 @@ main.wrap { overflow-x: clip; }
 }
 .w-bushel-call:hover { border-color: var(--accent); border-left-color: var(--brass); }
 .w-bushel-call:active { transform: translateY(1px); }
-.w-bushel-call-n { font-family: var(--f-type); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.w-bushel-call-n { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
 .w-bushel-call-who { font-family: var(--f-body); font-weight: 700; font-size: .98rem; line-height: 1.3; }
 .w-bushel-call-said { font-size: .94rem; line-height: 1.5; color: var(--ink-2); animation: w-bushel-in .3s ease-out both; }
 .w-bushel-call.is-heard { border-left-color: var(--accent); cursor: default; }
@@ -480,7 +485,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-opt[aria-pressed="true"] .w-bushel-box path { stroke-dashoffset: 0; }
 .w-bushel-opt-text { display: grid; gap: .1rem; min-width: 0; }
 .w-bushel-opt-label { font-family: var(--f-body); font-weight: 700; font-size: 1rem; line-height: 1.3; }
-.w-bushel-opt-sub { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); line-height: 1.35; }
+.w-bushel-opt-sub { font-family: var(--f-type); font-size: .78rem; color: var(--ink-3); line-height: 1.35; }
 .w-bushel-reply { padding: .55rem .8rem; border-left: 3px solid var(--brass); background: var(--sheet-2); font-size: .96rem; line-height: 1.55; color: var(--ink); }
 .w-bushel-reply[hidden] { display: none; }
 
@@ -490,7 +495,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-hold-label { position: relative; }
 .btn.w-bushel-hold.is-holding { transform: translateY(1px) scale(.98); }
 .btn.w-bushel-hold.is-done { background: var(--brass); border-color: var(--brass); }
-.w-bushel-holdhint { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); line-height: 1.4; }
+.w-bushel-holdhint { font-family: var(--f-type); font-size: .8rem; color: var(--ink-3); line-height: 1.4; }
 .w-bushel-holdhint.is-nudge { color: var(--seal); animation: w-bushel-shake .4s; }
 @keyframes w-bushel-shake { 0%, 100% { transform: none; } 25% { transform: translateX(-3px); } 50% { transform: translateX(3px); } 75% { transform: translateX(-2px); } }
 
@@ -499,12 +504,15 @@ main.wrap { overflow-x: clip; }
 .w-bushel-finebox[hidden] { display: none; }
 .w-bushel-finestamp {
   justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; color: var(--seal);
-  border: 3px double var(--seal); padding: .1rem .5rem; transform: rotate(-4deg); animation: w-bushel-stamp .4s cubic-bezier(.2, 1.5, .4, 1) both;
+  border: 3px double var(--seal); padding: .1rem .5rem; --rot: -4deg; transform: rotate(var(--rot)); transform-origin: 0 50%;
+  animation: w-bushel-stamp .4s cubic-bezier(.2, 1.5, .4, 1) both;
 }
-@keyframes w-bushel-stamp { from { opacity: 0; transform: rotate(-4deg) scale(1.8); } to { opacity: 1; transform: rotate(-4deg) scale(1); } }
+@keyframes w-bushel-stamp { from { opacity: 0; transform: rotate(var(--rot, -4deg)) scale(1.35); } to { opacity: 1; transform: rotate(var(--rot, -4deg)) scale(1); } }
 
 /* ---------- the ending ---------- */
 .w-bushel-plaque { margin: 0; display: grid; gap: .55rem; justify-items: center; }
+.w-bushel-plaque-slot { padding: .15rem 0 .1rem; }
+.w-bushel-plaque-slot:empty { display: none; }
 .w-bushel-plaque-in {
   position: relative; max-width: 30rem; padding: 1.1rem 1.15rem 1.15rem; background: var(--brass-soft); border: 2px solid var(--brass); border-radius: 3px;
   box-shadow: inset 0 0 0 4px var(--brass-soft), inset 0 0 0 5px var(--brass), 0 10px 22px -16px rgba(0, 0, 0, .6);
@@ -514,7 +522,7 @@ main.wrap { overflow-x: clip; }
 .w-bushel-plaque-in::before { left: 9px; }
 .w-bushel-plaque-in::after { right: 9px; }
 .w-bushel-plaque-in p { font-family: var(--f-body); font-size: .86rem; line-height: 1.55; text-align: center; color: var(--ink); letter-spacing: .01em; }
-.w-bushel-plaque figcaption { font-family: var(--f-type); font-size: .72rem; color: var(--ink-3); text-align: center; }
+.w-bushel-plaque figcaption { font-family: var(--f-type); font-size: .78rem; color: var(--ink-3); text-align: center; }
 .w-bushel-teach, .w-bushel-coda { display: grid; gap: .3rem; padding: .1rem 0 .1rem .85rem; border-left: 3px solid var(--brass); font-size: .96rem; line-height: 1.55; color: var(--ink); }
 .w-bushel-teach .label, .w-bushel-coda .label { color: var(--brass); }
 .w-bushel-coda { border-left-color: var(--accent); }
@@ -523,11 +531,11 @@ main.wrap { overflow-x: clip; }
 .w-bushel-record .label { color: var(--seal); padding-right: 7rem; }
 .w-bushel-record dl { margin: 0; display: grid; gap: .3rem; }
 .w-bushel-record dl div { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: .6rem; align-items: baseline; }
-.w-bushel-record dt { font-family: var(--f-type); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.w-bushel-record dt { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .w-bushel-record dd { margin: 0; font-family: var(--f-type); font-size: .86rem; line-height: 1.4; border-bottom: 1px dotted var(--rule); padding-bottom: .15rem; min-width: 0; }
 .w-bushel-record-stamp {
-  position: absolute; top: .55rem; right: .6rem; font-family: var(--f-type); font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--accent); border: 3px double var(--accent); padding: .1rem .4rem; transform: rotate(-6deg); background: var(--sheet-2);
+  position: absolute; top: .55rem; right: .6rem; font-family: var(--f-type); font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); border: 3px double var(--accent); padding: .1rem .4rem; --rot: -6deg; transform: rotate(var(--rot)); transform-origin: 100% 50%; background: var(--sheet-2);
   animation: w-bushel-stamp .42s cubic-bezier(.2, 1.5, .4, 1) .3s both;
 }
 
@@ -540,7 +548,7 @@ main.wrap { overflow-x: clip; }
 [data-widget="bushel"] .wb-floor { fill: var(--sheet); }
 [data-widget="bushel"] .wb-line { stroke: var(--ink-3); stroke-width: 1.4; }
 [data-widget="bushel"] .wb-ln { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
-[data-widget="bushel"] .wb-lbl { font-size: 8.5px; fill: var(--ink-2); letter-spacing: .04em; }
+[data-widget="bushel"] .wb-lbl { font-size: 12.5px; fill: var(--ink-2); }
 [data-widget="bushel"] .wb-shield { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.2; }
 [data-widget="bushel"] .wb-cross { fill: none; stroke: var(--seal); stroke-width: 4; }
 [data-widget="bushel"] .wb-sword { fill: none; stroke: var(--seal); stroke-width: 1.4; stroke-linecap: round; }
@@ -561,7 +569,7 @@ main.wrap { overflow-x: clip; }
 [data-widget="bushel"] .wb-chain-b { fill: var(--sticker); }
 [data-widget="bushel"] .wb-you-ring { fill: none; stroke: var(--sticker); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; animation: wb-pulse 1.8s ease-in-out infinite; }
 @keyframes wb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
-[data-widget="bushel"] .wb-you-lbl { font-size: 9px; font-weight: 700; fill: var(--brass); letter-spacing: .08em; }
+[data-widget="bushel"] .wb-you-lbl { font-size: 12.5px; font-weight: 700; fill: var(--brass); letter-spacing: .04em; }
 [data-widget="bushel"] .wb-you-arrow { fill: none; stroke: var(--brass); stroke-width: 1.6; stroke-linecap: round; }
 
 /* the court */
@@ -574,7 +582,7 @@ main.wrap { overflow-x: clip; }
 [data-widget="bushel"] .is-witness .wb-witness { opacity: 1; }
 [data-widget="bushel"] .is-witness .wb-bubble { animation: wb-pop .35s ease-out; transform-box: fill-box; transform-origin: 0 100%; }
 [data-widget="bushel"] .wb-bubble rect, [data-widget="bushel"] .wb-bubble path { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
-[data-widget="bushel"] .wb-bubble text { font-size: 10px; font-weight: 700; fill: var(--ink-2); }
+[data-widget="bushel"] .wb-bubble circle { fill: var(--ink-2); stroke: none; }
 @keyframes wb-pop { from { transform: scale(.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 [data-widget="bushel"] .wb-refused { opacity: 0; transition: opacity .2s; }
 [data-widget="bushel"] .wb-refused rect { fill: var(--sheet); stroke: var(--seal); stroke-width: 2.4; }
@@ -583,7 +591,7 @@ main.wrap { overflow-x: clip; }
 @keyframes wb-stamp { from { opacity: 0; transform: scale(1.7); } to { opacity: 1; transform: scale(1); } }
 [data-widget="bushel"] .wb-verdict { opacity: 0; }
 [data-widget="bushel"] .wb-verdict rect { fill: var(--accent); }
-[data-widget="bushel"] .wb-verdict text { font-size: 11px; font-weight: 700; letter-spacing: .14em; fill: var(--on-accent); }
+[data-widget="bushel"] .wb-verdict text { font-size: 12.5px; font-weight: 700; letter-spacing: .12em; fill: var(--on-accent); }
 [data-widget="bushel"] .is-verdict .wb-verdict { opacity: 1; animation: wb-stamp .42s cubic-bezier(.2, 1.5, .4, 1) both; transform-box: fill-box; transform-origin: center; }
 
 /* the locked room */
@@ -617,7 +625,7 @@ main.wrap { overflow-x: clip; }
 [data-widget="bushel"] .wb-portcullis { transition: transform .6s ease-in-out .2s; }
 [data-widget="bushel"] .is-paid .wb-portcullis { transform: translateY(-112px); }
 [data-widget="bushel"] .wb-sign { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.1; }
-[data-widget="bushel"] .wb-sign-t { font-size: 10px; font-weight: 700; letter-spacing: .22em; fill: var(--ink); }
+[data-widget="bushel"] .wb-sign-t { font-size: 12.5px; font-weight: 700; letter-spacing: .16em; fill: var(--ink); }
 [data-widget="bushel"] .wb-ledge { fill: var(--ink-3); }
 [data-widget="bushel"] .wb-purse { fill: var(--brass-soft); stroke: var(--ink); stroke-width: 1.2; }
 [data-widget="bushel"] .wb-coin { fill: var(--sticker); stroke: var(--brass); stroke-width: 1.3; }
@@ -626,7 +634,7 @@ main.wrap { overflow-x: clip; }
 [data-widget="bushel"] .wb-writ { opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .4s cubic-bezier(.2, 1.4, .4, 1); }
 [data-widget="bushel"] .is-writ .wb-writ { opacity: 1; transform: rotate(3deg); transform-box: fill-box; transform-origin: center; }
 [data-widget="bushel"] .wb-parch { fill: var(--brass-soft); stroke: var(--ink-3); stroke-width: 1.2; }
-[data-widget="bushel"] .wb-writ-t { font-family: var(--f-body); font-style: italic; font-weight: 700; font-size: 11px; fill: var(--ink); }
+[data-widget="bushel"] .wb-writ-t { font-family: var(--f-body); font-style: italic; font-weight: 700; font-size: 12.5px; fill: var(--ink); }
 [data-widget="bushel"] .wb-lines { fill: none; stroke: var(--ink-3); stroke-width: 1.2; }
 [data-widget="bushel"] .wb-wax { fill: var(--seal); }
 
@@ -648,7 +656,7 @@ main.wrap { overflow-x: clip; }
   background-image:
     radial-gradient(ellipse at 12% 18%, color-mix(in srgb, var(--brass) 10%, transparent), transparent 55%),
     radial-gradient(ellipse at 88% 85%, color-mix(in srgb, var(--brass) 14%, transparent), transparent 50%),
-    repeating-linear-gradient(to bottom, transparent 0, transparent 2.45rem, color-mix(in srgb, var(--brass) 22%, transparent) 2.45rem, color-mix(in srgb, var(--brass) 22%, transparent) calc(2.45rem + 1px));
+    repeating-linear-gradient(to bottom, transparent 0, transparent 2.5rem, color-mix(in srgb, var(--brass) 22%, transparent) 2.5rem, color-mix(in srgb, var(--brass) 22%, transparent) calc(2.5rem + 1px));
   background-position: 0 0, 0 0, 0 2.45rem;
   border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent);
   box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--sheet) 25%, transparent), 0 10px 22px -16px rgba(0, 0, 0, .55);
@@ -659,22 +667,27 @@ main.wrap { overflow-x: clip; }
 .w-carta-sheet::before { left: .4rem; }
 .w-carta-sheet::after { right: .4rem; }
 .w-carta-sheethead { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; flex-wrap: wrap; padding: 0 .3rem .25rem; border-bottom: 1px solid color-mix(in srgb, var(--brass) 40%, transparent); }
-.w-carta-title { font-family: var(--f-type); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--brass); }
-.w-carta-clause { font-family: var(--f-type); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.w-carta-title { font-family: var(--f-type); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--brass); }
+.w-carta-clause { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
 
-.w-carta-latin { margin: .45rem 0 0; font-family: var(--f-display); font-weight: 500; font-size: 1.42rem; line-height: 2.45rem; color: var(--ink); overflow-wrap: anywhere; }
+.w-carta-latin { margin: .45rem 0 0; font-family: var(--f-display); font-weight: 500; font-size: 1.42rem; line-height: 2.5rem; color: var(--ink); overflow-wrap: anywhere; }
 .w-carta-ph { position: relative; border-radius: 3px; }
 .w-carta-w {
   font: inherit; color: inherit; background: transparent; border: 0; margin: 0; padding: .02rem .14rem .1rem;
-  min-height: 2.4rem; min-width: 1.6rem; cursor: pointer; border-radius: 3px; touch-action: manipulation; line-height: 1.35;
+  min-height: 2.5rem; min-width: 2.5rem; vertical-align: top; cursor: pointer; border-radius: 3px; touch-action: manipulation; line-height: 1.35;
   background-image: linear-gradient(to right, var(--brass) 45%, transparent 45%); background-size: 6px 1.5px; background-repeat: repeat-x; background-position: 0 calc(100% - .35rem);
   transition: background-color .15s, color .15s;
+}
+/* phones: a touch smaller so the clause keeps to seven 40px lines and the gloss lands closer to the strip */
+@media (max-width: 30rem) {
+  .w-carta-latin { font-size: 1.32rem; }
+  .w-carta-w { padding-left: .1rem; padding-right: .1rem; }
 }
 .w-carta-w:hover { background-color: color-mix(in srgb, var(--sticker) 35%, transparent); }
 .w-carta-w:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .w-carta-ph.is-on .w-carta-w { color: var(--accent); background-image: linear-gradient(var(--brass), var(--brass)); background-size: 100% 1.5px; }
 .w-carta-ph.is-cur .w-carta-w { background-color: var(--sticker); color: var(--on-sticker); }
-.w-carta-sup { display: none; font-family: var(--f-type); font-size: .6rem; font-weight: 700; color: var(--brass); vertical-align: super; line-height: 0; margin-left: .05rem; }
+.w-carta-sup { display: none; font-family: var(--f-type); font-size: .75rem; font-weight: 700; color: var(--brass); vertical-align: super; line-height: 0; margin-left: .05rem; }
 .w-carta-ph.is-on .w-carta-sup { display: inline; }
 .w-carta-punct { margin-left: -.18rem; }
 .w-carta-ph.is-fresh .w-carta-w { animation: w-carta-ink .45s ease-out; }
@@ -701,7 +714,7 @@ main.wrap { overflow-x: clip; }
 .w-carta.is-sealed .w-carta-left { display: none; }
 .w-carta-wax { transform-box: fill-box; transform-origin: 50% 50%; }
 .w-carta-big.is-stamp .w-carta-wax { animation: w-carta-stamp .5s cubic-bezier(.2, 1.4, .4, 1); }
-@keyframes w-carta-stamp { 0% { transform: scale(1.7) rotate(-18deg); opacity: .3; } 60% { transform: scale(.94) rotate(2deg); opacity: 1; } 100% { transform: none; } }
+@keyframes w-carta-stamp { 0% { transform: scale(1.4) rotate(-14deg); opacity: .3; } 60% { transform: scale(.94) rotate(2deg); opacity: 1; } 100% { transform: none; } }
 
 /* the English */
 .w-carta-enbox { display: grid; gap: .35rem; }
@@ -712,7 +725,7 @@ main.wrap { overflow-x: clip; }
 .w-carta-seg.is-blank { display: inline-block; width: 2.6rem; height: .9em; border-bottom: 1.5px dotted var(--ink-3); vertical-align: baseline; }
 .w-carta-bl { margin: .35rem 0 0; padding: .1rem 0 .1rem .9rem; border-left: 3px solid var(--seal); display: grid; gap: .3rem; }
 .w-carta-bl p { font-style: italic; font-size: .98rem; line-height: 1.5; }
-.w-carta-bl footer { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); }
+.w-carta-bl footer { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); }
 
 /* gloss + peers */
 .w-carta-panels { display: grid; gap: .85rem; min-width: 0; }
@@ -720,6 +733,7 @@ main.wrap { overflow-x: clip; }
 .w-carta-gloss {
   display: grid; gap: .55rem; min-width: 0; background: var(--sheet-2); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
   border-radius: var(--radius); padding: .8rem .9rem .9rem;
+  scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
 }
 .w-carta-gloss.is-later { border-left-color: var(--accent); }
 .w-carta-gloss.is-empty { justify-items: start; }
@@ -730,10 +744,10 @@ main.wrap { overflow-x: clip; }
 .w-carta-ilrow { display: flex; flex-wrap: wrap; gap: .3rem .75rem; }
 .w-carta-il { display: inline-grid; gap: 0; line-height: 1.2; }
 .w-carta-il i { font-family: var(--f-body); font-size: 1.2rem; font-style: italic; color: var(--ink); }
-.w-carta-il small { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: .12rem; }
+.w-carta-il small { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: .12rem; }
 .w-carta-gen { font-weight: 700; font-size: 1.08rem; line-height: 1.35; color: var(--ink); }
 .w-carta-gnote { font-size: .95rem; line-height: 1.55; color: var(--ink-2); }
-.w-carta-nlabel { font-family: var(--f-type); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-right: .2rem; }
+.w-carta-nlabel { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-right: .2rem; }
 .w-carta-gloss.is-later .w-carta-nlabel { color: var(--accent); }
 .w-carta-done { font-family: var(--f-type); font-size: .85rem; color: var(--seal); border-top: 1px dashed var(--rule); padding-top: .5rem; line-height: 1.45; }
 
@@ -985,6 +999,8 @@ main.wrap { overflow-x: clip; }
 /* ===== widget: inversion ===== */
 /* inversion: "Would you be seated?" A card-sorting game in the voir dire room. */
 [data-widget="inversion"] .w-inversion { display: grid; gap: .9rem; min-width: 0; }
+/* what the widget scrolls to after a tap lands just under the sticky ticker */
+[data-widget="inversion"] .w-inversion, .w-inversion-card, .w-inversion-end { scroll-margin-top: calc(var(--ticker-h) + 16px); }
 
 /* ---- header: count, tally of ten, score ---- */
 .w-inversion-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
@@ -1028,7 +1044,7 @@ main.wrap { overflow-x: clip; }
 .w-inversion-face { display: grid; gap: .8rem; padding: .85rem .95rem 1rem; }
 .w-inversion-cardhead {
   display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; padding-bottom: .45rem;
-  border-bottom: 2px solid var(--seal); font-family: var(--f-type); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  border-bottom: 2px solid var(--seal); font-family: var(--f-type); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
   color: var(--ink-2); min-width: 0;
 }
 .w-inversion-cardhead > span:first-child { white-space: nowrap; }
@@ -1057,20 +1073,20 @@ main.wrap { overflow-x: clip; }
 .w-inversion-answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
 @media (min-width: 40rem) { .w-inversion-answers { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .w-inversion-ans {
-  display: grid; gap: .1rem; justify-items: center; align-content: center; min-height: 3.6rem; padding: .45rem .4rem;
+  display: grid; gap: .1rem; justify-items: center; align-content: center; min-height: 3.6rem; padding: .45rem .25rem;
   border: 1.5px solid var(--ink-2); border-radius: var(--radius); background: var(--sheet); color: var(--ink); cursor: pointer;
   touch-action: manipulation; box-shadow: 0 2px 0 var(--rule); transition: transform .1s, background .15s, border-color .15s, box-shadow .1s, opacity .2s;
 }
 .w-inversion-ans:hover:not([disabled]) { background: var(--wash); border-color: var(--accent); }
 .w-inversion-ans:active:not([disabled]) { transform: translateY(2px); box-shadow: 0 0 0 var(--rule); }
 .w-inversion-ans-label { font-family: var(--f-type); font-weight: 700; font-size: 1.3rem; line-height: 1.1; letter-spacing: .03em; }
-.w-inversion-ans-sub { font-family: var(--f-type); font-size: .7rem; letter-spacing: .04em; color: var(--ink-3); }
+.w-inversion-ans-sub { font-family: var(--f-type); font-size: .75rem; line-height: 1.3; letter-spacing: 0; color: var(--ink-3); text-wrap: balance; }
 .w-inversion-ans[disabled] { cursor: default; opacity: .45; }
 .w-inversion-ans.is-picked-right { opacity: 1; background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .w-inversion-ans.is-picked-wrong { opacity: 1; background: var(--seal-soft); border-color: var(--seal); }
 .w-inversion-ans.is-picked-right .w-inversion-ans-sub { color: var(--on-accent); }
 .w-inversion-ans.is-answer { opacity: 1; border-color: var(--accent); border-style: dashed; }
-.w-inversion-swipe { display: none; font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); text-align: center; }
+.w-inversion-swipe { display: none; font-family: var(--f-type); font-size: .8rem; color: var(--ink-3); text-align: center; }
 @media (pointer: coarse) { .w-inversion-swipe { display: block; } }
 
 /* ---- the ruling side ---- */
@@ -1091,19 +1107,19 @@ main.wrap { overflow-x: clip; }
 .w-inversion-stamp {
   display: inline-block; font-family: var(--f-type); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase;
   padding: .15rem .45rem .1rem; border: 3px double currentColor; border-radius: 3px; transform: rotate(-5deg); line-height: 1.3;
-  animation: w-inversion-thunk .42s cubic-bezier(.2, 1.4, .4, 1) both;
+  transform-origin: 30% 50%; animation: w-inversion-thunk .42s cubic-bezier(.2, 1.4, .4, 1) both;
 }
 .w-inversion-ruling + .w-inversion-ruling .w-inversion-stamp { animation-delay: .14s; transform: rotate(3deg); animation-name: w-inversion-thunk-b; }
 .w-inversion-stamp.is-seated { color: var(--accent); }
 .w-inversion-stamp.is-excused { color: var(--seal); }
 .w-inversion-stamp.is-maybe { color: var(--brass); }
 @keyframes w-inversion-thunk {
-  0% { opacity: 0; transform: rotate(-9deg) scale(1.9); }
+  0% { opacity: 0; transform: rotate(-9deg) scale(1.5); }
   60% { opacity: 1; transform: rotate(-5deg) scale(.94); }
   100% { opacity: 1; transform: rotate(-5deg) scale(1); }
 }
 @keyframes w-inversion-thunk-b {
-  0% { opacity: 0; transform: rotate(7deg) scale(1.9); }
+  0% { opacity: 0; transform: rotate(7deg) scale(1.5); }
   60% { opacity: 1; transform: rotate(3deg) scale(.94); }
   100% { opacity: 1; transform: rotate(3deg) scale(1); }
 }
@@ -1137,7 +1153,7 @@ main.wrap { overflow-x: clip; }
   border-bottom: 1px solid var(--rule); padding: .75rem 0 .7rem; max-width: 34rem; width: 100%; margin-inline: auto;
 }
 .w-inversion-col h5 {
-  font-family: var(--f-type); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+  font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
   padding-bottom: .3rem; margin: 0 0 .35rem; border-bottom: 2px solid var(--ink);
 }
 .w-inversion-col h5 span { font-size: .95rem; color: var(--ink); letter-spacing: .04em; }
@@ -1699,6 +1715,8 @@ main.wrap { overflow-x: clip; }
 /* ===== widget: scale ===== */
 /* scale: "The scales". A brass balance, a deck of argument chips, a ruling and a then-and-now panel. */
 [data-widget="scale"] .w-scale { position: relative; display: grid; gap: .8rem; min-width: 0; }
+/* what the widget scrolls to after a tap lands just under the sticky ticker */
+.w-scale-deck, .w-scale-note, .w-scale-ruling { scroll-margin-top: calc(var(--ticker-h) + 16px); }
 
 /* ---- the deck: one argument at a time, like a brass weight with a paper tag ---- */
 .w-scale-deck { display: grid; gap: .55rem; }
@@ -1722,17 +1740,19 @@ main.wrap { overflow-x: clip; }
 .w-scale-weight-body { fill: var(--brass); }
 .w-scale-weight-line { stroke: var(--brass-soft); stroke-width: 1.6; stroke-linecap: round; }
 .w-scale-chip-body { display: grid; gap: .15rem; min-width: 0; }
-.w-scale-chip-num { color: var(--ink-3); font-size: .68rem; }
+.w-scale-chip-num { color: var(--ink-3); font-size: .75rem; }
 .w-scale-chip-num b { color: var(--ink-2); }
 .w-scale-chip-text { font-family: var(--f-body); font-size: 1.12rem; line-height: 1.3; font-weight: 600; color: var(--ink); text-wrap: balance; }
 @media (min-width: 40rem) { .w-scale-chip-text { font-size: 1.25rem; } }
 .w-scale-deckbar { display: flex; align-items: center; justify-content: space-between; gap: .6rem; min-height: 2.5rem; }
 .w-scale-ask { font-size: .8rem; color: var(--ink-2); }
-.w-scale-undo { min-height: 2.5rem; }
+.w-scale-undo { min-height: 2.5rem; flex: none; white-space: nowrap; }
 
 /* ---- the balance ---- */
 .w-scale-stage { position: relative; margin: 0 auto; width: 100%; max-width: 30rem; }
 .w-scale-svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* on a short phone screen, shrink the drawing so the argument, the lesson and the pans fit on one screen */
+@media (max-width: 40rem) { .w-scale-svg { max-height: max(8.5rem, 100vh - 31.5rem); max-height: max(8.5rem, 100svh - 31.5rem); } }
 .w-scale-dial { fill: none; stroke: var(--rule); stroke-width: 2; }
 .w-scale-tick { fill: none; stroke: var(--ink-3); stroke-width: 1.4; stroke-linecap: round; }
 .w-scale-base { fill: var(--brass); }
@@ -1766,9 +1786,10 @@ main.wrap { overflow-x: clip; }
 .w-scale-panbtn.is-n { border-top: 4px solid var(--accent); }
 .w-scale-panbtn.is-s { border-top: 4px solid var(--ink); }
 .w-scale-panname { font-family: var(--f-body); font-weight: 700; font-size: .95rem; line-height: 1.2; }
-.w-scale-pancount { font-family: var(--f-type); font-size: .74rem; color: var(--ink-2); }
+@media (max-width: 26rem) { .w-scale-panbtn { padding-inline: .3rem; } .w-scale-panname { font-size: .9rem; } }
+.w-scale-pancount { font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); }
 .w-scale-pancount b { color: var(--ink); font-size: .85rem; }
-.w-scale-panhint { font-family: var(--f-type); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--brass); font-weight: 700; display: none; }
+.w-scale-panhint { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--brass); font-weight: 700; display: none; }
 .is-waiting .w-scale-panbtn { border-style: dashed; border-top-style: solid; }
 .is-waiting .w-scale-panhint { display: block; }
 .is-waiting .w-scale-panbtn:hover { background: var(--wash); border-color: var(--accent); }
@@ -1810,14 +1831,14 @@ main.wrap { overflow-x: clip; }
 .w-scale-side { border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet-2); padding: .6rem .7rem .4rem; min-width: 0; }
 .w-scale-side.is-n { border-top: 4px solid var(--accent); }
 .w-scale-side.is-s { border-top: 4px solid var(--ink); }
-.w-scale-side h5 { font-family: var(--f-type); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 .25rem; }
+.w-scale-side h5 { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 .25rem; }
 .w-scale-side ul { list-style: none; margin: 0; padding: 0; }
 .w-scale-side li { display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .3rem 0; border-top: 1px dashed var(--rule); font-size: .9rem; line-height: 1.3; }
 .w-scale-side li:first-child { border-top: 0; }
 .w-scale-side li.is-empty { color: var(--ink-3); font-style: italic; }
 .w-scale-move {
-  flex: 0 0 auto; min-height: 2.5rem; min-width: 2.75rem; padding: .2rem .5rem; border: 1px solid var(--rule); border-radius: var(--radius);
-  background: var(--sheet); font-family: var(--f-type); font-size: .7rem; letter-spacing: .04em; color: var(--accent); cursor: pointer; touch-action: manipulation;
+  flex: 0 0 auto; min-height: 2.75rem; min-width: 2.75rem; padding: .2rem .55rem; border: 1px solid var(--rule); border-radius: var(--radius);
+  background: var(--sheet); font-family: var(--f-type); font-size: .78rem; letter-spacing: .02em; color: var(--accent); cursor: pointer; touch-action: manipulation;
 }
 .w-scale-move:hover { border-color: var(--accent); background: var(--wash); }
 
@@ -1825,15 +1846,15 @@ main.wrap { overflow-x: clip; }
 .w-scale-tn { display: grid; gap: .55rem; margin-top: .3rem; }
 .w-scale-tnhead { display: grid; gap: .3rem; }
 .w-scale-tnhead h4 { font-family: var(--f-body); font-size: 1.2rem; font-weight: 700; }
-.w-scale-tnkey { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-family: var(--f-type); font-size: .74rem; color: var(--ink-2); line-height: 1.5; }
+.w-scale-tnkey { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); line-height: 1.5; }
 .w-scale-tag {
-  display: inline-block; font-family: var(--f-type); font-weight: 700; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase;
+  display: inline-block; font-family: var(--f-type); font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
   padding: .05rem .4rem; border-radius: 2px; vertical-align: .08em; margin-right: .25rem;
 }
 .w-scale-tag.is-then { background: var(--brass-soft); color: var(--brass); }
 .w-scale-tag.is-now { background: var(--ink); color: var(--paper); }
 .w-scale-tnrow { border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet); padding: .6rem .75rem .7rem; display: grid; gap: .45rem; }
-.w-scale-tnrow h5 { color: var(--ink); font-size: .72rem; margin: 0; }
+.w-scale-tnrow h5 { color: var(--ink); font-size: .75rem; margin: 0; }
 .w-scale-tnpair { display: grid; gap: .45rem; }
 @media (min-width: 40rem) { .w-scale-tnpair { grid-template-columns: 1fr 1fr; gap: 1rem; } }
 .w-scale-tnpair p { font-size: .92rem; line-height: 1.45; }
@@ -2464,7 +2485,7 @@ main.wrap { overflow-x: clip; }
 .w-wt-part { display: grid; gap: .9rem; min-width: 0; }
 .w-wt-b { border-top: 1px solid var(--rule); padding-top: 1.4rem; }
 .w-wt-phead { display: grid; gap: .25rem; }
-.w-wt-kicker { font-family: var(--f-type); font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+.w-wt-kicker { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
 .w-wt-ptitle { font-family: var(--f-body); font-size: 1.15rem; font-weight: 700; line-height: 1.25; }
 .w-wt-intro { font-size: .95rem; line-height: 1.5; color: var(--ink-2); }
 
@@ -2478,7 +2499,7 @@ main.wrap { overflow-x: clip; }
 .w-wt-tab:hover { border-color: var(--accent); }
 .w-wt-tab.is-cur { border: 2px solid var(--accent); color: var(--ink); background: var(--wash); }
 .w-wt-tabm {
-  position: absolute; top: -.45rem; right: -.45rem; min-width: 1.15rem; height: 1.15rem; border-radius: 50%; font-size: .62rem; line-height: 1.15rem;
+  position: absolute; top: -.5rem; right: -.5rem; min-width: 1.3rem; height: 1.3rem; border-radius: 50%; font-size: .75rem; font-weight: 700; line-height: 1.3rem;
   text-align: center; display: none;
 }
 .w-wt-tab.is-p .w-wt-tabm { display: block; background: var(--accent); color: var(--on-accent); }
@@ -2487,8 +2508,8 @@ main.wrap { overflow-x: clip; }
 
 /* ---------- Part A: the theory card (an index card) ---------- */
 .w-wt-card {
-  position: relative; display: grid; gap: .7rem; min-width: 0; padding: .95rem .95rem 1rem; border: 1px solid var(--rule); border-radius: 3px;
-  background: var(--sheet);
+  position: relative; display: flex; flex-direction: column; gap: .7rem; min-width: 0; padding: .95rem .95rem 1rem; border: 1px solid var(--rule); border-radius: 3px;
+  background: var(--sheet); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 12px 24px -20px rgba(0, 0, 0, .55);
 }
 .w-wt-card.is-in { animation: w-wt-cardin .28s ease-out; }
@@ -2501,17 +2522,17 @@ main.wrap { overflow-x: clip; }
 .w-wt-em .w-wt-thin { stroke-width: 1.1; }
 .w-wt-em .w-wt-frame { stroke-width: 1.4; }
 .w-wt-ctitles { display: grid; gap: .1rem; min-width: 0; }
-.w-wt-cnum { font-size: .68rem; }
+.w-wt-cnum { font-size: .75rem; }
 .w-wt-cname { font-family: var(--f-body); font-size: 1.12rem; font-weight: 700; line-height: 1.2; }
 .w-wt-spec {
-  justify-self: start; font-family: var(--f-type); font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  align-self: flex-start; font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
   color: var(--seal); border: 1.5px dashed var(--seal); padding: .1rem .45rem; border-radius: 2px;
 }
 .w-wt-ctext { font-size: .98rem; line-height: 1.55; }
 .w-wt-cquote { margin: 0; padding-left: .85rem; border-left: 3px solid var(--brass); display: grid; gap: .25rem; }
 .w-wt-cquote p { font-style: italic; font-size: .95rem; line-height: 1.5; color: var(--ink); }
-.w-wt-cquote footer { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); }
-.w-wt-cact { display: flex; flex-wrap: wrap; gap: .5rem; }
+.w-wt-cquote footer { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); }
+.w-wt-cact { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; }
 .w-wt-mark, .w-wt-fav {
   min-height: 2.75rem; padding: .45rem .85rem; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--sheet);
   font-family: var(--f-type); font-weight: 700; font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2);
@@ -2533,7 +2554,7 @@ main.wrap { overflow-x: clip; }
 .w-wt-fav[aria-pressed="true"] .w-wt-star path { fill: var(--brass); stroke: var(--brass); }
 .w-wt-crecord { display: grid; gap: .45rem; padding-top: .7rem; border-top: 1px dashed var(--rule); }
 .w-wt-ctag {
-  justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase;
+  align-self: flex-start; font-family: var(--f-type); font-weight: 700; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase;
   color: var(--seal); border: 3px double var(--seal); padding: .12rem .5rem; transform: rotate(-2deg);
 }
 .w-wt-card[data-tag="henry"] .w-wt-ctag { color: var(--accent); border-color: var(--accent); }
@@ -2547,29 +2568,49 @@ main.wrap { overflow-x: clip; }
 .w-wt-status:empty { display: none; }
 
 /* ---------- Part A: the ruling ---------- */
-.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; }
+.w-wt-ruling { display: grid; gap: .85rem; padding: 1rem .95rem 1.05rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); min-width: 0; scroll-margin-top: calc(var(--ticker-h) + 16px); }
 .w-wt-ruling.is-in { animation: w-wt-cardin .3s ease-out; }
 .w-wt-rstamp {
   justify-self: start; font-family: var(--f-type); font-weight: 700; font-size: 1.35rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--seal); border: 4px double var(--seal); padding: .2rem .7rem; transform: rotate(-3.5deg); margin: .2rem 0 .1rem .2rem;
 }
+.w-wt-rstamp { transform-origin: 0 50%; }
 .w-wt-ruling.is-in .w-wt-rstamp { animation: w-wt-stamp .45s cubic-bezier(.2, 1.5, .4, 1); }
-@keyframes w-wt-stamp { from { transform: rotate(-12deg) scale(1.6); opacity: 0; } to { transform: rotate(-3.5deg) scale(1); opacity: 1; } }
+@keyframes w-wt-stamp { from { transform: rotate(-10deg) scale(1.3); opacity: 0; } to { transform: rotate(-3.5deg) scale(1); opacity: 1; } }
 .w-wt-rlead { font-size: 1rem; line-height: 1.55; }
 .w-wt-rq { margin: 0; display: grid; gap: .3rem; }
 .w-wt-rq blockquote { margin: 0; padding-left: .85rem; border-left: 3px solid var(--brass); }
 .w-wt-rq p { font-size: .98rem; line-height: 1.55; }
 .w-wt-rq q { font-style: italic; quotes: "\201C" "\201D" "\2018" "\2019"; }
-.w-wt-rq figcaption { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); line-height: 1.45; padding-left: 1.05rem; }
+.w-wt-rq figcaption { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); line-height: 1.45; padding-left: 1.05rem; }
 .w-wt-kian { font-size: .95rem; line-height: 1.5; color: var(--ink); padding-left: 1.05rem; }
-.w-wt-benchtitle { font-family: var(--f-type); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-top: .2rem; }
+.w-wt-benchtitle { font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin-top: .2rem; }
+/* the quotes and the bench fold away on phones */
+.w-wt-more { min-width: 0; border-top: 1px solid var(--rule); scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px; }
+.w-wt-more:last-of-type { border-bottom: 1px solid var(--rule); }
+.w-wt-more + .w-wt-more { margin-top: -.85rem; }
+.w-wt-more > summary {
+  list-style: none; display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 2.75rem; padding: .3rem 0;
+  cursor: pointer; touch-action: manipulation; font-family: var(--f-type); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); line-height: 1.3;
+}
+.w-wt-more > summary::-webkit-details-marker { display: none; }
+.w-wt-more > summary::after {
+  content: ""; flex: 0 0 auto; width: .55rem; height: .55rem; margin-right: .35rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: translateY(-25%) rotate(45deg); transition: transform .2s;
+}
+.w-wt-more[open] > summary::after { transform: translateY(25%) rotate(-135deg); }
+.w-wt-more > summary:hover { color: var(--ink); }
+.w-wt-more > summary:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+.w-wt-morebody { display: grid; gap: .85rem; padding: .2rem 0 .9rem; min-width: 0; }
+.w-wt-more[data-k="b"] .w-wt-morebody { padding-top: 0; }
 .w-wt-bench { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .w-wt-bench li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .15rem .6rem; padding: .5rem 0; border-bottom: 1px solid var(--rule); font-size: .88rem; }
 .w-wt-bname { grid-column: 1 / -1; font-weight: 700; display: inline-flex; align-items: center; gap: .3rem; }
 .w-wt-bname .w-wt-star { width: .95rem; height: .95rem; }
 .w-wt-bname .w-wt-star path { fill: var(--brass); stroke: var(--brass); }
 .w-wt-byou, .w-wt-brec { font-family: var(--f-type); font-size: .78rem; color: var(--ink-2); }
-.w-wt-byou i, .w-wt-brec i { font-style: normal; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-right: .2rem; }
+.w-wt-byou i, .w-wt-brec i { font-style: normal; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-right: .2rem; }
 .w-wt-mk-p { color: var(--accent); }
 .w-wt-mk-d { color: var(--seal); }
 @media (min-width: 40rem) {
@@ -2608,10 +2649,10 @@ main.wrap { overflow-x: clip; }
 .w-wt-range::-moz-range-track { height: 6px; border-radius: 3px; background: var(--rule); }
 .w-wt-range::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--accent); }
 .w-wt-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--sheet); border: 3px solid var(--accent); box-shadow: 0 3px 8px -3px rgba(0, 0, 0, .45); }
-.w-wt-ticks { position: relative; height: 1.3rem; margin-top: -10px; pointer-events: none; }
+.w-wt-ticks { position: relative; height: 1.4rem; margin-top: -10px; pointer-events: none; }
 .w-wt-tickmark { position: absolute; top: 0; left: calc(14px + (100% - 28px) * var(--f)); transform: translateX(-50%); display: grid; justify-items: center; gap: 1px; }
 .w-wt-tickmark i { display: block; width: 1.5px; height: 6px; background: var(--brass); }
-.w-wt-tickmark b { font-family: var(--f-type); font-size: .66rem; color: var(--brass); line-height: 1; }
+.w-wt-tickmark b { font-family: var(--f-type); font-size: .75rem; color: var(--brass); line-height: 1; }
 .w-wt-lmchips .chip, .w-wt-share .chip { min-height: 2.5rem; }
 .w-wt-lmchips .chip b { font-weight: 700; margin-right: .15rem; }
 
@@ -2624,19 +2665,21 @@ main.wrap { overflow-x: clip; }
 .w-wt-rail { fill: var(--brass); }
 .w-wt-inset { fill: none; stroke: var(--rule); stroke-width: 1.2; }
 .w-wt-plaque { fill: var(--brass-soft); stroke: var(--brass); stroke-width: 1; }
-.w-wt-plaquetext { font-family: var(--f-type); font-size: 9.5px; font-weight: 700; letter-spacing: .14em; fill: var(--brass); }
+/* user units: about 13px on screen in a 324px-wide box (iPhone 13) */
+.w-wt-plaquetext { font-family: var(--f-type); font-size: 13.6px; font-weight: 700; letter-spacing: .12em; fill: var(--brass); }
 .w-wt-juror path, .w-wt-juror circle { fill: var(--rule); stroke: var(--ink-3); stroke-width: 1.2; }
 .w-wt-juror.is-g path, .w-wt-juror.is-g circle { fill: var(--brass); stroke: var(--brass); }
 .w-wt-juror.is-g .w-wt-badge { fill: var(--sheet); stroke: none; }
 .w-wt-juror { transform-box: fill-box; transform-origin: 50% 100%; }
 .w-wt-juror.is-pop { animation: w-wt-pop .32s cubic-bezier(.2, 1.5, .4, 1) both; }
 @keyframes w-wt-pop { from { transform: translateY(8px) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
-.w-wt-legend { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: .3rem .5rem; font-family: var(--f-type); font-size: .74rem; color: var(--ink-2); }
+.w-wt-legend { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: .3rem .5rem; font-family: var(--f-type); font-size: .75rem; color: var(--ink-2); }
 .w-wt-key { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; background: var(--rule); box-shadow: inset 0 0 0 1.2px var(--ink-3); margin-left: .35rem; }
 .w-wt-key.is-g { background: var(--brass); box-shadow: none; margin-left: 0; }
 .w-wt-drawrow { display: flex; justify-content: center; width: 100%; }
 .w-wt-draw { min-width: 12rem; }
 .w-wt-result { display: grid; gap: .25rem; text-align: center; min-height: 3.2rem; max-width: 26rem; }
+.w-wt-boxwrap .w-wt-req { justify-content: center; width: 100%; max-width: 26rem; }
 .w-wt-idle { font-family: var(--f-type); font-size: .8rem; color: var(--ink-3); }
 .w-wt-drew { font-weight: 700; font-size: 1rem; }
 .w-wt-drew.is-none { color: var(--seal); }
@@ -2646,14 +2689,14 @@ main.wrap { overflow-x: clip; }
 .w-wt-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
 .w-wt-stat { display: grid; gap: .1rem; padding: .6rem .7rem; background: var(--sheet-2); border: 1px solid var(--rule); border-radius: var(--radius); }
 .w-wt-big { font-family: var(--f-type); font-weight: 700; font-size: 2rem; line-height: 1.05; color: var(--accent); }
-.w-wt-slabel { font-family: var(--f-type); font-size: .72rem; color: var(--ink-2); line-height: 1.3; }
+.w-wt-slabel { font-family: var(--f-type); font-size: .75rem; color: var(--ink-2); line-height: 1.3; }
 .w-wt-formula { font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); overflow-wrap: anywhere; }
-.w-wt-formula sup { font-size: .7em; }
-.w-wt-bars { display: flex; align-items: flex-end; gap: 3px; height: 74px; padding-bottom: 1rem; position: relative; border-bottom: 1px solid var(--rule); }
+.w-wt-formula sup { font-size: .75rem; }
+.w-wt-bars { display: flex; align-items: flex-end; gap: 3px; height: 78px; padding-bottom: 1.1rem; position: relative; border-bottom: 1px solid var(--rule); }
 .w-wt-bar { position: relative; flex: 1 1 0; height: 100%; display: flex; align-items: flex-end; }
 .w-wt-bar i { display: block; width: 100%; background: var(--rule); border-radius: 2px 2px 0 0; transition: height .25s ease-out; }
 .w-wt-bar.is-cur i { background: var(--accent); }
-.w-wt-bar b { position: absolute; left: 50%; bottom: -1rem; transform: translateX(-50%); font-family: var(--f-type); font-size: .6rem; font-weight: 400; color: var(--ink-3); line-height: 1; }
+.w-wt-bar b { position: absolute; left: 50%; bottom: -1.05rem; transform: translateX(-50%); font-family: var(--f-type); font-size: .75rem; font-weight: 400; color: var(--ink-3); line-height: 1; }
 .w-wt-bar.is-lm b { color: var(--brass); font-weight: 700; }
 .w-wt-bar.is-cur b { color: var(--accent); font-weight: 700; }
 .w-wt-ballew { font-size: .86rem; line-height: 1.5; color: var(--ink-2); font-style: italic; padding-left: .7rem; border-left: 2px solid var(--brass); margin-top: .35rem; }
@@ -2670,7 +2713,8 @@ main.wrap { overflow-x: clip; }
 .w-wt-ramos, .w-wt-lesson { font-size: .9rem; line-height: 1.5; color: var(--ink-2); }
 
 /* the seal requirement */
-.w-wt-req { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; padding-top: .9rem; border-top: 1px dashed var(--rule); }
+.w-wt-req { scroll-margin-bottom: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; padding: .45rem .7rem; border: 1px dashed var(--rule); border-radius: var(--radius); }
+.w-wt-req.is-done { border-style: solid; border-color: var(--accent); }
 .w-wt-reqi { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--f-type); font-size: .8rem; color: var(--ink-2); }
 .w-wt-tick { width: 1.15rem; height: 1.15rem; }
 .w-wt-tick rect { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
@@ -3454,6 +3498,7 @@ main.wrap { overflow-x: clip; }
         gave: 'You tell the foreman you will convict. It changes nothing: a verdict needs all twelve, and the real jury held firm. You are locked up with them all the same.' },
       2: { kicker: 'Sunday night', title: 'The second night', body: 'The room is colder. Nobody has eaten since Saturday.',
         firm: 'You hold firm again. So did the real jury.',
+        firmFirst: 'This time you hold firm. So did the real jury.',
         gave: 'Hunger is a strong argument. The real jury did not give in. They spent a second night locked up, and so do you.' }
     },
     morning: 'Wait for morning',
@@ -3538,18 +3583,18 @@ main.wrap { overflow-x: clip; }
       '<path class="wb-shield" d="M147 10 h26 v15 q0 12 -13 18 q-13 -6 -13 -18 z"/>' +
       '<path class="wb-cross" d="M160 11 V42 M148 21 H172"/><path class="wb-sword" d="M152 12.5 V19 M150 14.5 H154"/>' +
       // the bench
-      person(80, 58, { robe: 'ink3' }) + person(124, 56, { robe: 'seal', chain: true }) + person(196, 56, { robe: 'ink', wig: true }) + person(240, 58, { robe: 'ink3' }) +
+      person(78, 58, { robe: 'ink3' }) + person(116, 56, { robe: 'seal', chain: true }) + person(204, 56, { robe: 'ink', wig: true }) + person(242, 58, { robe: 'ink3' }) +
       '<rect class="wb-desk-top" x="54" y="74" width="212" height="6" rx="1"/><rect class="wb-desk" x="58" y="80" width="204" height="30"/>' +
-      '<text class="wb-lbl" x="124" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="196" y="98" text-anchor="middle">Recorder</text>' +
+      '<text class="wb-lbl" x="116" y="99" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="204" y="99" text-anchor="middle">Recorder</text>' +
       // the verdict refused
       '<g class="wb-refused"><rect x="112" y="22" width="96" height="24" rx="2" transform="rotate(-6 160 34)"/><text x="160" y="39" text-anchor="middle" transform="rotate(-6 160 34)">REFUSED</text></g>' +
       // the dock
-      person(28, 126, { robe: 'ink', hat: true }) + person(62, 126, { robe: 'ink', hat: true }) +
+      person(25, 126, { robe: 'ink', hat: true }) + person(66, 126, { robe: 'ink', hat: true }) +
       '<rect class="wb-dock" x="6" y="140" width="80" height="34"/>' + bars + '<line class="wb-rail-top" x1="4" y1="140" x2="88" y2="140"/>' +
-      '<text class="wb-lbl" x="28" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="62" y="188" text-anchor="middle">Mead</text>' +
+      '<text class="wb-lbl" x="25" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="66" y="188" text-anchor="middle">Mead</text>' +
       // the witness
       '<g class="wb-witness">' + person(124, 128, { robe: 'brass' }) +
-        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><text x="147" y="116" text-anchor="middle">. . .</text></g>' +
+        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><circle cx="141" cy="112" r="1.6"/><circle cx="147" cy="112" r="1.6"/><circle cx="153" cy="112" r="1.6"/></g>' +
       '</g>' +
       '<rect class="wb-stand" x="110" y="142" width="28" height="32"/><text class="wb-lbl" x="124" y="188" text-anchor="middle">Witness</text>' +
       // the jury box
@@ -3609,13 +3654,13 @@ main.wrap { overflow-x: clip; }
       '<clipPath id="wb-arch-clip"><path d="M110 176 V70 Q160 22 210 70 V176 Z"/></clipPath>' +
       '<g clip-path="url(#wb-arch-clip)"><g class="wb-portcullis">' + bars + '<line x1="112" y1="96" x2="208" y2="96"/><line x1="112" y1="140" x2="208" y2="140"/></g></g>' +
       '<path class="wb-arch-rim" d="M110 176 V70 Q160 22 210 70 V176"/>' +
-      '<rect class="wb-sign" x="118" y="8" width="84" height="18" rx="2"/><text class="wb-sign-t" x="160" y="21" text-anchor="middle">NEWGATE</text>' +
+      '<rect class="wb-sign" x="118" y="8" width="84" height="18" rx="2"/><text class="wb-sign-t" x="161" y="21.5" text-anchor="middle">NEWGATE</text>' +
       '<rect class="wb-ledge" x="20" y="140" width="72" height="8"/>' +
       '<g class="wb-purse-g"><path class="wb-purse" d="M42 140 q-12 -2 -10 -16 q2 -10 12 -12 h16 q10 2 12 12 q2 14 -10 16 z"/><path class="wb-ln" d="M44 112 q12 6 24 0"/>' + coins +
       '<text class="wb-lbl" x="56" y="162" text-anchor="middle">40 marks</text></g>' +
       '<g class="wb-writ"><rect class="wb-parch" x="230" y="70" width="70" height="88" rx="3"/>' +
-        '<text class="wb-writ-t" x="265" y="90" text-anchor="middle">Habeas</text><text class="wb-writ-t" x="265" y="102" text-anchor="middle">corpus</text>' +
-        '<path class="wb-lines" d="M240 114 h50 M240 122 h50 M240 130 h36"/><circle class="wb-wax" cx="282" cy="146" r="7"/></g>' +
+        '<text class="wb-writ-t" x="265" y="91" text-anchor="middle">Habeas</text><text class="wb-writ-t" x="265" y="106" text-anchor="middle">corpus</text>' +
+        '<path class="wb-lines" d="M240 117 h50 M240 125 h50 M240 133 h36"/><circle class="wb-wax" cx="282" cy="148" r="7"/></g>' +
       '<line class="wb-line" x1="0" y1="176" x2="320" y2="176"/>' +
       '</svg>';
   }
@@ -3661,6 +3706,40 @@ main.wrap { overflow-x: clip; }
     var currentScene = null;
 
     function later(fn, ms) { var t = setTimeout(fn, R ? 0 : ms); timers.push(t); return t; }
+
+    /* ---------- keeping the reader's place ----------
+       After a tap, scroll only when what it revealed is off screen or under the sticky ticker, and never once the reader
+       has started scrolling on their own. The page's html scroll-padding-top is the band the ticker covers (ticker plus
+       12px). Positions are computed here rather than with scrollIntoView, because engines differ on whether that
+       padding and an element's scroll-margin add up. */
+    var lastUserScroll = 0;
+    function userScrolled() { lastUserScroll = Date.now(); }
+    window.addEventListener('wheel', userScrolled, { passive: true });
+    window.addEventListener('touchmove', userScrolled, { passive: true });
+    window.addEventListener('keydown', function (e) {
+      if (/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End)$/.test(e.key) || (e.key === ' ' && !(e.target.closest && e.target.closest('button, input, textarea, select')))) userScrolled();
+    });
+    function coverH() {
+      var p = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+      if (!(p > 0)) { var t = document.querySelector('.ticker'); p = t ? Math.max(0, t.getBoundingClientRect().bottom) + 12 : 0; }
+      return p;
+    }
+    function goTo(y) {
+      y = Math.max(0, Math.round(y));
+      if (Math.abs(y - window.scrollY) < 2) return;
+      try { window.scrollTo({ top: y, behavior: R ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, y); }
+    }
+    function toTop(el) { goTo(window.scrollY + el.getBoundingClientRect().top - coverH() - 4); }
+    // show the run from a down to b with the least movement; when it cannot all fit, show its top
+    function showRange(a, b) {
+      if (!a || !a.getClientRects().length) return;
+      if (!b || !b.getClientRects().length) b = a;
+      var top = coverH() - 8, vh = window.innerHeight;
+      var ta = a.getBoundingClientRect().top, bb = b.getBoundingClientRect().bottom;
+      if (ta >= top && bb <= vh) return;
+      if (ta < top || bb - ta > vh - top - 24) toTop(a);
+      else goTo(window.scrollY + bb - vh + 16);
+    }
     function clearTimers() { timers.forEach(clearTimeout); timers = []; }
     function say(msg) { live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 40); }
     function svg() { return artEl.querySelector('svg'); }
@@ -3689,10 +3768,12 @@ main.wrap { overflow-x: clip; }
     }
 
     /* ---------- the scene ---------- */
+    var artFresh = false;
     function scene(name, opts) {
       opts = opts || {};
       if (name === currentScene && !opts.force) return svg();
       currentScene = name;
+      artFresh = true;
       var html, label;
       if (name === 'court') { html = artCourt(); label = DATA.art.court; }
       else if (name === 'room') { html = artRoom(opts.nights || 0); label = fill(DATA.art.room, { sky: opts.nights ? 'dark' : 'still light' }); }
@@ -3729,13 +3810,28 @@ main.wrap { overflow-x: clip; }
       if (!R) { box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in'); }
       var hd = box.querySelector('[data-focus]');
       hd.setAttribute('tabindex', '-1');
+      if (o.ready) o.ready();
       if (o.focus !== false && root.contains(document.activeElement)) { try { hd.focus({ preventScroll: true }); } catch (e) { hd.focus(); } }
-      if (o.scroll !== false) reveal();
+      if (o.scroll !== false) reveal(o.art != null ? o.art : artFresh);
+      artFresh = false;
       if (o.say) say(o.say);
     }
-    function reveal() {
-      var r = root.getBoundingClientRect();
-      if (r.top < 0 || r.top > window.innerHeight * 0.75) root.scrollIntoView({ block: 'start', behavior: R ? 'auto' : 'smooth' });
+    /* A new step: bring its heading near the top, under the ticker. When the picture changed too, show the picture
+       with the heading under it (and the calendar and meters as well, when the whole step then fits on screen). */
+    function reveal(showArt) {
+      var hd = box.querySelector('[data-focus]');
+      var top = coverH() - 8, vh = window.innerHeight;
+      var a = artEl.getBoundingClientRect(), b = box.getBoundingClientRect(), h = hd.getBoundingClientRect();
+      var stacked = a.height > 0 && a.bottom <= b.top + 1;
+      if (showArt && stacked) {
+        var fits = b.bottom - root.getBoundingClientRect().top <= vh - top - 56;
+        var el = fits ? root : artEl;
+        if (el.getBoundingClientRect().top >= top && (fits ? b.bottom <= vh : h.bottom <= vh * 0.75)) return;
+        toTop(el);
+      } else {
+        if (b.top >= top && h.top <= vh * 0.45) return;
+        toTop(box);
+      }
     }
     function setActions(list, focusFirst) {
       var row = box.querySelector('.w-bushel-actions');
@@ -3859,12 +3955,16 @@ main.wrap { overflow-x: clip; }
         b.setAttribute('aria-expanded', 'true');
         b.classList.add('is-heard');
         b.querySelector('.w-bushel-call-said').hidden = false;
+        showRange(b);
         sceneClass('is-witness', false);
         void artEl.offsetWidth;
         sceneClass('is-witness', true);
         state.heard++;
         say(b.querySelector('.w-bushel-call-said').textContent);
-        if (state.heard === E.witnesses.length) later(showBallot, 350);
+        if (state.heard === E.witnesses.length) {
+          var t0 = Date.now();
+          later(function () { showBallot(); if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-after .w-bushel-p')); }, 350);
+        }
       };
       function showBallot() {
         var after = box.querySelector('.w-bushel-after');
@@ -3877,6 +3977,7 @@ main.wrap { overflow-x: clip; }
         wireBallot(E.options, function (id) {
           state.vote = id;
           setActions([{ label: E.handUp, act: 'handup', cls: 'btn btn-seal', fn: stageRefused }], false);
+          showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions'));
         });
         var first = after.querySelector('.w-bushel-opt');
         if (first && root.contains(document.activeElement)) first.focus({ preventScroll: true });
@@ -3902,7 +4003,7 @@ main.wrap { overflow-x: clip; }
       scene('court');
       sceneClass('is-witness', false);
       sceneClass('is-refused', true);
-      step({ kicker: S.kicker, title: S.title, body: S.body,
+      step({ kicker: S.kicker, title: S.title, body: S.body, art: true,
         extra: quote(S.threatWho, S.threat, 'is-bench') + banList() + quote(S.pennWho, S.penn, 'is-penn') +
           '<p class="w-bushel-q">' + S.prompt + '</p>',
         after: '<p class="w-bushel-holdhint" id="w-bushel-holdhint">' + DATA.holdHint + '</p>',
@@ -3912,11 +4013,14 @@ main.wrap { overflow-x: clip; }
 
     function nightCard(n, firm) {
       var N = DATA.nights[n];
+      var t0 = Date.now();
+      // night 2: 'again' only if the reader also held firm on night 1 (state.firm already counts tonight)
+      var lead = !firm ? N.gave : (n === 2 && state.firm < 2 && N.firmFirst ? N.firmFirst : N.firm);
       state.nights = n - 1;
       scene('room', { force: true, nights: n - 1 });
-      step({ kicker: N.kicker, title: N.title, body: (firm ? N.firm : N.gave) + ' ' + N.body,
+      step({ kicker: N.kicker, title: N.title, body: lead + ' ' + N.body,
         actions: [{ label: DATA.morning, act: 'morning', disabled: true, fn: n === 1 ? stageSunday : stageMonday }],
-        say: (firm ? N.firm : N.gave) + ' ' + N.body });
+        say: lead + ' ' + N.body });
       // the sky darkens, a mark goes on the wall, the stomach complains
       later(function () {
         var s = svg();
@@ -3930,7 +4034,11 @@ main.wrap { overflow-x: clip; }
           hud(true);
           later(function () {
             var b = box.querySelector('[data-act="morning"]');
-            if (b) { b.disabled = false; if (root.contains(document.activeElement)) b.focus({ preventScroll: true }); }
+            if (b) {
+              b.disabled = false;
+              if (root.contains(document.activeElement)) b.focus({ preventScroll: true });
+              if (lastUserScroll <= t0) showRange(b);
+            }
           }, 250);
         }, 520);
       }, 80);
@@ -3962,6 +4070,7 @@ main.wrap { overflow-x: clip; }
         extra: ballot(M.options, 'Your final vote') + '<div class="w-bushel-finebox" hidden></div>',
         say: M.title + '. ' + M.body });
       wireBallot(M.options, function (id) {
+        var t0 = Date.now();
         state.final = id;
         sceneClass('is-refused', false);
         sceneClass('is-verdict', true);
@@ -3973,6 +4082,7 @@ main.wrap { overflow-x: clip; }
           if (!R) fb.classList.add('is-in');
           say(M.fine);
           setActions([{ label: M.act, act: 'newgate', fn: stageNewgate }]);
+          if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions'));
         }, 700);
       });
     }
@@ -3990,10 +4100,25 @@ main.wrap { overflow-x: clip; }
         sceneClass('is-writ', !state.paid);
         box.querySelectorAll('.w-bushel-opt').forEach(function (o) { o.disabled = true; });
         setActions([{ label: G.act, act: 'judgment', cls: 'btn btn-seal', fn: stageEnding }]);
+        var t0 = Date.now();
+        later(function () { if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions')); }, 500);
       });
     }
 
     /* ---------- the ending: Bushel's Case ---------- */
+    // The tablet is tall. Two columns: it fills the picture column. One column (phones): it follows the holding,
+    // so the heading and the holding come first, and the empty picture box hides (:empty in bushel.css).
+    var wide = window.matchMedia ? window.matchMedia('(min-width: 46rem)') : null;
+    function placePlaque() {
+      var fig = root.querySelector('.w-bushel-plaque'), slot = box.querySelector('[data-plaque-slot]');
+      if (!fig || !slot) return;
+      var dest = wide && wide.matches ? artEl : slot;
+      if (fig.parentNode !== dest) dest.appendChild(fig);
+    }
+    if (wide) {
+      if (wide.addEventListener) wide.addEventListener('change', placePlaque);
+      else if (wide.addListener) wide.addListener(placePlaque);
+    }
     function stageEnding() {
       var E = DATA.ending;
       state.day = 4;
@@ -4014,8 +4139,9 @@ main.wrap { overflow-x: clip; }
             '<div><dt>Fine</dt><dd>' + (state.paid ? 'Paid, 40 marks' : 'Refused. Freed by habeas corpus') + '</dd></div>' +
           '</dl>' +
         '</div>';
-      step({ kicker: E.kicker, title: E.title, body: E.holding,
+      step({ kicker: E.kicker, title: E.title, body: E.holding, ready: placePlaque,
         extra: '<p class="w-bushel-p">' + E.why + '</p>' +
+          '<div class="w-bushel-plaque-slot" data-plaque-slot></div>' +
           '<p class="w-bushel-fine">' + E.plaqueNote + '</p>' +
           '<div class="w-bushel-teach"><p class="label">' + E.teachLabel + '</p><p>' + E.teach + '</p></div>' +
           record +
@@ -4289,7 +4415,6 @@ main.wrap { overflow-x: clip; }
     enBox.appendChild(enLabel);
     enBox.appendChild(enLine);
     enBox.appendChild(bl);
-    root.appendChild(enBox);
 
     /* ---------- gloss and the peers card ---------- */
     const panels = h('div', 'w-carta-panels');
@@ -4306,7 +4431,10 @@ main.wrap { overflow-x: clip; }
       '<ol class="w-carta-tl">' + DATA.peers.items.map((it) => '<li><b class="tnum">' + esc(it[0]) + '</b><span>' + esc(it[1]) + '</span></li>').join('') + '</ol>';
     panels.appendChild(gloss);
     panels.appendChild(peers);
+    /* On a phone the gloss sits straight under the strip and its tally, so a tapped word and its meaning share a screen.
+       The running English follows the gloss. */
     root.appendChild(panels);
+    root.appendChild(enBox);
 
     /* ---------- context card ---------- */
     const context = h('section', 'w-carta-context');
@@ -4322,6 +4450,53 @@ main.wrap { overflow-x: clip; }
 
     /* ---------- behaviour ---------- */
     function nDecoded() { return Object.keys(decoded).length; }
+
+    /* Keeping what a tap reveals on screen. The sticky ticker covers the top of the viewport; scroll only when the
+       target is under it or below the fold, and only in answer to a tap. */
+    function tickerBottom() {
+      const t = document.querySelector('.ticker');
+      const b = t ? t.getBoundingClientRect().bottom : 0;
+      return b > 0 ? b : 0;
+    }
+    function offScreen(top, bottom) { return top < tickerBottom() - 1 || bottom > window.innerHeight + 1; }
+    function behavior() { return ctx.reduced ? 'auto' : 'smooth'; }
+    /* The page may already pad its scroll by the ticker (scroll-padding-top on html); trim the margin so the gap
+       under the ticker is 16px either way, never double. */
+    function fitMargin(target) {
+      let pad = 0;
+      try { pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; } catch (e) {}
+      target.style.scrollMarginTop = Math.max(0, Math.round(tickerBottom() + 16 - pad)) + 'px';
+    }
+    /* Show the gloss after a tap on the strip. */
+    function showGloss() {
+      const r = gloss.getBoundingClientRect();
+      if (!r.height || !offScreen(r.top, r.bottom)) return false;
+      fitMargin(gloss);
+      gloss.scrollIntoView({ block: 'nearest', behavior: behavior() });
+      return true;
+    }
+    /* Show the big seal and the gloss under it together. The seal toast drops in just under the ticker, so the seal
+       is kept below that strip; if seal and gloss do not fit together, the seal comes first. */
+    function showSeal() {
+      const a = big.getBoundingClientRect();
+      const b = gloss.getBoundingClientRect();
+      if (!a.height) return false;
+      const vh = window.innerHeight;
+      const clear = tickerBottom() + 64;
+      if (a.top >= clear && b.bottom <= vh) return false;
+      const delta = b.bottom - a.top <= vh - 16 - clear ? b.bottom - (vh - 16) : a.top - clear;
+      if (Math.abs(delta) < 2) return false;
+      window.scrollBy({ top: delta, behavior: behavior() });
+      return true;
+    }
+    /* Run cb once a smooth scroll has settled, so an animation plays where the reader can see it. */
+    function afterScroll(moved, cb) {
+      if (!moved || ctx.reduced) { cb(); return; }
+      let done = false;
+      const go = () => { if (done) return; done = true; window.removeEventListener('scrollend', go); cb(); };
+      window.addEventListener('scrollend', go);
+      setTimeout(go, 700);
+    }
 
     function setRoving(i) {
       focusIdx = i;
@@ -4473,17 +4648,23 @@ main.wrap { overflow-x: clip; }
         else { const o = gloss.querySelector(navFocus === 'prev' ? '.w-carta-next' : '.w-carta-prev'); if (o) o.focus(); }
       }
       if (fresh && nDecoded() === N) finish();
+      else if (fromStrip) showGloss();
     }
 
     function finish() {
-      if (!ctx.reduced) {
-        big.classList.remove('is-stamp');
-        void big.getBoundingClientRect();
-        big.classList.add('is-stamp');
-      }
       const msg = h('p', 'w-carta-done', esc(DATA.done));
       gloss.appendChild(msg);
-      ctx.stamp('carta');
+      big.classList.remove('is-stamp');
+      /* the wax stays empty until the stamp lands */
+      if (!ctx.reduced) root.classList.remove('is-sealed');
+      afterScroll(showSeal(), () => {
+        if (!ctx.reduced) {
+          root.classList.toggle('is-sealed', nDecoded() === N);
+          void big.getBoundingClientRect();
+          big.classList.add('is-stamp');
+        }
+        ctx.stamp('carta');
+      });
     }
 
     function setMode(m) {
@@ -5153,6 +5334,31 @@ main.wrap { overflow-x: clip; }
     var card = el.querySelector('.w-inversion-card');
     var controls = el.querySelector('.w-inversion-controls');
     var live = el.querySelector('[aria-live]');
+    var root = el.querySelector('.w-inversion');
+
+    /* ---------- keeping the reader's place ----------
+       The sticky ticker covers the top of the screen. Everything we scroll to carries
+       scroll-margin-top: calc(var(--ticker-h) + 16px) in inversion.css. We read that back and move the page with
+       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
+    var acted = 0, moved = 0;
+    function act() { acted = Date.now(); }
+    window.addEventListener('touchmove', function () { moved = Date.now(); }, { passive: true });
+    window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
+    el.addEventListener('click', act, true);
+    el.addEventListener('keydown', act, true);
+    /* If `need` is hidden under the ticker (or, unless topOnly, runs off the bottom of the screen),
+       put `anchor` (default: need) just under the ticker. */
+    function show(need, anchor, topOnly) {
+      if (!need || !need.isConnected || moved > acted) return;
+      anchor = anchor || need;
+      var gap = parseFloat(getComputedStyle(anchor).scrollMarginTop) || 0;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var r = need.getBoundingClientRect();
+      if (r.top >= gap - 12 && (topOnly || r.bottom <= vh)) return;
+      var top = anchor.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - gap;
+      try { window.scrollTo({ top: Math.max(0, top), behavior: ctx.reduced ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, Math.max(0, top)); }
+    }
 
     function current() { return byId(state.order[state.i]); }
     function jurorNo(i) {
@@ -5263,6 +5469,7 @@ main.wrap { overflow-x: clip; }
           (c.note ? ' ' + c.note.label + ': ' + c.note.text : '');
         try { go.focus({ preventScroll: true }); } catch (e) { go.focus(); }
         busy = false;
+        show(card.querySelector('.w-inversion-verdict'), card, true);
       };
 
       if (ctx.reduced || !card.animate) {
@@ -5290,6 +5497,7 @@ main.wrap { overflow-x: clip; }
       if (state.i >= total - 1) { finish(); return; }
       state.i++;
       renderAsk(true);
+      show(stage, root);
       try { card.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'Juror ' + (state.i + 1) + ' of ' + total + ': ' + current().quote;
     }
@@ -5337,9 +5545,11 @@ main.wrap { overflow-x: clip; }
         '</section>';
       controls.querySelector('.w-inversion-again').addEventListener('click', replay);
       var t = controls.querySelector('.w-inversion-end-title');
+      var end = controls.querySelector('.w-inversion-end');
+      show(end.querySelector('.w-inversion-end-score'), end);
       try { t.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'The Great Inversion. You scored ' + state.score + ' of ' + total + '. ' + rank.title + '. ' + DATA.summary;
-      if (!ctx.reduced) controls.querySelector('.w-inversion-end').classList.add('is-fresh');
+      if (!ctx.reduced) end.classList.add('is-fresh');
       ctx.stamp('inversion');
     }
 
@@ -5355,6 +5565,7 @@ main.wrap { overflow-x: clip; }
       state.i = 0; state.score = 0; state.marks = [];
       stage.hidden = false;
       renderAsk(true);
+      show(stage, root);
       try { card.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'New round. Juror 1 of ' + total + ': ' + current().quote;
     }
@@ -5409,6 +5620,7 @@ main.wrap { overflow-x: clip; }
       card.classList.remove('is-dragging');
       setEdges(0);
       if (!d.live) return;
+      act();
       if (!cancelled && d.dx <= -THRESH) answer('then', true);
       else if (!cancelled && d.dx >= THRESH) answer('now', true);
       else {
@@ -7043,6 +7255,7 @@ main.wrap { overflow-x: clip; }
     el.innerHTML =
       '<div class="w-scale">' +
         '<div class="w-scale-deck"></div>' +
+        '<div class="w-scale-note" aria-live="polite"></div>' +
         '<div class="w-scale-stage">' + scaleSVG() + '</div>' +
         '<div class="w-scale-pans">' +
           ['n', 's'].map(function (side) {
@@ -7053,7 +7266,6 @@ main.wrap { overflow-x: clip; }
             '</button>';
           }).join('') +
         '</div>' +
-        '<div class="w-scale-note" aria-live="polite"></div>' +
         '<div class="w-scale-ruling" hidden></div>' +
       '</div>';
 
@@ -7066,6 +7278,35 @@ main.wrap { overflow-x: clip; }
     var panBtns = { n: el.querySelector('.w-scale-panbtn.is-n'), s: el.querySelector('.w-scale-panbtn.is-s') };
     var note = el.querySelector('.w-scale-note');
     var ruling = el.querySelector('.w-scale-ruling');
+
+    /* ---------- keeping the reader's place ----------
+       The sticky ticker covers the top of the screen. Everything we scroll to carries
+       scroll-margin-top: calc(var(--ticker-h) + 16px) in scale.css. We read that back and move the page with
+       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
+    var acted = 0, moved = 0;
+    function act() { acted = Date.now(); }
+    window.addEventListener('touchmove', function () { moved = Date.now(); }, { passive: true });
+    window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
+    el.addEventListener('click', act, true);
+    el.addEventListener('keydown', act, true);
+    function gapOf(node) { return parseFloat(getComputedStyle(node).scrollMarginTop) || 0; }
+    function nudge(dy) {
+      if (Math.abs(dy) < 2) return;
+      var top = Math.max(0, (window.pageYOffset || document.documentElement.scrollTop) + dy);
+      try { window.scrollTo({ top: top, behavior: ctx.reduced ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, top); }
+    }
+    /* After a placement the reader needs the next argument (the deck) and the lesson (the note) on screen.
+       If the top of the deck is under the ticker, or the lesson runs off the bottom of the screen,
+       put the deck just under the ticker. */
+    function showDeck() {
+      if (moved > acted) return;
+      var top = deck.hidden ? note : deck;
+      var gap = gapOf(top), vh = window.innerHeight || document.documentElement.clientHeight;
+      var t = top.getBoundingClientRect().top, b = note.getBoundingClientRect().bottom;
+      if (t >= gap - 12 && b <= vh) return;
+      nudge(t - gap);
+    }
 
     /* ---------- spring physics for the beam ---------- */
     var phys = { a: 0, v: 0, target: 0 };
@@ -7209,6 +7450,7 @@ main.wrap { overflow-x: clip; }
         if (state.placed.length === total) complete();
         else {
           renderDeck(true);
+          showDeck();
           var nextChip = deck.querySelector('.w-scale-chip');
           if (document.activeElement && document.activeElement.classList.contains('w-scale-undo')) {
             try { nextChip.focus({ preventScroll: true }); } catch (e) {}
@@ -7247,6 +7489,7 @@ main.wrap { overflow-x: clip; }
       settle(last.side === 's' ? -30 : 30);
       note.innerHTML = '<p>Taken back. The argument is on top of the deck again.</p>';
       renderDeck(true);
+      showDeck();
       var chipEl = deck.querySelector('.w-scale-chip');
       try { chipEl.focus({ preventScroll: true }); } catch (e) {}
     }
@@ -7315,11 +7558,13 @@ main.wrap { overflow-x: clip; }
       note.insertAdjacentHTML('beforeend', '<p class="sr-only">All arguments placed. ' + (key === 'close' ? 'A close call. ' : key === 's' ? 'For the strangers. ' : 'For the neighbors. ') + esc(DATA.rulings[key]) + ' Neighbors ' + c.n + ', strangers ' + c.s + '.</p>');
       var t = ruling.querySelector('.w-scale-rtitle');
       try { t.focus({ preventScroll: true }); } catch (e) {}
-      if (!ctx.reduced && t.scrollIntoView) {
-        setTimeout(function () {
-          var rr = ruling.getBoundingClientRect();
-          if (rr.top > window.innerHeight * 0.75) window.scrollBy({ top: Math.min(rr.top - window.innerHeight * 0.35, 320), behavior: 'smooth' });
-        }, 380);
+      if (moved <= acted) {
+        var gap = gapOf(note), vh = window.innerHeight || document.documentElement.clientHeight;
+        var nr = note.getBoundingClientRect(), hr = ruling.querySelector('.w-scale-rhead').getBoundingClientRect();
+        /* the last lesson first: if it is under the ticker, put it just below */
+        if (nr.top < gap - 12) nudge(nr.top - gap);
+        /* then, if the ruling's heading is below the screen, raise it into view, without pushing the lesson under the ticker */
+        else if (hr.bottom > vh - 12) nudge(Math.min(hr.bottom - vh + 24, nr.top - gap));
       }
       ctx.store.set('last', counts());
       if (!state.sealed) { state.sealed = true; ctx.stamp('scale'); }
@@ -7355,8 +7600,9 @@ main.wrap { overflow-x: clip; }
       renderTokens();
       settle(0);
       renderDeck(true);
+      showDeck();
       var chipEl = deck.querySelector('.w-scale-chip');
-      try { chipEl.focus({ preventScroll: false }); } catch (e) {}
+      try { chipEl.focus({ preventScroll: true }); } catch (e) {}
     }
 
     /* ---------- input ---------- */
@@ -9666,6 +9912,7 @@ main.wrap { overflow-x: clip; }
       willQ2: 'wholly without significance ‘except to mystics.’',
       kian: 'In June 2026 the Court agreed to look again, in *Kian v. Florida*. The accident is back on the docket.',
       willCite: '*Williams v. Florida*, 399 U.S. 78 (1970), opinion of Justice White. “Except to mystics” is Justice Harlan’s phrase, from his dissent in *Duncan v. Louisiana* (1968).',
+      quotesTitle: 'Coke and the Supreme Court',
       benchTitle: 'Your bench against the record',
       you: 'You',
       record: 'Record',
@@ -9781,7 +10028,9 @@ main.wrap { overflow-x: clip; }
       p: ctx.store.get('p', 0.1),
       seats: null,
       draws: 0,
-      none: 0
+      none: 0,
+      openQ: null,
+      openB: null
     };
     if (!(st.n >= DATA.min && st.n <= DATA.max)) st.n = DATA.start;
     if (DATA.shares.indexOf(st.p) < 0) st.p = 0.1;
@@ -9852,6 +10101,9 @@ main.wrap { overflow-x: clip; }
     const statusA = h('p', 'w-wt-status');
     statusA.setAttribute('aria-live', 'polite');
     partA.appendChild(statusA);
+    /* the seal needs both parts: say so beside the ruling button and again beside the draw button */
+    const reqA = makeReq();
+    partA.appendChild(reqA);
 
     const ruling = h('section', 'w-wt-ruling');
     ruling.hidden = true;
@@ -9942,6 +10194,8 @@ main.wrap { overflow-x: clip; }
     const resultB = h('div', 'w-wt-result');
     resultB.setAttribute('aria-live', 'polite');
     boxWrap.appendChild(resultB);
+    const reqB = makeReq();
+    boxWrap.appendChild(reqB);
     lab.appendChild(boxWrap);
 
     const mathBox = h('div', 'w-wt-math');
@@ -9967,9 +10221,45 @@ main.wrap { overflow-x: clip; }
     lab.appendChild(lawBox);
     root.appendChild(partB);
 
-    const req = h('div', 'w-wt-req');
-    req.innerHTML = '<span class="label">' + esc(DATA.sealReq) + '</span><span class="w-wt-reqi" data-r="1">' + TICK + esc(DATA.req1) + '</span><span class="w-wt-reqi" data-r="2">' + TICK + esc(DATA.req2) + '</span>';
-    root.appendChild(req);
+
+    function makeReq() {
+      const r = h('div', 'w-wt-req');
+      r.innerHTML = '<span class="label">' + esc(DATA.sealReq) + '</span><span class="w-wt-reqi" data-r="1">' + TICK + esc(DATA.req1) + '</span><span class="w-wt-reqi" data-r="2">' + TICK + esc(DATA.req2) + '</span>';
+      return r;
+    }
+
+    /* =================== keeping what a tap reveals on screen =================== */
+    /* The sticky ticker covers the top of the viewport. Scroll only in answer to a tap, and only when the target is
+       under the ticker or below the fold. */
+    function tickerBottom() {
+      const t = document.querySelector('.ticker');
+      const b = t ? t.getBoundingClientRect().bottom : 0;
+      return b > 0 ? b : 0;
+    }
+    /* html may already pad its scroll by the ticker (scroll-padding-top); trim the margin so the gap under the ticker
+       is 16px either way, never double. */
+    function fitMargin(target) {
+      let pad = 0;
+      try { pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; } catch (e) {}
+      target.style.scrollMarginTop = Math.max(0, Math.round(tickerBottom() + 16 - pad)) + 'px';
+    }
+    /* block 'nearest': scroll when any part is hidden. block 'start': scroll when the top is hidden or sits in the
+       lower half of the screen with the rest below the fold. */
+    function show(target, block) {
+      const r = target.getBoundingClientRect();
+      if (!r.height) return false;
+      const tb = tickerBottom(), vh = window.innerHeight;
+      let need = r.top < tb - 1;
+      if (!need && block === 'nearest') need = r.bottom > vh + 1;
+      if (!need && block === 'start') need = r.bottom > vh + 1 && r.top > tb + (vh - tb) / 2;
+      if (!need) return false;
+      fitMargin(target);
+      target.scrollIntoView({ block: block, behavior: ctx.reduced ? 'auto' : 'smooth' });
+      return true;
+    }
+    function isPhone() {
+      try { return window.matchMedia('(max-width: 40rem)').matches; } catch (e) { return false; }
+    }
 
     /* =================== Part A behaviour =================== */
     function nMarked() { return T.filter((t) => st.marks[t.id]).length; }
@@ -9992,10 +10282,10 @@ main.wrap { overflow-x: clip; }
       revealBtn.classList.toggle('is-ready', n === T.length && !st.revealed);
     }
 
-    function renderCard(anim) {
-      const t = T[st.idx];
+    function fillCard(idx) {
+      const t = T[idx];
       cEm.innerHTML = emblem(t.emblem);
-      cNum.textContent = 'Theory ' + (st.idx + 1) + ' of 5';
+      cNum.textContent = 'Theory ' + (idx + 1) + ' of 5';
       cName.textContent = t.name;
       cSpec.hidden = !t.speculative;
       cSpec.textContent = DATA.specLabel;
@@ -10015,6 +10305,23 @@ main.wrap { overflow-x: clip; }
       cRec.querySelector('p').textContent = t.record;
       card.classList.toggle('is-spec', !!t.speculative);
       card.dataset.tag = t.id;
+    }
+
+    /* Every card gets the height of the tallest, so the mark buttons (pinned to the bottom) do not jump under the
+       thumb when the next theory slides in. Measured, because the tallest depends on width, fonts and the ruling. */
+    let cardW = 0;
+    function sizeCard() {
+      card.style.minHeight = '';
+      if (!card.offsetWidth) return;
+      let max = 0;
+      T.forEach((t, i) => { fillCard(i); max = Math.max(max, card.getBoundingClientRect().height); });
+      fillCard(st.idx);
+      cardW = card.offsetWidth;
+      card.style.minHeight = Math.ceil(max) + 'px';
+    }
+
+    function renderCard(anim) {
+      fillCard(st.idx);
       if (anim && !ctx.reduced) { card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in'); }
       renderTabs();
     }
@@ -10022,6 +10329,7 @@ main.wrap { overflow-x: clip; }
     let advanceTimer = null;
     function mark(m) {
       const t = T[st.idx];
+      const wasAll = nMarked() === T.length;
       st.marks[t.id] = m;
       saveA();
       renderCard(false);
@@ -10030,7 +10338,15 @@ main.wrap { overflow-x: clip; }
       const next = T.findIndex((x, i) => i > st.idx && !st.marks[x.id]);
       const wrap = next < 0 ? T.findIndex((x) => !st.marks[x.id]) : next;
       if (wrap >= 0 && !st.revealed) {
-        advanceTimer = setTimeout(() => { st.idx = wrap; renderCard(true); }, ctx.reduced ? 150 : 450);
+        const y0 = window.scrollY;
+        advanceTimer = setTimeout(() => {
+          st.idx = wrap;
+          renderCard(true);
+          if (Math.abs(window.scrollY - y0) < 48) show(card, 'nearest');
+        }, ctx.reduced ? 150 : 450);
+      } else if (!wasAll && nMarked() === T.length && !st.revealed) {
+        /* all five weighed: the next step is the ruling button, with the seal checklist under it */
+        show(reqA, 'nearest');
       }
     }
 
@@ -10045,25 +10361,36 @@ main.wrap { overflow-x: clip; }
     function renderRuling() {
       const R = DATA.ruling;
       const nP = T.filter((t) => st.marks[t.id] === 'p').length;
+      /* On a phone the quotes and the bench table fold away behind toggles; wider screens open them. */
+      const wide = !isPhone();
+      const openQ = st.openQ == null ? wide : st.openQ;
+      const openB = st.openB == null ? wide : st.openB;
       ruling.innerHTML =
         '<div class="w-wt-rstamp" tabindex="-1">' + esc(R.stamp) + '</div>' +
         '<p class="w-wt-rlead">' + esc(R.lead) + '</p>' +
+        '<details class="w-wt-more" data-k="q"' + (openQ ? ' open' : '') + '><summary><span class="w-wt-moretitle">' + esc(R.quotesTitle) + '</span></summary><div class="w-wt-morebody">' +
         '<figure class="w-wt-rq"><blockquote><p>' + esc(R.cokePre) + ' <q>' + esc(R.cokeQ) + '</q></p></blockquote><figcaption>' + esc(R.cokeCite) + '</figcaption></figure>' +
         '<figure class="w-wt-rq"><blockquote><p>' + esc(R.willPre) + ' <q>' + esc(R.willQ) + '</q> ' + esc(R.willPre2) + ' <q>' + esc(R.willQ2) + '</q></p></blockquote><figcaption>' + fmt(R.willCite) + '</figcaption></figure>' +
-        '<p class="w-wt-kian">' + fmt(R.kian) + '</p>' +
-        '<h5 class="w-wt-benchtitle">' + esc(R.benchTitle) + '</h5>' +
+        '<p class="w-wt-kian">' + fmt(R.kian) + '</p></div></details>' +
+        '<details class="w-wt-more" data-k="b"' + (openB ? ' open' : '') + '><summary><span class="w-wt-moretitle">' + esc(R.benchTitle) + '</span></summary><div class="w-wt-morebody">' +
         '<ul class="w-wt-bench">' + T.map((t) => {
           const m = st.marks[t.id];
           return '<li><span class="w-wt-bname">' + (st.fav === t.id ? STAR : '') + esc(t.name) + '</span>' +
             '<span class="w-wt-byou w-wt-mk-' + (m || 'x') + '"><i>' + esc(R.you) + '</i> ' + esc(m ? DATA.marks[m] : 'none') + '</span>' +
             '<span class="w-wt-brec"><i>' + esc(R.record) + '</i> ' + esc(t.tag) + '</span></li>';
-        }).join('') + '</ul>' +
+        }).join('') + '</ul></div></details>' +
         '<p class="w-wt-rtally">' + esc(R.tally(nP)) + (st.fav ? ' ' + esc(R.favNote[st.fav]) : '') + '</p>';
       const again = h('button', 'btn btn-ghost btn-small w-wt-again');
       again.type = 'button';
       again.textContent = R.again;
       again.addEventListener('click', weighAgain);
       ruling.appendChild(again);
+      ruling.querySelectorAll('.w-wt-more').forEach((d) => {
+        d.addEventListener('toggle', () => {
+          if (d.dataset.k === 'q') st.openQ = d.open; else st.openB = d.open;
+          if (d.open) show(d, 'nearest');
+        });
+      });
     }
 
     function reveal() {
@@ -10072,6 +10399,7 @@ main.wrap { overflow-x: clip; }
         st.idx = open;
         renderCard(true);
         statusA.textContent = DATA.needAll(T[open].name);
+        show(card, 'nearest');
         return;
       }
       clearTimeout(advanceTimer);
@@ -10082,10 +10410,12 @@ main.wrap { overflow-x: clip; }
       ruling.hidden = false;
       revealBtn.hidden = true;
       if (first && !ctx.reduced) { ruling.classList.remove('is-in'); void ruling.offsetWidth; ruling.classList.add('is-in'); }
+      sizeCard();
       renderCard(false);
       statusA.textContent = '';
       const stamp = ruling.querySelector('.w-wt-rstamp');
-      if (stamp) stamp.focus({ preventScroll: false });
+      if (stamp) stamp.focus({ preventScroll: true });
+      show(ruling, 'start');
       checkSeal();
     }
 
@@ -10097,8 +10427,10 @@ main.wrap { overflow-x: clip; }
       ruling.hidden = true;
       revealBtn.hidden = false;
       st.idx = 0;
+      sizeCard();
       renderCard(true);
-      tabBtns[0].focus();
+      tabBtns[0].focus({ preventScroll: true });
+      show(tabs, 'start');
     }
 
     /* =================== Part B behaviour =================== */
@@ -10129,7 +10461,7 @@ main.wrap { overflow-x: clip; }
       s += '<rect class="w-wt-panel" x="6" y="118" width="328" height="46" rx="3"/>';
       s += '<rect class="w-wt-rail" x="2" y="113" width="336" height="7" rx="2"/>';
       for (let k = 0; k < 6; k++) s += '<rect class="w-wt-inset" x="' + (14 + k * 53.5) + '" y="125" width="44.5" height="32" rx="2"/>';
-      s += '<rect class="w-wt-plaque" x="128" y="133" width="84" height="17" rx="2"/><text class="w-wt-plaquetext" x="170" y="145" text-anchor="middle">' + esc(DATA.boxLabel) + '</text>';
+      s += '<rect class="w-wt-plaque" x="113" y="129" width="114" height="24" rx="2"/><text class="w-wt-plaquetext" x="170" y="146" text-anchor="middle">' + esc(DATA.boxLabel) + '</text>';
       svg.innerHTML = s;
       const k = filled ? st.seats.filter(Boolean).length : 0;
       svg.setAttribute('aria-label', 'A jury box with ' + n + ' seats' + (filled ? ', ' + k + ' filled by members of the group' : ', all empty') + '.');
@@ -10211,6 +10543,7 @@ main.wrap { overflow-x: clip; }
       renderResult(k);
       if (!st.drawn) { st.drawn = true; ctx.store.set('drawn', true); }
       checkSeal();
+      show(reqB, 'nearest');
     }
 
     range.addEventListener('input', () => setN(+range.value));
@@ -10218,9 +10551,11 @@ main.wrap { overflow-x: clip; }
     plus.addEventListener('click', () => setN(st.n + 1));
 
     function renderReq() {
-      req.querySelector('[data-r="1"]').classList.toggle('is-done', st.revealed);
-      req.querySelector('[data-r="2"]').classList.toggle('is-done', st.drawn);
-      req.classList.toggle('is-done', st.revealed && st.drawn);
+      [reqA, reqB].forEach((req) => {
+        req.querySelector('[data-r="1"]').classList.toggle('is-done', st.revealed);
+        req.querySelector('[data-r="2"]').classList.toggle('is-done', st.drawn);
+        req.classList.toggle('is-done', st.revealed && st.drawn);
+      });
     }
 
     function checkSeal() {
@@ -10236,6 +10571,11 @@ main.wrap { overflow-x: clip; }
     renderMath();
     renderResult();
     renderReq();
+    sizeCard();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCard);
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => { if (card.offsetWidth && card.offsetWidth !== cardW) sizeCard(); }).observe(partA);
+    }
   });
 })();
 

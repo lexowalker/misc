@@ -257,7 +257,6 @@
     enBox.appendChild(enLabel);
     enBox.appendChild(enLine);
     enBox.appendChild(bl);
-    root.appendChild(enBox);
 
     /* ---------- gloss and the peers card ---------- */
     const panels = h('div', 'w-carta-panels');
@@ -274,7 +273,10 @@
       '<ol class="w-carta-tl">' + DATA.peers.items.map((it) => '<li><b class="tnum">' + esc(it[0]) + '</b><span>' + esc(it[1]) + '</span></li>').join('') + '</ol>';
     panels.appendChild(gloss);
     panels.appendChild(peers);
+    /* On a phone the gloss sits straight under the strip and its tally, so a tapped word and its meaning share a screen.
+       The running English follows the gloss. */
     root.appendChild(panels);
+    root.appendChild(enBox);
 
     /* ---------- context card ---------- */
     const context = h('section', 'w-carta-context');
@@ -290,6 +292,53 @@
 
     /* ---------- behaviour ---------- */
     function nDecoded() { return Object.keys(decoded).length; }
+
+    /* Keeping what a tap reveals on screen. The sticky ticker covers the top of the viewport; scroll only when the
+       target is under it or below the fold, and only in answer to a tap. */
+    function tickerBottom() {
+      const t = document.querySelector('.ticker');
+      const b = t ? t.getBoundingClientRect().bottom : 0;
+      return b > 0 ? b : 0;
+    }
+    function offScreen(top, bottom) { return top < tickerBottom() - 1 || bottom > window.innerHeight + 1; }
+    function behavior() { return ctx.reduced ? 'auto' : 'smooth'; }
+    /* The page may already pad its scroll by the ticker (scroll-padding-top on html); trim the margin so the gap
+       under the ticker is 16px either way, never double. */
+    function fitMargin(target) {
+      let pad = 0;
+      try { pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0; } catch (e) {}
+      target.style.scrollMarginTop = Math.max(0, Math.round(tickerBottom() + 16 - pad)) + 'px';
+    }
+    /* Show the gloss after a tap on the strip. */
+    function showGloss() {
+      const r = gloss.getBoundingClientRect();
+      if (!r.height || !offScreen(r.top, r.bottom)) return false;
+      fitMargin(gloss);
+      gloss.scrollIntoView({ block: 'nearest', behavior: behavior() });
+      return true;
+    }
+    /* Show the big seal and the gloss under it together. The seal toast drops in just under the ticker, so the seal
+       is kept below that strip; if seal and gloss do not fit together, the seal comes first. */
+    function showSeal() {
+      const a = big.getBoundingClientRect();
+      const b = gloss.getBoundingClientRect();
+      if (!a.height) return false;
+      const vh = window.innerHeight;
+      const clear = tickerBottom() + 64;
+      if (a.top >= clear && b.bottom <= vh) return false;
+      const delta = b.bottom - a.top <= vh - 16 - clear ? b.bottom - (vh - 16) : a.top - clear;
+      if (Math.abs(delta) < 2) return false;
+      window.scrollBy({ top: delta, behavior: behavior() });
+      return true;
+    }
+    /* Run cb once a smooth scroll has settled, so an animation plays where the reader can see it. */
+    function afterScroll(moved, cb) {
+      if (!moved || ctx.reduced) { cb(); return; }
+      let done = false;
+      const go = () => { if (done) return; done = true; window.removeEventListener('scrollend', go); cb(); };
+      window.addEventListener('scrollend', go);
+      setTimeout(go, 700);
+    }
 
     function setRoving(i) {
       focusIdx = i;
@@ -441,17 +490,23 @@
         else { const o = gloss.querySelector(navFocus === 'prev' ? '.w-carta-next' : '.w-carta-prev'); if (o) o.focus(); }
       }
       if (fresh && nDecoded() === N) finish();
+      else if (fromStrip) showGloss();
     }
 
     function finish() {
-      if (!ctx.reduced) {
-        big.classList.remove('is-stamp');
-        void big.getBoundingClientRect();
-        big.classList.add('is-stamp');
-      }
       const msg = h('p', 'w-carta-done', esc(DATA.done));
       gloss.appendChild(msg);
-      ctx.stamp('carta');
+      big.classList.remove('is-stamp');
+      /* the wax stays empty until the stamp lands */
+      if (!ctx.reduced) root.classList.remove('is-sealed');
+      afterScroll(showSeal(), () => {
+        if (!ctx.reduced) {
+          root.classList.toggle('is-sealed', nDecoded() === N);
+          void big.getBoundingClientRect();
+          big.classList.add('is-stamp');
+        }
+        ctx.stamp('carta');
+      });
     }
 
     function setMode(m) {

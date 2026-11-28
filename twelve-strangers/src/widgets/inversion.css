@@ -1,5 +1,7 @@
 /* inversion: "Would you be seated?" A card-sorting game in the voir dire room. */
 [data-widget="inversion"] .w-inversion { display: grid; gap: .9rem; min-width: 0; }
+/* what the widget scrolls to after a tap lands just under the sticky ticker */
+[data-widget="inversion"] .w-inversion, .w-inversion-card, .w-inversion-end { scroll-margin-top: calc(var(--ticker-h) + 16px); }
 
 /* ---- header: count, tally of ten, score ---- */
 .w-inversion-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
@@ -43,7 +45,7 @@
 .w-inversion-face { display: grid; gap: .8rem; padding: .85rem .95rem 1rem; }
 .w-inversion-cardhead {
   display: flex; justify-content: space-between; align-items: baseline; gap: .8rem; padding-bottom: .45rem;
-  border-bottom: 2px solid var(--seal); font-family: var(--f-type); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  border-bottom: 2px solid var(--seal); font-family: var(--f-type); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
   color: var(--ink-2); min-width: 0;
 }
 .w-inversion-cardhead > span:first-child { white-space: nowrap; }
@@ -72,20 +74,20 @@
 .w-inversion-answers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
 @media (min-width: 40rem) { .w-inversion-answers { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .w-inversion-ans {
-  display: grid; gap: .1rem; justify-items: center; align-content: center; min-height: 3.6rem; padding: .45rem .4rem;
+  display: grid; gap: .1rem; justify-items: center; align-content: center; min-height: 3.6rem; padding: .45rem .25rem;
   border: 1.5px solid var(--ink-2); border-radius: var(--radius); background: var(--sheet); color: var(--ink); cursor: pointer;
   touch-action: manipulation; box-shadow: 0 2px 0 var(--rule); transition: transform .1s, background .15s, border-color .15s, box-shadow .1s, opacity .2s;
 }
 .w-inversion-ans:hover:not([disabled]) { background: var(--wash); border-color: var(--accent); }
 .w-inversion-ans:active:not([disabled]) { transform: translateY(2px); box-shadow: 0 0 0 var(--rule); }
 .w-inversion-ans-label { font-family: var(--f-type); font-weight: 700; font-size: 1.3rem; line-height: 1.1; letter-spacing: .03em; }
-.w-inversion-ans-sub { font-family: var(--f-type); font-size: .7rem; letter-spacing: .04em; color: var(--ink-3); }
+.w-inversion-ans-sub { font-family: var(--f-type); font-size: .75rem; line-height: 1.3; letter-spacing: 0; color: var(--ink-3); text-wrap: balance; }
 .w-inversion-ans[disabled] { cursor: default; opacity: .45; }
 .w-inversion-ans.is-picked-right { opacity: 1; background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .w-inversion-ans.is-picked-wrong { opacity: 1; background: var(--seal-soft); border-color: var(--seal); }
 .w-inversion-ans.is-picked-right .w-inversion-ans-sub { color: var(--on-accent); }
 .w-inversion-ans.is-answer { opacity: 1; border-color: var(--accent); border-style: dashed; }
-.w-inversion-swipe { display: none; font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); text-align: center; }
+.w-inversion-swipe { display: none; font-family: var(--f-type); font-size: .8rem; color: var(--ink-3); text-align: center; }
 @media (pointer: coarse) { .w-inversion-swipe { display: block; } }
 
 /* ---- the ruling side ---- */
@@ -106,19 +108,19 @@
 .w-inversion-stamp {
   display: inline-block; font-family: var(--f-type); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase;
   padding: .15rem .45rem .1rem; border: 3px double currentColor; border-radius: 3px; transform: rotate(-5deg); line-height: 1.3;
-  animation: w-inversion-thunk .42s cubic-bezier(.2, 1.4, .4, 1) both;
+  transform-origin: 30% 50%; animation: w-inversion-thunk .42s cubic-bezier(.2, 1.4, .4, 1) both;
 }
 .w-inversion-ruling + .w-inversion-ruling .w-inversion-stamp { animation-delay: .14s; transform: rotate(3deg); animation-name: w-inversion-thunk-b; }
 .w-inversion-stamp.is-seated { color: var(--accent); }
 .w-inversion-stamp.is-excused { color: var(--seal); }
 .w-inversion-stamp.is-maybe { color: var(--brass); }
 @keyframes w-inversion-thunk {
-  0% { opacity: 0; transform: rotate(-9deg) scale(1.9); }
+  0% { opacity: 0; transform: rotate(-9deg) scale(1.5); }
   60% { opacity: 1; transform: rotate(-5deg) scale(.94); }
   100% { opacity: 1; transform: rotate(-5deg) scale(1); }
 }
 @keyframes w-inversion-thunk-b {
-  0% { opacity: 0; transform: rotate(7deg) scale(1.9); }
+  0% { opacity: 0; transform: rotate(7deg) scale(1.5); }
   60% { opacity: 1; transform: rotate(3deg) scale(.94); }
   100% { opacity: 1; transform: rotate(3deg) scale(1); }
 }
@@ -152,7 +154,7 @@
   border-bottom: 1px solid var(--rule); padding: .75rem 0 .7rem; max-width: 34rem; width: 100%; margin-inline: auto;
 }
 .w-inversion-col h5 {
-  font-family: var(--f-type); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+  font-family: var(--f-type); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
   padding-bottom: .3rem; margin: 0 0 .35rem; border-bottom: 2px solid var(--ink);
 }
 .w-inversion-col h5 span { font-size: .95rem; color: var(--ink); letter-spacing: .04em; }

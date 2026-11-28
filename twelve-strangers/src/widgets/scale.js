@@ -132,6 +132,7 @@
     el.innerHTML =
       '<div class="w-scale">' +
         '<div class="w-scale-deck"></div>' +
+        '<div class="w-scale-note" aria-live="polite"></div>' +
         '<div class="w-scale-stage">' + scaleSVG() + '</div>' +
         '<div class="w-scale-pans">' +
           ['n', 's'].map(function (side) {
@@ -142,7 +143,6 @@
             '</button>';
           }).join('') +
         '</div>' +
-        '<div class="w-scale-note" aria-live="polite"></div>' +
         '<div class="w-scale-ruling" hidden></div>' +
       '</div>';
 
@@ -155,6 +155,35 @@
     var panBtns = { n: el.querySelector('.w-scale-panbtn.is-n'), s: el.querySelector('.w-scale-panbtn.is-s') };
     var note = el.querySelector('.w-scale-note');
     var ruling = el.querySelector('.w-scale-ruling');
+
+    /* ---------- keeping the reader's place ----------
+       The sticky ticker covers the top of the screen. Everything we scroll to carries
+       scroll-margin-top: calc(var(--ticker-h) + 16px) in scale.css. We read that back and move the page with
+       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
+    var acted = 0, moved = 0;
+    function act() { acted = Date.now(); }
+    window.addEventListener('touchmove', function () { moved = Date.now(); }, { passive: true });
+    window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
+    el.addEventListener('click', act, true);
+    el.addEventListener('keydown', act, true);
+    function gapOf(node) { return parseFloat(getComputedStyle(node).scrollMarginTop) || 0; }
+    function nudge(dy) {
+      if (Math.abs(dy) < 2) return;
+      var top = Math.max(0, (window.pageYOffset || document.documentElement.scrollTop) + dy);
+      try { window.scrollTo({ top: top, behavior: ctx.reduced ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, top); }
+    }
+    /* After a placement the reader needs the next argument (the deck) and the lesson (the note) on screen.
+       If the top of the deck is under the ticker, or the lesson runs off the bottom of the screen,
+       put the deck just under the ticker. */
+    function showDeck() {
+      if (moved > acted) return;
+      var top = deck.hidden ? note : deck;
+      var gap = gapOf(top), vh = window.innerHeight || document.documentElement.clientHeight;
+      var t = top.getBoundingClientRect().top, b = note.getBoundingClientRect().bottom;
+      if (t >= gap - 12 && b <= vh) return;
+      nudge(t - gap);
+    }
 
     /* ---------- spring physics for the beam ---------- */
     var phys = { a: 0, v: 0, target: 0 };
@@ -298,6 +327,7 @@
         if (state.placed.length === total) complete();
         else {
           renderDeck(true);
+          showDeck();
           var nextChip = deck.querySelector('.w-scale-chip');
           if (document.activeElement && document.activeElement.classList.contains('w-scale-undo')) {
             try { nextChip.focus({ preventScroll: true }); } catch (e) {}
@@ -336,6 +366,7 @@
       settle(last.side === 's' ? -30 : 30);
       note.innerHTML = '<p>Taken back. The argument is on top of the deck again.</p>';
       renderDeck(true);
+      showDeck();
       var chipEl = deck.querySelector('.w-scale-chip');
       try { chipEl.focus({ preventScroll: true }); } catch (e) {}
     }
@@ -404,11 +435,13 @@
       note.insertAdjacentHTML('beforeend', '<p class="sr-only">All arguments placed. ' + (key === 'close' ? 'A close call. ' : key === 's' ? 'For the strangers. ' : 'For the neighbors. ') + esc(DATA.rulings[key]) + ' Neighbors ' + c.n + ', strangers ' + c.s + '.</p>');
       var t = ruling.querySelector('.w-scale-rtitle');
       try { t.focus({ preventScroll: true }); } catch (e) {}
-      if (!ctx.reduced && t.scrollIntoView) {
-        setTimeout(function () {
-          var rr = ruling.getBoundingClientRect();
-          if (rr.top > window.innerHeight * 0.75) window.scrollBy({ top: Math.min(rr.top - window.innerHeight * 0.35, 320), behavior: 'smooth' });
-        }, 380);
+      if (moved <= acted) {
+        var gap = gapOf(note), vh = window.innerHeight || document.documentElement.clientHeight;
+        var nr = note.getBoundingClientRect(), hr = ruling.querySelector('.w-scale-rhead').getBoundingClientRect();
+        /* the last lesson first: if it is under the ticker, put it just below */
+        if (nr.top < gap - 12) nudge(nr.top - gap);
+        /* then, if the ruling's heading is below the screen, raise it into view, without pushing the lesson under the ticker */
+        else if (hr.bottom > vh - 12) nudge(Math.min(hr.bottom - vh + 24, nr.top - gap));
       }
       ctx.store.set('last', counts());
       if (!state.sealed) { state.sealed = true; ctx.stamp('scale'); }
@@ -444,8 +477,9 @@
       renderTokens();
       settle(0);
       renderDeck(true);
+      showDeck();
       var chipEl = deck.querySelector('.w-scale-chip');
-      try { chipEl.focus({ preventScroll: false }); } catch (e) {}
+      try { chipEl.focus({ preventScroll: true }); } catch (e) {}
     }
 
     /* ---------- input ---------- */

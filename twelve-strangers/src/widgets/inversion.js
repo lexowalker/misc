@@ -160,6 +160,31 @@
     var card = el.querySelector('.w-inversion-card');
     var controls = el.querySelector('.w-inversion-controls');
     var live = el.querySelector('[aria-live]');
+    var root = el.querySelector('.w-inversion');
+
+    /* ---------- keeping the reader's place ----------
+       The sticky ticker covers the top of the screen. Everything we scroll to carries
+       scroll-margin-top: calc(var(--ticker-h) + 16px) in inversion.css. We read that back and move the page with
+       window.scrollTo, because scrollIntoView would also add the page's own scroll-padding-top.
+       We only scroll right after the reader's own tap or key, and never once they have scrolled since. */
+    var acted = 0, moved = 0;
+    function act() { acted = Date.now(); }
+    window.addEventListener('touchmove', function () { moved = Date.now(); }, { passive: true });
+    window.addEventListener('wheel', function () { moved = Date.now(); }, { passive: true });
+    el.addEventListener('click', act, true);
+    el.addEventListener('keydown', act, true);
+    /* If `need` is hidden under the ticker (or, unless topOnly, runs off the bottom of the screen),
+       put `anchor` (default: need) just under the ticker. */
+    function show(need, anchor, topOnly) {
+      if (!need || !need.isConnected || moved > acted) return;
+      anchor = anchor || need;
+      var gap = parseFloat(getComputedStyle(anchor).scrollMarginTop) || 0;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var r = need.getBoundingClientRect();
+      if (r.top >= gap - 12 && (topOnly || r.bottom <= vh)) return;
+      var top = anchor.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop) - gap;
+      try { window.scrollTo({ top: Math.max(0, top), behavior: ctx.reduced ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, Math.max(0, top)); }
+    }
 
     function current() { return byId(state.order[state.i]); }
     function jurorNo(i) {
@@ -270,6 +295,7 @@
           (c.note ? ' ' + c.note.label + ': ' + c.note.text : '');
         try { go.focus({ preventScroll: true }); } catch (e) { go.focus(); }
         busy = false;
+        show(card.querySelector('.w-inversion-verdict'), card, true);
       };
 
       if (ctx.reduced || !card.animate) {
@@ -297,6 +323,7 @@
       if (state.i >= total - 1) { finish(); return; }
       state.i++;
       renderAsk(true);
+      show(stage, root);
       try { card.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'Juror ' + (state.i + 1) + ' of ' + total + ': ' + current().quote;
     }
@@ -344,9 +371,11 @@
         '</section>';
       controls.querySelector('.w-inversion-again').addEventListener('click', replay);
       var t = controls.querySelector('.w-inversion-end-title');
+      var end = controls.querySelector('.w-inversion-end');
+      show(end.querySelector('.w-inversion-end-score'), end);
       try { t.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'The Great Inversion. You scored ' + state.score + ' of ' + total + '. ' + rank.title + '. ' + DATA.summary;
-      if (!ctx.reduced) controls.querySelector('.w-inversion-end').classList.add('is-fresh');
+      if (!ctx.reduced) end.classList.add('is-fresh');
       ctx.stamp('inversion');
     }
 
@@ -362,6 +391,7 @@
       state.i = 0; state.score = 0; state.marks = [];
       stage.hidden = false;
       renderAsk(true);
+      show(stage, root);
       try { card.focus({ preventScroll: true }); } catch (e) {}
       live.textContent = 'New round. Juror 1 of ' + total + ': ' + current().quote;
     }
@@ -416,6 +446,7 @@
       card.classList.remove('is-dragging');
       setEdges(0);
       if (!d.live) return;
+      act();
       if (!cancelled && d.dx <= -THRESH) answer('then', true);
       else if (!cancelled && d.dx >= THRESH) answer('now', true);
       else {

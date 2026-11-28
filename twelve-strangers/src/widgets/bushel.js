@@ -84,6 +84,7 @@
         gave: 'You tell the foreman you will convict. It changes nothing: a verdict needs all twelve, and the real jury held firm. You are locked up with them all the same.' },
       2: { kicker: 'Sunday night', title: 'The second night', body: 'The room is colder. Nobody has eaten since Saturday.',
         firm: 'You hold firm again. So did the real jury.',
+        firmFirst: 'This time you hold firm. So did the real jury.',
         gave: 'Hunger is a strong argument. The real jury did not give in. They spent a second night locked up, and so do you.' }
     },
     morning: 'Wait for morning',
@@ -168,18 +169,18 @@
       '<path class="wb-shield" d="M147 10 h26 v15 q0 12 -13 18 q-13 -6 -13 -18 z"/>' +
       '<path class="wb-cross" d="M160 11 V42 M148 21 H172"/><path class="wb-sword" d="M152 12.5 V19 M150 14.5 H154"/>' +
       // the bench
-      person(80, 58, { robe: 'ink3' }) + person(124, 56, { robe: 'seal', chain: true }) + person(196, 56, { robe: 'ink', wig: true }) + person(240, 58, { robe: 'ink3' }) +
+      person(78, 58, { robe: 'ink3' }) + person(116, 56, { robe: 'seal', chain: true }) + person(204, 56, { robe: 'ink', wig: true }) + person(242, 58, { robe: 'ink3' }) +
       '<rect class="wb-desk-top" x="54" y="74" width="212" height="6" rx="1"/><rect class="wb-desk" x="58" y="80" width="204" height="30"/>' +
-      '<text class="wb-lbl" x="124" y="98" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="196" y="98" text-anchor="middle">Recorder</text>' +
+      '<text class="wb-lbl" x="116" y="99" text-anchor="middle">Lord Mayor</text><text class="wb-lbl" x="204" y="99" text-anchor="middle">Recorder</text>' +
       // the verdict refused
       '<g class="wb-refused"><rect x="112" y="22" width="96" height="24" rx="2" transform="rotate(-6 160 34)"/><text x="160" y="39" text-anchor="middle" transform="rotate(-6 160 34)">REFUSED</text></g>' +
       // the dock
-      person(28, 126, { robe: 'ink', hat: true }) + person(62, 126, { robe: 'ink', hat: true }) +
+      person(25, 126, { robe: 'ink', hat: true }) + person(66, 126, { robe: 'ink', hat: true }) +
       '<rect class="wb-dock" x="6" y="140" width="80" height="34"/>' + bars + '<line class="wb-rail-top" x1="4" y1="140" x2="88" y2="140"/>' +
-      '<text class="wb-lbl" x="28" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="62" y="188" text-anchor="middle">Mead</text>' +
+      '<text class="wb-lbl" x="25" y="188" text-anchor="middle">Penn</text><text class="wb-lbl" x="66" y="188" text-anchor="middle">Mead</text>' +
       // the witness
       '<g class="wb-witness">' + person(124, 128, { robe: 'brass' }) +
-        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><text x="147" y="116" text-anchor="middle">. . .</text></g>' +
+        '<g class="wb-bubble"><rect x="132" y="104" width="30" height="16" rx="4"/><path d="M136 120 l-3 6 l8 -6"/><circle cx="141" cy="112" r="1.6"/><circle cx="147" cy="112" r="1.6"/><circle cx="153" cy="112" r="1.6"/></g>' +
       '</g>' +
       '<rect class="wb-stand" x="110" y="142" width="28" height="32"/><text class="wb-lbl" x="124" y="188" text-anchor="middle">Witness</text>' +
       // the jury box
@@ -239,13 +240,13 @@
       '<clipPath id="wb-arch-clip"><path d="M110 176 V70 Q160 22 210 70 V176 Z"/></clipPath>' +
       '<g clip-path="url(#wb-arch-clip)"><g class="wb-portcullis">' + bars + '<line x1="112" y1="96" x2="208" y2="96"/><line x1="112" y1="140" x2="208" y2="140"/></g></g>' +
       '<path class="wb-arch-rim" d="M110 176 V70 Q160 22 210 70 V176"/>' +
-      '<rect class="wb-sign" x="118" y="8" width="84" height="18" rx="2"/><text class="wb-sign-t" x="160" y="21" text-anchor="middle">NEWGATE</text>' +
+      '<rect class="wb-sign" x="118" y="8" width="84" height="18" rx="2"/><text class="wb-sign-t" x="161" y="21.5" text-anchor="middle">NEWGATE</text>' +
       '<rect class="wb-ledge" x="20" y="140" width="72" height="8"/>' +
       '<g class="wb-purse-g"><path class="wb-purse" d="M42 140 q-12 -2 -10 -16 q2 -10 12 -12 h16 q10 2 12 12 q2 14 -10 16 z"/><path class="wb-ln" d="M44 112 q12 6 24 0"/>' + coins +
       '<text class="wb-lbl" x="56" y="162" text-anchor="middle">40 marks</text></g>' +
       '<g class="wb-writ"><rect class="wb-parch" x="230" y="70" width="70" height="88" rx="3"/>' +
-        '<text class="wb-writ-t" x="265" y="90" text-anchor="middle">Habeas</text><text class="wb-writ-t" x="265" y="102" text-anchor="middle">corpus</text>' +
-        '<path class="wb-lines" d="M240 114 h50 M240 122 h50 M240 130 h36"/><circle class="wb-wax" cx="282" cy="146" r="7"/></g>' +
+        '<text class="wb-writ-t" x="265" y="91" text-anchor="middle">Habeas</text><text class="wb-writ-t" x="265" y="106" text-anchor="middle">corpus</text>' +
+        '<path class="wb-lines" d="M240 117 h50 M240 125 h50 M240 133 h36"/><circle class="wb-wax" cx="282" cy="148" r="7"/></g>' +
       '<line class="wb-line" x1="0" y1="176" x2="320" y2="176"/>' +
       '</svg>';
   }
@@ -291,6 +292,40 @@
     var currentScene = null;
 
     function later(fn, ms) { var t = setTimeout(fn, R ? 0 : ms); timers.push(t); return t; }
+
+    /* ---------- keeping the reader's place ----------
+       After a tap, scroll only when what it revealed is off screen or under the sticky ticker, and never once the reader
+       has started scrolling on their own. The page's html scroll-padding-top is the band the ticker covers (ticker plus
+       12px). Positions are computed here rather than with scrollIntoView, because engines differ on whether that
+       padding and an element's scroll-margin add up. */
+    var lastUserScroll = 0;
+    function userScrolled() { lastUserScroll = Date.now(); }
+    window.addEventListener('wheel', userScrolled, { passive: true });
+    window.addEventListener('touchmove', userScrolled, { passive: true });
+    window.addEventListener('keydown', function (e) {
+      if (/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End)$/.test(e.key) || (e.key === ' ' && !(e.target.closest && e.target.closest('button, input, textarea, select')))) userScrolled();
+    });
+    function coverH() {
+      var p = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
+      if (!(p > 0)) { var t = document.querySelector('.ticker'); p = t ? Math.max(0, t.getBoundingClientRect().bottom) + 12 : 0; }
+      return p;
+    }
+    function goTo(y) {
+      y = Math.max(0, Math.round(y));
+      if (Math.abs(y - window.scrollY) < 2) return;
+      try { window.scrollTo({ top: y, behavior: R ? 'auto' : 'smooth' }); } catch (e) { window.scrollTo(0, y); }
+    }
+    function toTop(el) { goTo(window.scrollY + el.getBoundingClientRect().top - coverH() - 4); }
+    // show the run from a down to b with the least movement; when it cannot all fit, show its top
+    function showRange(a, b) {
+      if (!a || !a.getClientRects().length) return;
+      if (!b || !b.getClientRects().length) b = a;
+      var top = coverH() - 8, vh = window.innerHeight;
+      var ta = a.getBoundingClientRect().top, bb = b.getBoundingClientRect().bottom;
+      if (ta >= top && bb <= vh) return;
+      if (ta < top || bb - ta > vh - top - 24) toTop(a);
+      else goTo(window.scrollY + bb - vh + 16);
+    }
     function clearTimers() { timers.forEach(clearTimeout); timers = []; }
     function say(msg) { live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 40); }
     function svg() { return artEl.querySelector('svg'); }
@@ -319,10 +354,12 @@
     }
 
     /* ---------- the scene ---------- */
+    var artFresh = false;
     function scene(name, opts) {
       opts = opts || {};
       if (name === currentScene && !opts.force) return svg();
       currentScene = name;
+      artFresh = true;
       var html, label;
       if (name === 'court') { html = artCourt(); label = DATA.art.court; }
       else if (name === 'room') { html = artRoom(opts.nights || 0); label = fill(DATA.art.room, { sky: opts.nights ? 'dark' : 'still light' }); }
@@ -359,13 +396,28 @@
       if (!R) { box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in'); }
       var hd = box.querySelector('[data-focus]');
       hd.setAttribute('tabindex', '-1');
+      if (o.ready) o.ready();
       if (o.focus !== false && root.contains(document.activeElement)) { try { hd.focus({ preventScroll: true }); } catch (e) { hd.focus(); } }
-      if (o.scroll !== false) reveal();
+      if (o.scroll !== false) reveal(o.art != null ? o.art : artFresh);
+      artFresh = false;
       if (o.say) say(o.say);
     }
-    function reveal() {
-      var r = root.getBoundingClientRect();
-      if (r.top < 0 || r.top > window.innerHeight * 0.75) root.scrollIntoView({ block: 'start', behavior: R ? 'auto' : 'smooth' });
+    /* A new step: bring its heading near the top, under the ticker. When the picture changed too, show the picture
+       with the heading under it (and the calendar and meters as well, when the whole step then fits on screen). */
+    function reveal(showArt) {
+      var hd = box.querySelector('[data-focus]');
+      var top = coverH() - 8, vh = window.innerHeight;
+      var a = artEl.getBoundingClientRect(), b = box.getBoundingClientRect(), h = hd.getBoundingClientRect();
+      var stacked = a.height > 0 && a.bottom <= b.top + 1;
+      if (showArt && stacked) {
+        var fits = b.bottom - root.getBoundingClientRect().top <= vh - top - 56;
+        var el = fits ? root : artEl;
+        if (el.getBoundingClientRect().top >= top && (fits ? b.bottom <= vh : h.bottom <= vh * 0.75)) return;
+        toTop(el);
+      } else {
+        if (b.top >= top && h.top <= vh * 0.45) return;
+        toTop(box);
+      }
     }
     function setActions(list, focusFirst) {
       var row = box.querySelector('.w-bushel-actions');
@@ -489,12 +541,16 @@
         b.setAttribute('aria-expanded', 'true');
         b.classList.add('is-heard');
         b.querySelector('.w-bushel-call-said').hidden = false;
+        showRange(b);
         sceneClass('is-witness', false);
         void artEl.offsetWidth;
         sceneClass('is-witness', true);
         state.heard++;
         say(b.querySelector('.w-bushel-call-said').textContent);
-        if (state.heard === E.witnesses.length) later(showBallot, 350);
+        if (state.heard === E.witnesses.length) {
+          var t0 = Date.now();
+          later(function () { showBallot(); if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-after .w-bushel-p')); }, 350);
+        }
       };
       function showBallot() {
         var after = box.querySelector('.w-bushel-after');
@@ -507,6 +563,7 @@
         wireBallot(E.options, function (id) {
           state.vote = id;
           setActions([{ label: E.handUp, act: 'handup', cls: 'btn btn-seal', fn: stageRefused }], false);
+          showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions'));
         });
         var first = after.querySelector('.w-bushel-opt');
         if (first && root.contains(document.activeElement)) first.focus({ preventScroll: true });
@@ -532,7 +589,7 @@
       scene('court');
       sceneClass('is-witness', false);
       sceneClass('is-refused', true);
-      step({ kicker: S.kicker, title: S.title, body: S.body,
+      step({ kicker: S.kicker, title: S.title, body: S.body, art: true,
         extra: quote(S.threatWho, S.threat, 'is-bench') + banList() + quote(S.pennWho, S.penn, 'is-penn') +
           '<p class="w-bushel-q">' + S.prompt + '</p>',
         after: '<p class="w-bushel-holdhint" id="w-bushel-holdhint">' + DATA.holdHint + '</p>',
@@ -542,11 +599,14 @@
 
     function nightCard(n, firm) {
       var N = DATA.nights[n];
+      var t0 = Date.now();
+      // night 2: 'again' only if the reader also held firm on night 1 (state.firm already counts tonight)
+      var lead = !firm ? N.gave : (n === 2 && state.firm < 2 && N.firmFirst ? N.firmFirst : N.firm);
       state.nights = n - 1;
       scene('room', { force: true, nights: n - 1 });
-      step({ kicker: N.kicker, title: N.title, body: (firm ? N.firm : N.gave) + ' ' + N.body,
+      step({ kicker: N.kicker, title: N.title, body: lead + ' ' + N.body,
         actions: [{ label: DATA.morning, act: 'morning', disabled: true, fn: n === 1 ? stageSunday : stageMonday }],
-        say: (firm ? N.firm : N.gave) + ' ' + N.body });
+        say: lead + ' ' + N.body });
       // the sky darkens, a mark goes on the wall, the stomach complains
       later(function () {
         var s = svg();
@@ -560,7 +620,11 @@
           hud(true);
           later(function () {
             var b = box.querySelector('[data-act="morning"]');
-            if (b) { b.disabled = false; if (root.contains(document.activeElement)) b.focus({ preventScroll: true }); }
+            if (b) {
+              b.disabled = false;
+              if (root.contains(document.activeElement)) b.focus({ preventScroll: true });
+              if (lastUserScroll <= t0) showRange(b);
+            }
           }, 250);
         }, 520);
       }, 80);
@@ -592,6 +656,7 @@
         extra: ballot(M.options, 'Your final vote') + '<div class="w-bushel-finebox" hidden></div>',
         say: M.title + '. ' + M.body });
       wireBallot(M.options, function (id) {
+        var t0 = Date.now();
         state.final = id;
         sceneClass('is-refused', false);
         sceneClass('is-verdict', true);
@@ -603,6 +668,7 @@
           if (!R) fb.classList.add('is-in');
           say(M.fine);
           setActions([{ label: M.act, act: 'newgate', fn: stageNewgate }]);
+          if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions'));
         }, 700);
       });
     }
@@ -620,10 +686,25 @@
         sceneClass('is-writ', !state.paid);
         box.querySelectorAll('.w-bushel-opt').forEach(function (o) { o.disabled = true; });
         setActions([{ label: G.act, act: 'judgment', cls: 'btn btn-seal', fn: stageEnding }]);
+        var t0 = Date.now();
+        later(function () { if (lastUserScroll <= t0) showRange(box.querySelector('.w-bushel-reply'), box.querySelector('.w-bushel-actions')); }, 500);
       });
     }
 
     /* ---------- the ending: Bushel's Case ---------- */
+    // The tablet is tall. Two columns: it fills the picture column. One column (phones): it follows the holding,
+    // so the heading and the holding come first, and the empty picture box hides (:empty in bushel.css).
+    var wide = window.matchMedia ? window.matchMedia('(min-width: 46rem)') : null;
+    function placePlaque() {
+      var fig = root.querySelector('.w-bushel-plaque'), slot = box.querySelector('[data-plaque-slot]');
+      if (!fig || !slot) return;
+      var dest = wide && wide.matches ? artEl : slot;
+      if (fig.parentNode !== dest) dest.appendChild(fig);
+    }
+    if (wide) {
+      if (wide.addEventListener) wide.addEventListener('change', placePlaque);
+      else if (wide.addListener) wide.addListener(placePlaque);
+    }
     function stageEnding() {
       var E = DATA.ending;
       state.day = 4;
@@ -644,8 +725,9 @@
             '<div><dt>Fine</dt><dd>' + (state.paid ? 'Paid, 40 marks' : 'Refused. Freed by habeas corpus') + '</dd></div>' +
           '</dl>' +
         '</div>';
-      step({ kicker: E.kicker, title: E.title, body: E.holding,
+      step({ kicker: E.kicker, title: E.title, body: E.holding, ready: placePlaque,
         extra: '<p class="w-bushel-p">' + E.why + '</p>' +
+          '<div class="w-bushel-plaque-slot" data-plaque-slot></div>' +
           '<p class="w-bushel-fine">' + E.plaqueNote + '</p>' +
           '<div class="w-bushel-teach"><p class="label">' + E.teachLabel + '</p><p>' + E.teach + '</p></div>' +
           record +

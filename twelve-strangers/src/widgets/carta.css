@@ -11,7 +11,7 @@
   background-image:
     radial-gradient(ellipse at 12% 18%, color-mix(in srgb, var(--brass) 10%, transparent), transparent 55%),
     radial-gradient(ellipse at 88% 85%, color-mix(in srgb, var(--brass) 14%, transparent), transparent 50%),
-    repeating-linear-gradient(to bottom, transparent 0, transparent 2.45rem, color-mix(in srgb, var(--brass) 22%, transparent) 2.45rem, color-mix(in srgb, var(--brass) 22%, transparent) calc(2.45rem + 1px));
+    repeating-linear-gradient(to bottom, transparent 0, transparent 2.5rem, color-mix(in srgb, var(--brass) 22%, transparent) 2.5rem, color-mix(in srgb, var(--brass) 22%, transparent) calc(2.5rem + 1px));
   background-position: 0 0, 0 0, 0 2.45rem;
   border: 1px solid color-mix(in srgb, var(--brass) 45%, transparent);
   box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--sheet) 25%, transparent), 0 10px 22px -16px rgba(0, 0, 0, .55);
@@ -22,22 +22,27 @@
 .w-carta-sheet::before { left: .4rem; }
 .w-carta-sheet::after { right: .4rem; }
 .w-carta-sheethead { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; flex-wrap: wrap; padding: 0 .3rem .25rem; border-bottom: 1px solid color-mix(in srgb, var(--brass) 40%, transparent); }
-.w-carta-title { font-family: var(--f-type); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--brass); }
-.w-carta-clause { font-family: var(--f-type); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.w-carta-title { font-family: var(--f-type); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--brass); }
+.w-carta-clause { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
 
-.w-carta-latin { margin: .45rem 0 0; font-family: var(--f-display); font-weight: 500; font-size: 1.42rem; line-height: 2.45rem; color: var(--ink); overflow-wrap: anywhere; }
+.w-carta-latin { margin: .45rem 0 0; font-family: var(--f-display); font-weight: 500; font-size: 1.42rem; line-height: 2.5rem; color: var(--ink); overflow-wrap: anywhere; }
 .w-carta-ph { position: relative; border-radius: 3px; }
 .w-carta-w {
   font: inherit; color: inherit; background: transparent; border: 0; margin: 0; padding: .02rem .14rem .1rem;
-  min-height: 2.4rem; min-width: 1.6rem; cursor: pointer; border-radius: 3px; touch-action: manipulation; line-height: 1.35;
+  min-height: 2.5rem; min-width: 2.5rem; vertical-align: top; cursor: pointer; border-radius: 3px; touch-action: manipulation; line-height: 1.35;
   background-image: linear-gradient(to right, var(--brass) 45%, transparent 45%); background-size: 6px 1.5px; background-repeat: repeat-x; background-position: 0 calc(100% - .35rem);
   transition: background-color .15s, color .15s;
+}
+/* phones: a touch smaller so the clause keeps to seven 40px lines and the gloss lands closer to the strip */
+@media (max-width: 30rem) {
+  .w-carta-latin { font-size: 1.32rem; }
+  .w-carta-w { padding-left: .1rem; padding-right: .1rem; }
 }
 .w-carta-w:hover { background-color: color-mix(in srgb, var(--sticker) 35%, transparent); }
 .w-carta-w:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .w-carta-ph.is-on .w-carta-w { color: var(--accent); background-image: linear-gradient(var(--brass), var(--brass)); background-size: 100% 1.5px; }
 .w-carta-ph.is-cur .w-carta-w { background-color: var(--sticker); color: var(--on-sticker); }
-.w-carta-sup { display: none; font-family: var(--f-type); font-size: .6rem; font-weight: 700; color: var(--brass); vertical-align: super; line-height: 0; margin-left: .05rem; }
+.w-carta-sup { display: none; font-family: var(--f-type); font-size: .75rem; font-weight: 700; color: var(--brass); vertical-align: super; line-height: 0; margin-left: .05rem; }
 .w-carta-ph.is-on .w-carta-sup { display: inline; }
 .w-carta-punct { margin-left: -.18rem; }
 .w-carta-ph.is-fresh .w-carta-w { animation: w-carta-ink .45s ease-out; }
@@ -64,7 +69,7 @@
 .w-carta.is-sealed .w-carta-left { display: none; }
 .w-carta-wax { transform-box: fill-box; transform-origin: 50% 50%; }
 .w-carta-big.is-stamp .w-carta-wax { animation: w-carta-stamp .5s cubic-bezier(.2, 1.4, .4, 1); }
-@keyframes w-carta-stamp { 0% { transform: scale(1.7) rotate(-18deg); opacity: .3; } 60% { transform: scale(.94) rotate(2deg); opacity: 1; } 100% { transform: none; } }
+@keyframes w-carta-stamp { 0% { transform: scale(1.4) rotate(-14deg); opacity: .3; } 60% { transform: scale(.94) rotate(2deg); opacity: 1; } 100% { transform: none; } }
 
 /* the English */
 .w-carta-enbox { display: grid; gap: .35rem; }
@@ -75,7 +80,7 @@
 .w-carta-seg.is-blank { display: inline-block; width: 2.6rem; height: .9em; border-bottom: 1.5px dotted var(--ink-3); vertical-align: baseline; }
 .w-carta-bl { margin: .35rem 0 0; padding: .1rem 0 .1rem .9rem; border-left: 3px solid var(--seal); display: grid; gap: .3rem; }
 .w-carta-bl p { font-style: italic; font-size: .98rem; line-height: 1.5; }
-.w-carta-bl footer { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); }
+.w-carta-bl footer { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); }
 
 /* gloss + peers */
 .w-carta-panels { display: grid; gap: .85rem; min-width: 0; }
@@ -83,6 +88,7 @@
 .w-carta-gloss {
   display: grid; gap: .55rem; min-width: 0; background: var(--sheet-2); border: 1px solid var(--rule); border-left: 4px solid var(--brass);
   border-radius: var(--radius); padding: .8rem .9rem .9rem;
+  scroll-margin-top: calc(var(--ticker-h) + 16px); scroll-margin-bottom: 12px;
 }
 .w-carta-gloss.is-later { border-left-color: var(--accent); }
 .w-carta-gloss.is-empty { justify-items: start; }
@@ -93,10 +99,10 @@
 .w-carta-ilrow { display: flex; flex-wrap: wrap; gap: .3rem .75rem; }
 .w-carta-il { display: inline-grid; gap: 0; line-height: 1.2; }
 .w-carta-il i { font-family: var(--f-body); font-size: 1.2rem; font-style: italic; color: var(--ink); }
-.w-carta-il small { font-family: var(--f-type); font-size: .74rem; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: .12rem; }
+.w-carta-il small { font-family: var(--f-type); font-size: .75rem; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: .12rem; }
 .w-carta-gen { font-weight: 700; font-size: 1.08rem; line-height: 1.35; color: var(--ink); }
 .w-carta-gnote { font-size: .95rem; line-height: 1.55; color: var(--ink-2); }
-.w-carta-nlabel { font-family: var(--f-type); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-right: .2rem; }
+.w-carta-nlabel { font-family: var(--f-type); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-right: .2rem; }
 .w-carta-gloss.is-later .w-carta-nlabel { color: var(--accent); }
 .w-carta-done { font-family: var(--f-type); font-size: .85rem; color: var(--seal); border-top: 1px dashed var(--rule); padding-top: .5rem; line-height: 1.45; }
 
