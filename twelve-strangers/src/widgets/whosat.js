@@ -181,6 +181,7 @@
 
     el.innerHTML =
       '<div class="w-whosat">' +
+        '<div class="w-whosat-main">' +
         '<div class="w-whosat-top">' +
           '<div class="w-whosat-year"><span class="label">Year</span><b class="w-whosat-yr">1791</b></div>' +
           '<div class="w-whosat-ctrl">' +
@@ -215,11 +216,14 @@
             '<button type="button" class="btn btn-small btn-ghost w-whosat-next">Next event</button>' +
           '</div>' +
         '</article>' +
+        '</div>' +
         '<p class="w-whosat-foot">' + esc(F.footnote) + ' ' + esc(F.seatNote) + '</p>' +
         '<p class="sr-only" aria-live="polite"></p>' +
       '</div>';
 
     var root = el.querySelector('.w-whosat');
+    var topEl = el.querySelector('.w-whosat-top');
+    var boxWrap = el.querySelector('.w-whosat-boxwrap');
     var yrEl = el.querySelector('.w-whosat-yr');
     var playBtn = el.querySelector('.w-whosat-play');
     var drawBtn = el.querySelector('.w-whosat-draw');
@@ -281,7 +285,7 @@
       var parts = [];
       F.lanes.forEach(function (l, k) { if (counts[k]) parts.push(counts[k] + ' ' + (counts[k] === 1 ? l.one : l.many)); });
       var list = parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1] : parts[0];
-      comp.innerHTML = '<span class="label">Seated, ' + year + '</span> ' + esc(list) + '.';
+      comp.innerHTML = '<span class="label">Seated</span> ' + esc(list) + '.';
     }
     function maybeDraw(threshold) {
       var d = drift(lastProbs, probs(year));
@@ -320,7 +324,7 @@
       clearTimeout(announceTimer);
       var go = function () {
         var m = F.milestones[mIdx];
-        live.textContent = year + '. ' + (m.year <= year ? m.when + ': ' + stripTags(m.title) + '. ' : '') + comp.textContent.replace(/^Seated, \d+ /, 'Seated: ');
+        live.textContent = year + '. ' + (m.year <= year ? m.when + ': ' + stripTags(m.title) + '. ' : '') + comp.textContent.replace(/^Seated\s*/, 'Seated: ');
       };
       if (now) go(); else announceTimer = setTimeout(go, 650);
     }
@@ -428,8 +432,51 @@
       else raf = requestAnimationFrame(frame);
     }
 
-    playBtn.addEventListener('click', function () { if (playing) stop(); else play(); });
-    drawBtn.addEventListener('click', function () { drawSeats(true); announce(true); });
+    /* ---------- keeping the right parts on screen ----------
+       The year bar sticks under the site ticker. On a phone the whole exhibit is taller than the screen, so after a tap
+       the page moves (once, and only if needed) to show what the tap changed. It never moves while the reader scrolls. */
+    function barLine() {
+      var t = parseFloat(getComputedStyle(topEl).top);
+      if (isNaN(t)) t = 56;
+      return t + topEl.offsetHeight + 8;   // just under the year bar once it is stuck
+    }
+    /* Smallest scroll that puts viewport span [top, bottom] between the bar and the foot of the screen.
+       If the span is too tall for that, its top goes just under the bar. */
+    function reveal(top, bottom) {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var lo = bottom - (vh - 8), hi = top - barLine();
+      var d = lo <= hi ? Math.min(Math.max(0, lo), hi) : hi;
+      if (Math.abs(d) < 4) return;
+      window.scrollTo({ top: Math.max(0, Math.round(window.pageYOffset + d)), behavior: ctx.reduced ? 'auto' : 'smooth' });
+    }
+    function revealPlay() {   // the chart and the event card together, the chart in full
+      reveal(chart.getBoundingClientRect().top, card.getBoundingClientRect().bottom);
+    }
+    function revealCard() {
+      var r = card.getBoundingClientRect();
+      reveal(r.top, r.bottom);
+    }
+    function revealBox() {
+      reveal(boxWrap.getBoundingClientRect().top, comp.getBoundingClientRect().bottom);
+    }
+
+    /* a hairline under the bar only while it is stuck over the exhibit */
+    var stuckRaf = 0;
+    function checkStuck() {
+      stuckRaf = 0;
+      var stuck = boxWrap.getBoundingClientRect().top < topEl.getBoundingClientRect().bottom + 2;
+      if (stuck !== topEl.classList.contains('is-stuck')) topEl.classList.toggle('is-stuck', stuck);
+    }
+    function onScroll() { if (!stuckRaf) stuckRaf = requestAnimationFrame(checkStuck); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    playBtn.addEventListener('click', function () {
+      if (playing) { stop(); return; }
+      play();
+      revealPlay();
+    });
+    drawBtn.addEventListener('click', function () { drawSeats(true); announce(true); revealBox(); });
 
     range.addEventListener('input', function () {
       if (playing) stop();
@@ -453,6 +500,7 @@
       drawSeats(true);
       setPlayUI();
       announce(true);
+      revealCard();
     }
     prevBtn.addEventListener('click', function () { jump(-1); });
     nextBtn.addEventListener('click', function () { jump(1); });
@@ -500,5 +548,6 @@
     setYear(F.start, { force: true, quiet: true });
     drawSeats(false);
     setPlayUI();
+    checkStuck();
   });
 })();

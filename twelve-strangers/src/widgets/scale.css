@@ -148,3 +148,11 @@
 .w-scale-now { color: var(--ink); }
 @media (max-width: 39.99rem) { .w-scale-now { padding-top: .45rem; border-top: 1px dashed var(--rule); } }
 .w-scale-ruling .btn-row { margin-top: .2rem; }
+/* phones: the pan buttons sit right under the argument, so the reader never scrolls between reading and placing */
+@media (max-width: 45.99rem) {
+  [data-widget="scale"] .w-scale-deck { order: 1; }
+  [data-widget="scale"] .w-scale-pans { order: 2; margin-top: 0; }
+  [data-widget="scale"] .w-scale-note { order: 3; }
+  [data-widget="scale"] .w-scale-stage { order: 4; }
+  [data-widget="scale"] .w-scale-ruling { order: 5; }
+}
