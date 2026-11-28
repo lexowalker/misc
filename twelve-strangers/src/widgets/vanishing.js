@@ -58,6 +58,10 @@
 
   var NS = 'http://www.w3.org/2000/svg';
   var DUR = 480;
+  /* SVG label type, kept in step with vanishing.css: Courier advances 0.6em a character, plus the letter-spacing.
+     The chart is drawn at 1 unit = 1 CSS px, so these are rendered sizes (12px is the floor on a phone). */
+  var NAME_PX = 12, NAME_TRACK = 0.06, SUB_PX = 12, SUB_TRACK = 0.04, SUB_LINE = 15;
+  function typeW(str, px, track) { return str.length * px * (0.6 + track); }
 
   function pctOf(n, total) { return (n / total) * 100; }
   function fmtPct(n, total) { return pctOf(n, total).toFixed(1) + '%'; }
@@ -155,8 +159,7 @@
 
       /* sorted: bins flow left to right and wrap */
       var ps = narrow ? Math.min(19, (w - 4) / 15) : 22;
-      var rs = ps * 0.36, LABEL = 40, SUBH = 26, gapX = narrow ? 18 : 30, gapY = 16;
-      var CH = 6.95; // Courier label width per character at 10.5px with tracking
+      var rs = ps * 0.36, LABEL = 42, gapX = narrow ? 18 : 30, gapY = 16;
       var maxH = 0;
       ['criminal', 'civil'].forEach(function (key) {
         var D = FACTS[key];
@@ -170,9 +173,10 @@
           var bc = slots >= 30 ? 15 : Math.min(slots, 8);
           var brows = Math.ceil(slots / bc);
           var names = [b.name, b.juryName || b.name];
-          var labelW = Math.max.apply(null, names.map(function (s) { return s.length * CH; }));
-          var bw = Math.max(bc * ps, labelW, b.sub ? 10 * 6 : 0);
-          var bh = LABEL + brows * ps + (b.sub ? SUBH : 4);
+          var labelW = Math.max.apply(null, names.map(function (s) { return typeW(s, NAME_PX, NAME_TRACK); }));
+          var subW = b.sub ? Math.max.apply(null, b.sub.map(function (s) { return typeW(s, SUB_PX, SUB_TRACK); })) : 0;
+          var bw = Math.max(bc * ps, labelW, subW);
+          var bh = LABEL + brows * ps + (b.sub ? 8 + b.sub.length * SUB_LINE : 4);
           if (x > 2 && x + bw > w) { x = 2; y += rowH + gapY; rowH = 0; }
           var bin = { id: b.id, x: x, y: y, w: bw, cols: bc, n: n, ghost: hasGhost, sub: b.sub, dotsTop: y + LABEL, rows: brows };
           x += bw + gapX;
@@ -219,14 +223,14 @@
       S.bins.forEach(function (bin, bi) {
         var b = D.bins[bi];
         var g = svgEl('g', { 'class': 'w-van-bin' + (b.id === 'trial' ? ' is-trial' : '') }, gLabels);
-        var name = svgEl('text', { 'class': 'w-van-name', x: bin.x, y: bin.y + 12 }, g);
+        var name = svgEl('text', { 'class': 'w-van-name', x: bin.x, y: bin.y + 13 }, g);
         name.textContent = (mode === 'jury' && b.juryName) ? b.juryName : b.name;
-        var pct = svgEl('text', { 'class': 'w-van-pct', x: bin.x, y: bin.y + 32 }, g);
+        var pct = svgEl('text', { 'class': 'w-van-pct', x: bin.x, y: bin.y + 34 }, g);
         pct.textContent = (mode === 'jury' && b.id === 'trial') ? fmtPct(D.jury.n, D.total) : fmtPct(b.n, D.total);
         if (b.sub && mode !== 'jury') {
-          var sy = bin.dotsTop + bin.rows * S.ps + 11;
+          var sy = bin.dotsTop + bin.rows * S.ps + 13;
           b.sub.forEach(function (line, li) {
-            var t = svgEl('text', { 'class': 'w-van-sub', x: bin.x, y: sy + li * 12 }, g);
+            var t = svgEl('text', { 'class': 'w-van-sub', x: bin.x, y: sy + li * SUB_LINE }, g);
             t.textContent = line;
           });
         }
@@ -385,9 +389,32 @@
       render(true, false);
     }
 
+    /* After a tap on the main button, make sure the reader can see what it changed: the dots and the start of the
+       panel under the button (the ledger, then the payoff). One scroll at most, only if something is off screen or
+       under the sticky ticker, and the dots stay on screen. */
+    function topLine() {
+      var probe = document.createElement('div');
+      probe.style.cssText = 'position:absolute;left:0;top:0;width:1px;visibility:hidden;pointer-events:none;' +
+        'height:calc(env(safe-area-inset-top, 0px) + var(--ticker-h, 3.1rem) + 3px)';
+      el.appendChild(probe);
+      var h = probe.offsetHeight;
+      el.removeChild(probe);
+      return (h || 53) + 8;
+    }
+    function revealResult() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var s = stage.getBoundingClientRect(), p = panel.getBoundingClientRect();
+      var want = Math.min(p.height, mode === 'jury' ? 190 : 150);
+      var lo = p.top + want - (vh - 8), hi = s.top - topLine();
+      var d = lo <= hi ? Math.min(Math.max(0, lo), hi) : hi;
+      if (Math.abs(d) < 4) return;
+      window.scrollTo({ top: Math.max(0, Math.round(window.pageYOffset + d)), behavior: ctx.reduced ? 'auto' : 'smooth' });
+    }
+
     goBtn.addEventListener('click', function () {
       mode = mode === 'rest' ? 'sorted' : mode === 'sorted' ? 'jury' : 'rest';
       render(false, true);
+      revealResult();
     });
     chips.forEach(function (c) {
       c.addEventListener('click', function () {

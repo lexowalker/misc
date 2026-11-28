@@ -436,9 +436,10 @@
        The year bar sticks under the site ticker. On a phone the whole exhibit is taller than the screen, so after a tap
        the page moves (once, and only if needed) to show what the tap changed. It never moves while the reader scrolls. */
     function barLine() {
-      var t = parseFloat(getComputedStyle(topEl).top);
+      var cs = getComputedStyle(topEl);
+      var t = parseFloat(cs.top);   // the bar's sticky offset: the ticker's height
       if (isNaN(t)) t = 56;
-      return t + topEl.offsetHeight + 8;   // just under the year bar once it is stuck
+      return t + (cs.position === 'sticky' ? topEl.offsetHeight : 0) + 8;   // just under the bar once stuck, else under the ticker
     }
     /* Smallest scroll that puts viewport span [top, bottom] between the bar and the foot of the screen.
        If the span is too tall for that, its top goes just under the bar. */
